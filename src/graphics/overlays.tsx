@@ -37,7 +37,7 @@ const Card: React.FC<
 
 // ---------- FullscreenStamp : « FAUX / 1re erreur » ----------
 export const FullscreenStamp: React.FC<Base & { word?: string; sub?: string }> = ({
-  hold = 34,
+  hold = 44,
   word = "FAUX",
   sub = "1RE ERREUR",
 }) => {
@@ -75,28 +75,28 @@ export const Toggle: React.FC<Base & { labels?: [string, string]; active?: numbe
   const env = envelope(f, fps, hold);
   const op = opacityInOut(env);
   const sc = scaleInOut(env);
-  // le curseur glisse vers le segment actif après l'entrée
-  const slide = interpolate(f, [18, 30], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // le segment actif s'allume en accent dès l'arrivée (fin d'entrée), puis tient
+  const fill = interpolate(env.e, [0.55, 1], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-      <div style={{ opacity: op, transform: `scale(${sc}) translateY(${holdDrift(f, 6)}px)`, display: "flex", ...shadow, borderRadius: 999, background: T.cardBg, padding: 10, border: `1px solid ${T.line}`, position: "relative" }}>
-        <div
-          style={{
-            position: "absolute",
-            top: 10,
-            bottom: 10,
-            left: active === 0 ? 10 : `calc(${interpolate(slide, [0, 1], [10, 50])}% )`,
-            width: "46%",
-            borderRadius: 999,
-            background: T.accent,
-            opacity: slide,
-          }}
-        />
-        {labels.map((l, i) => (
-          <div key={l} style={{ ...label(48, i === active ? T.white : T.sub), zIndex: 1, padding: "26px 64px", fontWeight: i === active ? 800 : 500 }}>
-            {l}
-          </div>
-        ))}
+      <div style={{ opacity: op, transform: `scale(${sc}) translateY(${holdDrift(f, 6)}px)`, display: "flex", ...shadow, borderRadius: 999, background: T.cardBg, padding: 10, border: `1px solid ${T.line}` }}>
+        {labels.map((l, i) => {
+          const on = i === active;
+          return (
+            <div
+              key={l}
+              style={{
+                ...label(48, on ? T.white : T.sub),
+                fontWeight: on ? 800 : 500,
+                padding: "26px 68px",
+                borderRadius: 999,
+                background: on ? `rgba(79,107,255,${fill})` : "transparent",
+              }}
+            >
+              {l}
+            </div>
+          );
+        })}
       </div>
     </AbsoluteFill>
   );
@@ -270,11 +270,11 @@ export const HighlightBox: React.FC<Base & { text?: string }> = ({ hold = 42, te
 };
 
 // ---------- FullscreenCard : LE PIÈGE (chapitre / masque) ----------
-export const FullscreenCard: React.FC<Base & { text?: string }> = ({ hold = 18, text = "LE PIÈGE" }) => {
+export const FullscreenCard: React.FC<Base & { text?: string }> = ({ hold = 44, text = "LE PIÈGE" }) => {
   ensureFont();
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const env = envelope(f, fps, hold, 8, 6);
+  const env = envelope(f, fps, hold, 10, 8);
   const op = opacityInOut(env);
   const sc = scaleInOut(env);
   const ruleW = interpolate(env.e, [0.2, 1], [0, 60], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
