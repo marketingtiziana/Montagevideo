@@ -9,8 +9,21 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["react", "node"]
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "react",
+      "node"
+    ],
+    "resolveJsonModule": true,
+    "allowJs": true
   },
-  "include": ["src", "remotion.config.ts"]
+  "include": [
+    "src",
+    "remotion.config.ts",
+    "data"
+  ]
 }

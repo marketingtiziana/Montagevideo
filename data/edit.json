@@ -1,12 +1,12 @@
 {
   "meta": {
-    "target_duration": 50.04,
+    "target_duration": 44.59,
     "fps": 30,
     "width": 1080,
     "height": 1920,
     "source": "source/reel5.mp4",
     "source_fps": 60,
-    "whisper_model": "base (multilingue) — texte relu/corrigé manuellement"
+    "whisper_model": "base (multilingue) — texte relu/corrigé"
   },
   "segments": [
     {
@@ -531,11 +531,11 @@
       "id": "s06",
       "role": "body",
       "src_in": 135.48,
-      "src_out": 141.48,
+      "src_out": 139.07,
       "out_start": 22.64,
-      "out_end": 28.64,
-      "dur": 6.0,
-      "text": "Il y a un pays qui ne taxe pas le jeu, ça peut représenter la moitié de ce que tu gagnes dans l'année.",
+      "out_end": 26.23,
+      "dur": 3.59,
+      "text": "Il y a un pays qui ne taxe pas le jeu, ça peut représenter la moitié",
       "camera": {
         "type": "punch_in",
         "from": 1.0,
@@ -550,8 +550,8 @@
         "type": "stat_counter",
         "value": "50%",
         "label": "de tes gains, en jeu",
-        "in": 0.8,
-        "duration": 3.2,
+        "in": 0.7,
+        "duration": 2.6,
         "anchor": "top_third"
       },
       "caption_words": [
@@ -650,48 +650,6 @@
           "start": 3.09,
           "end": 3.51,
           "accent": true
-        },
-        {
-          "w": "de",
-          "start": 3.51,
-          "end": 3.75,
-          "accent": false
-        },
-        {
-          "w": "ce",
-          "start": 3.75,
-          "end": 3.75,
-          "accent": false
-        },
-        {
-          "w": "que",
-          "start": 3.75,
-          "end": 3.93,
-          "accent": false
-        },
-        {
-          "w": "tu",
-          "start": 3.93,
-          "end": 4.24,
-          "accent": false
-        },
-        {
-          "w": "gagnes",
-          "start": 4.24,
-          "end": 4.92,
-          "accent": false
-        },
-        {
-          "w": "dans",
-          "start": 4.92,
-          "end": 5.18,
-          "accent": false
-        },
-        {
-          "w": "l'année.",
-          "start": 5.18,
-          "end": 5.92,
-          "accent": false
         }
       ]
     },
@@ -700,8 +658,8 @@
       "role": "body",
       "src_in": 141.76,
       "src_out": 147.28,
-      "out_start": 28.64,
-      "out_end": 34.16,
+      "out_start": 26.23,
+      "out_end": 31.75,
       "dur": 5.52,
       "text": "Et c'est là que les gens se font avoir, tu peux pas juste dire j'habite là-bas.",
       "camera": {
@@ -811,113 +769,12 @@
       ]
     },
     {
-      "id": "s08",
-      "role": "body",
-      "src_in": 147.12,
-      "src_out": 150.16,
-      "out_start": 34.16,
-      "out_end": 37.2,
-      "dur": 3.04,
-      "text": "Il faut que ce soit vrai que tu vis vraiment dans ce pays.",
-      "camera": {
-        "type": "punch_in",
-        "from": 1.0,
-        "to": 1.1,
-        "easing": "expo_out"
-      },
-      "transition_in": "hard_cut",
-      "sfx": [
-        "click"
-      ],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "Il",
-          "start": 0.08,
-          "end": 0.2,
-          "accent": false
-        },
-        {
-          "w": "faut",
-          "start": 0.2,
-          "end": 0.42,
-          "accent": false
-        },
-        {
-          "w": "que",
-          "start": 0.42,
-          "end": 0.59,
-          "accent": false
-        },
-        {
-          "w": "ce",
-          "start": 0.59,
-          "end": 0.7,
-          "accent": false
-        },
-        {
-          "w": "soit",
-          "start": 0.7,
-          "end": 0.93,
-          "accent": false
-        },
-        {
-          "w": "vrai",
-          "start": 0.93,
-          "end": 1.28,
-          "accent": true
-        },
-        {
-          "w": "que",
-          "start": 1.28,
-          "end": 1.41,
-          "accent": false
-        },
-        {
-          "w": "tu",
-          "start": 1.41,
-          "end": 1.44,
-          "accent": false
-        },
-        {
-          "w": "vis",
-          "start": 1.44,
-          "end": 1.66,
-          "accent": false
-        },
-        {
-          "w": "vraiment",
-          "start": 1.66,
-          "end": 2.12,
-          "accent": true
-        },
-        {
-          "w": "dans",
-          "start": 2.12,
-          "end": 2.35,
-          "accent": false
-        },
-        {
-          "w": "ce",
-          "start": 2.35,
-          "end": 2.45,
-          "accent": false
-        },
-        {
-          "w": "pays.",
-          "start": 2.45,
-          "end": 2.96,
-          "accent": false
-        }
-      ]
-    },
-    {
       "id": "s09",
       "role": "body",
       "src_in": 150.0,
       "src_out": 156.96,
-      "out_start": 37.2,
-      "out_end": 44.16,
+      "out_start": 31.75,
+      "out_end": 38.71,
       "dur": 6.96,
       "text": "Un joueur qui prétend être expatrié mais qui passe sa vie et joue depuis la France, le fisc le requalifie. Et tout retombe.",
       "camera": {
@@ -1084,8 +941,8 @@
       "role": "cta",
       "src_in": 194.56,
       "src_out": 200.44,
-      "out_start": 44.16,
-      "out_end": 50.04,
+      "out_start": 38.71,
+      "out_end": 44.59,
       "dur": 5.88,
       "text": "Si tu veux savoir où poser tes valises pour de bon.",
       "camera": {
@@ -1182,17 +1039,17 @@
     }
   ],
   "music": {
-    "track": "assets/music/bed.mp3",
+    "track": "assets/music/bed.wav",
     "in": 0.0,
     "gain_db": -20,
     "duck_db": -9,
-    "status": "MANQUANT — /assets/music vide, source à fournir (voir note)"
+    "status": "généré synthétiquement (ffmpeg)"
   },
   "sfx_bank": {
-    "impact_deep": "généré ffmpeg",
-    "whoosh_short": "généré ffmpeg",
-    "click": "généré ffmpeg",
-    "riser_1s": "généré ffmpeg",
+    "impact_deep": "assets/sfx/impact_deep.wav",
+    "whoosh_short": "assets/sfx/whoosh_short.wav",
+    "click": "assets/sfx/click.wav",
+    "riser_1s": "assets/sfx/riser_1s.wav",
     "level_db": -14
   },
   "captions": {
@@ -1203,7 +1060,6 @@
     "tracking": "-0.02em",
     "stroke": "noir 8px + drop shadow",
     "accent_color": "#3BE8FF",
-    "note": "jaune évité (interdits: pas de chaud/or)",
     "current_word": "scale 1.06 + accent",
     "safe_bottom_px": 280,
     "min_y_px": 1640
