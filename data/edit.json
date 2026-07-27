@@ -1,1071 +1,179 @@
 {
   "meta": {
-    "target_duration": 44.59,
     "fps": 30,
     "width": 1080,
     "height": 1920,
     "source": "source/reel5.mp4",
     "source_fps": 60,
-    "whisper_model": "base (multilingue) — texte relu/corrigé"
+    "thesis": "Pour un joueur de poker pro, le pays ou il vit n'est pas un detail fiscal mais LA decision : a gains egaux, elle separe celui qui garde tout de celui qui en laisse la moitie, a condition d'y resider vraiment.",
+    "margins": { "pre_first_word_s": 0.25, "post_last_word_s": 0.40 },
+    "note_texte": "Textes = relecture corrigee de l'ASR base (modele large/medium injoignables). A valider si un terme fiscal ou un chiffre doit etre exact.",
+    "effets_autorises": {
+      "signature": "s06 — pivot 'ce qui rend le poker unique' (1:02). UNIQUE effet marquant du short.",
+      "cross_dissolve_8f": "s10 — saut temporel (bloc mort de 33s retire). UNE seule fois.",
+      "masque_plein_cadre": ["s03 tampon FAUX", "s08 ComparisonBar", "s11 carte LE PIEGE"]
+    }
   },
   "segments": [
     {
-      "id": "s01",
-      "role": "hook",
-      "src_in": 156.8,
-      "src_out": 164.56,
-      "out_start": 0.0,
-      "out_end": 7.76,
-      "dur": 7.76,
-      "text": "Le Poker, c'est le seul métier où deux joueurs, avec exactement les mêmes gains, finissent l'année avec des fortunes différentes,",
-      "camera": {
-        "type": "punch_in",
-        "from": 1.0,
-        "to": 1.1,
-        "easing": "expo_out"
-      },
+      "id": "s01", "act": "accroche",
+      "why": "Ouverture reelle de la source : la question + la promesse chiffree. Se comprend sans contexte, donc peut ouvrir.",
+      "src_in": 6.30, "src_out": 15.76,
+      "text": "Ou habiter quand on est joueur de poker pro ? Je vais te dire pourquoi c'est le seul metier ou ca peut litteralement te couter des dizaines de milliers d'euros par an.",
+      "audio_lead": 0.0,
+      "camera": { "type": "push_in", "from": 1.00, "to": 1.06 },
       "transition_in": "hard_cut",
-      "sfx": [
-        "impact_deep"
-      ],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "Le",
-          "start": 0.08,
-          "end": 0.22,
-          "accent": false
-        },
-        {
-          "w": "Poker,",
-          "start": 0.22,
-          "end": 0.72,
-          "accent": false
-        },
-        {
-          "w": "c'est",
-          "start": 0.72,
-          "end": 1.08,
-          "accent": false
-        },
-        {
-          "w": "le",
-          "start": 1.08,
-          "end": 1.22,
-          "accent": false
-        },
-        {
-          "w": "seul",
-          "start": 1.22,
-          "end": 1.51,
-          "accent": false
-        },
-        {
-          "w": "métier",
-          "start": 1.51,
-          "end": 2.02,
-          "accent": false
-        },
-        {
-          "w": "où",
-          "start": 2.02,
-          "end": 2.24,
-          "accent": false
-        },
-        {
-          "w": "deux",
-          "start": 2.24,
-          "end": 2.53,
-          "accent": false
-        },
-        {
-          "w": "joueurs,",
-          "start": 2.53,
-          "end": 3.3,
-          "accent": false
-        },
-        {
-          "w": "avec",
-          "start": 3.3,
-          "end": 3.47,
-          "accent": false
-        },
-        {
-          "w": "exactement",
-          "start": 3.47,
-          "end": 4.2,
-          "accent": false
-        },
-        {
-          "w": "les",
-          "start": 4.2,
-          "end": 4.42,
-          "accent": false
-        },
-        {
-          "w": "mêmes",
-          "start": 4.42,
-          "end": 4.86,
-          "accent": true
-        },
-        {
-          "w": "gains,",
-          "start": 4.86,
-          "end": 5.48,
-          "accent": true
-        },
-        {
-          "w": "finissent",
-          "start": 5.48,
-          "end": 5.72,
-          "accent": false
-        },
-        {
-          "w": "l'année",
-          "start": 5.72,
-          "end": 6.13,
-          "accent": false
-        },
-        {
-          "w": "avec",
-          "start": 6.13,
-          "end": 6.33,
-          "accent": false
-        },
-        {
-          "w": "des",
-          "start": 6.33,
-          "end": 6.48,
-          "accent": false
-        },
-        {
-          "w": "fortunes",
-          "start": 6.48,
-          "end": 6.89,
-          "accent": true
-        },
-        {
-          "w": "différentes,",
-          "start": 6.89,
-          "end": 7.68,
-          "accent": true
-        }
-      ]
+      "graphic": null
     },
     {
-      "id": "s02",
-      "role": "hook",
-      "src_in": 165.55,
-      "src_out": 168.08,
-      "out_start": 7.76,
-      "out_end": 10.29,
-      "dur": 2.53,
-      "text": "À cause de l'endroit où ils dorment.",
-      "camera": {
-        "type": "snap_zoom",
-        "from": 1.0,
-        "to": 1.18
-      },
+      "id": "s02", "act": "accroche",
+      "why": "Installe la fausse croyance de confort du spectateur (mes gains de jeu ne sont pas imposables).",
+      "src_in": 15.76, "src_out": 21.32,
+      "text": "Tu vis du poker, tu gagnes bien, et tu te dis : c'est du jeu, c'est de la chance, donc c'est pas imposable.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static", "drift_px": 6 },
+      "transition_in": "continue",
+      "graphic": null,
+      "cut_after": "Retire 21.32->26.12 (redite 'donc c'est pas imposable, mais pas du tout')."
+    },
+    {
+      "id": "s03", "act": "accroche",
+      "why": "Le contre-pied qui detruit la croyance. Bouton d'accroche.",
+      "src_in": 26.12, "src_out": 29.92,
+      "text": "C'est faux. Premiere erreur.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
       "transition_in": "hard_cut",
-      "sfx": [
-        "impact_deep"
-      ],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "à",
-          "start": 0.08,
-          "end": 0.23,
-          "accent": false
-        },
-        {
-          "w": "cause",
-          "start": 0.23,
-          "end": 0.44,
-          "accent": false
-        },
-        {
-          "w": "de",
-          "start": 0.44,
-          "end": 0.63,
-          "accent": false
-        },
-        {
-          "w": "l'endroit",
-          "start": 0.63,
-          "end": 1.45,
-          "accent": false
-        },
-        {
-          "w": "où",
-          "start": 1.45,
-          "end": 1.63,
-          "accent": false
-        },
-        {
-          "w": "ils",
-          "start": 1.63,
-          "end": 1.81,
-          "accent": false
-        },
-        {
-          "w": "dorment.",
-          "start": 1.81,
-          "end": 2.45,
-          "accent": true
-        }
-      ]
+      "graphic": { "type": "FullscreenStamp", "label": "FAUX", "sub": "1re erreur", "role": "masque le jump cut de la redite", "in_frames": 5, "hold_min_s": 1.4 }
     },
     {
-      "id": "s03",
-      "role": "body",
-      "src_in": 29.89,
-      "src_out": 34.48,
-      "out_start": 10.29,
-      "out_end": 14.88,
-      "dur": 4.59,
-      "text": "Tout dépend d'une seule chose. Est-ce que tu es vu comme un amateur ou comme un pro",
-      "camera": {
-        "type": "drift",
-        "px": 12
-      },
-      "transition_in": "whip_left",
-      "sfx": [
-        "whoosh_short"
-      ],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "Tout",
-          "start": 0.08,
-          "end": 0.22,
-          "accent": false
-        },
-        {
-          "w": "dépend",
-          "start": 0.22,
-          "end": 0.56,
-          "accent": false
-        },
-        {
-          "w": "d'une",
-          "start": 0.56,
-          "end": 0.79,
-          "accent": false
-        },
-        {
-          "w": "seule",
-          "start": 0.79,
-          "end": 1.04,
-          "accent": false
-        },
-        {
-          "w": "chose.",
-          "start": 1.04,
-          "end": 1.47,
-          "accent": false
-        },
-        {
-          "w": "Est-ce",
-          "start": 1.47,
-          "end": 2.02,
-          "accent": false
-        },
-        {
-          "w": "que",
-          "start": 2.02,
-          "end": 2.13,
-          "accent": false
-        },
-        {
-          "w": "tu",
-          "start": 2.13,
-          "end": 2.28,
-          "accent": false
-        },
-        {
-          "w": "es",
-          "start": 2.28,
-          "end": 2.58,
-          "accent": false
-        },
-        {
-          "w": "vu",
-          "start": 2.58,
-          "end": 2.66,
-          "accent": false
-        },
-        {
-          "w": "comme",
-          "start": 2.66,
-          "end": 2.95,
-          "accent": false
-        },
-        {
-          "w": "un",
-          "start": 2.95,
-          "end": 3.1,
-          "accent": false
-        },
-        {
-          "w": "amateur",
-          "start": 3.1,
-          "end": 3.67,
-          "accent": true
-        },
-        {
-          "w": "ou",
-          "start": 3.67,
-          "end": 3.86,
-          "accent": false
-        },
-        {
-          "w": "comme",
-          "start": 3.86,
-          "end": 4.14,
-          "accent": false
-        },
-        {
-          "w": "un",
-          "start": 4.14,
-          "end": 4.32,
-          "accent": false
-        },
-        {
-          "w": "pro",
-          "start": 4.32,
-          "end": 4.51,
-          "accent": true
-        }
-      ]
+      "id": "s04", "act": "contexte",
+      "why": "Pose la ligne de partage amateur/pro. On garde la respiration apres 'premiere erreur'.",
+      "src_in": 29.97, "src_out": 34.75,
+      "text": "Tout depend d'une seule chose : est-ce que tu es vu comme un amateur ou comme un pro ?",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
+      "transition_in": "continue",
+      "graphic": { "type": "Toggle", "labels": ["AMATEUR", "PRO"], "hold_min_s": 1.6 },
+      "cut_after": "Retire 34.75->45.10 (faux depart 'un amateur qui gagne de l'argent' + reprise trainante 8s)."
     },
     {
-      "id": "s04",
-      "role": "body",
-      "src_in": 65.4,
-      "src_out": 69.64,
-      "out_start": 14.88,
-      "out_end": 19.12,
-      "dur": 4.24,
-      "text": "La façon dont les gains sont taxés change énormément d'un pays à l'autre.",
-      "camera": {
-        "type": "punch_in",
-        "from": 1.0,
-        "to": 1.08,
-        "easing": "expo_out"
-      },
+      "id": "s05", "act": "contexte",
+      "why": "Le mecanisme du 'pourquoi imposable' : tu en vis, c'est regulier -> activite professionnelle -> ca s'impose. Designe le destinataire (le pro).",
+      "src_in": 45.10, "src_out": 55.56,
+      "text": "Oui, c'est du jeu. Mais toi, tu en vis, c'est regulier, c'est ton metier : pour le fisc francais, c'est une activite professionnelle. Et une activite professionnelle, ca s'impose.",
+      "audio_lead": 0.4,
+      "camera": { "type": "static", "scale": 1.12 },
       "transition_in": "hard_cut",
-      "sfx": [
-        "click"
-      ],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "La",
-          "start": 0.08,
-          "end": 0.2,
-          "accent": false
-        },
-        {
-          "w": "façon",
-          "start": 0.2,
-          "end": 0.56,
-          "accent": false
-        },
-        {
-          "w": "dont",
-          "start": 0.56,
-          "end": 0.79,
-          "accent": false
-        },
-        {
-          "w": "les",
-          "start": 0.79,
-          "end": 0.97,
-          "accent": false
-        },
-        {
-          "w": "gains",
-          "start": 0.97,
-          "end": 1.27,
-          "accent": true
-        },
-        {
-          "w": "sont",
-          "start": 1.27,
-          "end": 1.51,
-          "accent": false
-        },
-        {
-          "w": "taxés",
-          "start": 1.51,
-          "end": 1.86,
-          "accent": false
-        },
-        {
-          "w": "change",
-          "start": 1.86,
-          "end": 2.37,
-          "accent": false
-        },
-        {
-          "w": "énormément",
-          "start": 2.37,
-          "end": 2.92,
-          "accent": true
-        },
-        {
-          "w": "d'un",
-          "start": 2.92,
-          "end": 3.14,
-          "accent": false
-        },
-        {
-          "w": "pays",
-          "start": 3.14,
-          "end": 3.4,
-          "accent": false
-        },
-        {
-          "w": "à",
-          "start": 3.4,
-          "end": 3.5,
-          "accent": false
-        },
-        {
-          "w": "l'autre.",
-          "start": 3.5,
-          "end": 4.16,
-          "accent": false
-        }
-      ]
+      "jumpcut_mask": "changement de cadrage (plan plus serre) + J-cut 0.4s",
+      "graphic": { "type": "LowerThird", "title": "ACTIVITE PRO", "accent": "= IMPOSABLE", "on_word": "s'impose", "hold_min_s": 1.6 },
+      "cut_after": "Retire 55.56->62.10 (recap redondant 'je touche tout pour un pro, c'est faux')."
     },
     {
-      "id": "s05",
-      "role": "body",
-      "src_in": 69.48,
-      "src_out": 73.0,
-      "out_start": 19.12,
-      "out_end": 22.64,
-      "dur": 3.52,
-      "text": "Certains pays ne taxent pas du tout, les gains du jeu.",
-      "camera": {
-        "type": "drift",
-        "px": 12
-      },
-      "transition_in": "whip_right",
-      "sfx": [
-        "whoosh_short"
-      ],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "Certains",
-          "start": 0.08,
-          "end": 0.64,
-          "accent": false
-        },
-        {
-          "w": "pays",
-          "start": 0.64,
-          "end": 0.92,
-          "accent": false
-        },
-        {
-          "w": "ne",
-          "start": 0.92,
-          "end": 1.08,
-          "accent": false
-        },
-        {
-          "w": "taxent",
-          "start": 1.08,
-          "end": 1.59,
-          "accent": true
-        },
-        {
-          "w": "pas",
-          "start": 1.59,
-          "end": 1.69,
-          "accent": false
-        },
-        {
-          "w": "du",
-          "start": 1.69,
-          "end": 1.83,
-          "accent": false
-        },
-        {
-          "w": "tout,",
-          "start": 1.83,
-          "end": 2.29,
-          "accent": false
-        },
-        {
-          "w": "les",
-          "start": 2.29,
-          "end": 2.46,
-          "accent": false
-        },
-        {
-          "w": "gains",
-          "start": 2.46,
-          "end": 2.8,
-          "accent": true
-        },
-        {
-          "w": "du",
-          "start": 2.8,
-          "end": 2.95,
-          "accent": false
-        },
-        {
-          "w": "jeu.",
-          "start": 2.95,
-          "end": 3.44,
-          "accent": false
-        }
-      ]
+      "id": "s06", "act": "demonstration",
+      "why": "POINT DE BASCULE PRINCIPAL. Le recit pivote : de 'tu es imposable' vers 'tout depend du pays'. Seul emplacement de la transition signature.",
+      "src_in": 62.10, "src_out": 65.48,
+      "text": "Et la, arrive ce qui rend le poker unique.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
+      "transition_in": "SIGNATURE",
+      "graphic": null
     },
     {
-      "id": "s06",
-      "role": "body",
-      "src_in": 135.48,
-      "src_out": 139.07,
-      "out_start": 22.64,
-      "out_end": 26.23,
-      "dur": 3.59,
-      "text": "Il y a un pays qui ne taxe pas le jeu, ça peut représenter la moitié",
-      "camera": {
-        "type": "punch_in",
-        "from": 1.0,
-        "to": 1.09,
-        "easing": "expo_out"
-      },
+      "id": "s07", "act": "demonstration",
+      "why": "Le mecanisme reel : la taxation varie enormement selon le pays. Certains ne taxent pas du tout.",
+      "src_in": 65.48, "src_out": 72.92,
+      "text": "La facon dont les gains sont taxes change enormement d'un pays a l'autre. Certains pays ne taxent pas du tout les gains du jeu.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static", "drift_px": 6 },
+      "transition_in": "continue",
+      "graphic": { "type": "Map", "note": "pays qui taxe vs pays qui ne taxe pas", "hold_min_s": 2.0 },
+      "cut_after": "Retire 72.92->93.00 (20s traines/redite 'd'autres te taxent comme un revenu, meme d'autres, d'autres...')."
+    },
+    {
+      "id": "s08", "act": "demonstration",
+      "why": "Le chiffre-choc qui condense l'enjeu : memes gains, tu gardes tout ou tu laisses la moitie.",
+      "src_in": 93.00, "src_out": 96.76,
+      "text": "Mais selon ou tu vis : tu gardes tout, ou tu en laisses la moitie.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
       "transition_in": "hard_cut",
-      "sfx": [
-        "click"
-      ],
-      "overlay": {
-        "type": "stat_counter",
-        "value": "50%",
-        "label": "de tes gains, en jeu",
-        "in": 0.7,
-        "duration": 2.6,
-        "anchor": "top_third"
-      },
-      "caption_words": [
-        {
-          "w": "Il",
-          "start": 0.08,
-          "end": 0.2,
-          "accent": false
-        },
-        {
-          "w": "y",
-          "start": 0.2,
-          "end": 0.26,
-          "accent": false
-        },
-        {
-          "w": "a",
-          "start": 0.26,
-          "end": 0.34,
-          "accent": false
-        },
-        {
-          "w": "un",
-          "start": 0.34,
-          "end": 0.44,
-          "accent": false
-        },
-        {
-          "w": "pays",
-          "start": 0.44,
-          "end": 0.68,
-          "accent": false
-        },
-        {
-          "w": "qui",
-          "start": 0.68,
-          "end": 0.85,
-          "accent": false
-        },
-        {
-          "w": "ne",
-          "start": 0.85,
-          "end": 1.16,
-          "accent": false
-        },
-        {
-          "w": "taxe",
-          "start": 1.16,
-          "end": 1.22,
-          "accent": false
-        },
-        {
-          "w": "pas",
-          "start": 1.22,
-          "end": 1.4,
-          "accent": false
-        },
-        {
-          "w": "le",
-          "start": 1.4,
-          "end": 1.52,
-          "accent": false
-        },
-        {
-          "w": "jeu,",
-          "start": 1.52,
-          "end": 1.98,
-          "accent": false
-        },
-        {
-          "w": "ça",
-          "start": 1.98,
-          "end": 2.0,
-          "accent": false
-        },
-        {
-          "w": "peut",
-          "start": 2.0,
-          "end": 2.24,
-          "accent": false
-        },
-        {
-          "w": "représenter",
-          "start": 2.24,
-          "end": 2.98,
-          "accent": false
-        },
-        {
-          "w": "la",
-          "start": 2.98,
-          "end": 3.09,
-          "accent": false
-        },
-        {
-          "w": "moitié",
-          "start": 3.09,
-          "end": 3.51,
-          "accent": true
-        }
-      ]
+      "jumpcut_mask": "carte ComparisonBar plein cadre (couvre la coupe du bloc traine)",
+      "graphic": { "type": "ComparisonBar", "left": { "label": "GARDE TOUT", "val": 100 }, "right": { "label": "LAISSE LA MOITIE", "val": 50 }, "hold_min_s": 2.2 }
     },
     {
-      "id": "s07",
-      "role": "body",
-      "src_in": 141.76,
-      "src_out": 147.28,
-      "out_start": 26.23,
-      "out_end": 31.75,
-      "dur": 5.52,
-      "text": "Et c'est là que les gens se font avoir, tu peux pas juste dire j'habite là-bas.",
-      "camera": {
-        "type": "drift",
-        "px": 12
-      },
+      "id": "s09", "act": "demonstration",
+      "why": "Formule-cle : le choix du pays n'est pas un detail, c'est LA decision. On garde la battue avant 'la decision'.",
+      "src_in": 96.76, "src_out": 102.24,
+      "text": "Tu comprends le truc. Pour un joueur pro, le choix du pays ou tu habites, c'est pas un detail : c'est la decision.",
+      "audio_lead": 0.0,
+      "camera": { "type": "push_in", "from": 1.00, "to": 1.05, "land_on": "decision" },
+      "transition_in": "continue",
+      "graphic": { "type": "HighlightBox", "on_word": "decision", "hold_min_s": 1.4 }
+    },
+    {
+      "id": "s10", "act": "demonstration",
+      "why": "L'enjeu chiffre : un pays qui ne taxe pas le jeu = la moitie de tes gains sur l'annee.",
+      "src_in": 135.56, "src_out": 141.40,
+      "text": "Il y a un pays qui ne taxe pas le jeu : ca peut representer la moitie de ce que tu gagnes dans l'annee.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
+      "transition_in": "cross_dissolve_8f",
+      "jumpcut_mask": "cross-dissolve 8 frames : marque le saut temporel (bloc mort de 33s retire). UNIQUE dissolve du short.",
+      "graphic": { "type": "StatCard", "value": 50, "unit": "%", "label": "DE TES GAINS", "count_s": 0.9, "hold_min_s": 2.0 }
+    },
+    {
+      "id": "s11", "act": "demonstration",
+      "why": "POINT DE BASCULE SECONDAIRE. Le contre-pied dans le contre-pied : le bon pays ne suffit pas.",
+      "src_in": 141.40, "src_out": 147.20,
+      "text": "Mais, et c'est la que les gens se font avoir : tu peux pas juste dire j'habite la-bas.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
+      "transition_in": "continue",
+      "graphic": { "type": "FullscreenCard", "label": "LE PIEGE", "role": "marque le twist (bascule secondaire), audio continue dessous (L-cut)", "duration_s": 0.6, "hold_min_s": 1.4 }
+    },
+    {
+      "id": "s12", "act": "demonstration",
+      "why": "La condition reelle + la sanction : il faut vraiment y vivre, sinon requalification et tout retombe. On garde le temps apres 'et tout retombe'.",
+      "src_in": 147.20, "src_out": 156.88,
+      "text": "Il faut que ce soit vrai : que tu vives vraiment dans ce pays. Un joueur qui pretend etre expatrie mais qui vit et joue depuis la France, le fisc le requalifie. Et tout retombe.",
+      "audio_lead": 0.0,
+      "camera": { "type": "push_in", "from": 1.00, "to": 1.04, "land_on": "retombe" },
+      "transition_in": "continue",
+      "graphic": { "type": "LowerThird", "title": "REQUALIFICATION", "accent": "tout retombe", "on_word": "retombe", "hold_min_s": 1.6 }
+    },
+    {
+      "id": "s13", "act": "resolution",
+      "why": "La punchline qui cristallise la these — ne fonctionne que maintenant, l'argument etant pose. Livree sur coupe franche, le silence fait le travail.",
+      "src_in": 156.88, "src_out": 168.00,
+      "text": "Le poker, c'est le seul metier ou deux joueurs, avec exactement les memes gains, finissent l'annee avec des fortunes differentes. Pas a cause de leur niveau : a cause de l'endroit ou ils dorment.",
+      "audio_lead": 0.0,
+      "camera": { "type": "push_in", "from": 1.02, "to": 1.10, "land_on": "dorment" },
       "transition_in": "hard_cut",
-      "sfx": [],
-      "overlay": null,
-      "caption_words": [
-        {
-          "w": "et",
-          "start": 0.08,
-          "end": 0.24,
-          "accent": false
-        },
-        {
-          "w": "c'est",
-          "start": 0.24,
-          "end": 0.63,
-          "accent": false
-        },
-        {
-          "w": "là",
-          "start": 0.63,
-          "end": 0.84,
-          "accent": false
-        },
-        {
-          "w": "que",
-          "start": 0.84,
-          "end": 1.07,
-          "accent": false
-        },
-        {
-          "w": "les",
-          "start": 1.07,
-          "end": 1.39,
-          "accent": false
-        },
-        {
-          "w": "gens",
-          "start": 1.39,
-          "end": 1.6,
-          "accent": false
-        },
-        {
-          "w": "se",
-          "start": 1.6,
-          "end": 1.75,
-          "accent": false
-        },
-        {
-          "w": "font",
-          "start": 1.75,
-          "end": 2.14,
-          "accent": false
-        },
-        {
-          "w": "avoir,",
-          "start": 2.14,
-          "end": 2.68,
-          "accent": false
-        },
-        {
-          "w": "tu",
-          "start": 2.68,
-          "end": 2.73,
-          "accent": false
-        },
-        {
-          "w": "peux",
-          "start": 2.73,
-          "end": 3.03,
-          "accent": false
-        },
-        {
-          "w": "pas",
-          "start": 3.03,
-          "end": 3.54,
-          "accent": false
-        },
-        {
-          "w": "juste",
-          "start": 3.54,
-          "end": 3.64,
-          "accent": false
-        },
-        {
-          "w": "dire",
-          "start": 3.64,
-          "end": 3.94,
-          "accent": false
-        },
-        {
-          "w": "j'habite",
-          "start": 3.94,
-          "end": 4.54,
-          "accent": true
-        },
-        {
-          "w": "là-bas.",
-          "start": 4.54,
-          "end": 5.44,
-          "accent": true
-        }
-      ]
+      "graphic": { "type": "TwinReveal", "left": "MEMES GAINS", "right": "FORTUNES !=", "note": "discret, s'efface avant 'ou ils dorment'", "hold_min_s": 1.6 },
+      "cut_after": "Retire 168.00->185.40 (reprises hesitantes 'ce qui se reflechit en amont' x2)."
     },
     {
-      "id": "s09",
-      "role": "body",
-      "src_in": 150.0,
-      "src_out": 156.96,
-      "out_start": 31.75,
-      "out_end": 38.71,
-      "dur": 6.96,
-      "text": "Un joueur qui prétend être expatrié mais qui passe sa vie et joue depuis la France, le fisc le requalifie. Et tout retombe.",
-      "camera": {
-        "type": "shake",
-        "px": 4,
-        "on": "tout retombe"
-      },
-      "transition_in": "flash",
-      "sfx": [
-        "riser_1s",
-        "impact_deep"
-      ],
-      "overlay": {
-        "type": "lower_third",
-        "value": "Fausse expat",
-        "label": "le fisc requalifie tout",
-        "in": 0.4,
-        "duration": 3.4,
-        "anchor": "lower"
-      },
-      "caption_words": [
-        {
-          "w": "Un",
-          "start": 0.08,
-          "end": 0.26,
-          "accent": false
-        },
-        {
-          "w": "joueur",
-          "start": 0.26,
-          "end": 0.59,
-          "accent": false
-        },
-        {
-          "w": "qui",
-          "start": 0.59,
-          "end": 0.78,
-          "accent": false
-        },
-        {
-          "w": "prétend",
-          "start": 0.78,
-          "end": 1.29,
-          "accent": false
-        },
-        {
-          "w": "être",
-          "start": 1.29,
-          "end": 1.62,
-          "accent": false
-        },
-        {
-          "w": "expatrié",
-          "start": 1.62,
-          "end": 2.2,
-          "accent": false
-        },
-        {
-          "w": "mais",
-          "start": 2.2,
-          "end": 2.46,
-          "accent": false
-        },
-        {
-          "w": "qui",
-          "start": 2.46,
-          "end": 2.64,
-          "accent": false
-        },
-        {
-          "w": "passe",
-          "start": 2.64,
-          "end": 3.09,
-          "accent": false
-        },
-        {
-          "w": "sa",
-          "start": 3.09,
-          "end": 3.11,
-          "accent": false
-        },
-        {
-          "w": "vie",
-          "start": 3.11,
-          "end": 3.3,
-          "accent": false
-        },
-        {
-          "w": "et",
-          "start": 3.3,
-          "end": 3.43,
-          "accent": false
-        },
-        {
-          "w": "joue",
-          "start": 3.43,
-          "end": 3.79,
-          "accent": false
-        },
-        {
-          "w": "depuis",
-          "start": 3.79,
-          "end": 4.08,
-          "accent": false
-        },
-        {
-          "w": "la",
-          "start": 4.08,
-          "end": 4.23,
-          "accent": false
-        },
-        {
-          "w": "France,",
-          "start": 4.23,
-          "end": 4.84,
-          "accent": false
-        },
-        {
-          "w": "le",
-          "start": 4.84,
-          "end": 4.88,
-          "accent": false
-        },
-        {
-          "w": "fisc",
-          "start": 4.88,
-          "end": 5.2,
-          "accent": false
-        },
-        {
-          "w": "le",
-          "start": 5.2,
-          "end": 5.31,
-          "accent": false
-        },
-        {
-          "w": "requalifie.",
-          "start": 5.31,
-          "end": 5.88,
-          "accent": true
-        },
-        {
-          "w": "Et",
-          "start": 5.88,
-          "end": 6.06,
-          "accent": false
-        },
-        {
-          "w": "tout",
-          "start": 6.06,
-          "end": 6.25,
-          "accent": false
-        },
-        {
-          "w": "retombe.",
-          "start": 6.25,
-          "end": 6.88,
-          "accent": true
-        }
-      ]
+      "id": "s14", "act": "resolution",
+      "why": "Retourne l'insight vers le spectateur : ton profil (mobile, revenus eleves) est parfait pour le faire proprement.",
+      "src_in": 185.40, "src_out": 194.64,
+      "text": "Tes revenus sont eleves, tu es totalement mobile, tu peux jouer de n'importe ou : t'as le profil parfait pour choisir intelligemment, proprement, et 100 % en regle.",
+      "audio_lead": 0.3,
+      "camera": { "type": "static", "scale": 1.08 },
+      "transition_in": "hard_cut",
+      "jumpcut_mask": "changement de cadrage + J-cut 0.3s",
+      "graphic": { "type": "LowerThird", "title": "100 % EN REGLE", "on_word": "regle", "hold_min_s": 1.6 }
     },
     {
-      "id": "s10",
-      "role": "cta",
-      "src_in": 194.56,
-      "src_out": 200.44,
-      "out_start": 38.71,
-      "out_end": 44.59,
-      "dur": 5.88,
-      "text": "Si tu veux savoir où poser tes valises pour de bon.",
-      "camera": {
-        "type": "drift",
-        "px": 12
-      },
-      "transition_in": "whip_left",
-      "sfx": [
-        "whoosh_short"
-      ],
-      "overlay": {
-        "type": "lower_third",
-        "value": "Commente POKER",
-        "label": "pour ton pays cible",
-        "in": 0.5,
-        "duration": 2.6,
-        "anchor": "center_low"
-      },
-      "caption_words": [
-        {
-          "w": "Si",
-          "start": 0.08,
-          "end": 0.36,
-          "accent": false
-        },
-        {
-          "w": "tu",
-          "start": 0.36,
-          "end": 0.6,
-          "accent": false
-        },
-        {
-          "w": "veux",
-          "start": 0.6,
-          "end": 1.09,
-          "accent": false
-        },
-        {
-          "w": "savoir",
-          "start": 1.09,
-          "end": 1.86,
-          "accent": false
-        },
-        {
-          "w": "où",
-          "start": 1.86,
-          "end": 2.16,
-          "accent": false
-        },
-        {
-          "w": "poser",
-          "start": 2.16,
-          "end": 2.71,
-          "accent": false
-        },
-        {
-          "w": "tes",
-          "start": 2.71,
-          "end": 3.43,
-          "accent": false
-        },
-        {
-          "w": "valises",
-          "start": 3.43,
-          "end": 4.41,
-          "accent": false
-        },
-        {
-          "w": "pour",
-          "start": 4.41,
-          "end": 4.53,
-          "accent": false
-        },
-        {
-          "w": "de",
-          "start": 4.53,
-          "end": 5.04,
-          "accent": false
-        },
-        {
-          "w": "bon.",
-          "start": 5.04,
-          "end": 5.8,
-          "accent": true
-        }
-      ]
+      "id": "s15", "act": "resolution",
+      "why": "Transforme l'insight en action. CTA net.",
+      "src_in": 194.64, "src_out": 202.60,
+      "text": "Si tu veux savoir ou poser tes valises tout en restant en regle : commente poker.",
+      "audio_lead": 0.0,
+      "camera": { "type": "static" },
+      "transition_in": "continue",
+      "graphic": { "type": "CTACard", "label": "COMMENTE \"POKER\"", "hold_min_s": 2.0 },
+      "cut_after": "Retire 202.60->205.64 (doublon CTA 'comment de poker ?')."
     }
-  ],
-  "global_overlays": [
-    {
-      "type": "progress_bar",
-      "anchor": "top",
-      "height_px": 6
-    }
-  ],
-  "music": {
-    "track": "assets/music/bed.wav",
-    "in": 0.0,
-    "gain_db": -20,
-    "duck_db": -9,
-    "status": "généré synthétiquement (ffmpeg)"
-  },
-  "sfx_bank": {
-    "impact_deep": "assets/sfx/impact_deep.wav",
-    "whoosh_short": "assets/sfx/whoosh_short.wav",
-    "click": "assets/sfx/click.wav",
-    "riser_1s": "assets/sfx/riser_1s.wav",
-    "level_db": -14
-  },
-  "captions": {
-    "style": "karaoke_pop",
-    "max_words": 3,
-    "font": "Inter Black 900",
-    "size_px": 92,
-    "tracking": "-0.02em",
-    "stroke": "noir 8px + drop shadow",
-    "accent_color": "#3BE8FF",
-    "current_word": "scale 1.06 + accent",
-    "safe_bottom_px": 280,
-    "min_y_px": 1640
-  },
-  "master": {
-    "target_lufs": -14,
-    "true_peak_dbtp": -1
-  }
+  ]
 }
