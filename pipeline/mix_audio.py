@@ -13,7 +13,9 @@ for j, b in enumerate(ev.get('whoosh', [])):
 for b in ev.get('appear', []):
     events.append(('sfx/pop.wav', b, 0.5))          # incrustation appears
 for b in ev.get('tick', []):
-    events.append(('sfx/cut.wav', b, 0.28))         # jump-cut
+    events.append(('sfx/cut.wav', b, 0.30))         # minor jump-cut
+for b in ev.get('whoosh_cut', []):
+    events.append(('sfx/whoosh_soft.wav', b - 0.06, 0.42))  # bigger cut between plans
 for (b, v) in blips:
     events.append(('sfx/blip.wav', b, v))           # text appears
 

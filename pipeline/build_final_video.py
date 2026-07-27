@@ -46,14 +46,16 @@ for i in range(len(KEEP)-1):
     acc += KEEP[i][1]-KEEP[i][0]
     removed = KEEP[i+1][0]-KEEP[i][1]
     cuts_new.append((round(acc, 3), round(removed, 3)))
-TICKS = [t for (t, r) in cuts_new if r > 0.30]          # small sound on every real cut
-MINIFLASH = [t for (t, r) in cuts_new if r > 0.45]      # subtle visual blink on cuts
+TICKS = [t for (t, r) in cuts_new if 0.30 < r <= 0.55]  # small tick on minor cuts
+WHOOSH_CUT = [t for (t, r) in cuts_new if r > 0.55]     # soft whoosh on bigger cuts
+MINIFLASH = [t for (t, r) in cuts_new if r > 0.28]      # coloured blink between plans
 
 OVL = [(p, map_time(s), map_time(e), x, y) for (p, s, e, x, y) in OVL_OLD]
 FLASH = sorted(set(round(map_time(b), 3) for b in FLASH_OLD))
 POPS = sorted(set(round(map_time(b), 3) for b in POP_OLD))
 APPEAR = sorted(round(s, 3) for (p, s, e, x, y) in OVL)   # overlay/incrustation appearance times
-json.dump({'whoosh': FLASH, 'appear': APPEAR, 'tick': TICKS}, open('audio_events.json', 'w'))
+json.dump({'whoosh': FLASH, 'appear': APPEAR, 'tick': TICKS, 'whoosh_cut': WHOOSH_CUT},
+          open('audio_events.json', 'w'))
 
 inputs = ['-i', 'base2.mp4']; idx = 1
 ovl_idx = []
@@ -67,10 +69,12 @@ for j, b in enumerate(FLASH):
     png = FLASH_PNGS[j % len(FLASH_PNGS)]
     inputs += ['-loop', '1', '-t', '0.30', '-itsoffset', f'{round(b-0.10,3)}', '-i', png]
     flash_idx.append((idx, b, 0.08, 0.14)); idx += 1
+MINI_PNGS = ['assets/mini_b.png', 'assets/mini_p.png', 'assets/mini_c.png',
+             'assets/mini_o.png', 'assets/mini_w.png']
 mini_idx = []
-for b in MINIFLASH:
-    inputs += ['-loop', '1', '-t', '0.18', '-itsoffset', f'{round(b-0.05,3)}', '-i', 'assets/miniflash.png']
-    mini_idx.append((idx, b, 0.04, 0.08)); idx += 1
+for j, b in enumerate(MINIFLASH):
+    inputs += ['-loop', '1', '-t', '0.18', '-itsoffset', f'{round(b-0.05,3)}', '-i', MINI_PNGS[j % len(MINI_PNGS)]]
+    mini_idx.append((idx, b, 0.04, 0.09)); idx += 1
 
 fc = ["[0:v]subtitles=subs.ass:fontsdir=fonts[v0]"]
 cur, n = 'v0', 1
@@ -80,7 +84,8 @@ for (i, b, din, dout) in flash_idx + mini_idx:
     fc.append(f"[{cur}][fl{i}]overlay=0:0:eof_action=pass[v{n}]"); cur=f'v{n}'; n+=1
 for k, (p, s, e, x, y) in zip(ovl_idx, OVL):
     fc.append(f"[{k}:v]format=rgba,fade=t=in:st={s}:d=0.20:alpha=1,fade=t=out:st={round(e-0.20,3)}:d=0.20:alpha=1[o{k}]")
-    yexpr = f"if(lt(t\\,{s}+0.28)\\,{y}+55*(1-(t-{s})/0.28)\\,{y})"
+    # slide-up entrance, then gentle continuous float (bob)
+    yexpr = f"if(lt(t\\,{s}+0.28)\\,{y}+55*(1-(t-{s})/0.28)\\,{y}+7*sin(2*PI*(t-{s})*1.1))"
     fc.append(f"[{cur}][o{k}]overlay=x={x}:y='{yexpr}':eof_action=pass[v{n}]"); cur=f'v{n}'; n+=1
 
 cmd = [FF, '-y'] + inputs + ['-filter_complex', ";".join(fc),

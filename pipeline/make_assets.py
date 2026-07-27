@@ -187,6 +187,9 @@ for nm, rgb, a in [('flash_b', (90, 150, 255), 80), ('flash_p', (170, 90, 255), 
                    ('flash_c', (60, 230, 220), 74), ('flash_o', (255, 150, 40), 74)]:
     Image.new('RGBA', (1080, 1920), rgb + (a,)).save(f'assets/{nm}.png')
 Image.new('RGBA', (1080, 1920), (255, 255, 255, 42)).save('assets/miniflash.png')
+for nm, rgb in [('mini_b', (120, 170, 255)), ('mini_p', (185, 120, 255)),
+                ('mini_c', (90, 235, 225)), ('mini_o', (255, 170, 70)), ('mini_w', (255, 255, 255))]:
+    Image.new('RGBA', (1080, 1920), rgb + (44,)).save(f'assets/{nm}.png')
 
 for n in os.listdir('assets'):
     if n.endswith('.png') and not n.startswith('_'):
