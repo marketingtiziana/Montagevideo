@@ -25,8 +25,20 @@ for s, e in sil:
     ce = e - HEAD_PAD
     if ce - cs > 0.06:
         cuts.append((round(cs, 3), round(ce, 3)))
+
+# Manual cuts (base timeline): the cough at the start of S3 (~source 88-90)
+MANUAL_CUTS = [(52.10, 54.55)]
+cuts += MANUAL_CUTS
 # merge/clip
 cuts.sort()
+# merge overlaps
+merged = []
+for cs, ce in cuts:
+    if merged and cs <= merged[-1][1]:
+        merged[-1] = (merged[-1][0], max(merged[-1][1], ce))
+    else:
+        merged.append((cs, ce))
+cuts = merged
 print('cuts:', len(cuts), 'total removed:', round(sum(e-s for s, e in cuts), 2), 's')
 
 # KEEP segments = complement of cuts within [0, DUR]

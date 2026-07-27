@@ -44,7 +44,8 @@ MINIFLASH = [t for (t, r) in cuts_new if r > 0.75]      # subtle visual blink on
 OVL = [(p, map_time(s), map_time(e), x, y) for (p, s, e, x, y) in OVL_OLD]
 FLASH = sorted(set(round(map_time(b), 3) for b in FLASH_OLD))
 POPS = sorted(set(round(map_time(b), 3) for b in POP_OLD))
-json.dump({'whoosh': FLASH, 'pop': POPS, 'tick': TICKS}, open('audio_events.json', 'w'))
+APPEAR = sorted(round(s, 3) for (p, s, e, x, y) in OVL)   # overlay/incrustation appearance times
+json.dump({'whoosh': FLASH, 'appear': APPEAR, 'tick': TICKS}, open('audio_events.json', 'w'))
 
 inputs = ['-i', 'base2.mp4']; idx = 1
 ovl_idx = []

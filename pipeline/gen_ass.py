@@ -183,4 +183,9 @@ for i, (s, e, f, t) in enumerate(fixed):
 
 with open('subs.ass', 'w') as fh:
     fh.write(header + "\n".join(lines) + "\n")
-print("captions:", len(fixed), "-> subs.ass")
+
+# Export caption start times (+ accent flag) so mix_audio can blip on text appearance
+import json as _json
+meta = [{'t': round(s, 3), 'accent': ('~' in t)} for (s, e, f, t) in fixed]
+_json.dump(meta, open('subs_meta.json', 'w'))
+print("captions:", len(fixed), "-> subs.ass (+subs_meta.json)")
