@@ -102,7 +102,7 @@ CAPS = [
 ]
 
 FONTS = {'A': 'Anton', 'H': 'Archivo Black', 'B': 'Bebas Neue'}
-SIZES = {'A': 118, 'H': 104, 'B': 140}
+SIZES = {'A': 108, 'H': 94, 'B': 130}
 
 WHITE = "&H00FFFFFF"
 YELLOW = "&H0000FFFF"  # ASS &HAABBGGRR ; yellow = R255 G255 B0
@@ -157,14 +157,14 @@ styles = []
 for k, fam in FONTS.items():
     styles.append(
         f"Style: {k},{fam},{SIZES[k]},{WHITE},&H000000FF,&H00101010,&H90000000,"
-        f"0,0,0,0,100,100,1,0,1,7,4,2,90,90,560,1"
+        f"0,0,0,0,100,100,1,0,1,6,4,2,110,110,560,1"
     )
 
 header = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
 PlayResY: 1920
-WrapStyle: 2
+WrapStyle: 0
 ScaledBorderAndShadow: yes
 YCbCr Matrix: TV.709
 

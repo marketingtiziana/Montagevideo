@@ -10,26 +10,31 @@ ROWS = [590, 748, 906]   # stacked groups (flags / rates)
 
 # (png, start_old, end_old, x, y)
 OVL_OLD = [
+    ('assets/s_hook.png',  1.00,  3.40, CX, Y_SINGLE),
     ('assets/cli_be.png',  9.20, 12.40, CX, ROWS[0]),
     ('assets/cli_fr.png', 10.40, 12.40, CX, ROWS[1]),
     ('assets/cli_ch.png', 11.10, 12.40, CX, ROWS[2]),
-    ('assets/s_20.png',   14.30, 15.90, CX, Y_SINGLE),
+    ('assets/s_20.png',   14.30, 15.30, CX, Y_SINGLE),
+    ('assets/s_logique.png', 15.30, 16.30, CX, Y_SINGLE),
     ('assets/s_faux.png', 16.40, 19.20, CX, Y_SINGLE),
     ('assets/s_particulier.png', 23.60, 25.60, CX, Y_SINGLE),
     ('assets/rate_de.png', 33.90, 39.10, CX, ROWS[0]),
     ('assets/rate_be.png', 35.30, 39.10, CX, ROWS[1]),
     ('assets/rate_ch.png', 36.50, 39.10, CX, ROWS[2]),
     ('assets/x3.png',      42.30, 45.00, CX, Y_SINGLE),
-    ('assets/s_part3.png', 45.10, 47.60, CX, Y_SINGLE),
+    ('assets/s_part3.png', 45.10, 46.20, CX, Y_SINGLE),
+    ('assets/s_money.png', 46.30, 47.90, CX, Y_SINGLE),
     ('assets/s_entreprise.png', 48.30, 50.60, CX, Y_SINGLE),
     ('assets/s_warn.png',  56.20, 58.20, CX, Y_SINGLE),
     ('assets/s_poche.png', 65.30, 67.20, CX, Y_SINGLE),
     ('assets/s_ok.png',    67.30, 69.60, CX, Y_SINGLE),
+    ('assets/s_eu.png',    72.70, 73.90, CX, Y_SINGLE),
     ('assets/s_1decl.png', 74.90, 77.00, CX, Y_SINGLE),
     ('assets/s_oss.png',   77.10, 80.60, CX, Y_SINGLE),
     ('assets/s_cta.png',   97.30, 100.34, CX, Y_SINGLE),
+    ('assets/s_arrow.png', 97.30, 100.34, CX, 628),
 ]
-FLASH_OLD = [3.2, 16.35, 19.27, 42.3, 52.1, 67.3, 87.4, 97.35]   # strong section transitions
+FLASH_OLD = [3.2, 16.35, 19.27, 23.6, 42.3, 52.1, 67.3, 74.9, 87.4, 97.35]   # section transitions
 POP_OLD = [16.4, 42.3, 65.3, 67.3, 77.1, 97.3]
 
 # --- cut points on the tightened timeline (jump-cuts from silence removal) ---
@@ -39,7 +44,7 @@ for i in range(len(KEEP)-1):
     removed = KEEP[i+1][0]-KEEP[i][1]
     cuts_new.append((round(acc, 3), round(removed, 3)))
 TICKS = [t for (t, r) in cuts_new if r > 0.30]          # small sound on every real cut
-MINIFLASH = [t for (t, r) in cuts_new if r > 0.75]      # subtle visual blink on bigger cuts
+MINIFLASH = [t for (t, r) in cuts_new if r > 0.45]      # subtle visual blink on cuts
 
 OVL = [(p, map_time(s), map_time(e), x, y) for (p, s, e, x, y) in OVL_OLD]
 FLASH = sorted(set(round(map_time(b), 3) for b in FLASH_OLD))

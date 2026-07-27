@@ -130,6 +130,13 @@ sticker('s_oss', text='GUICHET UNIQUE', accent_txt='OSS', emoji='🇪🇺', fs=5
 sticker('s_warn', text='ATTENTION', emoji='⚠️', fs=58, top='#4a3a05', bot='#a8850a', bar='#ffd60a', glow='#f5c518', acc_fill=WHITE)
 sticker('s_cta', text='COMMENTE', accent_txt='« TVA »', emoji='💬', fs=60, bar='#3ee06e', glow='#22c55e')
 sticker('s_part3', accent_txt='3 ÉTATS', emoji='🏛️', fs=64)
+# --- extra stickers (v5: more incrustations) ---
+sticker('s_hook', text='TVA', accent_txt='INTERNATIONALE', emoji='🌍', fs=52, bar='#4da3ff')
+sticker('s_logique', text='LOGIQUE', accent_txt='?', emoji='🤔', fs=60)
+sticker('s_eu', text='TVA', accent_txt='UE', emoji='🇪🇺', fs=64, bar='#4da3ff')
+sticker('s_money', text='CHACUN SA PART', emoji='💰', fs=52, top='#4a3a05', bot='#a8850a', bar='#ffd60a', glow='#f5c518')
+sticker('s_arrow', text='EN COMMENTAIRE', emoji='👇', fs=54, top='#0d3d1e', bot='#128a3e', bar='#3ee06e', glow='#22c55e')
+sticker('s_piege', text='LE PIÈGE', emoji='⚠️', fs=60, top='#5b0f12', bot='#c0212b', bar='#ff5964', glow='#ff2d3d', acc_fill=WHITE)
 
 # ---- ×3 red badge ----
 def badge_x3():
