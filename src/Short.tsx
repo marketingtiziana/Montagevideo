@@ -12,7 +12,6 @@ import {
 } from "remotion";
 import timelineData from "../data/timeline.json";
 import { T, textOutline, ensureFont } from "./theme";
-import { Grain } from "./components/Grain";
 import { ENTER, EXIT } from "./anim";
 import {
   FullscreenStamp,
@@ -179,7 +178,6 @@ export const Short: React.FC = () => {
       ))}
       <CaptionsLayer />
       <Signature />
-      <Grain opacity={0.05} />
     </AbsoluteFill>
   );
 };

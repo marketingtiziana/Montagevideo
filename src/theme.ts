@@ -56,7 +56,7 @@ export const CAPTION = {
 // Contour propre via multi-ombres (plus net que -webkit-text-stroke au rendu).
 export const textOutline = (px: number, color: string = T.ink) => {
   const o: string[] = [];
-  const steps = 16;
+  const steps = 8; // 8 directions : contour net, coût de rendu réduit
   for (let i = 0; i < steps; i++) {
     const a = (i / steps) * Math.PI * 2;
     o.push(`${Math.cos(a) * px}px ${Math.sin(a) * px}px 0 ${color}`);
