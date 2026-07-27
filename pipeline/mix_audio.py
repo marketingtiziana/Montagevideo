@@ -18,6 +18,11 @@ for j, b in enumerate(pops):
     ms = int(b*1000)
     fc.append(f"[{idx}:a]aformat=channel_layouts=stereo:sample_rates=44100,adelay={ms}|{ms},volume=0.55[p{j}]")
     labels.append(f"p{j}"); idx += 1
+for j, b in enumerate(ev.get('tick', [])):
+    inputs += ['-i', 'sfx/tick.wav']
+    ms = int(b*1000)
+    fc.append(f"[{idx}:a]aformat=channel_layouts=stereo:sample_rates=44100,adelay={ms}|{ms},volume=0.33[t{j}]")
+    labels.append(f"t{j}"); idx += 1
 
 mix = "".join(f"[{l}]" for l in labels) + f"amix=inputs={len(labels)}:normalize=0:dropout_transition=0,alimiter=limit=0.95[aout]"
 fc.append(mix)

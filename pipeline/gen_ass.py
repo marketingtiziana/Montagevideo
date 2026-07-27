@@ -143,7 +143,15 @@ for i, (s, e, f, t) in enumerate(caps):
             e = ns
     fixed.append((s, e, f, t))
 
-POP = r"{\fad(60,40)\fscx62\fscy62\t(0,110,\fscx106\fscy106)\t(110,180,\fscx100\fscy100)}"
+# Varied entrance animations for "effets spéciaux" on the subtitles
+PRESETS = [
+    r"{\fad(45,40)\fscx55\fscy55\t(0,110,\fscx108\fscy108)\t(110,190,\fscx100\fscy100)}",              # pop
+    r"{\fad(40,40)\blur9\fscx90\fscy90\t(0,170,\blur0)\t(0,170,\fscx100\fscy100)}",                     # blur-in
+    r"{\fad(40,40)\fscx145\fscy145\t(0,150,\fscx100\fscy100)}",                                         # zoom-out
+    r"{\fad(40,30)\fscx58\fscy58\t(0,85,\fscx113\fscy113)\t(85,140,\fscx93\fscy93)\t(140,205,\fscx100\fscy100)}",  # bounce
+    r"{\fad(40,40)\frz7\fscx82\fscy82\t(0,160,\frz0)\t(0,160,\fscx100\fscy100)}",                       # rotate-in
+    r"{\fad(35,40)\fscy45\t(0,140,\fscy110)\t(140,200,\fscy100)}",                                      # squash-stretch
+]
 
 styles = []
 for k, fam in FONTS.items():
@@ -169,8 +177,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 
 lines = []
-for s, e, f, t in fixed:
-    lines.append(f"Dialogue: 0,{ts(s)},{ts(e)},{f},,0,0,0,,{POP}{markup(t)}")
+for i, (s, e, f, t) in enumerate(fixed):
+    anim = PRESETS[i % len(PRESETS)]
+    lines.append(f"Dialogue: 0,{ts(s)},{ts(e)},{f},,0,0,0,,{anim}{markup(t)}")
 
 with open('subs.ass', 'w') as fh:
     fh.write(header + "\n".join(lines) + "\n")
