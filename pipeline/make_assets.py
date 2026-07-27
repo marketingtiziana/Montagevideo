@@ -137,6 +137,10 @@ sticker('s_eu', text='TVA', accent_txt='UE', emoji='🇪🇺', fs=64, bar='#4da3
 sticker('s_money', text='CHACUN SA PART', emoji='💰', fs=52, top='#4a3a05', bot='#a8850a', bar='#ffd60a', glow='#f5c518')
 sticker('s_arrow', text='EN COMMENTAIRE', emoji='👇', fs=54, top='#0d3d1e', bot='#128a3e', bar='#3ee06e', glow='#22c55e')
 sticker('s_piege', text='LE PIÈGE', emoji='⚠️', fs=60, top='#5b0f12', bot='#c0212b', bar='#ff5964', glow='#ff2d3d', acc_fill=WHITE)
+# --- start-of-video stickers (v5b) ---
+sticker('s_secret', text='PERSONNE', accent_txt='NE DIT ÇA', emoji='🤫', fs=52, bar='#ffd60a')
+sticker('s_online', text='FORMATION', accent_txt='EN LIGNE', emoji='🎓', fs=52, bar='#4da3ff')
+sticker('s_facture', text='TVA', accent_txt='FRANÇAISE', emoji='🧾', fs=54, bar='#ffffff')
 
 # ---- ×3 red badge ----
 def badge_x3():

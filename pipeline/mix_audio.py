@@ -2,16 +2,9 @@ import subprocess, json, imageio_ffmpeg, os
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 ev = json.load(open('audio_events.json'))
 
-# subtitle blips: throttle so rapid consecutive cards don't machine-gun
+# No sound on subtitle text appearance (user request) — keep sounds only for
+# transitions and incrustation appearances.
 blips = []
-if os.path.exists('subs_meta.json'):
-    last = -9
-    for m in json.load(open('subs_meta.json')):
-        gap = m['t'] - last
-        # blip on key (yellow) words, or when a fresh phrase starts after a pause
-        if m['accent'] or gap > 0.9:
-            blips.append((m['t'], 0.22 if m['accent'] else 0.14))
-            last = m['t']
 
 # build (file, time, volume) event list
 events = []

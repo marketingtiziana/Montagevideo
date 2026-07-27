@@ -26,8 +26,10 @@ for s, e in sil:
     if ce - cs > 0.06:
         cuts.append((round(cs, 3), round(ce, 3)))
 
-# Manual cuts (base timeline): the cough at the start of S3 (~source 88-90)
-MANUAL_CUTS = [(52.10, 54.55)]
+# Manual cuts (base timeline):
+#  - the cough at the start of S3 (~source 88-90)
+#  - the first, buggy attempt of "Si tu vends à l'international" (she restarts it)
+MANUAL_CUTS = [(52.10, 54.55), (93.70, 95.46)]
 cuts += MANUAL_CUTS
 # merge/clip
 cuts.sort()

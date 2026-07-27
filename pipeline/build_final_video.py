@@ -11,9 +11,12 @@ ROWS = [590, 748, 906]   # stacked groups (flags / rates)
 # (png, start_old, end_old, x, y)
 OVL_OLD = [
     ('assets/s_hook.png',  1.00,  3.40, CX, Y_SINGLE),
+    ('assets/s_secret.png', 4.80,  6.60, CX, Y_SINGLE),
+    ('assets/s_online.png', 7.34,  9.05, CX, Y_SINGLE),
     ('assets/cli_be.png',  9.20, 12.40, CX, ROWS[0]),
     ('assets/cli_fr.png', 10.40, 12.40, CX, ROWS[1]),
     ('assets/cli_ch.png', 11.10, 12.40, CX, ROWS[2]),
+    ('assets/s_facture.png', 12.70, 14.20, CX, Y_SINGLE),
     ('assets/s_20.png',   14.30, 15.30, CX, Y_SINGLE),
     ('assets/s_logique.png', 15.30, 16.30, CX, Y_SINGLE),
     ('assets/s_faux.png', 16.40, 19.20, CX, Y_SINGLE),

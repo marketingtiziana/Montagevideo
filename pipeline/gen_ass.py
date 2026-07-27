@@ -7,7 +7,7 @@ import re
 # fonts: A=Anton (default compact), H=Archivo Black (heavy punch), B=Bebas Neue (tall condensed)
 CAPS = [
     (0.12, 1.06, 'A', "Comment je gère"),
-    (1.06, 1.46, 'H', "la ~TVA~"),
+    (1.06, 1.46, 'H', "la *TVA*"),
     (1.46, 1.91, 'A', "quand tu vends"),
     (1.91, 2.46, 'A', "une formation"),
     (2.46, 3.42, 'H', "dans ~3 pays~ ?"),
@@ -26,10 +26,10 @@ CAPS = [
     (13.68, 14.33, 'A', "française"),
     (14.33, 15.44, 'H', "~20%~ à tout le monde"),
     (15.44, 16.38, 'B', "logique, non ?"),
-    (16.38, 17.53, 'H', "Eh bien ~NON~"),
+    (16.38, 17.53, 'H', "Eh bien *NON*"),
     (17.53, 18.26, 'A', "C'est là que"),
     (18.26, 18.91, 'A', "tout le monde"),
-    (18.91, 19.64, 'H', "~se plante~"),
+    (18.91, 19.64, 'H', "*se plante*"),
     (19.64, 21.79, 'A', "Pour une formation"),
     (21.79, 23.56, 'A', "en ligne vendue"),
     (23.56, 24.93, 'A', "à un ~particulier~"),
@@ -50,7 +50,7 @@ CAPS = [
     (39.55, 40.63, 'H', "dans ~3 pays~"),
     (40.63, 41.69, 'A', "t'as pas une TVA"),
     (41.69, 42.54, 'A', "à gérer"),
-    (42.54, 43.50, 'H', "t'en as ~TROIS~"),
+    (42.54, 43.50, 'H', "t'en as *TROIS*"),
     (43.50, 45.17, 'H', "~3~ taux différents"),
     (45.17, 45.87, 'H', "~3~ États"),
     (45.87, 46.64, 'A', "qui attendent"),
@@ -69,7 +69,7 @@ CAPS = [
     (61.83, 63.37, 'A', "l'État te le réclame"),
     (63.37, 64.30, 'H', "~quand même~"),
     (64.30, 65.71, 'H', "sauf que tu l'as ~PLUS~"),
-    (65.71, 67.30, 'H', "il sort de ~ta poche~"),
+    (65.71, 67.30, 'H', "il sort de *ta poche*"),
     (67.30, 68.08, 'H', "La ~bonne nouvelle~ :"),
     (68.08, 69.45, 'A', "il existe un ~système~"),
     (69.45, 70.08, 'A', "pour éviter"),
@@ -78,7 +78,7 @@ CAPS = [
     (71.94, 72.77, 'A', "Tu déclares toute"),
     (72.77, 73.85, 'A', "cette TVA ~européenne~"),
     (73.85, 74.98, 'H', "au ~même endroit~"),
-    (74.98, 76.90, 'H', "une ~SEULE~ déclaration"),
+    (74.98, 76.90, 'H', "une *SEULE* déclaration"),
     (76.90, 77.85, 'A', "Ça s'appelle"),
     (77.85, 79.32, 'H', "le ~guichet unique~"),
     (79.32, 80.90, 'A', "Encore faut-il savoir"),
@@ -90,13 +90,13 @@ CAPS = [
     (86.29, 87.38, 'H', "~dès le départ~"),
     (87.38, 89.02, 'H', "La TVA ~internationale~"),
     (89.02, 90.06, 'A', "ça se rattrape pas"),
-    (90.06, 91.14, 'H', "en ~panique~"),
+    (90.06, 91.14, 'H', "en *panique*"),
     (91.14, 91.97, 'A', "ça se conçoit"),
     (91.97, 92.77, 'A', "en même temps"),
     (92.77, 93.90, 'H', "que ta ~structure~"),
-    (93.90, 94.89, 'A', "Si tu vends"),
-    (94.89, 96.77, 'H', "à ~l'international~"),
-    (96.77, 97.62, 'A', "et que t'as un ~doute~"),
+    (95.55, 96.12, 'A', "Si tu vends"),
+    (96.12, 96.77, 'H', "à ~l'international~"),
+    (96.77, 97.62, 'A', "et que t'as un *doute*"),
     (97.62, 98.84, 'H', "commente « ~TVA~ »"),
     (98.84, 100.34, 'H', "on regarde si t'es ~en règle~"),
 ]
@@ -116,9 +116,14 @@ def ts(t):
     if cs == 100: s += 1; cs = 0
     return f"{h}:{m:02d}:{s:02d}.{cs:02d}"
 
-def markup(text):
+def markup(text, cardkey):
+    fam = FONTS[cardkey]
+    alt = 'Bebas Neue' if cardkey != 'B' else 'Archivo Black'
     text = text.upper()
-    # ~word~ -> yellow
+    # *word* -> stylized: contrasting font swap + yellow (per-word font-change effect)
+    text = re.sub(r"\*([^*]+)\*",
+                  lambda m: f"{{\\fn{alt}\\c{YEL_INLINE}\\bord7}}{m.group(1)}{{\\fn{fam}\\c{WHT_INLINE}\\bord6}}", text)
+    # ~word~ -> yellow accent
     text = re.sub(r"~([^~]+)~", lambda m: f"{{\\c{YEL_INLINE}}}{m.group(1)}{{\\c{WHT_INLINE}}}", text)
     return text
 
@@ -179,7 +184,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 lines = []
 for i, (s, e, f, t) in enumerate(fixed):
     anim = PRESETS[i % len(PRESETS)]
-    lines.append(f"Dialogue: 0,{ts(s)},{ts(e)},{f},,0,0,0,,{anim}{markup(t)}")
+    lines.append(f"Dialogue: 0,{ts(s)},{ts(e)},{f},,0,0,0,,{anim}{markup(t, f)}")
 
 with open('subs.ass', 'w') as fh:
     fh.write(header + "\n".join(lines) + "\n")
