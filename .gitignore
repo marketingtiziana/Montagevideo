@@ -1,0 +1,16 @@
+# Ressources lourdes / dérivées — ne pas versionner
+*.mp4
+*.wav
+*.log
+ffmpeg2pass-*
+models/
+fonts/
+sfx/
+assets/
+frames/
+*.ass
+words.json
+final_words.json
+kept_words.json
+transcript.txt
+__pycache__/
