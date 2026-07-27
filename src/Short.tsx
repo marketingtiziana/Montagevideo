@@ -45,8 +45,9 @@ const norm = (s: string) =>
 
 // Incrustations "dominantes" (centrées / plein cadre) → masquent les sous-titres.
 const DOMINANT = new Set([
-  "FullscreenStamp", "Toggle", "MapCard", "ComparisonBar",
+  "FullscreenStamp", "Toggle", "Map", "ComparisonBar",
   "HighlightBox", "StatCard", "FullscreenCard", "TwinReveal", "CTACard",
+  "LowerThird", // le bandeau porte le sens : on masque le sous-titre pendant (pas de collision)
 ]);
 
 type GTiming = { seg: Seg; type: string; appear: number; hold: number; total: number; dominant: boolean; props: Record<string, unknown> };

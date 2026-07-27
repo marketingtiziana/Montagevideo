@@ -54,12 +54,16 @@ def build_caps(seg, out_start, out_end):
     for i in range(1, len(timed)):
         if timed[i]["at_f"] < timed[i - 1]["at_f"]:
             timed[i]["at_f"] = timed[i - 1]["at_f"]
-    # chunks de 2-3 mots, coupe sur ponctuation forte
+    # chunks : max 3 mots ET max ~15 caracteres (lisibilite, pas de debordement), coupe sur ponctuation
     caps = []
     cur = []
+    def chars(lst):
+        return sum(len(x["w"]) for x in lst) + max(0, len(lst) - 1)
     for t in timed:
+        if cur and (len(cur) >= 3 or chars(cur) + 1 + len(t["w"]) > 15):
+            caps.append(cur); cur = []
         cur.append(t)
-        if re.search(r"[.?!:»]$", t["w"]) or len(cur) >= 3:
+        if re.search(r"[.?!:»]$", t["w"]):
             caps.append(cur); cur = []
     if cur:
         caps.append(cur)
