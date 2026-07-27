@@ -37,7 +37,7 @@ fc = []
 # voix : nettoyage
 fc.append(
     "[0:a]highpass=f=80,deesser,"
-    "acompressor=threshold=-20dB:ratio=3:attack=6:release=120:makeup=3dB,"
+    "acompressor=threshold=-20dB:ratio=3:attack=6:release=120,volume=3dB,"
     "alimiter=limit=0.95,aformat=channel_layouts=stereo,apad=whole_dur={dur},atrim=0:{dur}[voice]".format(dur=DUR)
 )
 # copie de la voix pour la sidechain
@@ -49,7 +49,7 @@ fc.append(
     "aformat=channel_layouts=stereo[bed]".format(dur=DUR)
 )
 fc.append(
-    "[bed][vkey]sidechaincompress=threshold=0.03:ratio=8:attack=5:release=250:makeup=0[bedduck]"
+    "[bed][vkey]sidechaincompress=threshold=0.03:ratio=8:attack=5:release=250:makeup=1[bedduck]"
 )
 fc.append("[bedduck]afade=t=out:st={fs}:d={fd}[music]".format(fs=fade_start, fd=10 / FPS))
 # SFX
