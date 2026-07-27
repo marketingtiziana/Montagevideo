@@ -122,13 +122,24 @@ def markup(text):
     text = re.sub(r"~([^~]+)~", lambda m: f"{{\\c{YEL_INLINE}}}{m.group(1)}{{\\c{WHT_INLINE}}}", text)
     return text
 
+# Remap caption times from old base timeline -> tightened base2 timeline
+from remap import map_time
+remapped = []
+for (s, e, f, t) in CAPS:
+    ns, ne = map_time(s), map_time(e)
+    if ne - ns < 0.08:          # caption collapsed by a cut; give it a minimum on-screen time
+        ne = ns + 0.32
+    remapped.append((ns, ne, f, t))
+
 # close micro-gaps to avoid flicker, but keep real pauses blank
-caps = sorted(CAPS, key=lambda c: c[0])
+caps = sorted(remapped, key=lambda c: c[0])
 fixed = []
 for i, (s, e, f, t) in enumerate(caps):
     if i+1 < len(caps):
         ns = caps[i+1][0]
         if 0 <= (ns - e) < 0.30:
+            e = ns
+        if e > ns:              # avoid overlap after remap
             e = ns
     fixed.append((s, e, f, t))
 
