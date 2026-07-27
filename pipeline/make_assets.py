@@ -143,7 +143,7 @@ sticker('cli_fr', 'FRANCE', flagkind='FR', fs=60, bar='#ffffff')
 sticker('cli_ch', 'SUISSE', flagkind='CH', fs=60, bar='#d52b1e')
 # ---- rate pills ----
 sticker('rate_de', accent_txt='19%', flagkind='DE', fs=72, acc_fill=YELLOW)
-sticker('rate_be', accent_txt='20%', flagkind='BE', fs=72, acc_fill=YELLOW)
+sticker('rate_be', accent_txt='21%', flagkind='BE', fs=72, acc_fill=YELLOW)
 sticker('rate_ch', text='TAUX', accent_txt='23%', fs=64)
 # ---- concept stickers ----
 sticker('s_faux', text='FAUX', emoji='❌', fs=76, top='#5b0f12', bot='#c0212b', bar='#ff5964', glow='#ff2d3d', txt_fill=WHITE)

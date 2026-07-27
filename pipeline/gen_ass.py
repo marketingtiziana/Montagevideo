@@ -6,7 +6,7 @@ import re
 # (start, end, font_key, TEXT)   ~word~ => yellow accent
 # fonts: A=Anton (default compact), H=Archivo Black (heavy punch), B=Bebas Neue (tall condensed)
 CAPS = [
-    (0.12, 1.06, 'A', "Comment je gère"),
+    (0.12, 1.06, 'A', "Comment gérer"),
     (1.06, 1.46, 'H', "la *TVA*"),
     (1.46, 1.91, 'B', "quand tu vends"),
     (1.91, 2.46, 'A', "une formation"),
@@ -44,7 +44,7 @@ CAPS = [
     (32.40, 33.24, 'H', "Et chaque pays"),
     (33.24, 34.01, 'B', "a son taux"),
     (34.01, 35.42, 'A', "~19%~ l'Allemagne"),
-    (35.42, 36.62, 'H', "~20%~ la Belgique"),
+    (35.42, 36.62, 'H', "~21%~ la Belgique"),
     (36.62, 38.48, 'B', "~23%~..."),
     (38.48, 39.55, 'A', "Quand tu vends"),
     (39.55, 40.63, 'H', "dans ~3 pays~"),
