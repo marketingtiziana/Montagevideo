@@ -66,6 +66,9 @@ function graphicTiming(seg: Seg): GTiming | null {
           break outer;
         }
   }
+  // le graphique doit tenir DANS son segment (ne jamais deborder sur le suivant)
+  const MINTOTAL = ENTER + 42 + EXIT;
+  if (appear + MINTOTAL > seg.out_end) appear = Math.max(seg.out_start, seg.out_end - MINTOTAL);
   const available = seg.out_end - appear;
   const hold = Math.max(42, Math.min(available - ENTER - EXIT, 72));
   return { seg, type, appear, hold, total: ENTER + hold + EXIT, dominant: DOMINANT.has(type), props: g };

@@ -143,8 +143,8 @@ export const StatCard: React.FC<Base & { value?: number; unit?: string; sub?: st
   const env = envelope(f, fps, hold);
   const op = opacityInOut(env);
   const sc = scaleInOut(env);
-  const count = Math.round(interpolate(f, [10, 10 + 0.9 * fps], [0, value], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
-  const barW = interpolate(f, [10, 10 + 0.9 * fps], [0, value], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const count = Math.round(interpolate(f, [8, 8 + 0.6 * fps], [0, value], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
+  const barW = interpolate(f, [8, 8 + 0.6 * fps], [0, value], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
       <div style={{ opacity: op, transform: `scale(${sc}) translateY(${holdDrift(f, 6)}px)`, width: 1080 - T.marginX * 2 }}>
