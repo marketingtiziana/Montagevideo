@@ -12,7 +12,7 @@ CAPS = [
     (1.91, 2.46, 'A', "une formation"),
     (2.46, 3.42, 'H', "dans ~3 pays~ ?"),
     (3.42, 4.22, 'A', "Je vais te dire"),
-    (4.22, 4.82, 'B', "le ~truc~"),
+    (4.22, 4.82, 'B', "le *truc*"),
     (4.82, 5.56, 'A', "que personne"),
     (5.56, 6.16, 'A', "ne t'explique"),
     (6.16, 7.34, 'A', "à propos de ce cas"),
@@ -32,7 +32,7 @@ CAPS = [
     (18.91, 19.64, 'H', "*se plante*"),
     (19.64, 21.79, 'A', "Pour une formation"),
     (21.79, 23.56, 'A', "en ligne vendue"),
-    (23.56, 24.93, 'A', "à un ~particulier~"),
+    (23.56, 24.93, 'A', "à un *particulier*"),
     (24.93, 26.14, 'A', "la règle est simple"),
     (26.23, 27.27, 'A', "mais quasi personne"),
     (27.27, 28.29, 'A', "ne la connaît"),
@@ -71,7 +71,7 @@ CAPS = [
     (64.30, 65.71, 'H', "sauf que tu l'as ~PLUS~"),
     (65.71, 67.30, 'H', "il sort de *ta poche*"),
     (67.30, 68.08, 'H', "La ~bonne nouvelle~ :"),
-    (68.08, 69.45, 'A', "il existe un ~système~"),
+    (68.08, 69.45, 'A', "il existe un *système*"),
     (69.45, 70.08, 'A', "pour éviter"),
     (70.08, 71.06, 'A', "de t'enregistrer"),
     (71.06, 71.94, 'H', "dans ~3 pays~"),
@@ -80,7 +80,7 @@ CAPS = [
     (73.85, 74.98, 'H', "au ~même endroit~"),
     (74.98, 76.90, 'H', "une *SEULE* déclaration"),
     (76.90, 77.85, 'A', "Ça s'appelle"),
-    (77.85, 79.32, 'H', "le ~guichet unique~"),
+    (77.85, 79.32, 'H', "le *guichet unique*"),
     (79.32, 80.90, 'A', "Encore faut-il savoir"),
     (80.90, 82.20, 'A', "que ça existe"),
     (82.20, 83.30, 'A', "et le mettre en place"),
@@ -88,7 +88,7 @@ CAPS = [
     (84.12, 85.52, 'A', "Et c'est exactement"),
     (85.52, 86.29, 'A', "ce qu'on gère"),
     (86.29, 87.38, 'H', "~dès le départ~"),
-    (87.38, 89.02, 'H', "La TVA ~internationale~"),
+    (87.38, 89.02, 'H', "La TVA *internationale*"),
     (89.02, 90.06, 'A', "ça se rattrape pas"),
     (90.06, 91.14, 'H', "en *panique*"),
     (91.14, 91.97, 'A', "ça se conçoit"),
@@ -116,15 +116,28 @@ def ts(t):
     if cs == 100: s += 1; cs = 0
     return f"{h}:{m:02d}:{s:02d}.{cs:02d}"
 
+# Vivid accent colours (ASS inline &HBBGGRR) cycled for variety + neon glow
+ACCENTS = ["&H00FFFF&", "&HFFFF00&", "&H6EE03E&", "&HF05CFF&", "&H1C9FFF&"]  # yellow,cyan,green,pink,orange
+_acc = [0]
+
+def _neon(word, col):
+    # coloured fill + matching glowing outline, then restore white text / black outline
+    return (f"{{\\c{col}\\3c{col}\\blur2\\bord8}}{word}"
+            f"{{\\c{WHT_INLINE}\\3c&H000000&\\blur0\\bord6}}")
+
 def markup(text, cardkey):
     fam = FONTS[cardkey]
     alt = 'Bebas Neue' if cardkey != 'B' else 'Archivo Black'
     text = text.upper()
-    # *word* -> stylized: contrasting font swap + yellow (per-word font-change effect)
-    text = re.sub(r"\*([^*]+)\*",
-                  lambda m: f"{{\\fn{alt}\\c{YEL_INLINE}\\bord7}}{m.group(1)}{{\\fn{fam}\\c{WHT_INLINE}\\bord6}}", text)
-    # ~word~ -> yellow accent
-    text = re.sub(r"~([^~]+)~", lambda m: f"{{\\c{YEL_INLINE}}}{m.group(1)}{{\\c{WHT_INLINE}}}", text)
+    def styl(m):
+        col = ACCENTS[_acc[0] % len(ACCENTS)]; _acc[0] += 1
+        return (f"{{\\fn{alt}\\c{col}\\3c{col}\\blur2\\bord8}}{m.group(1)}"
+                f"{{\\fn{fam}\\c{WHT_INLINE}\\3c&H000000&\\blur0\\bord6}}")
+    def acc(m):
+        col = ACCENTS[_acc[0] % len(ACCENTS)]; _acc[0] += 1
+        return _neon(m.group(1), col)
+    text = re.sub(r"\*([^*]+)\*", styl, text)   # stylized: font swap + neon colour
+    text = re.sub(r"~([^~]+)~", acc, text)      # accent: neon colour
     return text
 
 # Remap caption times from old base timeline -> tightened base2 timeline
@@ -156,6 +169,8 @@ PRESETS = [
     r"{\fad(40,30)\fscx58\fscy58\t(0,85,\fscx113\fscy113)\t(85,140,\fscx93\fscy93)\t(140,205,\fscx100\fscy100)}",  # bounce
     r"{\fad(40,40)\frz7\fscx82\fscy82\t(0,160,\frz0)\t(0,160,\fscx100\fscy100)}",                       # rotate-in
     r"{\fad(35,40)\fscy45\t(0,140,\fscy110)\t(140,200,\fscy100)}",                                      # squash-stretch
+    r"{\fad(30,40)\fscx180\fscy180\t(0,90,\fscx94\fscy94)\t(90,150,\fscx100\fscy100)}",                 # slam
+    r"{\fad(50,50)\fscx88\fscy88\t(0,130,\fscx104\fscy104)\t(130,260,\fscx100\fscy100)}",               # soft pulse
 ]
 
 styles = []

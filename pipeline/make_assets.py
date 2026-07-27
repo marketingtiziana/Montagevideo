@@ -45,38 +45,65 @@ def flag(kind, w=104, h=68):
     return im
 
 def card(W, H, top='#151a30', bot='#2b3557', accent=None, glow='#000000', radius=30):
-    """A rounded gradient card with drop shadow + optional glow + left accent bar."""
-    pad = 34
+    """A rounded gradient card with big outer glow, deep shadow, glossy top, colored rim."""
+    pad = 46
     canvas = Image.new('RGBA', (W+pad*2, H+pad*2), (0, 0, 0, 0))
-    # glow
-    gl = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-    gd = ImageDraw.Draw(gl)
     gc = hexc(glow)
-    gd.rounded_rectangle([pad-6, pad-2, pad+W+6, pad+H+8], radius=radius+8, fill=gc+(150,))
-    gl = gl.filter(ImageFilter.GaussianBlur(18))
-    canvas.alpha_composite(gl)
-    # shadow
+    # wide soft outer glow (two passes for a richer halo)
+    for grow, blur, a in [(14, 30, 130), (6, 16, 150)]:
+        gl = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
+        ImageDraw.Draw(gl).rounded_rectangle(
+            [pad-grow, pad-grow+4, pad+W+grow, pad+H+grow+8], radius=radius+grow, fill=gc+(a,))
+        canvas.alpha_composite(gl.filter(ImageFilter.GaussianBlur(blur)))
+    # deep drop shadow
     sh = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-    ImageDraw.Draw(sh).rounded_rectangle([pad+5, pad+11, pad+W+5, pad+H+11], radius=radius, fill=(0, 0, 0, 130))
-    canvas.alpha_composite(sh.filter(ImageFilter.GaussianBlur(7)))
+    ImageDraw.Draw(sh).rounded_rectangle([pad+6, pad+15, pad+W+6, pad+H+15], radius=radius, fill=(0, 0, 0, 150))
+    canvas.alpha_composite(sh.filter(ImageFilter.GaussianBlur(10)))
     # gradient body via mask
     grad = vgrad(W, H, hexc(top), hexc(bot)).convert('RGBA')
     mask = Image.new('L', (W, H), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, W-1, H-1], radius=radius, fill=255)
     canvas.paste(grad, (pad, pad), mask)
+    # glossy top highlight (upper half brighter, blurred)
+    gloss = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(gloss).rounded_rectangle([6, 5, W-7, int(H*0.5)], radius=radius-6, fill=(255, 255, 255, 42))
+    gloss = gloss.filter(ImageFilter.GaussianBlur(6))
+    canvas.paste(gloss, (pad, pad), Image.composite(gloss.split()[3], Image.new('L', (W, H), 0), mask))
     d = ImageDraw.Draw(canvas)
-    # top gloss highlight
-    d.rounded_rectangle([pad, pad, pad+W-1, pad+H-1], radius=radius, outline=(255, 255, 255, 55), width=2)
+    # bright inner rim + colored outer rim
+    rim = hexc(accent) if accent else (255, 255, 255)
+    d.rounded_rectangle([pad, pad, pad+W-1, pad+H-1], radius=radius, outline=rim+(235,), width=3)
+    d.rounded_rectangle([pad+3, pad+3, pad+W-4, pad+H-4], radius=radius-3, outline=(255, 255, 255, 70), width=2)
     if accent:
         ab = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-        ImageDraw.Draw(ab).rounded_rectangle([0, 0, 16, H-1], radius=8, fill=hexc(accent)+(255,))
+        ImageDraw.Draw(ab).rounded_rectangle([0, 0, 18, H-1], radius=9, fill=hexc(accent)+(255,))
         m2 = Image.new('L', (W, H), 0); ImageDraw.Draw(m2).rounded_rectangle([0, 0, W-1, H-1], radius=radius, fill=255)
-        canvas.paste(ab, (pad, pad), Image.composite(ab.split()[3], Image.new('L',(W,H),0), m2))
+        canvas.paste(ab, (pad, pad), Image.composite(ab.split()[3], Image.new('L', (W, H), 0), m2))
     return canvas, pad
 
+# Colorful gradient themes (top, bot, glow, default-bar) for variety
+THEMES = [
+    ('#12294f', '#1e56b3', '#2f7ff5', '#66b0ff'),   # blue
+    ('#2a1250', '#5b23b0', '#8b3cf0', '#c08bff'),   # purple
+    ('#08303a', '#0f7d86', '#17c0c0', '#5ff0e6'),   # teal
+    ('#4a2a05', '#b3610a', '#ff8a1f', '#ffc07a'),   # orange
+    ('#4a0a2e', '#b0246e', '#f03c9a', '#ff8bd0'),   # pink
+    ('#1a1450', '#3a3ab0', '#5b5bf0', '#9b9bff'),   # indigo
+    ('#0d3d1e', '#12904a', '#22c55e', '#6ff0a0'),   # green
+    ('#4a1010', '#b32424', '# f0453c'.replace(' ', ''), '#ff8b8b'),  # crimson
+]
+_theme_i = [0]
+
 def sticker(name, text=None, accent_txt=None, emoji=None, flagkind=None,
-            top='#151a30', bot='#2b3557', bar=None, glow='#0a0e1c',
+            top=None, bot=None, bar=None, glow=None,
             fs=66, txt_fill=WHITE, acc_fill=YELLOW, emo=96):
+    if top is None:                      # auto-assign a colorful theme
+        th = THEMES[_theme_i[0] % len(THEMES)]; _theme_i[0] += 1
+        top, bot, glow = th[0], th[1], th[2]
+        if bar is None:
+            bar = th[3]
+    if glow is None:
+        glow = '#0a0e1c'
     f = ImageFont.truetype(ARCHIVO, fs)
     tmp = ImageDraw.Draw(Image.new('RGBA', (4, 4)))
     padx, pady = 34, 26
@@ -153,6 +180,13 @@ def badge_x3():
     d.text((p+pad-tb[0], p+pad-tb[1]), txt, font=f, fill=WHITE)
     canvas.save('assets/x3.png')
 badge_x3()
+
+# colored transition flashes
+Image.new('RGBA', (1080, 1920), (255, 255, 255, 95)).save('assets/flash.png')
+for nm, rgb, a in [('flash_b', (90, 150, 255), 80), ('flash_p', (170, 90, 255), 78),
+                   ('flash_c', (60, 230, 220), 74), ('flash_o', (255, 150, 40), 74)]:
+    Image.new('RGBA', (1080, 1920), rgb + (a,)).save(f'assets/{nm}.png')
+Image.new('RGBA', (1080, 1920), (255, 255, 255, 42)).save('assets/miniflash.png')
 
 for n in os.listdir('assets'):
     if n.endswith('.png') and not n.startswith('_'):

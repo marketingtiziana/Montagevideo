@@ -60,9 +60,12 @@ ovl_idx = []
 for (p, s, e, x, y) in OVL:
     dur = max(0.3, round(e - s, 3))
     inputs += ['-loop', '1', '-t', f'{dur}', '-itsoffset', f'{s}', '-i', p]; ovl_idx.append(idx); idx += 1
+FLASH_PNGS = ['assets/flash.png', 'assets/flash_b.png', 'assets/flash_p.png',
+              'assets/flash_c.png', 'assets/flash_o.png']
 flash_idx = []
-for b in FLASH:
-    inputs += ['-loop', '1', '-t', '0.30', '-itsoffset', f'{round(b-0.10,3)}', '-i', 'assets/flash.png']
+for j, b in enumerate(FLASH):
+    png = FLASH_PNGS[j % len(FLASH_PNGS)]
+    inputs += ['-loop', '1', '-t', '0.30', '-itsoffset', f'{round(b-0.10,3)}', '-i', png]
     flash_idx.append((idx, b, 0.08, 0.14)); idx += 1
 mini_idx = []
 for b in MINIFLASH:
