@@ -14,3 +14,12 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Remotion / short pipeline
+node_modules/
+whisper-cpp/
+source/
+out/
+preview/
+data/*.wav
+data/_*.log
