@@ -1,0 +1,2654 @@
+{
+  "meta": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "source": "source/reel5.mp4",
+    "source_fps": 60,
+    "thesis": "Pour un joueur de poker pro, le pays ou il vit n'est pas un detail fiscal mais LA decision : a gains egaux, elle separe celui qui garde tout de celui qui en laisse la moitie, a condition d'y resider vraiment.",
+    "margins": {
+      "pre_first_word_s": 0.25,
+      "post_last_word_s": 0.4
+    },
+    "note_texte": "Textes = relecture corrigee de l'ASR base (modele large/medium injoignables). A valider si un terme fiscal ou un chiffre doit etre exact.",
+    "effets_autorises": {
+      "signature": "s06 — pivot 'ce qui rend le poker unique' (1:02). UNIQUE effet marquant du short.",
+      "cross_dissolve_8f": "s10 — saut temporel (bloc mort de 33s retire). UNE seule fois.",
+      "masque_plein_cadre": [
+        "s03 tampon FAUX",
+        "s08 ComparisonBar",
+        "s11 carte LE PIEGE"
+      ]
+    },
+    "total_frames": 3104,
+    "total_seconds": 103.47
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "act": "accroche",
+      "why": "Ouverture reelle de la source : la question + la promesse chiffree. Se comprend sans contexte, donc peut ouvrir.",
+      "src_in": 6.3,
+      "src_out": 15.76,
+      "dur_f": 284,
+      "out_start": 0,
+      "out_end": 284,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.06
+      },
+      "graphic": null,
+      "captions": [
+        {
+          "in_f": 8,
+          "out_f": 62,
+          "words": [
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 8
+            },
+            {
+              "w": "habiter,",
+              "accent": false,
+              "at_f": 22
+            },
+            {
+              "w": "quand",
+              "accent": false,
+              "at_f": 52
+            }
+          ]
+        },
+        {
+          "in_f": 62,
+          "out_f": 86,
+          "words": [
+            {
+              "w": "on",
+              "accent": false,
+              "at_f": 62
+            },
+            {
+              "w": "est",
+              "accent": false,
+              "at_f": 67
+            },
+            {
+              "w": "joueur",
+              "accent": false,
+              "at_f": 73
+            }
+          ]
+        },
+        {
+          "in_f": 86,
+          "out_f": 112,
+          "words": [
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 86
+            },
+            {
+              "w": "Poker",
+              "accent": true,
+              "at_f": 90
+            },
+            {
+              "w": "Pro",
+              "accent": false,
+              "at_f": 100
+            }
+          ]
+        },
+        {
+          "in_f": 112,
+          "out_f": 120,
+          "words": [
+            {
+              "w": "Je",
+              "accent": false,
+              "at_f": 112
+            },
+            {
+              "w": "vais",
+              "accent": false,
+              "at_f": 114
+            },
+            {
+              "w": "te",
+              "accent": false,
+              "at_f": 119
+            }
+          ]
+        },
+        {
+          "in_f": 120,
+          "out_f": 144,
+          "words": [
+            {
+              "w": "dire",
+              "accent": false,
+              "at_f": 120
+            },
+            {
+              "w": "pourquoi",
+              "accent": false,
+              "at_f": 125
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 136
+            }
+          ]
+        },
+        {
+          "in_f": 144,
+          "out_f": 165,
+          "words": [
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 144
+            },
+            {
+              "w": "seul",
+              "accent": false,
+              "at_f": 152
+            },
+            {
+              "w": "métier",
+              "accent": false,
+              "at_f": 153
+            }
+          ]
+        },
+        {
+          "in_f": 165,
+          "out_f": 183,
+          "words": [
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 165
+            },
+            {
+              "w": "on",
+              "accent": false,
+              "at_f": 169
+            },
+            {
+              "w": "adresse",
+              "accent": false,
+              "at_f": 172
+            }
+          ]
+        },
+        {
+          "in_f": 183,
+          "out_f": 214,
+          "words": [
+            {
+              "w": "vos",
+              "accent": false,
+              "at_f": 183
+            },
+            {
+              "w": "littéralement",
+              "accent": false,
+              "at_f": 188
+            },
+            {
+              "w": "des",
+              "accent": false,
+              "at_f": 210
+            }
+          ]
+        },
+        {
+          "in_f": 214,
+          "out_f": 245,
+          "words": [
+            {
+              "w": "dizaines",
+              "accent": false,
+              "at_f": 214
+            },
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 227
+            },
+            {
+              "w": "milliers",
+              "accent": false,
+              "at_f": 230
+            }
+          ]
+        },
+        {
+          "in_f": 245,
+          "out_f": 284,
+          "words": [
+            {
+              "w": "d'euros",
+              "accent": false,
+              "at_f": 245
+            },
+            {
+              "w": "par",
+              "accent": false,
+              "at_f": 254
+            },
+            {
+              "w": "an.",
+              "accent": false,
+              "at_f": 265
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "act": "accroche",
+      "why": "Installe la fausse croyance de confort du spectateur (mes gains de jeu ne sont pas imposables).",
+      "src_in": 15.76,
+      "src_out": 21.32,
+      "dur_f": 167,
+      "out_start": 284,
+      "out_end": 451,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static",
+        "drift_px": 6
+      },
+      "graphic": null,
+      "captions": [
+        {
+          "in_f": 284,
+          "out_f": 298,
+          "words": [
+            {
+              "w": "Tu",
+              "accent": false,
+              "at_f": 284
+            },
+            {
+              "w": "vis",
+              "accent": false,
+              "at_f": 288
+            },
+            {
+              "w": "du",
+              "accent": false,
+              "at_f": 293
+            }
+          ]
+        },
+        {
+          "in_f": 298,
+          "out_f": 322,
+          "words": [
+            {
+              "w": "Poker,",
+              "accent": true,
+              "at_f": 298
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 309
+            },
+            {
+              "w": "gagnes",
+              "accent": false,
+              "at_f": 313
+            }
+          ]
+        },
+        {
+          "in_f": 322,
+          "out_f": 337,
+          "words": [
+            {
+              "w": "bien",
+              "accent": false,
+              "at_f": 322
+            },
+            {
+              "w": "et",
+              "accent": false,
+              "at_f": 329
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 337
+            }
+          ]
+        },
+        {
+          "in_f": 337,
+          "out_f": 358,
+          "words": [
+            {
+              "w": "te",
+              "accent": false,
+              "at_f": 337
+            },
+            {
+              "w": "dis",
+              "accent": false,
+              "at_f": 340
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 348
+            }
+          ]
+        },
+        {
+          "in_f": 358,
+          "out_f": 379,
+          "words": [
+            {
+              "w": "du",
+              "accent": false,
+              "at_f": 358
+            },
+            {
+              "w": "jeu,",
+              "accent": false,
+              "at_f": 362
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 371
+            }
+          ]
+        },
+        {
+          "in_f": 379,
+          "out_f": 409,
+          "words": [
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 379
+            },
+            {
+              "w": "la",
+              "accent": false,
+              "at_f": 383
+            },
+            {
+              "w": "chance",
+              "accent": false,
+              "at_f": 386
+            }
+          ]
+        },
+        {
+          "in_f": 409,
+          "out_f": 421,
+          "words": [
+            {
+              "w": "»,",
+              "accent": false,
+              "at_f": 409
+            },
+            {
+              "w": "donc",
+              "accent": false,
+              "at_f": 410
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 415
+            }
+          ]
+        },
+        {
+          "in_f": 421,
+          "out_f": 451,
+          "words": [
+            {
+              "w": "quasiment",
+              "accent": false,
+              "at_f": 421
+            },
+            {
+              "w": "imposable.",
+              "accent": true,
+              "at_f": 433
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "act": "accroche",
+      "why": "Le contre-pied qui detruit la croyance. Bouton d'accroche.",
+      "src_in": 26.12,
+      "src_out": 29.92,
+      "dur_f": 114,
+      "out_start": 451,
+      "out_end": 565,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": {
+        "type": "FullscreenStamp",
+        "label": "FAUX",
+        "sub": "1re erreur",
+        "role": "masque le jump cut de la redite",
+        "in_frames": 5,
+        "hold_min_s": 1.4
+      },
+      "captions": [
+        {
+          "in_f": 451,
+          "out_f": 534,
+          "words": [
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 451
+            },
+            {
+              "w": "faux,",
+              "accent": true,
+              "at_f": 469
+            },
+            {
+              "w": "première",
+              "accent": false,
+              "at_f": 492
+            }
+          ]
+        },
+        {
+          "in_f": 534,
+          "out_f": 565,
+          "words": [
+            {
+              "w": "erreur.",
+              "accent": false,
+              "at_f": 534
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "act": "contexte",
+      "why": "Pose la ligne de partage amateur/pro. On garde la respiration apres 'premiere erreur'.",
+      "src_in": 29.97,
+      "src_out": 34.75,
+      "dur_f": 143,
+      "out_start": 565,
+      "out_end": 708,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": {
+        "type": "Toggle",
+        "labels": [
+          "AMATEUR",
+          "PRO"
+        ],
+        "hold_min_s": 1.6
+      },
+      "captions": [
+        {
+          "in_f": 565,
+          "out_f": 586,
+          "words": [
+            {
+              "w": "Tout",
+              "accent": false,
+              "at_f": 565
+            },
+            {
+              "w": "dépend",
+              "accent": false,
+              "at_f": 569
+            },
+            {
+              "w": "d'une",
+              "accent": false,
+              "at_f": 579
+            }
+          ]
+        },
+        {
+          "in_f": 586,
+          "out_f": 607,
+          "words": [
+            {
+              "w": "seule",
+              "accent": false,
+              "at_f": 586
+            },
+            {
+              "w": "chose.",
+              "accent": false,
+              "at_f": 594
+            }
+          ]
+        },
+        {
+          "in_f": 607,
+          "out_f": 631,
+          "words": [
+            {
+              "w": "Est-ce",
+              "accent": false,
+              "at_f": 607
+            },
+            {
+              "w": "que",
+              "accent": false,
+              "at_f": 623
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 627
+            }
+          ]
+        },
+        {
+          "in_f": 631,
+          "out_f": 651,
+          "words": [
+            {
+              "w": "es",
+              "accent": false,
+              "at_f": 631
+            },
+            {
+              "w": "vu",
+              "accent": false,
+              "at_f": 640
+            },
+            {
+              "w": "comme",
+              "accent": false,
+              "at_f": 642
+            }
+          ]
+        },
+        {
+          "in_f": 651,
+          "out_f": 678,
+          "words": [
+            {
+              "w": "un",
+              "accent": false,
+              "at_f": 651
+            },
+            {
+              "w": "amateur",
+              "accent": false,
+              "at_f": 656
+            },
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 673
+            }
+          ]
+        },
+        {
+          "in_f": 678,
+          "out_f": 698,
+          "words": [
+            {
+              "w": "comme",
+              "accent": false,
+              "at_f": 678
+            },
+            {
+              "w": "un",
+              "accent": false,
+              "at_f": 687
+            },
+            {
+              "w": "pro",
+              "accent": false,
+              "at_f": 692
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "act": "contexte",
+      "why": "Le mecanisme du 'pourquoi imposable' : tu en vis, c'est regulier -> activite professionnelle -> ca s'impose. Designe le destinataire (le pro).",
+      "src_in": 45.1,
+      "src_out": 55.56,
+      "dur_f": 314,
+      "out_start": 708,
+      "out_end": 1022,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.4,
+      "camera": {
+        "type": "static",
+        "scale": 1.12
+      },
+      "graphic": {
+        "type": "LowerThird",
+        "title": "ACTIVITE PRO",
+        "accent": "= IMPOSABLE",
+        "on_word": "s'impose",
+        "hold_min_s": 1.6
+      },
+      "captions": [
+        {
+          "in_f": 711,
+          "out_f": 728,
+          "words": [
+            {
+              "w": "Oui,",
+              "accent": false,
+              "at_f": 711
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 719
+            },
+            {
+              "w": "du",
+              "accent": false,
+              "at_f": 725
+            }
+          ]
+        },
+        {
+          "in_f": 728,
+          "out_f": 756,
+          "words": [
+            {
+              "w": "jeu,",
+              "accent": false,
+              "at_f": 728
+            },
+            {
+              "w": "mais",
+              "accent": false,
+              "at_f": 738
+            },
+            {
+              "w": "toi,",
+              "accent": false,
+              "at_f": 746
+            }
+          ]
+        },
+        {
+          "in_f": 756,
+          "out_f": 775,
+          "words": [
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 756
+            },
+            {
+              "w": "en",
+              "accent": false,
+              "at_f": 760
+            },
+            {
+              "w": "vis,",
+              "accent": false,
+              "at_f": 764
+            }
+          ]
+        },
+        {
+          "in_f": 775,
+          "out_f": 811,
+          "words": [
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 775
+            },
+            {
+              "w": "régulier,",
+              "accent": false,
+              "at_f": 785
+            },
+            {
+              "w": "si",
+              "accent": false,
+              "at_f": 807
+            }
+          ]
+        },
+        {
+          "in_f": 811,
+          "out_f": 840,
+          "words": [
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 811
+            },
+            {
+              "w": "ton",
+              "accent": false,
+              "at_f": 826
+            },
+            {
+              "w": "métier",
+              "accent": false,
+              "at_f": 828
+            }
+          ]
+        },
+        {
+          "in_f": 840,
+          "out_f": 860,
+          "words": [
+            {
+              "w": "pour",
+              "accent": false,
+              "at_f": 840
+            },
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 850
+            },
+            {
+              "w": "fisc",
+              "accent": false,
+              "at_f": 852
+            }
+          ]
+        },
+        {
+          "in_f": 860,
+          "out_f": 898,
+          "words": [
+            {
+              "w": "français,",
+              "accent": false,
+              "at_f": 860
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 885
+            },
+            {
+              "w": "une",
+              "accent": false,
+              "at_f": 893
+            }
+          ]
+        },
+        {
+          "in_f": 898,
+          "out_f": 944,
+          "words": [
+            {
+              "w": "activité",
+              "accent": false,
+              "at_f": 898
+            },
+            {
+              "w": "professionnelle",
+              "accent": false,
+              "at_f": 914
+            },
+            {
+              "w": "et",
+              "accent": false,
+              "at_f": 940
+            }
+          ]
+        },
+        {
+          "in_f": 944,
+          "out_f": 994,
+          "words": [
+            {
+              "w": "une",
+              "accent": false,
+              "at_f": 944
+            },
+            {
+              "w": "activité",
+              "accent": false,
+              "at_f": 949
+            },
+            {
+              "w": "professionnelle,",
+              "accent": false,
+              "at_f": 964
+            }
+          ]
+        },
+        {
+          "in_f": 994,
+          "out_f": 1022,
+          "words": [
+            {
+              "w": "ça",
+              "accent": false,
+              "at_f": 994
+            },
+            {
+              "w": "s'impose.",
+              "accent": false,
+              "at_f": 1000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "act": "demonstration",
+      "why": "POINT DE BASCULE PRINCIPAL. Le recit pivote : de 'tu es imposable' vers 'tout depend du pays'. Seul emplacement de la transition signature.",
+      "src_in": 62.1,
+      "src_out": 65.48,
+      "dur_f": 101,
+      "out_start": 1022,
+      "out_end": 1123,
+      "transition_in": "SIGNATURE",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": null,
+      "captions": [
+        {
+          "in_f": 1024,
+          "out_f": 1057,
+          "words": [
+            {
+              "w": "Et",
+              "accent": false,
+              "at_f": 1024
+            },
+            {
+              "w": "là,",
+              "accent": false,
+              "at_f": 1029
+            },
+            {
+              "w": "arrive",
+              "accent": false,
+              "at_f": 1045
+            }
+          ]
+        },
+        {
+          "in_f": 1057,
+          "out_f": 1080,
+          "words": [
+            {
+              "w": "ce",
+              "accent": false,
+              "at_f": 1057
+            },
+            {
+              "w": "qui",
+              "accent": false,
+              "at_f": 1063
+            },
+            {
+              "w": "rend",
+              "accent": false,
+              "at_f": 1070
+            }
+          ]
+        },
+        {
+          "in_f": 1080,
+          "out_f": 1123,
+          "words": [
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 1080
+            },
+            {
+              "w": "Poker",
+              "accent": true,
+              "at_f": 1087
+            },
+            {
+              "w": "unique.",
+              "accent": false,
+              "at_f": 1099
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "act": "demonstration",
+      "why": "Le mecanisme reel : la taxation varie enormement selon le pays. Certains ne taxent pas du tout.",
+      "src_in": 65.48,
+      "src_out": 72.92,
+      "dur_f": 223,
+      "out_start": 1123,
+      "out_end": 1346,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static",
+        "drift_px": 6
+      },
+      "graphic": {
+        "type": "Map",
+        "note": "pays qui taxe vs pays qui ne taxe pas",
+        "hold_min_s": 2.0
+      },
+      "captions": [
+        {
+          "in_f": 1123,
+          "out_f": 1144,
+          "words": [
+            {
+              "w": "La",
+              "accent": false,
+              "at_f": 1123
+            },
+            {
+              "w": "façon",
+              "accent": false,
+              "at_f": 1127
+            },
+            {
+              "w": "dont",
+              "accent": false,
+              "at_f": 1137
+            }
+          ]
+        },
+        {
+          "in_f": 1144,
+          "out_f": 1166,
+          "words": [
+            {
+              "w": "les",
+              "accent": false,
+              "at_f": 1144
+            },
+            {
+              "w": "gains",
+              "accent": false,
+              "at_f": 1150
+            },
+            {
+              "w": "sont",
+              "accent": false,
+              "at_f": 1159
+            }
+          ]
+        },
+        {
+          "in_f": 1166,
+          "out_f": 1208,
+          "words": [
+            {
+              "w": "taxés",
+              "accent": false,
+              "at_f": 1166
+            },
+            {
+              "w": "change",
+              "accent": false,
+              "at_f": 1176
+            },
+            {
+              "w": "énormément",
+              "accent": false,
+              "at_f": 1192
+            }
+          ]
+        },
+        {
+          "in_f": 1208,
+          "out_f": 1226,
+          "words": [
+            {
+              "w": "d'un",
+              "accent": false,
+              "at_f": 1208
+            },
+            {
+              "w": "pays",
+              "accent": false,
+              "at_f": 1215
+            },
+            {
+              "w": "à",
+              "accent": false,
+              "at_f": 1223
+            }
+          ]
+        },
+        {
+          "in_f": 1226,
+          "out_f": 1245,
+          "words": [
+            {
+              "w": "l'autre.",
+              "accent": false,
+              "at_f": 1226
+            }
+          ]
+        },
+        {
+          "in_f": 1245,
+          "out_f": 1275,
+          "words": [
+            {
+              "w": "Certains",
+              "accent": false,
+              "at_f": 1245
+            },
+            {
+              "w": "pays",
+              "accent": false,
+              "at_f": 1262
+            },
+            {
+              "w": "ne",
+              "accent": false,
+              "at_f": 1271
+            }
+          ]
+        },
+        {
+          "in_f": 1275,
+          "out_f": 1298,
+          "words": [
+            {
+              "w": "taxent",
+              "accent": false,
+              "at_f": 1275
+            },
+            {
+              "w": "pas",
+              "accent": false,
+              "at_f": 1291
+            },
+            {
+              "w": "du",
+              "accent": false,
+              "at_f": 1294
+            }
+          ]
+        },
+        {
+          "in_f": 1298,
+          "out_f": 1327,
+          "words": [
+            {
+              "w": "tout,",
+              "accent": false,
+              "at_f": 1298
+            },
+            {
+              "w": "les",
+              "accent": false,
+              "at_f": 1312
+            },
+            {
+              "w": "gains",
+              "accent": false,
+              "at_f": 1317
+            }
+          ]
+        },
+        {
+          "in_f": 1327,
+          "out_f": 1346,
+          "words": [
+            {
+              "w": "du",
+              "accent": false,
+              "at_f": 1327
+            },
+            {
+              "w": "jeu.",
+              "accent": false,
+              "at_f": 1332
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "act": "demonstration",
+      "why": "Le chiffre-choc qui condense l'enjeu : memes gains, tu gardes tout ou tu laisses la moitie.",
+      "src_in": 93.0,
+      "src_out": 96.76,
+      "dur_f": 113,
+      "out_start": 1346,
+      "out_end": 1459,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": {
+        "type": "ComparisonBar",
+        "left": {
+          "label": "GARDE TOUT",
+          "val": 100
+        },
+        "right": {
+          "label": "LAISSE LA MOITIE",
+          "val": 50
+        },
+        "hold_min_s": 2.2
+      },
+      "captions": [
+        {
+          "in_f": 1353,
+          "out_f": 1376,
+          "words": [
+            {
+              "w": "mais",
+              "accent": false,
+              "at_f": 1353
+            },
+            {
+              "w": "selon",
+              "accent": false,
+              "at_f": 1361
+            },
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 1371
+            }
+          ]
+        },
+        {
+          "in_f": 1376,
+          "out_f": 1395,
+          "words": [
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 1376
+            },
+            {
+              "w": "vis,",
+              "accent": false,
+              "at_f": 1380
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 1391
+            }
+          ]
+        },
+        {
+          "in_f": 1395,
+          "out_f": 1419,
+          "words": [
+            {
+              "w": "gardes",
+              "accent": false,
+              "at_f": 1395
+            },
+            {
+              "w": "tout",
+              "accent": false,
+              "at_f": 1407
+            },
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 1416
+            }
+          ]
+        },
+        {
+          "in_f": 1419,
+          "out_f": 1434,
+          "words": [
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 1419
+            },
+            {
+              "w": "laisses",
+              "accent": false,
+              "at_f": 1425
+            },
+            {
+              "w": "la",
+              "accent": false,
+              "at_f": 1429
+            }
+          ]
+        },
+        {
+          "in_f": 1434,
+          "out_f": 1459,
+          "words": [
+            {
+              "w": "moitié.",
+              "accent": true,
+              "at_f": 1434
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "act": "demonstration",
+      "why": "Formule-cle : le choix du pays n'est pas un detail, c'est LA decision. On garde la battue avant 'la decision'.",
+      "src_in": 96.76,
+      "src_out": 102.24,
+      "dur_f": 164,
+      "out_start": 1459,
+      "out_end": 1623,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.05,
+        "land_on": "decision"
+      },
+      "graphic": {
+        "type": "HighlightBox",
+        "on_word": "decision",
+        "hold_min_s": 1.4
+      },
+      "captions": [
+        {
+          "in_f": 1459,
+          "out_f": 1482,
+          "words": [
+            {
+              "w": "Tu",
+              "accent": false,
+              "at_f": 1459
+            },
+            {
+              "w": "comprends",
+              "accent": false,
+              "at_f": 1462
+            },
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 1475
+            }
+          ]
+        },
+        {
+          "in_f": 1482,
+          "out_f": 1489,
+          "words": [
+            {
+              "w": "truc.",
+              "accent": false,
+              "at_f": 1482
+            }
+          ]
+        },
+        {
+          "in_f": 1489,
+          "out_f": 1506,
+          "words": [
+            {
+              "w": "Pour",
+              "accent": false,
+              "at_f": 1489
+            },
+            {
+              "w": "un",
+              "accent": false,
+              "at_f": 1494
+            },
+            {
+              "w": "joueur",
+              "accent": false,
+              "at_f": 1501
+            }
+          ]
+        },
+        {
+          "in_f": 1506,
+          "out_f": 1524,
+          "words": [
+            {
+              "w": "pro,",
+              "accent": false,
+              "at_f": 1506
+            },
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 1514
+            },
+            {
+              "w": "choix",
+              "accent": false,
+              "at_f": 1515
+            }
+          ]
+        },
+        {
+          "in_f": 1524,
+          "out_f": 1537,
+          "words": [
+            {
+              "w": "du",
+              "accent": false,
+              "at_f": 1524
+            },
+            {
+              "w": "pays",
+              "accent": false,
+              "at_f": 1525
+            },
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 1535
+            }
+          ]
+        },
+        {
+          "in_f": 1537,
+          "out_f": 1557,
+          "words": [
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 1537
+            },
+            {
+              "w": "habites,",
+              "accent": false,
+              "at_f": 1538
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 1550
+            }
+          ]
+        },
+        {
+          "in_f": 1557,
+          "out_f": 1577,
+          "words": [
+            {
+              "w": "pas",
+              "accent": false,
+              "at_f": 1557
+            },
+            {
+              "w": "un",
+              "accent": false,
+              "at_f": 1564
+            },
+            {
+              "w": "détail,",
+              "accent": false,
+              "at_f": 1564
+            }
+          ]
+        },
+        {
+          "in_f": 1577,
+          "out_f": 1623,
+          "words": [
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 1577
+            },
+            {
+              "w": "la",
+              "accent": false,
+              "at_f": 1589
+            },
+            {
+              "w": "décision.",
+              "accent": true,
+              "at_f": 1592
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "act": "demonstration",
+      "why": "L'enjeu chiffre : un pays qui ne taxe pas le jeu = la moitie de tes gains sur l'annee.",
+      "src_in": 135.56,
+      "src_out": 141.4,
+      "dur_f": 175,
+      "out_start": 1615,
+      "out_end": 1790,
+      "transition_in": "cross_dissolve_8f",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": {
+        "type": "StatCard",
+        "value": 50,
+        "unit": "%",
+        "label": "DE TES GAINS",
+        "count_s": 0.9,
+        "hold_min_s": 2.0
+      },
+      "captions": [
+        {
+          "in_f": 1615,
+          "out_f": 1623,
+          "words": [
+            {
+              "w": "Il",
+              "accent": false,
+              "at_f": 1615
+            },
+            {
+              "w": "y",
+              "accent": false,
+              "at_f": 1619
+            },
+            {
+              "w": "a",
+              "accent": false,
+              "at_f": 1620
+            }
+          ]
+        },
+        {
+          "in_f": 1623,
+          "out_f": 1638,
+          "words": [
+            {
+              "w": "un",
+              "accent": false,
+              "at_f": 1623
+            },
+            {
+              "w": "pays",
+              "accent": false,
+              "at_f": 1626
+            },
+            {
+              "w": "qui",
+              "accent": false,
+              "at_f": 1633
+            }
+          ]
+        },
+        {
+          "in_f": 1638,
+          "out_f": 1655,
+          "words": [
+            {
+              "w": "ne",
+              "accent": false,
+              "at_f": 1638
+            },
+            {
+              "w": "taxe",
+              "accent": false,
+              "at_f": 1647
+            },
+            {
+              "w": "pas",
+              "accent": false,
+              "at_f": 1649
+            }
+          ]
+        },
+        {
+          "in_f": 1655,
+          "out_f": 1673,
+          "words": [
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 1655
+            },
+            {
+              "w": "jeu,",
+              "accent": false,
+              "at_f": 1658
+            },
+            {
+              "w": "ça",
+              "accent": false,
+              "at_f": 1672
+            }
+          ]
+        },
+        {
+          "in_f": 1673,
+          "out_f": 1705,
+          "words": [
+            {
+              "w": "peut",
+              "accent": false,
+              "at_f": 1673
+            },
+            {
+              "w": "représenter",
+              "accent": false,
+              "at_f": 1680
+            },
+            {
+              "w": "la",
+              "accent": false,
+              "at_f": 1702
+            }
+          ]
+        },
+        {
+          "in_f": 1705,
+          "out_f": 1725,
+          "words": [
+            {
+              "w": "moitié",
+              "accent": true,
+              "at_f": 1705
+            },
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 1718
+            },
+            {
+              "w": "ce",
+              "accent": false,
+              "at_f": 1725
+            }
+          ]
+        },
+        {
+          "in_f": 1725,
+          "out_f": 1760,
+          "words": [
+            {
+              "w": "que",
+              "accent": false,
+              "at_f": 1725
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 1730
+            },
+            {
+              "w": "gagnes",
+              "accent": false,
+              "at_f": 1740
+            }
+          ]
+        },
+        {
+          "in_f": 1760,
+          "out_f": 1790,
+          "words": [
+            {
+              "w": "dans",
+              "accent": false,
+              "at_f": 1760
+            },
+            {
+              "w": "l'année.",
+              "accent": false,
+              "at_f": 1768
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "act": "demonstration",
+      "why": "POINT DE BASCULE SECONDAIRE. Le contre-pied dans le contre-pied : le bon pays ne suffit pas.",
+      "src_in": 141.4,
+      "src_out": 147.2,
+      "dur_f": 174,
+      "out_start": 1790,
+      "out_end": 1964,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": {
+        "type": "FullscreenCard",
+        "label": "LE PIEGE",
+        "role": "marque le twist (bascule secondaire), audio continue dessous (L-cut)",
+        "duration_s": 0.6,
+        "hold_min_s": 1.4
+      },
+      "captions": [
+        {
+          "in_f": 1790,
+          "out_f": 1820,
+          "words": [
+            {
+              "w": "Mais,",
+              "accent": false,
+              "at_f": 1790
+            },
+            {
+              "w": "et",
+              "accent": false,
+              "at_f": 1803
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 1808
+            }
+          ]
+        },
+        {
+          "in_f": 1820,
+          "out_f": 1842,
+          "words": [
+            {
+              "w": "là",
+              "accent": false,
+              "at_f": 1820
+            },
+            {
+              "w": "que",
+              "accent": false,
+              "at_f": 1826
+            },
+            {
+              "w": "les",
+              "accent": false,
+              "at_f": 1833
+            }
+          ]
+        },
+        {
+          "in_f": 1842,
+          "out_f": 1865,
+          "words": [
+            {
+              "w": "gens",
+              "accent": false,
+              "at_f": 1842
+            },
+            {
+              "w": "se",
+              "accent": false,
+              "at_f": 1849
+            },
+            {
+              "w": "font",
+              "accent": false,
+              "at_f": 1853
+            }
+          ]
+        },
+        {
+          "in_f": 1865,
+          "out_f": 1892,
+          "words": [
+            {
+              "w": "avoir,",
+              "accent": false,
+              "at_f": 1865
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 1881
+            },
+            {
+              "w": "peux",
+              "accent": false,
+              "at_f": 1883
+            }
+          ]
+        },
+        {
+          "in_f": 1892,
+          "out_f": 1919,
+          "words": [
+            {
+              "w": "pas",
+              "accent": false,
+              "at_f": 1892
+            },
+            {
+              "w": "juste",
+              "accent": false,
+              "at_f": 1907
+            },
+            {
+              "w": "dire",
+              "accent": false,
+              "at_f": 1910
+            }
+          ]
+        },
+        {
+          "in_f": 1919,
+          "out_f": 1964,
+          "words": [
+            {
+              "w": "j'habite",
+              "accent": false,
+              "at_f": 1919
+            },
+            {
+              "w": "là-bas.",
+              "accent": false,
+              "at_f": 1937
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "act": "demonstration",
+      "why": "La condition reelle + la sanction : il faut vraiment y vivre, sinon requalification et tout retombe. On garde le temps apres 'et tout retombe'.",
+      "src_in": 147.2,
+      "src_out": 156.88,
+      "dur_f": 290,
+      "out_start": 1964,
+      "out_end": 2254,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.04,
+        "land_on": "retombe"
+      },
+      "graphic": {
+        "type": "LowerThird",
+        "title": "REQUALIFICATION",
+        "accent": "tout retombe",
+        "on_word": "retombe",
+        "hold_min_s": 1.6
+      },
+      "captions": [
+        {
+          "in_f": 1964,
+          "out_f": 1979,
+          "words": [
+            {
+              "w": "Il",
+              "accent": false,
+              "at_f": 1964
+            },
+            {
+              "w": "faut",
+              "accent": false,
+              "at_f": 1968
+            },
+            {
+              "w": "que",
+              "accent": false,
+              "at_f": 1974
+            }
+          ]
+        },
+        {
+          "in_f": 1979,
+          "out_f": 2000,
+          "words": [
+            {
+              "w": "ce",
+              "accent": false,
+              "at_f": 1979
+            },
+            {
+              "w": "soit",
+              "accent": false,
+              "at_f": 1983
+            },
+            {
+              "w": "vrai",
+              "accent": false,
+              "at_f": 1990
+            }
+          ]
+        },
+        {
+          "in_f": 2000,
+          "out_f": 2011,
+          "words": [
+            {
+              "w": "que",
+              "accent": false,
+              "at_f": 2000
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 2004
+            },
+            {
+              "w": "vis",
+              "accent": false,
+              "at_f": 2005
+            }
+          ]
+        },
+        {
+          "in_f": 2011,
+          "out_f": 2035,
+          "words": [
+            {
+              "w": "vraiment",
+              "accent": false,
+              "at_f": 2011
+            },
+            {
+              "w": "dans",
+              "accent": false,
+              "at_f": 2025
+            },
+            {
+              "w": "ce",
+              "accent": false,
+              "at_f": 2032
+            }
+          ]
+        },
+        {
+          "in_f": 2035,
+          "out_f": 2050,
+          "words": [
+            {
+              "w": "pays.",
+              "accent": false,
+              "at_f": 2035
+            }
+          ]
+        },
+        {
+          "in_f": 2050,
+          "out_f": 2071,
+          "words": [
+            {
+              "w": "Un",
+              "accent": false,
+              "at_f": 2050
+            },
+            {
+              "w": "joueur",
+              "accent": false,
+              "at_f": 2056
+            },
+            {
+              "w": "qui",
+              "accent": false,
+              "at_f": 2066
+            }
+          ]
+        },
+        {
+          "in_f": 2071,
+          "out_f": 2114,
+          "words": [
+            {
+              "w": "prétend",
+              "accent": false,
+              "at_f": 2071
+            },
+            {
+              "w": "être",
+              "accent": false,
+              "at_f": 2087
+            },
+            {
+              "w": "expatrié",
+              "accent": false,
+              "at_f": 2097
+            }
+          ]
+        },
+        {
+          "in_f": 2114,
+          "out_f": 2141,
+          "words": [
+            {
+              "w": "mais",
+              "accent": false,
+              "at_f": 2114
+            },
+            {
+              "w": "qui",
+              "accent": false,
+              "at_f": 2122
+            },
+            {
+              "w": "passe",
+              "accent": false,
+              "at_f": 2127
+            }
+          ]
+        },
+        {
+          "in_f": 2141,
+          "out_f": 2151,
+          "words": [
+            {
+              "w": "sa",
+              "accent": false,
+              "at_f": 2141
+            },
+            {
+              "w": "vie",
+              "accent": false,
+              "at_f": 2141
+            },
+            {
+              "w": "et",
+              "accent": false,
+              "at_f": 2147
+            }
+          ]
+        },
+        {
+          "in_f": 2151,
+          "out_f": 2175,
+          "words": [
+            {
+              "w": "joue",
+              "accent": false,
+              "at_f": 2151
+            },
+            {
+              "w": "depuis",
+              "accent": false,
+              "at_f": 2162
+            },
+            {
+              "w": "la",
+              "accent": false,
+              "at_f": 2170
+            }
+          ]
+        },
+        {
+          "in_f": 2175,
+          "out_f": 2204,
+          "words": [
+            {
+              "w": "France,",
+              "accent": true,
+              "at_f": 2175
+            },
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 2193
+            },
+            {
+              "w": "fisc",
+              "accent": false,
+              "at_f": 2194
+            }
+          ]
+        },
+        {
+          "in_f": 2204,
+          "out_f": 2224,
+          "words": [
+            {
+              "w": "en",
+              "accent": false,
+              "at_f": 2204
+            },
+            {
+              "w": "requalifie.",
+              "accent": true,
+              "at_f": 2207
+            }
+          ]
+        },
+        {
+          "in_f": 2224,
+          "out_f": 2254,
+          "words": [
+            {
+              "w": "Et",
+              "accent": false,
+              "at_f": 2224
+            },
+            {
+              "w": "tout",
+              "accent": false,
+              "at_f": 2230
+            },
+            {
+              "w": "retombe.",
+              "accent": false,
+              "at_f": 2236
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "act": "resolution",
+      "why": "La punchline qui cristallise la these — ne fonctionne que maintenant, l'argument etant pose. Livree sur coupe franche, le silence fait le travail.",
+      "src_in": 156.88,
+      "src_out": 168.0,
+      "dur_f": 334,
+      "out_start": 2254,
+      "out_end": 2588,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.02,
+        "to": 1.1,
+        "land_on": "dorment"
+      },
+      "graphic": {
+        "type": "TwinReveal",
+        "left": "MEMES GAINS",
+        "right": "FORTUNES !=",
+        "note": "discret, s'efface avant 'ou ils dorment'",
+        "hold_min_s": 1.6
+      },
+      "captions": [
+        {
+          "in_f": 2254,
+          "out_f": 2284,
+          "words": [
+            {
+              "w": "Le",
+              "accent": false,
+              "at_f": 2254
+            },
+            {
+              "w": "Poker,",
+              "accent": true,
+              "at_f": 2258
+            },
+            {
+              "w": "c'est",
+              "accent": false,
+              "at_f": 2273
+            }
+          ]
+        },
+        {
+          "in_f": 2284,
+          "out_f": 2312,
+          "words": [
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 2284
+            },
+            {
+              "w": "seul",
+              "accent": false,
+              "at_f": 2288
+            },
+            {
+              "w": "métier",
+              "accent": false,
+              "at_f": 2297
+            }
+          ]
+        },
+        {
+          "in_f": 2312,
+          "out_f": 2351,
+          "words": [
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 2312
+            },
+            {
+              "w": "deux",
+              "accent": false,
+              "at_f": 2319
+            },
+            {
+              "w": "joueurs,",
+              "accent": false,
+              "at_f": 2328
+            }
+          ]
+        },
+        {
+          "in_f": 2351,
+          "out_f": 2384,
+          "words": [
+            {
+              "w": "avec",
+              "accent": false,
+              "at_f": 2351
+            },
+            {
+              "w": "exactement",
+              "accent": false,
+              "at_f": 2356
+            },
+            {
+              "w": "les",
+              "accent": false,
+              "at_f": 2378
+            }
+          ]
+        },
+        {
+          "in_f": 2384,
+          "out_f": 2423,
+          "words": [
+            {
+              "w": "mêmes",
+              "accent": false,
+              "at_f": 2384
+            },
+            {
+              "w": "gains,",
+              "accent": false,
+              "at_f": 2397
+            },
+            {
+              "w": "finissent",
+              "accent": false,
+              "at_f": 2416
+            }
+          ]
+        },
+        {
+          "in_f": 2423,
+          "out_f": 2446,
+          "words": [
+            {
+              "w": "l'année",
+              "accent": false,
+              "at_f": 2423
+            },
+            {
+              "w": "avec",
+              "accent": false,
+              "at_f": 2436
+            },
+            {
+              "w": "des",
+              "accent": false,
+              "at_f": 2442
+            }
+          ]
+        },
+        {
+          "in_f": 2446,
+          "out_f": 2484,
+          "words": [
+            {
+              "w": "fortunes",
+              "accent": false,
+              "at_f": 2446
+            },
+            {
+              "w": "différentes,",
+              "accent": false,
+              "at_f": 2458
+            },
+            {
+              "w": "pas",
+              "accent": false,
+              "at_f": 2482
+            }
+          ]
+        },
+        {
+          "in_f": 2484,
+          "out_f": 2503,
+          "words": [
+            {
+              "w": "cause",
+              "accent": false,
+              "at_f": 2484
+            },
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 2492
+            },
+            {
+              "w": "leurs",
+              "accent": false,
+              "at_f": 2495
+            }
+          ]
+        },
+        {
+          "in_f": 2503,
+          "out_f": 2527,
+          "words": [
+            {
+              "w": "niveaux,",
+              "accent": false,
+              "at_f": 2503
+            },
+            {
+              "w": "à",
+              "accent": false,
+              "at_f": 2516
+            },
+            {
+              "w": "cause",
+              "accent": false,
+              "at_f": 2521
+            }
+          ]
+        },
+        {
+          "in_f": 2527,
+          "out_f": 2563,
+          "words": [
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 2527
+            },
+            {
+              "w": "l'endroit",
+              "accent": false,
+              "at_f": 2533
+            },
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 2558
+            }
+          ]
+        },
+        {
+          "in_f": 2563,
+          "out_f": 2588,
+          "words": [
+            {
+              "w": "ils",
+              "accent": false,
+              "at_f": 2563
+            },
+            {
+              "w": "dorment.",
+              "accent": true,
+              "at_f": 2568
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "act": "resolution",
+      "why": "Retourne l'insight vers le spectateur : ton profil (mobile, revenus eleves) est parfait pour le faire proprement.",
+      "src_in": 185.4,
+      "src_out": 194.64,
+      "dur_f": 277,
+      "out_start": 2588,
+      "out_end": 2865,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.3,
+      "camera": {
+        "type": "static",
+        "scale": 1.08
+      },
+      "graphic": {
+        "type": "LowerThird",
+        "title": "100 % EN REGLE",
+        "on_word": "regle",
+        "hold_min_s": 1.6
+      },
+      "captions": [
+        {
+          "in_f": 2593,
+          "out_f": 2613,
+          "words": [
+            {
+              "w": "tu es",
+              "accent": false,
+              "at_f": 2593
+            },
+            {
+              "w": "revenus",
+              "accent": false,
+              "at_f": 2598
+            },
+            {
+              "w": "sont",
+              "accent": false,
+              "at_f": 2604
+            }
+          ]
+        },
+        {
+          "in_f": 2613,
+          "out_f": 2655,
+          "words": [
+            {
+              "w": "élevés,",
+              "accent": false,
+              "at_f": 2613
+            },
+            {
+              "w": "tu es",
+              "accent": false,
+              "at_f": 2635
+            },
+            {
+              "w": "totalement",
+              "accent": false,
+              "at_f": 2637
+            }
+          ]
+        },
+        {
+          "in_f": 2655,
+          "out_f": 2682,
+          "words": [
+            {
+              "w": "mobiles,",
+              "accent": false,
+              "at_f": 2655
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 2675
+            },
+            {
+              "w": "peux",
+              "accent": false,
+              "at_f": 2680
+            }
+          ]
+        },
+        {
+          "in_f": 2682,
+          "out_f": 2712,
+          "words": [
+            {
+              "w": "jouer",
+              "accent": false,
+              "at_f": 2682
+            },
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 2691
+            },
+            {
+              "w": "n'importe",
+              "accent": false,
+              "at_f": 2695
+            }
+          ]
+        },
+        {
+          "in_f": 2712,
+          "out_f": 2733,
+          "words": [
+            {
+              "w": "où,",
+              "accent": false,
+              "at_f": 2712
+            },
+            {
+              "w": "t'as",
+              "accent": false,
+              "at_f": 2720
+            },
+            {
+              "w": "le",
+              "accent": false,
+              "at_f": 2728
+            }
+          ]
+        },
+        {
+          "in_f": 2733,
+          "out_f": 2765,
+          "words": [
+            {
+              "w": "profil",
+              "accent": false,
+              "at_f": 2733
+            },
+            {
+              "w": "parfait",
+              "accent": false,
+              "at_f": 2742
+            },
+            {
+              "w": "pour",
+              "accent": false,
+              "at_f": 2761
+            }
+          ]
+        },
+        {
+          "in_f": 2765,
+          "out_f": 2823,
+          "words": [
+            {
+              "w": "choisir",
+              "accent": false,
+              "at_f": 2765
+            },
+            {
+              "w": "intelligemment",
+              "accent": false,
+              "at_f": 2777
+            },
+            {
+              "w": "proprement",
+              "accent": false,
+              "at_f": 2808
+            }
+          ]
+        },
+        {
+          "in_f": 2823,
+          "out_f": 2847,
+          "words": [
+            {
+              "w": "et",
+              "accent": false,
+              "at_f": 2823
+            },
+            {
+              "w": "100%",
+              "accent": true,
+              "at_f": 2829
+            },
+            {
+              "w": "en",
+              "accent": false,
+              "at_f": 2845
+            }
+          ]
+        },
+        {
+          "in_f": 2847,
+          "out_f": 2865,
+          "words": [
+            {
+              "w": "règle.",
+              "accent": true,
+              "at_f": 2847
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "act": "resolution",
+      "why": "Transforme l'insight en action. CTA net.",
+      "src_in": 194.64,
+      "src_out": 202.6,
+      "dur_f": 239,
+      "out_start": 2865,
+      "out_end": 3104,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphic": {
+        "type": "CTACard",
+        "label": "COMMENTE \"POKER\"",
+        "hold_min_s": 2.0
+      },
+      "captions": [
+        {
+          "in_f": 2865,
+          "out_f": 2895,
+          "words": [
+            {
+              "w": "Si",
+              "accent": false,
+              "at_f": 2865
+            },
+            {
+              "w": "tu",
+              "accent": false,
+              "at_f": 2873
+            },
+            {
+              "w": "veux",
+              "accent": false,
+              "at_f": 2881
+            }
+          ]
+        },
+        {
+          "in_f": 2895,
+          "out_f": 2944,
+          "words": [
+            {
+              "w": "savoir",
+              "accent": false,
+              "at_f": 2895
+            },
+            {
+              "w": "où",
+              "accent": false,
+              "at_f": 2918
+            },
+            {
+              "w": "poser",
+              "accent": false,
+              "at_f": 2927
+            }
+          ]
+        },
+        {
+          "in_f": 2944,
+          "out_f": 2999,
+          "words": [
+            {
+              "w": "tu es",
+              "accent": false,
+              "at_f": 2944
+            },
+            {
+              "w": "valises",
+              "accent": false,
+              "at_f": 2966
+            },
+            {
+              "w": "pour",
+              "accent": false,
+              "at_f": 2995
+            }
+          ]
+        },
+        {
+          "in_f": 2999,
+          "out_f": 3064,
+          "words": [
+            {
+              "w": "deux",
+              "accent": false,
+              "at_f": 2999
+            },
+            {
+              "w": "valises,",
+              "accent": false,
+              "at_f": 3014
+            },
+            {
+              "w": "commente",
+              "accent": false,
+              "at_f": 3037
+            }
+          ]
+        },
+        {
+          "in_f": 3064,
+          "out_f": 3090,
+          "words": [
+            {
+              "w": "de",
+              "accent": false,
+              "at_f": 3064
+            },
+            {
+              "w": "Poker?",
+              "accent": true,
+              "at_f": 3071
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

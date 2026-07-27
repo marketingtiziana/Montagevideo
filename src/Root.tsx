@@ -1,17 +1,27 @@
 import React from "react";
 import { Composition } from "remotion";
-import { EDIT } from "./edit";
+import { GraphicsOnly, GRAPHICS_TOTAL } from "./graphics/GraphicsOnly";
 import { Short, TOTAL_FRAMES } from "./Short";
 
 export const RemotionRoot: React.FC = () => {
   return (
-    <Composition
-      id="Short"
-      component={Short}
-      durationInFrames={TOTAL_FRAMES}
-      fps={EDIT.meta.fps}
-      width={EDIT.meta.width}
-      height={EDIT.meta.height}
-    />
+    <>
+      <Composition
+        id="GraphicsOnly"
+        component={GraphicsOnly}
+        durationInFrames={GRAPHICS_TOTAL}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Short"
+        component={Short}
+        durationInFrames={TOTAL_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+    </>
   );
 };
