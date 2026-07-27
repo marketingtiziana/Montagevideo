@@ -1,0 +1,1215 @@
+{
+  "meta": {
+    "target_duration": 50.04,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "source": "source/reel5.mp4",
+    "source_fps": 60,
+    "whisper_model": "base (multilingue) — texte relu/corrigé manuellement"
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "role": "hook",
+      "src_in": 156.8,
+      "src_out": 164.56,
+      "out_start": 0.0,
+      "out_end": 7.76,
+      "dur": 7.76,
+      "text": "Le Poker, c'est le seul métier où deux joueurs, avec exactement les mêmes gains, finissent l'année avec des fortunes différentes,",
+      "camera": {
+        "type": "punch_in",
+        "from": 1.0,
+        "to": 1.1,
+        "easing": "expo_out"
+      },
+      "transition_in": "hard_cut",
+      "sfx": [
+        "impact_deep"
+      ],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "Le",
+          "start": 0.08,
+          "end": 0.22,
+          "accent": false
+        },
+        {
+          "w": "Poker,",
+          "start": 0.22,
+          "end": 0.72,
+          "accent": false
+        },
+        {
+          "w": "c'est",
+          "start": 0.72,
+          "end": 1.08,
+          "accent": false
+        },
+        {
+          "w": "le",
+          "start": 1.08,
+          "end": 1.22,
+          "accent": false
+        },
+        {
+          "w": "seul",
+          "start": 1.22,
+          "end": 1.51,
+          "accent": false
+        },
+        {
+          "w": "métier",
+          "start": 1.51,
+          "end": 2.02,
+          "accent": false
+        },
+        {
+          "w": "où",
+          "start": 2.02,
+          "end": 2.24,
+          "accent": false
+        },
+        {
+          "w": "deux",
+          "start": 2.24,
+          "end": 2.53,
+          "accent": false
+        },
+        {
+          "w": "joueurs,",
+          "start": 2.53,
+          "end": 3.3,
+          "accent": false
+        },
+        {
+          "w": "avec",
+          "start": 3.3,
+          "end": 3.47,
+          "accent": false
+        },
+        {
+          "w": "exactement",
+          "start": 3.47,
+          "end": 4.2,
+          "accent": false
+        },
+        {
+          "w": "les",
+          "start": 4.2,
+          "end": 4.42,
+          "accent": false
+        },
+        {
+          "w": "mêmes",
+          "start": 4.42,
+          "end": 4.86,
+          "accent": true
+        },
+        {
+          "w": "gains,",
+          "start": 4.86,
+          "end": 5.48,
+          "accent": true
+        },
+        {
+          "w": "finissent",
+          "start": 5.48,
+          "end": 5.72,
+          "accent": false
+        },
+        {
+          "w": "l'année",
+          "start": 5.72,
+          "end": 6.13,
+          "accent": false
+        },
+        {
+          "w": "avec",
+          "start": 6.13,
+          "end": 6.33,
+          "accent": false
+        },
+        {
+          "w": "des",
+          "start": 6.33,
+          "end": 6.48,
+          "accent": false
+        },
+        {
+          "w": "fortunes",
+          "start": 6.48,
+          "end": 6.89,
+          "accent": true
+        },
+        {
+          "w": "différentes,",
+          "start": 6.89,
+          "end": 7.68,
+          "accent": true
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "role": "hook",
+      "src_in": 165.55,
+      "src_out": 168.08,
+      "out_start": 7.76,
+      "out_end": 10.29,
+      "dur": 2.53,
+      "text": "À cause de l'endroit où ils dorment.",
+      "camera": {
+        "type": "snap_zoom",
+        "from": 1.0,
+        "to": 1.18
+      },
+      "transition_in": "hard_cut",
+      "sfx": [
+        "impact_deep"
+      ],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "à",
+          "start": 0.08,
+          "end": 0.23,
+          "accent": false
+        },
+        {
+          "w": "cause",
+          "start": 0.23,
+          "end": 0.44,
+          "accent": false
+        },
+        {
+          "w": "de",
+          "start": 0.44,
+          "end": 0.63,
+          "accent": false
+        },
+        {
+          "w": "l'endroit",
+          "start": 0.63,
+          "end": 1.45,
+          "accent": false
+        },
+        {
+          "w": "où",
+          "start": 1.45,
+          "end": 1.63,
+          "accent": false
+        },
+        {
+          "w": "ils",
+          "start": 1.63,
+          "end": 1.81,
+          "accent": false
+        },
+        {
+          "w": "dorment.",
+          "start": 1.81,
+          "end": 2.45,
+          "accent": true
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "role": "body",
+      "src_in": 29.89,
+      "src_out": 34.48,
+      "out_start": 10.29,
+      "out_end": 14.88,
+      "dur": 4.59,
+      "text": "Tout dépend d'une seule chose. Est-ce que tu es vu comme un amateur ou comme un pro",
+      "camera": {
+        "type": "drift",
+        "px": 12
+      },
+      "transition_in": "whip_left",
+      "sfx": [
+        "whoosh_short"
+      ],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "Tout",
+          "start": 0.08,
+          "end": 0.22,
+          "accent": false
+        },
+        {
+          "w": "dépend",
+          "start": 0.22,
+          "end": 0.56,
+          "accent": false
+        },
+        {
+          "w": "d'une",
+          "start": 0.56,
+          "end": 0.79,
+          "accent": false
+        },
+        {
+          "w": "seule",
+          "start": 0.79,
+          "end": 1.04,
+          "accent": false
+        },
+        {
+          "w": "chose.",
+          "start": 1.04,
+          "end": 1.47,
+          "accent": false
+        },
+        {
+          "w": "Est-ce",
+          "start": 1.47,
+          "end": 2.02,
+          "accent": false
+        },
+        {
+          "w": "que",
+          "start": 2.02,
+          "end": 2.13,
+          "accent": false
+        },
+        {
+          "w": "tu",
+          "start": 2.13,
+          "end": 2.28,
+          "accent": false
+        },
+        {
+          "w": "es",
+          "start": 2.28,
+          "end": 2.58,
+          "accent": false
+        },
+        {
+          "w": "vu",
+          "start": 2.58,
+          "end": 2.66,
+          "accent": false
+        },
+        {
+          "w": "comme",
+          "start": 2.66,
+          "end": 2.95,
+          "accent": false
+        },
+        {
+          "w": "un",
+          "start": 2.95,
+          "end": 3.1,
+          "accent": false
+        },
+        {
+          "w": "amateur",
+          "start": 3.1,
+          "end": 3.67,
+          "accent": true
+        },
+        {
+          "w": "ou",
+          "start": 3.67,
+          "end": 3.86,
+          "accent": false
+        },
+        {
+          "w": "comme",
+          "start": 3.86,
+          "end": 4.14,
+          "accent": false
+        },
+        {
+          "w": "un",
+          "start": 4.14,
+          "end": 4.32,
+          "accent": false
+        },
+        {
+          "w": "pro",
+          "start": 4.32,
+          "end": 4.51,
+          "accent": true
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "role": "body",
+      "src_in": 65.4,
+      "src_out": 69.64,
+      "out_start": 14.88,
+      "out_end": 19.12,
+      "dur": 4.24,
+      "text": "La façon dont les gains sont taxés change énormément d'un pays à l'autre.",
+      "camera": {
+        "type": "punch_in",
+        "from": 1.0,
+        "to": 1.08,
+        "easing": "expo_out"
+      },
+      "transition_in": "hard_cut",
+      "sfx": [
+        "click"
+      ],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "La",
+          "start": 0.08,
+          "end": 0.2,
+          "accent": false
+        },
+        {
+          "w": "façon",
+          "start": 0.2,
+          "end": 0.56,
+          "accent": false
+        },
+        {
+          "w": "dont",
+          "start": 0.56,
+          "end": 0.79,
+          "accent": false
+        },
+        {
+          "w": "les",
+          "start": 0.79,
+          "end": 0.97,
+          "accent": false
+        },
+        {
+          "w": "gains",
+          "start": 0.97,
+          "end": 1.27,
+          "accent": true
+        },
+        {
+          "w": "sont",
+          "start": 1.27,
+          "end": 1.51,
+          "accent": false
+        },
+        {
+          "w": "taxés",
+          "start": 1.51,
+          "end": 1.86,
+          "accent": false
+        },
+        {
+          "w": "change",
+          "start": 1.86,
+          "end": 2.37,
+          "accent": false
+        },
+        {
+          "w": "énormément",
+          "start": 2.37,
+          "end": 2.92,
+          "accent": true
+        },
+        {
+          "w": "d'un",
+          "start": 2.92,
+          "end": 3.14,
+          "accent": false
+        },
+        {
+          "w": "pays",
+          "start": 3.14,
+          "end": 3.4,
+          "accent": false
+        },
+        {
+          "w": "à",
+          "start": 3.4,
+          "end": 3.5,
+          "accent": false
+        },
+        {
+          "w": "l'autre.",
+          "start": 3.5,
+          "end": 4.16,
+          "accent": false
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "role": "body",
+      "src_in": 69.48,
+      "src_out": 73.0,
+      "out_start": 19.12,
+      "out_end": 22.64,
+      "dur": 3.52,
+      "text": "Certains pays ne taxent pas du tout, les gains du jeu.",
+      "camera": {
+        "type": "drift",
+        "px": 12
+      },
+      "transition_in": "whip_right",
+      "sfx": [
+        "whoosh_short"
+      ],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "Certains",
+          "start": 0.08,
+          "end": 0.64,
+          "accent": false
+        },
+        {
+          "w": "pays",
+          "start": 0.64,
+          "end": 0.92,
+          "accent": false
+        },
+        {
+          "w": "ne",
+          "start": 0.92,
+          "end": 1.08,
+          "accent": false
+        },
+        {
+          "w": "taxent",
+          "start": 1.08,
+          "end": 1.59,
+          "accent": true
+        },
+        {
+          "w": "pas",
+          "start": 1.59,
+          "end": 1.69,
+          "accent": false
+        },
+        {
+          "w": "du",
+          "start": 1.69,
+          "end": 1.83,
+          "accent": false
+        },
+        {
+          "w": "tout,",
+          "start": 1.83,
+          "end": 2.29,
+          "accent": false
+        },
+        {
+          "w": "les",
+          "start": 2.29,
+          "end": 2.46,
+          "accent": false
+        },
+        {
+          "w": "gains",
+          "start": 2.46,
+          "end": 2.8,
+          "accent": true
+        },
+        {
+          "w": "du",
+          "start": 2.8,
+          "end": 2.95,
+          "accent": false
+        },
+        {
+          "w": "jeu.",
+          "start": 2.95,
+          "end": 3.44,
+          "accent": false
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "role": "body",
+      "src_in": 135.48,
+      "src_out": 141.48,
+      "out_start": 22.64,
+      "out_end": 28.64,
+      "dur": 6.0,
+      "text": "Il y a un pays qui ne taxe pas le jeu, ça peut représenter la moitié de ce que tu gagnes dans l'année.",
+      "camera": {
+        "type": "punch_in",
+        "from": 1.0,
+        "to": 1.09,
+        "easing": "expo_out"
+      },
+      "transition_in": "hard_cut",
+      "sfx": [
+        "click"
+      ],
+      "overlay": {
+        "type": "stat_counter",
+        "value": "50%",
+        "label": "de tes gains, en jeu",
+        "in": 0.8,
+        "duration": 3.2,
+        "anchor": "top_third"
+      },
+      "caption_words": [
+        {
+          "w": "Il",
+          "start": 0.08,
+          "end": 0.2,
+          "accent": false
+        },
+        {
+          "w": "y",
+          "start": 0.2,
+          "end": 0.26,
+          "accent": false
+        },
+        {
+          "w": "a",
+          "start": 0.26,
+          "end": 0.34,
+          "accent": false
+        },
+        {
+          "w": "un",
+          "start": 0.34,
+          "end": 0.44,
+          "accent": false
+        },
+        {
+          "w": "pays",
+          "start": 0.44,
+          "end": 0.68,
+          "accent": false
+        },
+        {
+          "w": "qui",
+          "start": 0.68,
+          "end": 0.85,
+          "accent": false
+        },
+        {
+          "w": "ne",
+          "start": 0.85,
+          "end": 1.16,
+          "accent": false
+        },
+        {
+          "w": "taxe",
+          "start": 1.16,
+          "end": 1.22,
+          "accent": false
+        },
+        {
+          "w": "pas",
+          "start": 1.22,
+          "end": 1.4,
+          "accent": false
+        },
+        {
+          "w": "le",
+          "start": 1.4,
+          "end": 1.52,
+          "accent": false
+        },
+        {
+          "w": "jeu,",
+          "start": 1.52,
+          "end": 1.98,
+          "accent": false
+        },
+        {
+          "w": "ça",
+          "start": 1.98,
+          "end": 2.0,
+          "accent": false
+        },
+        {
+          "w": "peut",
+          "start": 2.0,
+          "end": 2.24,
+          "accent": false
+        },
+        {
+          "w": "représenter",
+          "start": 2.24,
+          "end": 2.98,
+          "accent": false
+        },
+        {
+          "w": "la",
+          "start": 2.98,
+          "end": 3.09,
+          "accent": false
+        },
+        {
+          "w": "moitié",
+          "start": 3.09,
+          "end": 3.51,
+          "accent": true
+        },
+        {
+          "w": "de",
+          "start": 3.51,
+          "end": 3.75,
+          "accent": false
+        },
+        {
+          "w": "ce",
+          "start": 3.75,
+          "end": 3.75,
+          "accent": false
+        },
+        {
+          "w": "que",
+          "start": 3.75,
+          "end": 3.93,
+          "accent": false
+        },
+        {
+          "w": "tu",
+          "start": 3.93,
+          "end": 4.24,
+          "accent": false
+        },
+        {
+          "w": "gagnes",
+          "start": 4.24,
+          "end": 4.92,
+          "accent": false
+        },
+        {
+          "w": "dans",
+          "start": 4.92,
+          "end": 5.18,
+          "accent": false
+        },
+        {
+          "w": "l'année.",
+          "start": 5.18,
+          "end": 5.92,
+          "accent": false
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "role": "body",
+      "src_in": 141.76,
+      "src_out": 147.28,
+      "out_start": 28.64,
+      "out_end": 34.16,
+      "dur": 5.52,
+      "text": "Et c'est là que les gens se font avoir, tu peux pas juste dire j'habite là-bas.",
+      "camera": {
+        "type": "drift",
+        "px": 12
+      },
+      "transition_in": "hard_cut",
+      "sfx": [],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "et",
+          "start": 0.08,
+          "end": 0.24,
+          "accent": false
+        },
+        {
+          "w": "c'est",
+          "start": 0.24,
+          "end": 0.63,
+          "accent": false
+        },
+        {
+          "w": "là",
+          "start": 0.63,
+          "end": 0.84,
+          "accent": false
+        },
+        {
+          "w": "que",
+          "start": 0.84,
+          "end": 1.07,
+          "accent": false
+        },
+        {
+          "w": "les",
+          "start": 1.07,
+          "end": 1.39,
+          "accent": false
+        },
+        {
+          "w": "gens",
+          "start": 1.39,
+          "end": 1.6,
+          "accent": false
+        },
+        {
+          "w": "se",
+          "start": 1.6,
+          "end": 1.75,
+          "accent": false
+        },
+        {
+          "w": "font",
+          "start": 1.75,
+          "end": 2.14,
+          "accent": false
+        },
+        {
+          "w": "avoir,",
+          "start": 2.14,
+          "end": 2.68,
+          "accent": false
+        },
+        {
+          "w": "tu",
+          "start": 2.68,
+          "end": 2.73,
+          "accent": false
+        },
+        {
+          "w": "peux",
+          "start": 2.73,
+          "end": 3.03,
+          "accent": false
+        },
+        {
+          "w": "pas",
+          "start": 3.03,
+          "end": 3.54,
+          "accent": false
+        },
+        {
+          "w": "juste",
+          "start": 3.54,
+          "end": 3.64,
+          "accent": false
+        },
+        {
+          "w": "dire",
+          "start": 3.64,
+          "end": 3.94,
+          "accent": false
+        },
+        {
+          "w": "j'habite",
+          "start": 3.94,
+          "end": 4.54,
+          "accent": true
+        },
+        {
+          "w": "là-bas.",
+          "start": 4.54,
+          "end": 5.44,
+          "accent": true
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "role": "body",
+      "src_in": 147.12,
+      "src_out": 150.16,
+      "out_start": 34.16,
+      "out_end": 37.2,
+      "dur": 3.04,
+      "text": "Il faut que ce soit vrai que tu vis vraiment dans ce pays.",
+      "camera": {
+        "type": "punch_in",
+        "from": 1.0,
+        "to": 1.1,
+        "easing": "expo_out"
+      },
+      "transition_in": "hard_cut",
+      "sfx": [
+        "click"
+      ],
+      "overlay": null,
+      "caption_words": [
+        {
+          "w": "Il",
+          "start": 0.08,
+          "end": 0.2,
+          "accent": false
+        },
+        {
+          "w": "faut",
+          "start": 0.2,
+          "end": 0.42,
+          "accent": false
+        },
+        {
+          "w": "que",
+          "start": 0.42,
+          "end": 0.59,
+          "accent": false
+        },
+        {
+          "w": "ce",
+          "start": 0.59,
+          "end": 0.7,
+          "accent": false
+        },
+        {
+          "w": "soit",
+          "start": 0.7,
+          "end": 0.93,
+          "accent": false
+        },
+        {
+          "w": "vrai",
+          "start": 0.93,
+          "end": 1.28,
+          "accent": true
+        },
+        {
+          "w": "que",
+          "start": 1.28,
+          "end": 1.41,
+          "accent": false
+        },
+        {
+          "w": "tu",
+          "start": 1.41,
+          "end": 1.44,
+          "accent": false
+        },
+        {
+          "w": "vis",
+          "start": 1.44,
+          "end": 1.66,
+          "accent": false
+        },
+        {
+          "w": "vraiment",
+          "start": 1.66,
+          "end": 2.12,
+          "accent": true
+        },
+        {
+          "w": "dans",
+          "start": 2.12,
+          "end": 2.35,
+          "accent": false
+        },
+        {
+          "w": "ce",
+          "start": 2.35,
+          "end": 2.45,
+          "accent": false
+        },
+        {
+          "w": "pays.",
+          "start": 2.45,
+          "end": 2.96,
+          "accent": false
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "role": "body",
+      "src_in": 150.0,
+      "src_out": 156.96,
+      "out_start": 37.2,
+      "out_end": 44.16,
+      "dur": 6.96,
+      "text": "Un joueur qui prétend être expatrié mais qui passe sa vie et joue depuis la France, le fisc le requalifie. Et tout retombe.",
+      "camera": {
+        "type": "shake",
+        "px": 4,
+        "on": "tout retombe"
+      },
+      "transition_in": "flash",
+      "sfx": [
+        "riser_1s",
+        "impact_deep"
+      ],
+      "overlay": {
+        "type": "lower_third",
+        "value": "Fausse expat",
+        "label": "le fisc requalifie tout",
+        "in": 0.4,
+        "duration": 3.4,
+        "anchor": "lower"
+      },
+      "caption_words": [
+        {
+          "w": "Un",
+          "start": 0.08,
+          "end": 0.26,
+          "accent": false
+        },
+        {
+          "w": "joueur",
+          "start": 0.26,
+          "end": 0.59,
+          "accent": false
+        },
+        {
+          "w": "qui",
+          "start": 0.59,
+          "end": 0.78,
+          "accent": false
+        },
+        {
+          "w": "prétend",
+          "start": 0.78,
+          "end": 1.29,
+          "accent": false
+        },
+        {
+          "w": "être",
+          "start": 1.29,
+          "end": 1.62,
+          "accent": false
+        },
+        {
+          "w": "expatrié",
+          "start": 1.62,
+          "end": 2.2,
+          "accent": false
+        },
+        {
+          "w": "mais",
+          "start": 2.2,
+          "end": 2.46,
+          "accent": false
+        },
+        {
+          "w": "qui",
+          "start": 2.46,
+          "end": 2.64,
+          "accent": false
+        },
+        {
+          "w": "passe",
+          "start": 2.64,
+          "end": 3.09,
+          "accent": false
+        },
+        {
+          "w": "sa",
+          "start": 3.09,
+          "end": 3.11,
+          "accent": false
+        },
+        {
+          "w": "vie",
+          "start": 3.11,
+          "end": 3.3,
+          "accent": false
+        },
+        {
+          "w": "et",
+          "start": 3.3,
+          "end": 3.43,
+          "accent": false
+        },
+        {
+          "w": "joue",
+          "start": 3.43,
+          "end": 3.79,
+          "accent": false
+        },
+        {
+          "w": "depuis",
+          "start": 3.79,
+          "end": 4.08,
+          "accent": false
+        },
+        {
+          "w": "la",
+          "start": 4.08,
+          "end": 4.23,
+          "accent": false
+        },
+        {
+          "w": "France,",
+          "start": 4.23,
+          "end": 4.84,
+          "accent": false
+        },
+        {
+          "w": "le",
+          "start": 4.84,
+          "end": 4.88,
+          "accent": false
+        },
+        {
+          "w": "fisc",
+          "start": 4.88,
+          "end": 5.2,
+          "accent": false
+        },
+        {
+          "w": "le",
+          "start": 5.2,
+          "end": 5.31,
+          "accent": false
+        },
+        {
+          "w": "requalifie.",
+          "start": 5.31,
+          "end": 5.88,
+          "accent": true
+        },
+        {
+          "w": "Et",
+          "start": 5.88,
+          "end": 6.06,
+          "accent": false
+        },
+        {
+          "w": "tout",
+          "start": 6.06,
+          "end": 6.25,
+          "accent": false
+        },
+        {
+          "w": "retombe.",
+          "start": 6.25,
+          "end": 6.88,
+          "accent": true
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "role": "cta",
+      "src_in": 194.56,
+      "src_out": 200.44,
+      "out_start": 44.16,
+      "out_end": 50.04,
+      "dur": 5.88,
+      "text": "Si tu veux savoir où poser tes valises pour de bon.",
+      "camera": {
+        "type": "drift",
+        "px": 12
+      },
+      "transition_in": "whip_left",
+      "sfx": [
+        "whoosh_short"
+      ],
+      "overlay": {
+        "type": "lower_third",
+        "value": "Commente POKER",
+        "label": "pour ton pays cible",
+        "in": 0.5,
+        "duration": 2.6,
+        "anchor": "center_low"
+      },
+      "caption_words": [
+        {
+          "w": "Si",
+          "start": 0.08,
+          "end": 0.36,
+          "accent": false
+        },
+        {
+          "w": "tu",
+          "start": 0.36,
+          "end": 0.6,
+          "accent": false
+        },
+        {
+          "w": "veux",
+          "start": 0.6,
+          "end": 1.09,
+          "accent": false
+        },
+        {
+          "w": "savoir",
+          "start": 1.09,
+          "end": 1.86,
+          "accent": false
+        },
+        {
+          "w": "où",
+          "start": 1.86,
+          "end": 2.16,
+          "accent": false
+        },
+        {
+          "w": "poser",
+          "start": 2.16,
+          "end": 2.71,
+          "accent": false
+        },
+        {
+          "w": "tes",
+          "start": 2.71,
+          "end": 3.43,
+          "accent": false
+        },
+        {
+          "w": "valises",
+          "start": 3.43,
+          "end": 4.41,
+          "accent": false
+        },
+        {
+          "w": "pour",
+          "start": 4.41,
+          "end": 4.53,
+          "accent": false
+        },
+        {
+          "w": "de",
+          "start": 4.53,
+          "end": 5.04,
+          "accent": false
+        },
+        {
+          "w": "bon.",
+          "start": 5.04,
+          "end": 5.8,
+          "accent": true
+        }
+      ]
+    }
+  ],
+  "global_overlays": [
+    {
+      "type": "progress_bar",
+      "anchor": "top",
+      "height_px": 6
+    }
+  ],
+  "music": {
+    "track": "assets/music/bed.mp3",
+    "in": 0.0,
+    "gain_db": -20,
+    "duck_db": -9,
+    "status": "MANQUANT — /assets/music vide, source à fournir (voir note)"
+  },
+  "sfx_bank": {
+    "impact_deep": "généré ffmpeg",
+    "whoosh_short": "généré ffmpeg",
+    "click": "généré ffmpeg",
+    "riser_1s": "généré ffmpeg",
+    "level_db": -14
+  },
+  "captions": {
+    "style": "karaoke_pop",
+    "max_words": 3,
+    "font": "Inter Black 900",
+    "size_px": 92,
+    "tracking": "-0.02em",
+    "stroke": "noir 8px + drop shadow",
+    "accent_color": "#3BE8FF",
+    "note": "jaune évité (interdits: pas de chaud/or)",
+    "current_word": "scale 1.06 + accent",
+    "safe_bottom_px": 280,
+    "min_y_px": 1640
+  },
+  "master": {
+    "target_lufs": -14,
+    "true_peak_dbtp": -1
+  }
+}

@@ -1,0 +1,2233 @@
+{
+  "model": "ggml-base (multilingue)",
+  "lang": "fr",
+  "n_words": 445,
+  "text": "Reel 3 – ou habité, quand on est joueur de Poker Pro? Je vais te dire pourquoi c'est le seul métier où on adresse vos littéralement des dizaines de milliers d'euros par an. Tu vis du Poker, tu gagne bien et tu te dis « c'est du jeu, c'est de la chance », donc c'est quasiment imposable. Donc c'est pas imposable, mais pas du tout, c'est faux, première erreur. Tout dépend d'une seule chose. Est-ce que tu es vu comme un amateur ou comme un pro? Parce qu'un amateur qui gagne de l'argent en temps? Un amateur qui gagne de temps en temps? Oui, c'est du jeu, mais toi, tu en vies, c'est régulier, si c'est ton métier pour le fils français, c'est une activité professionnelle et une activité professionnelle, ça s'impose. Donc c'est du jeu, je touche tout pour un pro, c'est faux. Et là, arrive ce qui rend le Poker unique. La façon dont les gains sont taxés change énormément d'un pays à l'autre. Certains pays ne taxent pas du tout, les gains du jeu. D'autres, te taxent comme n'importe quel revenu, même d'autres, d'autres, te taxent comme n'importe quel revenu, même gains, mais selon où tu vies, tu gardes tout ou tu l'aisses la moitié. Tu comprends le truc. Pour un joueur pro, le choix du pays où tu habites, c'est pas un détail, c'est la décision. Les 4 entreprises qui te taxent comme un pro et un pays qui te taxent. Les 4 entreprises qui te taxent comme un pro et un pays qui te taxent comme un pro. Il y a un pays qui ne taxe pas le jeu, ça peut représenter la moitié de ce que tu gagnes dans l'année. Mais, et c'est là que les gens se font avoir, tu peux pas juste dire j'habite là-bas. Il faut que ce soit vrai que tu vies vraiment dans ce pays. Un joueur qui prétend être expatrié mais qui passe sa vie et joue depuis la France, le fiscle en qualifi. Et tout retombe. Le Poker, c'est le seul métier où deux joueurs, avec exactement les mêmes gains, finissent d'année avec des fortunes différentes, pas cause de leurs niveaux, à cause de l'endroit où ils dorment. Et c'est exactement ça qui se réfléchit en amont, tes revenus sont élevés, tes totalement mobiles, tu… Et c'est exactement ça qui se réfléchit en amont, tes revenus sont élevés, tes totalement mobiles, tu peux jouer de n'importe où, t'as le profil parfait pour choisir intelligentement proprement et 100% en règle. Si tu veux savoir ou poser tes valises pour deux bons, comment de Poker? Comment de Poker?",
+  "words": [
+    {
+      "w": "Reel",
+      "start": 0.0,
+      "end": 3.63
+    },
+    {
+      "w": "3",
+      "start": 3.63,
+      "end": 6.0
+    },
+    {
+      "w": "–",
+      "start": 6.0,
+      "end": 6.55
+    },
+    {
+      "w": "ou",
+      "start": 6.55,
+      "end": 7.03
+    },
+    {
+      "w": "habité,",
+      "start": 7.03,
+      "end": 8.02
+    },
+    {
+      "w": "quand",
+      "start": 8.02,
+      "end": 8.38
+    },
+    {
+      "w": "on",
+      "start": 8.38,
+      "end": 8.52
+    },
+    {
+      "w": "est",
+      "start": 8.52,
+      "end": 8.74
+    },
+    {
+      "w": "joueur",
+      "start": 8.74,
+      "end": 9.15
+    },
+    {
+      "w": "de",
+      "start": 9.15,
+      "end": 9.29
+    },
+    {
+      "w": "Poker",
+      "start": 9.29,
+      "end": 9.64
+    },
+    {
+      "w": "Pro",
+      "start": 9.64,
+      "end": 10.02
+    },
+    {
+      "w": "?",
+      "start": 10.02,
+      "end": 10.03
+    },
+    {
+      "w": "Je",
+      "start": 10.03,
+      "end": 10.1
+    },
+    {
+      "w": "vais",
+      "start": 10.1,
+      "end": 10.26
+    },
+    {
+      "w": "te",
+      "start": 10.26,
+      "end": 10.31
+    },
+    {
+      "w": "dire",
+      "start": 10.31,
+      "end": 10.48
+    },
+    {
+      "w": "pourquoi",
+      "start": 10.48,
+      "end": 10.84
+    },
+    {
+      "w": "c'est",
+      "start": 10.84,
+      "end": 11.1
+    },
+    {
+      "w": "le",
+      "start": 11.1,
+      "end": 11.35
+    },
+    {
+      "w": "seul",
+      "start": 11.35,
+      "end": 11.41
+    },
+    {
+      "w": "métier",
+      "start": 11.41,
+      "end": 11.8
+    },
+    {
+      "w": "où",
+      "start": 11.8,
+      "end": 11.94
+    },
+    {
+      "w": "on",
+      "start": 11.94,
+      "end": 12.04
+    },
+    {
+      "w": "adresse",
+      "start": 12.04,
+      "end": 12.4
+    },
+    {
+      "w": "vos",
+      "start": 12.4,
+      "end": 12.58
+    },
+    {
+      "w": "littéralement",
+      "start": 12.58,
+      "end": 13.29
+    },
+    {
+      "w": "des",
+      "start": 13.29,
+      "end": 13.45
+    },
+    {
+      "w": "dizaines",
+      "start": 13.45,
+      "end": 13.88
+    },
+    {
+      "w": "de",
+      "start": 13.88,
+      "end": 13.97
+    },
+    {
+      "w": "milliers",
+      "start": 13.97,
+      "end": 14.48
+    },
+    {
+      "w": "d'euros",
+      "start": 14.48,
+      "end": 14.76
+    },
+    {
+      "w": "par",
+      "start": 14.76,
+      "end": 15.13
+    },
+    {
+      "w": "an.",
+      "start": 15.13,
+      "end": 15.76
+    },
+    {
+      "w": "Tu",
+      "start": 15.76,
+      "end": 15.88
+    },
+    {
+      "w": "vis",
+      "start": 15.88,
+      "end": 16.06
+    },
+    {
+      "w": "du",
+      "start": 16.06,
+      "end": 16.21
+    },
+    {
+      "w": "Poker,",
+      "start": 16.21,
+      "end": 16.6
+    },
+    {
+      "w": "tu",
+      "start": 16.6,
+      "end": 16.72
+    },
+    {
+      "w": "gagne",
+      "start": 16.72,
+      "end": 17.02
+    },
+    {
+      "w": "bien",
+      "start": 17.02,
+      "end": 17.25
+    },
+    {
+      "w": "et",
+      "start": 17.25,
+      "end": 17.51
+    },
+    {
+      "w": "tu",
+      "start": 17.51,
+      "end": 17.52
+    },
+    {
+      "w": "te",
+      "start": 17.52,
+      "end": 17.63
+    },
+    {
+      "w": "dis",
+      "start": 17.63,
+      "end": 17.8
+    },
+    {
+      "w": "«",
+      "start": 17.8,
+      "end": 17.88
+    },
+    {
+      "w": "c'est",
+      "start": 17.88,
+      "end": 18.23
+    },
+    {
+      "w": "du",
+      "start": 18.23,
+      "end": 18.35
+    },
+    {
+      "w": "jeu,",
+      "start": 18.35,
+      "end": 18.65
+    },
+    {
+      "w": "c'est",
+      "start": 18.65,
+      "end": 18.94
+    },
+    {
+      "w": "de",
+      "start": 18.94,
+      "end": 19.07
+    },
+    {
+      "w": "la",
+      "start": 19.07,
+      "end": 19.17
+    },
+    {
+      "w": "chance",
+      "start": 19.17,
+      "end": 19.92
+    },
+    {
+      "w": "»,",
+      "start": 19.92,
+      "end": 19.96
+    },
+    {
+      "w": "donc",
+      "start": 19.96,
+      "end": 20.12
+    },
+    {
+      "w": "c'est",
+      "start": 20.12,
+      "end": 20.33
+    },
+    {
+      "w": "quasiment",
+      "start": 20.33,
+      "end": 20.74
+    },
+    {
+      "w": "imposable.",
+      "start": 20.74,
+      "end": 21.32
+    },
+    {
+      "w": "Donc",
+      "start": 21.32,
+      "end": 21.82
+    },
+    {
+      "w": "c'est",
+      "start": 21.82,
+      "end": 22.45
+    },
+    {
+      "w": "pas",
+      "start": 22.45,
+      "end": 22.85
+    },
+    {
+      "w": "imposable,",
+      "start": 22.85,
+      "end": 24.22
+    },
+    {
+      "w": "mais",
+      "start": 24.22,
+      "end": 24.73
+    },
+    {
+      "w": "pas",
+      "start": 24.73,
+      "end": 25.11
+    },
+    {
+      "w": "du",
+      "start": 25.11,
+      "end": 25.52
+    },
+    {
+      "w": "tout,",
+      "start": 25.52,
+      "end": 26.12
+    },
+    {
+      "w": "c'est",
+      "start": 26.12,
+      "end": 26.73
+    },
+    {
+      "w": "faux,",
+      "start": 26.73,
+      "end": 27.5
+    },
+    {
+      "w": "première",
+      "start": 27.5,
+      "end": 28.88
+    },
+    {
+      "w": "erreur.",
+      "start": 28.88,
+      "end": 29.92
+    },
+    {
+      "w": "Tout",
+      "start": 29.97,
+      "end": 30.11
+    },
+    {
+      "w": "dépend",
+      "start": 30.11,
+      "end": 30.45
+    },
+    {
+      "w": "d'une",
+      "start": 30.45,
+      "end": 30.68
+    },
+    {
+      "w": "seule",
+      "start": 30.68,
+      "end": 30.93
+    },
+    {
+      "w": "chose.",
+      "start": 30.93,
+      "end": 31.36
+    },
+    {
+      "w": "Est-ce",
+      "start": 31.36,
+      "end": 31.91
+    },
+    {
+      "w": "que",
+      "start": 31.91,
+      "end": 32.02
+    },
+    {
+      "w": "tu",
+      "start": 32.02,
+      "end": 32.17
+    },
+    {
+      "w": "es",
+      "start": 32.17,
+      "end": 32.47
+    },
+    {
+      "w": "vu",
+      "start": 32.47,
+      "end": 32.55
+    },
+    {
+      "w": "comme",
+      "start": 32.55,
+      "end": 32.84
+    },
+    {
+      "w": "un",
+      "start": 32.84,
+      "end": 32.99
+    },
+    {
+      "w": "amateur",
+      "start": 32.99,
+      "end": 33.56
+    },
+    {
+      "w": "ou",
+      "start": 33.56,
+      "end": 33.75
+    },
+    {
+      "w": "comme",
+      "start": 33.75,
+      "end": 34.03
+    },
+    {
+      "w": "un",
+      "start": 34.03,
+      "end": 34.21
+    },
+    {
+      "w": "pro",
+      "start": 34.21,
+      "end": 34.4
+    },
+    {
+      "w": "?",
+      "start": 34.4,
+      "end": 34.75
+    },
+    {
+      "w": "Parce",
+      "start": 34.75,
+      "end": 34.9
+    },
+    {
+      "w": "qu'un",
+      "start": 34.9,
+      "end": 35.1
+    },
+    {
+      "w": "amateur",
+      "start": 35.1,
+      "end": 35.39
+    },
+    {
+      "w": "qui",
+      "start": 35.39,
+      "end": 35.56
+    },
+    {
+      "w": "gagne",
+      "start": 35.56,
+      "end": 35.76
+    },
+    {
+      "w": "de",
+      "start": 35.76,
+      "end": 35.87
+    },
+    {
+      "w": "l'argent",
+      "start": 35.87,
+      "end": 36.39
+    },
+    {
+      "w": "en",
+      "start": 36.39,
+      "end": 36.42
+    },
+    {
+      "w": "temps",
+      "start": 36.42,
+      "end": 36.57
+    },
+    {
+      "w": "?",
+      "start": 36.57,
+      "end": 36.92
+    },
+    {
+      "w": "Un",
+      "start": 36.92,
+      "end": 37.6
+    },
+    {
+      "w": "amateur",
+      "start": 37.6,
+      "end": 39.27
+    },
+    {
+      "w": "qui",
+      "start": 39.27,
+      "end": 40.06
+    },
+    {
+      "w": "gagne",
+      "start": 40.06,
+      "end": 41.37
+    },
+    {
+      "w": "de",
+      "start": 41.37,
+      "end": 43.0
+    },
+    {
+      "w": "temps",
+      "start": 43.0,
+      "end": 43.2
+    },
+    {
+      "w": "en",
+      "start": 43.2,
+      "end": 43.72
+    },
+    {
+      "w": "temps",
+      "start": 43.72,
+      "end": 45.08
+    },
+    {
+      "w": "?",
+      "start": 45.08,
+      "end": 45.2
+    },
+    {
+      "w": "Oui,",
+      "start": 45.2,
+      "end": 45.45
+    },
+    {
+      "w": "c'est",
+      "start": 45.45,
+      "end": 45.68
+    },
+    {
+      "w": "du",
+      "start": 45.68,
+      "end": 45.76
+    },
+    {
+      "w": "jeu,",
+      "start": 45.76,
+      "end": 46.09
+    },
+    {
+      "w": "mais",
+      "start": 46.09,
+      "end": 46.37
+    },
+    {
+      "w": "toi,",
+      "start": 46.37,
+      "end": 46.69
+    },
+    {
+      "w": "tu",
+      "start": 46.69,
+      "end": 46.82
+    },
+    {
+      "w": "en",
+      "start": 46.82,
+      "end": 46.95
+    },
+    {
+      "w": "vies,",
+      "start": 46.95,
+      "end": 47.34
+    },
+    {
+      "w": "c'est",
+      "start": 47.34,
+      "end": 47.66
+    },
+    {
+      "w": "régulier,",
+      "start": 47.66,
+      "end": 48.39
+    },
+    {
+      "w": "si",
+      "start": 48.39,
+      "end": 48.52
+    },
+    {
+      "w": "c'est",
+      "start": 48.52,
+      "end": 49.04
+    },
+    {
+      "w": "ton",
+      "start": 49.04,
+      "end": 49.09
+    },
+    {
+      "w": "métier",
+      "start": 49.09,
+      "end": 49.51
+    },
+    {
+      "w": "pour",
+      "start": 49.51,
+      "end": 49.83
+    },
+    {
+      "w": "le",
+      "start": 49.83,
+      "end": 49.91
+    },
+    {
+      "w": "fils",
+      "start": 49.91,
+      "end": 50.18
+    },
+    {
+      "w": "français,",
+      "start": 50.18,
+      "end": 51.0
+    },
+    {
+      "w": "c'est",
+      "start": 51.0,
+      "end": 51.27
+    },
+    {
+      "w": "une",
+      "start": 51.27,
+      "end": 51.44
+    },
+    {
+      "w": "activité",
+      "start": 51.44,
+      "end": 51.98
+    },
+    {
+      "w": "professionnelle",
+      "start": 51.98,
+      "end": 52.84
+    },
+    {
+      "w": "et",
+      "start": 52.84,
+      "end": 52.98
+    },
+    {
+      "w": "une",
+      "start": 52.98,
+      "end": 53.12
+    },
+    {
+      "w": "activité",
+      "start": 53.12,
+      "end": 53.64
+    },
+    {
+      "w": "professionnelle,",
+      "start": 53.64,
+      "end": 54.62
+    },
+    {
+      "w": "ça",
+      "start": 54.62,
+      "end": 54.85
+    },
+    {
+      "w": "s'impose.",
+      "start": 54.85,
+      "end": 55.56
+    },
+    {
+      "w": "Donc",
+      "start": 55.56,
+      "end": 56.07
+    },
+    {
+      "w": "c'est",
+      "start": 56.07,
+      "end": 56.71
+    },
+    {
+      "w": "du",
+      "start": 56.71,
+      "end": 56.99
+    },
+    {
+      "w": "jeu,",
+      "start": 56.99,
+      "end": 57.75
+    },
+    {
+      "w": "je",
+      "start": 57.75,
+      "end": 57.83
+    },
+    {
+      "w": "touche",
+      "start": 57.83,
+      "end": 58.59
+    },
+    {
+      "w": "tout",
+      "start": 58.59,
+      "end": 59.09
+    },
+    {
+      "w": "pour",
+      "start": 59.09,
+      "end": 59.61
+    },
+    {
+      "w": "un",
+      "start": 59.61,
+      "end": 59.86
+    },
+    {
+      "w": "pro,",
+      "start": 59.86,
+      "end": 60.49
+    },
+    {
+      "w": "c'est",
+      "start": 60.49,
+      "end": 61.12
+    },
+    {
+      "w": "faux.",
+      "start": 61.12,
+      "end": 62.16
+    },
+    {
+      "w": "Et",
+      "start": 62.16,
+      "end": 62.33
+    },
+    {
+      "w": "là,",
+      "start": 62.33,
+      "end": 62.88
+    },
+    {
+      "w": "arrive",
+      "start": 62.88,
+      "end": 63.28
+    },
+    {
+      "w": "ce",
+      "start": 63.28,
+      "end": 63.45
+    },
+    {
+      "w": "qui",
+      "start": 63.45,
+      "end": 63.71
+    },
+    {
+      "w": "rend",
+      "start": 63.71,
+      "end": 64.05
+    },
+    {
+      "w": "le",
+      "start": 64.05,
+      "end": 64.27
+    },
+    {
+      "w": "Poker",
+      "start": 64.27,
+      "end": 64.65
+    },
+    {
+      "w": "unique.",
+      "start": 64.65,
+      "end": 65.48
+    },
+    {
+      "w": "La",
+      "start": 65.48,
+      "end": 65.6
+    },
+    {
+      "w": "façon",
+      "start": 65.6,
+      "end": 65.96
+    },
+    {
+      "w": "dont",
+      "start": 65.96,
+      "end": 66.19
+    },
+    {
+      "w": "les",
+      "start": 66.19,
+      "end": 66.37
+    },
+    {
+      "w": "gains",
+      "start": 66.37,
+      "end": 66.67
+    },
+    {
+      "w": "sont",
+      "start": 66.67,
+      "end": 66.91
+    },
+    {
+      "w": "taxés",
+      "start": 66.91,
+      "end": 67.26
+    },
+    {
+      "w": "change",
+      "start": 67.26,
+      "end": 67.77
+    },
+    {
+      "w": "énormément",
+      "start": 67.77,
+      "end": 68.32
+    },
+    {
+      "w": "d'un",
+      "start": 68.32,
+      "end": 68.54
+    },
+    {
+      "w": "pays",
+      "start": 68.54,
+      "end": 68.8
+    },
+    {
+      "w": "à",
+      "start": 68.8,
+      "end": 68.9
+    },
+    {
+      "w": "l'autre.",
+      "start": 68.9,
+      "end": 69.56
+    },
+    {
+      "w": "Certains",
+      "start": 69.56,
+      "end": 70.12
+    },
+    {
+      "w": "pays",
+      "start": 70.12,
+      "end": 70.4
+    },
+    {
+      "w": "ne",
+      "start": 70.4,
+      "end": 70.56
+    },
+    {
+      "w": "taxent",
+      "start": 70.56,
+      "end": 71.07
+    },
+    {
+      "w": "pas",
+      "start": 71.07,
+      "end": 71.17
+    },
+    {
+      "w": "du",
+      "start": 71.17,
+      "end": 71.31
+    },
+    {
+      "w": "tout,",
+      "start": 71.31,
+      "end": 71.77
+    },
+    {
+      "w": "les",
+      "start": 71.77,
+      "end": 71.94
+    },
+    {
+      "w": "gains",
+      "start": 71.94,
+      "end": 72.28
+    },
+    {
+      "w": "du",
+      "start": 72.28,
+      "end": 72.43
+    },
+    {
+      "w": "jeu.",
+      "start": 72.43,
+      "end": 72.92
+    },
+    {
+      "w": "D'autres,",
+      "start": 72.97,
+      "end": 75.88
+    },
+    {
+      "w": "te",
+      "start": 75.88,
+      "end": 76.46
+    },
+    {
+      "w": "taxent",
+      "start": 76.46,
+      "end": 78.25
+    },
+    {
+      "w": "comme",
+      "start": 78.25,
+      "end": 79.73
+    },
+    {
+      "w": "n'importe",
+      "start": 79.73,
+      "end": 82.41
+    },
+    {
+      "w": "quel",
+      "start": 82.41,
+      "end": 83.6
+    },
+    {
+      "w": "revenu,",
+      "start": 83.6,
+      "end": 85.97
+    },
+    {
+      "w": "même",
+      "start": 85.97,
+      "end": 87.46
+    },
+    {
+      "w": "d'autres,",
+      "start": 87.46,
+      "end": 90.52
+    },
+    {
+      "w": "d'autres,",
+      "start": 90.52,
+      "end": 90.88
+    },
+    {
+      "w": "te",
+      "start": 90.88,
+      "end": 90.94
+    },
+    {
+      "w": "taxent",
+      "start": 90.94,
+      "end": 91.02
+    },
+    {
+      "w": "comme",
+      "start": 91.02,
+      "end": 91.12
+    },
+    {
+      "w": "n'importe",
+      "start": 91.12,
+      "end": 91.69
+    },
+    {
+      "w": "quel",
+      "start": 91.69,
+      "end": 91.95
+    },
+    {
+      "w": "revenu,",
+      "start": 91.95,
+      "end": 92.46
+    },
+    {
+      "w": "même",
+      "start": 92.46,
+      "end": 92.88
+    },
+    {
+      "w": "gains,",
+      "start": 92.88,
+      "end": 93.22
+    },
+    {
+      "w": "mais",
+      "start": 93.22,
+      "end": 93.49
+    },
+    {
+      "w": "selon",
+      "start": 93.49,
+      "end": 93.83
+    },
+    {
+      "w": "où",
+      "start": 93.83,
+      "end": 94.0
+    },
+    {
+      "w": "tu",
+      "start": 94.0,
+      "end": 94.13
+    },
+    {
+      "w": "vies,",
+      "start": 94.13,
+      "end": 94.51
+    },
+    {
+      "w": "tu",
+      "start": 94.51,
+      "end": 94.64
+    },
+    {
+      "w": "gardes",
+      "start": 94.64,
+      "end": 95.03
+    },
+    {
+      "w": "tout",
+      "start": 95.03,
+      "end": 95.35
+    },
+    {
+      "w": "ou",
+      "start": 95.35,
+      "end": 95.42
+    },
+    {
+      "w": "tu",
+      "start": 95.42,
+      "end": 95.64
+    },
+    {
+      "w": "l'aisses",
+      "start": 95.64,
+      "end": 95.76
+    },
+    {
+      "w": "la",
+      "start": 95.76,
+      "end": 95.92
+    },
+    {
+      "w": "moitié.",
+      "start": 95.92,
+      "end": 96.76
+    },
+    {
+      "w": "Tu",
+      "start": 96.76,
+      "end": 96.86
+    },
+    {
+      "w": "comprends",
+      "start": 96.86,
+      "end": 97.28
+    },
+    {
+      "w": "le",
+      "start": 97.28,
+      "end": 97.54
+    },
+    {
+      "w": "truc.",
+      "start": 97.54,
+      "end": 97.76
+    },
+    {
+      "w": "Pour",
+      "start": 97.76,
+      "end": 97.94
+    },
+    {
+      "w": "un",
+      "start": 97.94,
+      "end": 98.15
+    },
+    {
+      "w": "joueur",
+      "start": 98.15,
+      "end": 98.32
+    },
+    {
+      "w": "pro,",
+      "start": 98.32,
+      "end": 98.59
+    },
+    {
+      "w": "le",
+      "start": 98.59,
+      "end": 98.64
+    },
+    {
+      "w": "choix",
+      "start": 98.64,
+      "end": 98.92
+    },
+    {
+      "w": "du",
+      "start": 98.92,
+      "end": 98.97
+    },
+    {
+      "w": "pays",
+      "start": 98.97,
+      "end": 99.3
+    },
+    {
+      "w": "où",
+      "start": 99.3,
+      "end": 99.36
+    },
+    {
+      "w": "tu",
+      "start": 99.36,
+      "end": 99.39
+    },
+    {
+      "w": "habites,",
+      "start": 99.39,
+      "end": 99.81
+    },
+    {
+      "w": "c'est",
+      "start": 99.81,
+      "end": 100.03
+    },
+    {
+      "w": "pas",
+      "start": 100.03,
+      "end": 100.26
+    },
+    {
+      "w": "un",
+      "start": 100.26,
+      "end": 100.26
+    },
+    {
+      "w": "détail,",
+      "start": 100.26,
+      "end": 100.68
+    },
+    {
+      "w": "c'est",
+      "start": 100.68,
+      "end": 101.08
+    },
+    {
+      "w": "la",
+      "start": 101.08,
+      "end": 101.2
+    },
+    {
+      "w": "décision.",
+      "start": 101.2,
+      "end": 102.24
+    },
+    {
+      "w": "Les",
+      "start": 102.32,
+      "end": 102.41
+    },
+    {
+      "w": "4",
+      "start": 102.41,
+      "end": 102.58
+    },
+    {
+      "w": "entreprises",
+      "start": 102.58,
+      "end": 103.21
+    },
+    {
+      "w": "qui",
+      "start": 103.21,
+      "end": 103.38
+    },
+    {
+      "w": "te",
+      "start": 103.38,
+      "end": 103.51
+    },
+    {
+      "w": "taxent",
+      "start": 103.51,
+      "end": 103.85
+    },
+    {
+      "w": "comme",
+      "start": 103.85,
+      "end": 104.11
+    },
+    {
+      "w": "un",
+      "start": 104.11,
+      "end": 104.22
+    },
+    {
+      "w": "pro",
+      "start": 104.22,
+      "end": 104.39
+    },
+    {
+      "w": "et",
+      "start": 104.39,
+      "end": 104.5
+    },
+    {
+      "w": "un",
+      "start": 104.5,
+      "end": 104.61
+    },
+    {
+      "w": "pays",
+      "start": 104.61,
+      "end": 104.84
+    },
+    {
+      "w": "qui",
+      "start": 104.84,
+      "end": 105.0
+    },
+    {
+      "w": "te",
+      "start": 105.0,
+      "end": 105.12
+    },
+    {
+      "w": "taxent.",
+      "start": 105.12,
+      "end": 105.64
+    },
+    {
+      "w": "Les",
+      "start": 105.64,
+      "end": 107.99
+    },
+    {
+      "w": "4",
+      "start": 107.99,
+      "end": 110.34
+    },
+    {
+      "w": "entreprises",
+      "start": 110.34,
+      "end": 118.95
+    },
+    {
+      "w": "qui",
+      "start": 118.95,
+      "end": 121.3
+    },
+    {
+      "w": "te",
+      "start": 121.3,
+      "end": 122.87
+    },
+    {
+      "w": "taxent",
+      "start": 122.87,
+      "end": 127.56
+    },
+    {
+      "w": "comme",
+      "start": 127.56,
+      "end": 131.47
+    },
+    {
+      "w": "un",
+      "start": 131.47,
+      "end": 133.09
+    },
+    {
+      "w": "pro",
+      "start": 133.09,
+      "end": 135.44
+    },
+    {
+      "w": "et",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "un",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "pays",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "qui",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "te",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "taxent",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "comme",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "un",
+      "start": 135.44,
+      "end": 135.44
+    },
+    {
+      "w": "pro.",
+      "start": 135.44,
+      "end": 135.56
+    },
+    {
+      "w": "Il",
+      "start": 135.56,
+      "end": 135.68
+    },
+    {
+      "w": "y",
+      "start": 135.68,
+      "end": 135.74
+    },
+    {
+      "w": "a",
+      "start": 135.74,
+      "end": 135.82
+    },
+    {
+      "w": "un",
+      "start": 135.82,
+      "end": 135.92
+    },
+    {
+      "w": "pays",
+      "start": 135.92,
+      "end": 136.16
+    },
+    {
+      "w": "qui",
+      "start": 136.16,
+      "end": 136.33
+    },
+    {
+      "w": "ne",
+      "start": 136.33,
+      "end": 136.64
+    },
+    {
+      "w": "taxe",
+      "start": 136.64,
+      "end": 136.7
+    },
+    {
+      "w": "pas",
+      "start": 136.7,
+      "end": 136.88
+    },
+    {
+      "w": "le",
+      "start": 136.88,
+      "end": 137.0
+    },
+    {
+      "w": "jeu,",
+      "start": 137.0,
+      "end": 137.46
+    },
+    {
+      "w": "ça",
+      "start": 137.46,
+      "end": 137.48
+    },
+    {
+      "w": "peut",
+      "start": 137.48,
+      "end": 137.72
+    },
+    {
+      "w": "représenter",
+      "start": 137.72,
+      "end": 138.46
+    },
+    {
+      "w": "la",
+      "start": 138.46,
+      "end": 138.57
+    },
+    {
+      "w": "moitié",
+      "start": 138.57,
+      "end": 138.99
+    },
+    {
+      "w": "de",
+      "start": 138.99,
+      "end": 139.23
+    },
+    {
+      "w": "ce",
+      "start": 139.23,
+      "end": 139.23
+    },
+    {
+      "w": "que",
+      "start": 139.23,
+      "end": 139.41
+    },
+    {
+      "w": "tu",
+      "start": 139.41,
+      "end": 139.72
+    },
+    {
+      "w": "gagnes",
+      "start": 139.72,
+      "end": 140.4
+    },
+    {
+      "w": "dans",
+      "start": 140.4,
+      "end": 140.66
+    },
+    {
+      "w": "l'année.",
+      "start": 140.66,
+      "end": 141.4
+    },
+    {
+      "w": "Mais,",
+      "start": 141.4,
+      "end": 141.84
+    },
+    {
+      "w": "et",
+      "start": 141.84,
+      "end": 142.0
+    },
+    {
+      "w": "c'est",
+      "start": 142.0,
+      "end": 142.39
+    },
+    {
+      "w": "là",
+      "start": 142.39,
+      "end": 142.6
+    },
+    {
+      "w": "que",
+      "start": 142.6,
+      "end": 142.83
+    },
+    {
+      "w": "les",
+      "start": 142.83,
+      "end": 143.15
+    },
+    {
+      "w": "gens",
+      "start": 143.15,
+      "end": 143.36
+    },
+    {
+      "w": "se",
+      "start": 143.36,
+      "end": 143.51
+    },
+    {
+      "w": "font",
+      "start": 143.51,
+      "end": 143.9
+    },
+    {
+      "w": "avoir,",
+      "start": 143.9,
+      "end": 144.44
+    },
+    {
+      "w": "tu",
+      "start": 144.44,
+      "end": 144.49
+    },
+    {
+      "w": "peux",
+      "start": 144.49,
+      "end": 144.79
+    },
+    {
+      "w": "pas",
+      "start": 144.79,
+      "end": 145.3
+    },
+    {
+      "w": "juste",
+      "start": 145.3,
+      "end": 145.4
+    },
+    {
+      "w": "dire",
+      "start": 145.4,
+      "end": 145.7
+    },
+    {
+      "w": "j'habite",
+      "start": 145.7,
+      "end": 146.3
+    },
+    {
+      "w": "là-bas.",
+      "start": 146.3,
+      "end": 147.2
+    },
+    {
+      "w": "Il",
+      "start": 147.2,
+      "end": 147.32
+    },
+    {
+      "w": "faut",
+      "start": 147.32,
+      "end": 147.54
+    },
+    {
+      "w": "que",
+      "start": 147.54,
+      "end": 147.71
+    },
+    {
+      "w": "ce",
+      "start": 147.71,
+      "end": 147.82
+    },
+    {
+      "w": "soit",
+      "start": 147.82,
+      "end": 148.05
+    },
+    {
+      "w": "vrai",
+      "start": 148.05,
+      "end": 148.4
+    },
+    {
+      "w": "que",
+      "start": 148.4,
+      "end": 148.53
+    },
+    {
+      "w": "tu",
+      "start": 148.53,
+      "end": 148.56
+    },
+    {
+      "w": "vies",
+      "start": 148.56,
+      "end": 148.78
+    },
+    {
+      "w": "vraiment",
+      "start": 148.78,
+      "end": 149.24
+    },
+    {
+      "w": "dans",
+      "start": 149.24,
+      "end": 149.47
+    },
+    {
+      "w": "ce",
+      "start": 149.47,
+      "end": 149.57
+    },
+    {
+      "w": "pays.",
+      "start": 149.57,
+      "end": 150.08
+    },
+    {
+      "w": "Un",
+      "start": 150.08,
+      "end": 150.26
+    },
+    {
+      "w": "joueur",
+      "start": 150.26,
+      "end": 150.59
+    },
+    {
+      "w": "qui",
+      "start": 150.59,
+      "end": 150.78
+    },
+    {
+      "w": "prétend",
+      "start": 150.78,
+      "end": 151.29
+    },
+    {
+      "w": "être",
+      "start": 151.29,
+      "end": 151.62
+    },
+    {
+      "w": "expatrié",
+      "start": 151.62,
+      "end": 152.2
+    },
+    {
+      "w": "mais",
+      "start": 152.2,
+      "end": 152.46
+    },
+    {
+      "w": "qui",
+      "start": 152.46,
+      "end": 152.64
+    },
+    {
+      "w": "passe",
+      "start": 152.64,
+      "end": 153.09
+    },
+    {
+      "w": "sa",
+      "start": 153.09,
+      "end": 153.11
+    },
+    {
+      "w": "vie",
+      "start": 153.11,
+      "end": 153.3
+    },
+    {
+      "w": "et",
+      "start": 153.3,
+      "end": 153.43
+    },
+    {
+      "w": "joue",
+      "start": 153.43,
+      "end": 153.79
+    },
+    {
+      "w": "depuis",
+      "start": 153.79,
+      "end": 154.08
+    },
+    {
+      "w": "la",
+      "start": 154.08,
+      "end": 154.23
+    },
+    {
+      "w": "France,",
+      "start": 154.23,
+      "end": 154.84
+    },
+    {
+      "w": "le",
+      "start": 154.84,
+      "end": 154.88
+    },
+    {
+      "w": "fiscle",
+      "start": 154.88,
+      "end": 155.2
+    },
+    {
+      "w": "en",
+      "start": 155.2,
+      "end": 155.31
+    },
+    {
+      "w": "qualifi.",
+      "start": 155.31,
+      "end": 155.88
+    },
+    {
+      "w": "Et",
+      "start": 155.88,
+      "end": 156.06
+    },
+    {
+      "w": "tout",
+      "start": 156.06,
+      "end": 156.25
+    },
+    {
+      "w": "retombe.",
+      "start": 156.25,
+      "end": 156.88
+    },
+    {
+      "w": "Le",
+      "start": 156.88,
+      "end": 157.02
+    },
+    {
+      "w": "Poker,",
+      "start": 157.02,
+      "end": 157.52
+    },
+    {
+      "w": "c'est",
+      "start": 157.52,
+      "end": 157.88
+    },
+    {
+      "w": "le",
+      "start": 157.88,
+      "end": 158.02
+    },
+    {
+      "w": "seul",
+      "start": 158.02,
+      "end": 158.31
+    },
+    {
+      "w": "métier",
+      "start": 158.31,
+      "end": 158.82
+    },
+    {
+      "w": "où",
+      "start": 158.82,
+      "end": 159.04
+    },
+    {
+      "w": "deux",
+      "start": 159.04,
+      "end": 159.33
+    },
+    {
+      "w": "joueurs,",
+      "start": 159.33,
+      "end": 160.1
+    },
+    {
+      "w": "avec",
+      "start": 160.1,
+      "end": 160.27
+    },
+    {
+      "w": "exactement",
+      "start": 160.27,
+      "end": 161.0
+    },
+    {
+      "w": "les",
+      "start": 161.0,
+      "end": 161.22
+    },
+    {
+      "w": "mêmes",
+      "start": 161.22,
+      "end": 161.66
+    },
+    {
+      "w": "gains,",
+      "start": 161.66,
+      "end": 162.28
+    },
+    {
+      "w": "finissent",
+      "start": 162.28,
+      "end": 162.52
+    },
+    {
+      "w": "d'année",
+      "start": 162.52,
+      "end": 162.93
+    },
+    {
+      "w": "avec",
+      "start": 162.93,
+      "end": 163.13
+    },
+    {
+      "w": "des",
+      "start": 163.13,
+      "end": 163.28
+    },
+    {
+      "w": "fortunes",
+      "start": 163.28,
+      "end": 163.69
+    },
+    {
+      "w": "différentes,",
+      "start": 163.69,
+      "end": 164.48
+    },
+    {
+      "w": "pas",
+      "start": 164.48,
+      "end": 164.56
+    },
+    {
+      "w": "cause",
+      "start": 164.56,
+      "end": 164.82
+    },
+    {
+      "w": "de",
+      "start": 164.82,
+      "end": 164.92
+    },
+    {
+      "w": "leurs",
+      "start": 164.92,
+      "end": 165.18
+    },
+    {
+      "w": "niveaux,",
+      "start": 165.18,
+      "end": 165.63
+    },
+    {
+      "w": "à",
+      "start": 165.63,
+      "end": 165.78
+    },
+    {
+      "w": "cause",
+      "start": 165.78,
+      "end": 165.99
+    },
+    {
+      "w": "de",
+      "start": 165.99,
+      "end": 166.18
+    },
+    {
+      "w": "l'endroit",
+      "start": 166.18,
+      "end": 167.0
+    },
+    {
+      "w": "où",
+      "start": 167.0,
+      "end": 167.18
+    },
+    {
+      "w": "ils",
+      "start": 167.18,
+      "end": 167.36
+    },
+    {
+      "w": "dorment.",
+      "start": 167.36,
+      "end": 168.0
+    },
+    {
+      "w": "Et",
+      "start": 168.0,
+      "end": 168.18
+    },
+    {
+      "w": "c'est",
+      "start": 168.18,
+      "end": 168.63
+    },
+    {
+      "w": "exactement",
+      "start": 168.63,
+      "end": 169.73
+    },
+    {
+      "w": "ça",
+      "start": 169.73,
+      "end": 169.81
+    },
+    {
+      "w": "qui",
+      "start": 169.81,
+      "end": 170.17
+    },
+    {
+      "w": "se",
+      "start": 170.17,
+      "end": 170.3
+    },
+    {
+      "w": "réfléchit",
+      "start": 170.3,
+      "end": 171.25
+    },
+    {
+      "w": "en",
+      "start": 171.25,
+      "end": 171.43
+    },
+    {
+      "w": "amont,",
+      "start": 171.43,
+      "end": 172.3
+    },
+    {
+      "w": "tes",
+      "start": 172.3,
+      "end": 172.33
+    },
+    {
+      "w": "revenus",
+      "start": 172.33,
+      "end": 172.98
+    },
+    {
+      "w": "sont",
+      "start": 172.98,
+      "end": 173.32
+    },
+    {
+      "w": "élevés,",
+      "start": 173.32,
+      "end": 174.59
+    },
+    {
+      "w": "tes",
+      "start": 174.59,
+      "end": 174.6
+    },
+    {
+      "w": "totalement",
+      "start": 174.6,
+      "end": 175.12
+    },
+    {
+      "w": "mobiles,",
+      "start": 175.12,
+      "end": 176.08
+    },
+    {
+      "w": "tu…",
+      "start": 176.08,
+      "end": 176.37
+    },
+    {
+      "w": "Et",
+      "start": 176.37,
+      "end": 176.89
+    },
+    {
+      "w": "c'est",
+      "start": 176.89,
+      "end": 177.99
+    },
+    {
+      "w": "exactement",
+      "start": 177.99,
+      "end": 180.25
+    },
+    {
+      "w": "ça",
+      "start": 180.25,
+      "end": 180.92
+    },
+    {
+      "w": "qui",
+      "start": 180.92,
+      "end": 181.59
+    },
+    {
+      "w": "se",
+      "start": 181.59,
+      "end": 182.59
+    },
+    {
+      "w": "réfléchit",
+      "start": 182.59,
+      "end": 184.56
+    },
+    {
+      "w": "en",
+      "start": 184.56,
+      "end": 184.7
+    },
+    {
+      "w": "amont,",
+      "start": 184.7,
+      "end": 185.55
+    },
+    {
+      "w": "tes",
+      "start": 185.55,
+      "end": 185.74
+    },
+    {
+      "w": "revenus",
+      "start": 185.74,
+      "end": 185.92
+    },
+    {
+      "w": "sont",
+      "start": 185.92,
+      "end": 186.24
+    },
+    {
+      "w": "élevés,",
+      "start": 186.24,
+      "end": 186.98
+    },
+    {
+      "w": "tes",
+      "start": 186.98,
+      "end": 187.02
+    },
+    {
+      "w": "totalement",
+      "start": 187.02,
+      "end": 187.64
+    },
+    {
+      "w": "mobiles,",
+      "start": 187.64,
+      "end": 188.3
+    },
+    {
+      "w": "tu",
+      "start": 188.3,
+      "end": 188.47
+    },
+    {
+      "w": "peux",
+      "start": 188.47,
+      "end": 188.54
+    },
+    {
+      "w": "jouer",
+      "start": 188.54,
+      "end": 188.85
+    },
+    {
+      "w": "de",
+      "start": 188.85,
+      "end": 188.97
+    },
+    {
+      "w": "n'importe",
+      "start": 188.97,
+      "end": 189.52
+    },
+    {
+      "w": "où,",
+      "start": 189.52,
+      "end": 189.81
+    },
+    {
+      "w": "t'as",
+      "start": 189.81,
+      "end": 190.06
+    },
+    {
+      "w": "le",
+      "start": 190.06,
+      "end": 190.25
+    },
+    {
+      "w": "profil",
+      "start": 190.25,
+      "end": 190.54
+    },
+    {
+      "w": "parfait",
+      "start": 190.54,
+      "end": 191.08
+    },
+    {
+      "w": "pour",
+      "start": 191.16,
+      "end": 191.31
+    },
+    {
+      "w": "choisir",
+      "start": 191.31,
+      "end": 191.71
+    },
+    {
+      "w": "intelligentement",
+      "start": 191.71,
+      "end": 192.72
+    },
+    {
+      "w": "proprement",
+      "start": 192.72,
+      "end": 193.23
+    },
+    {
+      "w": "et",
+      "start": 193.23,
+      "end": 193.45
+    },
+    {
+      "w": "100%",
+      "start": 193.45,
+      "end": 193.97
+    },
+    {
+      "w": "en",
+      "start": 193.97,
+      "end": 194.03
+    },
+    {
+      "w": "règle.",
+      "start": 194.03,
+      "end": 194.64
+    },
+    {
+      "w": "Si",
+      "start": 194.64,
+      "end": 194.92
+    },
+    {
+      "w": "tu",
+      "start": 194.92,
+      "end": 195.16
+    },
+    {
+      "w": "veux",
+      "start": 195.16,
+      "end": 195.65
+    },
+    {
+      "w": "savoir",
+      "start": 195.65,
+      "end": 196.42
+    },
+    {
+      "w": "ou",
+      "start": 196.42,
+      "end": 196.72
+    },
+    {
+      "w": "poser",
+      "start": 196.72,
+      "end": 197.27
+    },
+    {
+      "w": "tes",
+      "start": 197.27,
+      "end": 197.99
+    },
+    {
+      "w": "valises",
+      "start": 197.99,
+      "end": 198.97
+    },
+    {
+      "w": "pour",
+      "start": 198.97,
+      "end": 199.09
+    },
+    {
+      "w": "deux",
+      "start": 199.09,
+      "end": 199.6
+    },
+    {
+      "w": "bons,",
+      "start": 199.6,
+      "end": 200.36
+    },
+    {
+      "w": "comment",
+      "start": 200.36,
+      "end": 201.26
+    },
+    {
+      "w": "de",
+      "start": 201.26,
+      "end": 201.51
+    },
+    {
+      "w": "Poker",
+      "start": 201.51,
+      "end": 202.13
+    },
+    {
+      "w": "?",
+      "start": 202.13,
+      "end": 202.64
+    },
+    {
+      "w": "Comment",
+      "start": 202.64,
+      "end": 203.87
+    },
+    {
+      "w": "de",
+      "start": 203.87,
+      "end": 204.22
+    },
+    {
+      "w": "Poker",
+      "start": 204.22,
+      "end": 205.09
+    },
+    {
+      "w": "?",
+      "start": 205.09,
+      "end": 205.64
+    }
+  ]
+}
