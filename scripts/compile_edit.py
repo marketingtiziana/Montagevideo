@@ -9,28 +9,27 @@ edit = json.load(open("data/edit.json"))
 tr = json.load(open("data/transcript.json"))
 WORDS = [(w["start"], w["end"], w["w"]) for w in tr["words"]]
 
-ACCENT_RE = re.compile(
-    r"(\d|%|€|France|Poker|poker|moiti|décision|faux|dorment|règle|imposable|"
-    r"requalifie|milliers|gains|profil|expatri|détail)", re.I)
+# Mots JAUNES (#FFD84D) — 4 maximum sur tout le short, mots de rupture/enjeu.
+YELLOW = [("s01", "milliers"), ("s03", "faux"), ("s08", "moiti"), ("s13", "dorment")]
+STRIP = "«».,:;…\""  # ponctuation retiree (apostrophes/traits d'union gardes ; le '?' est conserve)
 
 def words_in(a, b):
     return [(s, e, w) for (s, e, w) in WORDS if s >= a - 0.02 and s < b - 0.02]
 
 def tokenize(text):
-    # fusionne la ponctuation FR isolee (espace avant ? ! : » ; et « ouvrant) avec le mot voisin
+    # retire la ponctuation (STRIP) ; conserve le '?' (rattache au mot precedent). Apostrophes gardees.
     raw = [t for t in text.split() if t.strip()]
-    out, pend = [], ""
+    out = []
     for t in raw:
-        if t == "«":
-            pend = t; continue
-        if t in ("?", "!", ":", ";", "»", ".", ","):
-            if out:
-                sep = " " if t in ("?", "!", ":", ";", "»") else ""
-                out[-1] = out[-1] + sep + t
+        q = "?" in t
+        cleaned = "".join(c for c in t if c not in STRIP and c != "?").strip()
+        if not cleaned:
+            if q and out:
+                out[-1] = out[-1] + " ?"
             continue
-        if pend:
-            t = pend + " " + t; pend = ""
-        out.append(t)
+        if q:
+            cleaned = cleaned + " ?"
+        out.append(cleaned)
     return out
 
 def build_caps(seg, out_start, out_end):
@@ -49,7 +48,8 @@ def build_caps(seg, out_start, out_end):
             at = sin + (i / N) * (sout - sin)
         at_f = round((at - sin) * FPS) + out_start
         at_f = max(out_start, min(out_end - 1, at_f))
-        timed.append({"w": word, "accent": bool(ACCENT_RE.search(word)), "at_f": at_f})
+        key = any(sid == seg["id"] and sub in word.lower() for sid, sub in YELLOW)
+        timed.append({"w": word, "key": key, "at_f": at_f})
     # monotonie stricte
     for i in range(1, len(timed)):
         if timed[i]["at_f"] < timed[i - 1]["at_f"]:
@@ -63,7 +63,7 @@ def build_caps(seg, out_start, out_end):
         if cur and (len(cur) >= 3 or chars(cur) + 1 + len(t["w"]) > 15):
             caps.append(cur); cur = []
         cur.append(t)
-        if re.search(r"[.?!:»]$", t["w"]):
+        if t["w"].endswith("?"):
             caps.append(cur); cur = []
     if cur:
         caps.append(cur)
@@ -73,7 +73,7 @@ def build_caps(seg, out_start, out_end):
         nxt = caps[k + 1][0]["at_f"] if k + 1 < len(caps) else out_end
         out_f = max(in_f + 8, min(nxt, ch[-1]["at_f"] + round(0.7 * FPS)))
         out.append({"in_f": in_f, "out_f": out_f,
-                    "words": [{"w": x["w"], "accent": x["accent"], "at_f": x["at_f"]} for x in ch]})
+                    "words": [{"w": x["w"], "key": x["key"], "at_f": x["at_f"]} for x in ch]})
     return out
 
 segments = []

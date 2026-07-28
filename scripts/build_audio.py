@@ -38,16 +38,25 @@ def appear_frame(seg, g):
     return a
 
 # --- cues (secondes, cales frame) ---
-# transitions : whip -> whoosh ; flash/signature -> impact
-whips = [t_start(s["id"]) for s in tl["segments"] if s["transition_in"] == "whip"]
-impacts = [t_start(s["id"]) for s in tl["segments"] if s["transition_in"] in ("flash", "SIGNATURE")]
+# whoosh UNIQUEMENT sur les zoom-through (mouvement) — jamais sur une coupe franche
+whooshs = [t_start(s["id"]) for s in tl["segments"] if s["transition_in"] == "zoom_through"]
+# impact sur les 2 snap zooms (punchlines) : "decision" (s09), "dorment" (s13)
+def word_t(sid, key):
+    s = next(x for x in tl["segments"] if x["id"] == sid)
+    for ch in s["captions"]:
+        for w in ch["words"]:
+            if key in w["w"].lower():
+                return w["at_f"] / FPS
+    return s["out_start"] / FPS
+impacts = [word_t("s09", "décision"), word_t("s13", "dorment")]
 riser_t = t_start("s10") - 1.0                     # riser finit sur la revelation 50%
-# pop discret a CHAQUE apparition d'incrustation
-pops = []
+# click discret (HP 2kHz, -22dB) sur l'apparition des cartes (incrustations dominantes)
+DOMS = {"FullscreenStamp","Toggle","Map","ComparisonBar","HighlightBox","StatCard","FullscreenCard","TwinReveal","CTACard","LowerThird","TitleFlash","Chip"}
+clicks = []
 for s in tl["segments"]:
     for g in s.get("graphics", []):
-        pops.append(appear_frame(s, g) / FPS)
-clicks = pops
+        if g and g.get("type") in DOMS:
+            clicks.append(appear_frame(s, g) / FPS)
 
 def ms(x): return int(max(0, x) * 1000)
 
@@ -67,17 +76,25 @@ fc.append("[bd]afade=t=out:st={st}:d={fd}[music]".format(st=DUR - 10 / FPS, fd=1
 inputs = ["-i", VOICE, "-i", BED]
 idx = 2
 sfx_labels = []
-def add_sfx(path, t, vol, whoosh_lead=0.0):
+def add_sfx(path, t, vol, lead=0.0, pre=""):
     global idx
     inputs.extend(["-i", path])
     lab = f"s{idx}"
-    fc.append(f"[{idx}:a]adelay={ms(t - whoosh_lead)}|{ms(t - whoosh_lead)},volume={vol}[{lab}]")
+    chain = f"[{idx}:a]"
+    if pre:
+        chain += pre + ","
+    chain += f"adelay={ms(t - lead)}|{ms(t - lead)},volume={vol}[{lab}]"
+    fc.append(chain)
     sfx_labels.append(f"[{lab}]"); idx += 1
 
-for t in whips: add_sfx(WHOOSH, t, "-13dB", whoosh_lead=0.13)
+# whoosh : pic sur la frame de coupe, 0,3 s de montee avant
+for t in whooshs: add_sfx(WHOOSH, t, "-13dB", lead=0.30)
+# impact snap zoom : -10dB, cale a la frame
 for t in impacts: add_sfx(IMPACT, t, "-10dB")
+# riser avant la revelation 50%
 add_sfx(RISER, riser_t, "-14dB")
-for t in clicks: add_sfx(CLICK, t, "-17dB")
+# click carte : passe-haut 2kHz, -22dB
+for t in clicks: add_sfx(CLICK, t, "-22dB", pre="highpass=f=2000")
 
 mix_ins = "[vmix][music]" + "".join(sfx_labels)
 n = 2 + len(sfx_labels)
@@ -86,7 +103,7 @@ fc.append("[mix]loudnorm=I=-14:TP=-1:LRA=11,aformat=channel_layouts=stereo:sampl
 
 cmd = ["ffmpeg", "-nostdin", "-y"] + inputs + ["-filter_complex", ";".join(fc),
        "-map", "[out]", "-t", f"{DUR:.3f}", "data/audio_final.wav"]
-print(f"DUR={DUR:.3f}s | whooshs={len(whips)} impacts={len(impacts)} clicks={len(clicks)} riser@{riser_t:.1f}")
+print(f"DUR={DUR:.3f}s | whooshs={len(whooshs)} impacts={len(impacts)} clicks={len(clicks)} riser@{riser_t:.1f}")
 subprocess.run(cmd, check=True)
 d = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=nw=1:nk=1","data/audio_final.wav"],capture_output=True,text=True).stdout.strip()
 print("audio_final.wav:", d, "s")

@@ -90,7 +90,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "flash",
+      "transition_in": "hard_cut",
       "graphic": {
         "type": "FullscreenStamp",
         "label": "FAUX",
@@ -134,7 +134,7 @@
         "type": "static",
         "scale": 1.12
       },
-      "transition_in": "whip",
+      "transition_in": "zoom_through",
       "jumpcut_mask": "changement de cadrage (plan plus serre) + J-cut 0.4s",
       "graphic": {
         "type": "LowerThird",
@@ -151,13 +151,6 @@
           "pos": "tr",
           "on_word": "régulier",
           "hold_min_s": 1.4
-        },
-        {
-          "type": "Tag",
-          "text": "TON MÉTIER",
-          "pos": "tl",
-          "on_word": "métier",
-          "hold_min_s": 1.4
         }
       ]
     },
@@ -172,7 +165,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "SIGNATURE",
+      "transition_in": "continue",
       "graphic": {
         "type": "TitleFlash",
         "label": "CE QUI CHANGE TOUT",
@@ -232,7 +225,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "flash",
+      "transition_in": "hard_cut",
       "jumpcut_mask": "carte ComparisonBar plein cadre (couvre la coupe du bloc traine)",
       "graphic": {
         "type": "ComparisonBar",
@@ -288,7 +281,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "whip",
+      "transition_in": "zoom_through",
       "jumpcut_mask": "cross-dissolve 8 frames : marque le saut temporel (bloc mort de 33s retire). UNIQUE dissolve du short.",
       "graphic": {
         "type": "StatCard",
@@ -357,14 +350,6 @@
           "pos": "tr",
           "on_word": "fisc",
           "hold_min_s": 1.4
-        },
-        {
-          "type": "Tag",
-          "text": "EXPATRIÉ ?",
-          "pos": "tl",
-          "on_word": "expatrié",
-          "fill": true,
-          "hold_min_s": 1.4
         }
       ]
     },
@@ -382,7 +367,7 @@
         "to": 1.1,
         "land_on": "dorment"
       },
-      "transition_in": "flash",
+      "transition_in": "hard_cut",
       "graphic": {
         "type": "TwinReveal",
         "left": "MÊMES GAINS",
@@ -391,15 +376,7 @@
         "hold_min_s": 1.6
       },
       "cut_after": "Retire 168.00->185.40 (reprises hesitantes 'ce qui se reflechit en amont' x2).",
-      "graphics": [
-        {
-          "type": "Tag",
-          "text": "MÊME NIVEAU",
-          "pos": "tr",
-          "on_word": "niveau",
-          "hold_min_s": 1.4
-        }
-      ]
+      "graphics": []
     },
     {
       "id": "s14",
@@ -413,7 +390,7 @@
         "type": "static",
         "scale": 1.08
       },
-      "transition_in": "whip",
+      "transition_in": "zoom_through",
       "jumpcut_mask": "changement de cadrage + J-cut 0.3s",
       "graphic": {
         "type": "LowerThird",

@@ -63,12 +63,12 @@
           "words": [
             {
               "w": "Où",
-              "accent": false,
+              "key": false,
               "at_f": 8
             },
             {
               "w": "habiter",
-              "accent": false,
+              "key": false,
               "at_f": 22
             }
           ]
@@ -79,17 +79,17 @@
           "words": [
             {
               "w": "quand",
-              "accent": false,
+              "key": false,
               "at_f": 52
             },
             {
               "w": "on",
-              "accent": false,
+              "key": false,
               "at_f": 62
             },
             {
               "w": "est",
-              "accent": false,
+              "key": false,
               "at_f": 67
             }
           ]
@@ -100,17 +100,17 @@
           "words": [
             {
               "w": "joueur",
-              "accent": false,
+              "key": false,
               "at_f": 73
             },
             {
               "w": "de",
-              "accent": false,
+              "key": false,
               "at_f": 86
             },
             {
               "w": "poker",
-              "accent": true,
+              "key": false,
               "at_f": 90
             }
           ]
@@ -121,7 +121,7 @@
           "words": [
             {
               "w": "pro ?",
-              "accent": false,
+              "key": false,
               "at_f": 100
             }
           ]
@@ -132,17 +132,17 @@
           "words": [
             {
               "w": "Je",
-              "accent": false,
+              "key": false,
               "at_f": 112
             },
             {
               "w": "vais",
-              "accent": false,
+              "key": false,
               "at_f": 112
             },
             {
               "w": "te",
-              "accent": false,
+              "key": false,
               "at_f": 114
             }
           ]
@@ -153,12 +153,12 @@
           "words": [
             {
               "w": "dire",
-              "accent": false,
+              "key": false,
               "at_f": 119
             },
             {
               "w": "pourquoi",
-              "accent": false,
+              "key": false,
               "at_f": 120
             }
           ]
@@ -169,17 +169,17 @@
           "words": [
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 125
             },
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 136
             },
             {
               "w": "seul",
-              "accent": false,
+              "key": false,
               "at_f": 144
             }
           ]
@@ -190,17 +190,17 @@
           "words": [
             {
               "w": "métier",
-              "accent": false,
+              "key": false,
               "at_f": 152
             },
             {
               "w": "où",
-              "accent": false,
+              "key": false,
               "at_f": 153
             },
             {
               "w": "ça",
-              "accent": false,
+              "key": false,
               "at_f": 165
             }
           ]
@@ -211,7 +211,7 @@
           "words": [
             {
               "w": "peut",
-              "accent": false,
+              "key": false,
               "at_f": 169
             }
           ]
@@ -222,7 +222,7 @@
           "words": [
             {
               "w": "littéralement",
-              "accent": false,
+              "key": false,
               "at_f": 172
             }
           ]
@@ -233,17 +233,17 @@
           "words": [
             {
               "w": "te",
-              "accent": false,
+              "key": false,
               "at_f": 183
             },
             {
               "w": "coûter",
-              "accent": false,
+              "key": false,
               "at_f": 188
             },
             {
               "w": "des",
-              "accent": false,
+              "key": false,
               "at_f": 210
             }
           ]
@@ -254,12 +254,12 @@
           "words": [
             {
               "w": "dizaines",
-              "accent": false,
+              "key": false,
               "at_f": 214
             },
             {
               "w": "de",
-              "accent": false,
+              "key": false,
               "at_f": 227
             }
           ]
@@ -270,7 +270,7 @@
           "words": [
             {
               "w": "milliers",
-              "accent": true,
+              "key": true,
               "at_f": 230
             }
           ]
@@ -281,17 +281,17 @@
           "words": [
             {
               "w": "d'euros",
-              "accent": false,
+              "key": false,
               "at_f": 245
             },
             {
               "w": "par",
-              "accent": false,
+              "key": false,
               "at_f": 254
             },
             {
-              "w": "an.",
-              "accent": false,
+              "w": "an",
+              "key": false,
               "at_f": 265
             }
           ]
@@ -330,128 +330,122 @@
           "words": [
             {
               "w": "Tu",
-              "accent": false,
+              "key": false,
               "at_f": 284
             },
             {
               "w": "vis",
-              "accent": false,
+              "key": false,
               "at_f": 288
             },
             {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 293
             }
           ]
         },
         {
           "in_f": 298,
-          "out_f": 322,
+          "out_f": 329,
           "words": [
             {
-              "w": "poker,",
-              "accent": true,
+              "w": "poker",
+              "key": false,
               "at_f": 298
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 309
+            },
+            {
+              "w": "gagnes",
+              "key": false,
+              "at_f": 322
             }
           ]
         },
         {
-          "in_f": 322,
-          "out_f": 337,
+          "in_f": 329,
+          "out_f": 340,
           "words": [
             {
-              "w": "gagnes",
-              "accent": false,
-              "at_f": 322
-            },
-            {
-              "w": "bien,",
-              "accent": false,
+              "w": "bien",
+              "key": false,
               "at_f": 329
             },
             {
               "w": "et",
-              "accent": false,
+              "key": false,
+              "at_f": 337
+            },
+            {
+              "w": "tu",
+              "key": false,
               "at_f": 337
             }
           ]
         },
         {
-          "in_f": 337,
-          "out_f": 348,
+          "in_f": 340,
+          "out_f": 358,
           "words": [
             {
-              "w": "tu",
-              "accent": false,
-              "at_f": 337
-            },
-            {
               "w": "te",
-              "accent": false,
+              "key": false,
               "at_f": 340
             },
             {
-              "w": "dis :",
-              "accent": false,
+              "w": "dis",
+              "key": false,
               "at_f": 345
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 348
             }
           ]
         },
         {
-          "in_f": 348,
-          "out_f": 379,
+          "in_f": 358,
+          "out_f": 383,
           "words": [
             {
-              "w": "c'est",
-              "accent": false,
-              "at_f": 348
-            },
-            {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 358
             },
             {
-              "w": "jeu,",
-              "accent": false,
+              "w": "jeu",
+              "key": false,
               "at_f": 362
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 379
             }
           ]
         },
         {
-          "in_f": 379,
-          "out_f": 407,
+          "in_f": 383,
+          "out_f": 410,
           "words": [
             {
-              "w": "c'est",
-              "accent": false,
-              "at_f": 379
-            },
-            {
               "w": "de",
-              "accent": false,
+              "key": false,
               "at_f": 383
             },
             {
               "w": "la",
-              "accent": false,
+              "key": false,
               "at_f": 386
-            }
-          ]
-        },
-        {
-          "in_f": 409,
-          "out_f": 417,
-          "words": [
+            },
             {
-              "w": "chance…",
-              "accent": false,
+              "w": "chance",
+              "key": false,
               "at_f": 409
             }
           ]
@@ -467,7 +461,7 @@
       "dur_f": 258,
       "out_start": 410,
       "out_end": 668,
-      "transition_in": "flash",
+      "transition_in": "hard_cut",
       "audio_lead": 0.0,
       "camera": {
         "type": "static"
@@ -489,17 +483,17 @@
           "words": [
             {
               "w": "Donc",
-              "accent": false,
+              "key": false,
               "at_f": 410
             },
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 425
             },
             {
               "w": "pas",
-              "accent": false,
+              "key": false,
               "at_f": 444
             }
           ]
@@ -510,7 +504,7 @@
           "words": [
             {
               "w": "imposable ?",
-              "accent": true,
+              "key": false,
               "at_f": 456
             }
           ]
@@ -521,66 +515,54 @@
           "words": [
             {
               "w": "Mais",
-              "accent": false,
+              "key": false,
               "at_f": 497
             },
             {
               "w": "pas",
-              "accent": false,
+              "key": false,
               "at_f": 512
             },
             {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 524
             }
           ]
         },
         {
           "in_f": 536,
-          "out_f": 554,
-          "words": [
-            {
-              "w": "tout.",
-              "accent": false,
-              "at_f": 536
-            }
-          ]
-        },
-        {
-          "in_f": 554,
           "out_f": 593,
           "words": [
             {
+              "w": "tout",
+              "key": false,
+              "at_f": 536
+            },
+            {
               "w": "C'est",
-              "accent": false,
+              "key": false,
               "at_f": 554
             },
             {
-              "w": "faux.",
-              "accent": true,
+              "w": "faux",
+              "key": true,
               "at_f": 572
             }
           ]
         },
         {
           "in_f": 595,
-          "out_f": 616,
-          "words": [
-            {
-              "w": "Première",
-              "accent": false,
-              "at_f": 595
-            }
-          ]
-        },
-        {
-          "in_f": 637,
           "out_f": 658,
           "words": [
             {
-              "w": "erreur.",
-              "accent": false,
+              "w": "Première",
+              "key": false,
+              "at_f": 595
+            },
+            {
+              "w": "erreur",
+              "key": false,
               "at_f": 637
             }
           ]
@@ -618,12 +600,12 @@
           "words": [
             {
               "w": "Tout",
-              "accent": false,
+              "key": false,
               "at_f": 668
             },
             {
               "w": "dépend",
-              "accent": false,
+              "key": false,
               "at_f": 672
             }
           ]
@@ -634,86 +616,86 @@
           "words": [
             {
               "w": "d'une",
-              "accent": false,
+              "key": false,
               "at_f": 682
             },
             {
               "w": "seule",
-              "accent": false,
+              "key": false,
               "at_f": 689
             }
           ]
         },
         {
           "in_f": 697,
-          "out_f": 710,
+          "out_f": 726,
           "words": [
             {
-              "w": "chose :",
-              "accent": false,
+              "w": "chose",
+              "key": false,
               "at_f": 697
+            },
+            {
+              "w": "est-ce",
+              "key": false,
+              "at_f": 710
             }
           ]
         },
         {
-          "in_f": 710,
-          "out_f": 734,
+          "in_f": 726,
+          "out_f": 745,
           "words": [
             {
-              "w": "est-ce",
-              "accent": false,
-              "at_f": 710
-            },
-            {
               "w": "que",
-              "accent": false,
+              "key": false,
               "at_f": 726
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 730
+            },
+            {
+              "w": "es",
+              "key": false,
+              "at_f": 734
             }
           ]
         },
         {
-          "in_f": 734,
-          "out_f": 759,
+          "in_f": 745,
+          "out_f": 776,
           "words": [
             {
-              "w": "es",
-              "accent": false,
-              "at_f": 734
-            },
-            {
               "w": "vu",
-              "accent": false,
+              "key": false,
               "at_f": 745
             },
             {
               "w": "comme",
-              "accent": false,
+              "key": false,
               "at_f": 754
+            },
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 759
             }
           ]
         },
         {
-          "in_f": 759,
+          "in_f": 776,
           "out_f": 790,
           "words": [
             {
-              "w": "un",
-              "accent": false,
-              "at_f": 759
-            },
-            {
               "w": "amateur",
-              "accent": false,
+              "key": false,
               "at_f": 776
             },
             {
               "w": "ou",
-              "accent": false,
+              "key": false,
               "at_f": 781
             }
           ]
@@ -724,17 +706,17 @@
           "words": [
             {
               "w": "comme",
-              "accent": false,
+              "key": false,
               "at_f": 790
             },
             {
               "w": "un",
-              "accent": false,
+              "key": false,
               "at_f": 795
             },
             {
               "w": "pro ?",
-              "accent": false,
+              "key": false,
               "at_f": 801
             }
           ]
@@ -750,7 +732,7 @@
       "dur_f": 512,
       "out_start": 811,
       "out_end": 1323,
-      "transition_in": "whip",
+      "transition_in": "zoom_through",
       "audio_lead": 0.4,
       "camera": {
         "type": "static",
@@ -770,13 +752,6 @@
           "pos": "tr",
           "on_word": "régulier",
           "hold_min_s": 1.4
-        },
-        {
-          "type": "Tag",
-          "text": "TON MÉTIER",
-          "pos": "tl",
-          "on_word": "métier",
-          "hold_min_s": 1.4
         }
       ],
       "captions": [
@@ -785,156 +760,156 @@
           "out_f": 831,
           "words": [
             {
-              "w": "Oui,",
-              "accent": false,
+              "w": "Oui",
+              "key": false,
               "at_f": 811
             },
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 814
             },
             {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 822
             }
           ]
         },
         {
           "in_f": 831,
-          "out_f": 841,
+          "out_f": 859,
           "words": [
             {
-              "w": "jeu.",
-              "accent": false,
+              "w": "jeu",
+              "key": false,
               "at_f": 831
-            }
-          ]
-        },
-        {
-          "in_f": 841,
-          "out_f": 863,
-          "words": [
+            },
             {
               "w": "Mais",
-              "accent": false,
+              "key": false,
               "at_f": 841
             },
             {
-              "w": "toi,",
-              "accent": false,
+              "w": "toi",
+              "key": false,
               "at_f": 849
-            },
-            {
-              "w": "tu",
-              "accent": false,
-              "at_f": 859
             }
           ]
         },
         {
-          "in_f": 863,
-          "out_f": 899,
+          "in_f": 859,
+          "out_f": 878,
           "words": [
             {
+              "w": "tu",
+              "key": false,
+              "at_f": 859
+            },
+            {
               "w": "en",
-              "accent": false,
+              "key": false,
               "at_f": 863
             },
             {
-              "w": "vis,",
-              "accent": false,
+              "w": "vis",
+              "key": false,
               "at_f": 867
-            },
+            }
+          ]
+        },
+        {
+          "in_f": 878,
+          "out_f": 914,
+          "words": [
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 878
-            }
-          ]
-        },
-        {
-          "in_f": 910,
-          "out_f": 929,
-          "words": [
-            {
-              "w": "régulier,",
-              "accent": false,
-              "at_f": 910
             },
             {
-              "w": "c'est",
-              "accent": false,
-              "at_f": 914
+              "w": "régulier",
+              "key": false,
+              "at_f": 910
             }
           ]
         },
         {
-          "in_f": 929,
-          "out_f": 943,
+          "in_f": 914,
+          "out_f": 931,
           "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 914
+            },
             {
               "w": "ton",
-              "accent": false,
+              "key": false,
               "at_f": 929
-            },
-            {
-              "w": "métier :",
-              "accent": false,
-              "at_f": 931
             }
           ]
         },
         {
-          "in_f": 943,
-          "out_f": 984,
+          "in_f": 931,
+          "out_f": 963,
           "words": [
             {
+              "w": "métier",
+              "key": false,
+              "at_f": 931
+            },
+            {
               "w": "pour",
-              "accent": false,
+              "key": false,
               "at_f": 943
             },
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 955
-            },
-            {
-              "w": "fisc",
-              "accent": false,
-              "at_f": 963
             }
           ]
         },
         {
-          "in_f": 988,
-          "out_f": 1001,
+          "in_f": 963,
+          "out_f": 996,
           "words": [
             {
-              "w": "français,",
-              "accent": false,
-              "at_f": 988
+              "w": "fisc",
+              "key": false,
+              "at_f": 963
             },
             {
-              "w": "c'est",
-              "accent": false,
-              "at_f": 996
+              "w": "français",
+              "key": false,
+              "at_f": 988
             }
           ]
         },
         {
-          "in_f": 1001,
+          "in_f": 996,
+          "out_f": 1017,
+          "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 996
+            },
+            {
+              "w": "une",
+              "key": false,
+              "at_f": 1001
+            }
+          ]
+        },
+        {
+          "in_f": 1017,
           "out_f": 1038,
           "words": [
             {
-              "w": "une",
-              "accent": false,
-              "at_f": 1001
-            },
-            {
               "w": "activité",
-              "accent": false,
+              "key": false,
               "at_f": 1017
             }
           ]
@@ -944,8 +919,8 @@
           "out_f": 1052,
           "words": [
             {
-              "w": "professionnelle,",
-              "accent": false,
+              "w": "professionnelle",
+              "key": false,
               "at_f": 1043
             }
           ]
@@ -956,12 +931,12 @@
           "words": [
             {
               "w": "ça",
-              "accent": false,
+              "key": false,
               "at_f": 1052
             },
             {
-              "w": "s'impose.",
-              "accent": false,
+              "w": "s'impose",
+              "key": false,
               "at_f": 1067
             }
           ]
@@ -972,17 +947,17 @@
           "words": [
             {
               "w": "Donc",
-              "accent": false,
+              "key": false,
               "at_f": 1097
             },
             {
-              "w": "« c'est",
-              "accent": false,
+              "w": "c'est",
+              "key": false,
               "at_f": 1103
             },
             {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 1125
             }
           ]
@@ -992,66 +967,60 @@
           "out_f": 1193,
           "words": [
             {
-              "w": "jeu,",
-              "accent": false,
+              "w": "jeu",
+              "key": false,
               "at_f": 1159
             },
             {
               "w": "je",
-              "accent": false,
+              "key": false,
               "at_f": 1168
             },
             {
               "w": "touche",
-              "accent": false,
+              "key": false,
               "at_f": 1190
             }
           ]
         },
         {
           "in_f": 1193,
-          "out_f": 1214,
+          "out_f": 1246,
           "words": [
             {
-              "w": "tout » :",
-              "accent": false,
+              "w": "tout",
+              "key": false,
               "at_f": 1193
-            }
-          ]
-        },
-        {
-          "in_f": 1216,
-          "out_f": 1267,
-          "words": [
+            },
             {
               "w": "pour",
-              "accent": false,
+              "key": false,
               "at_f": 1216
             },
             {
               "w": "un",
-              "accent": false,
+              "key": false,
               "at_f": 1231
-            },
-            {
-              "w": "pro,",
-              "accent": false,
-              "at_f": 1246
             }
           ]
         },
         {
-          "in_f": 1273,
+          "in_f": 1246,
           "out_f": 1313,
           "words": [
             {
+              "w": "pro",
+              "key": false,
+              "at_f": 1246
+            },
+            {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 1273
             },
             {
-              "w": "faux.",
-              "accent": true,
+              "w": "faux",
+              "key": false,
               "at_f": 1292
             }
           ]
@@ -1067,7 +1036,7 @@
       "dur_f": 100,
       "out_start": 1323,
       "out_end": 1423,
-      "transition_in": "SIGNATURE",
+      "transition_in": "continue",
       "audio_lead": 0.0,
       "camera": {
         "type": "static"
@@ -1086,17 +1055,17 @@
           "words": [
             {
               "w": "Et",
-              "accent": false,
+              "key": false,
               "at_f": 1323
             },
             {
-              "w": "là,",
-              "accent": false,
+              "w": "là",
+              "key": false,
               "at_f": 1328
             },
             {
               "w": "arrive",
-              "accent": false,
+              "key": false,
               "at_f": 1345
             }
           ]
@@ -1107,44 +1076,38 @@
           "words": [
             {
               "w": "ce",
-              "accent": false,
+              "key": false,
               "at_f": 1357
             },
             {
               "w": "qui",
-              "accent": false,
+              "key": false,
               "at_f": 1362
             },
             {
               "w": "rend",
-              "accent": false,
+              "key": false,
               "at_f": 1370
             }
           ]
         },
         {
           "in_f": 1380,
-          "out_f": 1398,
+          "out_f": 1419,
           "words": [
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 1380
             },
             {
               "w": "poker",
-              "accent": true,
+              "key": false,
               "at_f": 1386
-            }
-          ]
-        },
-        {
-          "in_f": 1398,
-          "out_f": 1419,
-          "words": [
+            },
             {
-              "w": "unique.",
-              "accent": false,
+              "w": "unique",
+              "key": false,
               "at_f": 1398
             }
           ]
@@ -1200,17 +1163,17 @@
           "words": [
             {
               "w": "La",
-              "accent": false,
+              "key": false,
               "at_f": 1423
             },
             {
               "w": "façon",
-              "accent": false,
+              "key": false,
               "at_f": 1427
             },
             {
               "w": "dont",
-              "accent": false,
+              "key": false,
               "at_f": 1437
             }
           ]
@@ -1221,17 +1184,17 @@
           "words": [
             {
               "w": "les",
-              "accent": false,
+              "key": false,
               "at_f": 1444
             },
             {
               "w": "gains",
-              "accent": true,
+              "key": false,
               "at_f": 1450
             },
             {
               "w": "sont",
-              "accent": false,
+              "key": false,
               "at_f": 1459
             }
           ]
@@ -1242,12 +1205,12 @@
           "words": [
             {
               "w": "taxés",
-              "accent": false,
+              "key": false,
               "at_f": 1466
             },
             {
               "w": "change",
-              "accent": false,
+              "key": false,
               "at_f": 1476
             }
           ]
@@ -1258,12 +1221,12 @@
           "words": [
             {
               "w": "énormément",
-              "accent": false,
+              "key": false,
               "at_f": 1492
             },
             {
               "w": "d'un",
-              "accent": false,
+              "key": false,
               "at_f": 1508
             }
           ]
@@ -1274,17 +1237,17 @@
           "words": [
             {
               "w": "pays",
-              "accent": false,
+              "key": false,
               "at_f": 1515
             },
             {
               "w": "à",
-              "accent": false,
+              "key": false,
               "at_f": 1523
             },
             {
-              "w": "l'autre.",
-              "accent": false,
+              "w": "l'autre",
+              "key": false,
               "at_f": 1526
             }
           ]
@@ -1295,12 +1258,12 @@
           "words": [
             {
               "w": "Certains",
-              "accent": false,
+              "key": false,
               "at_f": 1545
             },
             {
               "w": "pays",
-              "accent": false,
+              "key": false,
               "at_f": 1562
             }
           ]
@@ -1311,17 +1274,17 @@
           "words": [
             {
               "w": "ne",
-              "accent": false,
+              "key": false,
               "at_f": 1571
             },
             {
               "w": "taxent",
-              "accent": false,
+              "key": false,
               "at_f": 1575
             },
             {
               "w": "pas",
-              "accent": false,
+              "key": false,
               "at_f": 1591
             }
           ]
@@ -1332,17 +1295,17 @@
           "words": [
             {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 1594
             },
             {
               "w": "tout",
-              "accent": false,
+              "key": false,
               "at_f": 1598
             },
             {
               "w": "les",
-              "accent": false,
+              "key": false,
               "at_f": 1612
             }
           ]
@@ -1353,17 +1316,17 @@
           "words": [
             {
               "w": "gains",
-              "accent": true,
+              "key": false,
               "at_f": 1617
             },
             {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 1627
             },
             {
-              "w": "jeu.",
-              "accent": false,
+              "w": "jeu",
+              "key": false,
               "at_f": 1632
             }
           ]
@@ -1379,7 +1342,7 @@
       "dur_f": 113,
       "out_start": 1646,
       "out_end": 1759,
-      "transition_in": "flash",
+      "transition_in": "hard_cut",
       "audio_lead": 0.0,
       "camera": {
         "type": "static"
@@ -1405,102 +1368,96 @@
           "words": [
             {
               "w": "Mais",
-              "accent": false,
+              "key": false,
               "at_f": 1653
             },
             {
               "w": "selon",
-              "accent": false,
+              "key": false,
               "at_f": 1661
             },
             {
               "w": "où",
-              "accent": false,
+              "key": false,
               "at_f": 1671
             }
           ]
         },
         {
           "in_f": 1676,
-          "out_f": 1691,
+          "out_f": 1695,
           "words": [
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 1676
             },
             {
-              "w": "vis :",
-              "accent": false,
+              "w": "vis",
+              "key": false,
               "at_f": 1680
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 1691
             }
           ]
         },
         {
-          "in_f": 1691,
-          "out_f": 1707,
+          "in_f": 1695,
+          "out_f": 1716,
           "words": [
-            {
-              "w": "tu",
-              "accent": false,
-              "at_f": 1691
-            },
             {
               "w": "gardes",
-              "accent": false,
+              "key": false,
               "at_f": 1695
             },
             {
-              "w": "tout,",
-              "accent": false,
+              "w": "tout",
+              "key": false,
               "at_f": 1695
+            },
+            {
+              "w": "ou",
+              "key": false,
+              "at_f": 1707
             }
           ]
         },
         {
-          "in_f": 1707,
-          "out_f": 1725,
+          "in_f": 1716,
+          "out_f": 1729,
           "words": [
             {
-              "w": "ou",
-              "accent": false,
-              "at_f": 1707
-            },
-            {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 1716
             },
             {
               "w": "en",
-              "accent": false,
+              "key": false,
               "at_f": 1719
-            }
-          ]
-        },
-        {
-          "in_f": 1725,
-          "out_f": 1734,
-          "words": [
-            {
-              "w": "laisses",
-              "accent": false,
-              "at_f": 1725
             },
             {
-              "w": "la",
-              "accent": false,
-              "at_f": 1729
+              "w": "laisses",
+              "key": false,
+              "at_f": 1725
             }
           ]
         },
         {
-          "in_f": 1734,
+          "in_f": 1729,
           "out_f": 1755,
           "words": [
             {
-              "w": "moitié.",
-              "accent": true,
+              "w": "la",
+              "key": false,
+              "at_f": 1729
+            },
+            {
+              "w": "moitié",
+              "key": true,
               "at_f": 1734
             }
           ]
@@ -1545,107 +1502,101 @@
           "words": [
             {
               "w": "Tu",
-              "accent": false,
+              "key": false,
               "at_f": 1759
             },
             {
               "w": "comprends",
-              "accent": false,
+              "key": false,
               "at_f": 1762
             },
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 1775
             }
           ]
         },
         {
           "in_f": 1782,
-          "out_f": 1790,
+          "out_f": 1801,
           "words": [
             {
-              "w": "truc.",
-              "accent": false,
+              "w": "truc",
+              "key": false,
               "at_f": 1782
-            }
-          ]
-        },
-        {
-          "in_f": 1789,
-          "out_f": 1806,
-          "words": [
+            },
             {
               "w": "Pour",
-              "accent": false,
+              "key": false,
               "at_f": 1789
             },
             {
               "w": "un",
-              "accent": false,
+              "key": false,
               "at_f": 1794
-            },
-            {
-              "w": "joueur",
-              "accent": false,
-              "at_f": 1801
             }
           ]
         },
         {
-          "in_f": 1806,
-          "out_f": 1824,
+          "in_f": 1801,
+          "out_f": 1815,
           "words": [
             {
-              "w": "pro,",
-              "accent": false,
+              "w": "joueur",
+              "key": false,
+              "at_f": 1801
+            },
+            {
+              "w": "pro",
+              "key": false,
               "at_f": 1806
             },
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 1814
-            },
-            {
-              "w": "choix",
-              "accent": false,
-              "at_f": 1815
             }
           ]
         },
         {
-          "in_f": 1824,
-          "out_f": 1837,
+          "in_f": 1815,
+          "out_f": 1835,
           "words": [
             {
+              "w": "choix",
+              "key": false,
+              "at_f": 1815
+            },
+            {
               "w": "du",
-              "accent": false,
+              "key": false,
               "at_f": 1824
             },
             {
               "w": "pays",
-              "accent": false,
+              "key": false,
               "at_f": 1825
-            },
-            {
-              "w": "où",
-              "accent": false,
-              "at_f": 1835
             }
           ]
         },
         {
-          "in_f": 1837,
+          "in_f": 1835,
           "out_f": 1850,
           "words": [
             {
+              "w": "où",
+              "key": false,
+              "at_f": 1835
+            },
+            {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 1837
             },
             {
-              "w": "habites,",
-              "accent": false,
+              "w": "habites",
+              "key": false,
               "at_f": 1838
             }
           ]
@@ -1656,44 +1607,38 @@
           "words": [
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 1850
             },
             {
               "w": "pas",
-              "accent": false,
+              "key": false,
               "at_f": 1857
             },
             {
               "w": "un",
-              "accent": false,
+              "key": false,
               "at_f": 1864
             }
           ]
         },
         {
           "in_f": 1864,
-          "out_f": 1877,
-          "words": [
-            {
-              "w": "détail :",
-              "accent": true,
-              "at_f": 1864
-            }
-          ]
-        },
-        {
-          "in_f": 1877,
           "out_f": 1892,
           "words": [
             {
+              "w": "détail",
+              "key": false,
+              "at_f": 1864
+            },
+            {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 1877
             },
             {
               "w": "la",
-              "accent": false,
+              "key": false,
               "at_f": 1889
             }
           ]
@@ -1703,8 +1648,8 @@
           "out_f": 1913,
           "words": [
             {
-              "w": "décision.",
-              "accent": true,
+              "w": "décision",
+              "key": false,
               "at_f": 1892
             }
           ]
@@ -1720,7 +1665,7 @@
       "dur_f": 175,
       "out_start": 1923,
       "out_end": 2098,
-      "transition_in": "whip",
+      "transition_in": "zoom_through",
       "audio_lead": 0.0,
       "camera": {
         "type": "static"
@@ -1749,17 +1694,17 @@
           "words": [
             {
               "w": "Il",
-              "accent": false,
+              "key": false,
               "at_f": 1923
             },
             {
               "w": "y",
-              "accent": false,
+              "key": false,
               "at_f": 1927
             },
             {
               "w": "a",
-              "accent": false,
+              "key": false,
               "at_f": 1928
             }
           ]
@@ -1770,17 +1715,17 @@
           "words": [
             {
               "w": "un",
-              "accent": false,
+              "key": false,
               "at_f": 1931
             },
             {
               "w": "pays",
-              "accent": false,
+              "key": false,
               "at_f": 1934
             },
             {
               "w": "qui",
-              "accent": false,
+              "key": false,
               "at_f": 1941
             }
           ]
@@ -1791,49 +1736,49 @@
           "words": [
             {
               "w": "ne",
-              "accent": false,
+              "key": false,
               "at_f": 1946
             },
             {
               "w": "taxe",
-              "accent": false,
+              "key": false,
               "at_f": 1955
             },
             {
               "w": "pas",
-              "accent": false,
+              "key": false,
               "at_f": 1957
             }
           ]
         },
         {
           "in_f": 1963,
-          "out_f": 1980,
+          "out_f": 1981,
           "words": [
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 1963
             },
             {
-              "w": "jeu :",
-              "accent": false,
+              "w": "jeu",
+              "key": false,
               "at_f": 1966
+            },
+            {
+              "w": "ça",
+              "key": false,
+              "at_f": 1980
             }
           ]
         },
         {
-          "in_f": 1980,
-          "out_f": 1988,
+          "in_f": 1981,
+          "out_f": 1989,
           "words": [
             {
-              "w": "ça",
-              "accent": false,
-              "at_f": 1980
-            },
-            {
               "w": "peut",
-              "accent": false,
+              "key": false,
               "at_f": 1981
             }
           ]
@@ -1844,12 +1789,12 @@
           "words": [
             {
               "w": "représenter",
-              "accent": false,
+              "key": false,
               "at_f": 1988
             },
             {
               "w": "la",
-              "accent": false,
+              "key": false,
               "at_f": 2010
             }
           ]
@@ -1860,17 +1805,17 @@
           "words": [
             {
               "w": "moitié",
-              "accent": true,
+              "key": false,
               "at_f": 2013
             },
             {
               "w": "de",
-              "accent": false,
+              "key": false,
               "at_f": 2026
             },
             {
               "w": "ce",
-              "accent": false,
+              "key": false,
               "at_f": 2033
             }
           ]
@@ -1881,17 +1826,17 @@
           "words": [
             {
               "w": "que",
-              "accent": false,
+              "key": false,
               "at_f": 2033
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 2038
             },
             {
               "w": "gagnes",
-              "accent": false,
+              "key": false,
               "at_f": 2048
             }
           ]
@@ -1902,12 +1847,12 @@
           "words": [
             {
               "w": "dans",
-              "accent": false,
+              "key": false,
               "at_f": 2068
             },
             {
-              "w": "l'année.",
-              "accent": false,
+              "w": "l'année",
+              "key": false,
               "at_f": 2076
             }
           ]
@@ -1943,18 +1888,18 @@
           "out_f": 2128,
           "words": [
             {
-              "w": "Mais,",
-              "accent": false,
+              "w": "Mais",
+              "key": false,
               "at_f": 2098
             },
             {
               "w": "et",
-              "accent": false,
+              "key": false,
               "at_f": 2111
             },
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 2116
             }
           ]
@@ -1965,17 +1910,17 @@
           "words": [
             {
               "w": "là",
-              "accent": false,
+              "key": false,
               "at_f": 2128
             },
             {
               "w": "que",
-              "accent": false,
+              "key": false,
               "at_f": 2134
             },
             {
               "w": "les",
-              "accent": false,
+              "key": false,
               "at_f": 2141
             }
           ]
@@ -1986,87 +1931,75 @@
           "words": [
             {
               "w": "gens",
-              "accent": false,
+              "key": false,
               "at_f": 2150
             },
             {
               "w": "se",
-              "accent": false,
+              "key": false,
               "at_f": 2157
             },
             {
               "w": "font",
-              "accent": false,
+              "key": false,
               "at_f": 2161
             }
           ]
         },
         {
           "in_f": 2173,
-          "out_f": 2189,
+          "out_f": 2200,
           "words": [
             {
-              "w": "avoir :",
-              "accent": false,
+              "w": "avoir",
+              "key": false,
               "at_f": 2173
-            }
-          ]
-        },
-        {
-          "in_f": 2189,
-          "out_f": 2215,
-          "words": [
+            },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 2189
             },
             {
               "w": "peux",
-              "accent": false,
+              "key": false,
               "at_f": 2191
-            },
-            {
-              "w": "pas",
-              "accent": false,
-              "at_f": 2200
             }
           ]
         },
         {
-          "in_f": 2215,
+          "in_f": 2200,
           "out_f": 2227,
           "words": [
             {
+              "w": "pas",
+              "key": false,
+              "at_f": 2200
+            },
+            {
               "w": "juste",
-              "accent": false,
+              "key": false,
               "at_f": 2215
             },
             {
               "w": "dire",
-              "accent": false,
+              "key": false,
               "at_f": 2218
             }
           ]
         },
         {
           "in_f": 2227,
-          "out_f": 2245,
-          "words": [
-            {
-              "w": "j'habite",
-              "accent": false,
-              "at_f": 2227
-            }
-          ]
-        },
-        {
-          "in_f": 2245,
           "out_f": 2266,
           "words": [
             {
-              "w": "là-bas.",
-              "accent": false,
+              "w": "j'habite",
+              "key": false,
+              "at_f": 2227
+            },
+            {
+              "w": "là-bas",
+              "key": false,
               "at_f": 2245
             }
           ]
@@ -2104,14 +2037,6 @@
           "pos": "tr",
           "on_word": "fisc",
           "hold_min_s": 1.4
-        },
-        {
-          "type": "Tag",
-          "text": "EXPATRIÉ ?",
-          "pos": "tl",
-          "on_word": "expatrié",
-          "fill": true,
-          "hold_min_s": 1.4
         }
       ],
       "captions": [
@@ -2121,17 +2046,17 @@
           "words": [
             {
               "w": "Il",
-              "accent": false,
+              "key": false,
               "at_f": 2272
             },
             {
               "w": "faut",
-              "accent": false,
+              "key": false,
               "at_f": 2276
             },
             {
               "w": "que",
-              "accent": false,
+              "key": false,
               "at_f": 2282
             }
           ]
@@ -2142,17 +2067,17 @@
           "words": [
             {
               "w": "ce",
-              "accent": false,
+              "key": false,
               "at_f": 2287
             },
             {
               "w": "soit",
-              "accent": false,
+              "key": false,
               "at_f": 2291
             },
             {
-              "w": "vrai :",
-              "accent": false,
+              "w": "vrai",
+              "key": false,
               "at_f": 2298
             }
           ]
@@ -2163,17 +2088,17 @@
           "words": [
             {
               "w": "que",
-              "accent": false,
+              "key": false,
               "at_f": 2308
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 2312
             },
             {
               "w": "vives",
-              "accent": false,
+              "key": false,
               "at_f": 2313
             }
           ]
@@ -2184,49 +2109,49 @@
           "words": [
             {
               "w": "vraiment",
-              "accent": false,
+              "key": false,
               "at_f": 2333
             },
             {
               "w": "dans",
-              "accent": false,
+              "key": false,
               "at_f": 2340
             }
           ]
         },
         {
           "in_f": 2343,
-          "out_f": 2364,
+          "out_f": 2374,
           "words": [
             {
               "w": "ce",
-              "accent": false,
+              "key": false,
               "at_f": 2343
             },
             {
-              "w": "pays.",
-              "accent": false,
+              "w": "pays",
+              "key": false,
               "at_f": 2358
+            },
+            {
+              "w": "Un",
+              "key": false,
+              "at_f": 2364
             }
           ]
         },
         {
-          "in_f": 2364,
+          "in_f": 2374,
           "out_f": 2395,
           "words": [
             {
-              "w": "Un",
-              "accent": false,
-              "at_f": 2364
-            },
-            {
               "w": "joueur",
-              "accent": false,
+              "key": false,
               "at_f": 2374
             },
             {
               "w": "qui",
-              "accent": false,
+              "key": false,
               "at_f": 2379
             }
           ]
@@ -2237,12 +2162,12 @@
           "words": [
             {
               "w": "prétend",
-              "accent": false,
+              "key": false,
               "at_f": 2395
             },
             {
               "w": "être",
-              "accent": false,
+              "key": false,
               "at_f": 2405
             }
           ]
@@ -2253,12 +2178,12 @@
           "words": [
             {
               "w": "expatrié",
-              "accent": true,
+              "key": false,
               "at_f": 2422
             },
             {
               "w": "mais",
-              "accent": false,
+              "key": false,
               "at_f": 2430
             }
           ]
@@ -2269,17 +2194,17 @@
           "words": [
             {
               "w": "qui",
-              "accent": false,
+              "key": false,
               "at_f": 2435
             },
             {
               "w": "vit",
-              "accent": false,
+              "key": false,
               "at_f": 2449
             },
             {
               "w": "et",
-              "accent": false,
+              "key": false,
               "at_f": 2449
             }
           ]
@@ -2290,17 +2215,17 @@
           "words": [
             {
               "w": "joue",
-              "accent": false,
+              "key": false,
               "at_f": 2455
             },
             {
               "w": "depuis",
-              "accent": false,
+              "key": false,
               "at_f": 2459
             },
             {
               "w": "la",
-              "accent": false,
+              "key": false,
               "at_f": 2470
             }
           ]
@@ -2310,18 +2235,18 @@
           "out_f": 2512,
           "words": [
             {
-              "w": "France,",
-              "accent": true,
+              "w": "France",
+              "key": false,
               "at_f": 2483
             },
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 2501
             },
             {
               "w": "fisc",
-              "accent": false,
+              "key": false,
               "at_f": 2502
             }
           ]
@@ -2332,39 +2257,33 @@
           "words": [
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 2512
             },
             {
-              "w": "requalifie.",
-              "accent": true,
+              "w": "requalifie",
+              "key": false,
               "at_f": 2515
             }
           ]
         },
         {
           "in_f": 2532,
-          "out_f": 2544,
+          "out_f": 2562,
           "words": [
             {
               "w": "Et",
-              "accent": false,
+              "key": false,
               "at_f": 2532
             },
             {
               "w": "tout",
-              "accent": false,
+              "key": false,
               "at_f": 2538
-            }
-          ]
-        },
-        {
-          "in_f": 2544,
-          "out_f": 2562,
-          "words": [
+            },
             {
-              "w": "retombe.",
-              "accent": false,
+              "w": "retombe",
+              "key": false,
               "at_f": 2544
             }
           ]
@@ -2380,7 +2299,7 @@
       "dur_f": 334,
       "out_start": 2562,
       "out_end": 2896,
-      "transition_in": "flash",
+      "transition_in": "hard_cut",
       "audio_lead": 0.0,
       "camera": {
         "type": "push_in",
@@ -2395,13 +2314,6 @@
           "right": "FORTUNES ≠",
           "note": "discret, s'efface avant 'ou ils dorment'",
           "hold_min_s": 1.6
-        },
-        {
-          "type": "Tag",
-          "text": "MÊME NIVEAU",
-          "pos": "tr",
-          "on_word": "niveau",
-          "hold_min_s": 1.4
         }
       ],
       "captions": [
@@ -2411,17 +2323,17 @@
           "words": [
             {
               "w": "Le",
-              "accent": false,
+              "key": false,
               "at_f": 2562
             },
             {
-              "w": "poker,",
-              "accent": true,
+              "w": "poker",
+              "key": false,
               "at_f": 2566
             },
             {
               "w": "c'est",
-              "accent": false,
+              "key": false,
               "at_f": 2581
             }
           ]
@@ -2432,81 +2344,75 @@
           "words": [
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 2592
             },
             {
               "w": "seul",
-              "accent": false,
+              "key": false,
               "at_f": 2596
             },
             {
               "w": "métier",
-              "accent": false,
+              "key": false,
               "at_f": 2605
             }
           ]
         },
         {
           "in_f": 2620,
-          "out_f": 2636,
+          "out_f": 2657,
           "words": [
             {
               "w": "où",
-              "accent": false,
+              "key": false,
               "at_f": 2620
             },
             {
               "w": "deux",
-              "accent": false,
+              "key": false,
               "at_f": 2627
+            },
+            {
+              "w": "joueurs",
+              "key": false,
+              "at_f": 2636
             }
           ]
         },
         {
-          "in_f": 2636,
-          "out_f": 2664,
+          "in_f": 2659,
+          "out_f": 2685,
           "words": [
-            {
-              "w": "joueurs,",
-              "accent": false,
-              "at_f": 2636
-            },
             {
               "w": "avec",
-              "accent": false,
+              "key": false,
               "at_f": 2659
-            }
-          ]
-        },
-        {
-          "in_f": 2664,
-          "out_f": 2692,
-          "words": [
-            {
-              "w": "exactement",
-              "accent": false,
-              "at_f": 2664
             },
             {
-              "w": "les",
-              "accent": false,
-              "at_f": 2686
+              "w": "exactement",
+              "key": false,
+              "at_f": 2664
             }
           ]
         },
         {
-          "in_f": 2692,
+          "in_f": 2686,
           "out_f": 2724,
           "words": [
             {
+              "w": "les",
+              "key": false,
+              "at_f": 2686
+            },
+            {
               "w": "mêmes",
-              "accent": false,
+              "key": false,
               "at_f": 2692
             },
             {
-              "w": "gains,",
-              "accent": true,
+              "w": "gains",
+              "key": false,
               "at_f": 2705
             }
           ]
@@ -2517,7 +2423,7 @@
           "words": [
             {
               "w": "finissent",
-              "accent": false,
+              "key": false,
               "at_f": 2724
             }
           ]
@@ -2528,12 +2434,12 @@
           "words": [
             {
               "w": "l'année",
-              "accent": false,
+              "key": false,
               "at_f": 2731
             },
             {
               "w": "avec",
-              "accent": false,
+              "key": false,
               "at_f": 2744
             }
           ]
@@ -2544,92 +2450,86 @@
           "words": [
             {
               "w": "des",
-              "accent": false,
+              "key": false,
               "at_f": 2744
             },
             {
               "w": "fortunes",
-              "accent": false,
+              "key": false,
               "at_f": 2750
             }
           ]
         },
         {
           "in_f": 2754,
-          "out_f": 2766,
+          "out_f": 2787,
           "words": [
             {
-              "w": "différentes.",
-              "accent": false,
+              "w": "différentes",
+              "key": false,
               "at_f": 2754
+            },
+            {
+              "w": "Pas",
+              "key": false,
+              "at_f": 2766
             }
           ]
         },
         {
-          "in_f": 2766,
-          "out_f": 2800,
+          "in_f": 2790,
+          "out_f": 2803,
           "words": [
             {
-              "w": "Pas",
-              "accent": false,
-              "at_f": 2766
-            },
-            {
               "w": "à",
-              "accent": false,
+              "key": false,
               "at_f": 2790
             },
             {
               "w": "cause",
-              "accent": false,
+              "key": false,
               "at_f": 2792
-            }
-          ]
-        },
-        {
-          "in_f": 2800,
-          "out_f": 2811,
-          "words": [
-            {
-              "w": "de",
-              "accent": false,
-              "at_f": 2800
             },
             {
-              "w": "leur",
-              "accent": false,
-              "at_f": 2803
+              "w": "de",
+              "key": false,
+              "at_f": 2800
             }
           ]
         },
         {
-          "in_f": 2811,
-          "out_f": 2824,
+          "in_f": 2803,
+          "out_f": 2829,
           "words": [
             {
-              "w": "niveau :",
-              "accent": false,
+              "w": "leur",
+              "key": false,
+              "at_f": 2803
+            },
+            {
+              "w": "niveau",
+              "key": false,
               "at_f": 2811
+            },
+            {
+              "w": "à",
+              "key": false,
+              "at_f": 2824
             }
           ]
         },
         {
-          "in_f": 2824,
+          "in_f": 2829,
           "out_f": 2841,
           "words": [
             {
-              "w": "à",
-              "accent": false,
-              "at_f": 2824
-            },
-            {
               "w": "cause",
-              "accent": false,
+              "key": false,
               "at_f": 2829
             },
             {
               "w": "de",
-              "accent": false,
+              "key": false,
               "at_f": 2835
             }
           ]
@@ -2640,12 +2540,12 @@
           "words": [
             {
               "w": "l'endroit",
-              "accent": false,
+              "key": false,
               "at_f": 2841
             },
             {
               "w": "où",
-              "accent": false,
+              "key": false,
               "at_f": 2866
             }
           ]
@@ -2656,12 +2556,12 @@
           "words": [
             {
               "w": "ils",
-              "accent": false,
+              "key": false,
               "at_f": 2871
             },
             {
-              "w": "dorment.",
-              "accent": true,
+              "w": "dorment",
+              "key": true,
               "at_f": 2876
             }
           ]
@@ -2677,7 +2577,7 @@
       "dur_f": 277,
       "out_start": 2896,
       "out_end": 3173,
-      "transition_in": "whip",
+      "transition_in": "zoom_through",
       "audio_lead": 0.3,
       "camera": {
         "type": "static",
@@ -2705,12 +2605,12 @@
           "words": [
             {
               "w": "Tes",
-              "accent": false,
+              "key": false,
               "at_f": 2901
             },
             {
               "w": "revenus",
-              "accent": false,
+              "key": false,
               "at_f": 2906
             }
           ]
@@ -2721,17 +2621,17 @@
           "words": [
             {
               "w": "sont",
-              "accent": false,
+              "key": false,
               "at_f": 2912
             },
             {
-              "w": "élevés,",
-              "accent": false,
+              "w": "élevés",
+              "key": false,
               "at_f": 2921
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 2943
             }
           ]
@@ -2742,12 +2642,12 @@
           "words": [
             {
               "w": "es",
-              "accent": false,
+              "key": false,
               "at_f": 2945
             },
             {
               "w": "totalement",
-              "accent": false,
+              "key": false,
               "at_f": 2963
             }
           ]
@@ -2757,18 +2657,18 @@
           "out_f": 2990,
           "words": [
             {
-              "w": "mobile,",
-              "accent": false,
+              "w": "mobile",
+              "key": false,
               "at_f": 2963
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 2983
             },
             {
               "w": "peux",
-              "accent": false,
+              "key": false,
               "at_f": 2988
             }
           ]
@@ -2779,12 +2679,12 @@
           "words": [
             {
               "w": "jouer",
-              "accent": false,
+              "key": false,
               "at_f": 2990
             },
             {
               "w": "de",
-              "accent": false,
+              "key": false,
               "at_f": 2999
             }
           ]
@@ -2795,12 +2695,12 @@
           "words": [
             {
               "w": "n'importe",
-              "accent": false,
+              "key": false,
               "at_f": 3003
             },
             {
-              "w": "où :",
-              "accent": false,
+              "w": "où",
+              "key": false,
               "at_f": 3020
             }
           ]
@@ -2811,17 +2711,17 @@
           "words": [
             {
               "w": "t'as",
-              "accent": false,
+              "key": false,
               "at_f": 3028
             },
             {
               "w": "le",
-              "accent": false,
+              "key": false,
               "at_f": 3036
             },
             {
               "w": "profil",
-              "accent": true,
+              "key": false,
               "at_f": 3041
             }
           ]
@@ -2832,12 +2732,12 @@
           "words": [
             {
               "w": "parfait",
-              "accent": false,
+              "key": false,
               "at_f": 3050
             },
             {
               "w": "pour",
-              "accent": false,
+              "key": false,
               "at_f": 3069
             }
           ]
@@ -2848,7 +2748,7 @@
           "words": [
             {
               "w": "choisir",
-              "accent": false,
+              "key": false,
               "at_f": 3073
             }
           ]
@@ -2858,8 +2758,8 @@
           "out_f": 3093,
           "words": [
             {
-              "w": "intelligemment,",
-              "accent": false,
+              "w": "intelligemment",
+              "key": false,
               "at_f": 3085
             }
           ]
@@ -2869,13 +2769,13 @@
           "out_f": 3131,
           "words": [
             {
-              "w": "proprement,",
-              "accent": false,
+              "w": "proprement",
+              "key": false,
               "at_f": 3085
             },
             {
               "w": "et",
-              "accent": false,
+              "key": false,
               "at_f": 3116
             }
           ]
@@ -2886,17 +2786,17 @@
           "words": [
             {
               "w": "100",
-              "accent": true,
+              "key": false,
               "at_f": 3131
             },
             {
               "w": "%",
-              "accent": true,
+              "key": false,
               "at_f": 3137
             },
             {
               "w": "en",
-              "accent": false,
+              "key": false,
               "at_f": 3153
             }
           ]
@@ -2906,8 +2806,8 @@
           "out_f": 3173,
           "words": [
             {
-              "w": "règle.",
-              "accent": true,
+              "w": "règle",
+              "key": false,
               "at_f": 3155
             }
           ]
@@ -2942,17 +2842,17 @@
           "words": [
             {
               "w": "Si",
-              "accent": false,
+              "key": false,
               "at_f": 3173
             },
             {
               "w": "tu",
-              "accent": false,
+              "key": false,
               "at_f": 3181
             },
             {
               "w": "veux",
-              "accent": false,
+              "key": false,
               "at_f": 3189
             }
           ]
@@ -2963,17 +2863,17 @@
           "words": [
             {
               "w": "savoir",
-              "accent": false,
+              "key": false,
               "at_f": 3203
             },
             {
               "w": "où",
-              "accent": false,
+              "key": false,
               "at_f": 3226
             },
             {
               "w": "poser",
-              "accent": false,
+              "key": false,
               "at_f": 3235
             }
           ]
@@ -2984,60 +2884,49 @@
           "words": [
             {
               "w": "tes",
-              "accent": false,
+              "key": false,
               "at_f": 3252
             },
             {
               "w": "valises",
-              "accent": false,
+              "key": false,
               "at_f": 3274
             }
           ]
         },
         {
           "in_f": 3303,
-          "out_f": 3322,
+          "out_f": 3343,
           "words": [
             {
               "w": "tout",
-              "accent": false,
+              "key": false,
               "at_f": 3303
             },
             {
               "w": "en",
-              "accent": false,
-              "at_f": 3303
+              "key": false,
+              "at_f": 3307
             },
             {
               "w": "restant",
-              "accent": false,
-              "at_f": 3307
+              "key": false,
+              "at_f": 3322
             }
           ]
         },
         {
-          "in_f": 3322,
-          "out_f": 3366,
+          "in_f": 3345,
+          "out_f": 3379,
           "words": [
             {
               "w": "en",
-              "accent": false,
-              "at_f": 3322
+              "key": false,
+              "at_f": 3345
             },
             {
-              "w": "règle :",
-              "accent": true,
-              "at_f": 3345
-            }
-          ]
-        },
-        {
-          "in_f": 3372,
-          "out_f": 3380,
-          "words": [
-            {
-              "w": "commente",
-              "accent": false,
+              "w": "règle",
+              "key": false,
               "at_f": 3372
             }
           ]
@@ -3047,13 +2936,13 @@
           "out_f": 3412,
           "words": [
             {
-              "w": "« poker",
-              "accent": true,
+              "w": "commente",
+              "key": false,
               "at_f": 3379
             },
             {
-              "w": "».",
-              "accent": false,
+              "w": "poker",
+              "key": false,
               "at_f": 3398
             }
           ]

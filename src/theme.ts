@@ -7,7 +7,9 @@ export const T = {
   cardBg2: "#151C42", // variante légèrement plus claire pour étagement
   accent: "#4F6BFF",
   accentSoft: "#8FA0FF",
+  yellow: "#FFD84D", // accent chaud — mots-clés sous-titres uniquement
   white: "#FFFFFF",
+  whiteGrad: "linear-gradient(180deg,#FFFFFF 0%,#E4E9F5 100%)",
   sub: "#A8B0C8",
   ink: "#05070A",
   line: "rgba(168,176,200,0.22)",

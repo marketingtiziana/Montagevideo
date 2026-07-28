@@ -11,7 +11,8 @@ import {
   Sequence,
 } from "remotion";
 import timelineData from "../data/timeline.json";
-import { T, textOutline, ensureFont } from "./theme";
+import cameraData from "../data/camera.json";
+import { T, ensureFont } from "./theme";
 import { ENTER, EXIT } from "./anim";
 import {
   FullscreenStamp,
@@ -30,7 +31,8 @@ import {
   Tag,
 } from "./graphics/overlays";
 
-type Cap = { in_f: number; out_f: number; words: { w: string; accent: boolean; at_f: number }[] };
+type Cap = { in_f: number; out_f: number; words: { w: string; key: boolean; at_f: number }[] };
+const CAM = (cameraData as unknown as { cam: { scale: number; cx: number; cy: number; mblur: number }[] }).cam;
 type Seg = {
   id: string;
   out_start: number;
@@ -51,7 +53,7 @@ const norm = (s: string) =>
 const DOMINANT = new Set([
   "FullscreenStamp", "Toggle", "Map", "ComparisonBar",
   "HighlightBox", "StatCard", "FullscreenCard", "TwinReveal", "CTACard",
-  "LowerThird", "TitleFlash", // portent le sens plein cadre : masquent le sous-titre (pas de collision)
+  "LowerThird", "TitleFlash", "Chip", // portent le sens : masquent le sous-titre (pas de collision, <=2 elements)
 ]);
 
 type GTiming = { seg: Seg; type: string; appear: number; hold: number; total: number; dominant: boolean; props: Record<string, unknown> };
@@ -70,11 +72,13 @@ function graphicTiming(seg: Seg, g: Record<string, unknown>): GTiming | null {
           break outer;
         }
   }
-  // le graphique doit tenir DANS son segment (ne jamais deborder sur le suivant)
-  const MINTOTAL = ENTER + 42 + EXIT;
+  // tenues par type : FullscreenCard = 0,6s (masque chapitre) ; TitleFlash/TwinReveal resserrés
+  const holdFloor = type === "FullscreenCard" ? 18 : 42;
+  const holdCap = type === "FullscreenCard" ? 18 : type === "TitleFlash" || type === "TwinReveal" ? 48 : 66;
+  const MINTOTAL = ENTER + holdFloor + EXIT;
   if (appear + MINTOTAL > seg.out_end) appear = Math.max(seg.out_start, seg.out_end - MINTOTAL);
   const available = seg.out_end - appear;
-  const hold = Math.max(42, Math.min(available - ENTER - EXIT, 72));
+  const hold = Math.max(holdFloor, Math.min(available - ENTER - EXIT, holdCap));
   return { seg, type, appear, hold, total: ENTER + hold + EXIT, dominant: DOMINANT.has(type), props: g };
 }
 
@@ -84,26 +88,24 @@ const GRAPHICS = SEGS.flatMap((s) =>
 // Intervalles où une incrustation dominante est visible (pour masquer les sous-titres).
 const DOM_INTERVALS = GRAPHICS.filter((g) => g.dominant).map((g) => [g.appear, g.appear + g.total] as [number, number]);
 
-// ---------- Caméra sur le base cut (source déjà 9:16) ----------
+// ---------- Caméra virtuelle : crop par frame piloté par data/camera.json (suivi de visage) ----------
 const CameraVideo: React.FC = () => {
   const f = useCurrentFrame();
-  const seg = SEGS.find((s) => f >= s.out_start && f < s.out_end) ?? SEGS[SEGS.length - 1];
-  const local = (f - seg.out_start) / Math.max(1, seg.out_end - seg.out_start);
-  const cam = seg.camera || { type: "static" };
-  let scale = 1.03;
-  let tx = 0;
-  if (cam.type === "push_in") {
-    scale = interpolate(local, [0, 1], [cam.from ?? 1.0, cam.to ?? 1.06]) * 1.02;
-  } else {
-    scale = (cam.scale ?? 1.0) * 1.03;
-    // dérive lente pour ne jamais figer l'image
-    tx = Math.sin((f - seg.out_start) / 40) * (cam.drift_px ?? 4);
-  }
+  const c = CAM[Math.min(f, CAM.length - 1)] ?? { scale: 1, cx: 0.5, cy: 0.5, mblur: 0 };
+  const W = 1080, H = 1920;
+  // place le point (cx,cy) de la source au centre du cadre, à l'échelle scale
+  const tx = W / 2 - c.cx * W * c.scale;
+  const ty = H / 2 - c.cy * H * c.scale;
   return (
-    <AbsoluteFill style={{ overflow: "hidden" }}>
+    <AbsoluteFill style={{ overflow: "hidden", background: "#05070A" }}>
       <OffthreadVideo
         src={staticFile("base_cut.mp4")}
-        style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${scale}) translateX(${tx}px)` }}
+        style={{
+          width: W, height: H,
+          transformOrigin: "0 0",
+          transform: `translate(${tx}px, ${ty}px) scale(${c.scale})`,
+          filter: c.mblur > 0.3 ? `blur(${c.mblur}px)` : "none",
+        }}
       />
     </AbsoluteFill>
   );
@@ -142,40 +144,52 @@ const CaptionsLayer: React.FC = () => {
       if (f >= ch.in_f - 4 && f < ch.out_f + 6) { active = ch; break; }
   if (!active) return null;
   const app = interpolate(f, [active.in_f - 2, active.in_f + 2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const sc = interpolate(f, [active.in_f - 2, active.in_f + 2], [0.95, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const enter = interpolate(f, [active.in_f - 2, active.in_f + 2], [0.94, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   let activeIdx = 0;
   active.words.forEach((w, i) => { if (f >= w.at_f) activeIdx = i; });
+  const single = active.words.length === 1;
+  const SIZE = single ? 108 : 92;
   return (
     <AbsoluteFill>
-      <div style={{ position: "absolute", top: 1180, left: T.marginX, right: T.marginX, textAlign: "center", opacity: app, transform: `scale(${sc})` }}>
-        <span style={{ fontFamily: "Inter", fontWeight: 900, fontSize: 88, letterSpacing: "-0.02em", lineHeight: 1.28 }}>
-          {active.words.map((w, i) => {
-            const on = i === activeIdx;
-            // pop d'echelle au moment ou le mot devient actif
-            const dt = f - w.at_f;
-            const pop = on ? interpolate(dt, [0, 3, 8], [1.0, 1.16, 1.0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 1;
-            const key = w.accent;
+      <div
+        style={{
+          position: "absolute", bottom: 500, left: T.marginX, right: T.marginX,
+          textAlign: "center", opacity: app, transform: `scale(${enter})`,
+          filter: "drop-shadow(0 6px 18px rgba(0,0,0,0.6))",
+          fontFamily: "Inter", fontWeight: 900, fontSize: SIZE, letterSpacing: "-0.03em", lineHeight: 0.92,
+        }}
+      >
+        {active.words.map((w, i) => {
+          const on = i === activeIdx;
+          const yellow = w.key;
+          // mot en cours : echelle 1.06 + luminosite. AUCUN fond.
+          const pop = on ? interpolate(f - w.at_f, [0, 4], [1.0, 1.06], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 1;
+          const bright = on ? 1.18 : 1;
+          const common: React.CSSProperties = {
+            display: "inline-block", margin: "0 12px", transform: `scale(${pop})`,
+            filter: `brightness(${bright})`,
+            WebkitTextStroke: "6px #05070A", paintOrder: "stroke fill" as unknown as string,
+          };
+          if (yellow) {
+            // mot-cle jaune : entree lettre par lettre + micro-rotation
+            const dl = f - w.at_f;
             return (
-              <span
-                key={i}
-                style={{
-                  display: "inline-block",
-                  transform: `scale(${pop})`,
-                  margin: "0 9px",
-                  padding: on ? "2px 16px" : "2px 2px",
-                  borderRadius: 14,
-                  background: on ? T.accent : "transparent",
-                  color: on ? T.white : key ? T.accent : T.white,
-                  textShadow: on ? "0 4px 14px rgba(0,0,0,0.45)" : textOutline(8),
-                  boxShadow: on ? "0 8px 24px rgba(79,107,255,0.45)" : "none",
-                  borderBottom: key && !on ? `6px solid ${T.accent}` : "none",
-                }}
-              >
-                {w.w}
+              <span key={i} style={{ ...common, color: T.yellow }}>
+                {w.w.split("").map((ch, ci) => {
+                  const lo = interpolate(dl, [ci, ci + 3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+                  const rot = interpolate(dl, [ci, ci + 5], [1.5, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+                  return <span key={ci} style={{ display: "inline-block", opacity: lo, transform: `rotate(${rot}deg)` }}>{ch === " " ? " " : ch}</span>;
+                })}
               </span>
             );
-          })}
-        </span>
+          }
+          // mot blanc : contour + ombre (dégradé simulé par une teinte froide légère, robuste en headless)
+          return (
+            <span key={i} style={{ ...common, color: "#F4F7FF" }}>
+              {w.w}
+            </span>
+          );
+        })}
       </div>
     </AbsoluteFill>
   );
