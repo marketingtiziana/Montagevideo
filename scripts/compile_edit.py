@@ -85,13 +85,17 @@ for i, seg in enumerate(edit["segments"]):
     out_start = cursor
     out_end = out_start + dur_f
     cursor = out_end
+    gl = []
+    if seg.get("graphic"):
+        gl.append(seg["graphic"])
+    gl += seg.get("graphics", [])
     segments.append({
         "id": seg["id"], "act": seg["act"], "why": seg.get("why", ""),
         "src_in": seg["src_in"], "src_out": seg["src_out"], "dur_f": dur_f,
         "out_start": out_start, "out_end": out_end,
         "transition_in": trans, "audio_lead": seg.get("audio_lead", 0.0),
         "camera": seg.get("camera", {"type": "static"}),
-        "graphic": seg.get("graphic"),
+        "graphics": gl,
         "captions": build_caps(seg, out_start, out_end),
     })
 

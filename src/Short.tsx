@@ -27,6 +27,7 @@ import {
   ProgressLine,
   TitleFlash,
   Chip,
+  Tag,
 } from "./graphics/overlays";
 
 type Cap = { in_f: number; out_f: number; words: { w: string; accent: boolean; at_f: number }[] };
@@ -36,7 +37,7 @@ type Seg = {
   out_end: number;
   transition_in: string;
   camera: { type: string; from?: number; to?: number; scale?: number; drift_px?: number };
-  graphic: Record<string, unknown> | null;
+  graphics: Record<string, unknown>[];
   captions: Cap[];
 };
 const TL = timelineData as unknown as { meta: { total_frames: number }; segments: Seg[] };
@@ -55,8 +56,7 @@ const DOMINANT = new Set([
 
 type GTiming = { seg: Seg; type: string; appear: number; hold: number; total: number; dominant: boolean; props: Record<string, unknown> };
 
-function graphicTiming(seg: Seg): GTiming | null {
-  const g = seg.graphic;
+function graphicTiming(seg: Seg, g: Record<string, unknown>): GTiming | null {
   if (!g) return null;
   const type = g.type as string;
   let appear = seg.out_start + 6;
@@ -78,7 +78,9 @@ function graphicTiming(seg: Seg): GTiming | null {
   return { seg, type, appear, hold, total: ENTER + hold + EXIT, dominant: DOMINANT.has(type), props: g };
 }
 
-const GRAPHICS = SEGS.map(graphicTiming).filter(Boolean) as GTiming[];
+const GRAPHICS = SEGS.flatMap((s) =>
+  (s.graphics || []).map((g) => graphicTiming(s, g)),
+).filter(Boolean) as GTiming[];
 // Intervalles où une incrustation dominante est visible (pour masquer les sous-titres).
 const DOM_INTERVALS = GRAPHICS.filter((g) => g.dominant).map((g) => [g.appear, g.appear + g.total] as [number, number]);
 
@@ -124,6 +126,7 @@ const GraphicNode: React.FC<{ g: GTiming }> = ({ g }) => {
     case "CTACard": return <CTACard hold={hold} word={(p.label as string) ?? "« POKER »"} />;
     case "TitleFlash": return <TitleFlash hold={hold} text={(p.label as string) ?? "LE VRAI SUJET"} />;
     case "Chip": return <Chip hold={hold} big={(p.big as string) ?? ""} small={(p.small as string) ?? ""} />;
+    case "Tag": return <Tag hold={hold} text={(p.text as string) ?? ""} pos={(p.pos as "tl" | "tr" | "ml" | "mr") ?? "tr"} fill={Boolean(p.fill)} />;
     default: return null;
   }
 };
@@ -145,10 +148,33 @@ const CaptionsLayer: React.FC = () => {
   return (
     <AbsoluteFill>
       <div style={{ position: "absolute", top: 1180, left: T.marginX, right: T.marginX, textAlign: "center", opacity: app, transform: `scale(${sc})` }}>
-        <span style={{ fontFamily: "Inter", fontWeight: 900, fontSize: 88, letterSpacing: "-0.02em", lineHeight: 1.12, textShadow: textOutline(8) }}>
-          {active.words.map((w, i) => (
-            <span key={i} style={{ color: i === activeIdx || w.accent ? T.accent : T.white, marginRight: 18 }}>{w.w}</span>
-          ))}
+        <span style={{ fontFamily: "Inter", fontWeight: 900, fontSize: 88, letterSpacing: "-0.02em", lineHeight: 1.28 }}>
+          {active.words.map((w, i) => {
+            const on = i === activeIdx;
+            // pop d'echelle au moment ou le mot devient actif
+            const dt = f - w.at_f;
+            const pop = on ? interpolate(dt, [0, 3, 8], [1.0, 1.16, 1.0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 1;
+            const key = w.accent;
+            return (
+              <span
+                key={i}
+                style={{
+                  display: "inline-block",
+                  transform: `scale(${pop})`,
+                  margin: "0 9px",
+                  padding: on ? "2px 16px" : "2px 2px",
+                  borderRadius: 14,
+                  background: on ? T.accent : "transparent",
+                  color: on ? T.white : key ? T.accent : T.white,
+                  textShadow: on ? "0 4px 14px rgba(0,0,0,0.45)" : textOutline(8),
+                  boxShadow: on ? "0 8px 24px rgba(79,107,255,0.45)" : "none",
+                  borderBottom: key && !on ? `6px solid ${T.accent}` : "none",
+                }}
+              >
+                {w.w}
+              </span>
+            );
+          })}
         </span>
       </div>
     </AbsoluteFill>

@@ -18,12 +18,36 @@ RISER = "public/assets/sfx/riser_1s.wav"
 WHOOSH = "public/assets/sfx/whoosh_short.wav"
 CLICK = "public/assets/sfx/click.wav"
 
+import re
+def norm(s): return re.sub(r"[^a-z0-9]", "", s.lower())
+ENTER, EXITF = 14, 9
+def appear_frame(seg, g):
+    a = seg["out_start"] + 6
+    ow = g.get("on_word")
+    if ow:
+        k = norm(ow)
+        for ch in seg["captions"]:
+            for w in ch["words"]:
+                if k in norm(w["w"]) or norm(w["w"]) in k:
+                    a = max(seg["out_start"] + 2, w["at_f"] - 4); break
+            else: continue
+            break
+    MINTOTAL = ENTER + 42 + EXITF
+    if a + MINTOTAL > seg["out_end"]:
+        a = max(seg["out_start"], seg["out_end"] - MINTOTAL)
+    return a
+
 # --- cues (secondes, cales frame) ---
 # transitions : whip -> whoosh ; flash/signature -> impact
 whips = [t_start(s["id"]) for s in tl["segments"] if s["transition_in"] == "whip"]
 impacts = [t_start(s["id"]) for s in tl["segments"] if s["transition_in"] in ("flash", "SIGNATURE")]
 riser_t = t_start("s10") - 1.0                     # riser finit sur la revelation 50%
-clicks = [t_start("s04"), t_start("s07"), t_start("s09"), t_start("s12"), t_start("s15")]  # apparitions de cartes
+# pop discret a CHAQUE apparition d'incrustation
+pops = []
+for s in tl["segments"]:
+    for g in s.get("graphics", []):
+        pops.append(appear_frame(s, g) / FPS)
+clicks = pops
 
 def ms(x): return int(max(0, x) * 1000)
 

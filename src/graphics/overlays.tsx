@@ -395,6 +395,38 @@ export const Chip: React.FC<Base & { big?: string; small?: string }> = ({ hold =
   );
 };
 
+// ---------- Tag : petite pastille animée (non-dominante, coexiste avec le sous-titre) ----------
+type Pos = "tl" | "tr" | "ml" | "mr";
+export const Tag: React.FC<Base & { text?: string; pos?: Pos; fill?: boolean }> = ({
+  hold = 46,
+  text = "",
+  pos = "tr",
+  fill = false,
+}) => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const env = envelope(f, fps, hold);
+  const op = opacityInOut(env);
+  const sc = scaleInOut(env);
+  const rot = interpolate(env.e, [0, 1], [-4, 0]) + (env.x > 0 ? interpolate(env.x, [0, 1], [0, 3]) : 0);
+  const coord: Record<Pos, React.CSSProperties> = {
+    tl: { top: 300, left: T.marginX },
+    tr: { top: 300, right: T.marginX },
+    ml: { top: 760, left: T.marginX },
+    mr: { top: 760, right: T.marginX },
+  };
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      <div style={{ position: "absolute", ...coord[pos], opacity: op, transform: `scale(${sc}) rotate(${rot}deg)` }}>
+        <div style={{ background: fill ? T.accent : T.cardBg, border: `2px solid ${T.accent}`, borderRadius: 999, padding: "16px 30px", ...shadow }}>
+          <span style={{ ...label(40, fill ? T.white : T.accent), fontWeight: 800, letterSpacing: "0.02em" }}>{text}</span>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 // ---------- Sous-titres karaoké (2-3 mots, mot actif en accent) ----------
 export type Word = { w: string; accent?: boolean };
 export const CaptionChunk: React.FC<{ words: Word[]; activeIndex: number }> = ({ words, activeIndex }) => {
