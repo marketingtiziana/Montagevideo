@@ -45,12 +45,15 @@ for out, nf, a, b in chunks:
     subprocess.run(["npx", "remotion", "render", BUNDLE, "Short", out,
                     f"--frames={a}-{b}", f"--scale={SCALE}", "--log=error"], check=True)
 
-# 3) concat -> 30fps CFR strict (re-encode : evite la derive de timing du -c copy)
-lst = f"{CDIR}/list.txt"
-open(lst, "w").write("\n".join(f"file '{os.path.abspath(o)}'" for o, _, _, _ in chunks) + "\n")
+# 3) concat via FILTRE concat -> renumerote proprement, exactement sum(frames) @ 30fps CFR
 crf = "16" if SCALE == "1" else "20"
-subprocess.run(["ffmpeg", "-nostdin", "-y", "-f", "concat", "-safe", "0", "-i", lst,
-                "-vf", f"fps={FPS},setpts=N/({FPS}*TB)", "-fps_mode", "cfr", "-r", str(FPS),
+ins = []
+for o, _, _, _ in chunks:
+    ins += ["-i", o]
+n = len(chunks)
+filt = "".join(f"[{i}:v]" for i in range(n)) + f"concat=n={n}:v=1[v]"
+subprocess.run(["ffmpeg", "-nostdin", "-y", *ins, "-filter_complex", filt, "-map", "[v]",
+                "-fps_mode", "cfr", "-r", str(FPS), "-frames:v", str(TOTAL),
                 "-c:v", "libx264", "-preset", "veryfast", "-crf", crf, "-pix_fmt", "yuv420p", OUT], check=True)
 d = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=nw=1:nk=1",OUT],capture_output=True,text=True).stdout.strip()
 print(f"OK {OUT} : {d}s ({len(chunks)} chunks)")
