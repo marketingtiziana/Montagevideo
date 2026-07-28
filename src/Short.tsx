@@ -34,6 +34,8 @@ import {
   SceneMoney,
   ScenePassport,
   SceneMap,
+  SceneImpot,
+  SceneChoice,
 } from "./graphics/overlays";
 
 type Cap = { in_f: number; out_f: number; words: { w: string; key: boolean; at_f: number }[] };
@@ -98,7 +100,7 @@ const DOM_INTERVALS = GRAPHICS.filter((g) => g.dominant).map((g) => [g.appear, g
 type Broll = { scene: string; in_f: number; out_f: number; label?: string };
 const BROLL: Broll[] = SEGS.flatMap((s) => ((s as unknown as { broll?: Broll[] }).broll ?? []));
 const BROLL_INTERVALS = BROLL.map((b) => [b.in_f, b.out_f] as [number, number]);
-const SCENES: Record<string, React.FC> = { poker: ScenePoker, dubai: SceneDubai, money: SceneMoney, passport: ScenePassport, map: SceneMap };
+const SCENES: Record<string, React.FC> = { poker: ScenePoker, dubai: SceneDubai, money: SceneMoney, passport: ScenePassport, map: SceneMap, impot: SceneImpot, choix: SceneChoice };
 
 const OneBroll: React.FC<{ b: Broll }> = ({ b }) => {
   const f = useCurrentFrame();

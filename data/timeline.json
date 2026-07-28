@@ -467,7 +467,7 @@
       "why": "Le contre-pied qui detruit la croyance. Bouton d'accroche.",
       "src_in": 21.32,
       "src_out": 29.92,
-      "dur_f": 183,
+      "dur_f": 42,
       "out_start": 410,
       "out_end": 593,
       "transition_in": "hard_cut",
@@ -484,7 +484,14 @@
           "hold_min_s": 0.8
         }
       ],
-      "broll": [],
+      "broll": [
+        {
+          "scene": "impot",
+          "in_f": 410,
+          "out_f": 452,
+          "label": null
+        }
+      ],
       "captions": [
         {
           "in_f": 410,
@@ -739,7 +746,7 @@
       "why": "Le mecanisme du 'pourquoi imposable' : tu en vis, c'est regulier -> activite professionnelle -> ca s'impose. Designe le destinataire (le pro).",
       "src_in": 45.1,
       "src_out": 62.16,
-      "dur_f": 419,
+      "dur_f": 39,
       "out_start": 736,
       "out_end": 1155,
       "transition_in": "zoom_through",
@@ -764,7 +771,14 @@
           "hold_min_s": 1.4
         }
       ],
-      "broll": [],
+      "broll": [
+        {
+          "scene": "impot",
+          "in_f": 856,
+          "out_f": 895,
+          "label": null
+        }
+      ],
       "captions": [
         {
           "in_f": 736,
@@ -1491,7 +1505,7 @@
       "why": "Formule-cle : le choix du pays n'est pas un detail, c'est LA decision. On garde la battue avant 'la decision'.",
       "src_in": 96.76,
       "src_out": 102.24,
-      "dur_f": 164,
+      "dur_f": 39,
       "out_start": 1591,
       "out_end": 1755,
       "transition_in": "continue",
@@ -1516,7 +1530,14 @@
           "hold_min_s": 1.4
         }
       ],
-      "broll": [],
+      "broll": [
+        {
+          "scene": "choix",
+          "in_f": 1594,
+          "out_f": 1633,
+          "label": null
+        }
+      ],
       "captions": [
         {
           "in_f": 1591,
@@ -2328,7 +2349,7 @@
       "why": "La punchline qui cristallise la these — ne fonctionne que maintenant, l'argument etant pose. Livree sur coupe franche, le silence fait le travail.",
       "src_in": 156.88,
       "src_out": 168.0,
-      "dur_f": 334,
+      "dur_f": 39,
       "out_start": 2394,
       "out_end": 2728,
       "transition_in": "hard_cut",
@@ -2348,7 +2369,14 @@
           "hold_min_s": 1.6
         }
       ],
-      "broll": [],
+      "broll": [
+        {
+          "scene": "poker",
+          "in_f": 2398,
+          "out_f": 2437,
+          "label": null
+        }
+      ],
       "captions": [
         {
           "in_f": 2394,

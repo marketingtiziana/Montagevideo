@@ -514,6 +514,45 @@ export const SceneMap: React.FC = () => {
   );
 };
 
+export const SceneImpot: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const ry = interpolate(f, [0, 16], [70, 0], { extrapolateRight: "clamp" });
+  const stamp = interpolate(f, [12, 18], [1.7, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const sop = interpolate(f, [12, 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const rows = [0, 1, 2, 3];
+  return (
+    <AbsoluteFill style={{ background: bgScene, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <div style={{ transform: `translateY(${ry}px) rotate(4deg)`, width: 500, height: 660, borderRadius: 24, background: "linear-gradient(160deg,#1B2E63,#0E1740)", border: `4px solid ${T.accent}`, boxShadow: T.shadow, position: "relative" }}>
+        <div style={{ ...label(38, T.accentSoft), position: "absolute", top: 46, left: 0, right: 0, textAlign: "center", letterSpacing: "0.2em" }}>DÉCLARATION</div>
+        {rows.map((r) => (
+          <div key={r} style={{ position: "absolute", top: 150 + r * 70, left: 44, right: 44, height: 14, background: T.line, borderRadius: 7, opacity: interpolate(f, [4 + r * 2, 12 + r * 2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }} />
+        ))}
+        <div style={{ position: "absolute", bottom: 70, right: 44, transform: `rotate(-14deg) scale(${stamp})`, opacity: sop, border: `7px solid ${T.accent}`, color: T.accent, borderRadius: 12, padding: "8px 20px", fontFamily: FONT, fontWeight: 900, fontSize: 60 }}>IMPÔT</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+export const SceneChoice: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const spread = interpolate(f, [4, 20], [0, 220], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const op = interpolate(f, [2, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const glow = interpolate(f, [10, 22], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ background: bgScene, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: 620, width: 26, height: 26, borderRadius: "50%", background: T.white, boxShadow: T.shadow }} />
+      <div style={{ position: "absolute", top: 640, width: 8, height: 260, background: T.line }} />
+      <div style={{ position: "absolute", top: 900, left: "50%", transform: `translateX(calc(-50% - ${spread}px)) rotate(-24deg)`, width: 8, height: 300, background: `linear-gradient(180deg,${T.accent},#0E1740)`, opacity: op, transformOrigin: "top center" }} />
+      <div style={{ position: "absolute", top: 900, left: "50%", transform: `translateX(calc(-50% + ${spread}px)) rotate(24deg)`, width: 8, height: 300, background: `linear-gradient(180deg,${T.accentSoft},#0E1740)`, opacity: op, transformOrigin: "top center" }} />
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-end", paddingBottom: 300 }}>
+        <div style={{ ...title(120, T.white), opacity: glow, textShadow: `0 0 ${30 * glow}px ${T.accent}` }}>OU ?</div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
 // ---------- Tag : petite pastille animée (non-dominante, coexiste avec le sous-titre) ----------
 type Pos = "tl" | "tr" | "ml" | "mr";
 export const Tag: React.FC<Base & { text?: string; pos?: Pos; fill?: boolean }> = ({

@@ -61,6 +61,9 @@ broll_wh = []
 for s in tl["segments"]:
     for b in s.get("broll", []):
         broll_wh.append(b["in_f"] / FPS)
+# accent grave discret sur chaque coupe franche (densite, sans whoosh sur coupe)
+hardcuts = [s["out_start"] / FPS for s in tl["segments"]
+            if s["transition_in"] == "hard_cut" and s["out_start"] > 0]
 
 def ms(x): return int(max(0, x) * 1000)
 
@@ -95,15 +98,17 @@ def add_sfx(path, t, vol, lead=0.0, pre=""):
 for t in whooshs: add_sfx(WHOOSH, t, "-11dB", lead=0.30)
 # b-roll cut-away : whoosh + impact (bien marque)
 for t in broll_wh:
-    add_sfx(WHOOSH, t, "-13dB", lead=0.22)
-    add_sfx(IMPACT, t, "-13dB")
+    add_sfx(WHOOSH, t, "-11dB", lead=0.22)
+    add_sfx(IMPACT, t, "-12dB")
+# accent grave discret sur les coupes franches : impact grave passe-bas, tres feutre
+for t in hardcuts: add_sfx(IMPACT, t, "-19dB", pre="lowpass=f=220")
 # impact snap zoom : -9dB
 for t in impacts: add_sfx(IMPACT, t, "-9dB")
 # risers : avant la revelation 50% (s10) et avant la punchline (s13)
 add_sfx(RISER, riser_t, "-13dB")
 add_sfx(RISER, t_start("s13") - 1.0, "-15dB")
 # POP incrustation : bien audible, passe-haut leger 800Hz
-for t in clicks: add_sfx(CLICK, t, "-13dB", pre="highpass=f=800")
+for t in clicks: add_sfx(CLICK, t, "-12dB", pre="highpass=f=800")
 
 mix_ins = "[vmix][music]" + "".join(sfx_labels)
 n = 2 + len(sfx_labels)
