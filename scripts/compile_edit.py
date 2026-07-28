@@ -90,6 +90,24 @@ for i, seg in enumerate(edit["segments"]):
     if seg.get("graphic"):
         gl.append(seg["graphic"])
     gl += seg.get("graphics", [])
+    # b-rolls : inserts video (la voix continue par-dessus). timing sur on_word.
+    caps_tmp = build_caps(seg, out_start, out_end)
+    brolls = []
+    for br in seg.get("broll", []):
+        bf = out_start + 6
+        ow = br.get("on_word")
+        if ow:
+            k = ow.lower()
+            for ch in caps_tmp:
+                for w in ch["words"]:
+                    if k in w["w"].lower():
+                        bf = w["at_f"]; break
+                else: continue
+                break
+        dur_f = round(br.get("dur_s", 1.2) * FPS)
+        bf = min(bf, out_end - dur_f)
+        brolls.append({"scene": br.get("scene"), "in_f": max(out_start, bf), "out_f": min(out_end, bf + dur_f),
+                       "label": br.get("label")})
     segments.append({
         "id": seg["id"], "act": seg["act"], "why": seg.get("why", ""),
         "src_in": seg["src_in"], "src_out": seg["src_out"], "dur_f": dur_f,
@@ -97,7 +115,8 @@ for i, seg in enumerate(edit["segments"]):
         "transition_in": trans, "audio_lead": seg.get("audio_lead", 0.0),
         "camera": seg.get("camera", {"type": "static"}),
         "graphics": gl,
-        "captions": build_caps(seg, out_start, out_end),
+        "broll": brolls,
+        "captions": caps_tmp,
     })
 
 total = max(s["out_end"] for s in segments)

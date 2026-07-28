@@ -29,6 +29,9 @@ import {
   TitleFlash,
   Chip,
   Tag,
+  ScenePoker,
+  SceneDubai,
+  SceneMoney,
 } from "./graphics/overlays";
 
 type Cap = { in_f: number; out_f: number; words: { w: string; key: boolean; at_f: number }[] };
@@ -73,8 +76,9 @@ function graphicTiming(seg: Seg, g: Record<string, unknown>): GTiming | null {
         }
   }
   // tenues par type : FullscreenCard = 0,6s (masque chapitre) ; TitleFlash/TwinReveal resserrés
-  const holdFloor = type === "FullscreenCard" ? 18 : 42;
-  const holdCap = type === "FullscreenCard" ? 18 : type === "TitleFlash" || type === "TwinReveal" ? 48 : 66;
+  const shortCard = type === "FullscreenCard" || type === "FullscreenStamp";
+  const holdFloor = shortCard ? 20 : 42;
+  const holdCap = shortCard ? 24 : type === "TitleFlash" || type === "TwinReveal" ? 48 : 66;
   const MINTOTAL = ENTER + holdFloor + EXIT;
   if (appear + MINTOTAL > seg.out_end) appear = Math.max(seg.out_start, seg.out_end - MINTOTAL);
   const available = seg.out_end - appear;
@@ -87,6 +91,38 @@ const GRAPHICS = SEGS.flatMap((s) =>
 ).filter(Boolean) as GTiming[];
 // Intervalles où une incrustation dominante est visible (pour masquer les sous-titres).
 const DOM_INTERVALS = GRAPHICS.filter((g) => g.dominant).map((g) => [g.appear, g.appear + g.total] as [number, number]);
+
+// ---------- B-rolls : inserts vidéo plein cadre (la voix continue par-dessus = L-cut) ----------
+type Broll = { scene: string; in_f: number; out_f: number; label?: string };
+const BROLL: Broll[] = SEGS.flatMap((s) => ((s as unknown as { broll?: Broll[] }).broll ?? []));
+const BROLL_INTERVALS = BROLL.map((b) => [b.in_f, b.out_f] as [number, number]);
+const SCENES: Record<string, React.FC> = { poker: ScenePoker, dubai: SceneDubai, money: SceneMoney };
+
+const OneBroll: React.FC<{ b: Broll }> = ({ b }) => {
+  const f = useCurrentFrame();
+  const dur = b.out_f - b.in_f;
+  const op = Math.min(
+    interpolate(f, [0, 3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+    interpolate(f, [dur - 3, dur], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+  );
+  const Scene = SCENES[b.scene] ?? SceneMoney;
+  return (
+    <AbsoluteFill style={{ opacity: op }}>
+      <Scene />
+      <AbsoluteFill style={{ boxShadow: "inset 0 0 0 5px rgba(79,107,255,0.5)", pointerEvents: "none" }} />
+    </AbsoluteFill>
+  );
+};
+
+const BrollLayer: React.FC = () => (
+  <>
+    {BROLL.map((b, i) => (
+      <Sequence key={i} from={b.in_f} durationInFrames={b.out_f - b.in_f} name={`broll-${b.scene}`}>
+        <OneBroll b={b} />
+      </Sequence>
+    ))}
+  </>
+);
 
 // ---------- Caméra virtuelle : crop par frame piloté par data/camera.json (suivi de visage) ----------
 const CameraVideo: React.FC = () => {
@@ -237,6 +273,7 @@ export const Short: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#05070A" }}>
       <CameraVideo />
+      <BrollLayer />
       {GRAPHICS.map((g) => (
         <Sequence key={g.seg.id} from={g.appear} durationInFrames={g.total} name={`gfx-${g.seg.id}`}>
           <GraphicNode g={g} />

@@ -77,6 +77,13 @@
           "fill": true,
           "hold_min_s": 1.5
         }
+      ],
+      "broll": [
+        {
+          "scene": "poker",
+          "on_word": "poker",
+          "dur_s": 1.3
+        }
       ]
     },
     {
@@ -90,14 +97,13 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "hard_cut",
+      "transition_in": "zoom_through",
       "graphic": {
         "type": "FullscreenStamp",
         "label": "FAUX",
         "sub": "1re erreur",
-        "role": "masque le jump cut de la redite",
-        "in_frames": 5,
-        "hold_min_s": 1.4
+        "on_word": "faux",
+        "hold_min_s": 0.8
       }
     },
     {
@@ -212,6 +218,13 @@
           "fill": true,
           "hold_min_s": 1.4
         }
+      ],
+      "broll": [
+        {
+          "scene": "dubai",
+          "on_word": "certains",
+          "dur_s": 1.3
+        }
       ]
     },
     {
@@ -238,7 +251,14 @@
           "val": 50
         },
         "hold_min_s": 2.2
-      }
+      },
+      "broll": [
+        {
+          "scene": "money",
+          "on_word": "moitié",
+          "dur_s": 1.2
+        }
+      ]
     },
     {
       "id": "s09",

@@ -56,6 +56,7 @@
           "hold_min_s": 1.5
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 8,
@@ -304,7 +305,7 @@
       "why": "Installe la fausse croyance de confort du spectateur (mes gains de jeu ne sont pas imposables).",
       "src_in": 15.76,
       "src_out": 19.96,
-      "dur_f": 126,
+      "dur_f": 39,
       "out_start": 284,
       "out_end": 410,
       "transition_in": "continue",
@@ -321,6 +322,14 @@
           "on_word": "chance",
           "fill": true,
           "hold_min_s": 1.5
+        }
+      ],
+      "broll": [
+        {
+          "scene": "poker",
+          "in_f": 298,
+          "out_f": 337,
+          "label": null
         }
       ],
       "captions": [
@@ -461,7 +470,7 @@
       "dur_f": 258,
       "out_start": 410,
       "out_end": 668,
-      "transition_in": "hard_cut",
+      "transition_in": "zoom_through",
       "audio_lead": 0.0,
       "camera": {
         "type": "static"
@@ -471,11 +480,11 @@
           "type": "FullscreenStamp",
           "label": "FAUX",
           "sub": "1re erreur",
-          "role": "masque le jump cut de la redite",
-          "in_frames": 5,
-          "hold_min_s": 1.4
+          "on_word": "faux",
+          "hold_min_s": 0.8
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 410,
@@ -593,6 +602,7 @@
           "hold_min_s": 1.6
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 668,
@@ -754,6 +764,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 811,
@@ -1048,6 +1059,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 1323,
@@ -1120,7 +1132,7 @@
       "why": "Le mecanisme reel : la taxation varie enormement selon le pays. Certains ne taxent pas du tout.",
       "src_in": 65.48,
       "src_out": 72.92,
-      "dur_f": 223,
+      "dur_f": 39,
       "out_start": 1423,
       "out_end": 1646,
       "transition_in": "continue",
@@ -1154,6 +1166,14 @@
           "on_word": "taxent",
           "fill": true,
           "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "dubai",
+          "in_f": 1545,
+          "out_f": 1584,
+          "label": null
         }
       ],
       "captions": [
@@ -1339,7 +1359,7 @@
       "why": "Le chiffre-choc qui condense l'enjeu : memes gains, tu gardes tout ou tu laisses la moitie.",
       "src_in": 93.0,
       "src_out": 96.76,
-      "dur_f": 113,
+      "dur_f": 36,
       "out_start": 1646,
       "out_end": 1759,
       "transition_in": "hard_cut",
@@ -1359,6 +1379,14 @@
             "val": 50
           },
           "hold_min_s": 2.2
+        }
+      ],
+      "broll": [
+        {
+          "scene": "money",
+          "in_f": 1723,
+          "out_f": 1759,
+          "label": null
         }
       ],
       "captions": [
@@ -1495,6 +1523,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 1759,
@@ -1687,6 +1716,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 1923,
@@ -1882,6 +1912,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 2098,
@@ -2039,6 +2070,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 2272,
@@ -2316,6 +2348,7 @@
           "hold_min_s": 1.6
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 2562,
@@ -2598,6 +2631,7 @@
           "hold_min_s": 1.4
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 2901,
@@ -2835,6 +2869,7 @@
           "hold_min_s": 2.0
         }
       ],
+      "broll": [],
       "captions": [
         {
           "in_f": 3173,

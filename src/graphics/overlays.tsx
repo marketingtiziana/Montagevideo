@@ -2,7 +2,7 @@
 // Chaque composant : ENTRÉE / TENUE / SORTIE. Palette froide. 2 propriétés animées max.
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from "remotion";
-import { T, title, label, textOutline, ensureFont } from "../theme";
+import { T, FONT, title, label, textOutline, ensureFont } from "../theme";
 import {
   envelope,
   scaleInOut,
@@ -391,6 +391,79 @@ export const Chip: React.FC<Base & { big?: string; small?: string }> = ({ hold =
           {small ? <div style={{ ...label(38), marginTop: 10 }}>{small}</div> : null}
         </Card>
       </div>
+    </AbsoluteFill>
+  );
+};
+
+// ===== Scènes b-roll graphiques (inserts plein cadre, la voix continue) =====
+const bgScene = "radial-gradient(120% 90% at 50% 30%, #16204A 0%, #0B1030 60%, #05070A 100%)";
+
+export const ScenePoker: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const rise = interpolate(f, [0, 16], [40, 0], { extrapolateRight: "clamp" });
+  const chips = [0, 1, 2, 3, 4];
+  const suits = ["♠", "♣", "♦", "♥"];
+  return (
+    <AbsoluteFill style={{ background: bgScene, overflow: "hidden" }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", transform: `translateY(${rise}px)` }}>
+        <div style={{ display: "flex", gap: 30, alignItems: "flex-end" }}>
+          {chips.map((c) => {
+            const h = interpolate(f, [4 + c * 3, 18 + c * 3], [0, 90 + c * 26], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+            return <div key={c} style={{ width: 96, height: h, borderRadius: 12, background: c % 2 ? T.accent : T.cardBg2, border: `4px solid ${T.accent}`, boxShadow: T.shadow }} />;
+          })}
+        </div>
+        <div style={{ display: "flex", gap: 60, marginTop: 70 }}>
+          {suits.map((s, i) => (
+            <span key={i} style={{ fontFamily: FONT, fontSize: 120, color: i % 2 ? T.accentSoft : T.white, opacity: interpolate(f, [8 + i * 2, 16 + i * 2], [0, 0.9], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), transform: `translateY(${interpolate(f, [8 + i * 2, 16 + i * 2], [20, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)` }}>{s}</span>
+          ))}
+        </div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+export const SceneDubai: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const bars = [200, 340, 260, 520, 300, 620, 380, 280, 240];
+  return (
+    <AbsoluteFill style={{ background: "radial-gradient(90% 70% at 50% 20%, #1B2E63 0%, #0B1030 55%, #05070A 100%)", overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: 360, left: "50%", width: 220, height: 220, borderRadius: "50%", background: T.accent, filter: "blur(2px)", opacity: 0.85, transform: `translateX(-50%) translateY(${interpolate(f, [0, 20], [80, 0], { extrapolateRight: "clamp" })}px)` }} />
+      <div style={{ position: "absolute", bottom: 640, left: 0, right: 0, display: "flex", gap: 14, justifyContent: "center", alignItems: "flex-end" }}>
+        {bars.map((h, i) => (
+          <div key={i} style={{ width: 78, height: interpolate(f, [2 + i * 2, 16 + i * 2], [0, h], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), background: "linear-gradient(180deg,#2A3E7A,#0E1740)", borderTop: `3px solid ${T.accentSoft}` }} />
+        ))}
+      </div>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-end", paddingBottom: 300 }}>
+        <div style={{ ...title(180, T.accent), opacity: interpolate(f, [10, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>0 %</div>
+        <div style={{ ...label(46), marginTop: 6 }}>D'IMPÔT</div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+export const SceneMoney: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const cols = [0, 1, 2, 3, 4, 5];
+  return (
+    <AbsoluteFill style={{ background: bgScene, overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, display: "flex", gap: 20, justifyContent: "center", alignItems: "flex-end", paddingBottom: 620 }}>
+        {cols.map((c) => {
+          const h = interpolate(f, [2 + c * 2, 18 + c * 2], [0, 120 + ((c * 53) % 220)], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          return (
+            <div key={c} style={{ display: "flex", flexDirection: "column-reverse", gap: 6 }}>
+              {Array.from({ length: Math.max(1, Math.round(h / 26)) }).map((_, k) => (
+                <div key={k} style={{ width: 120, height: 20, borderRadius: 4, background: k % 2 ? T.accent : T.accentSoft, opacity: 0.92 }} />
+              ))}
+            </div>
+          );
+        })}
+      </div>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+        <div style={{ ...title(280, T.white), opacity: interpolate(f, [8, 18], [0, 0.9], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), transform: `scale(${interpolate(f, [8, 18], [0.9, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })})` }}>€</div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
