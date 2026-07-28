@@ -1,0 +1,3030 @@
+{
+  "meta": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "source": "source/reel5.mp4",
+    "source_fps": 60,
+    "thesis": "Pour un joueur de poker pro, le pays ou il vit n'est pas un detail fiscal mais LA decision : a gains egaux, elle separe celui qui garde tout de celui qui en laisse la moitie, a condition d'y resider vraiment.",
+    "margins": {
+      "pre_first_word_s": 0.25,
+      "post_last_word_s": 0.4
+    },
+    "note_texte": "Textes = relecture corrigee de l'ASR base (modele large/medium injoignables). A valider si un terme fiscal ou un chiffre doit etre exact.",
+    "effets_autorises": {
+      "signature": "s06 — pivot 'ce qui rend le poker unique' (1:02). UNIQUE effet marquant du short.",
+      "cross_dissolve_8f": "s10 — saut temporel (bloc mort de 33s retire). UNE seule fois.",
+      "masque_plein_cadre": [
+        "s03 tampon FAUX",
+        "s08 ComparisonBar",
+        "s11 carte LE PIEGE"
+      ]
+    },
+    "total_frames": 3164,
+    "total_seconds": 105.47
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "act": "accroche",
+      "why": "Ouverture reelle de la source : la question + la promesse chiffree. Se comprend sans contexte, donc peut ouvrir.",
+      "src_in": 6.3,
+      "src_out": 15.76,
+      "dur_f": 284,
+      "out_start": 0,
+      "out_end": 284,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.06
+      },
+      "graphics": [
+        {
+          "type": "Chip",
+          "big": "MILLIERS D'€",
+          "small": "CHAQUE ANNÉE",
+          "on_word": "milliers",
+          "hold_min_s": 1.6
+        },
+        {
+          "type": "Tag",
+          "text": "POKER PRO",
+          "pos": "tr",
+          "on_word": "pro",
+          "hold_min_s": 1.5
+        }
+      ],
+      "broll": [],
+      "captions": [
+        {
+          "in_f": 8,
+          "out_f": 43,
+          "words": [
+            {
+              "w": "Où",
+              "key": false,
+              "at_f": 8
+            },
+            {
+              "w": "habiter",
+              "key": false,
+              "at_f": 22
+            }
+          ]
+        },
+        {
+          "in_f": 52,
+          "out_f": 73,
+          "words": [
+            {
+              "w": "quand",
+              "key": false,
+              "at_f": 52
+            },
+            {
+              "w": "on",
+              "key": false,
+              "at_f": 62
+            },
+            {
+              "w": "est",
+              "key": false,
+              "at_f": 67
+            }
+          ]
+        },
+        {
+          "in_f": 73,
+          "out_f": 100,
+          "words": [
+            {
+              "w": "joueur",
+              "key": false,
+              "at_f": 73
+            },
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 86
+            },
+            {
+              "w": "poker",
+              "key": false,
+              "at_f": 90
+            }
+          ]
+        },
+        {
+          "in_f": 100,
+          "out_f": 112,
+          "words": [
+            {
+              "w": "pro ?",
+              "key": false,
+              "at_f": 100
+            }
+          ]
+        },
+        {
+          "in_f": 112,
+          "out_f": 120,
+          "words": [
+            {
+              "w": "Je",
+              "key": false,
+              "at_f": 112
+            },
+            {
+              "w": "vais",
+              "key": false,
+              "at_f": 112
+            },
+            {
+              "w": "te",
+              "key": false,
+              "at_f": 114
+            }
+          ]
+        },
+        {
+          "in_f": 119,
+          "out_f": 127,
+          "words": [
+            {
+              "w": "dire",
+              "key": false,
+              "at_f": 119
+            },
+            {
+              "w": "pourquoi",
+              "key": false,
+              "at_f": 120
+            }
+          ]
+        },
+        {
+          "in_f": 125,
+          "out_f": 152,
+          "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 125
+            },
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 136
+            },
+            {
+              "w": "seul",
+              "key": false,
+              "at_f": 144
+            }
+          ]
+        },
+        {
+          "in_f": 152,
+          "out_f": 169,
+          "words": [
+            {
+              "w": "métier",
+              "key": false,
+              "at_f": 152
+            },
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 153
+            },
+            {
+              "w": "ça",
+              "key": false,
+              "at_f": 165
+            }
+          ]
+        },
+        {
+          "in_f": 169,
+          "out_f": 177,
+          "words": [
+            {
+              "w": "peut",
+              "key": false,
+              "at_f": 169
+            }
+          ]
+        },
+        {
+          "in_f": 172,
+          "out_f": 183,
+          "words": [
+            {
+              "w": "littéralement",
+              "key": false,
+              "at_f": 172
+            }
+          ]
+        },
+        {
+          "in_f": 183,
+          "out_f": 214,
+          "words": [
+            {
+              "w": "te",
+              "key": false,
+              "at_f": 183
+            },
+            {
+              "w": "coûter",
+              "key": true,
+              "at_f": 188
+            },
+            {
+              "w": "des",
+              "key": false,
+              "at_f": 210
+            }
+          ]
+        },
+        {
+          "in_f": 214,
+          "out_f": 230,
+          "words": [
+            {
+              "w": "dizaines",
+              "key": false,
+              "at_f": 214
+            },
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 227
+            }
+          ]
+        },
+        {
+          "in_f": 230,
+          "out_f": 245,
+          "words": [
+            {
+              "w": "milliers",
+              "key": false,
+              "at_f": 230
+            }
+          ]
+        },
+        {
+          "in_f": 245,
+          "out_f": 284,
+          "words": [
+            {
+              "w": "d'euros",
+              "key": false,
+              "at_f": 245
+            },
+            {
+              "w": "par",
+              "key": false,
+              "at_f": 254
+            },
+            {
+              "w": "an",
+              "key": false,
+              "at_f": 265
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "act": "accroche",
+      "why": "Installe la fausse croyance de confort du spectateur (mes gains de jeu ne sont pas imposables).",
+      "src_in": 15.76,
+      "src_out": 19.96,
+      "dur_f": 45,
+      "out_start": 284,
+      "out_end": 410,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static",
+        "drift_px": 6
+      },
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "VRAIMENT ?",
+          "pos": "mr",
+          "on_word": "chance",
+          "fill": true,
+          "hold_min_s": 1.5
+        }
+      ],
+      "broll": [
+        {
+          "scene": "poker",
+          "in_f": 298,
+          "out_f": 343,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 284,
+          "out_f": 298,
+          "words": [
+            {
+              "w": "Tu",
+              "key": false,
+              "at_f": 284
+            },
+            {
+              "w": "vis",
+              "key": false,
+              "at_f": 288
+            },
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 293
+            }
+          ]
+        },
+        {
+          "in_f": 298,
+          "out_f": 329,
+          "words": [
+            {
+              "w": "poker",
+              "key": false,
+              "at_f": 298
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 309
+            },
+            {
+              "w": "gagnes",
+              "key": false,
+              "at_f": 322
+            }
+          ]
+        },
+        {
+          "in_f": 329,
+          "out_f": 340,
+          "words": [
+            {
+              "w": "bien",
+              "key": false,
+              "at_f": 329
+            },
+            {
+              "w": "et",
+              "key": false,
+              "at_f": 337
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 337
+            }
+          ]
+        },
+        {
+          "in_f": 340,
+          "out_f": 358,
+          "words": [
+            {
+              "w": "te",
+              "key": false,
+              "at_f": 340
+            },
+            {
+              "w": "dis",
+              "key": false,
+              "at_f": 345
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 348
+            }
+          ]
+        },
+        {
+          "in_f": 358,
+          "out_f": 383,
+          "words": [
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 358
+            },
+            {
+              "w": "jeu",
+              "key": false,
+              "at_f": 362
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 379
+            }
+          ]
+        },
+        {
+          "in_f": 383,
+          "out_f": 410,
+          "words": [
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 383
+            },
+            {
+              "w": "la",
+              "key": false,
+              "at_f": 386
+            },
+            {
+              "w": "chance",
+              "key": false,
+              "at_f": 409
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "act": "accroche",
+      "why": "Le contre-pied qui detruit la croyance. Bouton d'accroche.",
+      "src_in": 21.32,
+      "src_out": 29.92,
+      "dur_f": 42,
+      "out_start": 410,
+      "out_end": 593,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "FullscreenStamp",
+          "label": "FAUX",
+          "sub": "1re erreur",
+          "on_word": "faux",
+          "hold_min_s": 0.8
+        }
+      ],
+      "broll": [
+        {
+          "scene": "impot",
+          "in_f": 410,
+          "out_f": 452,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 410,
+          "out_f": 456,
+          "words": [
+            {
+              "w": "Donc",
+              "key": false,
+              "at_f": 410
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 425
+            },
+            {
+              "w": "pas",
+              "key": false,
+              "at_f": 444
+            }
+          ]
+        },
+        {
+          "in_f": 456,
+          "out_f": 464,
+          "words": [
+            {
+              "w": "imposable ?",
+              "key": false,
+              "at_f": 456
+            }
+          ]
+        },
+        {
+          "in_f": 457,
+          "out_f": 465,
+          "words": [
+            {
+              "w": "Mais",
+              "key": false,
+              "at_f": 457
+            },
+            {
+              "w": "pas",
+              "key": false,
+              "at_f": 457
+            },
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 457
+            }
+          ]
+        },
+        {
+          "in_f": 461,
+          "out_f": 519,
+          "words": [
+            {
+              "w": "tout",
+              "key": false,
+              "at_f": 461
+            },
+            {
+              "w": "C'est",
+              "key": false,
+              "at_f": 479
+            },
+            {
+              "w": "faux",
+              "key": false,
+              "at_f": 498
+            }
+          ]
+        },
+        {
+          "in_f": 521,
+          "out_f": 583,
+          "words": [
+            {
+              "w": "Première",
+              "key": false,
+              "at_f": 521
+            },
+            {
+              "w": "erreur",
+              "key": false,
+              "at_f": 562
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "act": "contexte",
+      "why": "Pose la ligne de partage amateur/pro. On garde la respiration apres 'premiere erreur'.",
+      "src_in": 29.97,
+      "src_out": 34.75,
+      "dur_f": 143,
+      "out_start": 593,
+      "out_end": 736,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "Toggle",
+          "labels": [
+            "AMATEUR",
+            "PRO"
+          ],
+          "hold_min_s": 1.6
+        }
+      ],
+      "broll": [],
+      "captions": [
+        {
+          "in_f": 593,
+          "out_f": 607,
+          "words": [
+            {
+              "w": "Tout",
+              "key": false,
+              "at_f": 593
+            },
+            {
+              "w": "dépend",
+              "key": false,
+              "at_f": 597
+            }
+          ]
+        },
+        {
+          "in_f": 607,
+          "out_f": 622,
+          "words": [
+            {
+              "w": "d'une",
+              "key": false,
+              "at_f": 607
+            },
+            {
+              "w": "seule",
+              "key": false,
+              "at_f": 614
+            }
+          ]
+        },
+        {
+          "in_f": 622,
+          "out_f": 651,
+          "words": [
+            {
+              "w": "chose",
+              "key": false,
+              "at_f": 622
+            },
+            {
+              "w": "est-ce",
+              "key": false,
+              "at_f": 635
+            }
+          ]
+        },
+        {
+          "in_f": 651,
+          "out_f": 670,
+          "words": [
+            {
+              "w": "que",
+              "key": false,
+              "at_f": 651
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 655
+            },
+            {
+              "w": "es",
+              "key": false,
+              "at_f": 659
+            }
+          ]
+        },
+        {
+          "in_f": 670,
+          "out_f": 701,
+          "words": [
+            {
+              "w": "vu",
+              "key": false,
+              "at_f": 670
+            },
+            {
+              "w": "comme",
+              "key": false,
+              "at_f": 679
+            },
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 684
+            }
+          ]
+        },
+        {
+          "in_f": 701,
+          "out_f": 715,
+          "words": [
+            {
+              "w": "amateur",
+              "key": false,
+              "at_f": 701
+            },
+            {
+              "w": "ou",
+              "key": false,
+              "at_f": 706
+            }
+          ]
+        },
+        {
+          "in_f": 715,
+          "out_f": 736,
+          "words": [
+            {
+              "w": "comme",
+              "key": false,
+              "at_f": 715
+            },
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 720
+            },
+            {
+              "w": "pro ?",
+              "key": false,
+              "at_f": 726
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "act": "contexte",
+      "why": "Le mecanisme du 'pourquoi imposable' : tu en vis, c'est regulier -> activite professionnelle -> ca s'impose. Designe le destinataire (le pro).",
+      "src_in": 45.1,
+      "src_out": 62.16,
+      "dur_f": 39,
+      "out_start": 736,
+      "out_end": 1155,
+      "transition_in": "zoom_through",
+      "audio_lead": 0.4,
+      "camera": {
+        "type": "static",
+        "scale": 1.12
+      },
+      "graphics": [
+        {
+          "type": "LowerThird",
+          "title": "ACTIVITÉ PRO",
+          "accent": "= IMPOSABLE",
+          "on_word": "s'impose",
+          "hold_min_s": 1.6
+        },
+        {
+          "type": "Tag",
+          "text": "RÉGULIER",
+          "pos": "tr",
+          "on_word": "régulier",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "impot",
+          "in_f": 856,
+          "out_f": 895,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 736,
+          "out_f": 756,
+          "words": [
+            {
+              "w": "Oui",
+              "key": false,
+              "at_f": 736
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 739
+            },
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 747
+            }
+          ]
+        },
+        {
+          "in_f": 756,
+          "out_f": 784,
+          "words": [
+            {
+              "w": "jeu",
+              "key": false,
+              "at_f": 756
+            },
+            {
+              "w": "Mais",
+              "key": false,
+              "at_f": 766
+            },
+            {
+              "w": "toi",
+              "key": false,
+              "at_f": 774
+            }
+          ]
+        },
+        {
+          "in_f": 784,
+          "out_f": 803,
+          "words": [
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 784
+            },
+            {
+              "w": "en",
+              "key": false,
+              "at_f": 788
+            },
+            {
+              "w": "vis",
+              "key": false,
+              "at_f": 792
+            }
+          ]
+        },
+        {
+          "in_f": 803,
+          "out_f": 839,
+          "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 803
+            },
+            {
+              "w": "régulier",
+              "key": false,
+              "at_f": 835
+            }
+          ]
+        },
+        {
+          "in_f": 839,
+          "out_f": 856,
+          "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 839
+            },
+            {
+              "w": "ton",
+              "key": false,
+              "at_f": 854
+            }
+          ]
+        },
+        {
+          "in_f": 856,
+          "out_f": 888,
+          "words": [
+            {
+              "w": "métier",
+              "key": false,
+              "at_f": 856
+            },
+            {
+              "w": "pour",
+              "key": false,
+              "at_f": 868
+            },
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 880
+            }
+          ]
+        },
+        {
+          "in_f": 888,
+          "out_f": 921,
+          "words": [
+            {
+              "w": "fisc",
+              "key": false,
+              "at_f": 888
+            },
+            {
+              "w": "français",
+              "key": false,
+              "at_f": 913
+            }
+          ]
+        },
+        {
+          "in_f": 921,
+          "out_f": 942,
+          "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 921
+            },
+            {
+              "w": "une",
+              "key": false,
+              "at_f": 926
+            }
+          ]
+        },
+        {
+          "in_f": 942,
+          "out_f": 963,
+          "words": [
+            {
+              "w": "activité",
+              "key": false,
+              "at_f": 942
+            }
+          ]
+        },
+        {
+          "in_f": 968,
+          "out_f": 977,
+          "words": [
+            {
+              "w": "professionnelle",
+              "key": false,
+              "at_f": 968
+            }
+          ]
+        },
+        {
+          "in_f": 977,
+          "out_f": 1013,
+          "words": [
+            {
+              "w": "ça",
+              "key": false,
+              "at_f": 977
+            },
+            {
+              "w": "s'impose",
+              "key": false,
+              "at_f": 992
+            }
+          ]
+        },
+        {
+          "in_f": 1022,
+          "out_f": 1071,
+          "words": [
+            {
+              "w": "Donc",
+              "key": false,
+              "at_f": 1022
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 1028
+            },
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 1050
+            }
+          ]
+        },
+        {
+          "in_f": 1084,
+          "out_f": 1118,
+          "words": [
+            {
+              "w": "jeu",
+              "key": false,
+              "at_f": 1084
+            },
+            {
+              "w": "je",
+              "key": false,
+              "at_f": 1093
+            },
+            {
+              "w": "touche",
+              "key": false,
+              "at_f": 1115
+            }
+          ]
+        },
+        {
+          "in_f": 1118,
+          "out_f": 1154,
+          "words": [
+            {
+              "w": "tout",
+              "key": false,
+              "at_f": 1118
+            },
+            {
+              "w": "pour",
+              "key": false,
+              "at_f": 1141
+            },
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 1154
+            }
+          ]
+        },
+        {
+          "in_f": 1154,
+          "out_f": 1162,
+          "words": [
+            {
+              "w": "pro",
+              "key": false,
+              "at_f": 1154
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 1154
+            },
+            {
+              "w": "faux",
+              "key": true,
+              "at_f": 1154
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "act": "demonstration",
+      "why": "POINT DE BASCULE PRINCIPAL. Le recit pivote : de 'tu es imposable' vers 'tout depend du pays'. Seul emplacement de la transition signature.",
+      "src_in": 62.16,
+      "src_out": 65.48,
+      "dur_f": 100,
+      "out_start": 1155,
+      "out_end": 1255,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "TitleFlash",
+          "label": "CE QUI CHANGE TOUT",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [],
+      "captions": [
+        {
+          "in_f": 1155,
+          "out_f": 1189,
+          "words": [
+            {
+              "w": "Et",
+              "key": false,
+              "at_f": 1155
+            },
+            {
+              "w": "là",
+              "key": false,
+              "at_f": 1160
+            },
+            {
+              "w": "arrive",
+              "key": false,
+              "at_f": 1177
+            }
+          ]
+        },
+        {
+          "in_f": 1189,
+          "out_f": 1212,
+          "words": [
+            {
+              "w": "ce",
+              "key": false,
+              "at_f": 1189
+            },
+            {
+              "w": "qui",
+              "key": false,
+              "at_f": 1194
+            },
+            {
+              "w": "rend",
+              "key": false,
+              "at_f": 1202
+            }
+          ]
+        },
+        {
+          "in_f": 1212,
+          "out_f": 1251,
+          "words": [
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 1212
+            },
+            {
+              "w": "poker",
+              "key": false,
+              "at_f": 1218
+            },
+            {
+              "w": "unique",
+              "key": false,
+              "at_f": 1230
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "act": "demonstration",
+      "why": "Le mecanisme reel : la taxation varie enormement selon le pays. Certains ne taxent pas du tout.",
+      "src_in": 65.48,
+      "src_out": 72.92,
+      "dur_f": 45,
+      "out_start": 1255,
+      "out_end": 1478,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static",
+        "drift_px": 6
+      },
+      "graphics": [
+        {
+          "type": "Map",
+          "note": "pays qui taxe vs pays qui ne taxe pas",
+          "hold_min_s": 2.0,
+          "chips": [
+            {
+              "v": "DUBAÏ",
+              "k": "0 % D'IMPÔT",
+              "accent": true
+            },
+            {
+              "v": "FRANCE",
+              "k": "IMPOSÉ",
+              "accent": false
+            }
+          ]
+        },
+        {
+          "type": "Tag",
+          "text": "0 % ?",
+          "pos": "mr",
+          "on_word": "taxent",
+          "fill": true,
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "dubai",
+          "in_f": 1377,
+          "out_f": 1422,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 1255,
+          "out_f": 1276,
+          "words": [
+            {
+              "w": "La",
+              "key": false,
+              "at_f": 1255
+            },
+            {
+              "w": "façon",
+              "key": false,
+              "at_f": 1259
+            },
+            {
+              "w": "dont",
+              "key": false,
+              "at_f": 1269
+            }
+          ]
+        },
+        {
+          "in_f": 1276,
+          "out_f": 1298,
+          "words": [
+            {
+              "w": "les",
+              "key": false,
+              "at_f": 1276
+            },
+            {
+              "w": "gains",
+              "key": false,
+              "at_f": 1282
+            },
+            {
+              "w": "sont",
+              "key": false,
+              "at_f": 1291
+            }
+          ]
+        },
+        {
+          "in_f": 1298,
+          "out_f": 1324,
+          "words": [
+            {
+              "w": "taxés",
+              "key": false,
+              "at_f": 1298
+            },
+            {
+              "w": "change",
+              "key": false,
+              "at_f": 1308
+            }
+          ]
+        },
+        {
+          "in_f": 1324,
+          "out_f": 1347,
+          "words": [
+            {
+              "w": "énormément",
+              "key": false,
+              "at_f": 1324
+            },
+            {
+              "w": "d'un",
+              "key": false,
+              "at_f": 1340
+            }
+          ]
+        },
+        {
+          "in_f": 1347,
+          "out_f": 1377,
+          "words": [
+            {
+              "w": "pays",
+              "key": false,
+              "at_f": 1347
+            },
+            {
+              "w": "à",
+              "key": false,
+              "at_f": 1355
+            },
+            {
+              "w": "l'autre",
+              "key": false,
+              "at_f": 1358
+            }
+          ]
+        },
+        {
+          "in_f": 1377,
+          "out_f": 1403,
+          "words": [
+            {
+              "w": "Certains",
+              "key": false,
+              "at_f": 1377
+            },
+            {
+              "w": "pays",
+              "key": false,
+              "at_f": 1394
+            }
+          ]
+        },
+        {
+          "in_f": 1403,
+          "out_f": 1426,
+          "words": [
+            {
+              "w": "ne",
+              "key": false,
+              "at_f": 1403
+            },
+            {
+              "w": "taxent",
+              "key": false,
+              "at_f": 1407
+            },
+            {
+              "w": "pas",
+              "key": false,
+              "at_f": 1423
+            }
+          ]
+        },
+        {
+          "in_f": 1426,
+          "out_f": 1449,
+          "words": [
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 1426
+            },
+            {
+              "w": "tout",
+              "key": false,
+              "at_f": 1430
+            },
+            {
+              "w": "les",
+              "key": false,
+              "at_f": 1444
+            }
+          ]
+        },
+        {
+          "in_f": 1449,
+          "out_f": 1478,
+          "words": [
+            {
+              "w": "gains",
+              "key": false,
+              "at_f": 1449
+            },
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 1459
+            },
+            {
+              "w": "jeu",
+              "key": false,
+              "at_f": 1464
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "act": "demonstration",
+      "why": "Le chiffre-choc qui condense l'enjeu : memes gains, tu gardes tout ou tu laisses la moitie.",
+      "src_in": 93.0,
+      "src_out": 96.76,
+      "dur_f": 113,
+      "out_start": 1478,
+      "out_end": 1591,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "ComparisonBar",
+          "left": {
+            "label": "GARDE TOUT",
+            "val": 100
+          },
+          "right": {
+            "label": "LAISSE LA MOITIÉ",
+            "val": 50
+          },
+          "hold_min_s": 2.2
+        }
+      ],
+      "broll": [],
+      "captions": [
+        {
+          "in_f": 1485,
+          "out_f": 1508,
+          "words": [
+            {
+              "w": "Mais",
+              "key": false,
+              "at_f": 1485
+            },
+            {
+              "w": "selon",
+              "key": false,
+              "at_f": 1493
+            },
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 1503
+            }
+          ]
+        },
+        {
+          "in_f": 1508,
+          "out_f": 1527,
+          "words": [
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 1508
+            },
+            {
+              "w": "vis",
+              "key": false,
+              "at_f": 1512
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 1523
+            }
+          ]
+        },
+        {
+          "in_f": 1527,
+          "out_f": 1548,
+          "words": [
+            {
+              "w": "gardes",
+              "key": false,
+              "at_f": 1527
+            },
+            {
+              "w": "tout",
+              "key": false,
+              "at_f": 1527
+            },
+            {
+              "w": "ou",
+              "key": false,
+              "at_f": 1539
+            }
+          ]
+        },
+        {
+          "in_f": 1548,
+          "out_f": 1561,
+          "words": [
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 1548
+            },
+            {
+              "w": "en",
+              "key": false,
+              "at_f": 1551
+            },
+            {
+              "w": "laisses",
+              "key": false,
+              "at_f": 1557
+            }
+          ]
+        },
+        {
+          "in_f": 1561,
+          "out_f": 1587,
+          "words": [
+            {
+              "w": "la",
+              "key": false,
+              "at_f": 1561
+            },
+            {
+              "w": "moitié",
+              "key": false,
+              "at_f": 1566
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "act": "demonstration",
+      "why": "Formule-cle : le choix du pays n'est pas un detail, c'est LA decision. On garde la battue avant 'la decision'.",
+      "src_in": 96.76,
+      "src_out": 102.24,
+      "dur_f": 39,
+      "out_start": 1591,
+      "out_end": 1755,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.05,
+        "land_on": "decision"
+      },
+      "graphics": [
+        {
+          "type": "HighlightBox",
+          "on_word": "decision",
+          "hold_min_s": 1.4
+        },
+        {
+          "type": "Tag",
+          "text": "LE CHOIX",
+          "pos": "tl",
+          "on_word": "choix",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "choix",
+          "in_f": 1594,
+          "out_f": 1633,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 1591,
+          "out_f": 1614,
+          "words": [
+            {
+              "w": "Tu",
+              "key": false,
+              "at_f": 1591
+            },
+            {
+              "w": "comprends",
+              "key": false,
+              "at_f": 1594
+            },
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 1607
+            }
+          ]
+        },
+        {
+          "in_f": 1614,
+          "out_f": 1633,
+          "words": [
+            {
+              "w": "truc",
+              "key": false,
+              "at_f": 1614
+            },
+            {
+              "w": "Pour",
+              "key": false,
+              "at_f": 1621
+            },
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 1626
+            }
+          ]
+        },
+        {
+          "in_f": 1633,
+          "out_f": 1647,
+          "words": [
+            {
+              "w": "joueur",
+              "key": false,
+              "at_f": 1633
+            },
+            {
+              "w": "pro",
+              "key": false,
+              "at_f": 1638
+            },
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 1646
+            }
+          ]
+        },
+        {
+          "in_f": 1647,
+          "out_f": 1667,
+          "words": [
+            {
+              "w": "choix",
+              "key": false,
+              "at_f": 1647
+            },
+            {
+              "w": "du",
+              "key": false,
+              "at_f": 1656
+            },
+            {
+              "w": "pays",
+              "key": false,
+              "at_f": 1657
+            }
+          ]
+        },
+        {
+          "in_f": 1667,
+          "out_f": 1682,
+          "words": [
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 1667
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 1669
+            },
+            {
+              "w": "habites",
+              "key": false,
+              "at_f": 1670
+            }
+          ]
+        },
+        {
+          "in_f": 1682,
+          "out_f": 1696,
+          "words": [
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 1682
+            },
+            {
+              "w": "pas",
+              "key": false,
+              "at_f": 1689
+            },
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 1696
+            }
+          ]
+        },
+        {
+          "in_f": 1696,
+          "out_f": 1724,
+          "words": [
+            {
+              "w": "détail",
+              "key": false,
+              "at_f": 1696
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 1709
+            },
+            {
+              "w": "la",
+              "key": false,
+              "at_f": 1721
+            }
+          ]
+        },
+        {
+          "in_f": 1724,
+          "out_f": 1745,
+          "words": [
+            {
+              "w": "décision",
+              "key": false,
+              "at_f": 1724
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "act": "demonstration",
+      "why": "L'enjeu chiffre : un pays qui ne taxe pas le jeu = la moitie de tes gains sur l'annee.",
+      "src_in": 135.56,
+      "src_out": 141.4,
+      "dur_f": 175,
+      "out_start": 1755,
+      "out_end": 1930,
+      "transition_in": "zoom_through",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "StatCard",
+          "value": 50,
+          "unit": "%",
+          "label": "DE TES GAINS",
+          "count_s": 0.9,
+          "hold_min_s": 2.0
+        },
+        {
+          "type": "Tag",
+          "text": "SUR L'ANNÉE",
+          "pos": "mr",
+          "on_word": "année",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [],
+      "captions": [
+        {
+          "in_f": 1755,
+          "out_f": 1763,
+          "words": [
+            {
+              "w": "Il",
+              "key": false,
+              "at_f": 1755
+            },
+            {
+              "w": "y",
+              "key": false,
+              "at_f": 1759
+            },
+            {
+              "w": "a",
+              "key": false,
+              "at_f": 1760
+            }
+          ]
+        },
+        {
+          "in_f": 1763,
+          "out_f": 1778,
+          "words": [
+            {
+              "w": "un",
+              "key": false,
+              "at_f": 1763
+            },
+            {
+              "w": "pays",
+              "key": false,
+              "at_f": 1766
+            },
+            {
+              "w": "qui",
+              "key": false,
+              "at_f": 1773
+            }
+          ]
+        },
+        {
+          "in_f": 1778,
+          "out_f": 1795,
+          "words": [
+            {
+              "w": "ne",
+              "key": false,
+              "at_f": 1778
+            },
+            {
+              "w": "taxe",
+              "key": false,
+              "at_f": 1787
+            },
+            {
+              "w": "pas",
+              "key": false,
+              "at_f": 1789
+            }
+          ]
+        },
+        {
+          "in_f": 1795,
+          "out_f": 1813,
+          "words": [
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 1795
+            },
+            {
+              "w": "jeu",
+              "key": false,
+              "at_f": 1798
+            },
+            {
+              "w": "ça",
+              "key": false,
+              "at_f": 1812
+            }
+          ]
+        },
+        {
+          "in_f": 1813,
+          "out_f": 1821,
+          "words": [
+            {
+              "w": "peut",
+              "key": false,
+              "at_f": 1813
+            }
+          ]
+        },
+        {
+          "in_f": 1820,
+          "out_f": 1845,
+          "words": [
+            {
+              "w": "représenter",
+              "key": false,
+              "at_f": 1820
+            },
+            {
+              "w": "la",
+              "key": false,
+              "at_f": 1842
+            }
+          ]
+        },
+        {
+          "in_f": 1845,
+          "out_f": 1865,
+          "words": [
+            {
+              "w": "moitié",
+              "key": false,
+              "at_f": 1845
+            },
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 1858
+            },
+            {
+              "w": "ce",
+              "key": false,
+              "at_f": 1865
+            }
+          ]
+        },
+        {
+          "in_f": 1865,
+          "out_f": 1900,
+          "words": [
+            {
+              "w": "que",
+              "key": false,
+              "at_f": 1865
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 1870
+            },
+            {
+              "w": "gagnes",
+              "key": false,
+              "at_f": 1880
+            }
+          ]
+        },
+        {
+          "in_f": 1900,
+          "out_f": 1929,
+          "words": [
+            {
+              "w": "dans",
+              "key": false,
+              "at_f": 1900
+            },
+            {
+              "w": "l'année",
+              "key": false,
+              "at_f": 1908
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "act": "demonstration",
+      "why": "POINT DE BASCULE SECONDAIRE. Le contre-pied dans le contre-pied : le bon pays ne suffit pas.",
+      "src_in": 141.4,
+      "src_out": 147.2,
+      "dur_f": 174,
+      "out_start": 1930,
+      "out_end": 2104,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "FullscreenCard",
+          "label": "LE PIÈGE",
+          "role": "marque le twist (bascule secondaire), audio continue dessous (L-cut)",
+          "duration_s": 0.6,
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [],
+      "captions": [
+        {
+          "in_f": 1930,
+          "out_f": 1960,
+          "words": [
+            {
+              "w": "Mais",
+              "key": false,
+              "at_f": 1930
+            },
+            {
+              "w": "et",
+              "key": false,
+              "at_f": 1943
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 1948
+            }
+          ]
+        },
+        {
+          "in_f": 1960,
+          "out_f": 1982,
+          "words": [
+            {
+              "w": "là",
+              "key": false,
+              "at_f": 1960
+            },
+            {
+              "w": "que",
+              "key": false,
+              "at_f": 1966
+            },
+            {
+              "w": "les",
+              "key": false,
+              "at_f": 1973
+            }
+          ]
+        },
+        {
+          "in_f": 1982,
+          "out_f": 2005,
+          "words": [
+            {
+              "w": "gens",
+              "key": false,
+              "at_f": 1982
+            },
+            {
+              "w": "se",
+              "key": false,
+              "at_f": 1989
+            },
+            {
+              "w": "font",
+              "key": false,
+              "at_f": 1993
+            }
+          ]
+        },
+        {
+          "in_f": 2005,
+          "out_f": 2032,
+          "words": [
+            {
+              "w": "avoir",
+              "key": false,
+              "at_f": 2005
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 2021
+            },
+            {
+              "w": "peux",
+              "key": false,
+              "at_f": 2023
+            }
+          ]
+        },
+        {
+          "in_f": 2032,
+          "out_f": 2059,
+          "words": [
+            {
+              "w": "pas",
+              "key": false,
+              "at_f": 2032
+            },
+            {
+              "w": "juste",
+              "key": false,
+              "at_f": 2047
+            },
+            {
+              "w": "dire",
+              "key": false,
+              "at_f": 2050
+            }
+          ]
+        },
+        {
+          "in_f": 2059,
+          "out_f": 2098,
+          "words": [
+            {
+              "w": "j'habite",
+              "key": false,
+              "at_f": 2059
+            },
+            {
+              "w": "là-bas",
+              "key": false,
+              "at_f": 2077
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "act": "demonstration",
+      "why": "La condition reelle + la sanction : il faut vraiment y vivre, sinon requalification et tout retombe. On garde le temps apres 'et tout retombe'.",
+      "src_in": 147.2,
+      "src_out": 156.88,
+      "dur_f": 45,
+      "out_start": 2104,
+      "out_end": 2394,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.04,
+        "land_on": "retombe"
+      },
+      "graphics": [
+        {
+          "type": "LowerThird",
+          "title": "REQUALIFICATION",
+          "accent": "tout retombe",
+          "on_word": "retombe",
+          "hold_min_s": 1.6
+        },
+        {
+          "type": "Tag",
+          "text": "LE FISC",
+          "pos": "tr",
+          "on_word": "fisc",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "passport",
+          "in_f": 2254,
+          "out_f": 2299,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 2104,
+          "out_f": 2119,
+          "words": [
+            {
+              "w": "Il",
+              "key": false,
+              "at_f": 2104
+            },
+            {
+              "w": "faut",
+              "key": false,
+              "at_f": 2108
+            },
+            {
+              "w": "que",
+              "key": false,
+              "at_f": 2114
+            }
+          ]
+        },
+        {
+          "in_f": 2119,
+          "out_f": 2140,
+          "words": [
+            {
+              "w": "ce",
+              "key": false,
+              "at_f": 2119
+            },
+            {
+              "w": "soit",
+              "key": false,
+              "at_f": 2123
+            },
+            {
+              "w": "vrai",
+              "key": false,
+              "at_f": 2130
+            }
+          ]
+        },
+        {
+          "in_f": 2140,
+          "out_f": 2165,
+          "words": [
+            {
+              "w": "que",
+              "key": false,
+              "at_f": 2140
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 2144
+            },
+            {
+              "w": "vives",
+              "key": false,
+              "at_f": 2145
+            }
+          ]
+        },
+        {
+          "in_f": 2165,
+          "out_f": 2175,
+          "words": [
+            {
+              "w": "vraiment",
+              "key": false,
+              "at_f": 2165
+            },
+            {
+              "w": "dans",
+              "key": false,
+              "at_f": 2172
+            }
+          ]
+        },
+        {
+          "in_f": 2175,
+          "out_f": 2206,
+          "words": [
+            {
+              "w": "ce",
+              "key": false,
+              "at_f": 2175
+            },
+            {
+              "w": "pays",
+              "key": false,
+              "at_f": 2190
+            },
+            {
+              "w": "Un",
+              "key": false,
+              "at_f": 2196
+            }
+          ]
+        },
+        {
+          "in_f": 2206,
+          "out_f": 2227,
+          "words": [
+            {
+              "w": "joueur",
+              "key": false,
+              "at_f": 2206
+            },
+            {
+              "w": "qui",
+              "key": false,
+              "at_f": 2211
+            }
+          ]
+        },
+        {
+          "in_f": 2227,
+          "out_f": 2254,
+          "words": [
+            {
+              "w": "prétend",
+              "key": false,
+              "at_f": 2227
+            },
+            {
+              "w": "être",
+              "key": false,
+              "at_f": 2237
+            }
+          ]
+        },
+        {
+          "in_f": 2254,
+          "out_f": 2267,
+          "words": [
+            {
+              "w": "expatrié",
+              "key": false,
+              "at_f": 2254
+            },
+            {
+              "w": "mais",
+              "key": false,
+              "at_f": 2262
+            }
+          ]
+        },
+        {
+          "in_f": 2267,
+          "out_f": 2287,
+          "words": [
+            {
+              "w": "qui",
+              "key": false,
+              "at_f": 2267
+            },
+            {
+              "w": "vit",
+              "key": false,
+              "at_f": 2281
+            },
+            {
+              "w": "et",
+              "key": false,
+              "at_f": 2281
+            }
+          ]
+        },
+        {
+          "in_f": 2287,
+          "out_f": 2315,
+          "words": [
+            {
+              "w": "joue",
+              "key": false,
+              "at_f": 2287
+            },
+            {
+              "w": "depuis",
+              "key": false,
+              "at_f": 2291
+            },
+            {
+              "w": "la",
+              "key": false,
+              "at_f": 2302
+            }
+          ]
+        },
+        {
+          "in_f": 2315,
+          "out_f": 2344,
+          "words": [
+            {
+              "w": "France",
+              "key": false,
+              "at_f": 2315
+            },
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 2333
+            },
+            {
+              "w": "fisc",
+              "key": false,
+              "at_f": 2334
+            }
+          ]
+        },
+        {
+          "in_f": 2344,
+          "out_f": 2364,
+          "words": [
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 2344
+            },
+            {
+              "w": "requalifie",
+              "key": false,
+              "at_f": 2347
+            }
+          ]
+        },
+        {
+          "in_f": 2364,
+          "out_f": 2394,
+          "words": [
+            {
+              "w": "Et",
+              "key": false,
+              "at_f": 2364
+            },
+            {
+              "w": "tout",
+              "key": false,
+              "at_f": 2370
+            },
+            {
+              "w": "retombe",
+              "key": false,
+              "at_f": 2376
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "act": "resolution",
+      "why": "La punchline qui cristallise la these — ne fonctionne que maintenant, l'argument etant pose. Livree sur coupe franche, le silence fait le travail.",
+      "src_in": 156.88,
+      "src_out": 168.0,
+      "dur_f": 39,
+      "out_start": 2394,
+      "out_end": 2728,
+      "transition_in": "hard_cut",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.02,
+        "to": 1.1,
+        "land_on": "dorment"
+      },
+      "graphics": [
+        {
+          "type": "TwinReveal",
+          "left": "MÊMES GAINS",
+          "right": "FORTUNES ≠",
+          "note": "discret, s'efface avant 'ou ils dorment'",
+          "hold_min_s": 1.6
+        }
+      ],
+      "broll": [
+        {
+          "scene": "poker",
+          "in_f": 2398,
+          "out_f": 2437,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 2394,
+          "out_f": 2424,
+          "words": [
+            {
+              "w": "Le",
+              "key": false,
+              "at_f": 2394
+            },
+            {
+              "w": "poker",
+              "key": false,
+              "at_f": 2398
+            },
+            {
+              "w": "c'est",
+              "key": false,
+              "at_f": 2413
+            }
+          ]
+        },
+        {
+          "in_f": 2424,
+          "out_f": 2452,
+          "words": [
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 2424
+            },
+            {
+              "w": "seul",
+              "key": false,
+              "at_f": 2428
+            },
+            {
+              "w": "métier",
+              "key": false,
+              "at_f": 2437
+            }
+          ]
+        },
+        {
+          "in_f": 2452,
+          "out_f": 2489,
+          "words": [
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 2452
+            },
+            {
+              "w": "deux",
+              "key": false,
+              "at_f": 2459
+            },
+            {
+              "w": "joueurs",
+              "key": false,
+              "at_f": 2468
+            }
+          ]
+        },
+        {
+          "in_f": 2491,
+          "out_f": 2517,
+          "words": [
+            {
+              "w": "avec",
+              "key": false,
+              "at_f": 2491
+            },
+            {
+              "w": "exactement",
+              "key": false,
+              "at_f": 2496
+            }
+          ]
+        },
+        {
+          "in_f": 2518,
+          "out_f": 2556,
+          "words": [
+            {
+              "w": "les",
+              "key": false,
+              "at_f": 2518
+            },
+            {
+              "w": "mêmes",
+              "key": false,
+              "at_f": 2524
+            },
+            {
+              "w": "gains",
+              "key": false,
+              "at_f": 2537
+            }
+          ]
+        },
+        {
+          "in_f": 2556,
+          "out_f": 2564,
+          "words": [
+            {
+              "w": "finissent",
+              "key": false,
+              "at_f": 2556
+            }
+          ]
+        },
+        {
+          "in_f": 2563,
+          "out_f": 2576,
+          "words": [
+            {
+              "w": "l'année",
+              "key": false,
+              "at_f": 2563
+            },
+            {
+              "w": "avec",
+              "key": false,
+              "at_f": 2576
+            }
+          ]
+        },
+        {
+          "in_f": 2576,
+          "out_f": 2586,
+          "words": [
+            {
+              "w": "des",
+              "key": false,
+              "at_f": 2576
+            },
+            {
+              "w": "fortunes",
+              "key": false,
+              "at_f": 2582
+            }
+          ]
+        },
+        {
+          "in_f": 2586,
+          "out_f": 2619,
+          "words": [
+            {
+              "w": "différentes",
+              "key": false,
+              "at_f": 2586
+            },
+            {
+              "w": "Pas",
+              "key": false,
+              "at_f": 2598
+            }
+          ]
+        },
+        {
+          "in_f": 2622,
+          "out_f": 2635,
+          "words": [
+            {
+              "w": "à",
+              "key": false,
+              "at_f": 2622
+            },
+            {
+              "w": "cause",
+              "key": false,
+              "at_f": 2624
+            },
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 2632
+            }
+          ]
+        },
+        {
+          "in_f": 2635,
+          "out_f": 2661,
+          "words": [
+            {
+              "w": "leur",
+              "key": false,
+              "at_f": 2635
+            },
+            {
+              "w": "niveau",
+              "key": false,
+              "at_f": 2643
+            },
+            {
+              "w": "à",
+              "key": false,
+              "at_f": 2656
+            }
+          ]
+        },
+        {
+          "in_f": 2661,
+          "out_f": 2673,
+          "words": [
+            {
+              "w": "cause",
+              "key": false,
+              "at_f": 2661
+            },
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 2667
+            }
+          ]
+        },
+        {
+          "in_f": 2673,
+          "out_f": 2703,
+          "words": [
+            {
+              "w": "l'endroit",
+              "key": false,
+              "at_f": 2673
+            },
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 2698
+            }
+          ]
+        },
+        {
+          "in_f": 2703,
+          "out_f": 2728,
+          "words": [
+            {
+              "w": "ils",
+              "key": false,
+              "at_f": 2703
+            },
+            {
+              "w": "dorment",
+              "key": true,
+              "at_f": 2708
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "act": "resolution",
+      "why": "Retourne l'insight vers le spectateur : ton profil (mobile, revenus eleves) est parfait pour le faire proprement.",
+      "src_in": 185.4,
+      "src_out": 194.64,
+      "dur_f": 45,
+      "out_start": 2728,
+      "out_end": 3005,
+      "transition_in": "zoom_through",
+      "audio_lead": 0.3,
+      "camera": {
+        "type": "static",
+        "scale": 1.08
+      },
+      "graphics": [
+        {
+          "type": "LowerThird",
+          "title": "100 % EN RÈGLE",
+          "on_word": "regle",
+          "hold_min_s": 1.6
+        },
+        {
+          "type": "Tag",
+          "text": "100 % MOBILE",
+          "pos": "mr",
+          "on_word": "mobile",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "money",
+          "in_f": 2738,
+          "out_f": 2783,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 2733,
+          "out_f": 2744,
+          "words": [
+            {
+              "w": "Tes",
+              "key": false,
+              "at_f": 2733
+            },
+            {
+              "w": "revenus",
+              "key": false,
+              "at_f": 2738
+            }
+          ]
+        },
+        {
+          "in_f": 2744,
+          "out_f": 2777,
+          "words": [
+            {
+              "w": "sont",
+              "key": false,
+              "at_f": 2744
+            },
+            {
+              "w": "élevés",
+              "key": false,
+              "at_f": 2753
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 2775
+            }
+          ]
+        },
+        {
+          "in_f": 2777,
+          "out_f": 2795,
+          "words": [
+            {
+              "w": "es",
+              "key": false,
+              "at_f": 2777
+            },
+            {
+              "w": "totalement",
+              "key": false,
+              "at_f": 2795
+            }
+          ]
+        },
+        {
+          "in_f": 2795,
+          "out_f": 2822,
+          "words": [
+            {
+              "w": "mobile",
+              "key": false,
+              "at_f": 2795
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 2815
+            },
+            {
+              "w": "peux",
+              "key": false,
+              "at_f": 2820
+            }
+          ]
+        },
+        {
+          "in_f": 2822,
+          "out_f": 2835,
+          "words": [
+            {
+              "w": "jouer",
+              "key": false,
+              "at_f": 2822
+            },
+            {
+              "w": "de",
+              "key": false,
+              "at_f": 2831
+            }
+          ]
+        },
+        {
+          "in_f": 2835,
+          "out_f": 2860,
+          "words": [
+            {
+              "w": "n'importe",
+              "key": false,
+              "at_f": 2835
+            },
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 2852
+            }
+          ]
+        },
+        {
+          "in_f": 2860,
+          "out_f": 2882,
+          "words": [
+            {
+              "w": "t'as",
+              "key": false,
+              "at_f": 2860
+            },
+            {
+              "w": "le",
+              "key": false,
+              "at_f": 2868
+            },
+            {
+              "w": "profil",
+              "key": false,
+              "at_f": 2873
+            }
+          ]
+        },
+        {
+          "in_f": 2882,
+          "out_f": 2905,
+          "words": [
+            {
+              "w": "parfait",
+              "key": false,
+              "at_f": 2882
+            },
+            {
+              "w": "pour",
+              "key": false,
+              "at_f": 2901
+            }
+          ]
+        },
+        {
+          "in_f": 2905,
+          "out_f": 2917,
+          "words": [
+            {
+              "w": "choisir",
+              "key": false,
+              "at_f": 2905
+            }
+          ]
+        },
+        {
+          "in_f": 2917,
+          "out_f": 2925,
+          "words": [
+            {
+              "w": "intelligemment",
+              "key": false,
+              "at_f": 2917
+            }
+          ]
+        },
+        {
+          "in_f": 2917,
+          "out_f": 2963,
+          "words": [
+            {
+              "w": "proprement",
+              "key": false,
+              "at_f": 2917
+            },
+            {
+              "w": "et",
+              "key": false,
+              "at_f": 2948
+            }
+          ]
+        },
+        {
+          "in_f": 2963,
+          "out_f": 2987,
+          "words": [
+            {
+              "w": "100",
+              "key": false,
+              "at_f": 2963
+            },
+            {
+              "w": "%",
+              "key": false,
+              "at_f": 2969
+            },
+            {
+              "w": "en",
+              "key": false,
+              "at_f": 2985
+            }
+          ]
+        },
+        {
+          "in_f": 2987,
+          "out_f": 3005,
+          "words": [
+            {
+              "w": "règle",
+              "key": false,
+              "at_f": 2987
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "act": "resolution",
+      "why": "Transforme l'insight en action. CTA net.",
+      "src_in": 194.64,
+      "src_out": 202.6,
+      "dur_f": 45,
+      "out_start": 3005,
+      "out_end": 3164,
+      "transition_in": "continue",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "graphics": [
+        {
+          "type": "CTACard",
+          "label": "« POKER »",
+          "hold_min_s": 2.0
+        }
+      ],
+      "broll": [
+        {
+          "scene": "map",
+          "in_f": 3106,
+          "out_f": 3151,
+          "label": null
+        }
+      ],
+      "captions": [
+        {
+          "in_f": 3005,
+          "out_f": 3035,
+          "words": [
+            {
+              "w": "Si",
+              "key": false,
+              "at_f": 3005
+            },
+            {
+              "w": "tu",
+              "key": false,
+              "at_f": 3013
+            },
+            {
+              "w": "veux",
+              "key": false,
+              "at_f": 3021
+            }
+          ]
+        },
+        {
+          "in_f": 3035,
+          "out_f": 3084,
+          "words": [
+            {
+              "w": "savoir",
+              "key": false,
+              "at_f": 3035
+            },
+            {
+              "w": "où",
+              "key": false,
+              "at_f": 3058
+            },
+            {
+              "w": "poser",
+              "key": false,
+              "at_f": 3067
+            }
+          ]
+        },
+        {
+          "in_f": 3084,
+          "out_f": 3127,
+          "words": [
+            {
+              "w": "tes",
+              "key": false,
+              "at_f": 3084
+            },
+            {
+              "w": "valises",
+              "key": false,
+              "at_f": 3106
+            }
+          ]
+        },
+        {
+          "in_f": 3135,
+          "out_f": 3163,
+          "words": [
+            {
+              "w": "tout",
+              "key": false,
+              "at_f": 3135
+            },
+            {
+              "w": "en",
+              "key": false,
+              "at_f": 3139
+            },
+            {
+              "w": "restant",
+              "key": false,
+              "at_f": 3154
+            }
+          ]
+        },
+        {
+          "in_f": 3163,
+          "out_f": 3171,
+          "words": [
+            {
+              "w": "en",
+              "key": false,
+              "at_f": 3163
+            },
+            {
+              "w": "règle",
+              "key": false,
+              "at_f": 3163
+            }
+          ]
+        },
+        {
+          "in_f": 3163,
+          "out_f": 3171,
+          "words": [
+            {
+              "w": "commente",
+              "key": false,
+              "at_f": 3163
+            },
+            {
+              "w": "poker",
+              "key": false,
+              "at_f": 3163
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

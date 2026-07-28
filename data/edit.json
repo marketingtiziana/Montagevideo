@@ -1,0 +1,499 @@
+{
+  "meta": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "source": "source/reel5.mp4",
+    "source_fps": 60,
+    "thesis": "Pour un joueur de poker pro, le pays ou il vit n'est pas un detail fiscal mais LA decision : a gains egaux, elle separe celui qui garde tout de celui qui en laisse la moitie, a condition d'y resider vraiment.",
+    "margins": {
+      "pre_first_word_s": 0.25,
+      "post_last_word_s": 0.4
+    },
+    "note_texte": "Textes = relecture corrigee de l'ASR base (modele large/medium injoignables). A valider si un terme fiscal ou un chiffre doit etre exact.",
+    "effets_autorises": {
+      "signature": "s06 — pivot 'ce qui rend le poker unique' (1:02). UNIQUE effet marquant du short.",
+      "cross_dissolve_8f": "s10 — saut temporel (bloc mort de 33s retire). UNE seule fois.",
+      "masque_plein_cadre": [
+        "s03 tampon FAUX",
+        "s08 ComparisonBar",
+        "s11 carte LE PIEGE"
+      ]
+    }
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "act": "accroche",
+      "why": "Ouverture reelle de la source : la question + la promesse chiffree. Se comprend sans contexte, donc peut ouvrir.",
+      "src_in": 6.3,
+      "src_out": 15.76,
+      "text": "Où habiter quand on est joueur de poker pro ? Je vais te dire pourquoi c'est le seul métier où ça peut littéralement te coûter des dizaines de milliers d'euros par an.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.06
+      },
+      "transition_in": "hard_cut",
+      "graphic": {
+        "type": "Chip",
+        "big": "MILLIERS D'€",
+        "small": "CHAQUE ANNÉE",
+        "on_word": "milliers",
+        "hold_min_s": 1.6
+      },
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "POKER PRO",
+          "pos": "tr",
+          "on_word": "pro",
+          "hold_min_s": 1.5
+        }
+      ],
+      "broll": []
+    },
+    {
+      "id": "s02",
+      "act": "accroche",
+      "why": "Installe la fausse croyance de confort du spectateur (mes gains de jeu ne sont pas imposables).",
+      "src_in": 15.76,
+      "src_out": 19.96,
+      "text": "Tu vis du poker, tu gagnes bien, et tu te dis : c'est du jeu, c'est de la chance…",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static",
+        "drift_px": 6
+      },
+      "transition_in": "continue",
+      "graphic": null,
+      "cut_after": "Retire 21.32->26.12 (redite 'donc c'est pas imposable, mais pas du tout').",
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "VRAIMENT ?",
+          "pos": "mr",
+          "on_word": "chance",
+          "fill": true,
+          "hold_min_s": 1.5
+        }
+      ],
+      "broll": [
+        {
+          "scene": "poker",
+          "on_word": "poker",
+          "dur_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "act": "accroche",
+      "why": "Le contre-pied qui detruit la croyance. Bouton d'accroche.",
+      "src_in": 21.32,
+      "src_out": 29.92,
+      "text": "Donc c'est pas imposable ? Mais pas du tout. C'est faux. Première erreur.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "hard_cut",
+      "graphic": {
+        "type": "FullscreenStamp",
+        "label": "FAUX",
+        "sub": "1re erreur",
+        "on_word": "faux",
+        "hold_min_s": 0.8
+      },
+      "broll": [
+        {
+          "scene": "impot",
+          "on_word": "Donc",
+          "dur_s": 1.4
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "act": "contexte",
+      "why": "Pose la ligne de partage amateur/pro. On garde la respiration apres 'premiere erreur'.",
+      "src_in": 29.97,
+      "src_out": 34.75,
+      "text": "Tout dépend d'une seule chose : est-ce que tu es vu comme un amateur ou comme un pro ?",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "Toggle",
+        "labels": [
+          "AMATEUR",
+          "PRO"
+        ],
+        "hold_min_s": 1.6
+      },
+      "cut_after": "Retire 34.75->45.10 (faux depart 'un amateur qui gagne de l'argent' + reprise trainante 8s).",
+      "broll": []
+    },
+    {
+      "id": "s05",
+      "act": "contexte",
+      "why": "Le mecanisme du 'pourquoi imposable' : tu en vis, c'est regulier -> activite professionnelle -> ca s'impose. Designe le destinataire (le pro).",
+      "src_in": 45.1,
+      "src_out": 62.16,
+      "text": "Oui, c'est du jeu. Mais toi, tu en vis, c'est régulier, c'est ton métier : pour le fisc français, c'est une activité professionnelle, ça s'impose. Donc « c'est du jeu, je touche tout » : pour un pro, c'est faux.",
+      "audio_lead": 0.4,
+      "camera": {
+        "type": "static",
+        "scale": 1.12
+      },
+      "transition_in": "zoom_through",
+      "jumpcut_mask": "changement de cadrage (plan plus serre) + J-cut 0.4s",
+      "graphic": {
+        "type": "LowerThird",
+        "title": "ACTIVITÉ PRO",
+        "accent": "= IMPOSABLE",
+        "on_word": "s'impose",
+        "hold_min_s": 1.6
+      },
+      "cut_after": "Retire 55.56->62.10 (recap redondant 'je touche tout pour un pro, c'est faux').",
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "RÉGULIER",
+          "pos": "tr",
+          "on_word": "régulier",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "impot",
+          "on_word": "métier",
+          "dur_s": 1.3
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "act": "demonstration",
+      "why": "POINT DE BASCULE PRINCIPAL. Le recit pivote : de 'tu es imposable' vers 'tout depend du pays'. Seul emplacement de la transition signature.",
+      "src_in": 62.16,
+      "src_out": 65.48,
+      "text": "Et là, arrive ce qui rend le poker unique.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "TitleFlash",
+        "label": "CE QUI CHANGE TOUT",
+        "hold_min_s": 1.4
+      },
+      "broll": []
+    },
+    {
+      "id": "s07",
+      "act": "demonstration",
+      "why": "Le mecanisme reel : la taxation varie enormement selon le pays. Certains ne taxent pas du tout.",
+      "src_in": 65.48,
+      "src_out": 72.92,
+      "text": "La façon dont les gains sont taxés change énormément d'un pays à l'autre. Certains pays ne taxent pas du tout les gains du jeu.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static",
+        "drift_px": 6
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "Map",
+        "note": "pays qui taxe vs pays qui ne taxe pas",
+        "hold_min_s": 2.0,
+        "chips": [
+          {
+            "v": "DUBAÏ",
+            "k": "0 % D'IMPÔT",
+            "accent": true
+          },
+          {
+            "v": "FRANCE",
+            "k": "IMPOSÉ",
+            "accent": false
+          }
+        ]
+      },
+      "cut_after": "Retire 72.92->93.00 (20s traines/redite 'd'autres te taxent comme un revenu, meme d'autres, d'autres...').",
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "0 % ?",
+          "pos": "mr",
+          "on_word": "taxent",
+          "fill": true,
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "dubai",
+          "on_word": "certains",
+          "dur_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "act": "demonstration",
+      "why": "Le chiffre-choc qui condense l'enjeu : memes gains, tu gardes tout ou tu laisses la moitie.",
+      "src_in": 93.0,
+      "src_out": 96.76,
+      "text": "Mais selon où tu vis : tu gardes tout, ou tu en laisses la moitié.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "hard_cut",
+      "jumpcut_mask": "carte ComparisonBar plein cadre (couvre la coupe du bloc traine)",
+      "graphic": {
+        "type": "ComparisonBar",
+        "left": {
+          "label": "GARDE TOUT",
+          "val": 100
+        },
+        "right": {
+          "label": "LAISSE LA MOITIÉ",
+          "val": 50
+        },
+        "hold_min_s": 2.2
+      },
+      "broll": []
+    },
+    {
+      "id": "s09",
+      "act": "demonstration",
+      "why": "Formule-cle : le choix du pays n'est pas un detail, c'est LA decision. On garde la battue avant 'la decision'.",
+      "src_in": 96.76,
+      "src_out": 102.24,
+      "text": "Tu comprends le truc. Pour un joueur pro, le choix du pays où tu habites, c'est pas un détail : c'est la décision.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.05,
+        "land_on": "decision"
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "HighlightBox",
+        "on_word": "decision",
+        "hold_min_s": 1.4
+      },
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "LE CHOIX",
+          "pos": "tl",
+          "on_word": "choix",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "choix",
+          "on_word": "comprends",
+          "dur_s": 1.3
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "act": "demonstration",
+      "why": "L'enjeu chiffre : un pays qui ne taxe pas le jeu = la moitie de tes gains sur l'annee.",
+      "src_in": 135.56,
+      "src_out": 141.4,
+      "text": "Il y a un pays qui ne taxe pas le jeu : ça peut représenter la moitié de ce que tu gagnes dans l'année.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "zoom_through",
+      "jumpcut_mask": "cross-dissolve 8 frames : marque le saut temporel (bloc mort de 33s retire). UNIQUE dissolve du short.",
+      "graphic": {
+        "type": "StatCard",
+        "value": 50,
+        "unit": "%",
+        "label": "DE TES GAINS",
+        "count_s": 0.9,
+        "hold_min_s": 2.0
+      },
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "SUR L'ANNÉE",
+          "pos": "mr",
+          "on_word": "année",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": []
+    },
+    {
+      "id": "s11",
+      "act": "demonstration",
+      "why": "POINT DE BASCULE SECONDAIRE. Le contre-pied dans le contre-pied : le bon pays ne suffit pas.",
+      "src_in": 141.4,
+      "src_out": 147.2,
+      "text": "Mais, et c'est là que les gens se font avoir : tu peux pas juste dire j'habite là-bas.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "FullscreenCard",
+        "label": "LE PIÈGE",
+        "role": "marque le twist (bascule secondaire), audio continue dessous (L-cut)",
+        "duration_s": 0.6,
+        "hold_min_s": 1.4
+      },
+      "broll": []
+    },
+    {
+      "id": "s12",
+      "act": "demonstration",
+      "why": "La condition reelle + la sanction : il faut vraiment y vivre, sinon requalification et tout retombe. On garde le temps apres 'et tout retombe'.",
+      "src_in": 147.2,
+      "src_out": 156.88,
+      "text": "Il faut que ce soit vrai : que tu vives vraiment dans ce pays. Un joueur qui prétend être expatrié mais qui vit et joue depuis la France, le fisc le requalifie. Et tout retombe.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.0,
+        "to": 1.04,
+        "land_on": "retombe"
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "LowerThird",
+        "title": "REQUALIFICATION",
+        "accent": "tout retombe",
+        "on_word": "retombe",
+        "hold_min_s": 1.6
+      },
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "LE FISC",
+          "pos": "tr",
+          "on_word": "fisc",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "passport",
+          "on_word": "expatrié",
+          "dur_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "act": "resolution",
+      "why": "La punchline qui cristallise la these — ne fonctionne que maintenant, l'argument etant pose. Livree sur coupe franche, le silence fait le travail.",
+      "src_in": 156.88,
+      "src_out": 168.0,
+      "text": "Le poker, c'est le seul métier où deux joueurs, avec exactement les mêmes gains, finissent l'année avec des fortunes différentes. Pas à cause de leur niveau : à cause de l'endroit où ils dorment.",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "push_in",
+        "from": 1.02,
+        "to": 1.1,
+        "land_on": "dorment"
+      },
+      "transition_in": "hard_cut",
+      "graphic": {
+        "type": "TwinReveal",
+        "left": "MÊMES GAINS",
+        "right": "FORTUNES ≠",
+        "note": "discret, s'efface avant 'ou ils dorment'",
+        "hold_min_s": 1.6
+      },
+      "cut_after": "Retire 168.00->185.40 (reprises hesitantes 'ce qui se reflechit en amont' x2).",
+      "graphics": [],
+      "broll": [
+        {
+          "scene": "poker",
+          "on_word": "poker",
+          "dur_s": 1.3
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "act": "resolution",
+      "why": "Retourne l'insight vers le spectateur : ton profil (mobile, revenus eleves) est parfait pour le faire proprement.",
+      "src_in": 185.4,
+      "src_out": 194.64,
+      "text": "Tes revenus sont élevés, tu es totalement mobile, tu peux jouer de n'importe où : t'as le profil parfait pour choisir intelligemment, proprement, et 100 % en règle.",
+      "audio_lead": 0.3,
+      "camera": {
+        "type": "static",
+        "scale": 1.08
+      },
+      "transition_in": "zoom_through",
+      "jumpcut_mask": "changement de cadrage + J-cut 0.3s",
+      "graphic": {
+        "type": "LowerThird",
+        "title": "100 % EN RÈGLE",
+        "on_word": "regle",
+        "hold_min_s": 1.6
+      },
+      "graphics": [
+        {
+          "type": "Tag",
+          "text": "100 % MOBILE",
+          "pos": "mr",
+          "on_word": "mobile",
+          "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "money",
+          "on_word": "revenus",
+          "dur_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "act": "resolution",
+      "why": "Transforme l'insight en action. CTA net.",
+      "src_in": 194.64,
+      "src_out": 202.6,
+      "text": "Si tu veux savoir où poser tes valises tout en restant en règle : commente « poker ».",
+      "audio_lead": 0.0,
+      "camera": {
+        "type": "static"
+      },
+      "transition_in": "continue",
+      "graphic": {
+        "type": "CTACard",
+        "label": "« POKER »",
+        "hold_min_s": 2.0
+      },
+      "cut_after": "Retire 202.60->205.64 (doublon CTA 'comment de poker ?').",
+      "broll": [
+        {
+          "scene": "map",
+          "on_word": "valises",
+          "dur_s": 1.5
+        }
+      ]
+    }
+  ]
+}
