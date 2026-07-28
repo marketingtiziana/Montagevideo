@@ -238,7 +238,7 @@
             },
             {
               "w": "coûter",
-              "key": false,
+              "key": true,
               "at_f": 188
             },
             {
@@ -270,7 +270,7 @@
           "words": [
             {
               "w": "milliers",
-              "key": true,
+              "key": false,
               "at_f": 230
             }
           ]
@@ -546,7 +546,7 @@
             },
             {
               "w": "faux",
-              "key": true,
+              "key": false,
               "at_f": 572
             }
           ]
@@ -1020,7 +1020,7 @@
             },
             {
               "w": "faux",
-              "key": false,
+              "key": true,
               "at_f": 1292
             }
           ]
@@ -1457,7 +1457,7 @@
             },
             {
               "w": "moitié",
-              "key": true,
+              "key": false,
               "at_f": 1734
             }
           ]

@@ -41,7 +41,7 @@ for arr in (cx, cy):
             arr[i] = arr[i - 1] + math.copysign(MAXV, d)
 
 # ---------- plan de zoom par segment (paliers alternes, jamais 2 identiques de suite) ----------
-PAL = [1.00, 1.08, 1.15]
+PAL = [1.08, 1.15]  # jamais 1.00 (source cadree haut) : toujours un peu de recompo
 base = {}
 prev = None
 cyc = 0

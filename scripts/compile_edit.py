@@ -10,7 +10,8 @@ tr = json.load(open("data/transcript.json"))
 WORDS = [(w["start"], w["end"], w["w"]) for w in tr["words"]]
 
 # Mots JAUNES (#FFD84D) — 4 maximum sur tout le short, mots de rupture/enjeu.
-YELLOW = [("s01", "milliers"), ("s03", "faux"), ("s08", "moiti"), ("s13", "dorment")]
+# mots jaunes sur des sous-titres VISIBLES (pas sous une carte plein cadre) — 4 max
+YELLOW = [("s01", "coûter"), ("s05", "faux"), ("s13", "dorment")]
 STRIP = "«».,:;…\""  # ponctuation retiree (apostrophes/traits d'union gardes ; le '?' est conserve)
 
 def words_in(a, b):
