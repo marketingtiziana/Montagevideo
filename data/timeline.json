@@ -1029,7 +1029,19 @@
       "graphic": {
         "type": "Map",
         "note": "pays qui taxe vs pays qui ne taxe pas",
-        "hold_min_s": 2.0
+        "hold_min_s": 2.0,
+        "chips": [
+          {
+            "v": "DUBAÏ",
+            "k": "0 % D'IMPÔT",
+            "accent": true
+          },
+          {
+            "v": "FRANCE",
+            "k": "IMPOSÉ",
+            "accent": false
+          }
+        ]
       },
       "captions": [
         {

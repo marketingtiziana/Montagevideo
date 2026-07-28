@@ -112,7 +112,7 @@ const GraphicNode: React.FC<{ g: GTiming }> = ({ g }) => {
     case "FullscreenStamp": return <FullscreenStamp hold={hold} word={(p.label as string) ?? "FAUX"} sub={(p.sub as string) ?? "1RE ERREUR"} />;
     case "Toggle": return <Toggle hold={hold} labels={(p.labels as [string, string]) ?? ["AMATEUR", "PRO"]} active={1} />;
     case "LowerThird": return <LowerThird hold={hold} titleText={(p.title as string) ?? ""} accent={p.accent as string | undefined} />;
-    case "Map": return <MapCard hold={hold} />;
+    case "Map": return <MapCard hold={hold} chips={p.chips as { v: string; k: string; accent?: boolean }[] | undefined} />;
     case "ComparisonBar": return <ComparisonBar hold={hold} />;
     case "HighlightBox": return <HighlightBox hold={hold} text="LA DÉCISION" />;
     case "StatCard": return <StatCard hold={hold} value={(p.value as number) ?? 50} unit={(p.unit as string) ?? "%"} sub={(p.label as string) ?? "DE TES GAINS"} />;

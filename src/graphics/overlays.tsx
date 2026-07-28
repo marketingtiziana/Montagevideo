@@ -202,18 +202,25 @@ export const ComparisonBar: React.FC<Base> = ({ hold = 66 }) => {
   );
 };
 
-// ---------- MapCard abstraite : selon le pays ----------
-export const MapCard: React.FC<Base> = ({ hold = 60 }) => {
+// ---------- MapCard : comparaison pays nommés ----------
+type Chip = { v: string; k: string; accent?: boolean };
+export const MapCard: React.FC<Base & { chips?: Chip[] }> = ({
+  hold = 60,
+  chips: chipsProp,
+}) => {
   ensureFont();
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const env = envelope(f, fps, hold);
   const op = opacityInOut(env);
   const sc = scaleInOut(env);
-  const chips: { k: string; v: string; c: string; delay: number }[] = [
-    { k: "CERTAINS PAYS", v: "0 %", c: T.accent, delay: 0 },
-    { k: "D'AUTRES", v: "REVENU", c: T.sub, delay: CASCADE + 2 },
+  const src = chipsProp ?? [
+    { v: "DUBAÏ", k: "0 % D'IMPÔT", accent: true },
+    { v: "FRANCE", k: "IMPOSÉ", accent: false },
   ];
+  const chips = src.map((c, i) => ({
+    k: c.k, v: c.v, c: c.accent ? T.accent : T.sub, delay: i === 0 ? 0 : CASCADE + 2,
+  }));
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
       <div style={{ opacity: op, transform: `scale(${sc})`, width: 1080 - T.marginX * 2 }}>
