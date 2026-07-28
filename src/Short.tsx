@@ -24,6 +24,9 @@ import {
   FullscreenCard,
   TwinReveal,
   CTACard,
+  ProgressLine,
+  TitleFlash,
+  Chip,
 } from "./graphics/overlays";
 
 type Cap = { in_f: number; out_f: number; words: { w: string; accent: boolean; at_f: number }[] };
@@ -47,7 +50,7 @@ const norm = (s: string) =>
 const DOMINANT = new Set([
   "FullscreenStamp", "Toggle", "Map", "ComparisonBar",
   "HighlightBox", "StatCard", "FullscreenCard", "TwinReveal", "CTACard",
-  "LowerThird", // le bandeau porte le sens : on masque le sous-titre pendant (pas de collision)
+  "LowerThird", "TitleFlash", // portent le sens plein cadre : masquent le sous-titre (pas de collision)
 ]);
 
 type GTiming = { seg: Seg; type: string; appear: number; hold: number; total: number; dominant: boolean; props: Record<string, unknown> };
@@ -119,6 +122,8 @@ const GraphicNode: React.FC<{ g: GTiming }> = ({ g }) => {
     case "FullscreenCard": return <FullscreenCard hold={hold} text={(p.label as string) ?? "LE PIÈGE"} />;
     case "TwinReveal": return <TwinReveal hold={hold} left={(p.left as string) ?? "MÊMES GAINS"} right={(p.right as string) ?? "FORTUNES ≠"} />;
     case "CTACard": return <CTACard hold={hold} word={(p.label as string) ?? "« POKER »"} />;
+    case "TitleFlash": return <TitleFlash hold={hold} text={(p.label as string) ?? "LE VRAI SUJET"} />;
+    case "Chip": return <Chip hold={hold} big={(p.big as string) ?? ""} small={(p.small as string) ?? ""} />;
     default: return null;
   }
 };
@@ -150,25 +155,42 @@ const CaptionsLayer: React.FC = () => {
   );
 };
 
-// ---------- Transition signature (unique, au pivot s06) ----------
-const Signature: React.FC = () => {
-  const seg = SEGS.find((s) => s.transition_in === "SIGNATURE");
-  const { fps } = useVideoConfig();
+// ---------- Transitions (aux vraies coupes) : whip / flash / signature ----------
+const EFFECTS = new Set(["SIGNATURE", "whip", "whip_l", "flash"]);
+const transitionDur = (t: string) => (t === "SIGNATURE" ? 12 : t === "flash" ? 8 : 10);
+
+const OneTransition: React.FC<{ type: string; at: number; idx: number }> = ({ type, at, idx }) => {
   const f = useCurrentFrame();
-  if (!seg) return null;
-  const t0 = seg.out_start - 5;
-  const dur = 12;
-  const p = interpolate(f, [t0, t0 + dur], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const dur = transitionDur(type);
+  const t0 = at - Math.floor(dur / 2);
   if (f < t0 || f > t0 + dur) return null;
-  // panneau accent qui balaie le cadre de gauche à droite, flou de mouvement
-  const x = interpolate(p, [0, 1], [-1200, 1200]);
-  const blur = interpolate(p, [0, 0.5, 1], [0, 24, 0]);
+  const p = interpolate(f, [t0, t0 + dur], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  if (type === "flash") {
+    const op = interpolate(p, [0, 0.28, 1], [0, 0.55, 0]);
+    return <AbsoluteFill style={{ background: T.accent, opacity: op, mixBlendMode: "screen" }} />;
+  }
+  // whip / signature : panneau accent qui balaie, flou de mouvement
+  const dir = type === "whip_l" ? -1 : 1;
+  const wide = type === "SIGNATURE";
+  const x = interpolate(p, [0, 1], [dir * -1300, dir * 1300]);
+  const blur = interpolate(p, [0, 0.5, 1], [0, wide ? 26 : 18, 0]);
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: 0, bottom: 0, width: 1500, left: 0, transform: `translateX(${x}px) skewX(-12deg)`, background: T.accent, filter: `blur(${blur}px)`, boxShadow: T.shadow }} />
+      <div style={{ position: "absolute", top: 0, bottom: 0, width: wide ? 1600 : 1200, left: 0, transform: `translateX(${x}px) skewX(-12deg)`, background: wide ? T.accent : T.accentSoft, filter: `blur(${blur}px)`, boxShadow: T.shadow }} />
+      {wide ? <div style={{ position: "absolute", top: 0, bottom: 0, width: 200, left: 0, transform: `translateX(${x - 260}px) skewX(-12deg)`, background: T.white, opacity: 0.5, filter: `blur(${blur}px)` }} /> : null}
     </AbsoluteFill>
   );
 };
+
+const TransitionLayer: React.FC = () => (
+  <>
+    {SEGS.map((s, i) =>
+      EFFECTS.has(s.transition_in) ? (
+        <OneTransition key={s.id} type={s.transition_in} at={s.out_start} idx={i} />
+      ) : null,
+    )}
+  </>
+);
 
 export const Short: React.FC = () => {
   ensureFont();
@@ -181,7 +203,8 @@ export const Short: React.FC = () => {
         </Sequence>
       ))}
       <CaptionsLayer />
-      <Signature />
+      <TransitionLayer />
+      <ProgressLine total={TOTAL_FRAMES} />
     </AbsoluteFill>
   );
 };

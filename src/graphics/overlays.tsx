@@ -344,6 +344,57 @@ export const CTACard: React.FC<Base & { textTop?: string; word?: string }> = ({
   );
 };
 
+// ---------- ProgressLine : filet 4px en haut, se remplit sur toute la durée ----------
+export const ProgressLine: React.FC<{ total: number }> = ({ total }) => {
+  const f = useCurrentFrame();
+  const w = interpolate(f, [0, total], [0, 100], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 6, background: "rgba(255,255,255,0.10)" }}>
+        <div style={{ height: "100%", width: `${w}%`, background: T.accent }} />
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// ---------- TitleFlash : titre bref centré (pivot) ----------
+export const TitleFlash: React.FC<Base & { text?: string }> = ({ hold = 44, text = "LE VRAI SUJET" }) => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const env = envelope(f, fps, hold);
+  const op = opacityInOut(env);
+  const sc = scaleInOut(env);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+      <div style={{ opacity: op, transform: `scale(${sc}) translateY(${holdDrift(f, 5)}px)`, textAlign: "center" }}>
+        <div style={{ height: 6, width: 90, background: T.accent, borderRadius: 3, margin: "0 auto 20px" }} />
+        <div style={{ ...title(120) }}>{text}</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// ---------- Chip : petit encart chiffré animé ----------
+export const Chip: React.FC<Base & { big?: string; small?: string }> = ({ hold = 50, big = "", small = "" }) => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const env = envelope(f, fps, hold);
+  const op = opacityInOut(env);
+  const ty = translateInOut(env, 30);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-start" }}>
+      <div style={{ position: "absolute", top: 980, opacity: op, transform: `translateY(${ty}px)` }}>
+        <Card pad={40} style={{ textAlign: "center" }}>
+          <div style={{ ...title(96, T.accent) }}>{big}</div>
+          {small ? <div style={{ ...label(38), marginTop: 10 }}>{small}</div> : null}
+        </Card>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 // ---------- Sous-titres karaoké (2-3 mots, mot actif en accent) ----------
 export type Word = { w: string; accent?: boolean };
 export const CaptionChunk: React.FC<{ words: Word[]; activeIndex: number }> = ({ words, activeIndex }) => {

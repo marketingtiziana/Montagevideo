@@ -36,7 +36,13 @@
         "to": 1.06
       },
       "transition_in": "hard_cut",
-      "graphic": null
+      "graphic": {
+        "type": "Chip",
+        "big": "MILLIERS D'€",
+        "small": "CHAQUE ANNÉE",
+        "on_word": "milliers",
+        "hold_min_s": 1.6
+      }
     },
     {
       "id": "s02",
@@ -65,7 +71,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "hard_cut",
+      "transition_in": "flash",
       "graphic": {
         "type": "FullscreenStamp",
         "label": "FAUX",
@@ -109,7 +115,7 @@
         "type": "static",
         "scale": 1.12
       },
-      "transition_in": "hard_cut",
+      "transition_in": "whip",
       "jumpcut_mask": "changement de cadrage (plan plus serre) + J-cut 0.4s",
       "graphic": {
         "type": "LowerThird",
@@ -132,7 +138,11 @@
         "type": "static"
       },
       "transition_in": "SIGNATURE",
-      "graphic": null
+      "graphic": {
+        "type": "TitleFlash",
+        "label": "CE QUI CHANGE TOUT",
+        "hold_min_s": 1.4
+      }
     },
     {
       "id": "s07",
@@ -177,7 +187,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "hard_cut",
+      "transition_in": "flash",
       "jumpcut_mask": "carte ComparisonBar plein cadre (couvre la coupe du bloc traine)",
       "graphic": {
         "type": "ComparisonBar",
@@ -224,7 +234,7 @@
       "camera": {
         "type": "static"
       },
-      "transition_in": "cross_dissolve_8f",
+      "transition_in": "whip",
       "jumpcut_mask": "cross-dissolve 8 frames : marque le saut temporel (bloc mort de 33s retire). UNIQUE dissolve du short.",
       "graphic": {
         "type": "StatCard",
@@ -292,7 +302,7 @@
         "to": 1.1,
         "land_on": "dorment"
       },
-      "transition_in": "hard_cut",
+      "transition_in": "flash",
       "graphic": {
         "type": "TwinReveal",
         "left": "MÊMES GAINS",
@@ -314,7 +324,7 @@
         "type": "static",
         "scale": 1.08
       },
-      "transition_in": "hard_cut",
+      "transition_in": "whip",
       "jumpcut_mask": "changement de cadrage + J-cut 0.3s",
       "graphic": {
         "type": "LowerThird",

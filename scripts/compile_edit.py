@@ -78,12 +78,11 @@ def build_caps(seg, out_start, out_end):
 
 segments = []
 cursor = 0
-DISSOLVE = 8
 for i, seg in enumerate(edit["segments"]):
     dur_f = round((seg["src_out"] - seg["src_in"]) * FPS)
     trans = seg["transition_in"]
-    start = cursor - DISSOLVE if (trans == "cross_dissolve_8f" and segments) else cursor
-    out_start = start
+    # base_cut = coupes franches frame-lockees ; transitions rendues cote Remotion.
+    out_start = cursor
     out_end = out_start + dur_f
     cursor = out_end
     segments.append({
