@@ -251,14 +251,7 @@
           "val": 50
         },
         "hold_min_s": 2.2
-      },
-      "broll": [
-        {
-          "scene": "money",
-          "on_word": "moitié",
-          "dur_s": 1.2
-        }
-      ]
+      }
     },
     {
       "id": "s09",
@@ -425,6 +418,13 @@
           "pos": "mr",
           "on_word": "mobile",
           "hold_min_s": 1.4
+        }
+      ],
+      "broll": [
+        {
+          "scene": "money",
+          "on_word": "revenus",
+          "dur_s": 1.3
         }
       ]
     },

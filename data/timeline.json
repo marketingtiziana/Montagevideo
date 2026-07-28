@@ -1359,7 +1359,7 @@
       "why": "Le chiffre-choc qui condense l'enjeu : memes gains, tu gardes tout ou tu laisses la moitie.",
       "src_in": 93.0,
       "src_out": 96.76,
-      "dur_f": 36,
+      "dur_f": 113,
       "out_start": 1646,
       "out_end": 1759,
       "transition_in": "hard_cut",
@@ -1381,14 +1381,7 @@
           "hold_min_s": 2.2
         }
       ],
-      "broll": [
-        {
-          "scene": "money",
-          "in_f": 1723,
-          "out_f": 1759,
-          "label": null
-        }
-      ],
+      "broll": [],
       "captions": [
         {
           "in_f": 1653,
@@ -2607,7 +2600,7 @@
       "why": "Retourne l'insight vers le spectateur : ton profil (mobile, revenus eleves) est parfait pour le faire proprement.",
       "src_in": 185.4,
       "src_out": 194.64,
-      "dur_f": 277,
+      "dur_f": 39,
       "out_start": 2896,
       "out_end": 3173,
       "transition_in": "zoom_through",
@@ -2631,7 +2624,14 @@
           "hold_min_s": 1.4
         }
       ],
-      "broll": [],
+      "broll": [
+        {
+          "scene": "money",
+          "in_f": 2906,
+          "out_f": 2945,
+          "label": null
+        }
+      ],
       "captions": [
         {
           "in_f": 2901,

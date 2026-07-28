@@ -407,10 +407,16 @@ export const ScenePoker: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: bgScene, overflow: "hidden" }}>
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", transform: `translateY(${rise}px)` }}>
-        <div style={{ display: "flex", gap: 30, alignItems: "flex-end" }}>
+        <div style={{ display: "flex", gap: 34, alignItems: "flex-end" }}>
           {chips.map((c) => {
-            const h = interpolate(f, [4 + c * 3, 18 + c * 3], [0, 90 + c * 26], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-            return <div key={c} style={{ width: 96, height: h, borderRadius: 12, background: c % 2 ? T.accent : T.cardBg2, border: `4px solid ${T.accent}`, boxShadow: T.shadow }} />;
+            const n = Math.round(interpolate(f, [4 + c * 3, 20 + c * 3], [0, 2 + c], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
+            return (
+              <div key={c} style={{ display: "flex", flexDirection: "column-reverse", gap: -8 }}>
+                {Array.from({ length: Math.max(1, n) }).map((_, k) => (
+                  <div key={k} style={{ width: 108, height: 108, borderRadius: "50%", background: k % 2 ? T.accent : T.cardBg2, border: `6px dashed ${k % 2 ? T.white : T.accent}`, boxShadow: T.shadow, marginTop: -78 }} />
+                ))}
+              </div>
+            );
           })}
         </div>
         <div style={{ display: "flex", gap: 60, marginTop: 70 }}>
