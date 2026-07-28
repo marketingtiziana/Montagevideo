@@ -32,23 +32,37 @@ def detect_silences(a, b):
             st = None
     return sils
 
+MERGE_GAP = 1.5   # ne coupe que si le silence retire est >= ca (evite le hachage staccato)
+MINKEEP = 0.7     # aucun fragment plus court que ca
+
 def keeps_for(a, b):
-    # ranges de speech a garder ; retire les silences > MINSIL en laissant BREATH de chaque cote
     sils = [(s, e) for (s, e) in detect_silences(a, b) if (e - s) > MINSIL]
     keeps = []
     cur = a
     for (s, e) in sils:
-        ks = max(cur, s + BREATH)  # on garde BREATH apres le debut de parole precedente... en fait avant le silence
-        # garder jusqu'a s+BREATH (respiration apres le mot), reprendre a e-BREATH (respiration avant le mot suivant)
         end_keep = min(b, s + BREATH)
         if end_keep > cur + 0.05:
-            keeps.append((cur, end_keep))
+            keeps.append([cur, end_keep])
         cur = max(cur, e - BREATH)
-    if b - cur > 0.05:
-        keeps.append((cur, b))
+    # traine finale : ne l'ajoute que si c'est du contenu (pas un silence de fin)
+    if b - cur > 0.35:
+        keeps.append([cur, b])
     if not keeps:
-        keeps = [(a, b)]
-    return keeps
+        return [(a, b)]
+    # FUSION anti-stutter : fusionne si le silence retire < MERGE_GAP, ou si un fragment est court
+    changed = True
+    while changed and len(keeps) > 1:
+        changed = False
+        out = [keeps[0]]
+        for k in keeps[1:]:
+            prev = out[-1]
+            gap = k[0] - prev[1]  # duree du silence retire entre les deux keeps
+            if gap < MERGE_GAP or (prev[1] - prev[0]) < MINKEEP or (k[1] - k[0]) < MINKEEP:
+                prev[1] = k[1]; changed = True
+            else:
+                out.append(k)
+        keeps = out
+    return [tuple(k) for k in keeps]
 
 def valid(path, F):
     if not os.path.exists(path): return False
