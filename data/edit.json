@@ -51,7 +51,8 @@
           "on_word": "pro",
           "hold_min_s": 1.5
         }
-      ]
+      ],
+      "broll": []
     },
     {
       "id": "s02",
@@ -104,7 +105,8 @@
         "sub": "1re erreur",
         "on_word": "faux",
         "hold_min_s": 0.8
-      }
+      },
+      "broll": []
     },
     {
       "id": "s04",
@@ -126,7 +128,8 @@
         ],
         "hold_min_s": 1.6
       },
-      "cut_after": "Retire 34.75->45.10 (faux depart 'un amateur qui gagne de l'argent' + reprise trainante 8s)."
+      "cut_after": "Retire 34.75->45.10 (faux depart 'un amateur qui gagne de l'argent' + reprise trainante 8s).",
+      "broll": []
     },
     {
       "id": "s05",
@@ -158,7 +161,8 @@
           "on_word": "régulier",
           "hold_min_s": 1.4
         }
-      ]
+      ],
+      "broll": []
     },
     {
       "id": "s06",
@@ -176,7 +180,8 @@
         "type": "TitleFlash",
         "label": "CE QUI CHANGE TOUT",
         "hold_min_s": 1.4
-      }
+      },
+      "broll": []
     },
     {
       "id": "s07",
@@ -251,7 +256,8 @@
           "val": 50
         },
         "hold_min_s": 2.2
-      }
+      },
+      "broll": []
     },
     {
       "id": "s09",
@@ -281,7 +287,8 @@
           "on_word": "choix",
           "hold_min_s": 1.4
         }
-      ]
+      ],
+      "broll": []
     },
     {
       "id": "s10",
@@ -312,7 +319,8 @@
           "on_word": "année",
           "hold_min_s": 1.4
         }
-      ]
+      ],
+      "broll": []
     },
     {
       "id": "s11",
@@ -332,7 +340,8 @@
         "role": "marque le twist (bascule secondaire), audio continue dessous (L-cut)",
         "duration_s": 0.6,
         "hold_min_s": 1.4
-      }
+      },
+      "broll": []
     },
     {
       "id": "s12",
@@ -364,6 +373,13 @@
           "on_word": "fisc",
           "hold_min_s": 1.4
         }
+      ],
+      "broll": [
+        {
+          "scene": "passport",
+          "on_word": "expatrié",
+          "dur_s": 1.3
+        }
       ]
     },
     {
@@ -389,7 +405,8 @@
         "hold_min_s": 1.6
       },
       "cut_after": "Retire 168.00->185.40 (reprises hesitantes 'ce qui se reflechit en amont' x2).",
-      "graphics": []
+      "graphics": [],
+      "broll": []
     },
     {
       "id": "s14",
@@ -445,7 +462,14 @@
         "label": "« POKER »",
         "hold_min_s": 2.0
       },
-      "cut_after": "Retire 202.60->205.64 (doublon CTA 'comment de poker ?')."
+      "cut_after": "Retire 202.60->205.64 (doublon CTA 'comment de poker ?').",
+      "broll": [
+        {
+          "scene": "map",
+          "on_word": "valises",
+          "dur_s": 1.4
+        }
+      ]
     }
   ]
 }

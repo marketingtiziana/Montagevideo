@@ -50,13 +50,17 @@ def word_t(sid, key):
     return s["out_start"] / FPS
 impacts = [word_t("s09", "décision"), word_t("s13", "dorment")]
 riser_t = t_start("s10") - 1.0                     # riser finit sur la revelation 50%
-# click discret (HP 2kHz, -22dB) sur l'apparition des cartes (incrustations dominantes)
-DOMS = {"FullscreenStamp","Toggle","Map","ComparisonBar","HighlightBox","StatCard","FullscreenCard","TwinReveal","CTACard","LowerThird","TitleFlash","Chip"}
+# POP sur CHAQUE apparition d'incrustation (cartes ET tags) — bien audible
 clicks = []
 for s in tl["segments"]:
     for g in s.get("graphics", []):
-        if g and g.get("type") in DOMS:
+        if g:
             clicks.append(appear_frame(s, g) / FPS)
+# whoosh doux sur l'entree de chaque b-roll (cut-away)
+broll_wh = []
+for s in tl["segments"]:
+    for b in s.get("broll", []):
+        broll_wh.append(b["in_f"] / FPS)
 
 def ms(x): return int(max(0, x) * 1000)
 
@@ -89,12 +93,14 @@ def add_sfx(path, t, vol, lead=0.0, pre=""):
 
 # whoosh : pic sur la frame de coupe, 0,3 s de montee avant
 for t in whooshs: add_sfx(WHOOSH, t, "-13dB", lead=0.30)
+# whoosh doux sur l'entree des b-rolls
+for t in broll_wh: add_sfx(WHOOSH, t, "-16dB", lead=0.20)
 # impact snap zoom : -10dB, cale a la frame
 for t in impacts: add_sfx(IMPACT, t, "-10dB")
 # riser avant la revelation 50%
 add_sfx(RISER, riser_t, "-14dB")
-# click carte : passe-haut 2kHz, -22dB
-for t in clicks: add_sfx(CLICK, t, "-22dB", pre="highpass=f=2000")
+# POP incrustation : bien audible, passe-haut leger 800Hz, -14dB
+for t in clicks: add_sfx(CLICK, t, "-14dB", pre="highpass=f=800")
 
 mix_ins = "[vmix][music]" + "".join(sfx_labels)
 n = 2 + len(sfx_labels)

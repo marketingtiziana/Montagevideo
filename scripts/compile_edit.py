@@ -4,10 +4,33 @@
 # AUCUN timecode en dur cote TSX.
 import json, re
 
+import os
 FPS = 30
 edit = json.load(open("data/edit.json"))
 tr = json.load(open("data/transcript.json"))
 WORDS = [(w["start"], w["end"], w["w"]) for w in tr["words"]]
+# keeps.json : ranges de speech conservees par segment (silences retires). Re-time tout.
+KEEPS = json.load(open("data/keeps.json")) if os.path.exists("data/keeps.json") else {}
+
+def seg_dur_f(seg):
+    ks = KEEPS.get(seg["id"])
+    if ks:
+        return round(sum(b - a for a, b in ks) * FPS)
+    return round((seg["src_out"] - seg["src_in"]) * FPS)
+
+def map_time(seg, out_start, t):
+    # temps source t -> frame de sortie, a travers les ranges conservees
+    ks = KEEPS.get(seg["id"])
+    if not ks:
+        return round((t - seg["src_in"]) * FPS) + out_start
+    off = 0.0
+    for (a, b) in ks:
+        if t < a:
+            break
+        if t <= b:
+            return round((off + (t - a)) * FPS) + out_start
+        off += (b - a)
+    return round(off * FPS) + out_start
 
 # Mots JAUNES (#FFD84D) — 4 maximum sur tout le short, mots de rupture/enjeu.
 # mots jaunes sur des sous-titres VISIBLES (pas sous une carte plein cadre) — 4 max
@@ -47,7 +70,7 @@ def build_caps(seg, out_start, out_end):
             at = asr[j][0]
         else:
             at = sin + (i / N) * (sout - sin)
-        at_f = round((at - sin) * FPS) + out_start
+        at_f = map_time(seg, out_start, at)
         at_f = max(out_start, min(out_end - 1, at_f))
         key = any(sid == seg["id"] and sub in word.lower() for sid, sub in YELLOW)
         timed.append({"w": word, "key": key, "at_f": at_f})
@@ -80,7 +103,7 @@ def build_caps(seg, out_start, out_end):
 segments = []
 cursor = 0
 for i, seg in enumerate(edit["segments"]):
-    dur_f = round((seg["src_out"] - seg["src_in"]) * FPS)
+    dur_f = seg_dur_f(seg)
     trans = seg["transition_in"]
     # base_cut = coupes franches frame-lockees ; transitions rendues cote Remotion.
     out_start = cursor

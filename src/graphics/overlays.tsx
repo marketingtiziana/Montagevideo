@@ -474,6 +474,46 @@ export const SceneMoney: React.FC = () => {
   );
 };
 
+export const ScenePassport: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const stamp = interpolate(f, [10, 16], [1.6, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const sop = interpolate(f, [10, 16], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const ry = interpolate(f, [0, 16], [60, 0], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ background: bgScene, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <div style={{ transform: `translateY(${ry}px) rotate(-6deg)`, width: 460, height: 640, borderRadius: 28, background: "linear-gradient(160deg,#1B2E63,#0E1740)", border: `4px solid ${T.accent}`, boxShadow: T.shadow, position: "relative" }}>
+        <div style={{ ...label(40, T.accentSoft), position: "absolute", top: 46, left: 0, right: 0, textAlign: "center", letterSpacing: "0.2em" }}>PASSEPORT</div>
+        <div style={{ position: "absolute", top: 150, left: "50%", transform: "translateX(-50%)", width: 150, height: 150, borderRadius: "50%", border: `4px solid ${T.line}` }} />
+        <div style={{ position: "absolute", bottom: 60, left: 40, right: 40, height: 12, background: T.line, borderRadius: 6 }} />
+        <div style={{ position: "absolute", bottom: 110, left: 40, width: 200, height: 12, background: T.line, borderRadius: 6 }} />
+        <div style={{ position: "absolute", top: 250, right: 40, transform: `rotate(-16deg) scale(${stamp})`, opacity: sop, border: `6px solid ${T.accent}`, color: T.accent, borderRadius: 12, padding: "8px 18px", fontFamily: FONT, fontWeight: 900, fontSize: 54 }}>EXPAT</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+export const SceneMap: React.FC = () => {
+  ensureFont();
+  const f = useCurrentFrame();
+  const pins = [[0.3, 0.4], [0.62, 0.32], [0.5, 0.55], [0.75, 0.6], [0.4, 0.68]];
+  const drop = interpolate(f, [8, 18], [-80, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ background: "radial-gradient(90% 70% at 50% 40%, #16204A 0%, #0B1030 60%, #05070A 100%)", overflow: "hidden" }}>
+      {pins.map((p, i) => {
+        const o = interpolate(f, [2 + i * 2, 10 + i * 2], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+        return <div key={i} style={{ position: "absolute", left: `${p[0] * 100}%`, top: `${p[1] * 100}%`, width: 22, height: 22, borderRadius: "50%", background: T.accentSoft, opacity: o }} />;
+      })}
+      <div style={{ position: "absolute", left: "50%", top: "38%", transform: `translate(-50%,${drop}px)` }}>
+        <div style={{ width: 60, height: 60, borderRadius: "50% 50% 50% 0", background: T.accent, transform: "rotate(-45deg)", boxShadow: T.shadow }} />
+      </div>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-end", paddingBottom: 340 }}>
+        <div style={{ ...title(150, T.white), opacity: interpolate(f, [12, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>OÙ ?</div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
 // ---------- Tag : petite pastille animée (non-dominante, coexiste avec le sous-titre) ----------
 type Pos = "tl" | "tr" | "ml" | "mr";
 export const Tag: React.FC<Base & { text?: string; pos?: Pos; fill?: boolean }> = ({
