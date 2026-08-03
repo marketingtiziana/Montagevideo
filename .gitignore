@@ -13,4 +13,7 @@ words.json
 final_words.json
 kept_words.json
 transcript.txt
+audio_events.json
+subs_meta.json
+broll/
 __pycache__/
