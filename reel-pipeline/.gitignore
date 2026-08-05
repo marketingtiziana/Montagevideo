@@ -20,3 +20,6 @@ __pycache__/
 
 # Local tool binaries + models (fetched by setup, never versioned)
 models/
+
+# Fonts fetched by setup (google/fonts mirror)
+remotion/fonts/

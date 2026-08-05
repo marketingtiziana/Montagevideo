@@ -37,7 +37,17 @@ python -m pip install --upgrade pip wheel
 say "installing python requirements (this can take a while)"
 python -m pip install -r python/requirements.txt
 
-# 4. Sanity checks.
+# 4. Inter font (brand typography). Fetched from the google/fonts mirror so the
+#    Remotion render uses real Inter Black instead of a system fallback.
+say "fetching Inter font (google/fonts mirror)"
+mkdir -p remotion/fonts
+if [ ! -f remotion/fonts/Inter.ttf ]; then
+  curl -sSL -o remotion/fonts/Inter.ttf \
+    "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf" \
+    || say "warning: could not fetch Inter; captions will use a fallback font"
+fi
+
+# 5. Sanity checks.
 say "verifying python imports"
 python - <<'PY'
 mods = []

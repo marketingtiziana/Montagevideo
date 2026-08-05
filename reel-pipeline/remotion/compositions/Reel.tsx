@@ -6,6 +6,7 @@ import { FaceFrame } from '../components/FaceFrame';
 import { Captions } from '../components/Captions';
 import { Transitions } from '../components/Transitions';
 import { InsertLayer } from '../components/InsertLayer';
+import { ensureFonts } from '../loadFonts';
 
 /**
  * Reel — 1080x1920 @ 30fps. Layer order matters (section 10 / 14.6):
@@ -16,6 +17,7 @@ import { InsertLayer } from '../components/InsertLayer';
  */
 export const Reel: React.FC<ReelProps> = (props) => {
   const { fps } = props;
+  ensureFonts();
   return (
     <AbsoluteFill style={{ backgroundColor: theme.colors.navy }}>
       {/* mastered audio replaces the raw track */}

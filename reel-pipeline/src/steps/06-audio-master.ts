@@ -20,18 +20,38 @@ import { log, info, ok } from '../lib/log.js';
 
 const TAG = '06-audio-master';
 
-// Chain 1..6 as a single filter string (loudnorm handled separately in 2 passes).
+/**
+ * Denoise stage. A GENTLE afftdn (nr=8) measurably lowers the noise floor
+ * (~5 dB here) while preserving the voice, without the underwater/metallic
+ * artefacts that aggressive settings produce. RNNoise (arnndn) is available via
+ * RNNOISE_MODEL but on close lav sources it under-denoises and can warble, so
+ * gentle afftdn is the default. Aggressive denoise was a big part of what made
+ * the earlier master sound bad — restraint here matters more than raw dB.
+ */
+function denoiseStage(): string {
+  const model = process.env.RNNOISE_MODEL;
+  if (model && existsSync(model)) return `arnndn=m=${model}`;
+  return 'afftdn=nr=8:nf=-28:tn=1';
+}
+
+/**
+ * Mastering pre-chain (everything before loudnorm). Tuned WARM and clean:
+ * a lav/phone source is already bright, so we tame harshness and roll off the
+ * top rather than boosting it — the opposite of a generic "add air" chain.
+ *   highpass -> denoise -> warmth -> de-mud -> de-ess -> harshness cut ->
+ *   gentle high-shelf cut -> soft compression -> safety limiter.
+ */
 function preChain(): string {
   return [
-    'highpass=f=75',
-    'afftdn=nr=12:nf=-32:tn=1',
-    // de-esser: notch the sibilance band gently (approximation via equalizer).
-    'deesser=i=0.4:m=0.5:f=0.2',
-    'equalizer=f=300:t=q:w=1.2:g=-2.5',
-    'equalizer=f=3000:t=q:w=1.0:g=2',
-    'treble=g=1.5:f=11000',
-    'acompressor=threshold=-20dB:ratio=3:attack=8:release=180:makeup=2',
-    'alimiter=limit=0.94:level=false',
+    'highpass=f=80', // rumble / handling / plosive energy
+    denoiseStage(),
+    'equalizer=f=180:t=q:w=1.0:g=2', // warmth / body
+    'equalizer=f=350:t=q:w=1.4:g=-2.5', // remove boxy mud
+    'deesser=i=0.55', // tame sibilance (real de-ess, moderate)
+    'equalizer=f=5500:t=q:w=2.5:g=-3.5', // cut the harsh presence band
+    'treble=g=-2:f=9000', // gentle high-shelf cut: less hiss, warmer top
+    'acompressor=threshold=-21dB:ratio=2.5:attack=20:release=220:makeup=1.5', // soft, transparent
+    'alimiter=limit=0.9:level=false',
   ].join(',');
 }
 

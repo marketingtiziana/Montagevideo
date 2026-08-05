@@ -61,6 +61,9 @@ export async function stepRender(ctx: RunContext, inputs: RenderInputs): Promise
   mkdirSync(publicDir, { recursive: true });
   copyFileSync(cut.video, join(publicDir, 'video.mp4'));
   copyFileSync(master, join(publicDir, 'audio.wav'));
+  // Stage the Inter font so staticFile('Inter.ttf') resolves during render.
+  const interSrc = join(process.cwd(), 'remotion', 'fonts', 'Inter.ttf');
+  if (existsSync(interSrc)) copyFileSync(interSrc, join(publicDir, 'Inter.ttf'));
 
   const props: ReelProps = {
     videoSrc: 'video.mp4',
