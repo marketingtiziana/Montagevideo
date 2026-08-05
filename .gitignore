@@ -1,16 +1,29 @@
+# Dépendances
+node_modules/
+.venv/
+.bin/
+
 # Ressources lourdes / dérivées — ne pas versionner
-*.mp4
+raw/*.mp4
+work/
+out/
 *.wav
 *.log
 ffmpeg2pass-*
 models/
 fonts/
-sfx/
-assets/
 frames/
 *.ass
+
+# PNG détourés lourds (on garde manifest.json et le .gitkeep)
+assets/cutouts/*.png
+assets/cutouts/*.jpg
+
+# Anciens artefacts du pipeline Python
 words.json
 final_words.json
 kept_words.json
 transcript.txt
+
 __pycache__/
+.DS_Store

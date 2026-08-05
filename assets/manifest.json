@@ -1,0 +1,11 @@
+{
+  "note": "Décrit chaque PNG détouré de assets/cutouts/. Claude (étape 3) sélectionne les assets pertinents par tags en fonction du transcript. Les sources peuvent être en couleur : le traitement §11.3 (désaturation, plage tonale, demi-teinte, flou) est appliqué au rendu.",
+  "assets": [
+    {
+      "id": "example_cloud_woman",
+      "file": "cutouts/example_cloud_woman.png",
+      "tags": ["personne", "femme", "tête", "nuage", "portrait", "motif-signature"],
+      "note": "Exemple. Remplacer par de vrais PNG détourés. Le motif tête-nuage est un candidat au motif signature (§11.5)."
+    }
+  ]
+}
