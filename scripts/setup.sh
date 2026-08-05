@@ -65,5 +65,24 @@ python -m pip install --quiet --upgrade pip
 log "Installation de WhisperX (large-v3)…"
 python -m pip install --quiet whisperx || warn "Échec install WhisperX (réseau ?). Réessayez : source .venv/bin/activate && pip install whisperx"
 
+# --- Préchargement des modèles WhisperX (si HuggingFace est joignable) --
+# Les poids (faster-whisper large-v3 + align wav2vec2 fr) viennent de HF. Si la
+# politique réseau bloque HF, ce préchargement est ignoré : fournir alors un
+# modèle local via WHISPER_MODEL_DIR (voir README).
+HF_CACHE="$ROOT/models/hf-cache"
+if curl -sS -o /dev/null --max-time 15 https://huggingface.co 2>/dev/null; then
+  log "HuggingFace joignable — préchargement large-v3 + align fr dans models/hf-cache…"
+  HF_HOME="$HF_CACHE" python - <<'PY' || warn "Préchargement modèle échoué (poursuite)."
+import whisperx
+whisperx.load_model("large-v3", device="cpu", compute_type="int8", language="fr")
+whisperx.load_align_model(language_code="fr", device="cpu")
+print("modèles WhisperX en cache")
+PY
+else
+  warn "HuggingFace injoignable (politique réseau). La transcription (étape 2)"
+  warn "nécessitera une session où HF est autorisé, ou un modèle local"
+  warn "(export WHISPER_MODEL_DIR=/chemin/faster-whisper-large-v3)."
+fi
+
 log "Setup terminé."
 log "Vérifs : node -v ; ffmpeg -version ; source .venv/bin/activate && python -c 'import whisperx'"

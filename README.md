@@ -25,6 +25,23 @@ bash scripts/setup.sh       # deps Node + ffmpeg + venv WhisperX, puis vérifie 
 export ANTHROPIC_API_KEY=…  # requis pour l'étape 3 (décisions éditoriales)
 ```
 
+### Accès aux modèles WhisperX (HuggingFace)
+
+L'étape 2 télécharge ses poids (faster-whisper large-v3 + align wav2vec2 fr)
+depuis **HuggingFace**. Si la politique réseau de l'environnement bloque
+`huggingface.co` (cas des environnements verrouillés), deux solutions :
+
+1. **Session autorisée** — créer/relancer l'environnement avec `huggingface.co`
+   (et `cdn-lfs.huggingface.co`) dans l'allowlist ; `setup.sh` précharge alors
+   les modèles dans `models/hf-cache`.
+2. **Modèle local** — placer un dossier CT2 faster-whisper large-v3 sur le
+   disque et l'exporter :
+   ```bash
+   export WHISPER_MODEL_DIR=/chemin/faster-whisper-large-v3
+   export WHISPER_ALIGN_MODEL=/chemin/wav2vec2-fr   # optionnel
+   npm run pipeline -- --input ./raw/source.mp4 --from 02
+   ```
+
 ## Utilisation (CLI)
 
 ```bash
