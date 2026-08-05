@@ -11,9 +11,9 @@ export const LowerThird: React.FC<{ name: string; role: string; env: number }> =
   return (
     <div style={{ display: 'flex', alignItems: 'stretch', fontFamily: theme.font, overflow: 'hidden', borderRadius: theme.radius, boxShadow: `0 8px 0 ${theme.colors.ink}` }}>
       <div style={{ width: 16 * wipe + 8, background: theme.colors.indigo }} />
-      <div style={{ background: theme.colors.navy, padding: '24px 32px', color: theme.colors.white, clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }}>
-        <div style={{ fontWeight: theme.weights.black, fontSize: 52, opacity: textReveal }}>{name}</div>
-        <div style={{ fontWeight: theme.weights.bold, fontSize: 32, color: theme.colors.indigo, opacity: textReveal, marginTop: 4 }}>{role}</div>
+      <div style={{ background: theme.colors.navy, padding: '16px 24px', color: theme.colors.white, clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }}>
+        <div style={{ fontWeight: theme.weights.black, fontSize: 36, opacity: textReveal }}>{name}</div>
+        <div style={{ fontWeight: theme.weights.bold, fontSize: 24, color: theme.colors.indigo, opacity: textReveal, marginTop: 3 }}>{role}</div>
       </div>
     </div>
   );

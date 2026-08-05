@@ -147,28 +147,20 @@ export function buildCaptions(transcript: Transcript, edl: Edl): CaptionGroup[] 
     .filter((w): w is { text: string; start: number; end: number } => !!w && w.text.length > 0)
     .sort((a, b) => a.start - b.start);
 
+  // One word at a time (karaoke). Each word is its own group and stays on
+  // screen until the next word starts, so a single word is always shown.
   const groups: CaptionGroup[] = [];
-  let cur: Array<{ text: string; start: number; end: number }> = [];
-  const flush = () => {
-    if (!cur.length) return;
-    const accentIdx = pickAccent(cur.map((c) => c.text));
+  for (let i = 0; i < remapped.length; i++) {
+    const w = remapped[i];
+    const next = remapped[i + 1];
+    const end = next ? next.start : w.end + 0.3;
+    const letters = w.text.replace(/[^\p{L}\p{N}]/gu, '').length;
     groups.push({
-      start: cur[0].start,
-      end: cur[cur.length - 1].end,
-      words: cur.map((c, i) => ({ text: c.text, start: c.start, end: c.end, accent: i === accentIdx })),
+      start: w.start,
+      end,
+      words: [{ text: w.text, start: w.start, end: w.end, accent: letters >= 7 }],
     });
-    cur = [];
-  };
-
-  for (const w of remapped) {
-    const tentative = [...cur, w];
-    const chars = tentative.map((c) => c.text).join(' ').length;
-    const gapToPrev = cur.length ? w.start - cur[cur.length - 1].end : 0;
-    if (cur.length >= 4 || chars > 22 || gapToPrev > 0.6) flush();
-    cur.push(w);
-    if (cur.length >= 2 && cur.map((c) => c.text).join(' ').length >= 18) flush();
   }
-  flush();
   return groups;
 }
 

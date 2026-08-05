@@ -37,14 +37,22 @@ export const InsertLayer: React.FC<Props> = ({ insert, faceTrack, fps, startFram
   // Resolve a placement box (normalised) that avoids the face box.
   const box = resolvePlacement(insert.anchor, faceTrack, startFrame, width, height);
 
+  // Sit the insert JUST ABOVE the subtitles: anchor by its bottom edge to the
+  // top of the caption band and let it grow upward.
+  const captionBandBottom = theme.caption.baselineFromBottom + theme.caption.size + 30;
+
   return (
     <AbsoluteFill style={{ pointerEvents: 'none' }}>
       <div
         style={{
           position: 'absolute',
           left: box.x * width,
-          top: box.y * height,
           width: box.w * width,
+          bottom: captionBandBottom,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
           opacity: env,
           transform: `translateY(${slideY}px)`,
         }}

@@ -105,7 +105,7 @@ function checkCutSpacing(edl: Edl): Check {
  * inserts against that reframed band, not the pre-reframe track coords.
  */
 function faceBoxAt(_face: FaceTrack, _frame: number): { x: number; y: number; w: number; h: number } {
-  return { x: 0.24, y: 0.29, w: 0.52, h: 0.3 };
+  return { x: 0.26, y: 0.19, w: 0.48, h: 0.28 };
 }
 
 function checkInserts(props: ReelProps): Check[] {
@@ -133,8 +133,8 @@ function checkInserts(props: ReelProps): Check[] {
 }
 
 function insertBoxForAnchor(_anchor: string): { x: number; y: number; w: number; h: number } {
-  // All inserts render in the dedicated top band (see InsertLayer).
-  return { x: 0.06, y: 0.05, w: 0.88, h: 0.2 };
+  // Inserts sit just above the captions (see InsertLayer), growing upward.
+  return { x: 0.06, y: 0.51, w: 0.88, h: 0.1 };
 }
 
 function intersectionArea(a: { x: number; y: number; w: number; h: number }, b: { x: number; y: number; w: number; h: number }): number {
