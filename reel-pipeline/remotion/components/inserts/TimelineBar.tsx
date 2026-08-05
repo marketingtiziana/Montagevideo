@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, interpolate, spring, useVideoConfig, Easing } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /** TimelineBar — a chronology. The line traces, points pop in sequence. */
 export const TimelineBar: React.FC<{ steps: string[]; env: number }> = ({ steps }) => {

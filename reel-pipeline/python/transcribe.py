@@ -14,6 +14,72 @@ import json
 import sys
 
 
+def transcribe_whispercpp(args) -> int:
+    """
+    Offline backend: whisper.cpp (pywhispercpp) with a local ggml model.
+    Used when WhisperX / HuggingFace downloads are unavailable (locked network).
+    token_timestamps + max_len=1 + split_on_word gives ~one word per segment.
+    """
+    import os
+    import subprocess
+    import tempfile
+
+    from pywhispercpp.model import Model  # type: ignore
+
+    # whisper.cpp's WAV reader wants 16-bit / 16kHz / mono. Our master WAV is
+    # 24-bit / 48kHz, so pre-convert with ffmpeg into a temp file.
+    ff = os.environ.get("FFMPEG_BIN", "ffmpeg")
+    tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+    tmp.close()
+    subprocess.run(
+        [ff, "-hide_banner", "-nostdin", "-y", "-i", args.audio,
+         "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", tmp.name],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    audio_path = tmp.name
+
+    print(f"[transcribe.py] whisper.cpp backend, model={args.ggml} lang={args.lang}")
+    m = Model(
+        args.ggml,
+        print_realtime=False,
+        print_progress=False,
+        language=args.lang,
+        translate=False,
+    )
+    segs = m.transcribe(
+        audio_path,
+        token_timestamps=True,
+        max_len=1,
+        split_on_word=True,
+        no_speech_thold=0.6,
+    )
+    os.unlink(audio_path)
+    words = []
+    idx = 0
+    for s in segs:
+        txt = (s.text or "").strip()
+        if not txt:
+            continue
+        words.append(
+            {
+                "i": idx,
+                "text": txt,
+                "start": round(s.t0 / 100.0, 3),  # centiseconds -> seconds
+                "end": round(s.t1 / 100.0, 3),
+                "score": 0.9,  # whisper.cpp does not expose a per-word prob here
+            }
+        )
+        idx += 1
+
+    out = {"version": 1, "language": args.lang, "words": words}
+    with open(args.out, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
+    print(f"[transcribe.py] wrote {len(words)} words -> {args.out}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--audio", required=True)
@@ -22,11 +88,32 @@ def main() -> int:
     ap.add_argument("--model", default="large-v3")
     ap.add_argument("--device", default="cpu")
     ap.add_argument(
+        "--backend",
+        default="auto",
+        choices=["auto", "whisperx", "whispercpp"],
+        help="auto: WhisperX if available, else whisper.cpp",
+    )
+    ap.add_argument(
+        "--ggml",
+        default="models/ggml-base.bin",
+        help="local ggml model for the whisper.cpp backend",
+    )
+    ap.add_argument(
         "--compute-type",
         default="int8",
         help="float16 on GPU, int8 on CPU",
     )
     args = ap.parse_args()
+
+    # Backend selection. whisper.cpp is the offline-friendly fallback.
+    if args.backend == "whispercpp":
+        return transcribe_whispercpp(args)
+    if args.backend == "auto":
+        try:
+            import whisperx  # noqa: F401
+        except ImportError:
+            print("[transcribe.py] whisperx unavailable, falling back to whisper.cpp")
+            return transcribe_whispercpp(args)
 
     try:
         import whisperx  # type: ignore

@@ -45,7 +45,7 @@ export async function stepProbe(ctx: RunContext): Promise<Probe> {
   await ffmpeg([
     '-i', ctx.params.input,
     '-map', '0:v:0',
-    '-vsync', 'cfr',
+    '-fps_mode', 'cfr',
     '-r', String(FPS),
     '-c:v', 'libx264',
     '-preset', 'medium',

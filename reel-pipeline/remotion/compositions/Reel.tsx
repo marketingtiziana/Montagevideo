@@ -1,11 +1,11 @@
 import React from 'react';
 import { AbsoluteFill, Audio, Sequence, staticFile } from 'remotion';
-import type { ReelProps, InsertPlan } from '../../src/lib/types.js';
-import { theme } from '../theme.js';
-import { FaceFrame } from '../components/FaceFrame.js';
-import { Captions } from '../components/Captions.js';
-import { Transitions } from '../components/Transitions.js';
-import { InsertLayer } from '../components/InsertLayer.js';
+import type { ReelProps, InsertPlan } from '../../src/lib/types';
+import { theme } from '../theme';
+import { FaceFrame } from '../components/FaceFrame';
+import { Captions } from '../components/Captions';
+import { Transitions } from '../components/Transitions';
+import { InsertLayer } from '../components/InsertLayer';
 
 /**
  * Reel — 1080x1920 @ 30fps. Layer order matters (section 10 / 14.6):
@@ -19,7 +19,7 @@ export const Reel: React.FC<ReelProps> = (props) => {
   return (
     <AbsoluteFill style={{ backgroundColor: theme.colors.navy }}>
       {/* mastered audio replaces the raw track */}
-      {props.audioSrc ? <Audio src={toSrc(props.audioSrc)} /> : null}
+      {props.audioSrc ? <Audio src={staticFile(props.audioSrc)} /> : null}
 
       {/* 1 — framing */}
       <FaceFrame
@@ -50,9 +50,3 @@ export const Reel: React.FC<ReelProps> = (props) => {
     </AbsoluteFill>
   );
 };
-
-/** Absolute paths must be wrapped for Remotion; http(s) pass through. */
-function toSrc(p: string): string {
-  if (/^https?:\/\//.test(p) || p.startsWith('file://')) return p;
-  return `file://${p}`;
-}

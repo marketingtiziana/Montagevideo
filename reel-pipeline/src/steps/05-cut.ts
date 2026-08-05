@@ -60,7 +60,7 @@ export async function stepCut(ctx: RunContext, edl: Edl): Promise<CutResult> {
         '-map', '0:v:0',
         '-map', '1:a:0',
         '-r', String(FPS),
-        '-vsync', 'cfr',
+        '-fps_mode', 'cfr',
         '-c:v', 'libx264',
         '-preset', 'medium',
         '-crf', '16',

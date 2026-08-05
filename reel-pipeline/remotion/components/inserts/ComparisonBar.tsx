@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 interface Side { label: string; value: number; }
 /** ComparisonBar — A vs B / before vs after. Bars fill sequentially (+6f). */

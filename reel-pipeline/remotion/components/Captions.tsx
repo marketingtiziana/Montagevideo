@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import type { CaptionGroup } from '../../src/lib/types.js';
-import { theme, captionTextShadow } from '../theme.js';
+import type { CaptionGroup } from '../../src/lib/types';
+import { theme, captionTextShadow } from '../theme';
 
 /**
  * Captions (10.3). Groups of 2–4 words, one line, <=22 chars. The active word

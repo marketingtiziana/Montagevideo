@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, spring, useVideoConfig } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /** KeywordPop — one strong keyword. Inter Black, scale 0.9 -> 1, no rotation. */
 export const KeywordPop: React.FC<{ word: string; env: number }> = ({ word }) => {

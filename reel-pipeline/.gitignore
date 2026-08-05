@@ -17,3 +17,6 @@ __pycache__/
 
 # OS
 .DS_Store
+
+# Local tool binaries + models (fetched by setup, never versioned)
+models/

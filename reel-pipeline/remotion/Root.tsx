@@ -1,7 +1,7 @@
 import React from 'react';
 import { Composition, getInputProps, registerRoot } from 'remotion';
-import { Reel } from './compositions/Reel.js';
-import type { ReelProps } from '../src/lib/types.js';
+import { Reel } from './compositions/Reel';
+import type { ReelProps } from '../src/lib/types';
 
 const FALLBACK: ReelProps = {
   videoSrc: '',

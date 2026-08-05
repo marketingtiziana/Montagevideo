@@ -1,15 +1,15 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing } from 'remotion';
-import type { InsertPlan, FaceTrack } from '../../src/lib/types.js';
-import { theme } from '../theme.js';
-import { StatCard } from './inserts/StatCard.js';
-import { ComparisonBar } from './inserts/ComparisonBar.js';
-import { LowerThird } from './inserts/LowerThird.js';
-import { KeywordPop } from './inserts/KeywordPop.js';
-import { QuoteBlock } from './inserts/QuoteBlock.js';
-import { ChecklistReveal } from './inserts/ChecklistReveal.js';
-import { TimelineBar } from './inserts/TimelineBar.js';
-import { Shape3D } from './inserts/Shape3D.js';
+import type { InsertPlan, FaceTrack } from '../../src/lib/types';
+import { theme } from '../theme';
+import { StatCard } from './inserts/StatCard';
+import { ComparisonBar } from './inserts/ComparisonBar';
+import { LowerThird } from './inserts/LowerThird';
+import { KeywordPop } from './inserts/KeywordPop';
+import { QuoteBlock } from './inserts/QuoteBlock';
+import { ChecklistReveal } from './inserts/ChecklistReveal';
+import { TimelineBar } from './inserts/TimelineBar';
+import { Shape3D } from './inserts/Shape3D';
 
 /**
  * InsertLayer (10.4). Places an insert in the free zone so it NEVER covers the

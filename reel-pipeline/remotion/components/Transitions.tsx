@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, interpolate, Easing } from 'remotion';
-import type { TransitionCue } from '../../src/lib/types.js';
-import { theme } from '../theme.js';
+import type { TransitionCue } from '../../src/lib/types';
+import { theme } from '../theme';
 
 /**
  * Transitions (10.5), only on joins with >1.5s removed:

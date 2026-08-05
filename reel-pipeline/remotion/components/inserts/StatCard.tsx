@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, spring, useVideoConfig } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /** StatCard — a cited figure. Counter increments, card springs up 30px. */
 export const StatCard: React.FC<{ value: string; label: string; source?: string; env: number }> = ({ value, label, source }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, spring, useVideoConfig } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /** ChecklistReveal — 3–5 points cascading in with an indigo check. */
 export const ChecklistReveal: React.FC<{ items: string[]; env: number }> = ({ items }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /** LowerThird — name / role. Indigo bar wipes in from the left, pushes text. */
 export const LowerThird: React.FC<{ name: string; role: string; env: number }> = ({ name, role }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /** QuoteBlock — a citation / law article. Navy 92% block, giant indigo quote. */
 export const QuoteBlock: React.FC<{ text: string; source?: string; env: number }> = ({ text, source }) => {

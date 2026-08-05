@@ -1,6 +1,6 @@
 import React from 'react';
-import { AbsoluteFill, OffthreadVideo, useCurrentFrame, spring, interpolate } from 'remotion';
-import type { Beat, FaceTrack } from '../../src/lib/types.js';
+import { AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, spring, interpolate } from 'remotion';
+import type { Beat, FaceTrack } from '../../src/lib/types';
 
 /**
  * Dynamic framing (10.2). OffthreadVideo cropped via transform, driven by
@@ -58,7 +58,7 @@ export const FaceFrame: React.FC<Props> = ({ videoSrc, faceTrack, beats, fps, wi
   return (
     <AbsoluteFill style={{ overflow: 'hidden' }}>
       <OffthreadVideo
-        src={toSrc(videoSrc)}
+        src={staticFile(videoSrc)}
         style={{
           width,
           height,
@@ -73,8 +73,4 @@ export const FaceFrame: React.FC<Props> = ({ videoSrc, faceTrack, beats, fps, wi
 
 function clamp(v: number, lo: number, hi: number): number {
   return Math.min(Math.max(v, lo), hi);
-}
-function toSrc(p: string): string {
-  if (/^https?:\/\//.test(p) || p.startsWith('file://')) return p;
-  return `file://${p}`;
 }

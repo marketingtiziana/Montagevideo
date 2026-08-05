@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
 import { ThreeCanvas } from '@remotion/three';
-import { theme } from '../../theme.js';
+import { theme } from '../../theme';
 
 /**
  * Shape3D — visual breather. A Three.js primitive in indigo wireframe, slow

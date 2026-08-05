@@ -7,7 +7,7 @@
  * out/reel.mp4 at 1080x1920 / 30fps. Order of composition (10.x): framing ->
  * captions -> transitions -> inserts.
  */
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync, mkdirSync, copyFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 import type { RunContext } from '../lib/cache.js';
@@ -18,6 +18,7 @@ import type {
 import { FPS, WIDTH, HEIGHT } from '../lib/types.js';
 import { srcToOut } from './04-build-edl.js';
 import { snapSec, secToFrame } from '../lib/timecode.js';
+import { ffmpeg } from '../lib/ffmpeg.js';
 import { log, info, ok, warn, logCmd } from '../lib/log.js';
 
 const TAG = '08-render';
@@ -54,9 +55,16 @@ export async function stepRender(ctx: RunContext, inputs: RenderInputs): Promise
   const transitions = buildTransitions(edl);
   const durationInFrames = Math.max(1, secToFrame(edl.stats.finalDurationSec));
 
+  // Remotion serves media from a public dir referenced via staticFile(); it
+  // cannot read file:// URLs. Stage the cut video + mastered audio there.
+  const publicDir = join(ctx.workDir, 'public');
+  mkdirSync(publicDir, { recursive: true });
+  copyFileSync(cut.video, join(publicDir, 'video.mp4'));
+  copyFileSync(master, join(publicDir, 'audio.wav'));
+
   const props: ReelProps = {
-    videoSrc: cut.video,
-    audioSrc: master,
+    videoSrc: 'video.mp4',
+    audioSrc: 'audio.wav',
     fps: FPS,
     width: WIDTH,
     height: HEIGHT,
@@ -73,7 +81,32 @@ export async function stepRender(ctx: RunContext, inputs: RenderInputs): Promise
   info(TAG, `props: ${captions.length} caption groups, ${transitions.length} transitions, ${edl.inserts.length} inserts`);
 
   log(TAG, `rendering ${WIDTH}x${HEIGHT}@${FPS} (${durationInFrames} frames)`);
-  await renderRemotion(propsPath, output);
+  const rendered = join(ctx.outDir, '.reel.render.mp4');
+  await renderRemotion(propsPath, rendered, publicDir);
+
+  // Finishing mux: Remotion re-encodes audio to AAC, whose intersample peaks
+  // can overshoot our -1 dBTP master and whose track length can drift from the
+  // video. Keep the rendered video, remux the exact mastered audio with a
+  // precise makeup gain to hit the LUFS target, a true-peak-safe limiter (with
+  // headroom for AAC overshoot), and -shortest to align durations. A precise
+  // gain is far more reliable than a single-pass loudnorm on short speech.
+  const makeupDb = (ctx.params.lufs - inputs.audio.outputLufs).toFixed(2);
+  info(TAG, `finishing mux (makeup ${makeupDb} dB + true-peak limiter, aligned durations)`);
+  await ffmpeg(
+    [
+      '-i', rendered,
+      '-i', master,
+      '-map', '0:v:0', '-map', '1:a:0',
+      '-c:v', 'copy',
+      '-af', `volume=${makeupDb}dB,alimiter=limit=0.82:level=false`,
+      '-c:a', 'aac', '-b:a', '256k',
+      '-shortest',
+      '-movflags', '+faststart',
+      output,
+    ],
+    TAG,
+  );
+  rmSync(rendered, { force: true });
 
   writeArtifact(ctx, 'render.json', { version: 1, output, durationInFrames } satisfies RenderResult);
   ok(TAG, `-> ${output}`);
@@ -81,9 +114,13 @@ export async function stepRender(ctx: RunContext, inputs: RenderInputs): Promise
 }
 
 /** Remotion CLI render. Props are passed via --props (a file path). */
-function renderRemotion(propsPath: string, output: string): Promise<void> {
+function renderRemotion(propsPath: string, output: string, publicDir: string): Promise<void> {
   const entry = join(process.cwd(), 'remotion', 'Root.tsx');
-  const argv = ['remotion', 'render', entry, 'Reel', output, `--props=${propsPath}`, '--codec=h264', '--crf=18'];
+  const argv = ['remotion', 'render', entry, 'Reel', output, `--props=${propsPath}`, `--public-dir=${publicDir}`, '--codec=h264', '--crf=18'];
+  // Use a pre-installed Chromium when provided (locked networks can't download one).
+  if (process.env.REMOTION_BROWSER_EXECUTABLE) {
+    argv.push(`--browser-executable=${process.env.REMOTION_BROWSER_EXECUTABLE}`);
+  }
   logCmd(TAG, ['npx', ...argv]);
   return new Promise((resolve, reject) => {
     const p = spawn('npx', argv, { stdio: ['ignore', 'inherit', 'inherit'] });
