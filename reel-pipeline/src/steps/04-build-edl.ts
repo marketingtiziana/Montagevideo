@@ -207,12 +207,12 @@ function remapInserts(inserts: InsertPlan[], segments: Segment[]): InsertPlan[] 
   return dedupeInsertDensity(out.sort((a, b) => a.start - b.start));
 }
 
-/** Enforce >=1.5s spacing between inserts (10.4 rule 3). */
+/** Drop inserts that would overlap the previous one in time (one at a time). */
 function dedupeInsertDensity(inserts: InsertPlan[]): InsertPlan[] {
   const out: InsertPlan[] = [];
   for (const ins of inserts) {
     const last = out[out.length - 1];
-    if (last && ins.start - (last.start + last.duration) < 1.5) continue;
+    if (last && ins.start - (last.start + last.duration) < 0.2) continue;
     out.push(ins);
   }
   return out;
