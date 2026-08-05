@@ -1,0 +1,28 @@
+# Intermediate artefacts and final renders — never versioned.
+work/
+out/
+raw/*.mp4
+raw/*.mov
+raw/*.MP4
+raw/*.MOV
+
+# Node / Python
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Remotion
+.remotion/
+
+# OS
+.DS_Store
+
+# Local tool binaries + models (fetched by setup, never versioned)
+models/
+
+# Fonts fetched by setup (google/fonts mirror)
+remotion/fonts/
+
+# Generated from Inter.ttf by setup.sh (large, do not version)
+remotion/interFontData.ts
