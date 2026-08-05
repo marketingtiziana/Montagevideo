@@ -1,0 +1,35 @@
+{
+  "name": "reel-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Facecam -> studio-grade vertical reel (1080x1920) pipeline. CLI + ffmpeg + WhisperX + Claude + MediaPipe + Remotion.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "pipeline": "tsx src/cli.ts",
+    "qa": "tsx src/qa.ts",
+    "preview": "remotion studio remotion/Root.tsx",
+    "render": "tsx src/steps/08-render.ts",
+    "typecheck": "tsc --noEmit",
+    "setup": "bash scripts/setup.sh"
+  },
+  "dependencies": {
+    "@remotion/three": "4.0.170",
+    "@react-three/fiber": "8.16.8",
+    "three": "0.164.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.170",
+    "@remotion/cli": "4.0.170",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.0",
+    "@types/react": "18.3.3",
+    "@types/three": "0.164.0",
+    "tsx": "4.16.2",
+    "typescript": "5.5.3"
+  }
+}
