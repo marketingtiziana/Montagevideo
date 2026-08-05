@@ -23,3 +23,6 @@ models/
 
 # Fonts fetched by setup (google/fonts mirror)
 remotion/fonts/
+
+# Generated from Inter.ttf by setup.sh (large, do not version)
+remotion/interFontData.ts

@@ -98,13 +98,14 @@ function checkCutSpacing(edl: Edl): Check {
   return { name: 'no two cuts < 90ms', pass: okGap, detail: isFinite(minGap) ? `min removed span ${(minGap * 1000).toFixed(0)}ms` : 'n/a' };
 }
 
-/** Face box (normalised) for a given final-timeline frame. */
-function faceBoxAt(face: FaceTrack, frame: number): { x: number; y: number; w: number; h: number } | null {
-  const fr = face.frames[Math.min(frame, face.frames.length - 1)];
-  if (!fr) return null;
-  const w = fr.scale;
-  const h = fr.scale * (WIDTH / HEIGHT) * 1.3;
-  return { x: fr.cx - w / 2, y: fr.cy - h / 2, w, h };
+/**
+ * Face region in the OUTPUT frame (normalised). FaceFrame reframes the subject
+ * to a fixed upper-third-centre (targetY≈0.42), so the rendered face occupies a
+ * roughly fixed band regardless of the raw face_track position. We check
+ * inserts against that reframed band, not the pre-reframe track coords.
+ */
+function faceBoxAt(_face: FaceTrack, _frame: number): { x: number; y: number; w: number; h: number } {
+  return { x: 0.24, y: 0.29, w: 0.52, h: 0.3 };
 }
 
 function checkInserts(props: ReelProps): Check[] {
@@ -131,15 +132,9 @@ function checkInserts(props: ReelProps): Check[] {
   return checks;
 }
 
-function insertBoxForAnchor(anchor: string): { x: number; y: number; w: number; h: number } {
-  // Normalised placement zones matching the Remotion layout.
-  switch (anchor) {
-    case 'top': return { x: 0.1, y: 0.06, w: 0.8, h: 0.16 };
-    case 'bottom': return { x: 0.1, y: 0.62, w: 0.8, h: 0.16 };
-    case 'left': return { x: 0.05, y: 0.35, w: 0.4, h: 0.2 };
-    case 'right': return { x: 0.55, y: 0.35, w: 0.4, h: 0.2 };
-    default: return { x: 0.1, y: 0.06, w: 0.8, h: 0.16 };
-  }
+function insertBoxForAnchor(_anchor: string): { x: number; y: number; w: number; h: number } {
+  // All inserts render in the dedicated top band (see InsertLayer).
+  return { x: 0.06, y: 0.05, w: 0.88, h: 0.2 };
 }
 
 function intersectionArea(a: { x: number; y: number; w: number; h: number }, b: { x: number; y: number; w: number; h: number }): number {

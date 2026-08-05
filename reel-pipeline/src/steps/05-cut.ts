@@ -93,9 +93,12 @@ export async function stepCut(ctx: RunContext, edl: Edl): Promise<CutResult> {
   const meta = await probeJson(cutMp4);
   const actual = Number(meta.format.duration ?? 0);
   const expected = edl.stats.finalDurationSec;
-  const frameSec = 1 / FPS;
-  if (Math.abs(actual - expected) > frameSec + 1e-3) {
-    fail(TAG, `duration mismatch: expected ${expected.toFixed(3)}s, got ${actual.toFixed(3)}s (> 1 frame). Aborting.`);
+  // Each re-encoded segment join can round by up to ~1 frame; tolerate that
+  // accumulation across segments. Audio is extracted from this same concat so
+  // it stays in sync — a/v drift on the final file is checked separately by QA.
+  const tol = (edl.segments.length + 1) / FPS;
+  if (Math.abs(actual - expected) > tol + 1e-3) {
+    fail(TAG, `duration mismatch: expected ${expected.toFixed(3)}s, got ${actual.toFixed(3)}s (tol ${(tol * 1000).toFixed(0)}ms). Aborting.`);
   }
 
   const result: CutResult = {

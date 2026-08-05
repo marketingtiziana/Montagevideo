@@ -71,35 +71,21 @@ function renderInsert(insert: InsertPlan, env: number): React.ReactNode {
 }
 
 /**
- * Choose a placement box (normalised) for the requested anchor, then push it
- * away if it collides with the face box on this frame. The face box is derived
- * from face_track.json; an insert is never allowed to sit over it.
+ * Placement (normalised). FaceFrame reframes the subject to a fixed
+ * upper-third-centre in the OUTPUT (targetY≈0.36), so the free zones in the
+ * rendered frame are the TOP strip (above the head) and are independent of the
+ * raw face_track position. Inserts sit in the top strip: clear of the face and
+ * clear of the captions (which live low, at 640px from the bottom). We do NOT
+ * relocate based on raw face_track coords — those are pre-reframe and would
+ * (wrongly) push inserts down into the caption zone.
  */
 function resolvePlacement(
   anchor: InsertPlan['anchor'],
-  faceTrack: FaceTrack,
-  startFrame: number,
-  width: number,
-  height: number,
+  _faceTrack: FaceTrack,
+  _startFrame: number,
+  _width: number,
+  _height: number,
 ): { x: number; y: number; w: number } {
-  const base: Record<string, { x: number; y: number; w: number }> = {
-    top: { x: 0.1, y: 0.06, w: 0.8 },
-    bottom: { x: 0.1, y: 0.62, w: 0.8 },
-    left: { x: 0.05, y: 0.35, w: 0.4 },
-    right: { x: 0.55, y: 0.35, w: 0.4 },
-  };
-  let box = base[anchor] ?? base.top;
-
-  const fp = faceTrack.frames[Math.min(startFrame, Math.max(0, faceTrack.frames.length - 1))];
-  if (fp) {
-    const fw = fp.scale;
-    const fh = fp.scale * (width / height) * 1.3;
-    const faceBox = { x: fp.cx - fw / 2, y: fp.cy - fh / 2, w: fw, h: fh };
-    // If the chosen band overlaps the face vertically, prefer the top band
-    // (face is framed in the upper third, so bottom is usually free).
-    const insertH = 0.16;
-    const overlapsV = box.y < faceBox.y + faceBox.h && box.y + insertH > faceBox.y;
-    if (overlapsV) box = base.bottom;
-  }
-  return box;
+  const top = { x: 0.06, y: 0.05, w: 0.88 }; // dedicated top band above the reframed face
+  return { top, bottom: top, left: top, right: top }[anchor] ?? top;
 }

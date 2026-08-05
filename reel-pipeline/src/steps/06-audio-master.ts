@@ -42,15 +42,21 @@ function denoiseStage(): string {
  *   gentle high-shelf cut -> soft compression -> safety limiter.
  */
 function preChain(): string {
+  // Tuned WARM + DE-ESSED: the source reads harsh/sibilant, so we notch the
+  // 5-9kHz sibilance band hard, roll the top off, and add body. Better a touch
+  // dark than piercing.
   return [
-    'highpass=f=80', // rumble / handling / plosive energy
+    'highpass=f=85', // rumble / handling / plosive energy
     denoiseStage(),
-    'equalizer=f=180:t=q:w=1.0:g=2', // warmth / body
+    'equalizer=f=170:t=q:w=1.0:g=2.5', // warmth / body
     'equalizer=f=350:t=q:w=1.4:g=-2.5', // remove boxy mud
-    'deesser=i=0.55', // tame sibilance (real de-ess, moderate)
-    'equalizer=f=5500:t=q:w=2.5:g=-3.5', // cut the harsh presence band
-    'treble=g=-2:f=9000', // gentle high-shelf cut: less hiss, warmer top
-    'acompressor=threshold=-21dB:ratio=2.5:attack=20:release=220:makeup=1.5', // soft, transparent
+    'deesser=i=0.6:m=0.5:f=0.12', // strong de-ess on the sibilance band
+    'equalizer=f=4000:t=q:w=2.0:g=-2', // ease presence harshness
+    'equalizer=f=6500:t=q:w=2.2:g=-5', // hard sibilance/harshness notch
+    'equalizer=f=8500:t=q:w=2.2:g=-4', // upper sibilance notch
+    'treble=g=-4:f=7500', // firm high-shelf cut -> warmer, softer top
+    'lowpass=f=13000', // roll off air/hiss/harshness above 13k
+    'acompressor=threshold=-21dB:ratio=2.5:attack=25:release=250:makeup=1.5', // soft, transparent
     'alimiter=limit=0.9:level=false',
   ].join(',');
 }

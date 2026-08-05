@@ -8,7 +8,7 @@ import type { Beat, FaceTrack } from '../../src/lib/types';
  * Punch-in on `punchline` beats (spring +0.14 over 8f, back over 22f). Slow
  * Ken Burns drift so the plate is never static. Face sits in the upper third.
  */
-const BASE_SCALE = 1.12;
+const BASE_SCALE = 1.06; // slight punch, but keep headroom for top inserts
 const MIN_SCALE = 1.0;
 const MAX_SCALE = 1.42;
 
@@ -45,8 +45,9 @@ export const FaceFrame: React.FC<Props> = ({ videoSrc, faceTrack, beats, fps, wi
 
   const scale = clamp(BASE_SCALE + punch + kb, MIN_SCALE, MAX_SCALE);
 
-  // Translate so the face lands in the upper third (cy target ≈ 0.36).
-  const targetY = 0.36;
+  // Translate so the face lands a bit below the upper third, leaving a clear
+  // top band for inserts (cy target ≈ 0.42).
+  const targetY = 0.42;
   const dx = (0.5 - cx) * width * scale;
   const dyRaw = (targetY - cy) * height * scale;
   // Clamp so the frame never shows an edge.
