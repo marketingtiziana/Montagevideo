@@ -55,7 +55,7 @@ CORRECTIONS = {
     28: "et c'est exactement", 29: "ce qu'on *gère*", 30: "dès le *départ*", 31: "la TVA *internationale*",
     32: "ça se *rattrape pas*", 33: "en *panique*", 34: "ça se conçoit", 35: "en même temps",
     36: "que ta *structure*", 37: "si tu vends", 38: "à *l'international*",
-    39: "t'as un *doute*", 40: "commente « *TVA* »", 41: "on regarde si", 42: "t'es *en règle*",
+    39: "t'as un *doute*", 40: "", 41: "on regarde si", 42: "t'es *en règle*",
 }
 
 MAIN = "EB Garamond"
@@ -152,6 +152,8 @@ def build():
     lines = []
     for i, (s, e, t) in enumerate(raw):
         txt = CORRECTIONS.get(i, t)
+        if not txt.strip():          # carte volontairement vide (ex: portée par une incrustation)
+            continue
         eff = TREAT.get(i)
         on_paper = (eff == 'paper')
         body, base_c = markup(txt, on_paper=on_paper)

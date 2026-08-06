@@ -46,7 +46,8 @@ STICKERS = [
 ]
 # Carte CTA plein cadre (au-dessus des sous-titres)
 CARDS = [
-    ('assets/card_cta.png', 41.55, 44.00, 0.32, 0.25),
+    # démarre avant le sous-titre "commente TVA" (41.24) pour éviter le doublon
+    ('assets/card_cta.png', 41.18, 44.00, 0.30, 0.25),
 ]
 # Transitions balayage-papier (surtout aux entrées de b-roll) : (start, durée)
 TRANS = [(1.05, 0.30), (5.55, 0.30), (9.80, 0.28), (14.20, 0.28), (19.35, 0.30),
