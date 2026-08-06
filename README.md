@@ -65,8 +65,15 @@ python3 pipeline/make_lux_assets.py    # -> assets/led_*.png, card_*.png (fiches
 python3 pipeline/lux_render.py         # -> REEL_lux.mp4 (grade + subs + incrustations)
 ```
 
-Les temps et le contenu des incrustations (`CUT` dans `lux_render.py`, listes/cartes dans
-`make_lux_assets.py`) sont **spécifiques au réel** — à adapter au discours de la source.
+Incrustations : deux familles (voir `lux_render.py`) —
+- **`COLLAGES`** : collages photo N&B surréalistes générés (Higgsfield, cf. `collage_prompts.md`),
+  placés SOUS les sous-titres (la caption reste visible par-dessus, comme dans la réf.) ;
+- **`CARDS`** : fiche « registre » lignée qui s'écrit + carte CTA (Pillow, `make_lux_assets.py`),
+  placées AU-DESSUS des sous-titres (elles portent leur propre texte).
+
+Les temps et le contenu des incrustations (`COLLAGES`/`CARDS` dans `lux_render.py`, listes/cartes
+dans `make_lux_assets.py`, prompts dans `collage_prompts.md`) sont **spécifiques au réel** — à adapter
+au discours de la source.
 
 ## Fichiers
 | Fichier | Rôle |
