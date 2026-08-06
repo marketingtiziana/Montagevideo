@@ -1,50 +1,125 @@
-# Montagevideo — pipeline de montage de réels (vertical 9:16)
+# Montagevideo — pipeline de montage automatisé (reel vertical 1080×1920)
 
-Pipeline semi-automatique pour transformer une vidéo brute (talking-head) en **réel prêt à publier** :
-coupe des hésitations, **sous-titres animés** (blanc gras compact, mots-clés en jaune, changements de
-police, sans boîte), **zooms/dézooms**, **incrustations animées**, **transitions + bruitages**.
+Pipeline **réplique de système** : transforme une vidéo talking-head en reel vertical
+`1080×1920` en reproduisant à l'identique le système de montage d'une vidéo de référence —
+mêmes sous-titres, mêmes types d'inserts, même ambiance, même rythme, même traitement audio.
 
-Conçu pour tourner dans un environnement verrouillé où **seuls PyPI et le CDN GitHub** sont accessibles
-(pas de Google Drive, pas de HuggingFace) :
-- `ffmpeg` complet via le wheel PyPI `imageio-ffmpeg` (libass, freetype, x264) ;
-- modèle **Whisper base multilingue** récupéré depuis un miroir GitHub (`aethersdr/AetherSDR`) ;
-- polices depuis le miroir GitHub `google/fonts` ;
-- bruitages générés synthétiquement avec ffmpeg.
+> **Règle transversale : la retenue.** À chaque hésitation entre un effet et son absence,
+> on choisit l'absence. Toute la palette graphique est **achromatique** (R=G=B). Aucune couleur,
+> aucun zoom/punch-in, aucune transition autre que la coupe franche. Voir la spec complète.
 
-## Récupérer la vidéo source
-Google Drive étant bloqué par la politique réseau, la source transite par une **GitHub Release** du dépôt
-(fichiers jusqu'à 2 Go). Téléchargement de l'asset via l'API authentifiée puis `source.mp4` à la racine.
+## Stack
 
-## Étapes
+- **Node 20 + TypeScript** pour l'orchestration (`src/`), exécuté via `tsx`.
+- **ffmpeg** pour tout le média.
+- **WhisperX** (large-v3, alignement mot à mot) pour la transcription — venv Python 3.11.
+- **API Claude** pour les décisions éditoriales (coupes + plan d'inserts), sortie validée par **Zod**.
+- **Remotion 4** pour la composition (`remotion/`).
+
+Chaque étape est **idempotente** et **mise en cache par hash** ; reprise possible avec `--from <étape>`.
+
+## Installation
 
 ```bash
-bash pipeline/setup.sh                 # deps + modèle + polices + bruitages
-# place la vidéo brute sous ./source.mp4
-
-python3 pipeline/transcribe.py         # -> words.json (+ transcript.txt) : transcription mot à mot FR
-# 1) définir les segments à garder dans pipeline/segments.py (coupe hésitations/blancs/prises ratées)
-python3 pipeline/build_base.py         # -> base.mp4 (coupes + zooms + audio synchro)
-# 2) re-transcrire base.mp4 pour caler les sous-titres sur la timeline finale
-# 3) écrire les cartes de sous-titres dans pipeline/gen_ass.py (texte corrigé + accents ~jaune~ + police)
-python3 pipeline/gen_ass.py            # -> subs.ass
-python3 pipeline/make_assets.py        # -> assets/*.png (drapeaux, pastilles de taux, badges)
-python3 pipeline/build_final_video.py  # -> finalv.mp4 (sous-titres + incrustations + flashs)
-bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier final
+bash scripts/setup.sh       # deps Node + ffmpeg + venv WhisperX, puis vérifie ffmpeg
+export ANTHROPIC_API_KEY=…  # requis pour l'étape 3 (décisions éditoriales)
 ```
 
-## Fichiers
-| Fichier | Rôle |
-|---|---|
-| `segments.py` | Segments source à conserver + mapping timeline source→finale + ken-burns par segment |
-| `transcribe.py` | Transcription mot à mot (français) via `pywhispercpp` + modèle ggml base |
-| `build_base.py` | Trim + zoom (zoompan) + concat + audio synchro → `base.mp4` |
-| `gen_ass.py` | Génère les sous-titres ASS animés (pop, accents jaunes `~mot~`, polices A/H/B, sans boîte) |
-| `make_assets.py` | Dessine les incrustations (drapeaux, pastilles de taux, badges ×3 / OSS) en PNG transparents |
-| `build_final_video.py` | Compose `base.mp4` + sous-titres + incrustations animées (fondu/glissé) + flashs de transition |
-| `mix_audio.sh` | Mixe les bruitages (whoosh/pop) et scelle le fichier final |
+### Décisions éditoriales SANS clé API (Claude en boucle)
 
-## Notes
-- Le modèle `base` fait des fautes (chiffres, noms propres) : **toujours relire/corriger** le texte des
-  sous-titres, surtout pour du contenu fiscal.
-- Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
-  réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+L'étape 3 (coupes éditoriales + plan d'inserts) peut tourner **sans
+`ANTHROPIC_API_KEY`** : déposer un `work/editorial_manual.json` (même schéma Zod
+que la sortie Claude — `cuts` / `keep_overrides` / `chapters` / `inserts`) et
+l'étape 3 l'utilise à la place de l'appel API. Pratique quand l'agent Claude
+rédige lui-même ces décisions depuis le transcript. Chemin surchargé par
+`EDITORIAL_MANUAL=/chemin.json`.
+
+### Environnement à accès réseau (rendu réel de la vidéo 1)
+
+Le seul vrai prérequis pour produire le rendu réel est un **environnement Claude
+Code (web) avec accès réseau** (HuggingFace pour WhisperX, et le CDN Higgsfield
+pour d'éventuels cutouts). La politique réseau se choisit **à la création de
+l'environnement** : créer une nouvelle session sur cette branche avec un accès
+« complet » (ou une allowlist incluant `huggingface.co`), puis lancer le
+pipeline. Tout est déjà commité ; aucune clé API n'est requise (voir ci-dessus).
+
+### Accès aux modèles WhisperX (HuggingFace)
+
+L'étape 2 télécharge ses poids (faster-whisper large-v3 + align wav2vec2 fr)
+depuis **HuggingFace**. Si la politique réseau de l'environnement bloque
+`huggingface.co` (cas des environnements verrouillés), deux solutions :
+
+1. **Session autorisée** — créer/relancer l'environnement avec `huggingface.co`
+   (et `cdn-lfs.huggingface.co`) dans l'allowlist ; `setup.sh` précharge alors
+   les modèles dans `models/hf-cache`.
+2. **Modèle local** — placer un dossier CT2 faster-whisper large-v3 sur le
+   disque et l'exporter :
+   ```bash
+   export WHISPER_MODEL_DIR=/chemin/faster-whisper-large-v3
+   export WHISPER_ALIGN_MODEL=/chemin/wav2vec2-fr   # optionnel
+   npm run pipeline -- --input ./raw/source.mp4 --from 02
+   ```
+
+## Utilisation (CLI)
+
+```bash
+npm run pipeline -- --input ./raw/source.mp4 --lang fr --dry-run-edl   # s'arrête après l'EDL
+npm run pipeline -- --input ./raw/source.mp4                           # pipeline complet
+npm run pipeline -- --input ./raw/source.mp4 --from 07                 # reprise à une étape
+npm run qa                                                             # QA bloquant + rapport
+npm run preview                                                        # Remotion studio
+```
+
+## Étapes du pipeline
+
+| ID | Étape | Sortie principale |
+|----|-------|-------------------|
+| 01 | Normalisation (CFR 30 fps, WAV 48k/24b) | `work/normalized.mp4`, `work/source.wav` |
+| 02 | Transcription WhisperX (mot à mot) | `work/transcript.json` |
+| 03 | Nettoyage parole (acoustique + lexical + Claude) + plan d'inserts | `work/editorial.json` |
+| 04 | EDL (respiration, zero-crossing, crossfade 18 ms, stats) | `work/edl.json` |
+| 05 | Découpe frame-accurate + concat | `work/cut.mp4`, `work/cut.wav` |
+| 06 | Mastering audio (chaîne complète + room tone + loudnorm 2 passes) | `work/audio_master.wav` |
+| 07 | Sous-titres — blocs cumulatifs (données Remotion) | `work/captions.json` |
+| 08 | Plans & rythme (recadrages + placement inserts) | `work/shots.json` |
+| 09 | Étalonnage facecam + rendu Remotion | `out/reel.mp4` |
+
+## Arborescence
+
+```
+src/
+  cli.ts              # point d'entrée CLI (parse args, orchestration)
+  pipeline.ts         # contrat d'étape + runner (--from, cache par hash)
+  config.ts           # SOURCE UNIQUE des valeurs numériques (pixel/frame)
+  steps/01..09        # une étape par fichier
+  claude/             # client API + schémas Zod (éditorial + inserts)
+  qa/                 # qa.ts (bloquant), neutralityLint.ts, contactSheet.ts
+  util/               # log, fs/hash, exec, ffmpeg, cache, stub
+remotion/
+  theme.ts            # tokens graphiques achromatiques (source unique)
+  Root.tsx            # compositions
+  compositions/Reel.tsx
+  components/Captions.tsx, Texture.tsx
+  components/inserts/  # CollageSubject, CollageScene, EditorialType, NotebookList, ObjectReveal
+scripts/setup.sh      # installe la stack, vérifie ffmpeg
+assets/manifest.json  # tags des PNG détourés (Claude sélectionne à l'étape 3)
+```
+
+## État — livraison par jalons
+
+Le pipeline se construit **jalon par jalon**, avec un livrable concret validé à chaque étape
+(voir §15 de la spec).
+
+- [x] **Jalon 1** — Setup, structure, CLI, étapes vides chaînées (cache + `--from` fonctionnels).
+- [ ] Jalon 2 — Étapes 1 et 2 (livrable : `transcript.json`).
+- [ ] Jalon 3 — Étapes 3 et 4 avec `--dry-run-edl` (livrable : EDL + stats).
+- [ ] Jalon 4 — Étapes 5 et 6 (livrable critique : audio seul au niveau de la référence).
+- [ ] Jalon 5 — Sous-titres seuls sur facecam brut (livrable : 15 s rendues).
+- [ ] Jalon 6 — Univers papier (CollageSubject, EditorialType).
+- [ ] Jalon 7 — Univers noir (NotebookList).
+- [ ] Jalon 8 — Assemblage, étalonnage, QA, planche-contact.
+
+> Les fichiers d'étape actuels écrivent des **placeholders** marqués `__stub__` : ils permettent
+> de vérifier le chaînage, le cache et `--from` avant que la logique réelle de chaque étape
+> ne soit branchée. L'ancien pipeline Python (approche colorée, à stickers) est remplacé par ce
+> système sobre ; son historique reste dans git.
