@@ -13,7 +13,8 @@
     "preview": "remotion studio remotion/index.ts",
     "render": "tsx src/cli.ts --from 09",
     "lint:neutral": "tsx src/qa/neutralityLint.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test \"src/**/*.test.ts\""
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
