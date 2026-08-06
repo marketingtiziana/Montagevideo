@@ -18,3 +18,9 @@ part de vide, sans texte. Générés via Higgsfield.
 
 Pour régénérer : `generate_image_batch` (Higgsfield) avec ces prompts, puis
 `curl` des `result_url` vers `assets/col_*.png`.
+
+## Ajouts (v2)
+| Fichier | Beat | Prompt (résumé) |
+|---|---|---|
+| `col_facture.png` | hook « si t'as facturé la mauvaise TVA » | grand-livre/facture épinglé, gros tampon à l'encre, coin déchiré, petite femme qui lève les yeux — collage N&B sur papier ivoire, halftone. |
+| `col_place.png` | « le mettre en place correctement » | deux mains posant la clé de voûte au sommet d'une arche classique — collage N&B éditorial sur papier ivoire, halftone. |

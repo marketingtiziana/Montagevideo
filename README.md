@@ -60,9 +60,12 @@ bash pipeline/setup.sh                 # deps + polices (dont EB Garamond / Play
 cp ma_video.mp4 source.mp4
 ffmpeg -y -i source.mp4 -vn -ac 1 -ar 16000 audio16.wav
 python3 pipeline/transcribe.py         # -> words.json
-python3 pipeline/gen_ass_lux.py        # -> subs.ass (serif, corrections dans CORRECTIONS)
+python3 pipeline/cut_reprise.py        # (option) retire une reprise/fausse-amorce -> source_cut.mp4 + décale words.json
+python3 pipeline/gen_ass_lux.py        # -> subs.ass (serif kinétique, corrections dans CORRECTIONS)
 python3 pipeline/make_lux_assets.py    # -> assets/led_*.png, card_*.png (fiches + cartes typo)
-python3 pipeline/lux_render.py         # -> REEL_lux.mp4 (grade + subs + incrustations)
+python3 pipeline/make_stickers.py      # -> assets/stk_*.png, trans_paper.png (stickers papier + transition)
+# collages N&B : cf. collage_prompts.md (génération Higgsfield -> assets/col_*.png)
+python3 pipeline/lux_render.py         # -> REEL_lux.mp4 (grade + subs + incrustations animées + transitions + punch-ins)
 ```
 
 Incrustations : deux familles (voir `lux_render.py`) —

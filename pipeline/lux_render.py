@@ -9,7 +9,7 @@
 import subprocess, re, imageio_ffmpeg
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-SRC = 'source.mp4'
+SRC = 'source_cut.mp4'      # source avec la reprise de fin coupée
 W, H, FPS = 1080, 1920, 30
 
 GRADE = (
@@ -20,24 +20,28 @@ GRADE = (
 )
 
 # Punch-ins de zoom (rythme) — sur des temps talking-head
-PUNCH = [2.55, 12.9, 24.6, 29.4, 39.2]
+PUNCH = [2.55, 6.20, 12.90, 20.30, 24.60, 29.40, 33.00, 42.20]
 
 # Collages plein cadre animés : (png, start, end, fin, fout)
 COLLAGES = [
-    ('assets/col_etat.png',      5.70,  8.60, 0.35, 0.32),
-    ('assets/col_poche.png',     9.90, 11.50, 0.30, 0.30),
-    ('assets/col_guichet.png',  19.50, 23.85, 0.35, 0.38),
-    ('assets/col_structure.png',31.80, 35.60, 0.35, 0.38),
+    ('assets/col_facture.png',   1.25,  3.55, 0.32, 0.30),   # hook : la mauvaise TVA facturée
+    ('assets/col_etat.png',      5.70,  8.60, 0.35, 0.32),   # l'État réclame
+    ('assets/col_poche.png',     9.90, 11.50, 0.30, 0.30),   # ça sort de ta poche
+    ('assets/col_guichet.png',  19.50, 23.85, 0.35, 0.38),   # guichet unique
+    ('assets/col_place.png',    26.20, 28.05, 0.32, 0.30),   # le mettre en place correctement
+    ('assets/col_structure.png',31.80, 35.60, 0.35, 0.38),   # TVA internationale / structure
 ]
 # Petits stickers papier partiels : (png, start, end, side, y)
 #   side: 'r' entre par la droite, 'l' par la gauche
 # y choisi dans les COINS pour ne pas masquer le visage (centré). Largeur ~300px.
 STK_W = 300
 STICKERS = [
-    ('assets/stk_3pays.png',  12.55, 14.05, 'r', 120),   # coin haut-droit
-    ('assets/stk_1decl.png',  23.95, 25.50, 'l', 140),   # coin haut-gauche
-    ('assets/stk_struct.png', 28.35, 30.20, 'r', 110),   # coin haut-droit
-    ('assets/stk_euro.png',   37.20, 38.90, 'l', 1580),  # coin bas-gauche (sous la caption)
+    ('assets/stk_facture.png', 4.30,  5.55, 'r', 120),   # haut-droit
+    ('assets/stk_3pays.png',  12.55, 14.05, 'r', 120),
+    ('assets/stk_1decl.png',  23.95, 25.50, 'l', 140),
+    ('assets/stk_ok.png',     30.35, 31.60, 'l', 130),   # bien fait / correctement
+    ('assets/stk_struct.png', 28.45, 30.05, 'r', 110),
+    ('assets/stk_euro.png',   37.20, 38.90, 'l', 1580),
 ]
 # Cartes plein cadre (au-dessus des sous-titres)
 CARDS = [
@@ -45,10 +49,11 @@ CARDS = [
     ('assets/led_a1.png', 14.95, 15.55, 0.00, 0.00),
     ('assets/led_a2.png', 15.55, 16.15, 0.00, 0.00),
     ('assets/led_a3.png', 16.15, 17.25, 0.00, 0.30),
-    ('assets/card_cta.png', 41.90, 44.10, 0.32, 0.25),
+    ('assets/card_cta.png', 41.55, 44.00, 0.32, 0.25),
 ]
 # Transitions balayage-papier : (start, durée)
-TRANS = [(5.55, 0.32), (17.15, 0.32), (19.35, 0.32), (31.65, 0.30), (41.80, 0.30)]
+TRANS = [(1.10, 0.30), (5.55, 0.32), (9.80, 0.30), (17.15, 0.32), (19.35, 0.32),
+         (26.05, 0.30), (31.65, 0.30), (38.98, 0.30), (41.40, 0.30)]
 
 
 def run(cmd, tail=3500):

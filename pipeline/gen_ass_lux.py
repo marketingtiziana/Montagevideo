@@ -54,8 +54,8 @@ CORRECTIONS = {
     24: "encore faut-il savoir", 25: "que ça *existe*", 26: "et le mettre", 27: "en place *correctement*",
     28: "et c'est exactement", 29: "ce qu'on *gère*", 30: "dès le *départ*", 31: "la TVA *internationale*",
     32: "ça se *rattrape pas*", 33: "en *panique*", 34: "ça se conçoit", 35: "en même temps",
-    36: "que ta *structure*", 37: "si tu vends", 38: "à *l'international*", 39: "et que t'as",
-    40: "un *doute*", 41: "commente « *TVA* »", 42: "on regarde si t'es", 43: "*en règle*",
+    36: "que ta *structure*", 37: "si tu vends", 38: "à *l'international*",
+    39: "t'as un *doute*", 40: "commente « *TVA* »", 41: "on regarde si", 42: "t'es *en règle*",
 }
 
 MAIN = "EB Garamond"
@@ -105,7 +105,7 @@ def rect_path(w, h):
 
 # Effet par carte-clé (cycle) pour du rythme : surlignage / cercle / papier
 EMPH = [i for i in sorted(CORRECTIONS) if '*' in CORRECTIONS[i]]
-EFFECTS = ['hl', 'circle', 'paper']
+EFFECTS = ['hl', 'circle', 'paper', 'underline']
 TREAT = {}
 for k, i in enumerate(EMPH):
     TREAT[i] = EFFECTS[k % 3]
@@ -166,6 +166,15 @@ def build():
                     f"\\clip({X},{Y},{X},{Y2})\\t(90,430,\\clip({X},{Y},{X2},{Y2}))\\p1}}"
                     f"{ellipse_path(bw,bh)}{{\\p0}}")
             lines.append(f"Dialogue: 2,{S},{E},Shape,,0,0,0,,{draw}")  # au-dessus du texte
+        elif eff == 'underline':
+            bw, bh = int(w*1.02)+8, 9
+            X = CX - bw//2
+            Y = CY + int(FS*0.46)
+            X2, Y2 = X+bw, Y+bh
+            draw = (f"{{\\an7\\pos({X},{Y})\\bord0\\shad0\\1c{RING_COL}\\frz-1"
+                    f"\\clip({X},{Y},{X},{Y2})\\t(80,340,\\clip({X},{Y},{X2},{Y2}))\\p1}}"
+                    f"{rect_path(bw,bh)}{{\\p0}}")
+            lines.append(f"Dialogue: 2,{S},{E},Shape,,0,0,0,,{draw}")
         elif eff == 'paper':
             bw, bh = int(w*1.05)+56, 108
             X, Y = CX - bw//2, CY - bh//2

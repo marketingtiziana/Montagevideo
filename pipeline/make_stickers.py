@@ -93,9 +93,11 @@ if __name__ == '__main__':
     photo_scrap('stk_etat', 'assets/col_etat.png', (300, 820, 720, 1120), "l'État réclame", rot=-3)
     photo_scrap('stk_guichet', 'assets/col_guichet.png', (150, 380, 620, 900), "un seul guichet", rot=3)
     photo_scrap('stk_struct', 'assets/col_structure.png', (120, 300, 660, 860), "dès le départ", rot=-2)
+    photo_scrap('stk_facture', 'assets/col_facture.png', (230, 520, 560, 800), "mauvaise TVA", rot=4)
     # petits libellés / chiffres sur papier
     label_scrap('stk_3pays', "3", "pays", rot=5)
     label_scrap('stk_euro', "€", "ta poche", rot=-5)
     label_scrap('stk_1decl', "1", "déclaration", rot=4)
+    label_scrap('stk_ok', "bien fait", None, w=420, rot=-4, big_font=(FI, 72))
     transition_strip()
     print('stickers:', sorted(f for f in os.listdir('assets') if f.startswith(('stk_', 'trans_'))))
