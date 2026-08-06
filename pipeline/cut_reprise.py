@@ -9,7 +9,7 @@ from pywhispercpp.model import Model
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 SRC, OUT = 'source.mp4', 'source_cut.mp4'
-CUT_S, CUT_E = 38.54, 39.43     # 1re "si tu vends" à retirer
+CUT_S, CUT_E = 38.40, 39.60     # 1re "si tu vends" à retirer (points de coupe DANS les silences)
 
 
 def cut_video():
