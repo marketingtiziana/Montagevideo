@@ -18,6 +18,13 @@ declare -A F=(
   [Anton-Regular.ttf]="ofl/anton/Anton-Regular.ttf"
   [Archivo-Black.ttf]="ofl/archivoblack/ArchivoBlack-Regular.ttf"
   [BebasNeue-Regular.ttf]="ofl/bebasneue/BebasNeue-Regular.ttf"
+  # serif éditorial "luxe" (variable fonts)
+  [EBGaramond.ttf]="ofl/ebgaramond/EBGaramond%5Bwght%5D.ttf"
+  [EBGaramond-Italic.ttf]="ofl/ebgaramond/EBGaramond-Italic%5Bwght%5D.ttf"
+  [PlayfairDisplay.ttf]="ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
+  [PlayfairDisplay-Italic.ttf]="ofl/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf"
+  [Cormorant.ttf]="ofl/cormorant/Cormorant%5Bwght%5D.ttf"
+  [Cormorant-Italic.ttf]="ofl/cormorant/Cormorant-Italic%5Bwght%5D.ttf"
 )
 for name in "${!F[@]}"; do
   [ -f "fonts/$name" ] || curl -sSL -o "fonts/$name" "https://raw.githubusercontent.com/google/fonts/main/${F[$name]}"
