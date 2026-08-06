@@ -79,9 +79,10 @@ au discours de la source.
 | Fichier | Rôle |
 |---|---|
 | `segments.py` | Segments source à conserver + mapping timeline source→finale + ken-burns par segment |
-| `gen_ass_lux.py` | Sous-titres **serif éditorial** (EB Garamond, minuscules, mot-clé gras, fondu doux) groupés sur le timing réel |
-| `make_lux_assets.py` | Incrustations éditoriales (fiche registre lignée + cartes typographiques) sur fonds texturés, sans IA |
-| `lux_render.py` | Rendu **luxe** : base gradée + ken-burns + sous-titres + incrustations plein cadre (fiche qui s'écrit + cartes) |
+| `gen_ass_lux.py` | Sous-titres **serif kinétiques** : surlignage marqueur qui se peint, cercle tracé à la main, mots sur papier, entrées animées |
+| `make_lux_assets.py` | Incrustations plein cadre (fiche registre lignée + cartes typographiques) sur fonds texturés, sans IA |
+| `make_stickers.py` | Petites incrustations **papier partielles** (photos N&B sur bouts de papier + libellés) + bande de transition |
+| `lux_render.py` | Rendu **luxe animé** : base gradée + ken-burns + **punch-ins**, collages animés (glissée/flottement/fondu), sous-titres kinétiques, stickers papier, cartes, **transitions balayage-papier** |
 | `gen_ass_auto.py` | (variante « punchy ») Sous-titres animés auto (capitales colorées, accents néon) |
 | `auto_render.py` | (variante « punchy ») Rendu auto : base ken-burns + subs + flashs + bruitages |
 | `transcribe.py` | Transcription mot à mot (français) via `pywhispercpp` + modèle ggml base |
