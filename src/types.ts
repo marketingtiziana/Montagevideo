@@ -58,3 +58,24 @@ export interface Edl {
   segments: EdlSegment[];
   stats: EdlStats;
 }
+
+/** Un mot de sous-titre positionné (ligne 1 = graisse 400, ligne 2 = 700). */
+export interface CaptionWord {
+  text: string;
+  appearFrame: number;
+  line: 1 | 2;
+}
+
+/** Bloc de sous-titre : jusqu'à 2 lignes, effacé puis redémarré. */
+export interface CaptionBlock {
+  index: number;
+  startFrame: number;
+  endFrame: number;
+  words: CaptionWord[];
+  surface: 'dark' | 'paper';
+}
+
+export interface CaptionsData {
+  fps: number;
+  blocks: CaptionBlock[];
+}
