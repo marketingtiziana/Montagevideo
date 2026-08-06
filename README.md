@@ -32,10 +32,62 @@ python3 pipeline/build_final_video.py  # -> finalv.mp4 (sous-titres + incrustati
 bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier final
 ```
 
+## Rendu automatique (source quelconque)
+Le pipeline « manuel » ci-dessus est calibré carte-par-carte pour **un** réel. Pour lancer un **rendu réel
+directement sur n'importe quelle source** (sous-titres calés sur le timing réel des mots, sans config codée
+en dur), utiliser le chemin auto :
+
+```bash
+bash pipeline/setup.sh && python3 pipeline/gen_sfx.py   # deps + modèle + polices + bruitages
+cp ma_video.mp4 source.mp4
+ffmpeg -y -i source.mp4 -vn -ac 1 -ar 16000 audio16.wav  # audio pour Whisper
+python3 pipeline/transcribe.py       # -> words.json (mot à mot)
+python3 pipeline/gen_ass_auto.py     # -> subs.ass (cartes groupées + animées, corrections dans CORRECTIONS)
+python3 pipeline/auto_render.py      # -> REEL_auto_final.mp4 (ken-burns + subs + flashs + bruitages)
+```
+
+`gen_ass_auto.py --dump` imprime le découpage en cartes (index + timing) : renseigner ensuite `CORRECTIONS`
+pour corriger le texte Whisper et poser les accents `~mot~` / mises en avant `*mot*`.
+
+## Rendu style ÉDITORIAL LUXE (« old money »)
+Chemin calqué sur une réf. éditoriale : **sous-titres serif** (EB Garamond, minuscules, blanc, discret,
+mot-clé en gras), **grade cinéma feutré** + vignette, **incrustations plein cadre** (fiche « registre »
+lignée dont la liste s'écrit ligne par ligne + cartes typographiques serif sur fond texturé), coupes nettes
+sans néon. Voix conservée.
+
+```bash
+bash pipeline/setup.sh                 # deps + polices (dont EB Garamond / Playfair / Cormorant)
+cp ma_video.mp4 source.mp4
+ffmpeg -y -i source.mp4 -vn -ac 1 -ar 16000 audio16.wav
+python3 pipeline/transcribe.py         # -> words.json
+python3 pipeline/cut_reprise.py        # (option) retire une reprise/fausse-amorce -> source_cut.mp4 + décale words.json
+python3 pipeline/gen_ass_lux.py        # -> subs.ass (serif kinétique, corrections dans CORRECTIONS)
+python3 pipeline/make_lux_assets.py    # -> assets/led_*.png, card_*.png (fiches + cartes typo)
+python3 pipeline/make_stickers.py      # -> assets/stk_*.png, trans_paper.png (stickers papier + transition)
+# collages N&B : cf. collage_prompts.md (génération Higgsfield -> assets/col_*.png)
+python3 pipeline/lux_render.py         # -> REEL_lux.mp4 (grade + subs + incrustations animées + transitions + punch-ins)
+```
+
+Incrustations : deux familles (voir `lux_render.py`) —
+- **`COLLAGES`** : collages photo N&B surréalistes générés (Higgsfield, cf. `collage_prompts.md`),
+  placés SOUS les sous-titres (la caption reste visible par-dessus, comme dans la réf.) ;
+- **`CARDS`** : fiche « registre » lignée qui s'écrit + carte CTA (Pillow, `make_lux_assets.py`),
+  placées AU-DESSUS des sous-titres (elles portent leur propre texte).
+
+Les temps et le contenu des incrustations (`COLLAGES`/`CARDS` dans `lux_render.py`, listes/cartes
+dans `make_lux_assets.py`, prompts dans `collage_prompts.md`) sont **spécifiques au réel** — à adapter
+au discours de la source.
+
 ## Fichiers
 | Fichier | Rôle |
 |---|---|
 | `segments.py` | Segments source à conserver + mapping timeline source→finale + ken-burns par segment |
+| `gen_ass_lux.py` | Sous-titres **serif kinétiques** : surlignage marqueur qui se peint, cercle tracé à la main, mots sur papier, entrées animées |
+| `make_lux_assets.py` | Incrustations plein cadre (fiche registre lignée + cartes typographiques) sur fonds texturés, sans IA |
+| `make_stickers.py` | Petites incrustations **papier partielles** (photos N&B sur bouts de papier + libellés) + bande de transition |
+| `lux_render.py` | Rendu **luxe animé** : base gradée + ken-burns + **punch-ins**, collages animés (glissée/flottement/fondu), sous-titres kinétiques, stickers papier, cartes, **transitions balayage-papier** |
+| `gen_ass_auto.py` | (variante « punchy ») Sous-titres animés auto (capitales colorées, accents néon) |
+| `auto_render.py` | (variante « punchy ») Rendu auto : base ken-burns + subs + flashs + bruitages |
 | `transcribe.py` | Transcription mot à mot (français) via `pywhispercpp` + modèle ggml base |
 | `build_base.py` | Trim + zoom (zoompan) + concat + audio synchro → `base.mp4` |
 | `gen_ass.py` | Génère les sous-titres ASS animés (pop, accents jaunes `~mot~`, polices A/H/B, sans boîte) |
