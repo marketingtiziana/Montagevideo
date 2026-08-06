@@ -40,3 +40,4 @@ composés plein cadre par `lux_render.py` (couche `BROLL`, sous les sous-titres)
 | `br_guichet` | « guichet unique » | porte unique dans un hall de marbre qui s'ouvre, lumière qui jaillit, travelling |
 | `br_place` | « en place correctement » | deux mains posant la clé de voûte d'une arche de pierre, poussière dans la lumière |
 | `br_structure` | « TVA internationale / structure » | plan d'architecte + maquette d'édifice à colonnes, lumière rasante, travelling latéral |
+| `br_inter` | « si tu vends à l'international » (couvre le raccord de coupe) | globe vintage qui tourne lentement sur un bureau, lumière rasante, N&B cinéma |

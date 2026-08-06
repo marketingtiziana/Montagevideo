@@ -33,6 +33,7 @@ BROLL = [
     ('broll_ready/br_guichet.mp4',  19.50, 23.85, 0.26, 0.34),  # porte unique qui s'ouvre
     ('broll_ready/br_place.mp4',    26.20, 28.05, 0.22, 0.28),  # pose de la clé de voûte
     ('broll_ready/br_structure.mp4',31.80, 35.60, 0.26, 0.34),  # plan/maquette d'architecture
+    ('broll_ready/br_inter.mp4',    38.10, 40.55, 0.24, 0.30),  # "si tu vends à l'international" (couvre le raccord)
 ]
 # Petits stickers papier partiels : (png, start, end, side, y)
 STK_W = 300
@@ -42,7 +43,7 @@ STICKERS = [
     ('assets/stk_1decl.png',  23.95, 25.50, 'l', 140),
     ('assets/stk_ok.png',     30.35, 31.60, 'l', 130),
     ('assets/stk_struct.png', 28.45, 30.05, 'r', 110),
-    ('assets/stk_euro.png',   37.20, 38.90, 'l', 1580),
+    ('assets/stk_euro.png',   37.05, 38.00, 'l', 1580),
 ]
 # Carte CTA plein cadre (au-dessus des sous-titres)
 CARDS = [
@@ -51,7 +52,7 @@ CARDS = [
 ]
 # Transitions balayage-papier (surtout aux entrées de b-roll) : (start, durée)
 TRANS = [(1.05, 0.30), (5.55, 0.30), (9.80, 0.28), (14.20, 0.28), (19.35, 0.30),
-         (26.05, 0.28), (31.65, 0.30), (38.98, 0.30), (41.40, 0.30)]
+         (26.05, 0.28), (31.65, 0.30), (38.02, 0.28), (40.45, 0.28), (41.40, 0.30)]
 
 
 def run(cmd, tail=3500):
