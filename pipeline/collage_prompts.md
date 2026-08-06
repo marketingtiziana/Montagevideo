@@ -24,3 +24,19 @@ Pour régénérer : `generate_image_batch` (Higgsfield) avec ces prompts, puis
 |---|---|---|
 | `col_facture.png` | hook « si t'as facturé la mauvaise TVA » | grand-livre/facture épinglé, gros tampon à l'encre, coin déchiré, petite femme qui lève les yeux — collage N&B sur papier ivoire, halftone. |
 | `col_place.png` | « le mettre en place correctement » | deux mains posant la clé de voûte au sommet d'une arche classique — collage N&B éditorial sur papier ivoire, halftone. |
+
+## B-roll vidéo (ambiance New York Times) — `make_broll.py`
+Clips vidéo cinématographiques N&B documentaire générés via Higgsfield **kling3_0**
+(9:16, 5 s, `sound:off`, ~7,5 crédits/clip), puis pré-traités par `make_broll.py`
+(cadrage 9:16, zoom-settle d'entrée, grade NYT + grain) -> `broll_ready/*.mp4`,
+composés plein cadre par `lux_render.py` (couche `BROLL`, sous les sous-titres).
+
+| Fichier | Beat | Prompt (résumé) |
+|---|---|---|
+| `br_facture` | hook « mauvaise TVA » | macro tampon officiel pressé sur une facture, encre qui s'étale, slow-mo N&B |
+| `br_etat` | « l'État réclame » | travelling avant contre-plongée sur un bâtiment administratif néoclassique, ciel couvert |
+| `br_poche` | « ta poche » | pièces et billets qui tombent au ralenti dans une lumière rasante |
+| `br_pays` | « 3 pays » | macro carte d'Europe, main qui pose épingles et tampons sur 3 pays |
+| `br_guichet` | « guichet unique » | porte unique dans un hall de marbre qui s'ouvre, lumière qui jaillit, travelling |
+| `br_place` | « en place correctement » | deux mains posant la clé de voûte d'une arche de pierre, poussière dans la lumière |
+| `br_structure` | « TVA internationale / structure » | plan d'architecte + maquette d'édifice à colonnes, lumière rasante, travelling latéral |

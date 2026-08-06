@@ -59,6 +59,14 @@ CORRECTIONS = {
 }
 
 MAIN = "EB Garamond"
+# Kickers éditoriaux "New York Times" : eyebrow en petites capitales espacées,
+# en haut, avec un filet fin qui se trace. (start, end, texte)
+KICKERS = [
+    (0.30,  3.60, "LE PIÈGE À ÉVITER"),
+    (11.90, 13.90, "CE QUE DIT LA RÈGLE"),
+    (17.55, 19.35, "LA SOLUTION"),
+    (35.70, 37.10, "L'ESSENTIEL"),
+]
 CX, CY = 540, 1300          # centre des sous-titres
 FS = 74                     # taille de police
 GLYPH = 0.455 * FS          # largeur moyenne d'un glyphe (estim.)
@@ -121,6 +129,7 @@ ENTER = [
 styles = [
     f"Style: Lux,{MAIN},{FS},&H00FFFFFF,&H00FFFFFF,&H64000000,&H78000000,0,0,0,0,100,100,0,0,1,0,2,5,150,150,600,1",
     f"Style: Shape,{MAIN},{FS},&H00FFFFFF,&H00FFFFFF,&H00202020,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1",
+    f"Style: Kick,{MAIN},40,&H00E6E6E6,&H00E6E6E6,&H50000000,&H60000000,0,0,0,0,100,100,8,0,1,0,2,8,80,80,150,1",
 ]
 
 header = f"""[Script Info]
@@ -190,8 +199,22 @@ def build():
         # couleur de base via \c déjà dans head ? on l'ajoute proprement :
         head = f"{{{pos}\\1c{base_c}{anim}}}"
         lines.append(f"Dialogue: 1,{S},{E},Lux,,0,0,0,,{head}{body}")
+    # Kickers éditoriaux (petites capitales + filet qui se trace)
+    for (ks, ke, ktext) in KICKERS:
+        kt = ktext.upper()
+        rw = max(180, int(len(kt) * 26))
+        X = CX - rw // 2
+        Y = 214
+        lines.append(
+            f"Dialogue: 1,{ts(ks)},{ts(ke)},Shape,,0,0,0,,"
+            f"{{\\an7\\pos({X},{Y})\\bord0\\shad0\\1c&H00DADADA&"
+            f"\\clip({X},{Y},{X},{Y+3})\\t(60,340,\\clip({X},{Y},{X+rw},{Y+3}))\\p1}}"
+            f"{rect_path(rw,3)}{{\\p0}}")
+        lines.append(f"Dialogue: 1,{ts(ks)},{ts(ke)},Kick,,0,0,0,,{{\\fad(240,200)}}{kt}")
+
     open('subs.ass', 'w').write(header + "\n".join(lines) + "\n")
-    print("captions:", len(raw), "| effets:", sum(1 for v in TREAT.values()), "-> subs.ass (kinétique)")
+    print("captions:", len(raw), "| effets:", sum(1 for v in TREAT.values()),
+          "| kickers:", len(KICKERS), "-> subs.ass (kinétique + NYT)")
 
 if __name__ == '__main__':
     import sys
