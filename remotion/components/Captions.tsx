@@ -23,14 +23,16 @@ const BASELINE_OFFSET = Math.round((LINE_HEIGHT - FONT_SIZE) / 2 + FONT_SIZE * 0
 
 export interface CaptionsProps {
   blocks: CaptionBlock[];
+  /** Couleur pilotée par le type de plan EN COURS (prioritaire sur block.surface). */
+  surfaceOverride?: 'dark' | 'paper';
 }
 
-export const Captions: React.FC<CaptionsProps> = ({ blocks }) => {
+export const Captions: React.FC<CaptionsProps> = ({ blocks, surfaceOverride }) => {
   const frame = useCurrentFrame();
   const block = blocks.find((b) => frame >= b.startFrame && frame < b.endFrame);
   if (!block) return null;
 
-  const onDark = block.surface === 'dark';
+  const onDark = (surfaceOverride ?? block.surface) === 'dark';
   const color = onDark ? '#FFFFFF' : '#111111';
   const textShadow = onDark ? '0 2px 10px rgba(0,0,0,0.45)' : 'none';
 

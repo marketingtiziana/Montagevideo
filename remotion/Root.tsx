@@ -18,11 +18,16 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Reel"
         component={Reel}
-        durationInFrames={FPS * 30}
+        durationInFrames={FPS * 15}
         fps={FPS}
         width={WIDTH}
         height={HEIGHT}
-        defaultProps={{ facecamSrc: null, captions: [], shots: [] }}
+        defaultProps={{ facecam: null, audio: null, captions: [], shots: [] }}
+        calculateMetadata={({ props }) => {
+          const spans = (props as { shots?: Array<{ endFrame: number }> }).shots ?? [];
+          const last = spans.reduce((m, s) => Math.max(m, s.endFrame), 0);
+          return { durationInFrames: last > 0 ? last : FPS * 15 };
+        }}
       />
       {/* Jalon 5 : sous-titres seuls sur facecam brut (15 s). */}
       <Composition

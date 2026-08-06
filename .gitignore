@@ -30,3 +30,6 @@ __pycache__/
 
 # Assets Remotion dérivés (rendus)
 remotion/public/*.mp4
+
+# Assets Remotion dérivés (audio)
+remotion/public/*.wav
