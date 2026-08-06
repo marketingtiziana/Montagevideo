@@ -13,4 +13,8 @@ words.json
 final_words.json
 kept_words.json
 transcript.txt
+subs_meta.json
+audio_events.json
+audio_events_auto.json
+remap.json
 __pycache__/
