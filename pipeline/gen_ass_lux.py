@@ -55,7 +55,7 @@ CORRECTIONS = {
     28: "et c'est exactement", 29: "ce qu'on *gère*", 30: "dès le *départ*", 31: "la TVA *internationale*",
     32: "ça se *rattrape pas*", 33: "en *panique*", 34: "ça se conçoit", 35: "en même temps",
     36: "que ta *structure*", 37: "si tu vends", 38: "à *l'international*",
-    39: "t'as un *doute*", 40: "", 41: "on regarde si", 42: "t'es *en règle*",
+    39: "t'as un *doute*", 40: "", 41: "on regarde si", 42: "t'es *en règle*", 43: "",
 }
 
 MAIN = "EB Garamond"
