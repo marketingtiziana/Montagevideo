@@ -49,12 +49,34 @@ python3 pipeline/auto_render.py      # -> REEL_auto_final.mp4 (ken-burns + subs 
 `gen_ass_auto.py --dump` imprime le découpage en cartes (index + timing) : renseigner ensuite `CORRECTIONS`
 pour corriger le texte Whisper et poser les accents `~mot~` / mises en avant `*mot*`.
 
+## Rendu style ÉDITORIAL LUXE (« old money »)
+Chemin calqué sur une réf. éditoriale : **sous-titres serif** (EB Garamond, minuscules, blanc, discret,
+mot-clé en gras), **grade cinéma feutré** + vignette, **incrustations plein cadre** (fiche « registre »
+lignée dont la liste s'écrit ligne par ligne + cartes typographiques serif sur fond texturé), coupes nettes
+sans néon. Voix conservée.
+
+```bash
+bash pipeline/setup.sh                 # deps + polices (dont EB Garamond / Playfair / Cormorant)
+cp ma_video.mp4 source.mp4
+ffmpeg -y -i source.mp4 -vn -ac 1 -ar 16000 audio16.wav
+python3 pipeline/transcribe.py         # -> words.json
+python3 pipeline/gen_ass_lux.py        # -> subs.ass (serif, corrections dans CORRECTIONS)
+python3 pipeline/make_lux_assets.py    # -> assets/led_*.png, card_*.png (fiches + cartes typo)
+python3 pipeline/lux_render.py         # -> REEL_lux.mp4 (grade + subs + incrustations)
+```
+
+Les temps et le contenu des incrustations (`CUT` dans `lux_render.py`, listes/cartes dans
+`make_lux_assets.py`) sont **spécifiques au réel** — à adapter au discours de la source.
+
 ## Fichiers
 | Fichier | Rôle |
 |---|---|
 | `segments.py` | Segments source à conserver + mapping timeline source→finale + ken-burns par segment |
-| `gen_ass_auto.py` | Sous-titres animés **auto** groupés sur le timing réel des mots (`words.json`) + corrections/accents |
-| `auto_render.py` | Rendu **auto** de bout en bout : base ken-burns + sous-titres + flashs aux respirations + bruitages |
+| `gen_ass_lux.py` | Sous-titres **serif éditorial** (EB Garamond, minuscules, mot-clé gras, fondu doux) groupés sur le timing réel |
+| `make_lux_assets.py` | Incrustations éditoriales (fiche registre lignée + cartes typographiques) sur fonds texturés, sans IA |
+| `lux_render.py` | Rendu **luxe** : base gradée + ken-burns + sous-titres + incrustations plein cadre (fiche qui s'écrit + cartes) |
+| `gen_ass_auto.py` | (variante « punchy ») Sous-titres animés auto (capitales colorées, accents néon) |
+| `auto_render.py` | (variante « punchy ») Rendu auto : base ken-burns + subs + flashs + bruitages |
 | `transcribe.py` | Transcription mot à mot (français) via `pywhispercpp` + modèle ggml base |
 | `build_base.py` | Trim + zoom (zoompan) + concat + audio synchro → `base.mp4` |
 | `gen_ass.py` | Génère les sous-titres ASS animés (pop, accents jaunes `~mot~`, polices A/H/B, sans boîte) |
