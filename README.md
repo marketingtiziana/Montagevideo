@@ -25,6 +25,24 @@ bash scripts/setup.sh       # deps Node + ffmpeg + venv WhisperX, puis vérifie 
 export ANTHROPIC_API_KEY=…  # requis pour l'étape 3 (décisions éditoriales)
 ```
 
+### Décisions éditoriales SANS clé API (Claude en boucle)
+
+L'étape 3 (coupes éditoriales + plan d'inserts) peut tourner **sans
+`ANTHROPIC_API_KEY`** : déposer un `work/editorial_manual.json` (même schéma Zod
+que la sortie Claude — `cuts` / `keep_overrides` / `chapters` / `inserts`) et
+l'étape 3 l'utilise à la place de l'appel API. Pratique quand l'agent Claude
+rédige lui-même ces décisions depuis le transcript. Chemin surchargé par
+`EDITORIAL_MANUAL=/chemin.json`.
+
+### Environnement à accès réseau (rendu réel de la vidéo 1)
+
+Le seul vrai prérequis pour produire le rendu réel est un **environnement Claude
+Code (web) avec accès réseau** (HuggingFace pour WhisperX, et le CDN Higgsfield
+pour d'éventuels cutouts). La politique réseau se choisit **à la création de
+l'environnement** : créer une nouvelle session sur cette branche avec un accès
+« complet » (ou une allowlist incluant `huggingface.co`), puis lancer le
+pipeline. Tout est déjà commité ; aucune clé API n'est requise (voir ci-dessus).
+
 ### Accès aux modèles WhisperX (HuggingFace)
 
 L'étape 2 télécharge ses poids (faster-whisper large-v3 + align wav2vec2 fr)
