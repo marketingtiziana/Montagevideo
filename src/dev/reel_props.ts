@@ -57,5 +57,8 @@ writeJson(out, {
   shots: shots.spans,
   captions,
 });
+// Fichiers d'entrée pour le QA (formes standard).
+writeJson(FILES.shots, shots);
+writeJson(FILES.captions, { fps: OUTPUT.fps, blocks: captions });
 console.log(`props Reel : ${out} — ${shots.spans.length} spans, ${(shots.stats.graphicShare * 100).toFixed(0)}% graphique, ${captions.length} blocs sous-titres.`);
 for (const w of shots.stats.warnings) console.log('  ⚠ ' + w);
