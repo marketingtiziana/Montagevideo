@@ -48,3 +48,35 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
   sous-titres, surtout pour du contenu fiscal.
 - Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
   réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+
+## Réel « règle de 3 » (business) — variante v2
+
+Deuxième réel monté à partir de `source.mp4` (talking-head business, ~46 s). Le discours est **continu** :
+on garde l'audio **traité façon micro RØDE** intact et on dynamise le **visuel** (zooms, inserts, B-rolls
+en cutaway pendant que la voix continue). Rendu sous-titres demandé : **blanc gras minimaliste, sans boîte
+ni surlignage**, animé.
+
+```bash
+bash pipeline/setup.sh                  # deps + modèle + polices + (bruitages)
+cp IMG_XXXX.MP4 source.mp4              # vidéo brute verticale
+
+python3 pipeline/transcribe.py          # -> words.json (timings mot à mot FR)
+python3 pipeline/process_audio.py       # -> voice_rode.wav  (PRIORITÉ: chaîne voix RØDE, -14 LUFS)
+python3 pipeline/build_base2.py         # -> base.mp4  (upscale 1080x1920 + ken-burns + audio RØDE)
+python3 pipeline/gen_ass2.py            # -> subs.ass  (sous-titres BLANC minimalistes animés, sans boîte)
+python3 pipeline/broll.py               # -> broll/br{A,B,C,D}.mp4  (B-rolls motion-design premium)
+python3 pipeline/make_assets2.py        # -> assets/ins_*.png  (inserts/incrustations navy+or)
+python3 pipeline/build_final2.py        # -> finalv.mp4  (base + B-rolls + inserts + flashs + sous-titres)
+python3 pipeline/gen_sfx.py             # -> sfx/*.wav
+python3 pipeline/mix_audio2.py          # -> REEL_regle3_final.mp4  (SFX légers + loudnorm -14 LUFS)
+```
+
+| Fichier | Rôle |
+|---|---|
+| `process_audio.py` | **Chaîne voix « RØDE »** : dé-rumble, débruitage spectral, gate léger, de-esser, EQ chaleur/présence/air, double compression broadcast, loudnorm -14 LUFS, limiteur |
+| `build_base2.py` | Upscale 720×1280 → 1080×1920 (lanczos) + ken-burns par chapitre (petits « punch » de zoom), audio RØDE continu |
+| `gen_ass2.py` | Sous-titres **blanc gras minimalistes** (Archivo Black), **sans boîte ni surlignage**, contour/ombre fins, pop discret, emphase par la taille (pas de couleur), calés sur les timings mots |
+| `broll.py` | 4 B-rolls **motion-design** (navy + or) : courbe business qui chute, « règle de 3 » (3 colonnes), « mettre de côté » (barres + flèche), « combien de temps » (jauge + horloge) |
+| `make_assets2.py` | Inserts/incrustations premium (pastilles navy liseré or, texte blanc, emoji/numéro) synchronisés aux propos |
+| `build_final2.py` | Compose base + B-rolls (cutaways plein cadre, audio continu) + inserts (au-dessus des sous-titres) + flashs + sous-titres par-dessus |
+| `mix_audio2.py` | Mixe des SFX **légers** (whoosh sur cutaways, pop sur inserts) sur le lit voix, loudnorm final |
