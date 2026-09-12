@@ -12,11 +12,16 @@ import {STROKE} from '../theme';
  */
 export const SCENE5_FRAMES = 300;
 
-/** Petites etincelles autour du CTA. */
-const sparkle = (x: number, y: number, s: number, seed: number) => [
-  {spec: {kind: 'line' as const, x1: x - s, y1: y, x2: x + s, y2: y}, seed, strokeWidth: 4},
-  {spec: {kind: 'line' as const, x1: x, y1: y - s, x2: x, y2: y + s}, seed: seed + 1, strokeWidth: 4},
-];
+/** Petites etincelles a quatre branches autour du CTA. */
+const sparkle = (x: number, y: number, s: number, seed: number) => {
+  const d = s * 0.52;
+  return [
+    {spec: {kind: 'line' as const, x1: x, y1: y - s, x2: x, y2: y + s}, seed, strokeWidth: 4},
+    {spec: {kind: 'line' as const, x1: x - s * 0.72, y1: y, x2: x + s * 0.72, y2: y}, seed: seed + 1, strokeWidth: 4},
+    {spec: {kind: 'line' as const, x1: x - d, y1: y - d, x2: x + d, y2: y + d}, seed: seed + 2, strokeWidth: 3},
+    {spec: {kind: 'line' as const, x1: x - d, y1: y + d, x2: x + d, y2: y - d}, seed: seed + 3, strokeWidth: 3},
+  ];
+};
 
 export const Scene5: React.FC = () => (
   <Board driftSeed={5} zoomTo={1.04}>
@@ -33,9 +38,8 @@ export const Scene5: React.FC = () => (
       <SketchGroup shapes={arrow(540, 955, 540, 1150, 44, 520)} start={130} each={12} stagger={8} />
       <SketchGroup
         shapes={[
-          ...sparkle(190, 1290, 30, 540),
-          ...sparkle(900, 1250, 26, 546),
-          ...sparkle(860, 1440, 30, 552),
+          ...sparkle(175, 1300, 32, 540),
+          ...sparkle(915, 1265, 26, 546),
         ]}
         start={226}
         each={9}

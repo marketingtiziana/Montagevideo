@@ -37,6 +37,17 @@ export const Scene4: React.FC = () => (
       <SketchGroup shapes={stickFigure(250, 890, 250, 520)} start={168} each={12} stagger={7} />
       <SketchGroup shapes={smile(250, 890, 250, 550)} start={212} each={9} stagger={6} />
       <SketchGroup shapes={globe(800, 990, 230, 560)} start={200} each={14} stagger={9} />
+      {/* petits arcs autour du globe : la scene ne se fige jamais */}
+      <SketchGroup
+        shapes={[
+          {spec: {kind: 'path', d: 'M 660 900 Q 632 990 662 1078'}, seed: 591, strokeWidth: 4},
+          {spec: {kind: 'path', d: 'M 940 900 Q 968 990 938 1078'}, seed: 592, strokeWidth: 4},
+          {spec: {kind: 'line', x1: 800, y1: 852, x2: 800, y2: 820}, seed: 593, strokeWidth: 4},
+        ]}
+        start={268}
+        each={12}
+        stagger={8}
+      />
     </Ink>
     <AbsoluteFill>
       <Handwriting

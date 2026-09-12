@@ -27,10 +27,10 @@ const at = (scene: number, local: number) => SCENE_OFFSETS[scene] + local;
  * les composants de scene.
  */
 export const DRAW_WINDOWS: [number, number][] = [
-  [at(0, 0), at(0, 92)],
+  [at(0, 0), at(0, 128)],
   [at(1, 0), at(1, 176)],
   [at(2, 0), at(2, 292)],
-  [at(3, 0), at(3, 270)],
+  [at(3, 0), at(3, 296)],
   [at(4, 0), at(4, 272)],
 ];
 

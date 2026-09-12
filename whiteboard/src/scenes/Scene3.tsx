@@ -16,7 +16,7 @@ export const Scene3: React.FC = () => (
   <Board eraseAt={SCENE3_FRAMES - 9} eraseDir="ltr" driftSeed={3}>
     <Ink>
       <SketchShape
-        spec={{kind: 'rect', x: 110, y: 330, w: 420, h: 250}}
+        spec={{kind: 'rect', x: 110, y: 320, w: 420, h: 280}}
         seed={301}
         start={0}
         duration={28}
@@ -25,36 +25,36 @@ export const Scene3: React.FC = () => (
         pencil
       />
       <SketchShape
-        spec={{kind: 'line', x1: 20, y1: 455, x2: 112, y2: 455}}
+        spec={{kind: 'line', x1: 20, y1: 545, x2: 112, y2: 545}}
         seed={311}
         start={40}
         duration={12}
       />
       <SketchShape
-        spec={{kind: 'line', x1: 118, y1: 455, x2: 528, y2: 455}}
+        spec={{kind: 'line', x1: 118, y1: 545, x2: 528, y2: 545}}
         seed={312}
         start={54}
         duration={24}
         dashed
       />
-      <SketchGroup shapes={arrow(534, 455, 800, 600, 38, 320)} start={76} each={12} stagger={7} />
-      <SketchGroup shapes={stickFigure(880, 680, 280, 340)} start={100} each={13} stagger={8} />
-      <SketchGroup shapes={smile(880, 680, 280, 360)} start={150} each={9} stagger={6} />
+      <SketchGroup shapes={arrow(534, 545, 800, 675, 38, 320)} start={76} each={12} stagger={7} />
+      <SketchGroup shapes={stickFigure(880, 745, 280, 340)} start={100} each={13} stagger={8} />
+      <SketchGroup shapes={smile(880, 745, 280, 360)} start={150} each={9} stagger={6} />
     </Ink>
     <AbsoluteFill>
       <Handwriting
         text="LLC"
         start={30}
-        fontSize={140}
+        fontSize={120}
         seed={21}
-        style={{position: 'absolute', left: 110, width: 420, top: 368, textAlign: 'center'}}
+        style={{position: 'absolute', left: 110, width: 420, top: 342, textAlign: 'center'}}
       />
       <Handwriting
         text="toi"
         start={168}
         fontSize={84}
         seed={23}
-        style={{position: 'absolute', left: 760, width: 240, top: 950, textAlign: 'center'}}
+        style={{position: 'absolute', left: 760, width: 240, top: 1000, textAlign: 'center'}}
       />
       <Handwriting
         text="Elle est fiscalement"
@@ -62,7 +62,7 @@ export const Scene3: React.FC = () => (
         fontSize={108}
         seed={25}
         pencil
-        style={{position: 'absolute', left: 0, right: 0, top: 1075, textAlign: 'center'}}
+        style={{position: 'absolute', left: 0, right: 0, top: 1125, textAlign: 'center'}}
       />
       <Handwriting
         text="transparente"
@@ -70,7 +70,7 @@ export const Scene3: React.FC = () => (
         fontSize={108}
         seed={27}
         pencil
-        style={{position: 'absolute', left: 0, right: 0, top: 1195, textAlign: 'center'}}
+        style={{position: 'absolute', left: 0, right: 0, top: 1247, textAlign: 'center'}}
       />
       <Handwriting
         text="les revenus vont"
@@ -78,7 +78,7 @@ export const Scene3: React.FC = () => (
         fontSize={100}
         seed={29}
         pencil
-        style={{position: 'absolute', left: 0, right: 0, top: 1335, textAlign: 'center'}}
+        style={{position: 'absolute', left: 0, right: 0, top: 1378, textAlign: 'center'}}
       />
       <Handwriting
         text="directement à toi"
@@ -89,7 +89,7 @@ export const Scene3: React.FC = () => (
         highlight="directement à toi"
         highlightDelay={5}
         highlightDuration={12}
-        style={{position: 'absolute', left: 0, right: 0, top: 1450, textAlign: 'center'}}
+        style={{position: 'absolute', left: 0, right: 0, top: 1490, textAlign: 'center'}}
       />
     </AbsoluteFill>
   </Board>

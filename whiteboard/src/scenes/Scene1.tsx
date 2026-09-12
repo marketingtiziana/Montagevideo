@@ -19,6 +19,18 @@ export const Scene1: React.FC = () => (
         stagger={20}
         pencilOnLast
       />
+      {/* petits traits d'insistance autour de la boite : rien ne reste fige */}
+      <SketchGroup
+        shapes={[
+          {spec: {kind: 'line', x1: 236, y1: 1372, x2: 280, y2: 1352}, seed: 131, strokeWidth: 4},
+          {spec: {kind: 'line', x1: 228, y1: 1448, x2: 274, y2: 1448}, seed: 132, strokeWidth: 4},
+          {spec: {kind: 'line', x1: 800, y1: 1372, x2: 844, y2: 1352}, seed: 133, strokeWidth: 4},
+          {spec: {kind: 'line', x1: 806, y1: 1448, x2: 852, y2: 1448}, seed: 134, strokeWidth: 4},
+        ]}
+        start={98}
+        each={9}
+        stagger={7}
+      />
       <SketchShape
         spec={{kind: 'rect', x: 300, y: 1320, w: 480, h: 250}}
         seed={121}
