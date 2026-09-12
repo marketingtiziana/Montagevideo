@@ -1,0 +1,22 @@
+{
+  "name": "reel-llc-whiteboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reel Instagram 9:16 100% anime style whiteboard - La LLC expliquee simplement",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render ReelLLC ../output/reel_llc_whiteboard.mp4 --codec=h264 --crf=18",
+    "still": "remotion still ReelLLC ../output/cover_reel_llc.png --frame=110"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.524",
+    "@remotion/media-utils": "^4.0.524",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.524",
+    "roughjs": "^4.6.6",
+    "typescript": "^7.0.2"
+  }
+}
