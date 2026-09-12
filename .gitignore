@@ -8,6 +8,7 @@ fonts/
 sfx/
 assets/
 frames/
+output/
 *.ass
 words.json
 final_words.json
