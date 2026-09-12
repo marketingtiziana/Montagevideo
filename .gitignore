@@ -8,9 +8,14 @@ fonts/
 sfx/
 assets/
 frames/
+output/
 *.ass
 words.json
 final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Le projet Remotion embarque sa police (OFL) : ne pas l'exclure
+!whiteboard/public/fonts/
+!whiteboard/public/fonts/**

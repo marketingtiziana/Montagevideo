@@ -1,0 +1,4 @@
+node_modules/
+out/
+# Bande son regeneree par pipeline/gen_whiteboard_audio.py
+public/audio/
