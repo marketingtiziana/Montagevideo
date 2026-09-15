@@ -17,6 +17,7 @@ import re
 import shutil
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import urlopen
@@ -27,6 +28,9 @@ TYPO = ROOT / "typo"
 OUT = ROOT / "out"
 
 W, H = 1080, 1920
+
+ZIP_STEM = "fynovates-stories-3-pays-2026"
+ZIP_NAME = ZIP_STEM + ".zip"
 
 # ---------------------------------------------------------------- direction artistique
 GOLD = "#E5C07B"          # jaune doré sobre
@@ -300,6 +304,20 @@ def main() -> None:
         print(f"  ✓ {dst.relative_to(ROOT.parent)}")
 
     contact_sheet()
+    bundle()
+
+
+def bundle() -> None:
+    """Archive prête à télécharger, contenant les 6 PNG."""
+    archive = OUT / ZIP_NAME
+    if archive.exists():
+        archive.unlink()
+    with zipfile.ZipFile(archive, "w", zipfile.ZIP_STORED) as z:
+        for s in STORIES:
+            png = OUT / f"story-{s['n']}.png"
+            z.write(png, f"{ZIP_STEM}/{png.name}")
+    mo = archive.stat().st_size / 1_048_576
+    print(f"  ✓ stories/out/{ZIP_NAME} ({mo:.1f} Mo)")
 
 
 def contact_sheet() -> None:

@@ -7,9 +7,10 @@ Marque : **Fynovates** — conseil en fiscalité internationale. Ton premium et 
 
 | Fichier | Contenu |
 |---|---|
-| `out/story-1.png` → `out/story-6.png` | Les 6 visuels finaux, 1080 × 1920 |
+| `out/fynovates-stories-3-pays-2026.zip` | **Les 6 PNG en une archive, prête à télécharger** |
+| `out/story-1.png` → `out/story-6.png` | Les 6 visuels finaux, 1080 × 1920, PNG 24 bits sans perte |
 | `out/planche-contact.html` | Planche de relecture : les 6 côte à côte |
-| `backgrounds/*.png` | Photos d'arrière-plan sources (générées, 9:16) |
+| `backgrounds/*.png` | Photos d'arrière-plan sources, 2294 × 4096 (9:16) |
 
 `backgrounds/01b-planisphere.png` est l'**option de repli** prévue pour la story 1
 (planisphère sombre à trois points rouges). La version retenue est la vue aérienne
@@ -19,7 +20,8 @@ qui fusionne skyline désertique, côte atlantique et jungle en une seule image.
 
 Identique sur les 6 visuels — même grille, même typo, même traitement d'image.
 
-- **Photo plein écran**, cadrage `cover`, centré.
+- **Photo plein écran**, cadrage `cover`, centré. Les sources sont en 2294 × 4096 :
+  le rendu 1080 × 1920 sous-échantillonne au lieu d'étirer, ce qui garde le grain net.
 - **Dégradé vertical noir** unique : léger en haut (lisibilité de la pagination),
   ≈ 60 % en zone de texte, appuyé jusqu'à 93 % en bas.
 - **Typographie** : Inter (variable), blanc, aligné à gauche, largeur de bloc 856 px.
@@ -47,8 +49,8 @@ python3 stories/build_stories.py
 ```
 
 Le script télécharge Inter depuis le miroir `google/fonts` si nécessaire, compose
-chaque story en HTML puis la capture en PNG via le Chromium fourni par Playwright.
-Aucune dépendance Python à installer.
+chaque story en HTML, la capture en PNG via le Chromium fourni par Playwright, puis
+regroupe les 6 fichiers dans l'archive ZIP. Aucune dépendance Python à installer.
 
 ## Modifier les textes
 
