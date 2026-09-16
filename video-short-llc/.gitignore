@@ -1,0 +1,17 @@
+node_modules/
+
+# Sorties générées (lourdes / régénérables)
+voice.mp3
+timestamps.json
+subs.ass
+clips/*.mp4
+clips/manifest.json
+work/
+output/
+music.mp3
+
+# Police téléchargée à l'installation
+assets/fonts/*.ttf
+
+# Secrets
+.env
