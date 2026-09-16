@@ -1,0 +1,207 @@
+/* ------------------------------------------------------------------
+   Série stories « Fermer une LLC » — feuille de style commune.
+   Format Instagram : 1080 x 1920, les 280 px du bas restent vides.
+   ------------------------------------------------------------------ */
+
+:root {
+  --gold: #D4AF37;
+  --red: #E05C5C;
+  --grey: #6B7280;
+  --white: #FFFFFF;
+  --body: rgba(255, 255, 255, 0.88);
+
+  --bg-top: #0A0F1E;
+  --bg-mid: #070B16;
+  --bg-bottom: #000000;
+  --glow: rgba(34, 52, 96, 0.55);
+
+  --pad: 88px;
+  --top: 100px;
+  --safe-bottom: 280px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--white);
+  font-feature-settings: "ss01", "cv05";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.canvas {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background:
+    radial-gradient(118% 62% at 50% 6%, var(--glow) 0%, rgba(10, 15, 30, 0) 64%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 44%, var(--bg-bottom) 100%);
+}
+
+/* ---------- couches de fond ---------- */
+
+.layer { position: absolute; inset: 0; pointer-events: none; }
+
+/* fines lignes de grille */
+.layer--grid {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 90px);
+  -webkit-mask-image: radial-gradient(84% 62% at 50% 34%, #000 0%, rgba(0, 0, 0, 0.25) 66%, transparent 100%);
+  mask-image: radial-gradient(84% 62% at 50% 34%, #000 0%, rgba(0, 0, 0, 0.25) 66%, transparent 100%);
+}
+
+/* filigrane : formulaire IRS estompé (5 à 8 % d'opacité) */
+.layer--form { opacity: 0.06; }
+.layer--form svg { position: absolute; }
+.layer--form .form-a { top: 54px; left: -128px; width: 560px; transform: rotate(-3.5deg); }
+.layer--form .form-b { top: 1010px; right: -172px; width: 520px; transform: rotate(5deg); }
+
+/* vignettage : renforce le contraste du texte sur les bords */
+.layer--scrim {
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.42) 62%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+.layer--vignette {
+  background:
+    radial-gradient(84% 56% at 50% 40%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 22%);
+}
+
+/* ---------- structure ---------- */
+
+.content {
+  position: absolute;
+  inset: 0;
+  padding: var(--top) var(--pad) calc(var(--safe-bottom) + 30px);
+  display: flex;
+  flex-direction: column;
+}
+
+.index {
+  position: absolute;
+  top: 88px;
+  right: var(--pad);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--grey);
+  font-variant-numeric: tabular-nums;
+}
+
+.art { display: flex; flex: 1 1 auto; align-items: center; }
+.art svg { display: block; overflow: visible; }
+
+.copy { display: flex; flex-direction: column; margin-top: auto; }
+
+/* ---------- typographie ---------- */
+
+.hook {
+  font-size: 66px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.quote {
+  font-size: 50px;
+  line-height: 1.28;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--white);
+  border-left: 3px solid rgba(212, 175, 55, 0.55);
+  padding-left: 34px;
+}
+
+.para {
+  font-size: 40px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.004em;
+  color: var(--body);
+}
+
+.kicker {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.gold { color: var(--gold); font-weight: 600; }
+.red { color: var(--red); font-weight: 600; }
+.strong { color: var(--white); font-weight: 600; }
+
+.figure {
+  display: block;
+  font-size: 104px;
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- story 3 : années manquantes ---------- */
+
+.years { display: flex; gap: 22px; }
+.year {
+  flex: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 18px;
+}
+.year b {
+  position: relative;
+  display: inline-block;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(255, 255, 255, 0.92);
+  font-variant-numeric: tabular-nums;
+}
+.year b::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  top: 53%;
+  height: 3px;
+  background: var(--red);
+}
+.year span {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--red);
+}
+
+/* ---------- story 6 : appel à l'action ---------- */
+
+.cta { display: flex; flex-direction: column; }
+.cta-line { font-size: 42px; line-height: 1.35; font-weight: 500; color: var(--white); }
+.tag {
+  align-self: flex-start;
+  border: 2px solid rgba(212, 175, 55, 0.75);
+  border-radius: 10px;
+  padding: 10px 48px 22px;
+  font-size: 164px;
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  text-shadow: 0 0 60px rgba(212, 175, 55, 0.35);
+}

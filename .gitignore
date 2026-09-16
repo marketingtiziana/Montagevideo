@@ -14,3 +14,7 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Stories : sources de police téléchargées (inter.css versionné, lui, embarque le base64)
+stories/webfonts/*.woff2
+stories/webfonts/inter-src.css
