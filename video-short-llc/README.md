@@ -163,6 +163,45 @@ Les prompts visuels sont en anglais (meilleurs résultats sur les modèles vidé
 
 ---
 
+## Variante : générer via Higgsfield (sans clés ElevenLabs/fal.ai)
+
+Si le compte Higgsfield est connecté (MCP), on peut produire la même vidéo avec
+ses crédits, sans créer de comptes ElevenLabs ni fal.ai :
+
+| Étape | Modèle Higgsfield | Coût |
+|---|---|---|
+| Voix | `text2speech_v2` (moteur **elevenlabs**), 1 appel/segment | 0,3 crédit/segment |
+| Clips | `kling2_6`, 9:16, 5 s, `sound:false` | 5 crédits/clip |
+| **Total** | 7 segments + 7 clips | **≈ 37 crédits** |
+
+Préflighter un coût sans rien dépenser : `get_cost: true`.
+`kling2_6` sort nativement en **1080×1920**, donc aucun recadrage n'est perdu.
+
+⚠️ **Aucun moteur TTS Higgsfield ne renvoie de timestamps mot à mot.**
+`tools/voice_from_audio.js` les ESTIME à partir des segments audio générés :
+
+1. **Post-traitement** — silences internes plafonnés + `atempo` (hauteur
+   préservée). La voix sortait à 10,7 car/s (≈ 79 s) contre ~15 en narration
+   française ; `VOICE_TEMPO=1.35` ramène à ~54 s.
+2. **Ancrage sur les silences** — `silencedetect` découpe chaque segment en
+   plages de parole réelles ; les mots sont répartis dans ces plages et jamais
+   au travers d'un silence, ce qui borne la dérive.
+3. **Poids prononcé** — « 25 000 » se dit « vingt-cinq mille » et « 5472 »
+   « cinq mille quatre cent soixante-douze ». Le poids d'un mot est calculé sur
+   sa forme parlée (`spellFr`), sinon les segments chiffrés défilent trop vite :
+   ici « 5472 » reçoit 2,33 s au lieu de ~0,2 s. Les séparateurs de milliers
+   sont recollés pour que « 25 000 » reste un seul mot surligné.
+
+```bash
+# les mp3 générés sont attendus dans work/voice_raw_NN.mp3
+VOICE_TEMPO=1.35 node tools/voice_from_audio.js
+node 03_subs.js && node 04_assemble.js
+```
+
+Le calage reste **estimé** : sur une longue plage sans pause, le mot surligné
+peut dériver de quelques dixièmes de seconde. Pour un calage exact, repasser par
+`01_voice.js` et ElevenLabs `/with-timestamps`.
+
 ## Tester sans dépenser
 
 ```bash
