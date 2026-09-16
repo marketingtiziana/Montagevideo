@@ -1,0 +1,19 @@
+{
+  "name": "video-short-llc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pipeline faceless short video: ElevenLabs voice-over + fal.ai clips + karaoke .ass subtitles + ffmpeg assembly",
+  "scripts": {
+    "voice": "node 01_voice.js",
+    "clips": "node 02_clips.js",
+    "subs": "node 03_subs.js",
+    "assemble": "node 04_assemble.js",
+    "all": "bash run.sh"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0"
+  },
+  "engines": { "node": ">=18" }
+}

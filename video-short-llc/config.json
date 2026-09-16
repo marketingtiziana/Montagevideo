@@ -1,0 +1,70 @@
+{
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "crf": 20,
+    "preset": "medium",
+    "intermediateCrf": 18
+  },
+
+  "voice": {
+    "provider": "elevenlabs",
+    "voiceId": "pNInz6obpgDQGcFmaJgB",
+    "modelId": "eleven_multilingual_v2",
+    "outputFormat": "mp3_44100_128",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.8,
+      "style": 0.35,
+      "use_speaker_boost": true
+    },
+    "segmentGapSeconds": 0.18
+  },
+
+  "clips": {
+    "provider": "fal",
+    "model": "fal-ai/kling-video/v1.6/standard/text-to-video",
+    "aspectRatio": "9:16",
+    "durationSeconds": 5,
+    "concurrency": 7,
+    "maxAttempts": 3,
+    "pollIntervalMs": 5000,
+    "timeoutMs": 900000,
+    "promptSuffix": "vertical 9:16 format, no text, no watermark, no people talking to camera",
+    "negativePrompt": "blur, distort, low quality, text, watermark, subtitles, logo"
+  },
+
+  "subs": {
+    "fontName": "Anton",
+    "fontFile": "assets/fonts/Anton-Regular.ttf",
+    "fontFallback": "Liberation Sans Bold",
+    "fontSize": 96,
+    "primaryColour": "&H00FFFFFF",
+    "highlightColour": "&H0000FFFF",
+    "outlineColour": "&H00000000",
+    "outline": 6,
+    "shadow": 2,
+    "alignment": 2,
+    "marginV": 620,
+    "marginL": 90,
+    "marginR": 90,
+    "wordsPerCard": 4,
+    "uppercase": true,
+    "maxWordGapSeconds": 0.6
+  },
+
+  "audio": {
+    "musicFile": "music.mp3",
+    "musicVolumeDb": -18,
+    "musicFadeOutSeconds": 1.5,
+    "sampleRate": 44100,
+    "bitrate": "192k"
+  },
+
+  "fit": {
+    "mode": "stretch",
+    "maxStretchFactor": 2.5,
+    "minSqueezeFactor": 0.5
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "title": "C'est quoi une LLC",
+  "slug": "llc",
+  "language": "fr",
+  "segments": [
+    {
+      "id": 1,
+      "role": "hook",
+      "text": "Tu vends en ligne et tu payes encore tes impôts comme un salarié ? Laisse-moi t'expliquer c'est quoi une LLC.",
+      "prompt": "Young entrepreneur working on laptop in modern apartment, cinematic, moody lighting, slow push-in"
+    },
+    {
+      "id": 2,
+      "role": "body",
+      "text": "Une LLC, c'est une société américaine. Limited Liability Company. Premier avantage : elle protège ton patrimoine. Si ta boîte a des dettes, on ne touche pas à tes biens personnels.",
+      "prompt": "American flag waving over modern glass office buildings, golden hour, cinematic"
+    },
+    {
+      "id": 3,
+      "role": "body",
+      "text": "Deuxième avantage : si tu es non-résident américain, sans activité physique aux États-Unis, ta LLC ne paye pas d'impôt là-bas.",
+      "prompt": "Glowing shield protecting a modern house, dark background, 3D render, dramatic"
+    },
+    {
+      "id": 4,
+      "role": "body",
+      "text": "C'est une entité transparente : les bénéfices remontent directement vers toi, et c'est ton pays de résidence fiscale qui décide de la taxation.",
+      "prompt": "Money and documents flowing upward through a transparent glass structure, abstract, cinematic"
+    },
+    {
+      "id": 5,
+      "role": "body",
+      "text": "Résultat : bien structurée, avec la bonne résidence, tu es 100% en règle avec une fiscalité optimisée.",
+      "prompt": "World map with glowing routes between continents, dark blue tones, premium"
+    },
+    {
+      "id": 6,
+      "role": "warning",
+      "text": "Mais attention. Une LLC mal déclarée, c'est jusqu'à 25 000 dollars d'amende. Le fameux formulaire 5472.",
+      "prompt": "Stack of IRS tax documents with red WARNING stamp slamming down, dramatic lighting"
+    },
+    {
+      "id": 7,
+      "role": "cta",
+      "text": "Suis-nous pour comprendre la fiscalité internationale, simplement.",
+      "prompt": "Minimal dark end card scene, elegant slow camera movement, premium finance aesthetic"
+    }
+  ]
+}
