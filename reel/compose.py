@@ -46,7 +46,9 @@ cmd = [FF, "-y", "-hide_banner", "-loglevel", "error", *inputs,
        "-filter_complex", fc,
        "-map", f"[{prev}]", "-map", "1:a",
        "-c:v", "libx264", "-profile:v", "high", "-level", "4.1",
-       "-preset", "slow", "-crf", "18", "-maxrate", "12M", "-bufsize", "20M",
+       # 4,2 Mb/s : indiscernable du master sur un plan serre en 1080x1920, et
+       # le fichier reste leger (les plateformes re-encodent de toute facon).
+       "-preset", "slow", "-crf", "22", "-maxrate", "4200k", "-bufsize", "8400k",
        "-pix_fmt", "yuv420p", "-r", str(FPS),
        "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
