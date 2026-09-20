@@ -51,12 +51,33 @@ const OUT = path.join(__dirname, 'output', 'carousel-moyen-orient');
       await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
     });
 
-    // auto-ajustement typographique
+    // auto-ajustement de la mise en page
     const fit = await page.evaluate(() => {
-      const el = document.querySelector('.body') || document.querySelector('.cta');
-      const out = { size: null, base: null, min: null, overflow: false, titleLines: null };
+      const slide = document.querySelector('.slide');
+      const tpl = slide.dataset.tpl;
+      const out = { size: null, base: null, min: null, overflow: false, titleLines: null, banner: null };
 
-      const tpl = document.querySelector('.slide').dataset.tpl;
+      /* Gabarit A : le titre de couverture se reduit par paliers de 4px tant
+         qu'il empiete sur la carte visuelle du bas. */
+      if (tpl === 'A') {
+        const title = document.querySelector('.title');
+        const sub = document.querySelector('.subtitle');
+        const card = document.querySelector('.cover-card');
+        if (!title || !sub) return out;
+        const limit = card ? card.getBoundingClientRect().top - 48 : 1350 - 90;
+        const base = parseFloat(title.dataset.base), min = parseFloat(title.dataset.min);
+        out.base = base; out.min = min;
+        let size = base;
+        title.style.fontSize = size + 'px';
+        const fits = () => sub.getBoundingClientRect().bottom <= limit;
+        while (!fits() && size - 4 >= min) { size -= 4; title.style.fontSize = size + 'px'; }
+        out.size = size;
+        out.overflow = !fits();
+        return out;
+      }
+
+      const el = document.querySelector('.body') || document.querySelector('.cta');
+
       const title = (tpl === 'B' || tpl === 'C') ? document.querySelector('.title') : null;
       if (title) {
         const lh = parseFloat(getComputedStyle(title).lineHeight);
@@ -79,14 +100,25 @@ const OUT = path.join(__dirname, 'output', 'carousel-moyen-orient');
         const availH = frame.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
         return el.getBoundingClientRect().height <= availH + 2;
       };
+
       let size = base;
       el.style.fontSize = size + 'px';
-      while (!fits() && size - 2 >= min) {
-        size -= 2;
-        el.style.fontSize = size + 'px';
+      while (!fits() && size - 2 >= min) { size -= 2; el.style.fontSize = size + 'px'; }
+
+      /* Gabarit C : plutot que de descendre le texte sous son minimum, on rend
+         de la place en reduisant le bandeau illustre, par paliers de 20px. */
+      if (tpl === 'C' && !fits()) {
+        const BANNER_MIN = 320;
+        let h = parseFloat(getComputedStyle(slide).getPropertyValue('--banner')) || 520;
+        while (!fits() && h - 20 >= BANNER_MIN) {
+          h -= 20;
+          slide.style.setProperty('--banner', h + 'px');
+        }
+        out.banner = h;
       }
+
       out.size = size;
-      out.overflow = !fits();          // deborde encore au minimum autorise
+      out.overflow = !fits();
       return out;
     });
 
@@ -108,10 +140,12 @@ const OUT = path.join(__dirname, 'output', 'carousel-moyen-orient');
   const warnings = [];
   for (const r of report) {
     const corps = r.size ? `${r.size}px${r.size !== r.base ? ` (base ${r.base})` : '     '}` : '  n/a  ';
+    const bandeau = r.banner ? ` / bandeau ${r.banner}px` : '';
     const titre = r.titleLines != null ? `${r.titleLines} ligne${r.titleLines > 1 ? 's' : ''}` : ' n/a   ';
     let etat = 'ok';
     if (r.overflow) { etat = 'DEBORDE AU MINIMUM'; warnings.push(`${r.file} : le corps deborde encore a ${r.min}px. Texte a raccourcir, rien n a ete tronque.`); }
     else if (r.size && r.size !== r.base) { etat = 'reduit'; }
+    etat += bandeau;
     if (r.titleLines > 2) { etat += ' / TITRE > 2 LIGNES'; warnings.push(`${r.file} : le titre occupe ${r.titleLines} lignes (max 2).`); }
     console.log(`  ${r.file.padEnd(16)} ${corps.padEnd(10)} ${titre.padEnd(9)} ${etat}`);
   }
@@ -137,6 +171,7 @@ function writePreview(report, warnings) {
     const n = r.file.match(/\d{2}/)[0];
     const tags = [];
     if (r.size && r.base && r.size !== r.base) tags.push(`corps reduit ${r.base} -> ${r.size}px`);
+    if (r.banner) tags.push(`bandeau reduit a ${r.banner}px`);
     if (r.overflow) tags.push('DEBORDE');
     if (r.titleLines > 2) tags.push(`titre ${r.titleLines} lignes`);
     const bad = r.overflow || r.titleLines > 2;

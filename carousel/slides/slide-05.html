@@ -89,9 +89,31 @@
       width: 8px; height: 8px;
       background: #4F6BFF;
     }
+    /* liste numerotee : le numero en indigo, texte alignes en retrait pendu */
+    .body ol.num-list { list-style: none; counter-reset: nl; }
+    .body ol.num-list li { padding-left: 1.55em; }
+    .body ol.num-list li::before {
+      counter-increment: nl;
+      content: counter(nl);
+      position: absolute; left: 0; top: 0;
+      width: auto; height: auto;
+      background: none;
+      font-weight: 900; font-size: 0.86em;
+      color: #4F6BFF;
+      font-variant-numeric: tabular-nums;
+    }
+    /* ligne de sources : hors du bloc auto-ajuste, taille fixe */
+    .sources {
+      flex: none;
+      padding-top: 26px;
+      font-weight: 400; font-size: 18px; line-height: 1.4;
+      color: #8A93AE;
+    }
+    /* --banner est la hauteur du bandeau. build.js peut la reduire quand le
+       texte de la slide ne tient pas, plutot que de rogner le texte. */
     .banner {
       position: absolute; top: 44px; left: 44px; right: 44px;
-      height: 520px;
+      height: var(--banner, 520px);
       border-radius: 24px;
       overflow: hidden;
       z-index: 1;
@@ -102,21 +124,23 @@
       position: absolute; inset: 0;
       background: rgba(15, 21, 53, 0.20);
     }
-    .frame { padding-top: 608px; }
+    .frame { padding-top: calc(var(--banner, 520px) + 88px); }
     .title { font-size: 52px; margin-top: 36px; }
     .body  { margin-top: 36px; }
   </style>
 </head>
 <body>
-<div class="slide" data-tpl="C" data-n="5">
+<div class="slide" data-tpl="C" data-n="5" style="--banner: 520px">
   <div class="banner"><img src="../assets/img/img-05-fret.jpg" alt=""></div>
   <div class="frame">
     <div class="num">05 / 16</div>
-    <h1 class="title">Titre provisoire slide 5</h1>
+    <h1 class="title">Canal 3 : si tu vends du physique, c'est direct</h1>
     <div class="body" data-base="28" data-min="26">
-      <p>Texte provisoire. Le cout d un conteneur quarante pieds atteint <b>4 300$</b> sur les routes Asie vers Europe.</p>
-      <p>Les compagnies repercutent une surcharge moyenne de <b>5%</b> sur l ensemble des contrats.</p>
+      <p>Les taux de fret Asie-Europe du Nord tournent autour de <b>4 300 $</b> par conteneur, Asie-Méditerranée autour de <b>4 200 $</b>. Ils ont baissé récemment, mais restent respectivement plus de <b>20%</b> et <b>50%</b> au-dessus des niveaux d'avant la haute saison.</p>
+      <p>Le retour vers la <em>mer Rouge</em> et <em>Suez</em> n'est normalisé qu'à hauteur de <b>27%</b>. Le contournement par le <em>cap de Bonne-Espérance</em> ajoute <b>10 à 14 jours</b> de transit sur l'Asie-Europe.</p>
+      <p>Traduction pour un e-commerce : ta marge unitaire baisse, et ton délai de livraison client s'allonge de deux semaines.</p>
     </div>
+    <div class="sources">Sources : freightos, globalmaritimehub, suaidglobal</div>
   </div>
 </div>
 </body>

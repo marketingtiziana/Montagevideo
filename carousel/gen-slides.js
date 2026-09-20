@@ -124,6 +124,11 @@ function logo(n) {
     : '';
 }
 
+function sources(s) {
+  if (!s.sources || !s.sources.length) return '';
+  return `\n    <div class="sources">Sources : ${s.sources.map(x => esc(x)).join(', ')}</div>`;
+}
+
 function num(n) {
   return `    <div class="num">${String(n).padStart(2, '0')} / ${TOTAL}</div>`;
 }
@@ -136,6 +141,12 @@ function bodyHtml(body, n) {
         .map(i => `        <li>${inline(i, `slide ${n} / li`)}</li>`)
         .join('\n');
       return `      <ul>\n${li}\n      </ul>`;
+    }
+    if (block.ol) {
+      const li = block.ol
+        .map(i => `        <li>${inline(i, `slide ${n} / ol`)}</li>`)
+        .join('\n');
+      return `      <ol class="num-list">\n${li}\n      </ol>`;
     }
     if (block.schema) return schemas.render(block.schema, n, inline);
     throw new Error(`[CONTENU] slide ${n} : bloc inconnu ${JSON.stringify(block)}`);
@@ -213,6 +224,26 @@ const TEXTCOMMON = (bodySize) => `    .frame {
       position: absolute; left: 0; top: 0.62em;
       width: 8px; height: 8px;
       background: ${T.accent};
+    }
+    /* liste numerotee : le numero en indigo, texte alignes en retrait pendu */
+    .body ol.num-list { list-style: none; counter-reset: nl; }
+    .body ol.num-list li { padding-left: 1.55em; }
+    .body ol.num-list li::before {
+      counter-increment: nl;
+      content: counter(nl);
+      position: absolute; left: 0; top: 0;
+      width: auto; height: auto;
+      background: none;
+      font-weight: 900; font-size: 0.86em;
+      color: ${T.accent};
+      font-variant-numeric: tabular-nums;
+    }
+    /* ligne de sources : hors du bloc auto-ajuste, taille fixe */
+    .sources {
+      flex: none;
+      padding-top: 26px;
+      font-weight: 400; font-size: 18px; line-height: 1.4;
+      color: #8A93AE;
     }`;
 
 function doc(s, style, markup) {
@@ -277,7 +308,7 @@ function tplA(s) {
     const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
   <div class="frame">
     <div class="rule"></div>
-    <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
+    <h1 class="title" data-base="88" data-min="52">${inline(s.title, `slide ${s.n} / title`)}</h1>
     <p class="subtitle">${inline(s.subtitle, `slide ${s.n} / subtitle`)}</p>
   </div>
   <div class="cover-card"><img src="../assets/img/${s.img}" alt=""></div>
@@ -321,7 +352,7 @@ ${num(s.n)}
     <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
     <div class="body" data-base="32" data-min="26">
 ${bodyHtml(s.body, s.n)}
-    </div>
+    </div>${sources(s)}
   </div>
 ${logo(s.n)}</div>`;
   return doc(s, style, markup);
@@ -331,10 +362,14 @@ ${logo(s.n)}</div>`;
 /* Gabarit C : bandeau illustration 520px + texte                      */
 /* ================================================================== */
 function tplC(s) {
-  const style = `${TEXTCOMMON(28)}
+  // Le CSS des schemas doit etre injecte ici aussi : une slide a bandeau peut
+  // porter un schema (slide 3), sans quoi il s'affiche sans aucune mise en forme.
+  const style = `${TEXTCOMMON(28)}${hasSchema(s) ? '\n' + schemas.css(T.ink, T.body) : ''}
+    /* --banner est la hauteur du bandeau. build.js peut la reduire quand le
+       texte de la slide ne tient pas, plutot que de rogner le texte. */
     .banner {
       position: absolute; top: 44px; left: 44px; right: 44px;
-      height: 520px;
+      height: var(--banner, 520px);
       border-radius: 24px;
       overflow: hidden;
       z-index: 1;
@@ -345,18 +380,18 @@ function tplC(s) {
       position: absolute; inset: 0;
       background: rgba(15, 21, 53, 0.20);
     }
-    .frame { padding-top: 608px; }
+    .frame { padding-top: calc(var(--banner, 520px) + 88px); }
     .title { font-size: 52px; margin-top: 36px; }
     .body  { margin-top: 36px; }`;
 
-  const markup = `<div class="slide" data-tpl="C" data-n="${s.n}">
+  const markup = `<div class="slide" data-tpl="C" data-n="${s.n}" style="--banner: 520px">
   <div class="banner"><img src="../assets/img/${s.img}" alt=""></div>
   <div class="frame">
 ${num(s.n)}
     <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
     <div class="body" data-base="28" data-min="26">
 ${bodyHtml(s.body, s.n)}
-    </div>
+    </div>${sources(s)}
   </div>
 ${logo(s.n)}</div>`;
   return doc(s, style, markup);

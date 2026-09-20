@@ -89,9 +89,31 @@
       width: 8px; height: 8px;
       background: #4F6BFF;
     }
+    /* liste numerotee : le numero en indigo, texte alignes en retrait pendu */
+    .body ol.num-list { list-style: none; counter-reset: nl; }
+    .body ol.num-list li { padding-left: 1.55em; }
+    .body ol.num-list li::before {
+      counter-increment: nl;
+      content: counter(nl);
+      position: absolute; left: 0; top: 0;
+      width: auto; height: auto;
+      background: none;
+      font-weight: 900; font-size: 0.86em;
+      color: #4F6BFF;
+      font-variant-numeric: tabular-nums;
+    }
+    /* ligne de sources : hors du bloc auto-ajuste, taille fixe */
+    .sources {
+      flex: none;
+      padding-top: 26px;
+      font-weight: 400; font-size: 18px; line-height: 1.4;
+      color: #8A93AE;
+    }
+    /* --banner est la hauteur du bandeau. build.js peut la reduire quand le
+       texte de la slide ne tient pas, plutot que de rogner le texte. */
     .banner {
       position: absolute; top: 44px; left: 44px; right: 44px;
-      height: 520px;
+      height: var(--banner, 520px);
       border-radius: 24px;
       overflow: hidden;
       z-index: 1;
@@ -102,21 +124,24 @@
       position: absolute; inset: 0;
       background: rgba(15, 21, 53, 0.20);
     }
-    .frame { padding-top: 608px; }
+    .frame { padding-top: calc(var(--banner, 520px) + 88px); }
     .title { font-size: 52px; margin-top: 36px; }
     .body  { margin-top: 36px; }
   </style>
 </head>
 <body>
-<div class="slide" data-tpl="C" data-n="2">
+<div class="slide" data-tpl="C" data-n="2" style="--banner: 520px">
   <div class="banner"><img src="../assets/img/img-02-detroit.jpg" alt=""></div>
   <div class="frame">
     <div class="num">02 / 16</div>
-    <h1 class="title">Titre provisoire slide 2</h1>
+    <h1 class="title">Ce qui se passe, en 30 secondes</h1>
     <div class="body" data-base="28" data-min="26">
-      <p>Texte provisoire de mise en page. Le detroit d <em>Ormuz</em> concentre une part decisive du trafic maritime mondial.</p>
-      <p>Chaque jour, <b>20 millions</b> de barils transitent par un couloir large de <b>39 kilometres</b> seulement.</p>
+      <p>Le détroit d'<em>Ormuz</em> est largement bloqué depuis le <b>28 février 2026</b>, après le déclenchement de la guerre aérienne américano-israélienne contre l'Iran. Avant le conflit, environ <b>25%</b> du pétrole transporté par voie maritime dans le monde y passait.</p>
+      <p>L'<em>Agence internationale de l'énergie</em> parle de la plus importante rupture d'approvisionnement de toute l'histoire du marché pétrolier mondial.</p>
+      <p>Et le <b>11 septembre</b>, l'Arabie saoudite a fermé son oléoduc Est-Ouest après des attaques de drones. C'était précisément la route de contournement du détroit.</p>
+      <p>Tu ne vends pas de pétrole. Tu vas quand même le payer.</p>
     </div>
+    <div class="sources">Sources : Wikipedia, euronews</div>
   </div>
 </div>
 </body>

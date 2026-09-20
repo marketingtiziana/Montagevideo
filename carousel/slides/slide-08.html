@@ -89,6 +89,26 @@
       width: 8px; height: 8px;
       background: #4F6BFF;
     }
+    /* liste numerotee : le numero en indigo, texte alignes en retrait pendu */
+    .body ol.num-list { list-style: none; counter-reset: nl; }
+    .body ol.num-list li { padding-left: 1.55em; }
+    .body ol.num-list li::before {
+      counter-increment: nl;
+      content: counter(nl);
+      position: absolute; left: 0; top: 0;
+      width: auto; height: auto;
+      background: none;
+      font-weight: 900; font-size: 0.86em;
+      color: #4F6BFF;
+      font-variant-numeric: tabular-nums;
+    }
+    /* ligne de sources : hors du bloc auto-ajuste, taille fixe */
+    .sources {
+      flex: none;
+      padding-top: 26px;
+      font-weight: 400; font-size: 18px; line-height: 1.4;
+      color: #8A93AE;
+    }
     /* --- schemas ------------------------------------------------ */
     .sch { margin-top: 1.25em; }
 
@@ -235,6 +255,101 @@
       color: #545E80;
     }
 
+    /* Enchainement horizontal : une chaine de causes, le dernier maillon
+       porte l'aboutissement */
+    .sch-flow {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 12px 10px;
+    }
+    .sch-flow .fl {
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      border: 1px solid #E2E6F2;
+      font-weight: 600; font-size: 22px; line-height: 1.25;
+      color: #0F1535;
+    }
+    .sch-flow .fl.end {
+      background: #4F6BFF;
+      border-color: #4F6BFF;
+      color: #FFFFFF;
+    }
+    .sch-flow .fa {
+      width: 0; height: 0;
+      border-left: 9px solid #4F6BFF;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      flex: none;
+    }
+
+    /* Deux colonnes de listes : ce qui tient contre ce qui tombe */
+    .sch-columns { display: flex; gap: 28px; }
+    .sch-columns .col {
+      flex: 1 1 0;
+      padding: 26px 26px 28px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 1px solid #E2E6F2;
+    }
+    .sch-columns .col-key { width: 32px; height: 4px; background: #93A6FF; }
+    .sch-columns .col.on .col-key { background: #4F6BFF; }
+    .sch-columns .col-t {
+      margin-top: 16px;
+      font-weight: 900; font-size: 24px; color: #0F1535;
+      letter-spacing: -0.01em;
+    }
+    .sch-columns ul { margin-top: 18px; list-style: none; }
+    .sch-columns li {
+      position: relative; padding-left: 20px;
+      font-weight: 400; font-size: 21px; line-height: 1.4;
+      color: #545E80;
+    }
+    .sch-columns li + li { margin-top: 12px; }
+    .sch-columns li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.56em;
+      width: 7px; height: 7px; background: #93A6FF;
+    }
+    .sch-columns .col.on li::before { background: #4F6BFF; }
+
+    /* Avant contre apres : remplace les marqueurs croix et coche par un
+       traitement typographique, le brand system interdit les emoji */
+    .sch-versus .vs {
+      position: relative;
+      padding: 22px 26px 22px 74px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 1px solid #E2E6F2;
+      font-weight: 600; font-size: 24px; line-height: 1.4;
+    }
+    .sch-versus .vs + .vs { margin-top: 16px; }
+    .sch-versus .vs.no  { color: #545E80; }
+    .sch-versus .vs.yes { color: #0F1535; border-color: #4F6BFF; }
+    .sch-versus .vs-m {
+      position: absolute; left: 26px; top: 26px;
+      width: 28px; height: 28px; border-radius: 50%;
+    }
+    .sch-versus .vs.no .vs-m  { background: #C3CAE0; }
+    .sch-versus .vs.yes .vs-m { background: #4F6BFF; }
+    /* croix : deux barres croisees, centrees dans la pastille */
+    .sch-versus .vs.no .vs-m::before,
+    .sch-versus .vs.no .vs-m::after {
+      content: '';
+      position: absolute; left: 8px; top: 13px;
+      width: 12px; height: 2px; background: #FFFFFF;
+    }
+    .sch-versus .vs.no .vs-m::before { transform: rotate(45deg); }
+    .sch-versus .vs.no .vs-m::after  { transform: rotate(-45deg); }
+    /* coche : un angle pivote */
+    .sch-versus .vs.yes .vs-m::after {
+      content: '';
+      position: absolute; left: 10px; top: 7px;
+      width: 7px; height: 12px;
+      border-right: 2px solid #FFFFFF;
+      border-bottom: 2px solid #FFFFFF;
+      transform: rotate(45deg);
+    }
+
     /* Comparatif : deux colonnes, paire deux nuances */
     .sch-compare { display: flex; gap: 28px; }
     .sch-compare .cmp {
@@ -266,20 +381,19 @@
 <div class="slide" data-tpl="B" data-n="8">
   <div class="frame">
     <div class="num">08 / 16</div>
-    <h1 class="title">Titre provisoire slide 8</h1>
+    <h1 class="title">Ce que tu changes dans ta promesse cette semaine</h1>
     <div class="body" data-base="32" data-min="26">
-      <p>Texte provisoire. Demonstration du schema meter face a un seuil.</p>
-    <div class="sch sch-meter">
-      <div class="m-head">
-        <span class="m-cap">Chiffre d affaires provisoire</span>
-        <span class="m-val">375 000 AED</span>
-      </div>
-      <div class="m-track">
-        <div class="m-fill" style="width: 62%"></div>
-        <div class="m-tick" style="left: 80%"></div>
-      </div>
-      <div class="m-foot"><span>0 AED</span><span>Seuil <em>Small Business Relief</em></span></div>
+    <div class="sch sch-versus">
+      <div class="vs no"><span class="vs-m"></span>"Reprends confiance en toi et développe ton activité"</div>
+      <div class="vs yes"><span class="vs-m"></span>"Signe <b>3 clients en 60 jours</b>, ou je continue gratuitement"</div>
     </div>
+      <p>En période tendue, on n'achète plus une transformation. On achète un retour sur investissement daté.</p>
+      <p>Trois éléments à ajouter dans ta page de vente :</p>
+      <ul>
+        <li>un chiffre</li>
+        <li>une échéance</li>
+        <li>une garantie ou une contrepartie</li>
+      </ul>
     </div>
   </div>
 </div>

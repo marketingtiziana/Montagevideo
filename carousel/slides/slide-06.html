@@ -89,176 +89,25 @@
       width: 8px; height: 8px;
       background: #4F6BFF;
     }
-    /* --- schemas ------------------------------------------------ */
-    .sch { margin-top: 1.25em; }
-
-    /* KPI : une valeur seule devient un chiffre heros, deux ou trois
-       deviennent une rangee de tuiles */
-    .sch-kpi { display: flex; gap: 56px; }
-    .sch-kpi .kpi { flex: 1 1 0; }
-    .sch-kpi .kpi-key { width: 40px; height: 4px; background: #4F6BFF; }
-    .sch-kpi .kpi-v {
-      margin-top: 18px;
-      font-weight: 900; line-height: 1;
-      letter-spacing: -0.035em;
-      color: #0F1535;
-    }
-    .sch-kpi .kpi-l {
-      margin-top: 14px;
-      font-weight: 400; line-height: 1.35;
-      color: #545E80;
-    }
-    .sch-kpi[data-count="1"] .kpi-v { font-size: 118px; }
-    .sch-kpi[data-count="1"] .kpi-l { font-size: 28px; }
-    .sch-kpi[data-count="2"] .kpi-v { font-size: 86px; }
-    .sch-kpi[data-count="2"] .kpi-l { font-size: 24px; }
-    .sch-kpi[data-count="3"] { gap: 40px; }
-    .sch-kpi[data-count="3"] .kpi-v { font-size: 64px; }
-    .sch-kpi[data-count="3"] .kpi-l { font-size: 21px; }
-
-    /* Barres horizontales : magnitude, serie unique */
-    .sch-bars .row + .row { margin-top: 30px; }
-    .sch-bars .row-l {
-      font-weight: 600; font-size: 24px; line-height: 1.3;
-      color: #0F1535;
-    }
-    /* La valeur suit immediatement le bout de la barre. La barre la plus longue
-       est plafonnee a BAR_MAX% de la piste, ce qui garantit la place de
-       l'etiquette sans jamais la detacher de sa marque ni la rogner. */
-    .sch-bars .row-b {
-      margin-top: 12px;
-      display: flex; align-items: center;
-    }
-    .sch-bars .bar {
-      height: 20px;
-      border-radius: 0 4px 4px 0;
-      background: #4F6BFF;
-      flex: none;
-    }
-    .sch-bars .bar.dim { background: #C3CAE0; }
-    .sch-bars .row-v {
-      margin-left: 18px;
-      font-weight: 900; font-size: 26px;
-      color: #0F1535;
-      white-space: nowrap;
-    }
-    .sch-bars .row.is-dim .row-l,
-    .sch-bars .row.is-dim .row-v { color: #545E80; }
-
-    /* Jauge : un rapport face a un seuil */
-    .sch-meter .m-head {
-      display: flex; align-items: baseline; justify-content: space-between;
-      gap: 24px;
-    }
-    .sch-meter .m-cap { font-weight: 600; font-size: 24px; color: #0F1535; }
-    .sch-meter .m-val { font-weight: 900; font-size: 44px; color: #0F1535; letter-spacing: -0.02em; }
-    .sch-meter .m-track {
-      position: relative;
-      margin-top: 16px;
-      height: 20px;
-      border-radius: 4px;
-      background: #DDE3F5;
-      overflow: hidden;
-    }
-    .sch-meter .m-fill {
-      height: 100%;
-      border-radius: 0 4px 4px 0;
-      background: #4F6BFF;
-    }
-    .sch-meter .m-tick {
-      position: absolute; top: -6px; bottom: -6px;
-      width: 2px; background: #0F1535;
-    }
-    .sch-meter .m-foot {
-      margin-top: 14px;
-      display: flex; justify-content: space-between; gap: 24px;
-      font-weight: 400; font-size: 21px; color: #545E80;
-    }
-
-    /* Etapes : un enchainement */
-    .sch-steps { list-style: none; }
-    .sch-steps li {
-      position: relative;
-      padding-left: 74px;
-      padding-bottom: 30px;
-    }
-    .sch-steps li:last-child { padding-bottom: 0; }
-    .sch-steps li::before {
-      content: '';
-      position: absolute; left: 23px; top: 48px; bottom: 0;
-      width: 2px; background: #E2E6F2;
-    }
-    .sch-steps li:last-child::before { display: none; }
-    .sch-steps .s-n {
+    /* liste numerotee : le numero en indigo, texte alignes en retrait pendu */
+    .body ol.num-list { list-style: none; counter-reset: nl; }
+    .body ol.num-list li { padding-left: 1.55em; }
+    .body ol.num-list li::before {
+      counter-increment: nl;
+      content: counter(nl);
       position: absolute; left: 0; top: 0;
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: #4F6BFF;
-      color: #FFFFFF;
-      font-weight: 900; font-size: 22px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .sch-steps .s-t {
-      display: block;
-      padding-top: 8px;
-      font-weight: 400; font-size: 26px; line-height: 1.4;
-      color: #545E80;
-    }
-    .sch-steps .s-t b { font-weight: 900; color: #0F1535; }
-
-    /* Frise : des jalons dates */
-    .sch-timeline { position: relative; padding-top: 4px; }
-    /* l'axe court du premier au dernier jalon, jamais au-dela :
-       les jalons sont ancres a gauche de cellules de largeur 100/n */
-    .sch-timeline .t-axis {
-      position: absolute; left: 7px; top: 63px;
-      width: calc((100% - 14px) * var(--span) / var(--n));
-      height: 1px; background: #E2E6F2;
-    }
-    .sch-timeline .t-row { position: relative; display: flex; }
-    .sch-timeline .t-item { flex: 1 1 0; padding-right: 28px; }
-    .sch-timeline .t-d {
-      font-weight: 900; font-size: 26px; line-height: 1.2;
-      color: #0F1535; letter-spacing: -0.015em;
-      min-height: 62px;
-    }
-    .sch-timeline .t-dot {
-      position: relative; z-index: 2;
-      width: 14px; height: 14px; border-radius: 50%;
-      background: #C3CAE0;
-      box-shadow: 0 0 0 4px #F4F6FC;
-    }
-    .sch-timeline .t-item.on .t-dot { background: #4F6BFF; }
-    .sch-timeline .t-l {
-      margin-top: 20px;
-      font-weight: 400; font-size: 21px; line-height: 1.4;
-      color: #545E80;
-    }
-
-    /* Comparatif : deux colonnes, paire deux nuances */
-    .sch-compare { display: flex; gap: 28px; }
-    .sch-compare .cmp {
-      flex: 1 1 0;
-      padding: 28px 28px 30px;
-      border-radius: 16px;
-      background: #FFFFFF;
-      border: 1px solid #E2E6F2;
-    }
-    .sch-compare .c-key { width: 32px; height: 4px; background: #93A6FF; }
-    .sch-compare .cmp.on .c-key { background: #4F6BFF; }
-    .sch-compare .c-t {
-      margin-top: 16px;
-      font-weight: 600; font-size: 22px; color: #545E80;
-    }
-    .sch-compare .c-v {
-      margin-top: 10px;
-      font-weight: 900; font-size: 56px; line-height: 1;
-      letter-spacing: -0.03em; color: #0F1535;
+      width: auto; height: auto;
+      background: none;
+      font-weight: 900; font-size: 0.86em;
+      color: #4F6BFF;
       font-variant-numeric: tabular-nums;
     }
-    .sch-compare .c-d {
-      margin-top: 14px;
-      font-weight: 400; font-size: 21px; line-height: 1.4; color: #545E80;
+    /* ligne de sources : hors du bloc auto-ajuste, taille fixe */
+    .sources {
+      flex: none;
+      padding-top: 26px;
+      font-weight: 400; font-size: 18px; line-height: 1.4;
+      color: #8A93AE;
     }
   </style>
 </head>
@@ -266,32 +115,17 @@
 <div class="slide" data-tpl="B" data-n="6">
   <div class="frame">
     <div class="num">06 / 16</div>
-    <h1 class="title">Titre provisoire slide 6</h1>
+    <h1 class="title">Canal 4 : le calendrier de ton Q4 est décalé</h1>
     <div class="body" data-base="32" data-min="26">
-      <p>Texte provisoire. Demonstration du schema bars, serie unique.</p>
-    <div class="sch sch-bars">
-      <div class="row">
-        <div class="row-l">Libelle provisoire un</div>
-        <div class="row-b">
-          <div class="bar" style="width: 78%"></div>
-          <div class="row-v">4 300$</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="row-l">Libelle provisoire deux</div>
-        <div class="row-b">
-          <div class="bar" style="width: 48%"></div>
-          <div class="row-v">2 650$</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="row-l">Libelle provisoire trois</div>
-        <div class="row-b">
-          <div class="bar" style="width: 25%"></div>
-          <div class="row-v">1 400$</div>
-        </div>
-      </div>
-    </div>
+      <p>Si tu lances une offre physique pour les fêtes, la règle a changé.</p>
+      <p>Ce qui fonctionnait : commander en octobre, vendre en décembre.</p>
+      <p>Ce qui fonctionne maintenant :</p>
+      <ul>
+        <li>commander <b>6 à 8 semaines</b> plus tôt</li>
+        <li>provisionner une hausse de coût de transport dans ton prix de vente, pas dans ta marge</li>
+        <li>annoncer des délais longs avant la commande, pas après</li>
+      </ul>
+      <p>Un délai annoncé est une contrainte. Un délai subi est un remboursement.</p>
     </div>
   </div>
 </div>

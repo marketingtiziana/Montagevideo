@@ -37,7 +37,7 @@ const VIZ = {
 const BAR_MAX = 78;
 
 /** Types de schema acceptes dans un bloc { schema: { type: ... } }. */
-const TYPES = ['kpi', 'bars', 'meter', 'steps', 'timeline', 'compare'];
+const TYPES = ['kpi', 'bars', 'meter', 'steps', 'timeline', 'compare', 'flow', 'columns', 'versus'];
 
 /* ------------------------------------------------------------------ */
 /* CSS, injecte uniquement dans les slides qui portent un schema       */
@@ -189,6 +189,101 @@ function css(ink, body) {
       color: ${body};
     }
 
+    /* Enchainement horizontal : une chaine de causes, le dernier maillon
+       porte l'aboutissement */
+    .sch-flow {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 12px 10px;
+    }
+    .sch-flow .fl {
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      border: 1px solid ${VIZ.rule};
+      font-weight: 600; font-size: 22px; line-height: 1.25;
+      color: ${ink};
+    }
+    .sch-flow .fl.end {
+      background: ${VIZ.accent};
+      border-color: ${VIZ.accent};
+      color: #FFFFFF;
+    }
+    .sch-flow .fa {
+      width: 0; height: 0;
+      border-left: 9px solid ${VIZ.accent};
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      flex: none;
+    }
+
+    /* Deux colonnes de listes : ce qui tient contre ce qui tombe */
+    .sch-columns { display: flex; gap: 28px; }
+    .sch-columns .col {
+      flex: 1 1 0;
+      padding: 26px 26px 28px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 1px solid ${VIZ.rule};
+    }
+    .sch-columns .col-key { width: 32px; height: 4px; background: ${VIZ.light}; }
+    .sch-columns .col.on .col-key { background: ${VIZ.accent}; }
+    .sch-columns .col-t {
+      margin-top: 16px;
+      font-weight: 900; font-size: 24px; color: ${ink};
+      letter-spacing: -0.01em;
+    }
+    .sch-columns ul { margin-top: 18px; list-style: none; }
+    .sch-columns li {
+      position: relative; padding-left: 20px;
+      font-weight: 400; font-size: 21px; line-height: 1.4;
+      color: ${body};
+    }
+    .sch-columns li + li { margin-top: 12px; }
+    .sch-columns li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.56em;
+      width: 7px; height: 7px; background: ${VIZ.light};
+    }
+    .sch-columns .col.on li::before { background: ${VIZ.accent}; }
+
+    /* Avant contre apres : remplace les marqueurs croix et coche par un
+       traitement typographique, le brand system interdit les emoji */
+    .sch-versus .vs {
+      position: relative;
+      padding: 22px 26px 22px 74px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 1px solid ${VIZ.rule};
+      font-weight: 600; font-size: 24px; line-height: 1.4;
+    }
+    .sch-versus .vs + .vs { margin-top: 16px; }
+    .sch-versus .vs.no  { color: ${body}; }
+    .sch-versus .vs.yes { color: ${ink}; border-color: ${VIZ.accent}; }
+    .sch-versus .vs-m {
+      position: absolute; left: 26px; top: 26px;
+      width: 28px; height: 28px; border-radius: 50%;
+    }
+    .sch-versus .vs.no .vs-m  { background: ${VIZ.dim}; }
+    .sch-versus .vs.yes .vs-m { background: ${VIZ.accent}; }
+    /* croix : deux barres croisees, centrees dans la pastille */
+    .sch-versus .vs.no .vs-m::before,
+    .sch-versus .vs.no .vs-m::after {
+      content: '';
+      position: absolute; left: 8px; top: 13px;
+      width: 12px; height: 2px; background: #FFFFFF;
+    }
+    .sch-versus .vs.no .vs-m::before { transform: rotate(45deg); }
+    .sch-versus .vs.no .vs-m::after  { transform: rotate(-45deg); }
+    /* coche : un angle pivote */
+    .sch-versus .vs.yes .vs-m::after {
+      content: '';
+      position: absolute; left: 10px; top: 7px;
+      width: 7px; height: 12px;
+      border-right: 2px solid #FFFFFF;
+      border-bottom: 2px solid #FFFFFF;
+      transform: rotate(45deg);
+    }
+
     /* Comparatif : deux colonnes, paire deux nuances */
     .sch-compare { display: flex; gap: 28px; }
     .sch-compare .cmp {
@@ -272,7 +367,7 @@ function render(sc, n, inline) {
     }
 
     case 'steps': {
-      const items = need(sc.items, where, 2, 4);
+      const items = need(sc.items, where, 2, 5);
       const li = items.map((s, k) => `      <li>
         <span class="s-n">${k + 1}</span>
         <span class="s-t">${t(s)}</span>
@@ -291,6 +386,40 @@ function render(sc, n, inline) {
       <div class="t-axis"></div>
       <div class="t-row">\n${cells}\n      </div>
     </div>`;
+    }
+
+    case 'flow': {
+      const items = need(sc.items, where, 2, 6);
+      const parts = items.map((label, k) => {
+        const chip = `<span class="fl${k === items.length - 1 ? ' end' : ''}">${t(label)}</span>`;
+        return k === 0 ? chip : `<span class="fa"></span>${chip}`;
+      }).join('');
+      return `    <div class="sch sch-flow">${parts}</div>`;
+    }
+
+    case 'columns': {
+      const items = need(sc.items, where, 2, 2);
+      const cols = items.map((c, k) => {
+        const li = need(c.items, `${where} / colonne ${k + 1}`, 1, 5)
+          .map(i => `          <li>${t(i)}</li>`).join('\n');
+        return `      <div class="col${k === 0 ? ' on' : ''}">
+        <div class="col-key"></div>
+        <div class="col-t">${t(c.title)}</div>
+        <ul>\n${li}\n        </ul>
+      </div>`;
+      }).join('\n');
+      return `    <div class="sch sch-columns">\n${cols}\n    </div>`;
+    }
+
+    case 'versus': {
+      const items = need(sc.items, where, 2, 2);
+      const rows = items.map(v => {
+        if (v.kind !== 'no' && v.kind !== 'yes') {
+          throw new Error(`[SCHEMA] ${where} : kind doit valoir "no" ou "yes"`);
+        }
+        return `      <div class="vs ${v.kind}"><span class="vs-m"></span>${t(v.text)}</div>`;
+      }).join('\n');
+      return `    <div class="sch sch-versus">\n${rows}\n    </div>`;
     }
 
     case 'compare': {

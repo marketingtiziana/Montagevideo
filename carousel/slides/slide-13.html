@@ -89,20 +89,43 @@
       width: 8px; height: 8px;
       background: #4F6BFF;
     }
+    /* liste numerotee : le numero en indigo, texte alignes en retrait pendu */
+    .body ol.num-list { list-style: none; counter-reset: nl; }
+    .body ol.num-list li { padding-left: 1.55em; }
+    .body ol.num-list li::before {
+      counter-increment: nl;
+      content: counter(nl);
+      position: absolute; left: 0; top: 0;
+      width: auto; height: auto;
+      background: none;
+      font-weight: 900; font-size: 0.86em;
+      color: #4F6BFF;
+      font-variant-numeric: tabular-nums;
+    }
+    /* ligne de sources : hors du bloc auto-ajuste, taille fixe */
+    .sources {
+      flex: none;
+      padding-top: 26px;
+      font-weight: 400; font-size: 18px; line-height: 1.4;
+      color: #8A93AE;
+    }
   </style>
 </head>
 <body>
 <div class="slide" data-tpl="B" data-n="13">
   <div class="frame">
     <div class="num">13 / 16</div>
-    <h1 class="title">Titre provisoire slide 13</h1>
+    <h1 class="title">Le test de résilience en 5 questions</h1>
     <div class="body" data-base="32" data-min="26">
-      <p>Texte provisoire. Trois leviers restent actionnables immediatement.</p>
-      <ul>
-        <li>Levier provisoire numero un</li>
-        <li>Levier provisoire numero deux</li>
-        <li>Levier provisoire numero trois</li>
-      </ul>
+      <p>Réponds honnêtement :</p>
+      <ol class="num-list">
+        <li>Si tes coûts d'acquisition montent de <b>30%</b> le mois prochain, tu tiens combien de mois ?</li>
+        <li>Quelle part de ton chiffre est récurrente ?</li>
+        <li>Tes clients sont-ils dans une seule zone monétaire ?</li>
+        <li>Ton offre fait-elle gagner de l'argent, ou en coûte-t-elle ?</li>
+        <li>Ta structure dépend-elle d'un régime avec une date de fin ?</li>
+      </ol>
+      <p>Une seule réponse inconfortable, c'est un chantier. Trois, c'est une priorité.</p>
     </div>
   </div>
 </div>

@@ -3,18 +3,30 @@
 16 slides 1080 x 1350 (ratio 4:5), design premium SaaS / fintech, illustrations
 photorealistes generees via Higgsfield (Nano Banana Pro).
 
-## Etat actuel
+## Etat
 
-**Les textes des slides sont PROVISOIRES.** Le brief contenait encore le placeholder
-`[COLLE ICI LE TEXTE DES 16 SLIDES]`. Toute la chaine (images, gabarits, export, preview)
-est operationnelle ; il ne reste qu'a coller les 16 textes valides.
+Les 16 textes valides sont en place, mis en page sans aucune reformulation.
+Les 16 PNG sont dans `output/carousel-moyen-orient/`, prets a publier.
 
-## Coller les textes valides
+Trois arbitrages de mise en page, pris parce que le brand system et le texte
+source se contredisaient :
+
+- Les marqueurs croix et coche de la slide 8 etaient des emoji, interdits par le
+  brand system. Les mots sont intacts, seuls les marqueurs sont devenus un
+  traitement typographique (schema `versus`).
+- Les URL des sources ne sont pas imprimees : elles ne sont pas cliquables sur
+  une image. Seuls les noms de sources apparaissent, en ligne discrete en bas
+  de slide, via le champ `sources`.
+- Les slides 2, 3 et 5 sont denses. Plutot que de rogner le texte, `build.js`
+  reduit le bandeau illustre (520px vers 440 a 500px selon la slide) pour rendre
+  de la place. Aucun texte n'est tronque.
+
+## Modifier les textes
+
 
 1. Ouvrir `content/slides.js`
-2. Remplacer chaque `title` / `subtitle` / `body` par le texte valide (aucune reformulation)
-3. Passer `PROVISOIRE` a `false`
-4. `npm run all`
+2. Modifier le `title`, `subtitle` ou `body` concerne
+3. `npm run all`
 
 ### Marquage typographique dans le texte
 
@@ -46,6 +58,9 @@ Le code vit dans `schemas.js`.
 | `steps` | un enchainement, 2 a 4 etapes numerotees | `items: ["etape", ...]` |
 | `timeline` | des jalons dates, 2 a 4 | `items: [{ date, label, on }]` |
 | `compare` | exactement 2 colonnes, avant contre apres | `items: [{ title, value, detail }]` |
+| `flow` | une chaine de causes, 2 a 6 maillons, le dernier porte l'aboutissement | `items: ["maillon", ...]` |
+| `columns` | 2 colonnes de listes, ce qui tient contre ce qui tombe | `items: [{ title, items: [...] }]` |
+| `versus` | exactement 2 lignes, une a eviter et une a suivre. Remplace les emoji croix et coche | `items: [{ kind: "no"\|"yes", text }]` |
 
 Details utiles :
 
@@ -60,6 +75,20 @@ Details utiles :
 - `pct` et `threshold` sont des pourcentages de 0 a 100. `threshold` dessine un
   repere vertical sur la jauge.
 - Le marquage `**gras**` et `*600*` fonctionne aussi a l'interieur des schemas.
+
+### Schema retenu par slide
+
+| Slide | Schema | Pourquoi |
+|---|---|---|
+| 3 | `flow` | le texte enonce deja une chaine : carburant vers transport vers alimentation vers factures vers budget |
+| 4 | `flow` | meme chose pour le mecanisme publicitaire |
+| 7 | `columns` | le texte oppose explicitement "ce qui resiste" et "ce qui souffre" |
+| 8 | `versus` | remplace les marqueurs croix et coche, interdits par le brand system |
+| 9, 13, 14 | `ol` | listes numerotees deja presentes dans le texte |
+| 6, 8, 12 | `ul` | listes a puces deja presentes dans le texte |
+
+Les autres slides sont en texte seul : elles sont deja denses, y ajouter un
+schema aurait force une reduction de corps sans gain de lisibilite.
 
 ### Palette des schemas
 
