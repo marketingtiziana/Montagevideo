@@ -1,0 +1,157 @@
+/* ============================================================
+   FYNOVATES — Carrousel Instagram 1080x1350
+   Charte : noir profond / bleu sobre. Aucune autre couleur.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../fonts/SpaceGrotesk.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+}
+
+:root {
+  --bg:      #0A0A0F;   /* noir profond */
+  --bg2:     #0D1526;   /* bleu nuit (dégradé subtil) */
+  --blue:    #2563EB;   /* bleu principal */
+  --blue-lt: #60A5FA;   /* bleu clair / secondaire */
+  --fg:      #F5F5F7;   /* texte principal */
+  --muted:   #9CA3AF;   /* texte secondaire */
+  --hair:    #232A38;   /* filet gris foncé (bordures) */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1080px;
+  height: 1350px;
+  overflow: hidden;
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.slide {
+  position: relative;
+  width: 1080px;
+  height: 1350px;
+  padding: 90px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(760px 520px at 88% 6%, rgba(37, 99, 235, 0.10), transparent 68%),
+    linear-gradient(168deg, #0A0A0F 0%, #0A0A0F 44%, #0D1526 100%);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------- chrome de marque ---------- */
+.top { display: flex; justify-content: flex-end; height: 28px; flex: none; }
+.idx {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500; font-size: 20px;
+  letter-spacing: 0.22em; color: var(--muted);
+}
+.foot {
+  display: flex; justify-content: space-between; align-items: baseline;
+  height: 28px; flex: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500; font-size: 20px;
+  letter-spacing: 0.22em; color: var(--muted);
+}
+
+.main { flex: 1; display: flex; flex-direction: column; min-height: 0; padding-bottom: 56px; }
+.main--center { justify-content: center; }
+
+/* ---------- typographie ---------- */
+.title {
+  font-weight: 800;
+  font-size: 58px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  word-spacing: 0.10em;
+  color: var(--fg);
+}
+.title--hero {
+  font-size: 88px;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  word-spacing: 0.12em;
+}
+.body {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 820px;
+}
+.body strong { font-weight: 600; color: var(--fg); }
+.body .blue { color: var(--blue-lt); font-weight: 600; }
+
+.lead {
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* filet bleu + phrase de chute */
+.kicker {
+  flex: none;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.4;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  word-spacing: 0.06em;
+}
+.kicker::before {
+  content: '';
+  display: block;
+  width: 56px; height: 3px;
+  background: var(--blue);
+  margin-bottom: 26px;
+}
+
+/* bloc schéma : centré verticalement entre titre et chute */
+.diagram { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
+.diagram svg { display: block; width: 900px; height: auto; }
+
+/* soulignement bleu */
+.u {
+  display: inline-block;
+  border-bottom: 7px solid var(--blue);
+  padding-bottom: 10px;
+  line-height: 1;
+}
+
+/* chiffre géant */
+.figure {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+/* eyebrow / label tracké */
+.eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ---------- classes utilitaires SVG ---------- */
+.svg-val   { font-family: 'Space Grotesk', sans-serif; font-weight: 600; fill: #F5F5F7; }
+.svg-lab   { font-family: 'Inter', sans-serif; font-weight: 400; fill: #9CA3AF; }
+.svg-name  { font-family: 'Space Grotesk', sans-serif; font-weight: 600; fill: #F5F5F7; letter-spacing: 0.08em; }
+.svg-strong{ font-family: 'Inter', sans-serif; font-weight: 600; fill: #F5F5F7; }

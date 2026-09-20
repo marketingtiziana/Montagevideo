@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fynovates — slide 02</title>
+<link rel="stylesheet" href="../src/style.css">
+</head>
+<body>
+<div class="slide">
+  <div class="top"><span class="idx">02 / 09</span></div>
+
+      <div class="main">
+        <h2 class="title">Le trajet d'un salaire<br>de 20 000€</h2>
+        <div class="diagram">
+<svg viewBox="0 0 900 650" role="img" aria-label="Entonnoir du salaire brut au net reel">
+  
+  <defs>
+    <marker id="ahBlue" viewBox="0 0 12 12" refX="10" refY="6"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#2563EB"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ahGrey" viewBox="0 0 12 12" refX="10" refY="6"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#9CA3AF"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <!-- parois de l'entonnoir -->
+  <polygon points="70,140 830,140 730,260 170,260" fill="rgba(96,165,250,0.05)"/>
+  <polygon points="170,400 730,400 660,520 240,520" fill="rgba(96,165,250,0.05)"/>
+
+  <!-- bloc 1 : brut charge -->
+  <rect x="70" y="0" width="760" height="140" rx="8"
+        fill="rgba(37,99,235,0.08)" stroke="#2563EB" stroke-width="2.5"/>
+  <text x="450" y="70"  class="svg-val" font-size="58" text-anchor="middle">20 000€</text>
+  <text x="450" y="108" class="svg-lab" font-size="25" text-anchor="middle">brut chargé</text>
+
+  <!-- fleche 1 -->
+  <line x1="450" y1="152" x2="450" y2="248" stroke="#60A5FA" stroke-width="2.5"
+        stroke-linecap="round" marker-end="url(#ahBlue)"/>
+  <text x="502" y="208" class="svg-lab" font-size="24">− charges sociales ≈ moitié</text>
+
+  <!-- bloc 2 : net -->
+  <rect x="170" y="260" width="560" height="140" rx="8"
+        fill="rgba(96,165,250,0.06)" stroke="#60A5FA" stroke-width="2"/>
+  <text x="450" y="330" class="svg-val" font-size="52" text-anchor="middle">≈ 10 000€</text>
+  <text x="450" y="368" class="svg-lab" font-size="25" text-anchor="middle">net</text>
+
+  <!-- fleche 2 -->
+  <line x1="450" y1="412" x2="450" y2="508" stroke="#60A5FA" stroke-width="2.5"
+        stroke-linecap="round" marker-end="url(#ahBlue)"/>
+  <text x="502" y="452" class="svg-lab" font-size="24">− impôt sur le revenu</text>
+  <text x="502" y="483" class="svg-lab" font-size="24">(tranches hautes)</text>
+
+  <!-- bloc 3 : reste reel -->
+  <rect x="240" y="520" width="420" height="120" rx="8"
+        fill="rgba(37,99,235,0.18)" stroke="#2563EB" stroke-width="2.5"/>
+  <text x="450" y="589" class="svg-strong" font-size="29" text-anchor="middle">ce qui te reste vraiment</text>
+</svg></div>
+        <p class="kicker">Le salaire est le revenu<br>le plus taxé qui existe.</p>
+      </div>
+  <div class="foot">
+    <span>FYNOVATES</span>
+    
+    <span>@madame.caci</span>
+  </div>
+</div>
+</body>
+</html>
