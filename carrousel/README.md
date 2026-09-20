@@ -39,8 +39,9 @@ Composants dans `style.css` : `.num` (numéro outline), `.badge` (pill catégori
 `.flow` (flux de cards + flèches), `.duo` (deux cards), `.ticks` (liste à puces carrées).
 
 ### Photo slide 1
-Déposer la photo détourée dans `assets/tiziana-cutout.png`. Tant que le fichier est absent,
-un placeholder en pointillés matérialise l'emplacement (bas gauche, 742px de haut).
+`assets/tiziana-cutout.png` — photo détourée (alpha), placée en bas gauche, 742px de haut
+(55% de la slide), le parapluie débordant sur le bord gauche. Si le fichier est retiré,
+un placeholder en pointillés matérialise l'emplacement.
 
 ## Contrôles automatiques
 `render.js` vérifie pour chaque slide : dimensions PNG exactes (1080×1350), aucun élément

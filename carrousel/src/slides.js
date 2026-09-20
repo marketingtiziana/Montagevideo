@@ -84,10 +84,10 @@ module.exports = { DECOR, slides: [
       ${badge('LES GRANDES FORTUNES')}
       <h1 class="title">Leur salaire<br>officiel.</h1>
       <div class="zone">
-        <div class="stat stat--blue" style="padding:64px">
-          <div class="stat-fig" style="font-size:180px">1€</div>
-          <div class="stat-sub" style="font-size:34px;margin-top:24px">
-            le salaire symbolique de certains<br>patrons de la tech.
+        <div class="stat stat--blue" style="padding:64px;display:flex;align-items:center;gap:52px">
+          <div class="stat-fig" style="font-size:180px;flex:none">1€</div>
+          <div class="stat-sub" style="font-size:32px;margin-top:0">
+            le salaire symbolique de certains patrons de la tech.
           </div>
         </div>
       </div>
