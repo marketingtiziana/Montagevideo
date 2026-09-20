@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Fynovates | Slide 05</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: block;
+      src: url('../assets/fonts/Inter-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: block;
+      src: url('../assets/fonts/Inter-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+        U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 1080px; height: 1350px;
+      overflow: hidden;
+      background: #0F1535;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+      font-variant-ligatures: none;
+    }
+    .slide {
+      position: relative;
+      width: 1080px; height: 1350px;
+      overflow: hidden;
+      background: #0F1535;
+    }
+    b  { font-weight: 900; color: #FFFFFF; }
+    em { font-weight: 600; color: #FFFFFF; font-style: normal; }
+    .logo {
+      position: absolute; right: 90px; bottom: 56px;
+      height: 40px; display: flex; align-items: center;
+      font-weight: 900; font-size: 19px; letter-spacing: 0.20em;
+      color: #FFFFFF; opacity: 0.6;
+      z-index: 5;
+    }
+    .frame {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 90px;
+      display: flex; flex-direction: column;
+    }
+    .num {
+      font-weight: 900; font-size: 22px; letter-spacing: 0.14em;
+      color: #4F6BFF;
+      flex: none;
+    }
+    .title {
+      margin-top: 44px;
+      font-weight: 900; font-size: 56px; line-height: 1.08;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+      flex: none;
+    }
+    .body {
+      margin-top: 44px;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      font-weight: 400; font-size: 28px; line-height: 1.5;
+      letter-spacing: -0.005em;
+      color: #A8B0C8;
+    }
+    .body > * + * { margin-top: 1em; }
+    .body ul { list-style: none; }
+    .body li {
+      position: relative;
+      padding-left: 1.05em;
+    }
+    .body li + li { margin-top: 0.62em; }
+    .body li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.62em;
+      width: 8px; height: 8px;
+      background: #4F6BFF;
+    }
+    .banner {
+      position: absolute; top: 44px; left: 44px; right: 44px;
+      height: 520px;
+      border-radius: 24px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .banner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(15, 21, 53, 0.20);
+    }
+    .frame { padding-top: 608px; }
+    .title { font-size: 52px; margin-top: 36px; }
+    .body  { margin-top: 36px; }
+  </style>
+</head>
+<body>
+<div class="slide" data-tpl="C" data-n="5">
+  <div class="banner"><img src="../assets/img/img-05-fret.jpg" alt=""></div>
+  <div class="frame">
+  <div class="num">05 / 16</div>
+    <h1 class="title">Titre provisoire slide 5</h1>
+    <div class="body" data-base="28" data-min="26">
+      <p>Texte provisoire. Le cout d un conteneur quarante pieds atteint <b>4 300$</b> sur les routes Asie vers Europe.</p>
+      <p>Les compagnies repercutent une surcharge moyenne de <b>5%</b> sur l ensemble des contrats.</p>
+    </div>
+  </div>
+  <div class="logo" aria-label="Fynovates">FYNOVATES</div>
+</div>
+</body>
+</html>

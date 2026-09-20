@@ -3,14 +3,17 @@
 *.wav
 *.log
 ffmpeg2pass-*
-models/
-fonts/
-sfx/
-assets/
-frames/
+/models/
+/fonts/
+/sfx/
+/assets/
+/frames/
 *.ass
 words.json
 final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Dependances npm
+node_modules/

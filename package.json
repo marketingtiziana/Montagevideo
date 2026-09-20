@@ -1,0 +1,15 @@
+{
+  "name": "fynovates-carousel",
+  "private": true,
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "gen": "node carousel/gen-slides.js",
+    "build": "node carousel/build.js",
+    "all": "node carousel/gen-slides.js && node carousel/build.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0",
+    "sharp": "^0.33.5"
+  }
+}
