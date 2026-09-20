@@ -14,3 +14,8 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+face_track.json
+words_*.json
+_voice_raw.wav
+_beds.wav
+_test.mp4
