@@ -48,3 +48,36 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
   sous-titres, surtout pour du contenu fiscal.
 - Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
   réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+
+---
+
+# `reel/` — chaîne de montage pilotée par un fichier de projet
+
+Version plus récente du pipeline, utilisée pour `final_tiktok.mp4`. Différence principale :
+les punch-ins **suivent le visage** (détection YuNet + trajectoire lissée), donc un zoom ne
+décadre jamais le sujet, même sur un selfie filmé en marchant.
+
+```bash
+bash reel/build.sh          # source.mp4 -> final_tiktok.mp4
+```
+
+Tout le montage se règle dans **`reel/config.py`** : segments conservés, niveaux de zoom,
+étalonnage, texte des sous-titres, cartons, arrêt sur image, bruitages, musique.
+Modifier ce fichier et relancer `build.sh` suffit.
+
+| Fichier | Rôle |
+|---|---|
+| `config.py` | **Fichier de projet** — tous les choix de montage |
+| `timeline.py` | Correspondance source→final, quantifiée à l'image (image et son partagent le même découpage) |
+| `track_face.py` | Détection + lissage de la position du visage → `face_track.json` |
+| `build_video.py` | Coupes + caméra virtuelle (recadrage suivant le visage) + étalonnage → `v_cam.mp4` |
+| `gen_captions.py` | Sous-titres ASS (blanc compact, un seul accent ambre, animation sobre) → `subs.ass` |
+| `gen_graphics.py` | Cartons texte en PNG transparent (interlettrage maîtrisé) → `assets/` |
+| `build_audio.py` | Voix nettoyée + bruitages + nappe, normalisé −14 LUFS → `v_audio.wav` |
+| `compose.py` | Assemblage final → `final_tiktok.mp4` |
+
+### Contrôles automatiques intégrés
+- chaque coupe est vérifiée contre l'énergie audio réelle (aucune coupe au milieu d'un mot) ;
+- `build_video.py` vérifie que le nombre d'images produit correspond à la timeline ;
+- après rendu, une passe de détection de visage confirme que la tête n'est jamais coupée
+  et que le visage ne descend jamais dans la zone des sous-titres.
