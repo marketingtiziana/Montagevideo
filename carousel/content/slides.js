@@ -21,6 +21,15 @@
  * BLOCS `body`
  *   { p: "paragraphe" }
  *   { ul: ["item", "item"] }   -> puces carrees indigo 8x8
+ *   { schema: { type: ... } }  -> schema de donnees, gabarit B uniquement
+ *
+ * SCHEMAS DISPONIBLES (voir schemas.js et README.md)
+ *   kpi       1 a 3 chiffres cles. 1 entree = chiffre heros, 2 ou 3 = tuiles
+ *   bars      1 a 5 barres horizontales, comparaison de grandeurs
+ *   meter     une jauge face a un seuil
+ *   steps     2 a 4 etapes enchainees
+ *   timeline  2 a 4 jalons dates
+ *   compare   exactement 2 colonnes, avant contre apres
  */
 
 const PROVISOIRE = true; // passer a false une fois les vrais textes colles
@@ -60,12 +69,12 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 4',
       body: [
-        { p: 'Texte provisoire de mise en page pour verifier le rythme typographique du gabarit B.' },
-        { ul: [
-          'Premier point provisoire avec un chiffre cle a **9%**',
-          'Deuxieme point provisoire mentionnant le *Small Business Relief*',
-          'Troisieme point provisoire sur le seuil de **375 000 AED**'
-        ]}
+        { p: 'Texte provisoire. Demonstration du schema kpi en trois tuiles.' },
+        { schema: { type: 'kpi', items: [
+          { value: '9%', label: 'Taux provisoire au dela du seuil' },
+          { value: '0%', label: 'Taux provisoire en dessous' },
+          { value: '27%', label: 'Variation provisoire sur le trimestre' }
+        ]}}
       ]
     },
     {
@@ -83,8 +92,12 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 6',
       body: [
-        { p: 'Texte provisoire de mise en page. Ce paragraphe sert uniquement a calibrer la hauteur disponible du gabarit B.' },
-        { p: 'Il sera remplace par le texte valide sans aucune reformulation.' }
+        { p: 'Texte provisoire. Demonstration du schema bars, serie unique.' },
+        { schema: { type: 'bars', items: [
+          { label: 'Libelle provisoire un', value: 4300, display: '4 300$' },
+          { label: 'Libelle provisoire deux', value: 2650, display: '2 650$' },
+          { label: 'Libelle provisoire trois', value: 1400, display: '1 400$' }
+        ]}}
       ]
     },
     {
@@ -92,12 +105,12 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 7',
       body: [
-        { p: 'Texte provisoire. La regle de *de minimis* s applique sous conditions strictes.' },
-        { ul: [
-          'Condition provisoire numero un',
-          'Condition provisoire numero deux',
-          'Condition provisoire numero trois'
-        ]}
+        { p: 'Texte provisoire. La regle de *de minimis* s applique sous conditions.' },
+        { schema: { type: 'steps', items: [
+          'Etape provisoire un, avec un terme en **gras**',
+          'Etape provisoire deux, enchainement du raisonnement',
+          'Etape provisoire trois, conclusion de la sequence'
+        ]}}
       ]
     },
     {
@@ -105,8 +118,15 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 8',
       body: [
-        { p: 'Texte provisoire de mise en page pour la slide huit du carousel.' },
-        { p: 'Le statut *QFZP* reste conditionne au respect permanent des criteres de substance.' }
+        { p: 'Texte provisoire. Demonstration du schema meter face a un seuil.' },
+        { schema: { type: 'meter',
+          caption: 'Chiffre d affaires provisoire',
+          value: '375 000 AED',
+          pct: 62,
+          threshold: 80,
+          min: '0 AED',
+          max: 'Seuil *Small Business Relief*'
+        }}
       ]
     },
     {
@@ -124,8 +144,11 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 10',
       body: [
-        { p: 'Texte provisoire de mise en page pour la slide dix.' },
-        { p: 'Le recours a un *CPA* devient indispensable des le premier exercice.' }
+        { p: 'Texte provisoire. Demonstration du schema compare en deux colonnes.' },
+        { schema: { type: 'compare', items: [
+          { title: 'Situation provisoire avant', value: '27%', detail: 'Detail provisoire de la colonne de gauche' },
+          { title: 'Situation provisoire apres', value: '9%', detail: 'Detail provisoire de la colonne de droite' }
+        ]}}
       ]
     },
     {
@@ -133,11 +156,12 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 11',
       body: [
-        { p: 'Texte provisoire. La date butoir est fixee au **31 decembre 2026**.' },
-        { ul: [
-          'Echeance provisoire numero un',
-          'Echeance provisoire numero deux'
-        ]}
+        { p: 'Texte provisoire. Demonstration du schema timeline.' },
+        { schema: { type: 'timeline', items: [
+          { date: '2024', label: 'Jalon provisoire un' },
+          { date: '2025', label: 'Jalon provisoire deux' },
+          { date: '31 dec. 2026', label: 'Jalon provisoire final', on: true }
+        ]}}
       ]
     },
     {
@@ -145,8 +169,10 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 12',
       body: [
-        { p: 'Texte provisoire de mise en page pour la slide douze du carousel.' },
-        { p: 'Ce bloc verifie le comportement de l auto ajustement typographique.' }
+        { p: 'Texte provisoire. Demonstration du chiffre heros, une seule valeur.' },
+        { schema: { type: 'kpi', items: [
+          { value: '2,12 EUR', label: 'Libelle provisoire du chiffre heros, le litre a la pompe' }
+        ]}}
       ]
     },
     {
@@ -167,8 +193,12 @@ module.exports = {
       tpl: 'B',
       title: 'Titre provisoire slide 14',
       body: [
-        { p: 'Texte provisoire de mise en page pour la slide quatorze.' },
-        { p: 'Le texte valide viendra remplacer ce paragraphe a l identique.' }
+        { p: 'Texte provisoire. Demonstration de la forme emphase : une barre porte l information, les autres font contexte.' },
+        { schema: { type: 'bars', items: [
+          { label: 'Contexte provisoire un', value: 1200, display: '1 200', emphasis: false },
+          { label: 'Point cle provisoire', value: 4300, display: '4 300' },
+          { label: 'Contexte provisoire deux', value: 900, display: '900', emphasis: false }
+        ]}}
       ]
     },
     {

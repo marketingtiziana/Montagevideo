@@ -1,0 +1,331 @@
+/**
+ * schemas.js
+ * Schemas de donnees pour les slides sans illustration (gabarit B).
+ * HTML + CSS purs, aucune librairie, aucun JS a l'execution.
+ *
+ * PALETTE (validee avec le validateur dataviz, surface #F4F6FC)
+ *   rampe ordinale indigo : #93A6FF -> #4F6BFF -> #2F46C9
+ *     monotone, ecarts de clarte suffisants, bout clair a 2,13:1, teinte unique
+ *   paire deux nuances    : #93A6FF + #4F6BFF
+ *     dans la bande de clarte, au-dessus du plancher de chroma, ecart CVD 16,4
+ *   #4F6BFF + #2F46C9 ne doivent JAMAIS coder deux series distinctes :
+ *     ecart en vision normale de 12,8, sous le plancher de 15.
+ *
+ * REGLES APPLIQUEES
+ *   - le rendu final est un PNG : aucune infobulle possible, donc chaque valeur
+ *     porte une etiquette directe, ce qui leve l'obligation de contraste du
+ *     bout clair de la rampe
+ *   - le texte ne porte jamais la couleur de donnee : etiquettes et valeurs en
+ *     encre navy ou gris secondaire, l'identite vient de la marque coloree
+ *   - barres de 20px d'epaisseur maximum, bout arrondi 4px, pied carre
+ *   - une seule serie : pas de boite de legende, le titre de slide la nomme
+ *   - chiffres proportionnels pour les grandes valeurs isolees, chiffres
+ *     tabulaires uniquement dans les colonnes alignees
+ */
+
+const VIZ = {
+  light:  '#93A6FF',   // rampe, pas clair
+  accent: '#4F6BFF',   // rampe, pas moyen
+  deep:   '#2F46C9',   // rampe, pas fonce
+  dim:    '#C3CAE0',   // mise en retrait (forme emphase, hors rampe categorielle)
+  track:  '#DDE3F5',   // fond de jauge
+  rule:   '#E2E6F2'    // filets et axes, un cran au-dessus de la surface
+};
+
+/** Part de la piste occupee par la barre la plus longue. Le reste est la
+    reserve d'etiquette, pour que la valeur tienne au bout de chaque barre. */
+const BAR_MAX = 78;
+
+/** Types de schema acceptes dans un bloc { schema: { type: ... } }. */
+const TYPES = ['kpi', 'bars', 'meter', 'steps', 'timeline', 'compare'];
+
+/* ------------------------------------------------------------------ */
+/* CSS, injecte uniquement dans les slides qui portent un schema       */
+/* ------------------------------------------------------------------ */
+function css(ink, body) {
+  return `    /* --- schemas ------------------------------------------------ */
+    .sch { margin-top: 1.25em; }
+
+    /* KPI : une valeur seule devient un chiffre heros, deux ou trois
+       deviennent une rangee de tuiles */
+    .sch-kpi { display: flex; gap: 56px; }
+    .sch-kpi .kpi { flex: 1 1 0; }
+    .sch-kpi .kpi-key { width: 40px; height: 4px; background: ${VIZ.accent}; }
+    .sch-kpi .kpi-v {
+      margin-top: 18px;
+      font-weight: 900; line-height: 1;
+      letter-spacing: -0.035em;
+      color: ${ink};
+    }
+    .sch-kpi .kpi-l {
+      margin-top: 14px;
+      font-weight: 400; line-height: 1.35;
+      color: ${body};
+    }
+    .sch-kpi[data-count="1"] .kpi-v { font-size: 118px; }
+    .sch-kpi[data-count="1"] .kpi-l { font-size: 28px; }
+    .sch-kpi[data-count="2"] .kpi-v { font-size: 86px; }
+    .sch-kpi[data-count="2"] .kpi-l { font-size: 24px; }
+    .sch-kpi[data-count="3"] { gap: 40px; }
+    .sch-kpi[data-count="3"] .kpi-v { font-size: 64px; }
+    .sch-kpi[data-count="3"] .kpi-l { font-size: 21px; }
+
+    /* Barres horizontales : magnitude, serie unique */
+    .sch-bars .row + .row { margin-top: 30px; }
+    .sch-bars .row-l {
+      font-weight: 600; font-size: 24px; line-height: 1.3;
+      color: ${ink};
+    }
+    /* La valeur suit immediatement le bout de la barre. La barre la plus longue
+       est plafonnee a BAR_MAX% de la piste, ce qui garantit la place de
+       l'etiquette sans jamais la detacher de sa marque ni la rogner. */
+    .sch-bars .row-b {
+      margin-top: 12px;
+      display: flex; align-items: center;
+    }
+    .sch-bars .bar {
+      height: 20px;
+      border-radius: 0 4px 4px 0;
+      background: ${VIZ.accent};
+      flex: none;
+    }
+    .sch-bars .bar.dim { background: ${VIZ.dim}; }
+    .sch-bars .row-v {
+      margin-left: 18px;
+      font-weight: 900; font-size: 26px;
+      color: ${ink};
+      white-space: nowrap;
+    }
+    .sch-bars .row.is-dim .row-l,
+    .sch-bars .row.is-dim .row-v { color: ${body}; }
+
+    /* Jauge : un rapport face a un seuil */
+    .sch-meter .m-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 24px;
+    }
+    .sch-meter .m-cap { font-weight: 600; font-size: 24px; color: ${ink}; }
+    .sch-meter .m-val { font-weight: 900; font-size: 44px; color: ${ink}; letter-spacing: -0.02em; }
+    .sch-meter .m-track {
+      position: relative;
+      margin-top: 16px;
+      height: 20px;
+      border-radius: 4px;
+      background: ${VIZ.track};
+      overflow: hidden;
+    }
+    .sch-meter .m-fill {
+      height: 100%;
+      border-radius: 0 4px 4px 0;
+      background: ${VIZ.accent};
+    }
+    .sch-meter .m-tick {
+      position: absolute; top: -6px; bottom: -6px;
+      width: 2px; background: ${ink};
+    }
+    .sch-meter .m-foot {
+      margin-top: 14px;
+      display: flex; justify-content: space-between; gap: 24px;
+      font-weight: 400; font-size: 21px; color: ${body};
+    }
+
+    /* Etapes : un enchainement */
+    .sch-steps { list-style: none; }
+    .sch-steps li {
+      position: relative;
+      padding-left: 74px;
+      padding-bottom: 30px;
+    }
+    .sch-steps li:last-child { padding-bottom: 0; }
+    .sch-steps li::before {
+      content: '';
+      position: absolute; left: 23px; top: 48px; bottom: 0;
+      width: 2px; background: ${VIZ.rule};
+    }
+    .sch-steps li:last-child::before { display: none; }
+    .sch-steps .s-n {
+      position: absolute; left: 0; top: 0;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: ${VIZ.accent};
+      color: #FFFFFF;
+      font-weight: 900; font-size: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sch-steps .s-t {
+      display: block;
+      padding-top: 8px;
+      font-weight: 400; font-size: 26px; line-height: 1.4;
+      color: ${body};
+    }
+    .sch-steps .s-t b { font-weight: 900; color: ${ink}; }
+
+    /* Frise : des jalons dates */
+    .sch-timeline { position: relative; padding-top: 4px; }
+    /* l'axe court du premier au dernier jalon, jamais au-dela :
+       les jalons sont ancres a gauche de cellules de largeur 100/n */
+    .sch-timeline .t-axis {
+      position: absolute; left: 7px; top: 63px;
+      width: calc((100% - 14px) * var(--span) / var(--n));
+      height: 1px; background: ${VIZ.rule};
+    }
+    .sch-timeline .t-row { position: relative; display: flex; }
+    .sch-timeline .t-item { flex: 1 1 0; padding-right: 28px; }
+    .sch-timeline .t-d {
+      font-weight: 900; font-size: 26px; line-height: 1.2;
+      color: ${ink}; letter-spacing: -0.015em;
+      min-height: 62px;
+    }
+    .sch-timeline .t-dot {
+      position: relative; z-index: 2;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: ${VIZ.dim};
+      box-shadow: 0 0 0 4px #F4F6FC;
+    }
+    .sch-timeline .t-item.on .t-dot { background: ${VIZ.accent}; }
+    .sch-timeline .t-l {
+      margin-top: 20px;
+      font-weight: 400; font-size: 21px; line-height: 1.4;
+      color: ${body};
+    }
+
+    /* Comparatif : deux colonnes, paire deux nuances */
+    .sch-compare { display: flex; gap: 28px; }
+    .sch-compare .cmp {
+      flex: 1 1 0;
+      padding: 28px 28px 30px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 1px solid ${VIZ.rule};
+    }
+    .sch-compare .c-key { width: 32px; height: 4px; background: ${VIZ.light}; }
+    .sch-compare .cmp.on .c-key { background: ${VIZ.accent}; }
+    .sch-compare .c-t {
+      margin-top: 16px;
+      font-weight: 600; font-size: 22px; color: ${body};
+    }
+    .sch-compare .c-v {
+      margin-top: 10px;
+      font-weight: 900; font-size: 56px; line-height: 1;
+      letter-spacing: -0.03em; color: ${ink};
+      font-variant-numeric: tabular-nums;
+    }
+    .sch-compare .c-d {
+      margin-top: 14px;
+      font-weight: 400; font-size: 21px; line-height: 1.4; color: ${body};
+    }`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Rendu                                                               */
+/* ------------------------------------------------------------------ */
+function render(sc, n, inline) {
+  const where = `slide ${n} / schema ${sc.type}`;
+  if (!TYPES.includes(sc.type)) {
+    throw new Error(`[SCHEMA] ${where} : type inconnu. Attendu : ${TYPES.join(', ')}`);
+  }
+  const t = s => inline(s, where);
+
+  switch (sc.type) {
+    case 'kpi': {
+      const items = need(sc.items, where, 1, 3);
+      const cells = items.map(i => `      <div class="kpi">
+        <div class="kpi-key"></div>
+        <div class="kpi-v">${t(i.value)}</div>
+        <div class="kpi-l">${t(i.label)}</div>
+      </div>`).join('\n');
+      return `    <div class="sch sch-kpi" data-count="${items.length}">\n${cells}\n    </div>`;
+    }
+
+    case 'bars': {
+      const items = need(sc.items, where, 1, 5);
+      const max = Math.max(...items.map(i => numOf(i.value, where)));
+      const rows = items.map(i => {
+        const w = Math.max(6, Math.round(numOf(i.value, where) / max * BAR_MAX));
+        const dim = i.emphasis === false;
+        return `      <div class="row${dim ? ' is-dim' : ''}">
+        <div class="row-l">${t(i.label)}</div>
+        <div class="row-b">
+          <div class="bar${dim ? ' dim' : ''}" style="width: ${w}%"></div>
+          <div class="row-v">${t(i.display)}</div>
+        </div>
+      </div>`;
+      }).join('\n');
+      return `    <div class="sch sch-bars">\n${rows}\n    </div>`;
+    }
+
+    case 'meter': {
+      const pct = clampPct(sc.pct, where);
+      const tick = sc.threshold == null
+        ? ''
+        : `\n        <div class="m-tick" style="left: ${clampPct(sc.threshold, where)}%"></div>`;
+      return `    <div class="sch sch-meter">
+      <div class="m-head">
+        <span class="m-cap">${t(sc.caption)}</span>
+        <span class="m-val">${t(sc.value)}</span>
+      </div>
+      <div class="m-track">
+        <div class="m-fill" style="width: ${pct}%"></div>${tick}
+      </div>
+      <div class="m-foot"><span>${t(sc.min)}</span><span>${t(sc.max)}</span></div>
+    </div>`;
+    }
+
+    case 'steps': {
+      const items = need(sc.items, where, 2, 4);
+      const li = items.map((s, k) => `      <li>
+        <span class="s-n">${k + 1}</span>
+        <span class="s-t">${t(s)}</span>
+      </li>`).join('\n');
+      return `    <ol class="sch sch-steps">\n${li}\n    </ol>`;
+    }
+
+    case 'timeline': {
+      const items = need(sc.items, where, 2, 4);
+      const cells = items.map(i => `        <div class="t-item${i.on ? ' on' : ''}">
+          <div class="t-d">${t(i.date)}</div>
+          <div class="t-dot"></div>
+          <div class="t-l">${t(i.label)}</div>
+        </div>`).join('\n');
+      return `    <div class="sch sch-timeline" style="--n: ${items.length}; --span: ${items.length - 1}">
+      <div class="t-axis"></div>
+      <div class="t-row">\n${cells}\n      </div>
+    </div>`;
+    }
+
+    case 'compare': {
+      const items = need(sc.items, where, 2, 2);
+      const cols = items.map((c, k) => `      <div class="cmp${k === 1 ? ' on' : ''}">
+        <div class="c-key"></div>
+        <div class="c-t">${t(c.title)}</div>
+        <div class="c-v">${t(c.value)}</div>
+        <div class="c-d">${t(c.detail)}</div>
+      </div>`).join('\n');
+      return `    <div class="sch sch-compare">\n${cols}\n    </div>`;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+function need(items, where, min, max) {
+  if (!Array.isArray(items) || items.length < min || items.length > max) {
+    throw new Error(`[SCHEMA] ${where} : items doit contenir de ${min} a ${max} entrees`);
+  }
+  return items;
+}
+function numOf(v, where) {
+  const n = Number(v);
+  if (!Number.isFinite(n) || n <= 0) {
+    throw new Error(`[SCHEMA] ${where} : value doit etre un nombre positif, recu ${JSON.stringify(v)}`);
+  }
+  return n;
+}
+function clampPct(v, where) {
+  const n = Number(v);
+  if (!Number.isFinite(n) || n < 0 || n > 100) {
+    throw new Error(`[SCHEMA] ${where} : pourcentage attendu entre 0 et 100, recu ${JSON.stringify(v)}`);
+  }
+  return n;
+}
+
+module.exports = { VIZ, TYPES, css, render };

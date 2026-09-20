@@ -29,7 +29,57 @@ est operationnelle ; il ne reste qu'a coller les 16 textes valides.
 ```js
 { p: "un paragraphe" }
 { ul: ["premier point", "deuxieme point"] }   // puces carrees indigo 8x8, jamais de tiret
+{ schema: { type: "kpi", ... } }              // schema de donnees, gabarit B uniquement
 ```
+
+## Schemas de donnees
+
+Les slides sans illustration peuvent porter un schema a la place, ou en plus, du
+texte. Tout est en HTML et CSS purs, aucune librairie, aucun JS a l'execution.
+Le code vit dans `schemas.js`.
+
+| Type | Quand l'utiliser | Contenu attendu |
+|---|---|---|
+| `kpi` | 1 a 3 chiffres cles. Une seule entree devient un chiffre heros a 118px, deux ou trois deviennent des tuiles | `items: [{ value, label }]` |
+| `bars` | comparer des grandeurs, 1 a 5 barres, serie unique | `items: [{ label, value, display, emphasis }]` |
+| `meter` | un rapport face a un seuil | `caption, value, pct, threshold, min, max` |
+| `steps` | un enchainement, 2 a 4 etapes numerotees | `items: ["etape", ...]` |
+| `timeline` | des jalons dates, 2 a 4 | `items: [{ date, label, on }]` |
+| `compare` | exactement 2 colonnes, avant contre apres | `items: [{ title, value, detail }]` |
+
+Details utiles :
+
+- `value` dans `bars` est le **nombre** qui dessine la barre, `display` est le texte
+  affiche au bout. Les deux sont separes pour que "4 300$" reste lisible tout en
+  produisant une longueur juste.
+- `emphasis: false` met une barre en retrait : elle devient grise et sert de
+  contexte, la barre restante porte l'information. C'est la forme la plus utile
+  quand une seule valeur compte.
+- `on: true` sur un jalon de `timeline` le passe en indigo, les autres restent en
+  retrait.
+- `pct` et `threshold` sont des pourcentages de 0 a 100. `threshold` dessine un
+  repere vertical sur la jauge.
+- Le marquage `**gras**` et `*600*` fonctionne aussi a l'interieur des schemas.
+
+### Palette des schemas
+
+Validee avec le validateur de la methode dataviz, surface `#F4F6FC` :
+
+| Role | Valeur | Controle |
+|---|---|---|
+| Rampe ordinale indigo | `#93A6FF` `#4F6BFF` `#2F46C9` | monotone, ecarts de clarte suffisants, bout clair a 2,13:1, teinte unique |
+| Paire deux nuances | `#93A6FF` + `#4F6BFF` | dans la bande de clarte, au-dessus du plancher de chroma, ecart CVD 16,4 |
+| Mise en retrait | `#C3CAE0` | canal de recul, hors rampe categorielle |
+| Fond de jauge | `#DDE3F5` | mobilier |
+| Filets et axes | `#E2E6F2` | un cran au-dessus de la surface |
+
+`#4F6BFF` et `#2F46C9` ne doivent jamais coder deux series distinctes : leur ecart
+en vision normale est de 12,8, sous le plancher de 15.
+
+Regles appliquees : le texte ne porte jamais la couleur de donnee, les barres font
+20px d'epaisseur avec un bout arrondi a 4px et un pied carre, une serie unique n'a
+pas de boite de legende. Le livrable etant un PNG, aucune infobulle n'est possible :
+chaque valeur porte donc une etiquette directe, posee au bout de sa barre.
 
 ## Commandes
 

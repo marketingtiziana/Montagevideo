@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const { slides, PROVISOIRE } = require('./content/slides.js');
+const schemas = require('./schemas.js');
 
 const OUT = path.join(__dirname, 'slides');
 const TOTAL = 16;
@@ -136,8 +137,14 @@ function bodyHtml(body, n) {
         .join('\n');
       return `      <ul>\n${li}\n      </ul>`;
     }
+    if (block.schema) return schemas.render(block.schema, n, inline);
     throw new Error(`[CONTENU] slide ${n} : bloc inconnu ${JSON.stringify(block)}`);
   }).join('\n');
+}
+
+/** true si la slide porte au moins un bloc schema. */
+function hasSchema(s) {
+  return Array.isArray(s.body) && s.body.some(b => b.schema);
 }
 
 /* ================================================================== */
@@ -306,6 +313,8 @@ ${logo(s.n)}</div>`;
 /* Gabarit B : texte seul sur fond plein                               */
 /* ================================================================== */
 function tplB(s) {
+  // Le CSS des schemas n'est injecte que dans les slides qui en portent un.
+  const style = TEXTCOMMON(32) + (hasSchema(s) ? '\n' + schemas.css(T.ink, T.body) : '');
   const markup = `<div class="slide" data-tpl="B" data-n="${s.n}">
   <div class="frame">
 ${num(s.n)}
@@ -315,7 +324,7 @@ ${bodyHtml(s.body, s.n)}
     </div>
   </div>
 ${logo(s.n)}</div>`;
-  return doc(s, TEXTCOMMON(32), markup);
+  return doc(s, style, markup);
 }
 
 /* ================================================================== */
