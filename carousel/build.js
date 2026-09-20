@@ -67,9 +67,13 @@ const OUT2X = path.join(__dirname, 'output', 'carousel-moyen-orient-2x');
       if (tpl === 'A') {
         const title = document.querySelector('.title');
         const sub = document.querySelector('.subtitle');
-        const card = document.querySelector('.cover-card');
         if (!title || !sub) return out;
-        const limit = card ? card.getBoundingClientRect().top - 48 : 1350 - 90;
+        /* Chaque variante de couverture reserve la place du visuel via le
+           padding-bottom de .frame. La limite est donc uniforme : le bas de
+           la boite de contenu du cadre. */
+        const frame = title.closest('.frame');
+        const fcs = getComputedStyle(frame);
+        const limit = frame.getBoundingClientRect().bottom - parseFloat(fcs.paddingBottom) + 2;
         const base = parseFloat(title.dataset.base), min = parseFloat(title.dataset.min);
         out.base = base; out.min = min;
         let size = base;

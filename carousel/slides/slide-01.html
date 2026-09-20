@@ -52,32 +52,35 @@
       color: #0F1535; opacity: 0.45;
       z-index: 5;
     }
-    .rule {
-      width: 80px; height: 4px;
-      background: #4F6BFF;
-      flex: none;
-    }
+    .rule { width: 80px; height: 4px; background: #4F6BFF; flex: none; }
     .title {
       margin-top: 40px;
-      font-weight: 900; font-size: 88px; line-height: 1.04;
-      letter-spacing: -0.025em;
-      color: #0F1535;
+      font-weight: 900; font-size: 84px; line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
     }
     .subtitle {
       margin-top: 32px;
       font-weight: 400; font-size: 34px; line-height: 1.4;
-      color: #545E80;
+      color: #A8B0C8;
+    }
+    /* Le halo vient du haut. Celui de la slide 16 vient du bas : le carousel
+       s'ouvre et se ferme sur la meme signature, inversee. */
+    html, body, .slide {
+      background:
+        radial-gradient(ellipse 1180px 780px at 50% -6%, #4F6BFF 0%, rgba(79, 107, 255, 0.5) 32%, rgba(79, 107, 255, 0) 68%),
+        #0F1535;
     }
     .frame {
       position: relative; z-index: 2;
       width: 100%; height: 100%;
-      padding: 110px 90px 0;
+      padding: 120px 90px 700px;
       display: flex; flex-direction: column;
       align-items: flex-start; justify-content: flex-start;
     }
     .cover-card {
       position: absolute; left: 44px; right: 44px; bottom: 44px;
-      height: 600px;
+      height: 580px;
       border-radius: 24px;
       overflow: hidden;
       z-index: 1;
@@ -89,7 +92,7 @@
 <div class="slide" data-tpl="A" data-n="1">
   <div class="frame">
     <div class="rule"></div>
-    <h1 class="title" data-base="88" data-min="52">Pourquoi le Moyen-Orient va avoir un impact sur ton business en ligne.</h1>
+    <h1 class="title" data-base="84" data-min="48">Pourquoi le Moyen-Orient va avoir un impact sur ton business en ligne.</h1>
     <p class="subtitle">Même si tu vends du 100% digital.</p>
   </div>
   <div class="cover-card"><img src="../assets/img/img-01-cover.jpg" alt=""></div>

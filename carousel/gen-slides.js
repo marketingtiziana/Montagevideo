@@ -20,6 +20,18 @@ const TOTAL = 16;
 const THEME = 'clair';
 
 /**
+ * Style de la slide 1 (couverture).
+ *   'immersif' photo plein cadre, voile navy degrade, titre blanc, indicateur
+ *              de swipe. Le plus percutant en vignette de fil.
+ *   'bandeau'  panneau navy arrondi en haut, photo en bandeau bas. Editorial.
+ *   'echo'     fond navy, halo indigo venant du haut, photo en carte basse.
+ *              Repond a la slide 16, dont le halo vient du bas.
+ *   'carte'    fond clair, titre navy, photo en carte basse. Le plus sobre.
+ * Surchargeable a la volee : COVER_STYLE=bandeau node gen-slides.js
+ */
+const COVER_STYLE = process.env.COVER_STYLE || 'echo';
+
+/**
  * Style de la slide 16 (appel a l'action).
  *   'halo'   fond navy profond, halo indigo, fleche ronde. Rupture forte avec
  *            les 15 slides claires qui precedent.
@@ -279,30 +291,127 @@ ${markup}
 /* Gabarit A : couverture                                              */
 /* ================================================================== */
 function tplA(s) {
-  const common = `    .rule {
-      width: 80px; height: 4px;
-      background: ${T.accent};
-      flex: none;
-    }
+  const title = inline(s.title, `slide ${s.n} / title`);
+  const subtitle = inline(s.subtitle, `slide ${s.n} / subtitle`);
+
+  /* Typo commune aux quatre couvertures. `ink` et `dim` changent selon que la
+     variante pose le texte sur clair ou sur sombre. */
+  const TYPO = (ink, dim, base) => `    .rule { width: 80px; height: 4px; background: ${BRAND.indigo}; flex: none; }
     .title {
       margin-top: 40px;
-      font-weight: 900; font-size: 88px; line-height: 1.04;
-      letter-spacing: -0.025em;
-      color: ${T.ink};
+      font-weight: 900; font-size: ${base}px; line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: ${ink};
     }
     .subtitle {
       margin-top: 32px;
       font-weight: 400; font-size: 34px; line-height: 1.4;
-      color: ${T.body};
+      color: ${dim};
     }`;
 
-  if (T.coverMode === 'card') {
-    // Fond clair : le visuel devient une carte basse, le texte respire en haut.
-    const style = `${common}
+  /* Indicateur de swipe : chevrons dessines en CSS, aucun emoji. */
+  const SWIPE = (ink) => `    .swipe {
+      position: absolute; left: 90px; bottom: 76px;
+      display: flex; align-items: center; gap: 16px;
+      z-index: 3;
+    }
+    .swipe b {
+      font-weight: 900; font-size: 20px; letter-spacing: 0.16em;
+      color: ${ink}; opacity: 0.66;
+    }
+    .swipe i {
+      width: 13px; height: 13px;
+      border-top: 3px solid ${BRAND.indigo};
+      border-right: 3px solid ${BRAND.indigo};
+      transform: rotate(45deg);
+    }
+    .swipe i:nth-of-type(1) { opacity: 0.35; }
+    .swipe i:nth-of-type(2) { opacity: 0.65; }
+    .swipe i:nth-of-type(3) { opacity: 1; }`;
+
+  const SWIPE_MARKUP = `  <div class="swipe"><b>16 SLIDES</b><i></i><i></i><i></i></div>`;
+
+  if (COVER_STYLE === 'bandeau') {
+    const style = `${TYPO(BRAND.white, BRAND.grey, 80)}
+    .panel {
+      position: absolute; top: 44px; left: 44px; right: 44px;
+      height: 856px;
+      border-radius: 24px;
+      background: ${BRAND.navy};
+      z-index: 1;
+    }
+    .frame {
+      position: absolute; top: 44px; left: 44px; right: 44px;
+      height: 856px;
+      z-index: 2;
+      padding: 90px 80px 96px;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center;
+    }
+    .photo {
+      position: absolute; left: 44px; right: 44px; top: 924px; bottom: 44px;
+      border-radius: 24px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .swipe { left: 124px; bottom: 112px; }`;
+
+    const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
+  <div class="panel"></div>
+  <div class="frame">
+    <div class="rule"></div>
+    <h1 class="title" data-base="80" data-min="48">${title}</h1>
+    <p class="subtitle">${subtitle}</p>
+  </div>
+  <div class="photo"><img src="../assets/img/${s.img}" alt=""></div>
+${SWIPE_MARKUP}
+${logo(s.n)}</div>`;
+    return doc(s, style + '\n' + SWIPE(BRAND.white), markup);
+  }
+
+  if (COVER_STYLE === 'echo') {
+    const style = `${TYPO(BRAND.white, BRAND.grey, 84)}
+    /* Le halo vient du haut. Celui de la slide 16 vient du bas : le carousel
+       s'ouvre et se ferme sur la meme signature, inversee. */
+    html, body, .slide {
+      background:
+        radial-gradient(ellipse 1180px 780px at 50% -6%, ${BRAND.indigo} 0%, rgba(79, 107, 255, 0.5) 32%, rgba(79, 107, 255, 0) 68%),
+        ${BRAND.navy};
+    }
     .frame {
       position: relative; z-index: 2;
       width: 100%; height: 100%;
-      padding: 110px 90px 0;
+      padding: 120px 90px 700px;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-start;
+    }
+    .cover-card {
+      position: absolute; left: 44px; right: 44px; bottom: 44px;
+      height: 580px;
+      border-radius: 24px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .cover-card img { width: 100%; height: 100%; object-fit: cover; display: block; }`;
+
+    const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
+  <div class="frame">
+    <div class="rule"></div>
+    <h1 class="title" data-base="84" data-min="48">${title}</h1>
+    <p class="subtitle">${subtitle}</p>
+  </div>
+  <div class="cover-card"><img src="../assets/img/${s.img}" alt=""></div>
+${logo(s.n)}</div>`;
+    return doc(s, style, markup);
+  }
+
+  if (COVER_STYLE === 'carte') {
+    const style = `${TYPO(T.ink, T.body, 88)}
+    .frame {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 110px 90px 692px;
       display: flex; flex-direction: column;
       align-items: flex-start; justify-content: flex-start;
     }
@@ -318,34 +427,47 @@ function tplA(s) {
     const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
   <div class="frame">
     <div class="rule"></div>
-    <h1 class="title" data-base="88" data-min="52">${inline(s.title, `slide ${s.n} / title`)}</h1>
-    <p class="subtitle">${inline(s.subtitle, `slide ${s.n} / subtitle`)}</p>
+    <h1 class="title" data-base="88" data-min="52">${title}</h1>
+    <p class="subtitle">${subtitle}</p>
   </div>
   <div class="cover-card"><img src="../assets/img/${s.img}" alt=""></div>
 ${logo(s.n)}</div>`;
     return doc(s, style, markup);
   }
 
-  // Fond sombre : illustration plein cadre + overlay navy 75%.
-  const style = `${common}
+  /* 'immersif' par defaut */
+  const style = `${TYPO(BRAND.white, '#C3CBE2', 88)}
+${SWIPE(BRAND.white)}
     .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-    .overlay { position: absolute; inset: 0; background: rgba(15, 21, 53, 0.75); z-index: 1; }
+    /* Voile degrade : dense la ou se pose le texte, il s'ouvre au tiers bas
+       pour laisser respirer la photo, puis se redensifie sous l'indicateur. */
+    .veil {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        180deg,
+        rgba(15, 21, 53, 0.93) 0%,
+        rgba(15, 21, 53, 0.86) 40%,
+        rgba(15, 21, 53, 0.30) 68%,
+        rgba(15, 21, 53, 0.22) 84%,
+        rgba(15, 21, 53, 0.66) 100%);
+    }
     .frame {
       position: relative; z-index: 2;
       width: 100%; height: 100%;
-      padding: 90px;
+      padding: 120px 90px 420px;
       display: flex; flex-direction: column;
-      align-items: flex-start; justify-content: center;
+      align-items: flex-start; justify-content: flex-start;
     }`;
 
   const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
   <img class="bg" src="../assets/img/${s.img}" alt="">
-  <div class="overlay"></div>
+  <div class="veil"></div>
   <div class="frame">
     <div class="rule"></div>
-    <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
-    <p class="subtitle">${inline(s.subtitle, `slide ${s.n} / subtitle`)}</p>
+    <h1 class="title" data-base="88" data-min="52">${title}</h1>
+    <p class="subtitle">${subtitle}</p>
   </div>
+${SWIPE_MARKUP}
 ${logo(s.n)}</div>`;
   return doc(s, style, markup);
 }
@@ -561,7 +683,7 @@ for (const s of slides) {
   fs.writeFileSync(file, fn(s), 'utf8');
 }
 
-console.log(`OK  ${slides.length} slides ecrites dans slides/  (theme : ${THEME}, CTA : ${CTA_STYLE})`);
+console.log(`OK  ${slides.length} slides ecrites dans slides/  (theme : ${THEME}, couverture : ${COVER_STYLE}, CTA : ${CTA_STYLE})`);
 console.log(LOGO_SLIDES.length
   ? `OK  logo sur les slides ${LOGO_SLIDES.join(', ')}`
   : 'OK  aucun logo sur les slides');

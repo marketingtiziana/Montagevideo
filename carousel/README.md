@@ -159,6 +159,7 @@ Deux reglages en tete de `gen-slides.js` :
 ```js
 const THEME = 'clair';       // 'clair' ou 'sombre'
 const LOGO_SLIDES = [];      // numeros des slides portant le logo
+const COVER_STYLE = 'echo';  // 'echo', 'immersif', 'bandeau' ou 'carte' (slide 1)
 const CTA_STYLE = 'halo';    // 'halo', 'massif' ou 'bloc' (slide 16)
 ```
 
@@ -171,6 +172,21 @@ repasse en illustration plein cadre avec overlay navy a 75%.
 
 `LOGO_SLIDES = []` (reglage actuel) : aucune slide ne porte le logo. Mettre `[1]`
 pour la seule couverture, `[1, 15]` pour couverture et derniere slide de contenu.
+
+### Slide 1, la couverture
+
+Quatre styles, surchargeables a la volee : `COVER_STYLE=immersif node gen-slides.js`
+
+| Style | Rendu |
+|---|---|
+| `echo` (actuel) | fond navy, halo indigo venant du haut, titre blanc, photo en carte basse. Repond a la slide 16, dont le halo vient du bas |
+| `immersif` | photo plein cadre, voile navy degrade, titre blanc, indicateur de swipe. Le plus percutant en vignette de fil |
+| `bandeau` | panneau navy arrondi en haut, photo en bandeau bas. Editorial |
+| `carte` | fond clair, titre navy, photo en carte basse. Le plus sobre |
+
+Le titre de couverture s'auto-ajuste par paliers de 4px jusqu'au minimum de
+chaque variante. Sa taille de base vit dans le CSS, pas seulement dans
+`build.js` : le fichier HTML doit rester lisible ouvert seul.
 
 ### Slide 16, l'appel a l'action
 
