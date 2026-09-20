@@ -37,7 +37,8 @@ const VIZ = {
 const BAR_MAX = 78;
 
 /** Types de schema acceptes dans un bloc { schema: { type: ... } }. */
-const TYPES = ['kpi', 'bars', 'meter', 'steps', 'timeline', 'compare', 'flow', 'columns', 'versus'];
+const TYPES = ['kpi', 'bars', 'meter', 'steps', 'timeline', 'compare', 'flow', 'columns', 'versus',
+  'threshold', 'pairs'];
 
 /* ------------------------------------------------------------------ */
 /* CSS, injecte uniquement dans les slides qui portent un schema       */
@@ -45,6 +46,14 @@ const TYPES = ['kpi', 'bars', 'meter', 'steps', 'timeline', 'compare', 'flow', '
 function css(ink, body) {
   return `    /* --- schemas ------------------------------------------------ */
     .sch { margin-top: 1.25em; }
+
+    /* Un libelle pose sur un aplat indigo prend le blanc, jamais l'encre.
+       C'est la seule exception a la regle "le texte ne porte pas la couleur
+       de donnee" : sur l'aplat, l'encre navy ne passe pas le contraste. */
+    .sch-pairs .pr-b b, .sch-pairs .pr-b em,
+    .sch-flow .fl.end b, .sch-flow .fl.end em,
+    .sch-threshold .th-zone.hi b, .sch-threshold .th-zone.hi em,
+    .sch-versus .vs.yes .vs-m b { color: #FFFFFF; }
 
     /* KPI : une valeur seule devient un chiffre heros, deux ou trois
        deviennent une rangee de tuiles */
@@ -63,6 +72,7 @@ function css(ink, body) {
       color: ${body};
     }
     .sch-kpi[data-count="1"] .kpi-v { font-size: 118px; }
+    .sch-kpi[data-count="1"] .kpi-v[data-long] { font-size: 72px; }
     .sch-kpi[data-count="1"] .kpi-l { font-size: 28px; }
     .sch-kpi[data-count="2"] .kpi-v { font-size: 86px; }
     .sch-kpi[data-count="2"] .kpi-l { font-size: 24px; }
@@ -196,11 +206,11 @@ function css(ink, body) {
       gap: 12px 10px;
     }
     .sch-flow .fl {
-      padding: 10px 16px;
+      padding: 11px 18px;
       border-radius: 10px;
       background: #FFFFFF;
       border: 1px solid ${VIZ.rule};
-      font-weight: 600; font-size: 22px; line-height: 1.25;
+      font-weight: 600; font-size: 24px; line-height: 1.25;
       color: ${ink};
     }
     .sch-flow .fl.end {
@@ -229,13 +239,13 @@ function css(ink, body) {
     .sch-columns .col.on .col-key { background: ${VIZ.accent}; }
     .sch-columns .col-t {
       margin-top: 16px;
-      font-weight: 900; font-size: 24px; color: ${ink};
+      font-weight: 900; font-size: 26px; color: ${ink};
       letter-spacing: -0.01em;
     }
     .sch-columns ul { margin-top: 18px; list-style: none; }
     .sch-columns li {
       position: relative; padding-left: 20px;
-      font-weight: 400; font-size: 21px; line-height: 1.4;
+      font-weight: 400; font-size: 23px; line-height: 1.4;
       color: ${body};
     }
     .sch-columns li + li { margin-top: 12px; }
@@ -284,6 +294,63 @@ function css(ink, body) {
       transform: rotate(45deg);
     }
 
+    /* Seuil : une bande coupee en deux zones de taux, le point de bascule
+       est chiffre sous la coupure. Le texte pose sur un aplat prend blanc ou
+       encre selon la luminosite de l'aplat. */
+    .sch-threshold .th-bar {
+      display: flex; align-items: stretch;
+      border-radius: 4px; overflow: hidden;
+    }
+    .sch-threshold .th-zone {
+      padding: 20px 24px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .sch-threshold .th-zone.lo { flex: 0 0 38%; background: ${VIZ.light}; }
+    .sch-threshold .th-zone.hi { flex: 1 1 auto; background: ${VIZ.accent}; }
+    .sch-threshold .th-v { font-weight: 900; font-size: 40px; line-height: 1; letter-spacing: -0.025em; }
+    .sch-threshold .th-l { font-weight: 400; font-size: 21px; line-height: 1.3; }
+    .sch-threshold .th-zone.lo .th-v { color: ${ink}; }
+    .sch-threshold .th-zone.lo .th-l { color: ${ink}; opacity: 0.72; }
+    .sch-threshold .th-zone.hi .th-v { color: #FFFFFF; }
+    .sch-threshold .th-zone.hi .th-l { color: #FFFFFF; opacity: 0.82; }
+    .sch-threshold .th-mark {
+      position: relative;
+      margin-left: 38%;
+      padding-top: 14px; padding-left: 16px;
+      font-weight: 900; font-size: 22px; color: ${ink};
+    }
+    .sch-threshold .th-mark::before {
+      content: '';
+      position: absolute; left: 0; top: 0; height: 14px;
+      border-left: 2px solid ${ink};
+    }
+
+    /* Bascules : une serie de "ceci devient cela" */
+    .sch-pairs .pr {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .sch-pairs .pr + .pr { margin-top: 14px; }
+    .sch-pairs .pr-a, .sch-pairs .pr-b {
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-weight: 600; font-size: 24px; line-height: 1.25;
+    }
+    .sch-pairs .pr-a {
+      background: #FFFFFF; border: 1px solid ${VIZ.rule};
+      color: ${body};
+    }
+    .sch-pairs .pr-b {
+      background: ${VIZ.accent};
+      color: #FFFFFF;
+    }
+    .sch-pairs .pr-ar {
+      width: 0; height: 0;
+      border-left: 9px solid ${VIZ.accent};
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      flex: none;
+    }
+
     /* Comparatif : deux colonnes, paire deux nuances */
     .sch-compare { display: flex; gap: 28px; }
     .sch-compare .cmp {
@@ -326,7 +393,7 @@ function render(sc, n, inline) {
       const items = need(sc.items, where, 1, 3);
       const cells = items.map(i => `      <div class="kpi">
         <div class="kpi-key"></div>
-        <div class="kpi-v">${t(i.value)}</div>
+        <div class="kpi-v"${items.length === 1 && i.value.replace(/\*/g, '').length > 10 ? ' data-long' : ''}>${t(i.value)}</div>
         <div class="kpi-l">${t(i.label)}</div>
       </div>`).join('\n');
       return `    <div class="sch sch-kpi" data-count="${items.length}">\n${cells}\n    </div>`;
@@ -399,10 +466,12 @@ function render(sc, n, inline) {
 
     case 'columns': {
       const items = need(sc.items, where, 2, 2);
+      const onIdx = items.findIndex(c => c.on);
+      const accent = onIdx === -1 ? 0 : onIdx;
       const cols = items.map((c, k) => {
         const li = need(c.items, `${where} / colonne ${k + 1}`, 1, 5)
           .map(i => `          <li>${t(i)}</li>`).join('\n');
-        return `      <div class="col${k === 0 ? ' on' : ''}">
+        return `      <div class="col${k === accent ? ' on' : ''}">
         <div class="col-key"></div>
         <div class="col-t">${t(c.title)}</div>
         <ul>\n${li}\n        </ul>
@@ -420,6 +489,32 @@ function render(sc, n, inline) {
         return `      <div class="vs ${v.kind}"><span class="vs-m"></span>${t(v.text)}</div>`;
       }).join('\n');
       return `    <div class="sch sch-versus">\n${rows}\n    </div>`;
+    }
+
+    case 'threshold': {
+      return `    <div class="sch sch-threshold">
+      <div class="th-bar">
+        <div class="th-zone lo">
+          <span class="th-v">${t(sc.low.value)}</span>
+          <span class="th-l">${t(sc.low.label)}</span>
+        </div>
+        <div class="th-zone hi">
+          <span class="th-v">${t(sc.high.value)}</span>
+          <span class="th-l">${t(sc.high.label)}</span>
+        </div>
+      </div>
+      <div class="th-mark">${t(sc.at)}</div>
+    </div>`;
+    }
+
+    case 'pairs': {
+      const items = need(sc.items, where, 2, 4);
+      const rows = items.map(i => `      <div class="pr">
+        <span class="pr-a">${t(i.from)}</span>
+        <span class="pr-ar"></span>
+        <span class="pr-b">${t(i.to)}</span>
+      </div>`).join('\n');
+      return `    <div class="sch sch-pairs">\n${rows}\n    </div>`;
     }
 
     case 'compare': {

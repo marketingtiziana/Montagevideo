@@ -61,6 +61,8 @@ Le code vit dans `schemas.js`.
 | `flow` | une chaine de causes, 2 a 6 maillons, le dernier porte l'aboutissement | `items: ["maillon", ...]` |
 | `columns` | 2 colonnes de listes, ce qui tient contre ce qui tombe | `items: [{ title, items: [...] }]` |
 | `versus` | exactement 2 lignes, une a eviter et une a suivre. Remplace les emoji croix et coche | `items: [{ kind: "no"\|"yes", text }]` |
+| `threshold` | une bande coupee en deux zones de taux, avec le point de bascule chiffre | `low: { value, label }, high: { value, label }, at` |
+| `pairs` | 2 a 4 bascules "ceci devient cela" | `items: [{ from, to }]` |
 
 Details utiles :
 
@@ -82,13 +84,24 @@ Details utiles :
 |---|---|---|
 | 3 | `flow` | le texte enonce deja une chaine : carburant vers transport vers alimentation vers factures vers budget |
 | 4 | `flow` | meme chose pour le mecanisme publicitaire |
-| 7 | `columns` | le texte oppose explicitement "ce qui resiste" et "ce qui souffre" |
+| 6 | `columns` | le texte oppose "ce qui fonctionnait" et "ce qui fonctionne maintenant" |
+| 7 | `columns` | le texte oppose "ce qui resiste" et "ce qui souffre" |
 | 8 | `versus` | remplace les marqueurs croix et coche, interdits par le brand system |
+| 10 | `threshold` | le texte pose un taux de part et d'autre d'un seuil chiffre |
+| 11 | `kpi` heros | la date et sa phrase de chute sont les mots exacts du texte |
+| 12 | `pairs` | les trois lignes du texte sont toutes des bascules "ceci devient cela" |
 | 9, 13, 14 | `ol` | listes numerotees deja presentes dans le texte |
-| 6, 8, 12 | `ul` | listes a puces deja presentes dans le texte |
+| 8 | `ul` | liste a puces deja presente dans le texte |
 
-Les autres slides sont en texte seul : elles sont deja denses, y ajouter un
-schema aurait force une reduction de corps sans gain de lisibilite.
+Les slides 2, 5 et 15 portent une illustration, les slides 1 et 16 sont la
+couverture et l'appel a l'action. Aucune slide de contenu n'est donc restee
+en texte brut.
+
+Dans tous les cas le schema reprend les mots du texte source : le gabarit
+change, jamais la formulation. Seules exceptions, signalees ici : les libelles
+propres au diagramme de la slide 10 ("sous le seuil", "sur les benefices
+au-dessus"), et les mots de liaison "peut devenir" et "peut avoir" de la
+slide 12, remplaces par la fleche du schema.
 
 ### Palette des schemas
 
@@ -128,6 +141,7 @@ Deux reglages en tete de `gen-slides.js` :
 ```js
 const THEME = 'clair';       // 'clair' ou 'sombre'
 const LOGO_SLIDES = [];      // numeros des slides portant le logo
+const CTA_STYLE = 'halo';    // 'halo', 'massif' ou 'bloc' (slide 16)
 ```
 
 `THEME = 'clair'` (reglage actuel) : fond `#F4F6FC`, titres et mots mis en avant en
@@ -140,7 +154,17 @@ repasse en illustration plein cadre avec overlay navy a 75%.
 `LOGO_SLIDES = []` (reglage actuel) : aucune slide ne porte le logo. Mettre `[1]`
 pour la seule couverture, `[1, 15]` pour couverture et derniere slide de contenu.
 
-La slide 16 garde son fond indigo plein dans les deux themes.
+### Slide 16, l'appel a l'action
+
+Trois styles, surchargeables a la volee : `CTA_STYLE=massif node gen-slides.js`
+
+| Style | Rendu |
+|---|---|
+| `halo` (actuel) | fond navy profond, halo indigo radial, filet, fleche ronde. Rupture forte apres 15 slides claires |
+| `massif` | fond indigo plein, typo navy massive, trois chevrons de progression |
+| `bloc` | fond clair, grand bloc indigo arrondi, fleche blanche. Le plus proche du reste du carousel |
+
+La fleche et les chevrons sont dessines en CSS : aucun emoji, aucune dependance.
 
 ## Brand system
 

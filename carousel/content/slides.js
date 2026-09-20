@@ -157,17 +157,26 @@ module.exports = {
           "p": "Si tu lances une offre physique pour les fêtes, la règle a changé."
         },
         {
-          "p": "Ce qui fonctionnait : commander en octobre, vendre en décembre."
-        },
-        {
-          "p": "Ce qui fonctionne maintenant :"
-        },
-        {
-          "ul": [
-            "commander **6 à 8 semaines** plus tôt",
-            "provisionner une hausse de coût de transport dans ton prix de vente, pas dans ta marge",
-            "annoncer des délais longs avant la commande, pas après"
-          ]
+          "schema": {
+            "type": "columns",
+            "items": [
+              {
+                "title": "Ce qui fonctionnait",
+                "items": [
+                  "commander en octobre, vendre en décembre"
+                ]
+              },
+              {
+                "title": "Ce qui fonctionne maintenant",
+                "on": true,
+                "items": [
+                  "commander **6 à 8 semaines** plus tôt",
+                  "provisionner une hausse de coût de transport dans ton prix de vente, pas dans ta marge",
+                  "annoncer des délais longs avant la commande, pas après"
+                ]
+              }
+            ]
+          }
         },
         {
           "p": "Un délai annoncé est une contrainte. Un délai subi est un remboursement."
@@ -277,6 +286,20 @@ module.exports = {
           "p": "Le taux est de **9%** sur les bénéfices au-dessus de **375 000 AED**, et une licence en *free zone* ne donne pas le **0%** à elle seule : il faut des activités qualifiantes, de la substance réelle, et respecter le test *de minimis*."
         },
         {
+          "schema": {
+            "type": "threshold",
+            "low": {
+              "value": "0%",
+              "label": "sous le seuil"
+            },
+            "high": {
+              "value": "9%",
+              "label": "sur les bénéfices au-dessus"
+            },
+            "at": "375 000 AED"
+          }
+        },
+        {
           "p": "Le seuil *de minimis* : les revenus non qualifiants ne doivent pas dépasser **5%** du chiffre d'affaires total ou **5 millions AED**, le plus faible des deux. Et les états financiers audités sont désormais obligatoires."
         },
         {
@@ -304,7 +327,15 @@ module.exports = {
           "p": "Les exercices qui se terminent après cette date ne peuvent plus l'utiliser. Et ce régime n'est pas cumulable avec le statut *QFZP* : il faut choisir l'un ou l'autre."
         },
         {
-          "p": "Ça, c'est dans trois mois."
+          "schema": {
+            "type": "kpi",
+            "items": [
+              {
+                "value": "31 décembre 2026",
+                "label": "Ça, c'est dans trois mois."
+              }
+            ]
+          }
         },
         {
           "p": "Si ta structure repose dessus, la question n'est pas \"est-ce que je pars\". C'est \"qu'est-ce que je fais avant le 31 décembre\"."
@@ -327,11 +358,23 @@ module.exports = {
           "p": "Ce que **2026** démontre :"
         },
         {
-          "ul": [
-            "un pays à **0%** peut devenir un pays à **9%** avec conditions",
-            "une zone stable peut devenir une zone de conflit",
-            "un régime favorable peut avoir une date d'expiration"
-          ]
+          "schema": {
+            "type": "pairs",
+            "items": [
+              {
+                "from": "un pays à **0%**",
+                "to": "un pays à **9%** avec conditions"
+              },
+              {
+                "from": "une zone stable",
+                "to": "une zone de conflit"
+              },
+              {
+                "from": "un régime favorable",
+                "to": "une date d'expiration"
+              }
+            ]
+          }
         },
         {
           "p": "Ce qui protège un business en ligne, ce n'est pas le pays choisi. C'est la capacité à changer de structure sans tout casser."

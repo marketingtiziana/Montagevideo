@@ -52,24 +52,58 @@
       color: #0F1535; opacity: 0.45;
       z-index: 5;
     }
-    html, body, .slide { background: #4F6BFF; }
+    .arrow {
+      position: relative;
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: #4F6BFF;
+      flex: none;
+    }
+    .arrow::before {
+      content: '';
+      position: absolute; left: 33px; top: 47px;
+      width: 31px; height: 2px; background: #FFFFFF;
+    }
+    .arrow::after {
+      content: '';
+      position: absolute; left: 51px; top: 40px;
+      width: 15px; height: 15px;
+      border-top: 2px solid #FFFFFF;
+      border-right: 2px solid #FFFFFF;
+      transform: rotate(45deg);
+    }
+    /* halo froid : un degrade radial indigo sur fond navy. Aucune couleur
+       chaude, le brand system n'interdit que les degrades orange et rouge. */
+    html, body, .slide {
+      background:
+        radial-gradient(ellipse 1180px 820px at 50% 104%, #4F6BFF 0%, rgba(79, 107, 255, 0.55) 34%, rgba(79, 107, 255, 0) 70%),
+        #0F1535;
+    }
+    /* 64px et non 90px : a 78px de corps, l'accroche demande 905px et la
+       marge de 90px n'en laisse que 900. Elle cassait en deux lignes. */
     .frame {
       width: 100%; height: 100%;
-      padding: 90px;
-      display: flex; align-items: center; justify-content: center;
+      padding: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
     }
+    .rule { width: 80px; height: 4px; background: #4F6BFF; }
     .cta {
-      font-weight: 900; font-size: 72px; line-height: 1.08;
-      letter-spacing: -0.02em;
+      margin-top: 48px;
+      font-weight: 900; font-size: 78px; line-height: 1.04;
+      letter-spacing: -0.035em;
       text-align: center;
-      color: #0F1535;
+      color: #FFFFFF;
     }
+    .arrow { margin-top: 60px; }
   </style>
 </head>
 <body>
 <div class="slide" data-tpl="CTA" data-n="16">
   <div class="frame">
-    <div class="cta" data-base="72" data-min="48">Abonne-toi pour la suite.</div>
+    <div class="rule"></div>
+    <div class="cta" data-base="78" data-min="52">Abonne-toi pour la suite.</div>
+    <div class="arrow"></div>
   </div>
 </div>
 </body>

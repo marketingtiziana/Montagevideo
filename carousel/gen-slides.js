@@ -20,6 +20,16 @@ const TOTAL = 16;
 const THEME = 'clair';
 
 /**
+ * Style de la slide 16 (appel a l'action).
+ *   'halo'   fond navy profond, halo indigo, fleche ronde. Rupture forte avec
+ *            les 15 slides claires qui precedent.
+ *   'massif' fond indigo plein, typo navy massive, chevrons de progression.
+ *   'bloc'   fond clair, grand bloc indigo arrondi. Le plus proche du reste.
+ * Surchargeable a la volee : CTA_STYLE=massif node gen-slides.js
+ */
+const CTA_STYLE = process.env.CTA_STYLE || 'halo';
+
+/**
  * Numeros des slides portant le logo Fynovates.
  * []        aucune slide (reglage actuel)
  * [1]       uniquement la couverture
@@ -401,22 +411,135 @@ ${logo(s.n)}</div>`;
 /* Gabarit CTA : slide 16                                              */
 /* ================================================================== */
 function tplCTA(s) {
-  const style = `    html, body, .slide { background: ${BRAND.indigo}; }
+  const text = inline(s.title, `slide ${s.n} / cta`);
+
+  /* Fleche : dessinee en CSS, aucun emoji, aucune dependance. */
+  const ARROW = (bg, ink) => `    .arrow {
+      position: relative;
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: ${bg};
+      flex: none;
+    }
+    .arrow::before {
+      content: '';
+      position: absolute; left: 33px; top: 47px;
+      width: 31px; height: 2px; background: ${ink};
+    }
+    .arrow::after {
+      content: '';
+      position: absolute; left: 51px; top: 40px;
+      width: 15px; height: 15px;
+      border-top: 2px solid ${ink};
+      border-right: 2px solid ${ink};
+      transform: rotate(45deg);
+    }`;
+
+  if (CTA_STYLE === 'massif') {
+    const style = `    html, body, .slide { background: ${BRAND.indigo}; }
     .frame {
       width: 100%; height: 100%;
-      padding: 90px;
-      display: flex; align-items: center; justify-content: center;
+      padding: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
     }
+    .rule { width: 80px; height: 4px; background: ${BRAND.navy}; opacity: 0.55; }
     .cta {
-      font-weight: 900; font-size: 72px; line-height: 1.08;
-      letter-spacing: -0.02em;
+      margin-top: 48px;
+      font-weight: 900; font-size: 78px; line-height: 1.04;
+      letter-spacing: -0.04em;
       text-align: center;
       color: ${BRAND.navy};
-    }`;
+    }
+    /* chevrons de progression, du plus marque au plus efface */
+    .chev { margin-top: 68px; display: flex; gap: 22px; }
+    .chev i {
+      width: 34px; height: 34px;
+      border-top: 6px solid ${BRAND.navy};
+      border-right: 6px solid ${BRAND.navy};
+      transform: rotate(45deg);
+    }
+    .chev i:nth-child(1) { opacity: 0.22; }
+    .chev i:nth-child(2) { opacity: 0.48; }
+    .chev i:nth-child(3) { opacity: 0.88; }`;
+
+    const markup = `<div class="slide" data-tpl="CTA" data-n="${s.n}">
+  <div class="frame">
+    <div class="rule"></div>
+    <div class="cta" data-base="78" data-min="56">${text}</div>
+    <div class="chev"><i></i><i></i><i></i></div>
+  </div>
+</div>`;
+    return doc(s, style, markup);
+  }
+
+  if (CTA_STYLE === 'bloc') {
+    const style = `${ARROW('#FFFFFF', BRAND.indigo)}
+    html, body, .slide { background: ${T.page}; }
+    .frame {
+      width: 100%; height: 100%;
+      padding: 44px;
+      display: flex;
+    }
+    .card {
+      flex: 1 1 auto;
+      border-radius: 24px;
+      background: ${BRAND.indigo};
+      padding: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .cta {
+      font-weight: 900; font-size: 72px; line-height: 1.04;
+      letter-spacing: -0.035em;
+      text-align: center;
+      color: #FFFFFF;
+    }
+    .arrow { margin-top: 56px; }`;
+
+    const markup = `<div class="slide" data-tpl="CTA" data-n="${s.n}">
+  <div class="frame">
+    <div class="card">
+      <div class="cta" data-base="72" data-min="52">${text}</div>
+      <div class="arrow"></div>
+    </div>
+  </div>
+</div>`;
+    return doc(s, style, markup);
+  }
+
+  /* 'halo' par defaut */
+  const style = `${ARROW(BRAND.indigo, '#FFFFFF')}
+    /* halo froid : un degrade radial indigo sur fond navy. Aucune couleur
+       chaude, le brand system n'interdit que les degrades orange et rouge. */
+    html, body, .slide {
+      background:
+        radial-gradient(ellipse 1180px 820px at 50% 104%, ${BRAND.indigo} 0%, rgba(79, 107, 255, 0.55) 34%, rgba(79, 107, 255, 0) 70%),
+        ${BRAND.navy};
+    }
+    /* 64px et non 90px : a 78px de corps, l'accroche demande 905px et la
+       marge de 90px n'en laisse que 900. Elle cassait en deux lignes. */
+    .frame {
+      width: 100%; height: 100%;
+      padding: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .rule { width: 80px; height: 4px; background: ${BRAND.indigo}; }
+    .cta {
+      margin-top: 48px;
+      font-weight: 900; font-size: 78px; line-height: 1.04;
+      letter-spacing: -0.035em;
+      text-align: center;
+      color: ${BRAND.white};
+    }
+    .arrow { margin-top: 60px; }`;
 
   const markup = `<div class="slide" data-tpl="CTA" data-n="${s.n}">
   <div class="frame">
-    <div class="cta" data-base="72" data-min="48">${inline(s.title, `slide ${s.n} / cta`)}</div>
+    <div class="rule"></div>
+    <div class="cta" data-base="78" data-min="52">${text}</div>
+    <div class="arrow"></div>
   </div>
 </div>`;
   return doc(s, style, markup);
@@ -438,7 +561,7 @@ for (const s of slides) {
   fs.writeFileSync(file, fn(s), 'utf8');
 }
 
-console.log(`OK  ${slides.length} slides ecrites dans slides/  (theme : ${THEME})`);
+console.log(`OK  ${slides.length} slides ecrites dans slides/  (theme : ${THEME}, CTA : ${CTA_STYLE})`);
 console.log(LOGO_SLIDES.length
   ? `OK  logo sur les slides ${LOGO_SLIDES.join(', ')}`
   : 'OK  aucun logo sur les slides');
