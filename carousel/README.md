@@ -20,9 +20,9 @@ est operationnelle ; il ne reste qu'a coller les 16 textes valides.
 
 | Ecriture | Rendu | Usage |
 |---|---|---|
-| `**texte**` | Inter Black 900, blanc | chiffres cles : 108 dollars, 2,12 EUR, 4 300$, 9%, 5%, 375 000 AED, 31 decembre 2026, 27% |
-| `*texte*` | Inter 600, blanc | noms propres / termes techniques : Ormuz, QFZP, Small Business Relief, de minimis, CPA, free zone |
-| texte nu | Inter 400, `#A8B0C8` | corps courant |
+| `**texte**` | Inter Black 900, couleur d'encre | chiffres cles : 108 dollars, 2,12 EUR, 4 300$, 9%, 5%, 375 000 AED, 31 decembre 2026, 27% |
+| `*texte*` | Inter 600, couleur d'encre | noms propres / termes techniques : Ormuz, QFZP, Small Business Relief, de minimis, CPA, free zone |
+| texte nu | Inter 400, gris secondaire | corps courant |
 
 ### Blocs de corps
 
@@ -42,6 +42,27 @@ npm run all     # les deux
 
 Ouvrir ensuite `preview.html` pour valider les 16 slides d'un coup d'oeil.
 
+## Theme et logo
+
+Deux reglages en tete de `gen-slides.js` :
+
+```js
+const THEME = 'clair';       // 'clair' ou 'sombre'
+const LOGO_SLIDES = [];      // numeros des slides portant le logo
+```
+
+`THEME = 'clair'` (reglage actuel) : fond `#F4F6FC`, titres et mots mis en avant en
+navy `#0F1535`, corps en `#545E80`, accent indigo inchange. La couverture place le
+visuel en carte basse sur fond clair.
+
+`THEME = 'sombre'` : fond navy plein, texte blanc, corps `#A8B0C8`. La couverture
+repasse en illustration plein cadre avec overlay navy a 75%.
+
+`LOGO_SLIDES = []` (reglage actuel) : aucune slide ne porte le logo. Mettre `[1]`
+pour la seule couverture, `[1, 15]` pour couverture et derniere slide de contenu.
+
+La slide 16 garde son fond indigo plein dans les deux themes.
+
 ## Brand system
 
 | Jeton | Valeur |
@@ -49,19 +70,19 @@ Ouvrir ensuite `preview.html` pour valider les 16 slides d'un coup d'oeil.
 | Navy principal | `#0F1535` |
 | Indigo accent | `#4F6BFF` |
 | Blanc | `#FFFFFF` |
-| Gris texte secondaire | `#A8B0C8` |
+| Gris texte sur fond sombre | `#A8B0C8` |
+| Gris texte sur fond clair | `#545E80` |
 
 Police Inter uniquement (400 / 600 / 900), aucune serif, aucune couleur chaude,
-aucun degrade, aucun tiret cadratin, aucun emoji. Logo en bas a droite, 40px,
-blanc a 60% d'opacite. `gen-slides.js` echoue explicitement si un tiret cadratin
-ou un emoji est trouve dans le contenu.
+aucun degrade, aucun tiret cadratin, aucun emoji. `gen-slides.js` echoue
+explicitement si un tiret cadratin ou un emoji est trouve dans le contenu.
 
 ## Gabarits
 
 | Gabarit | Slides | Description |
 |---|---|---|
-| A | 1 | Couverture : illustration plein cadre, overlay navy 75%, filet indigo 80x4, titre 88px, sous-titre 34px |
-| B | 4, 6, 7, 8, 10, 11, 12, 13, 14 | Navy plein, numero "NN / 16" indigo 22px, titre 56px, corps 32px, marges 90px |
+| A | 1 | Couverture : filet indigo 80x4, titre 88px, sous-titre 34px, visuel en carte basse (theme clair) ou plein cadre avec overlay 75% (theme sombre) |
+| B | 4, 6, 7, 8, 10, 11, 12, 13, 14 | Fond plein, numero "NN / 16" indigo 22px, titre 56px, corps 32px, marges 90px |
 | C | 2, 3, 5, 9, 15 | Bandeau illustration 520px, rayon 24px, overlay navy 20%, puis typo du gabarit B avec corps a 28px |
 | CTA | 16 | Fond indigo plein, texte navy Inter Black 900 72px centre, rien d'autre |
 
@@ -104,9 +125,10 @@ au moment de l'export et tout le rendu typographique est faux.
 
 ## Remplacer le logo
 
-Le logo est actuellement un bloc-mot CSS (`FYNOVATES`, Inter Black 900, 40px de haut,
-blanc a 60%). Pour utiliser le vrai logo, deposer le SVG et remplacer la constante
-`LOGO` dans `gen-slides.js` par `<img class="logo" src="../assets/logo.svg" alt="">`.
+Le logo est desactive sur toutes les slides (`LOGO_SLIDES = []`). Quand il est actif,
+c'est un bloc-mot CSS (`FYNOVATES`, Inter Black 900, 40px de haut). Pour utiliser le
+vrai logo, deposer le SVG et remplacer le corps de la fonction `logo()` dans
+`gen-slides.js` par `<img class="logo" src="../assets/logo.svg" alt="">`.
 
 ## Arborescence
 

@@ -31,7 +31,7 @@
     html, body {
       width: 1080px; height: 1350px;
       overflow: hidden;
-      background: #0F1535;
+      background: #F4F6FC;
       font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: geometricPrecision;
@@ -41,15 +41,15 @@
       position: relative;
       width: 1080px; height: 1350px;
       overflow: hidden;
-      background: #0F1535;
+      background: #F4F6FC;
     }
-    b  { font-weight: 900; color: #FFFFFF; }
-    em { font-weight: 600; color: #FFFFFF; font-style: normal; }
+    b  { font-weight: 900; color: #0F1535; }
+    em { font-weight: 600; color: #0F1535; font-style: normal; }
     .logo {
       position: absolute; right: 90px; bottom: 56px;
       height: 40px; display: flex; align-items: center;
       font-weight: 900; font-size: 19px; letter-spacing: 0.20em;
-      color: #FFFFFF; opacity: 0.6;
+      color: #0F1535; opacity: 0.45;
       z-index: 5;
     }
     .frame {
@@ -67,7 +67,7 @@
       margin-top: 44px;
       font-weight: 900; font-size: 56px; line-height: 1.08;
       letter-spacing: -0.015em;
-      color: #FFFFFF;
+      color: #0F1535;
       flex: none;
     }
     .body {
@@ -77,14 +77,11 @@
       overflow: hidden;
       font-weight: 400; font-size: 28px; line-height: 1.5;
       letter-spacing: -0.005em;
-      color: #A8B0C8;
+      color: #545E80;
     }
     .body > * + * { margin-top: 1em; }
     .body ul { list-style: none; }
-    .body li {
-      position: relative;
-      padding-left: 1.05em;
-    }
+    .body li { position: relative; padding-left: 1.05em; }
     .body li + li { margin-top: 0.62em; }
     .body li::before {
       content: '';
@@ -99,11 +96,7 @@
       overflow: hidden;
       z-index: 1;
     }
-    .banner img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .banner::after {
       content: '';
       position: absolute; inset: 0;
@@ -118,14 +111,13 @@
 <div class="slide" data-tpl="C" data-n="5">
   <div class="banner"><img src="../assets/img/img-05-fret.jpg" alt=""></div>
   <div class="frame">
-  <div class="num">05 / 16</div>
+    <div class="num">05 / 16</div>
     <h1 class="title">Titre provisoire slide 5</h1>
     <div class="body" data-base="28" data-min="26">
       <p>Texte provisoire. Le cout d un conteneur quarante pieds atteint <b>4 300$</b> sur les routes Asie vers Europe.</p>
       <p>Les compagnies repercutent une surcharge moyenne de <b>5%</b> sur l ensemble des contrats.</p>
     </div>
   </div>
-  <div class="logo" aria-label="Fynovates">FYNOVATES</div>
 </div>
 </body>
 </html>

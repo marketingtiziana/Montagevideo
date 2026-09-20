@@ -11,9 +11,24 @@ const { slides, PROVISOIRE } = require('./content/slides.js');
 const OUT = path.join(__dirname, 'slides');
 const TOTAL = 16;
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/* REGLAGES                                                            */
+/* ================================================================== */
+
+/** 'clair' (fond clair, texte navy) ou 'sombre' (fond navy, texte blanc). */
+const THEME = 'clair';
+
+/**
+ * Numeros des slides portant le logo Fynovates.
+ * []        aucune slide (reglage actuel)
+ * [1]       uniquement la couverture
+ * [1, 15]   couverture et derniere slide de contenu
+ */
+const LOGO_SLIDES = [];
+
+/* ================================================================== */
 /* Brand system                                                        */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 const BRAND = {
   navy:   '#0F1535',
   indigo: '#4F6BFF',
@@ -21,11 +36,35 @@ const BRAND = {
   grey:   '#A8B0C8'
 };
 
-/* ------------------------------------------------------------------ */
+const THEMES = {
+  clair: {
+    page:      '#F4F6FC',   // fond de slide
+    ink:       BRAND.navy,  // titres et mots mis en avant
+    body:      '#545E80',   // corps courant
+    accent:    BRAND.indigo,
+    logoInk:   BRAND.navy,
+    logoAlpha: 0.45,
+    coverMode: 'card'       // couverture : image en carte basse sur fond clair
+  },
+  sombre: {
+    page:      BRAND.navy,
+    ink:       BRAND.white,
+    body:      BRAND.grey,
+    accent:    BRAND.indigo,
+    logoInk:   BRAND.white,
+    logoAlpha: 0.6,
+    coverMode: 'overlay'    // couverture : image plein cadre + overlay navy 75%
+  }
+};
+
+const T = THEMES[THEME];
+if (!T) throw new Error(`[REGLAGE] THEME inconnu : "${THEME}" (attendu : clair ou sombre)`);
+
+/* ================================================================== */
 /* Garde-fous brand                                                    */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 const FORBIDDEN = [
-  [/—/, 'tiret cadratin (—) interdit'],
+  [/—/, 'tiret cadratin interdit'],
   [/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u, 'emoji interdit']
 ];
 function lint(txt, where) {
@@ -34,9 +73,9 @@ function lint(txt, where) {
   }
 }
 
-/* ------------------------------------------------------------------ */
-/* Markup inline : **black900 blanc**  /  *600 blanc*                  */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/* Markup inline : **Black 900**  /  *600*                             */
+/* ================================================================== */
 function esc(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -47,12 +86,12 @@ function inline(s, where) {
     .replace(/\*([^*]+)\*/g, '<em>$1</em>');    // noms propres / termes techniques
 }
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 /* Fragments                                                           */
-/* ------------------------------------------------------------------ */
-/* Inter est charge depuis Google Fonts (lien CDN), double d'une copie locale des
-   memes fichiers woff2 Google Fonts pour que l'export Playwright soit deterministe
-   meme sans reseau. Sans cette copie, Chromium retombe sur Arial. */
+/* ================================================================== */
+/* Inter est chargee depuis Google Fonts (lien CDN), doublee d'une copie locale
+   des memes fichiers woff2 pour que l'export Playwright soit deterministe meme
+   sans reseau. Sans cette copie, Chromium retombe sur Arial. */
 const FONTS = `  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">`;
@@ -78,10 +117,14 @@ const FONTFACE = `    @font-face {
         U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }`;
 
-const LOGO = `  <div class="logo" aria-label="Fynovates">FYNOVATES</div>`;
+function logo(n) {
+  return LOGO_SLIDES.includes(n)
+    ? `  <div class="logo" aria-label="Fynovates">FYNOVATES</div>\n`
+    : '';
+}
 
 function num(n) {
-  return `  <div class="num">${String(n).padStart(2, '0')} / ${TOTAL}</div>`;
+  return `    <div class="num">${String(n).padStart(2, '0')} / ${TOTAL}</div>`;
 }
 
 function bodyHtml(body, n) {
@@ -97,15 +140,15 @@ function bodyHtml(body, n) {
   }).join('\n');
 }
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 /* CSS commun                                                          */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 const RESET = `${FONTFACE}
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 1080px; height: 1350px;
       overflow: hidden;
-      background: ${BRAND.navy};
+      background: ${T.page};
       font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: geometricPrecision;
@@ -115,15 +158,15 @@ const RESET = `${FONTFACE}
       position: relative;
       width: 1080px; height: 1350px;
       overflow: hidden;
-      background: ${BRAND.navy};
+      background: ${T.page};
     }
-    b  { font-weight: 900; color: ${BRAND.white}; }
-    em { font-weight: 600; color: ${BRAND.white}; font-style: normal; }
+    b  { font-weight: 900; color: ${T.ink}; }
+    em { font-weight: 600; color: ${T.ink}; font-style: normal; }
     .logo {
       position: absolute; right: 90px; bottom: 56px;
       height: 40px; display: flex; align-items: center;
       font-weight: 900; font-size: 19px; letter-spacing: 0.20em;
-      color: ${BRAND.white}; opacity: 0.6;
+      color: ${T.logoInk}; opacity: ${T.logoAlpha};
       z-index: 5;
     }`;
 
@@ -135,14 +178,14 @@ const TEXTCOMMON = (bodySize) => `    .frame {
     }
     .num {
       font-weight: 900; font-size: 22px; letter-spacing: 0.14em;
-      color: ${BRAND.indigo};
+      color: ${T.accent};
       flex: none;
     }
     .title {
       margin-top: 44px;
       font-weight: 900; font-size: 56px; line-height: 1.08;
       letter-spacing: -0.015em;
-      color: ${BRAND.white};
+      color: ${T.ink};
       flex: none;
     }
     .body {
@@ -152,26 +195,20 @@ const TEXTCOMMON = (bodySize) => `    .frame {
       overflow: hidden;
       font-weight: 400; font-size: ${bodySize}px; line-height: 1.5;
       letter-spacing: -0.005em;
-      color: ${BRAND.grey};
+      color: ${T.body};
     }
     .body > * + * { margin-top: 1em; }
     .body ul { list-style: none; }
-    .body li {
-      position: relative;
-      padding-left: 1.05em;
-    }
+    .body li { position: relative; padding-left: 1.05em; }
     .body li + li { margin-top: 0.62em; }
     .body li::before {
       content: '';
       position: absolute; left: 0; top: 0.62em;
       width: 8px; height: 8px;
-      background: ${BRAND.indigo};
+      background: ${T.accent};
     }`;
 
-/* ------------------------------------------------------------------ */
-/* Gabarit A : couverture                                              */
-/* ------------------------------------------------------------------ */
-function tplA(s) {
+function doc(s, style, markup) {
   return `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -180,44 +217,80 @@ function tplA(s) {
 ${FONTS}
   <style>
 ${RESET}
-    .bg {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0;
+${style}
+  </style>
+</head>
+<body>
+${markup}
+</body>
+</html>
+`;
+}
+
+/* ================================================================== */
+/* Gabarit A : couverture                                              */
+/* ================================================================== */
+function tplA(s) {
+  const common = `    .rule {
+      width: 80px; height: 4px;
+      background: ${T.accent};
+      flex: none;
     }
-    .overlay {
-      position: absolute; inset: 0;
-      background: rgba(15, 21, 53, 0.75);
+    .title {
+      margin-top: 40px;
+      font-weight: 900; font-size: 88px; line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: ${T.ink};
+    }
+    .subtitle {
+      margin-top: 32px;
+      font-weight: 400; font-size: 34px; line-height: 1.4;
+      color: ${T.body};
+    }`;
+
+  if (T.coverMode === 'card') {
+    // Fond clair : le visuel devient une carte basse, le texte respire en haut.
+    const style = `${common}
+    .frame {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 110px 90px 0;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-start;
+    }
+    .cover-card {
+      position: absolute; left: 44px; right: 44px; bottom: 44px;
+      height: 600px;
+      border-radius: 24px;
+      overflow: hidden;
       z-index: 1;
     }
+    .cover-card img { width: 100%; height: 100%; object-fit: cover; display: block; }`;
+
+    const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
+  <div class="frame">
+    <div class="rule"></div>
+    <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
+    <p class="subtitle">${inline(s.subtitle, `slide ${s.n} / subtitle`)}</p>
+  </div>
+  <div class="cover-card"><img src="../assets/img/${s.img}" alt=""></div>
+${logo(s.n)}</div>`;
+    return doc(s, style, markup);
+  }
+
+  // Fond sombre : illustration plein cadre + overlay navy 75%.
+  const style = `${common}
+    .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .overlay { position: absolute; inset: 0; background: rgba(15, 21, 53, 0.75); z-index: 1; }
     .frame {
       position: relative; z-index: 2;
       width: 100%; height: 100%;
       padding: 90px;
       display: flex; flex-direction: column;
       align-items: flex-start; justify-content: center;
-    }
-    .rule {
-      width: 80px; height: 4px;
-      background: ${BRAND.indigo};
-      margin-bottom: 40px;
-      flex: none;
-    }
-    .title {
-      font-weight: 900; font-size: 88px; line-height: 1.04;
-      letter-spacing: -0.025em;
-      color: ${BRAND.white};
-    }
-    .subtitle {
-      margin-top: 36px;
-      font-weight: 400; font-size: 34px; line-height: 1.4;
-      color: ${BRAND.grey};
-    }
-  </style>
-</head>
-<body>
-<div class="slide" data-tpl="A" data-n="${s.n}">
+    }`;
+
+  const markup = `<div class="slide" data-tpl="A" data-n="${s.n}">
   <img class="bg" src="../assets/img/${s.img}" alt="">
   <div class="overlay"></div>
   <div class="frame">
@@ -225,30 +298,15 @@ ${RESET}
     <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
     <p class="subtitle">${inline(s.subtitle, `slide ${s.n} / subtitle`)}</p>
   </div>
-${LOGO}
-</div>
-</body>
-</html>
-`;
+${logo(s.n)}</div>`;
+  return doc(s, style, markup);
 }
 
-/* ------------------------------------------------------------------ */
-/* Gabarit B : texte seul sur navy plein                               */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/* Gabarit B : texte seul sur fond plein                               */
+/* ================================================================== */
 function tplB(s) {
-  return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Fynovates | Slide ${String(s.n).padStart(2, '0')}</title>
-${FONTS}
-  <style>
-${RESET}
-${TEXTCOMMON(32)}
-  </style>
-</head>
-<body>
-<div class="slide" data-tpl="B" data-n="${s.n}">
+  const markup = `<div class="slide" data-tpl="B" data-n="${s.n}">
   <div class="frame">
 ${num(s.n)}
     <h1 class="title">${inline(s.title, `slide ${s.n} / title`)}</h1>
@@ -256,26 +314,15 @@ ${num(s.n)}
 ${bodyHtml(s.body, s.n)}
     </div>
   </div>
-${LOGO}
-</div>
-</body>
-</html>
-`;
+${logo(s.n)}</div>`;
+  return doc(s, TEXTCOMMON(32), markup);
 }
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 /* Gabarit C : bandeau illustration 520px + texte                      */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 function tplC(s) {
-  return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Fynovates | Slide ${String(s.n).padStart(2, '0')}</title>
-${FONTS}
-  <style>
-${RESET}
-${TEXTCOMMON(28)}
+  const style = `${TEXTCOMMON(28)}
     .banner {
       position: absolute; top: 44px; left: 44px; right: 44px;
       height: 520px;
@@ -283,11 +330,7 @@ ${TEXTCOMMON(28)}
       overflow: hidden;
       z-index: 1;
     }
-    .banner img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .banner::after {
       content: '';
       position: absolute; inset: 0;
@@ -295,11 +338,9 @@ ${TEXTCOMMON(28)}
     }
     .frame { padding-top: 608px; }
     .title { font-size: 52px; margin-top: 36px; }
-    .body  { margin-top: 36px; }
-  </style>
-</head>
-<body>
-<div class="slide" data-tpl="C" data-n="${s.n}">
+    .body  { margin-top: 36px; }`;
+
+  const markup = `<div class="slide" data-tpl="C" data-n="${s.n}">
   <div class="banner"><img src="../assets/img/${s.img}" alt=""></div>
   <div class="frame">
 ${num(s.n)}
@@ -308,27 +349,15 @@ ${num(s.n)}
 ${bodyHtml(s.body, s.n)}
     </div>
   </div>
-${LOGO}
-</div>
-</body>
-</html>
-`;
+${logo(s.n)}</div>`;
+  return doc(s, style, markup);
 }
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 /* Gabarit CTA : slide 16                                              */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 function tplCTA(s) {
-  return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Fynovates | Slide ${String(s.n).padStart(2, '0')}</title>
-${FONTS}
-  <style>
-${RESET}
-    .slide { background: ${BRAND.indigo}; }
-    html, body { background: ${BRAND.indigo}; }
+  const style = `    html, body, .slide { background: ${BRAND.indigo}; }
     .frame {
       width: 100%; height: 100%;
       padding: 90px;
@@ -339,21 +368,17 @@ ${RESET}
       letter-spacing: -0.02em;
       text-align: center;
       color: ${BRAND.navy};
-    }
-  </style>
-</head>
-<body>
-<div class="slide" data-tpl="CTA" data-n="${s.n}">
+    }`;
+
+  const markup = `<div class="slide" data-tpl="CTA" data-n="${s.n}">
   <div class="frame">
     <div class="cta" data-base="72" data-min="48">${inline(s.title, `slide ${s.n} / cta`)}</div>
   </div>
-</div>
-</body>
-</html>
-`;
+</div>`;
+  return doc(s, style, markup);
 }
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 const RENDER = { A: tplA, B: tplB, C: tplC, CTA: tplCTA };
 
 fs.mkdirSync(OUT, { recursive: true });
@@ -369,7 +394,10 @@ for (const s of slides) {
   fs.writeFileSync(file, fn(s), 'utf8');
 }
 
-console.log(`OK  ${slides.length} slides ecrites dans slides/`);
+console.log(`OK  ${slides.length} slides ecrites dans slides/  (theme : ${THEME})`);
+console.log(LOGO_SLIDES.length
+  ? `OK  logo sur les slides ${LOGO_SLIDES.join(', ')}`
+  : 'OK  aucun logo sur les slides');
 if (PROVISOIRE) {
   console.log('!!  content/slides.js est encore en TEXTES PROVISOIRES (PROVISOIRE = true)');
 }
