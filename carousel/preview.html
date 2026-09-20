@@ -37,6 +37,24 @@
     display: flex; align-items: center; gap: 10px;
     padding: 12px 14px; font-size: 12px;
   }
+  .dl { margin-left: auto; display: flex; gap: 6px; }
+  .dl a {
+    padding: 4px 9px; border-radius: 999px;
+    background: rgba(79,107,255,.16); color: #A9B8FF;
+    text-decoration: none; font-weight: 600; font-size: 11px;
+    letter-spacing: .04em;
+  }
+  .dl a:hover { background: var(--indigo); color: #fff; }
+  .bar {
+    margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    font-size: 13px; color: var(--grey);
+  }
+  .bar a {
+    padding: 9px 16px; border-radius: 10px;
+    background: var(--indigo); color: #fff;
+    text-decoration: none; font-weight: 600;
+  }
+  .bar a.ghost { background: rgba(79,107,255,.16); color: #A9B8FF; }
   .n { font-weight: 900; color: var(--indigo); letter-spacing: .12em; }
   .tag { color: var(--grey); }
   .card.bad .tag { color: #ff9ecb; }
@@ -45,106 +63,207 @@
 <body>
   <header>
     <h1>Carousel Moyen-Orient : 16 slides, 1080 x 1350</h1>
-    <div class="meta">Export du 2026-09-20 17:38 &middot; PNG dans output/carousel-moyen-orient/ &middot; cliquer une vignette pour l ouvrir en taille reelle</div>
+    <div class="meta">Export du 2026-09-20 17:42 &middot; cliquer une vignette pour l ouvrir en taille reelle, ou 1080 / 2160 pour la telecharger</div>
+    <div class="bar">
+      <a download href="output/carousel-moyen-orient.zip?v=1789926162698">Telecharger les 16 slides (1080 x 1350)</a>
+      <a class="ghost" download href="output/carousel-moyen-orient-2x.zip?v=1789926162698">Version 2160 x 2700</a>
+      <span>1080 x 1350 est le format attendu par Instagram. Le 2160 x 2700 sert a l archive et a l impression.</span>
+    </div>
   </header>
 
 
   <div class="grid">
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-01.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-01.png?v=1789925911742" alt="Slide 01" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-01.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-01.png?v=1789926162698" alt="Slide 01" loading="lazy">
       </a>
-      <figcaption><span class="n">01</span></figcaption>
+      <figcaption>
+        <span class="n">01</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-01.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-01@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-02.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-02.png?v=1789925911742" alt="Slide 02" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-02.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-02.png?v=1789926162698" alt="Slide 02" loading="lazy">
       </a>
-      <figcaption><span class="n">02</span><span class="tag">corps reduit 28 -> 26px / bandeau reduit a 500px</span></figcaption>
+      <figcaption>
+        <span class="n">02</span><span class="tag">corps reduit 28 -> 26px / bandeau reduit a 500px</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-02.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-02@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-03.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-03.png?v=1789925911742" alt="Slide 03" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-03.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-03.png?v=1789926162698" alt="Slide 03" loading="lazy">
       </a>
-      <figcaption><span class="n">03</span><span class="tag">corps reduit 28 -> 26px / bandeau reduit a 440px</span></figcaption>
+      <figcaption>
+        <span class="n">03</span><span class="tag">corps reduit 28 -> 26px / bandeau reduit a 440px</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-03.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-03@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-04.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-04.png?v=1789925911742" alt="Slide 04" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-04.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-04.png?v=1789926162698" alt="Slide 04" loading="lazy">
       </a>
-      <figcaption><span class="n">04</span></figcaption>
+      <figcaption>
+        <span class="n">04</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-04.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-04@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-05.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-05.png?v=1789925911742" alt="Slide 05" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-05.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-05.png?v=1789926162698" alt="Slide 05" loading="lazy">
       </a>
-      <figcaption><span class="n">05</span><span class="tag">corps reduit 28 -> 26px / bandeau reduit a 500px</span></figcaption>
+      <figcaption>
+        <span class="n">05</span><span class="tag">corps reduit 28 -> 26px / bandeau reduit a 500px</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-05.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-05@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-06.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-06.png?v=1789925911742" alt="Slide 06" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-06.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-06.png?v=1789926162698" alt="Slide 06" loading="lazy">
       </a>
-      <figcaption><span class="n">06</span></figcaption>
+      <figcaption>
+        <span class="n">06</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-06.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-06@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-07.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-07.png?v=1789925911742" alt="Slide 07" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-07.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-07.png?v=1789926162698" alt="Slide 07" loading="lazy">
       </a>
-      <figcaption><span class="n">07</span></figcaption>
+      <figcaption>
+        <span class="n">07</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-07.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-07@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-08.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-08.png?v=1789925911742" alt="Slide 08" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-08.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-08.png?v=1789926162698" alt="Slide 08" loading="lazy">
       </a>
-      <figcaption><span class="n">08</span></figcaption>
+      <figcaption>
+        <span class="n">08</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-08.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-08@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-09.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-09.png?v=1789925911742" alt="Slide 09" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-09.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-09.png?v=1789926162698" alt="Slide 09" loading="lazy">
       </a>
-      <figcaption><span class="n">09</span></figcaption>
+      <figcaption>
+        <span class="n">09</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-09.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-09@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-10.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-10.png?v=1789925911742" alt="Slide 10" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-10.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-10.png?v=1789926162698" alt="Slide 10" loading="lazy">
       </a>
-      <figcaption><span class="n">10</span></figcaption>
+      <figcaption>
+        <span class="n">10</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-10.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-10@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-11.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-11.png?v=1789925911742" alt="Slide 11" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-11.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-11.png?v=1789926162698" alt="Slide 11" loading="lazy">
       </a>
-      <figcaption><span class="n">11</span></figcaption>
+      <figcaption>
+        <span class="n">11</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-11.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-11@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-12.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-12.png?v=1789925911742" alt="Slide 12" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-12.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-12.png?v=1789926162698" alt="Slide 12" loading="lazy">
       </a>
-      <figcaption><span class="n">12</span></figcaption>
+      <figcaption>
+        <span class="n">12</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-12.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-12@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-13.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-13.png?v=1789925911742" alt="Slide 13" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-13.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-13.png?v=1789926162698" alt="Slide 13" loading="lazy">
       </a>
-      <figcaption><span class="n">13</span></figcaption>
+      <figcaption>
+        <span class="n">13</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-13.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-13@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-14.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-14.png?v=1789925911742" alt="Slide 14" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-14.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-14.png?v=1789926162698" alt="Slide 14" loading="lazy">
       </a>
-      <figcaption><span class="n">14</span></figcaption>
+      <figcaption>
+        <span class="n">14</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-14.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-14@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-15.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-15.png?v=1789925911742" alt="Slide 15" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-15.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-15.png?v=1789926162698" alt="Slide 15" loading="lazy">
       </a>
-      <figcaption><span class="n">15</span></figcaption>
+      <figcaption>
+        <span class="n">15</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-15.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-15@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
     <figure class="card">
-      <a href="output/carousel-moyen-orient/slide-16.png?v=1789925911742" target="_blank">
-        <img src="output/carousel-moyen-orient/slide-16.png?v=1789925911742" alt="Slide 16" loading="lazy">
+      <a href="output/carousel-moyen-orient/slide-16.png?v=1789926162698" target="_blank">
+        <img src="output/carousel-moyen-orient/slide-16.png?v=1789926162698" alt="Slide 16" loading="lazy">
       </a>
-      <figcaption><span class="n">16</span></figcaption>
+      <figcaption>
+        <span class="n">16</span>
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/slide-16.png?v=1789926162698">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/slide-16@2x.png?v=1789926162698">2160</a>
+        </span>
+      </figcaption>
     </figure>
   </div>
 </body>

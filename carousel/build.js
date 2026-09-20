@@ -11,6 +11,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const { chromium } = require('playwright');
 const sharp = require('sharp');
 const { PROVISOIRE } = require('./content/slides.js');
@@ -28,9 +29,13 @@ function chromePath() {
 const W = 1080, H = 1350, SCALE = 2;
 const SRC = path.join(__dirname, 'slides');
 const OUT = path.join(__dirname, 'output', 'carousel-moyen-orient');
+/* Export haute definition : la capture Playwright est deja en 2160x2700,
+   on l'ecrit telle quelle en plus du 1080x1350. Aucun rendu supplementaire. */
+const OUT2X = path.join(__dirname, 'output', 'carousel-moyen-orient-2x');
 
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
+  fs.mkdirSync(OUT2X, { recursive: true });
   const files = fs.readdirSync(SRC).filter(f => /^slide-\d{2}\.html$/.test(f)).sort();
   if (!files.length) throw new Error('Aucune slide trouvee dans slides/ . Lancer d abord : node gen-slides.js');
 
@@ -128,6 +133,10 @@ const OUT = path.join(__dirname, 'output', 'carousel-moyen-orient');
       .resize(W, H, { kernel: sharp.kernel.lanczos3, fit: 'fill' })
       .png({ compressionLevel: 9 })
       .toFile(png);
+    // meme capture, sans downscale : 2160x2700 pour l'archive et l'impression
+    await sharp(buf)
+      .png({ compressionLevel: 9 })
+      .toFile(path.join(OUT2X, f.replace('.html', '@2x.png')));
 
     report.push({ file: f, png: path.basename(png), ...fit });
   }
@@ -150,15 +159,36 @@ const OUT = path.join(__dirname, 'output', 'carousel-moyen-orient');
     console.log(`  ${r.file.padEnd(16)} ${corps.padEnd(10)} ${titre.padEnd(9)} ${etat}`);
   }
 
+  zipAll();
   writePreview(report, warnings);
 
   console.log(`\nOK  ${report.length} PNG 1080x1350 dans output/carousel-moyen-orient/`);
+  console.log(`OK  ${report.length} PNG 2160x2700 dans output/carousel-moyen-orient-2x/`);
   console.log('OK  preview.html regenere');
   if (warnings.length) {
     console.log('\nA CORRIGER :');
     for (const w of warnings) console.log('  - ' + w);
   }
 })();
+
+/* ------------------------------------------------------------------ */
+/* Archives : un ZIP par resolution, pour tout recuperer d un coup      */
+/* ------------------------------------------------------------------ */
+function zipAll() {
+  const outDir = path.join(__dirname, 'output');
+  for (const dir of ['carousel-moyen-orient', 'carousel-moyen-orient-2x']) {
+    const zip = path.join(outDir, `${dir}.zip`);
+    fs.rmSync(zip, { force: true });
+    try {
+      execFileSync('zip', ['-q', '-r', '-9', zip, dir], { cwd: outDir });
+    } catch (e) {
+      console.log(`!!  archive ${dir}.zip non creee (${e.message.split('\n')[0]})`);
+      continue;
+    }
+    const mo = (fs.statSync(zip).size / 1048576).toFixed(1);
+    console.log(`OK  output/${dir}.zip (${mo} Mo)`);
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /* preview.html : les 16 PNG cote a cote pour validation d un coup d oeil */
@@ -179,7 +209,13 @@ function writePreview(report, warnings) {
       <a href="output/carousel-moyen-orient/${r.png}?v=${v}" target="_blank">
         <img src="output/carousel-moyen-orient/${r.png}?v=${v}" alt="Slide ${n}" loading="lazy">
       </a>
-      <figcaption><span class="n">${n}</span>${tags.length ? `<span class="tag">${tags.join(' / ')}</span>` : ''}</figcaption>
+      <figcaption>
+        <span class="n">${n}</span>${tags.length ? `<span class="tag">${tags.join(' / ')}</span>` : ''}
+        <span class="dl">
+          <a download href="output/carousel-moyen-orient/${r.png}?v=${v}">1080</a>
+          <a download href="output/carousel-moyen-orient-2x/${r.png.replace('.png', '@2x.png')}?v=${v}">2160</a>
+        </span>
+      </figcaption>
     </figure>`;
   }).join('\n');
 
@@ -230,6 +266,24 @@ function writePreview(report, warnings) {
     display: flex; align-items: center; gap: 10px;
     padding: 12px 14px; font-size: 12px;
   }
+  .dl { margin-left: auto; display: flex; gap: 6px; }
+  .dl a {
+    padding: 4px 9px; border-radius: 999px;
+    background: rgba(79,107,255,.16); color: #A9B8FF;
+    text-decoration: none; font-weight: 600; font-size: 11px;
+    letter-spacing: .04em;
+  }
+  .dl a:hover { background: var(--indigo); color: #fff; }
+  .bar {
+    margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    font-size: 13px; color: var(--grey);
+  }
+  .bar a {
+    padding: 9px 16px; border-radius: 10px;
+    background: var(--indigo); color: #fff;
+    text-decoration: none; font-weight: 600;
+  }
+  .bar a.ghost { background: rgba(79,107,255,.16); color: #A9B8FF; }
   .n { font-weight: 900; color: var(--indigo); letter-spacing: .12em; }
   .tag { color: var(--grey); }
   .card.bad .tag { color: #ff9ecb; }
@@ -238,7 +292,12 @@ function writePreview(report, warnings) {
 <body>
   <header>
     <h1>Carousel Moyen-Orient : 16 slides, 1080 x 1350</h1>
-    <div class="meta">Export du ${stamp} &middot; PNG dans output/carousel-moyen-orient/ &middot; cliquer une vignette pour l ouvrir en taille reelle</div>
+    <div class="meta">Export du ${stamp} &middot; cliquer une vignette pour l ouvrir en taille reelle, ou 1080 / 2160 pour la telecharger</div>
+    <div class="bar">
+      <a download href="output/carousel-moyen-orient.zip?v=${v}">Telecharger les 16 slides (1080 x 1350)</a>
+      <a class="ghost" download href="output/carousel-moyen-orient-2x.zip?v=${v}">Version 2160 x 2700</a>
+      <span>1080 x 1350 est le format attendu par Instagram. Le 2160 x 2700 sert a l archive et a l impression.</span>
+    </div>
   </header>
 ${banner}
 ${warnBlock}

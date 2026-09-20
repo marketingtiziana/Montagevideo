@@ -132,7 +132,25 @@ npm run build   # slides/*.html    -> output/carousel-moyen-orient/*.png + previ
 npm run all     # les deux
 ```
 
-Ouvrir ensuite `preview.html` pour valider les 16 slides d'un coup d'oeil.
+Ouvrir ensuite `preview.html` pour valider les 16 slides d'un coup d'oeil et les
+telecharger.
+
+## Recuperer les PNG
+
+Chaque build produit deux resolutions depuis la meme capture, sans rendu
+supplementaire :
+
+| Dossier | Taille | Usage |
+|---|---|---|
+| `output/carousel-moyen-orient/` | 1080 x 1350 | le format attendu par Instagram, a publier tel quel |
+| `output/carousel-moyen-orient-2x/` | 2160 x 2700 | archive, impression, recadrage ulterieur |
+
+Et deux archives, regenerees a chaque build :
+`output/carousel-moyen-orient.zip` et `output/carousel-moyen-orient-2x.zip`.
+Elles ne sont pas versionnees, les PNG sources le sont deja.
+
+`preview.html` porte un bouton par slide pour chaque resolution, plus deux
+boutons pour tout recuperer d'un coup.
 
 ## Theme et logo
 
@@ -243,6 +261,8 @@ carousel/
   build.js              HTML -> PNG + preview.html
   assets/img/           6 illustrations Higgsfield
   assets/fonts/         Inter woff2 (Google Fonts, copie locale)
-  output/carousel-moyen-orient/   slide-01.png ... slide-16.png  <- livrable
-  preview.html          les 16 PNG cote a cote (genere)
+  output/carousel-moyen-orient/      slide-01.png ... slide-16.png   <- livrable
+  output/carousel-moyen-orient-2x/   slide-01@2x.png ... (2160x2700)
+  output/*.zip                       archives, regenerees a chaque build
+  preview.html          les 16 PNG cote a cote, avec telechargement (genere)
 ```

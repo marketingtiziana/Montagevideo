@@ -17,3 +17,6 @@ __pycache__/
 
 # Dependances npm
 node_modules/
+
+# Archives generees a chaque build, les PNG sources sont deja versionnes
+carousel/output/*.zip
