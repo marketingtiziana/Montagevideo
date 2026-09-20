@@ -7,65 +7,50 @@
 </head>
 <body>
 <div class="slide">
-  <div class="top"><span class="idx">04 / 09</span></div>
 
-      <div class="main">
-        <h2 class="title">Leur vrai circuit</h2>
-        <div class="diagram">
-<svg viewBox="0 0 900 610" role="img" aria-label="Circuit societe vers holding vers capital">
-  
+<svg class="decor bleed" viewBox="0 0 1080 1350" aria-hidden="true">
   <defs>
-    <marker id="ahBlue" viewBox="0 0 12 12" refX="10" refY="6"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#2563EB"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </marker>
-    <marker id="ahGrey" viewBox="0 0 12 12" refX="10" refY="6"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#9CA3AF"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </marker>
+    <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0 L0 0 0 46" fill="none" stroke="#4353FF" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
   </defs>
-  <!-- SOCIETE -->
-  <rect x="0" y="0" width="250" height="210" rx="8" fill="none" stroke="#60A5FA" stroke-width="2"/>
-  <text x="125" y="98"  class="svg-name" font-size="26" text-anchor="middle">SOCIÉTÉ</text>
-  <text x="125" y="135" class="svg-lab"  font-size="22" text-anchor="middle">(profits)</text>
+  <rect x="-24" y="-24" width="418" height="418" fill="url(#grid)"/>
+  <rect x="746" y="1016" width="380" height="380" fill="url(#grid)"/>
+  <circle cx="1012" cy="1244" r="152" fill="none" stroke="#4353FF" stroke-opacity="0.12" stroke-width="1.5"/>
+</svg>
+  <div class="num">04</div>
 
-  <line x1="262" y1="105" x2="313" y2="105" stroke="#2563EB" stroke-width="2.5"
-        stroke-linecap="round" marker-end="url(#ahBlue)"/>
-
-  <!-- HOLDING -->
-  <rect x="325" y="0" width="250" height="210" rx="8"
-        fill="rgba(37,99,235,0.10)" stroke="#2563EB" stroke-width="2.5"/>
-  <text x="450" y="86"  class="svg-name" font-size="26" text-anchor="middle">HOLDING</text>
-  <text x="450" y="123" class="svg-lab"  font-size="21" text-anchor="middle">(dividendes, quasi</text>
-  <text x="450" y="150" class="svg-lab"  font-size="21" text-anchor="middle">sans friction)</text>
-
-  <line x1="587" y1="105" x2="638" y2="105" stroke="#2563EB" stroke-width="2.5"
-        stroke-linecap="round" marker-end="url(#ahBlue)"/>
-
-  <!-- CAPITAL -->
-  <rect x="650" y="0" width="250" height="210" rx="8"
-        fill="rgba(37,99,235,0.18)" stroke="#2563EB" stroke-width="2.5"/>
-  <text x="775" y="98"  class="svg-name" font-size="26" text-anchor="middle">CAPITAL</text>
-  <text x="775" y="135" class="svg-lab"  font-size="21" text-anchor="middle">(grossit à l'abri)</text>
-
-  <!-- derivation pointillee : salaire minimal -->
-  <line x1="125" y1="210" x2="125" y2="470" stroke="#9CA3AF" stroke-width="2"
-        stroke-dasharray="7 9" stroke-linecap="round" marker-end="url(#ahGrey)"/>
-  <text x="155" y="348" class="svg-lab" font-size="21">salaire minimal</text>
-
-  <rect x="10" y="494" width="230" height="104" rx="8"
-        fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-opacity="0.45"/>
-  <text x="125" y="553" class="svg-lab" font-size="22" text-anchor="middle">train de vie</text>
-</svg></div>
-        <p class="kicker">Ils ne vivent pas de leur revenu.<br>Ils vivent de leur structure.</p>
+      <div class="head"><span class="badge">LEUR CIRCUIT</span></div>
+      <h1 class="title">Ils ne touchent pas<br>leur argent.<br>Ils le <span class="blue">positionnent</span>.</h1>
+      <div class="zone">
+        <div class="flow">
+          <div class="flow-card flow-card--light">
+            <span class="flow-name">SOCIÉTÉ</span>
+            <span class="flow-desc">— les profits restent dedans</span>
+          </div>
+          
+<svg class="flow-arrow" width="26" height="58" viewBox="0 0 26 58" aria-hidden="true">
+  <line x1="13" y1="3" x2="13" y2="44" stroke="#4353FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M6 40 L13 50 L20 40" fill="none" stroke="#4353FF" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+          <div class="flow-card flow-card--light">
+            <span class="flow-name">HOLDING</span>
+            <span class="flow-desc">— dividendes quasi sans friction</span>
+          </div>
+          
+<svg class="flow-arrow" width="26" height="58" viewBox="0 0 26 58" aria-hidden="true">
+  <line x1="13" y1="3" x2="13" y2="44" stroke="#4353FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M6 40 L13 50 L20 40" fill="none" stroke="#4353FF" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+          <div class="flow-card flow-card--blue">
+            <span class="flow-name">CAPITAL</span>
+            <span class="flow-desc">— grossit à l'abri, année après année</span>
+          </div>
+        </div>
       </div>
-  <div class="foot">
-    <span>FYNOVATES</span>
-    
-    <span>@madame.caci</span>
-  </div>
+      <p class="chute">Ils vivent de leur <span class="blue">structure</span>.<br>Pas de leur revenu.</p>
 </div>
 </body>
 </html>
