@@ -212,7 +212,11 @@ html, body {
 .bubble--r { align-self: flex-end;  max-width: 80%; border-bottom-right-radius: 8px; text-align: right; }
 
 /* ---------- illustration de couverture (deck DM, slide 1) ---------- */
-.illus { position: absolute; left: 0; bottom: 0; width: 600px; }
+.illus {
+  position: absolute; left: 44px; bottom: 0; height: 742px;
+  filter: drop-shadow(0 34px 64px rgba(67, 83, 255, 0.22))
+          drop-shadow(0 8px 18px rgba(18, 18, 31, 0.10));
+}
 .illus-ph {
   position: absolute; left: 40px; bottom: 60px; width: 470px; height: 560px;
   border: 2px dashed rgba(67, 83, 255, 0.28); border-radius: var(--r);
