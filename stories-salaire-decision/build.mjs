@@ -41,6 +41,7 @@ const LIMITE_STORY6 = 900;           // la moitié basse reste au sondage
 const GOUTTIERE = 96;
 
 const TAILLES = [600, 580, 560, 540, 520, 500, 480, 460]; // tailles d'illustration candidates
+const OCCUPATION = 0.94;  // part du cadre carré occupée par le dessin, identique sur les 6
 
 /* ------------------------------------------------------------------ texte */
 
@@ -55,7 +56,17 @@ const typo = (t) =>
 const escapeHtml = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-/** __mot__ → <u> : le seul procédé de mise en valeur de la série. */
+/**
+ * __mot__ → <u> : le seul procédé de mise en valeur de la série.
+ *
+ * Une locution soulignée courte reste insécable : coupée en fin de ligne, son
+ * filet se briserait en deux morceaux et se lirait comme une coquille. Au-delà,
+ * on laisse le texte se composer normalement — « des dizaines de milliers
+ * d'euros d'écart » ne peut pas tenir sur une ligne, et son filet en deux
+ * tronçons est alors l'écriture normale de la locution.
+ */
+const INSECABLE_MAX = 18;
+
 function rich(source) {
   const text = typo(source);
   const re = /__(.+?)__/gs;
@@ -63,7 +74,8 @@ function rich(source) {
   let pos = 0;
   for (const m of text.matchAll(re)) {
     out += escapeHtml(text.slice(pos, m.index));
-    out += `<u>${escapeHtml(m[1])}</u>`;
+    const classe = m[1].length <= INSECABLE_MAX ? ' class="insecable"' : '';
+    out += `<u${classe}>${escapeHtml(m[1])}</u>`;
     pos = m.index + m[0].length;
   }
   return out + escapeHtml(text.slice(pos));
@@ -101,7 +113,7 @@ function findChrome() {
  *
  * Tourne dans la page : c'est le canvas de Chromium qui fait le travail.
  */
-const NETTOIE = async (dataUri, seuil) => {
+const NETTOIE = async (dataUri, seuil, occupation) => {
   const img = new Image();
   img.src = dataUri;
   await img.decode();
@@ -153,13 +165,49 @@ const NETTOIE = async (dataUri, seuil) => {
   let minApres = 255;
   for (const i of bord) minApres = Math.min(minApres, d2[i]);
 
+  // --- recadrage : boîte englobante de l'encre --------------------------
+  // Higgsfield cadre chaque dessin à sa guise : l'un flotte en haut à gauche,
+  // l'autre remplit le carré. Posés à la même taille dans six stories, ils
+  // n'auraient ni la même échelle apparente ni le même centre. On recadre donc
+  // sur l'encre, puis on repose le dessin au centre d'un carré dont le côté est
+  // calculé pour que l'encre occupe toujours la même part du cadre.
+  let x0 = c.width, y0 = c.height, x1 = -1, y1 = -1;
+  for (let y = 0; y < c.height; y++) {
+    for (let x = 0; x < c.width; x++) {
+      if (d2[(y * c.width + x) * 4] < 200) {
+        if (x < x0) x0 = x;
+        if (x > x1) x1 = x;
+        if (y < y0) y0 = y;
+        if (y > y1) y1 = y;
+      }
+    }
+  }
+  if (x1 < 0) throw new Error('image vide : aucune encre détectée');
+
+  const bw = x1 - x0 + 1;
+  const bh = y1 - y0 + 1;
+  const cote = Math.round(Math.max(bw, bh) / occupation);
+
+  const carre = document.createElement('canvas');
+  carre.width = cote;
+  carre.height = cote;
+  const cx = carre.getContext('2d');
+  cx.fillStyle = '#FFFFFF';
+  cx.fillRect(0, 0, cote, cote);
+  cx.drawImage(
+    c, x0, y0, bw, bh,
+    Math.round((cote - bw) / 2), Math.round((cote - bh) / 2), bw, bh
+  );
+
   return {
-    uri: c.toDataURL('image/png'),
+    uri: carre.toDataURL('image/png'),
     largeur: c.width,
     hauteur: c.height,
     minBordAvant: minBord,
     teinteAvant,
     minBordApres: minApres,
+    boite: `${bw}×${bh}`,
+    cadre: cote,
     // part de pixels franchement noirs : le proxy d'épaisseur de trait
     encre: +((encre / (c.width * c.height)) * 100).toFixed(2),
   };
@@ -218,12 +266,43 @@ const MESURE = () => {
   };
 };
 
-/** Le fond de la story doit rester du blanc pur partout où il n'y a pas d'encre. */
-const VERIFIE_BLANC = () => {
+/**
+ * Audit du PNG produit, relu pixel par pixel : la direction artistique interdit
+ * toute couleur, et la zone basse doit être rigoureusement vide.
+ */
+const AUDITE = async (dataUri, limite) => {
+  const img = new Image();
+  img.src = dataUri;
+  await img.decode();
+
   const c = document.createElement('canvas');
-  c.width = 1080;
-  c.height = 1920;
-  return null; // (la vérification se fait sur l'illustration nettoyée, avant rendu)
+  c.width = img.naturalWidth;
+  c.height = img.naturalHeight;
+  const x = c.getContext('2d', { willReadFrequently: true });
+  x.drawImage(img, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height).data;
+
+  let blancs = 0, total = 0, teinte = 0, sousLigne = 0, premierBas = null;
+  for (let y = 0; y < c.height; y++) {
+    for (let px = 0; px < c.width; px++) {
+      const k = (y * c.width + px) * 4;
+      const [R, G, B] = [d[k], d[k + 1], d[k + 2]];
+      total++;
+      if (R === 255 && G === 255 && B === 255) blancs++;
+      const t = Math.max(Math.abs(R - G), Math.abs(G - B), Math.abs(R - B));
+      if (t > teinte) teinte = t;
+      if (y >= limite && (R < 250 || G < 250 || B < 250)) {
+        sousLigne++;
+        if (premierBas === null) premierBas = y;
+      }
+    }
+  }
+  return {
+    partBlanche: +((blancs / total) * 100).toFixed(1),
+    teinte,
+    sousLigne,
+    premierBas,
+  };
 };
 
 /* -------------------------------------------------------------- exécution */
@@ -259,7 +338,7 @@ async function main() {
     for (const story of STORIES) {
       const brut = 'data:image/png;base64,' +
         readFileSync(join(ILLU, story.illu)).toString('base64');
-      const r = await page.evaluate(NETTOIE, brut, 240);
+      const r = await page.evaluate(NETTOIE, brut, 240, OCCUPATION);
 
       if (r.minBordApres !== 255) {
         throw new Error(
@@ -277,7 +356,8 @@ async function main() {
       });
       console.log(
         `    illu-${story.n} ${r.largeur}×${r.hauteur} — fond d'origine ${r.minBordAvant}/255 ` +
-        `(teinte ${r.teinteAvant}) → 255/255, encre ${r.encre}%`
+        `(teinte ${r.teinteAvant}) → 255/255, encre ${r.encre}%, ` +
+        `dessin ${r.boite} recadré sur ${r.cadre}×${r.cadre}`
       );
     }
 
@@ -358,11 +438,29 @@ async function main() {
       const [lx, ly] = [png.readUInt32BE(16), png.readUInt32BE(20)];
       if (lx !== W || ly !== H) throw new Error(`Story ${story.n} : export ${lx}×${ly}.`);
 
+      // Relecture du PNG livré : aucune couleur, aucune encre sous la ligne.
+      const audit = await page.evaluate(
+        AUDITE, `data:image/png;base64,${png.toString('base64')}`, limite
+      );
+      if (audit.teinte !== 0) {
+        throw new Error(
+          `Story ${story.n} : le rendu n'est pas strictement gris ` +
+          `(écart de teinte ${audit.teinte}). La direction artistique interdit la couleur.`
+        );
+      }
+      if (audit.sousLigne !== 0) {
+        throw new Error(
+          `Story ${story.n} : ${audit.sousLigne} pixels d'encre sous la ligne des ${limite}px ` +
+          `(le premier à ${audit.premierBas}px).`
+        );
+      }
+
       const ligne = rapport.find((r) => r.n === story.n);
-      Object.assign(ligne, { taille, ...m, limite });
+      Object.assign(ligne, { taille, ...m, limite, ...audit });
       console.log(
         `  ✓ output/story-${story.n}.png — illustration ${taille}px à ${m.illuHaut}→${m.illuBas}px, ` +
-        `texte ${m.texteHaut}→${m.texteBas}px / ${limite}px`
+        `texte ${m.texteHaut}→${m.texteBas}px / ${limite}px, ` +
+        `${audit.partBlanche}% de blanc pur, teinte ${audit.teinte}`
       );
     }
   } finally {

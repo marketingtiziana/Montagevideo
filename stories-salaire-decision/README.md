@@ -69,9 +69,21 @@ homogène. La story 6 fait exception — c'est la seule qui doit tenir tout enti
 900 px, ce qu'un dessin de 600 px rend arithmétiquement impossible (220 + 600 + 64 px de
 texte dépasse déjà la ligne sans même un espace entre les deux).
 
+## Le recadrage des dessins
+
+Higgsfield cadre chaque dessin à sa guise : le levier flottait en haut à gauche avec le tiers
+bas vide, les deux silhouettes remplissaient le carré. Posés tels quels à la même taille dans
+six stories, ils n'auraient eu ni la même échelle apparente ni le même centre — la série se
+serait vue en planche.
+
+Le build recadre donc chaque dessin sur la **boîte englobante de son encre**, puis le repose
+au centre d'un carré dont le côté est calculé pour que le dessin occupe toujours **94 % du
+cadre**. Les six ont alors la même présence, quel que soit le cadrage d'origine. Le relevé
+(boîte trouvée, carré reconstruit) est affiché à chaque build.
+
 ## Les garde-fous du build
 
-Le build échoue — il ne livre pas — si l'un des quatre contrôles ne passe pas.
+Le build échoue — il ne livre pas — si l'un des cinq contrôles ne passe pas.
 
 **1. Le blanc est-il pur ?** Higgsfield ne rend jamais un `#FFFFFF` exact : il reste un voile
 crème invisible isolément, mais qui dessine un carré net une fois posé sur le blanc de la
@@ -86,15 +98,31 @@ rendu.
 
 **4. L'export fait-il 1080 × 1920 ?** Lu dans l'en-tête du PNG produit, pas supposé.
 
+**5. Le PNG livré tient-il la direction artistique ?** Le build **relit son propre export,
+pixel par pixel** : l'écart de teinte maximal doit être de 0 — aucune couleur nulle part, pas
+même un résidu d'un pixel — et le compte de pixels encrés sous la ligne basse doit être nul.
+C'est le seul contrôle qui porte sur le fichier livré plutôt que sur le DOM qui l'a produit.
+
+Relevé du build livré : teinte 0 sur les six, entre 95,8 % et 99 % de blanc pur, zéro pixel
+sous la ligne.
+
 Le build affiche en plus, pour chaque dessin, sa **part de pixels franchement noirs**. C'est
 le proxy chiffré de l'épaisseur de trait : deux illustrations de la même série doivent tomber
-dans le même ordre de grandeur, et un écart franc signale un dessin à régénérer.
+dans le même ordre de grandeur, et un écart franc signale un dessin à régénérer. Sur cette
+série : de 0,39 % (le point d'interrogation, un trait unique) à 1,71 % (les deux silhouettes,
+qui portent plus de contour) — un rapport de densité qui suit la quantité de dessin, pas un
+changement de graisse.
 
 ## Modifier les textes
 
 Tout est dans la liste `STORIES` de `src/content.js`. Un seul balisage :
 
 - `__mot__` → souligné du filet noir
+
+Une locution soulignée de 18 caractères ou moins est rendue **insécable** : coupée en fin de
+ligne, son filet se briserait en deux morceaux et se lirait comme une coquille. Au-delà, le
+texte se compose normalement — « des dizaines de milliers d'euros d'écart » ne tient pas sur
+une ligne de toute façon.
 
 Le build applique au passage la typographie française : espace insécable après `«`, avant `»`,
 et avant `? ! ; : %`.

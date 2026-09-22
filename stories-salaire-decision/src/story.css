@@ -124,6 +124,9 @@ u {
   -webkit-box-decoration-break: clone;
 }
 
+/* Une locution courte ne se coupe pas : son filet resterait brisé en deux. */
+u.insecable { white-space: nowrap; }
+
 /* ------------------------------------------- story 6 : la phrase centrée */
 
 .story--centre .texte {
