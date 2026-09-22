@@ -1,0 +1,13 @@
+{
+  "name": "fynovates-salaire-decision",
+  "version": "1.0.0",
+  "description": "Séquence Instagram Story « Ton salaire est une décision » — Fynovates",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^25.11.0"
+  },
+  "type": "module"
+}

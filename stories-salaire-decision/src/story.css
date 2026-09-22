@@ -1,0 +1,140 @@
+/* Fynovates — « Ton salaire est une décision »
+   Six stories 1080 × 1920 (9:16). Minimalisme absolu : noir sur blanc pur.
+
+   Grille
+     marges latérales   110px
+     zone morte haute   220px   (l'illustration ne commence jamais plus haut)
+     zone morte basse   300px   (stickers Instagram — rien sous 1620px)
+     story 6            rien sous 900px, la moitié basse reste au sondage
+
+   Deux blocs seulement : l'illustration au trait, puis le texte. Rien d'autre —
+   pas de cadre, pas de texture, pas de dégradé, pas de couleur.
+
+   Les variables --illu-haut et --illu-taille sont injectées par le build, qui
+   mesure la hauteur réelle du texte pour poser le groupe au centre optique.
+*/
+
+:root {
+  --w: 1080px;
+  --h: 1920px;
+
+  --encre: #111111;
+  --gris: #333333;
+  --filigrane: #BBBBBB;
+
+  --marge: 110px;
+  --haut: 220px;
+  --bas: 300px;
+  --bloc: 820px;
+
+  --illu-taille: 600px;
+  --illu-haut: 220px;
+  --gouttiere: 96px;  /* entre le bas de l'illustration et la première ligne */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* ------------------------------------------------------------ pagination */
+
+.numero {
+  position: absolute;
+  top: var(--marge);
+  right: var(--marge);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--filigrane);
+  letter-spacing: 0.02em;
+}
+
+/* ---------------------------------------------------------- illustration */
+
+.illustration {
+  position: absolute;
+  top: var(--illu-haut);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--illu-taille);
+  height: var(--illu-taille);
+  object-fit: contain;
+  /* Le fond des PNG est ramené au blanc pur par le build ; le mix-blend-mode
+     absorbe le résidu d'anticrénelage sans toucher aux traits noirs. */
+  mix-blend-mode: multiply;
+}
+
+/* ----------------------------------------------------------------- texte */
+
+.texte {
+  position: absolute;
+  top: calc(var(--illu-haut) + var(--illu-taille) + var(--gouttiere));
+  left: var(--marge);
+  width: var(--bloc);
+  max-width: var(--bloc);
+}
+
+.accroche {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--encre);
+  text-wrap: pretty;
+}
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--gris);
+  text-wrap: pretty;
+}
+
+.accroche + .corps { margin-top: 44px; }
+.corps + .corps { margin-top: 30px; }
+
+/* Le seul procédé de mise en valeur de la série. Pas de couleur, pas de gras :
+   un filet noir sous le mot, décollé de la ligne de base pour ne pas manger
+   les jambages. */
+u {
+  text-decoration: none;
+  border-bottom: 3px solid var(--encre);
+  padding-bottom: 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ------------------------------------------- story 6 : la phrase centrée */
+
+.story--centre .texte {
+  left: 0;
+  width: var(--w);
+  max-width: none;
+  padding: 0 var(--marge);
+  text-align: center;
+}
+
+.story--centre .accroche {
+  font-size: 64px;
+  line-height: 1.2;
+}
