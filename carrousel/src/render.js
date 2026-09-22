@@ -7,9 +7,19 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
-const { DECOR, slides } = require('./slides.js');
+// Deck a rendre : --deck <nom>  (defaut : le carrousel « salaire »)
+const argv = process.argv.slice(2);
+const di = argv.indexOf('--deck');
+const DECK = di !== -1 ? argv[di + 1] : null;
+if (di !== -1) argv.splice(di, 2);
+
+const { DECOR, slides } = require(DECK ? `./slides-${DECK}.js` : './slides.js');
 
 const ROOT = path.join(__dirname, '..');
+const SUB = DECK ? path.join('', DECK) : '';          // sous-dossier par deck
+const REL = DECK ? '../..' : '..';                     // profondeur vers la racine du projet
+const DIR_HTML = path.join(ROOT, 'slides', SUB);
+const DIR_PNG  = path.join(ROOT, 'output', SUB);
 const W = 1080, H = 1350, MARGIN = 80;
 
 const pad2 = n => String(n).padStart(2, '0');
@@ -21,7 +31,7 @@ function html(slide, i) {
 <head>
 <meta charset="utf-8">
 <title>Fynovates — slide ${pad2(n)}</title>
-<link rel="stylesheet" href="../src/style.css">
+<link rel="stylesheet" href="REL_TOKEN/src/style.css">
 </head>
 <body>
 <div class="slide">
@@ -30,17 +40,17 @@ ${DECOR}
 ${slide.main}
 </div>
 </body>
-</html>`;
+</html>`.split('REL_TOKEN').join(REL);
 }
 
 (async () => {
-  const only = process.argv.slice(2).map(Number).filter(Boolean);
+  const only = argv.map(Number).filter(Boolean);
 
-  fs.mkdirSync(path.join(ROOT, 'slides'), { recursive: true });
-  fs.mkdirSync(path.join(ROOT, 'output'), { recursive: true });
+  fs.mkdirSync(DIR_HTML, { recursive: true });
+  fs.mkdirSync(DIR_PNG, { recursive: true });
 
   slides.forEach((s, i) => {
-    fs.writeFileSync(path.join(ROOT, 'slides', `slide-${pad2(i + 1)}.html`), html(s, i));
+    fs.writeFileSync(path.join(DIR_HTML, `slide-${pad2(i + 1)}.html`), html(s, i));
   });
 
   // Chromium pré-installé dans l'environnement (pas de téléchargement)
@@ -54,7 +64,7 @@ ${slide.main}
     const n = i + 1;
     if (only.length && !only.includes(n)) continue;
 
-    const file = path.join(ROOT, 'slides', `slide-${pad2(n)}.html`);
+    const file = path.join(DIR_HTML, `slide-${pad2(n)}.html`);
     await page.goto('file://' + file, { waitUntil: 'load' });
     await page.evaluate(() => document.fonts.ready);
 
@@ -99,7 +109,7 @@ ${slide.main}
       return out;
     }, MARGIN);
 
-    const png = path.join(ROOT, 'output', `slide-${pad2(n)}.png`);
+    const png = path.join(DIR_PNG, `slide-${pad2(n)}.png`);
     await page.screenshot({ path: png, clip: { x: 0, y: 0, width: W, height: H } });
 
     const buf = fs.readFileSync(png);
