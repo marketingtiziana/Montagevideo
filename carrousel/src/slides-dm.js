@@ -36,7 +36,7 @@ module.exports = { DECOR, slides: [
       <h1 class="title title--hero">
         Pose ta question<br>à un tax advisor.<br><span class="blue">GRATUITEMENT.</span>
       </h1>
-      <span class="float" style="top:312px;right:104px">DM 💬</span>
+      <span class="float" style="top:312px;right:104px">DM<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-6l-6 4.5V17a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/></svg></span>
       <p class="body muted" style="position:absolute;top:648px;left:560px;width:440px;font-size:34px">
         En DM.<br>Aujourd'hui.
       </p>
@@ -154,7 +154,7 @@ module.exports = { DECOR, slides: [
       <h1 class="title title--hero">Envoie ta<br><span class="blue">question</span>.</h1>
       <div class="zone">
         <div class="stat stat--blue" style="padding:56px;text-align:center">
-          <div style="font-size:64px;font-weight:900;color:#FFFFFF;letter-spacing:-0.02em">DM 💬</div>
+          <div style="font-size:64px;font-weight:900;color:#FFFFFF;letter-spacing:-0.02em">DM<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-6l-6 4.5V17a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/></svg></div>
         </div>
         <p class="muted" style="font-size:30px;font-weight:500;margin-top:36px;text-align:center">
           Réponse personnalisée. Offerte. Sans engagement.

@@ -226,3 +226,10 @@ html, body {
 /* slide 7 du deck DM : lignes sans puce carrée */
 .ticks--plain .tick::before { display: none; }
 .ticks--plain .tick { gap: 0; }
+
+/* icone bulle de message : suit la couleur du texte, donc reste dans la palette */
+.ico {
+  width: 0.92em; height: 0.92em;
+  display: inline-block; vertical-align: -0.08em;
+  margin-left: 0.34em; fill: currentColor;
+}
