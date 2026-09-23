@@ -8,3 +8,8 @@ Aucun asset tiers n'est utilisé dans le master v2.
 | Asset | URL | Auteur | Licence | Usage (t in → out) |
 |---|---|---|---|---|
 | — | — | — | — | — |
+
+## Attribution Pexels (à afficher là où la vidéo est publiée si des B-roll Pexels sont utilisés)
+- Texte : « Photos provided by Pexels » avec un lien vers https://www.pexels.com
+- Logos : https://images.pexels.com/lib/api/pexels-white.png (fond sombre) / https://images.pexels.com/lib/api/pexels.png (fond clair)
+- Pour une légende Instagram : « Vidéos : Pexels (pexels.com) »

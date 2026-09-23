@@ -7,7 +7,7 @@
 | Vidéo | H.264, **720×1280** (déjà en 9:16), 30 fps, 49,78 s |
 | Audio | AAC mono 48 kHz — **−28,8 LUFS** intégré, true peak −6,3 dBTP, LRA 6,5 LU |
 | Cadre | Plan fixe en extérieur, contre-jour doux. **Le visage occupe le tiers supérieur** (y ≈ 270–750 px en 1080×1920), buste en blazer blanc au centre |
-| Transcription | faster-whisper medium, mot à mot → `transcript.json` (161 mots, corrigés : « clothing » → « coaching », outro « Amara.org » halluciné supprimé) |
+| Transcription | faster-whisper medium, mot à mot → `transcript.json` (161 mots, corrigés : « clothing » → « cabinet », outro « Amara.org » halluciné supprimé) |
 | Silences | 12 silences ≥ 0,4 s à −30 dB → jump cuts (on garde 120 ms de respiration) |
 
 Durée estimée après jump cuts : **≈ 45 s de parole + CTA 2 s ≈ 47 s**.
@@ -126,7 +126,7 @@ Règles : jamais pendant le hook, 1 B-roll max par idée, 2–4 s, jamais deux �
 | Idée | Ce qui est nommé | Incrustation | Asset | In → out (master) | Statut |
 |---|---|---|---|---|---|
 | Hook | — | aucune (règle) | — | — | — |
-| 1. Collaborer ≠ s'associer | « mon coaching », « des gens qui s'associent » | **B-roll** Pexels | requête `business partners working together laptop` (portrait, ≥1080p, pas de gros plan visage) | 11,32 → 13,60 (après la carte, avant « peur ») | **bloqué : clé API** |
+| 1. Collaborer ≠ s'associer | « mon cabinet », « des gens qui s'associent » | **B-roll** Pexels | requête `business partners working together laptop` (portrait, ≥1080p, pas de gros plan visage) | 11,32 → 13,60 (après la carte, avant « peur ») | **bloqué : clé API** |
 | 2. Peur / ampleur | pas d'objet concret | schéma courbe (déjà en place) | — | 20,13 → 22,65 | fait |
 | 3. S'associer = mariage | « mariage », « copine », « vous vous mariez » | **B-roll** Pexels | requête `wedding rings exchange hands` (mains seulement) | 26,83 → 29,65 (après la carte bague, cut franc retour visage avant le whip de l'idée 4) | **bloqué : clé API** |
 | 4. Tester → collaborer | méthode, pas d'objet | schéma 3 blocs (déjà en place) | — | 30,31 → 40,57 | fait |
