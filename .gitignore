@@ -14,3 +14,4 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+*.mp3
