@@ -1,4 +1,4 @@
-# PLAN — Reel « Collaborer avant de s'associer »
+# PLAN — Reel « Collaborer avant de s'associer » (version finale, validée et exécutée)
 
 ## Source (ffprobe + ebur128)
 | | |
@@ -83,3 +83,32 @@ Durée estimée après jump cuts : **≈ 45 s de parole + CTA 2 s ≈ 47 s**.
 
 ## QA prévue
 Contact sheet (hook, 4 idées, CTA) · 3 frames les plus chargées (≈ 35,5 / 43,2 / 46,6 s) · drift caption/voix < 80 ms · draft puis master 1080×1920 30 fps H.264 10 Mb/s AAC 192k faststart · −14 ±1 LUFS · virality_predictor.
+
+---
+
+## Exécution — timeline finale (après jump cuts, en secondes du master)
+
+Variables appliquées : pas de marque (CTA générique) · palette `#0F0F12` / `#FFFFFF` / `#F2B544` · Montserrat 700 (seule graisse Bold livrée avec Higgsedit) · pas de musique · upscale Topaz 1080p.
+
+| t (s) | Élément | Détail |
+|---|---|---|
+| 0,00 → 3,00 | Hook | Plaque sombre + « S'il vous plaît, » → **ARRÊTEZ** (1,48 s) → « de vous associer » (2,00 s), cut franc à 3,00 |
+| 1,48 | Punch-in | 100 → 108 % sur « arrêtez » |
+| 4,06 → 44,67 | Captions | 50 groupes karaoké (3–5 mots), mot actif `#F2B544`, +60 ms de décalage mesuré |
+| 7,24 | Zoom-whip | 6 images, motion blur natif 8 samples, entrée idée 1 |
+| 8,16 → 10,36 | Carte | COLLABORER **≠** S'ASSOCIER |
+| 13,60 → 16,00 | Carte + icône `user` | PEUR D'ÊTRE **SEUL** |
+| 16,46 | Punch-in | « tellement » |
+| 20,13 → 22,65 | Schéma 1 | Ligne pointillée « ce que vous gérez » + courbe accent qui la dépasse (tracé 0,35 → 1,45 s), flèche, fondu 0,3 s |
+| 22,69 | Zoom-whip | entrée idée 3 |
+| 24,07 → 26,57 | Carte + icône `gem` | S'ASSOCIER = **UN MARIAGE** |
+| 28,13 | Punch-in + carte | COMBIEN DE **FOIS ?** (1,6 s) |
+| 29,65 | Zoom-whip | entrée idée 4 |
+| 30,31 → 40,57 | Schéma 2 | TESTER (30,31) → COLLABORER (31,39) → **S'ASSOCIER** (38,63), chaque bloc tracé en 0,6 s, fondu 0,3 s |
+| 37,84 | Punch-in | « ensuite » |
+| 40,45 | Zoom-whip | entrée clôture |
+| 42,07 → 44,27 | Carte + icône `eye` | PAS AU **1ER COUP D'ŒIL** |
+| 43,84 | Punch-in | « déçu » |
+| 44,67 → 46,67 | CTA | Cloche + « Abonne-toi pour la suite » + « Collaborer d'abord. S'associer ensuite. », fondu au noir 0,4 s |
+
+Chaîne image : grain GLSL 0,03 + vignette 14 % sur la vidéo, micro-dérive verticale ±5 px, scrim dégradé bas (0 → 55 %) pour la lisibilité des captions sur le blazer blanc, ombre portée sur toutes les cartes et plaques.
