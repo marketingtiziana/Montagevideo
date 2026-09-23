@@ -112,3 +112,25 @@ Variables appliquées : pas de marque (CTA générique) · palette `#0F0F12` / `
 | 44,67 → 46,67 | CTA | Cloche + « Abonne-toi pour la suite » + « Collaborer d'abord. S'associer ensuite. », fondu au noir 0,4 s |
 
 Chaîne image : grain GLSL 0,03 + vignette 14 % sur la vidéo, micro-dérive verticale ±5 px, scrim dégradé bas (0 → 55 %) pour la lisibilité des captions sur le blazer blanc, ombre portée sur toutes les cartes et plaques.
+
+---
+
+## Module B — son studio + incrustations réelles
+
+### Étape A (faite)
+Voix refaite avec DeepFilterNet3 + Pedalboard + de-esser + loudnorm : voir `audio/AVANT_APRES.md`. Master v2 = même image, nouvelle voix (−14,2 LUFS, −3,9 dBTP).
+
+### Étape B — type d'incrustation par idée
+Règles : jamais pendant le hook, 1 B-roll max par idée, 2–4 s, jamais deux à la suite, un seul élément graphique à la fois, visage ≥ 60 % du temps.
+
+| Idée | Ce qui est nommé | Incrustation | Asset | In → out (master) | Statut |
+|---|---|---|---|---|---|
+| Hook | — | aucune (règle) | — | — | — |
+| 1. Collaborer ≠ s'associer | « mon coaching », « des gens qui s'associent » | **B-roll** Pexels | requête `business partners working together laptop` (portrait, ≥1080p, pas de gros plan visage) | 11,32 → 13,60 (après la carte, avant « peur ») | **bloqué : clé API** |
+| 2. Peur / ampleur | pas d'objet concret | schéma courbe (déjà en place) | — | 20,13 → 22,65 | fait |
+| 3. S'associer = mariage | « mariage », « copine », « vous vous mariez » | **B-roll** Pexels | requête `wedding rings exchange hands` (mains seulement) | 26,83 → 29,65 (après la carte bague, cut franc retour visage avant le whip de l'idée 4) | **bloqué : clé API** |
+| 4. Tester → collaborer | méthode, pas d'objet | schéma 3 blocs (déjà en place) | — | 30,31 → 40,57 | fait |
+| Clôture | — | carte « 1er coup d'œil » (déjà en place) | — | 42,07 → 44,27 | fait |
+| Écrans iOS / desktop / statiques | aucun site ni outil cité | sans objet | — | — | — |
+
+Avec ces deux B-rolls, la personne reste à l'écran environ 89 % du temps (≈ 5 s de cutaway sur 46,7 s). Intégration prévue : `p.add()` + composé plein cadre fit cover, entrée en fondu 8 images, push-in 100 → 104 %, grade `eq=saturation=0.9:contrast=1.05,unsharp=3:3:0.4`, retour au visage par cut franc. Les captions restent affichées par-dessus.

@@ -3,7 +3,8 @@
 ## Fichiers hébergés (Higgsfield)
 | Élément | URL |
 |---|---|
-| **Master** 1080×1920, 30 fps, 46,67 s | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/df43cb8d-ae45-4b7c-910f-b2de89b56856.mp4 |
+| **Master v2 (voix studio, Module B)** 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/f01e44ba-6313-4247-b067-e1b2db145e60.mp4 |
+| Master v1 (voix ffmpeg) 1080×1920, 30 fps, 46,67 s | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/df43cb8d-ae45-4b7c-910f-b2de89b56856.mp4 |
 | Contact sheet (10 moments) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/4aff40d6-758f-48b2-8388-7350674532ca.png |
 | Rush monté (jump cuts + upscale, sans graphisme) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/a43a817f-9781-450e-876f-9d3e2240e59b.mp4 |
 | Voix nettoyée (voice_clean = mix, pas de musique), MP3 320k | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/6e8e33aa-e55c-44fd-bc49-a774b716334a.mp3 |
