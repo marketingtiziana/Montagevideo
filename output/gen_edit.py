@@ -49,7 +49,7 @@ acc = 0.0
 for s, e in keep[:-1]:
     acc += e - s; cuts.append(round(acc, 3))
 WHIPS = [remap(t) for t in (8.94, 25.32, 33.72, 44.92)]
-PUNCH = [remap(t) for t in (2.28, 18.76, 31.46, 42.30, 48.64)]
+PUNCH = [remap(t) for t in (18.76, 42.30, 48.64)]           # 2.28 is under the kinetic hook, 31.46 under the rings B-roll
 WH = 3 / FPS                                          # 6 frames total: 3 in, 3 out
 keys = [(0.0, 1.0, "linear")]
 events = sorted([(t, "p") for t in PUNCH] + [(t, "w") for t in WHIPS])
@@ -84,6 +84,21 @@ def val(t):
         prev = k
     return prev[1]
 
+# B-roll cutaways replace the footage track over their span (one clip per track instant in Higgsedit)
+BROLL_SPANS = [(round(remap(13.32) - 0.15, 3), round(remap(15.90) - 0.15, 3)), (round(remap(29.46) - 0.15, 3), round(remap(33.72) - 0.1 - 3 / FPS, 3))]
+split = []
+for a, b, blur in chunks:
+    pieces = [(a, b)]
+    for s0, s1 in BROLL_SPANS:
+        nxt = []
+        for x, y in pieces:
+            if s1 <= x or s0 >= y: nxt.append((x, y)); continue
+            if x < s0: nxt.append((x, s0))
+            if s1 < y: nxt.append((s1, y))
+        pieces = nxt
+    split += [(x, y, blur) for x, y in pieces if y - x > 1e-3]
+chunks = split
+
 chunk_data = []
 for a, b, blur in chunks:
     ks = [{"at": 0, "value": round(val(a), 4), "easing": "linear"}]
@@ -99,15 +114,20 @@ cards = [
     {"at": R(9.86), "dur": 2.2, "icon": None, "parts": [["COLLABORER", "fg"], [" ≠ ", "accent"], ["S'ASSOCIER", "fg"]]},
     {"at": R(15.90), "dur": 2.4, "icon": "user", "parts": [["PEUR D'ÊTRE ", "fg"], ["SEUL", "accent"]]},
     {"at": R(26.70), "dur": 2.5, "icon": "gem", "parts": [["S'ASSOCIER = ", "fg"], ["UN MARIAGE", "accent"]]},
-    {"at": R(31.46), "dur": 1.6, "icon": None, "parts": [["COMBIEN DE ", "fg"], ["FOIS ?", "accent"]]},
     {"at": R(46.54), "dur": 2.2, "icon": "eye", "parts": [["PAS AU ", "fg"], ["1ER COUP D'ŒIL", "accent"]]},
 ]
 curve = {"at": R(22.76), "end": R(24.98) + 0.3}
-blocks = {"at": R(34.38), "b2": R(35.46), "b3": R(43.10), "end": R(44.74) + 0.3}
+# Module C — checklist mockup (idée 4): starts 150 ms before « tester », one tick per spoken step
+checklist = {"at": round(R(34.38) - 0.15, 3), "ticks": [R(34.38), R(35.46), R(37.96), R(38.92), R(43.10)], "end": round(R(44.74) + 0.3, 3)}
+# Module B — Pexels B-roll cutaways (in 150 ms before the trigger word, hard cut back to the face)
+broll = [{"file": f, "at": a, "end": b} for f, (a, b) in zip(["idee1_partners.mp4", "idee3_rings.mp4"], BROLL_SPANS)]
+# Module C — kinetic hook: one word group per beat, 150 ms ahead of the voice
+hook = {"end": 3.6, "words": [["S'IL VOUS PLAÎT", 0.0, "fg"], ["ARRÊTEZ", round(R(2.28) - 0.15, 3), "accent"],
+                             ["DE VOUS", round(R(3.40) - 0.15, 3), "fg"], ["ASSOCIER", round(R(4.34) - 0.15, 3), "fg"]]}
 title = {"arr": R(2.28), "dva": R(3.40), "end": TITLE_END}
 
 data = {"DUR": DUR, "CTA": CTA, "PAL": PAL, "caps": caps, "chunks": chunk_data, "cards": cards,
-        "curve": curve, "blocks": blocks, "title": title,
+        "curve": curve, "checklist": checklist, "broll": broll, "hook": hook, "title": title,
         "sheet": [1.6, R(9.86) + 0.8, R(23.6), R(27.2), R(35.9), R(43.4), DUR + 1.0],
         "busy": [R(35.9), R(43.4), R(46.9)]}
 tpl = open("edit.template.js").read()

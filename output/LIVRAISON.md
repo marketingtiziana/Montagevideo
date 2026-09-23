@@ -3,7 +3,11 @@
 ## Fichiers hébergés (Higgsfield)
 | Élément | URL |
 |---|---|
-| **Master v3 (voix studio + sous-titre « cabinet » corrigé)** 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/ea493262-e6f7-4c11-b29e-dd9be148bfac.mp4 |
+| **Master v4 (Modules B + C : voix studio, B-roll Pexels, typo cinétique, checklist)** 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/235d65b8-5e0d-4027-9340-f5b069698e1f.mp4 |
+| B-roll 1 étalonnée (Yan Krukau / Pexels) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/3ceecd20-aaaf-4cdc-8758-26f5b57cfe2e.mp4 |
+| B-roll 2 étalonnée (Ebahir / Pexels) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/823163eb-54dc-4e4d-bd32-0fc76971cb68.mp4 |
+| Mockup checklist (ProRes 4444 + alpha) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/56fafbfb-a006-4b3f-85fc-9c51ab8f30c9.mp4 |
+| Master v3 (voix studio + sous-titre « cabinet » corrigé) 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/ea493262-e6f7-4c11-b29e-dd9be148bfac.mp4 |
 | Master v2 (voix studio, Module B) 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/f01e44ba-6313-4247-b067-e1b2db145e60.mp4 |
 | Master v1 (voix ffmpeg) 1080×1920, 30 fps, 46,67 s | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/df43cb8d-ae45-4b7c-910f-b2de89b56856.mp4 |
 | Contact sheet (10 moments) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/4aff40d6-758f-48b2-8388-7350674532ca.png |
@@ -48,7 +52,8 @@ Lecture : la rétention est très bonne (93), mais l'accroche est faible (34). L
 - `edit.js` : script Higgsedit final (généré, données incluses) ; `edit.template.js` + `gen_edit.py` : sources
 - `prep.py` / `cuts.json` : jump cuts à l'image près ; `transcript.json` : transcription mot à mot corrigée
 - `timeline.json` : captions, cartes, schémas et keyframes caméra sur la timeline finale
-- `contact_sheet.png` : contact sheet du master
+- `contact_sheet.png` : contact sheet du master v4 (une image par mockup et par B-roll)
+- `mockups/checklist/` : mockup HTML + tokens + script de rendu ; `SOURCES.md` : crédits Pexels et mockups ; `audio/` : chaîne voix studio
 - `tests/probe.js` : script de validation des primitives Higgsedit
 
 ## Reproduire

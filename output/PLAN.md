@@ -120,17 +120,38 @@ Chaîne image : grain GLSL 0,03 + vignette 14 % sur la vidéo, micro-dérive ver
 ### Étape A (faite)
 Voix refaite avec DeepFilterNet3 + Pedalboard + de-esser + loudnorm : voir `audio/AVANT_APRES.md`. Master v2 = même image, nouvelle voix (−14,2 LUFS, −3,9 dBTP).
 
-### Étape B — type d'incrustation par idée
-Règles : jamais pendant le hook, 1 B-roll max par idée, 2–4 s, jamais deux à la suite, un seul élément graphique à la fois, visage ≥ 60 % du temps.
+### Étape B — incrustations réelles (faites, clé Pexels fournie)
+| Idée | Déclencheur | Incrustation | Asset | In → out (master v4) |
+|---|---|---|---|---|
+| Hook | — | aucune B-roll (règle) | — | — |
+| 1. Collaborer ≠ s'associer | « mon **cabinet**, des gens qui s'associent » | B-roll Pexels plein cadre, fondu 8 images, push-in 100→104 %, cut franc retour | Yan Krukau #7691589 | 11,17 → 13,45 |
+| 3. S'associer = mariage | « vous vous mariez combien de fois ? » | B-roll Pexels plein cadre (même traitement) | Ebahir #38359909 | 26,68 → 29,45 |
+| Écrans iOS / desktop | aucun site ni outil cité | sans objet | — | — |
 
-| Idée | Ce qui est nommé | Incrustation | Asset | In → out (master) | Statut |
-|---|---|---|---|---|---|
-| Hook | — | aucune (règle) | — | — | — |
-| 1. Collaborer ≠ s'associer | « mon cabinet », « des gens qui s'associent » | **B-roll** Pexels | requête `business partners working together laptop` (portrait, ≥1080p, pas de gros plan visage) | 11,32 → 13,60 (après la carte, avant « peur ») | **bloqué : clé API** |
-| 2. Peur / ampleur | pas d'objet concret | schéma courbe (déjà en place) | — | 20,13 → 22,65 | fait |
-| 3. S'associer = mariage | « mariage », « copine », « vous vous mariez » | **B-roll** Pexels | requête `wedding rings exchange hands` (mains seulement) | 26,83 → 29,65 (après la carte bague, cut franc retour visage avant le whip de l'idée 4) | **bloqué : clé API** |
-| 4. Tester → collaborer | méthode, pas d'objet | schéma 3 blocs (déjà en place) | — | 30,31 → 40,57 | fait |
-| Clôture | — | carte « 1er coup d'œil » (déjà en place) | — | 42,07 → 44,27 | fait |
-| Écrans iOS / desktop / statiques | aucun site ni outil cité | sans objet | — | — | — |
+La carte « COMBIEN DE FOIS ? » est retirée : elle tombait sur la B-roll alliances, et on ne garde qu'une incrustation à la fois. La question reste dans les sous-titres. La personne est à l'écran en plein cadre environ 77 % du temps, 85 % en comptant le PIP du hook.
 
-Avec ces deux B-rolls, la personne reste à l'écran environ 89 % du temps (≈ 5 s de cutaway sur 46,7 s). Intégration prévue : `p.add()` + composé plein cadre fit cover, entrée en fondu 8 images, push-in 100 → 104 %, grade `eq=saturation=0.9:contrast=1.05,unsharp=3:3:0.4`, retour au visage par cut franc. Les captions restent affichées par-dessus.
+## Module C — mockups animés
+
+### C3 — déclencheurs trouvés dans `transcript.json`
+| Idée | Mots | Déclencheur C3 | Choix |
+|---|---|---|---|
+| Hook | « S'il vous plaît, arrêtez de vous associer » | aucun (hook) | **Typo cinétique (C2-11)**, natif Higgsedit : 4 groupes de mots, un par temps, scale 1,18→1 + blur 14→0 en 0,2 s, « ARRÊTEZ » en accent, fond `#0F0F12`, visage en PIP 260 px avec anneau accent. 0 → 3,6 s (au lieu de 3 s pour que « ASSOCIER » ait le temps d'être lu). Objectif : relever le score d'accroche (34/100). |
+| 1 | « collaborer, mais sans vous associer » | « au lieu de » faible | pas de mockup : la carte native COLLABORER ≠ S'ASSOCIER suffit, et la B-roll arrive juste après |
+| 2 | « prendre des ampleurs qu'on n'arrive pas à gérer » | pas de chiffre | schéma natif « courbe » conservé |
+| 3 | « combien de fois ? » | « fois » → compteur | **refusé** : aucun chiffre réel dans le script, un compteur inventerait une donnée |
+| 4 | « d'**abord** tester… collaborer… périodes basses… hautes… **ensuite** s'associer » | « d'abord / ensuite » → checklist | **Checklist (C2-4)** : 5 items tirés mot pour mot du script, chaque coche se trace (0,3 s) sur son mot, l'item se barre, le dernier en accent. Remplace le schéma à 3 blocs. 30,16 → 40,57 s, démarre 150 ms avant « tester ». |
+| Clôture | « au premier coup d'œil » | aucun | carte native conservée |
+| Google / message / notification / carte | — | absents du script | sans objet |
+
+Total : 1 mockup HTML + 1 typo cinétique (≤ 4 par reel).
+
+### C4 — règles appliquées
+- Un seul easing pour toutes les animations Higgsedit : `cubic-bezier(0.2, 0.8, 0.2, 1)`. Même courbe dans le mockup HTML.
+- Spring `stiffness 300 / damping 24` seulement pour l'entrée du mockup (et la cloche du CTA).
+- Entrées 0,2–0,4 s, sorties 0,25 s.
+- Checklist : ombre 40 px / 30 %, micro-parallax ±2 px.
+
+Exceptions techniques :
+- Le `motion.by` des textes Higgsedit n'accepte que `ease-out`/`house`/`linear` : le CTA garde `ease-out`.
+- Les coupes et le « hold » restent en paliers.
+- Le mockup est rendu image par image par une fonction `renderAt(t)` déterministe (`page.clock.install()` fige l'horloge). Chaque frame est calculée exactement, au lieu de dépendre de `runFor`.

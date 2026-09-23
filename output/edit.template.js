@@ -15,7 +15,10 @@ const ctx = createCanvas(4, 4).getContext("2d");
 const tw = (s, size) => { ctx.font = `700 ${size}px MeasureMont`; return Math.ceil(ctx.measureText(s).width * 1.06) + 10; };
 
 const SHADOW = { x: 0, y: 6, blur: 22, color: "#000000A0" };
-const SPRING = { kind: "spring", stiffness: 400, damping: 30 };
+const EASE = [0.2, 0.8, 0.2, 1];                                   // Module C4: the only curve used in this reel
+const MOCKUP_SPRING = { kind: "spring", stiffness: 300, damping: 24 }; // mockup entries only
+const ez = (e) => (e === "hold" || e === "linear" ? e : EASE);
+const MEDIA = "/home/user/w";
 const col = (k) => PAL[k] || k;
 // Film grain (≤ 0.04) + soft vignette, applied to the footage only.
 const GRAIN = `vec4 pixel(vec2 uv){
@@ -29,7 +32,7 @@ const GRAIN = `vec4 pixel(vec2 uv){
 // so the visible part advances from the origin in the drawing direction.
 const drawX = (w, h, at, dur) => ({
   mask: { shape: "rectangle", x: -1, y: -4, width: 2, height: h + 8 },
-  draw: { property: "maskWidth", keyframes: [{ at: 0, value: 2, easing: "hold" }, { at: Math.max(at, 0.001), value: 2, easing: "ease-in-out" }, { at: at + dur, value: 2 * w + 4 }] },
+  draw: { property: "maskWidth", keyframes: [{ at: 0, value: 2, easing: "hold" }, { at: Math.max(at, 0.001), value: 2, easing: EASE }, { at: at + dur, value: 2 * w + 4 }] },
 });
 const fadeKeys = (inAt, inDur, outAt, outDur) => {
   const k = [];
@@ -43,14 +46,29 @@ const roundRect = (w, h, r, i = 2) =>
 
 export default async ({ project, text, rect, media, path, frame, icon }) => {
   const p = await project({ dir: "reel", size: `${W}x${H}`, fps: 30, background: PAL.bg });
-  const v = await p.add("/home/user/w/cut.mp4");
+  const v = await p.add(`${MEDIA}/cut.mp4`);
+  const brolls = await Promise.all(D.broll.map((b) => p.add(`${MEDIA}/broll/${b.file}`)));
+  const checklistMov = await p.add(`${MEDIA}/checklist.mov`);
 
   // ---- spine: picture + cleaned voice (audio lives here) ----
   p.cut(v, { from: 0, dur: D.DUR, fit: "cover" });
 
-  // ---- footage chunks: punch-ins, zoom-whips (motion blur), micro drift, grain ----
-  for (const c of D.chunks) {
-    const len = c.b - c.a;
+  // ---- footage chunks (punch-ins, zoom-whips with motion blur, micro drift, grain) and Module B B-roll
+  //      cutaways, composed in time order: Higgsedit fills a track from its last placed clip onwards ----
+  const segs = [...D.chunks.map((c) => ({ kind: "footage", a: c.a, c })), ...D.broll.map((b, i) => ({ kind: "broll", a: b.at, b, i }))]
+    .sort((x, y) => x.a - y.a);
+  for (const sg of segs) {
+    if (sg.kind === "broll") {
+      // 8-frame dissolve in, push-in 100 -> 104 %, hard cut back to the face
+      const b = sg.b, len = b.end - b.at;
+      p.compose(media({ file: brolls[sg.i], x: 0, y: 0, width: W, height: H, fit: "cover", trimStart: 0,
+        effects: [{ kind: "shader", params: { glsl: GRAIN, amt: 0.03, vig: 0.14 } }],
+        animate: [{ property: "opacity", keyframes: [{ at: 0, value: 0, easing: EASE }, { at: 8 / 30, value: 1 }] },
+          { property: "scale", from: 1, to: 1.04, duration: len - 0.001, easing: "linear" }] }),
+        { at: b.at, dur: len, name: `broll ${b.file}` });
+      continue;
+    }
+    const c = sg.c, len = c.b - c.a;
     const drift = [];
     for (let t = 0; t < len; t += 2.5) drift.push({ at: t, value: +(5 * Math.sin((c.a + t) / 2.2)).toFixed(2) });
     drift.push({ at: len - 0.001, value: +(5 * Math.sin(c.b / 2.2)).toFixed(2) });
@@ -59,8 +77,8 @@ export default async ({ project, text, rect, media, path, frame, icon }) => {
       effects: [{ kind: "shader", params: { glsl: GRAIN, amt: 0.03, vig: 0.14 } }],
       ...(c.blur ? { motionBlur: { samples: 8, shutter: 0.7 } } : {}),
       animate: [
-        { property: "scale", keyframes: c.k.map((k) => ({ ...k, value: +(k.value * 1.012).toFixed(4) })) },
-        { property: "offsetY", keyframes: drift.filter((x, i, a) => i === 0 || x.at > a[i - 1].at + 0.01), easing: "smooth" },
+        { property: "scale", keyframes: c.k.map((k) => ({ ...k, easing: ez(k.easing), value: +(k.value * 1.012).toFixed(4) })) },
+        { property: "offsetY", keyframes: drift.filter((x, i, a) => i === 0 || x.at > a[i - 1].at + 0.01), easing: EASE },
       ],
     }), { at: c.a, dur: len, name: `footage ${c.a.toFixed(2)}` });
   }
@@ -70,20 +88,26 @@ export default async ({ project, text, rect, media, path, frame, icon }) => {
     fill: { kind: "linear", angle: 180, stops: [{ offset: 0, color: "#000000", opacity: 0 }, { offset: 0.45, color: "#000000", opacity: 0.38 }, { offset: 1, color: "#000000", opacity: 0.55 }] } }),
     { at: 0, dur: D.DUR, name: "scrim" });
 
-  // ---- hook title (0–3 s), hard cut ----
-  const T = D.title;
-  const tl = (s, size, y, color, inAt, extra = {}) => text(s, {
-    x: (W - tw(s, size)) / 2, y, width: tw(s, size), height: Math.round(size * 1.25), fontFamily: FONT, fontWeight: 700,
-    fontSize: size, color, align: "center", shadow: SHADOW, ...extra,
-    animate: inAt > 0 ? [{ property: "opacity", keyframes: [{ at: 0, value: 0, easing: "hold" }, { at: inAt, value: 0 }, { at: inAt + 0.12, value: 1 }] },
-      { property: "offsetY", keyframes: [{ at: 0, value: 24, easing: "hold" }, { at: inAt, value: 24, easing: "ease-out" }, { at: inAt + 0.3, value: 0 }] }] : [],
-  });
-  p.compose([
-    rect({ x: 90, y: 1000, width: 900, height: 390, radius: 36, fill: "#0F0F12", opacity: 0.72, shadow: SHADOW }),
-    tl("S'il vous plaît,", 54, 1040, PAL.fg, 0),
-    tl("ARRÊTEZ", 132, 1110, PAL.accent, T.arr),
-    tl("de vous associer", 70, 1280, PAL.fg, T.dva),
-  ], { at: 0, dur: T.end, name: "hook title" });
+  // ---- Module C: kinetic-type hook (0–3.6 s) on the plain background, face kept in a PIP circle ----
+  {
+    const K = D.hook, words = K.words;
+    const nodes = [rect({ x: 0, y: 0, width: W, height: H, fill: PAL.bg })];
+    words.forEach(([w, at, c], i) => {
+      const next = i + 1 < words.length ? words[i + 1][1] : K.end;
+      const size = Math.min(170, Math.floor(170 * 880 / tw(w, 170)));
+      const ww = tw(w, size), hh = Math.round(size * 1.3);
+      nodes.push(frame({ x: (W - ww) / 2, y: 700 - hh / 2, width: ww, height: hh, origin: "center", layout: "none", at, duration: next - at,
+        motion: { enter: { from: { scale: 1.18, opacity: 0 }, duration: 0.2, easing: EASE } } },
+        [text(w, { x: 0, y: 0, width: ww, height: hh, align: "center", fontFamily: FONT, fontWeight: 700, fontSize: size, color: col(c),
+          animate: [{ property: "blur", keyframes: [{ at: 0, value: 14, easing: EASE }, { at: 0.2, value: 0 }] }] })]));
+    });
+    // PIP: the talking head at 50 %, masked to a 260 px circle centred on the face, bottom-right inside the safe zone
+    const PX = 760, PY = 1080, R0 = 130;
+    nodes.push(media({ file: v, x: PX + R0 - 270, y: PY + R0 - 250, width: 540, height: 960, fit: "cover", trimStart: 0,
+      mask: { shape: "ellipse", x: 270 - R0, y: 250 - R0, width: 2 * R0, height: 2 * R0 }, shadow: { x: 0, y: 18, blur: 40, color: "#0000004D" } }));
+    nodes.push(rect({ x: PX - 3, y: PY - 3, width: 2 * R0 + 6, height: 2 * R0 + 6, radius: R0 + 3, fill: "#00000000", strokeColor: PAL.accent, strokeWidth: 4 }));
+    p.compose(nodes, { at: 0, dur: K.end, name: "kinetic hook" });
+  }
 
   // ---- karaoke captions: 3–5 words, active word in accent ----
   for (const c of D.caps) {
@@ -108,7 +132,7 @@ export default async ({ project, text, rect, media, path, frame, icon }) => {
     const cw = Math.min(W - 80, inner + 76);
     p.compose(frame({ x: (W - cw) / 2, y: 1060, width: cw, height: 124, origin: "center", layout: "row", gap, align: "center", justify: "center",
       background: "#0F0F12E8", radius: 30, shadow: SHADOW,
-      motion: { enter: { from: { scale: 0 }, duration: 0.35, easing: SPRING }, exit: { to: { scale: 0.92, opacity: 0 }, duration: 0.25 } } },
+      motion: { enter: { from: { scale: 0.6, opacity: 0 }, duration: 0.35, easing: EASE }, exit: { to: { scale: 0.92, opacity: 0 }, duration: 0.25, easing: EASE } } },
       [...(c.icon ? [icon(c.icon, { size: iw, color: PAL.accent, strokeWidth: 2 })] : []),
         ...parts.map(([s, k]) => text(s, { width: tw(s, size), height: 64, align: "center", fontFamily: FONT, fontWeight: 700, fontSize: size, color: k }))]),
       { at: c.at, dur: c.dur, name: "card" });
@@ -129,26 +153,17 @@ export default async ({ project, text, rect, media, path, frame, icon }) => {
     ], { at: s.at, dur, name: "schema curve" });
   }
 
-  // ---- schema 2: TESTER -> COLLABORER -> S'ASSOCIER ----
+  // ---- Module C: checklist mockup (HTML -> ProRes 4444 alpha), spring entry, 2.5D micro-parallax ----
   {
-    const s = D.blocks, dur = s.end - s.at, out = dur - 0.3, Y = 1040, BW = 270, BH = 120;
-    const xs = [70, 405, 740], starts = [0, s.b2 - s.at, s.b3 - s.at];
-    const labels = ["TESTER", "COLLABORER", "S'ASSOCIER"];
-    const nodes = [rect({ x: 40, y: Y - 40, width: 1000, height: BH + 80, radius: 32, fill: "#0F0F12", opacity: 0.78, shadow: SHADOW,
-      animate: [{ property: "opacity", keyframes: [{ at: 0, value: 0 }, { at: 0.2, value: 0.78 }, { at: out, value: 0.78 }, { at: dur - 0.001, value: 0 }] }] })];
-    labels.forEach((l, i) => {
-      const a = starts[i], d = drawX(BW, BH, a, 0.6);
-      nodes.push(path({ x: xs[i], y: Y, width: BW, height: BH, d: roundRect(BW, BH, 22), stroke: { width: 3, color: PAL.accent, cap: "round" },
-        mask: d.mask, animate: [d.draw, ...fadeKeys(0, 0, out, 0.3)] }));
-      nodes.push(text(l, { x: xs[i] + (BW - tw(l, 34)) / 2, y: Y + (BH - 44) / 2, width: tw(l, 34), height: 44, fontFamily: FONT, fontWeight: 700, fontSize: 34,
-        color: i === 2 ? PAL.accent : PAL.fg, animate: fadeKeys(a + 0.35, 0.25, out, 0.3) }));
-      if (i > 0) {
-        const ax = xs[i - 1] + BW + 8, aw = xs[i] - ax - 8, da = drawX(aw, 40, a - 0.25, 0.3);
-        nodes.push(path({ x: ax, y: Y + BH / 2 - 20, width: aw, height: 40, d: `M 2 20 L ${aw - 4} 20 M ${aw - 16} 8 L ${aw - 4} 20 L ${aw - 16} 32`,
-          stroke: { width: 3, color: PAL.fg, cap: "round" }, mask: da.mask, animate: [da.draw, ...fadeKeys(0, 0, out, 0.3)] }));
-      }
-    });
-    p.compose(nodes, { at: s.at, dur, name: "schema blocks" });
+    const s = D.checklist, dur = s.end - s.at, MW = 960, MH = 580;
+    p.compose(frame({ x: (W - MW) / 2, y: 830, width: MW, height: MH, origin: "center", layout: "none",
+      motion: { enter: { from: { scale: 0.85, y: 40 }, duration: 0.4, easing: MOCKUP_SPRING },
+                exit: { to: { scale: 0.96, opacity: 0 }, duration: 0.25, easing: EASE } } },
+      [media({ file: checklistMov, x: 0, y: 0, width: MW, height: MH, fit: "fill", trimStart: 0,
+        animate: [{ property: "opacity", keyframes: [{ at: 0, value: 0, easing: EASE }, { at: 0.15, value: 1 }] },
+          { property: "offsetX", keyframes: [{ at: 0, value: -2, easing: EASE }, { at: dur / 2, value: 2, easing: EASE }, { at: dur - 0.01, value: -2 }] },
+          { property: "offsetY", keyframes: [{ at: 0, value: 2, easing: EASE }, { at: dur / 2, value: -2, easing: EASE }, { at: dur - 0.01, value: 2 }] }] })]),
+      { at: s.at, dur, name: "mockup checklist" });
   }
 
   // ---- CTA 2 s + fade out ----
@@ -157,7 +172,7 @@ export default async ({ project, text, rect, media, path, frame, icon }) => {
     p.compose([
       rect({ x: 0, y: 0, width: W, height: H, fill: PAL.bg, animate: [{ property: "opacity", from: 0, to: 1, duration: 0.25 }] }),
       frame({ x: (W - 132) / 2, y: 700, width: 132, height: 132, origin: "center", layout: "row", align: "center", justify: "center", background: "#F2B5441F", radius: 66,
-        motion: { enter: { from: { scale: 0 }, duration: 0.35, easing: SPRING } } },
+        motion: { enter: { from: { scale: 0 }, duration: 0.4, easing: MOCKUP_SPRING } } },
         [icon("bell", { size: 72, color: PAL.accent, strokeWidth: 2 })]),
       text(t1, { x: (W - tw(t1, 64)) / 2, y: 880, width: tw(t1, 64), height: 80, fontFamily: FONT, fontWeight: 700, fontSize: 64, color: PAL.fg, shadow: SHADOW,
         motion: { by: "word", from: { opacity: 0, y: 18 }, at: 0.15, duration: 0.45, overlap: 0.5, easing: "ease-out" } }),
