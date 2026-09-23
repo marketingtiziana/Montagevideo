@@ -1,0 +1,128 @@
+/* Fynovates — « Ton salaire est une décision », version tout-texte
+   Six stories 1080 × 1920 (9:16). Minimalisme absolu : noir sur blanc pur.
+
+   Sans illustration, il ne reste que le texte — et donc plus rien pour tenir la
+   composition. Le bloc est posé au centre exact de la story, sur les deux axes,
+   et c'est ce centrage qui fait la grille.
+
+   Grille
+     marges latérales   110px
+     largeur du bloc    820px maximum
+     zone morte basse   300px   (stickers Instagram — rien sous 1620px)
+     story 6            bloc remonté, rien sous 900px : la moitié basse revient
+                        au sticker sondage
+
+   Rien d'autre : pas de cadre, pas de texture, pas de dégradé, pas de couleur.
+*/
+
+:root {
+  --w: 1080px;
+  --h: 1920px;
+
+  --encre: #111111;
+  --gris: #333333;
+  --filigrane: #BBBBBB;
+
+  --marge: 110px;
+  --bas: 300px;
+  --bloc: 820px;
+
+  /* Remontée du bloc par rapport au centre. Nulle par défaut ; injectée par le
+     build pour la story 6. */
+  --remontee: 0px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* ------------------------------------------------------------ pagination */
+
+.numero {
+  position: absolute;
+  top: var(--marge);
+  right: var(--marge);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--filigrane);
+  letter-spacing: 0.02em;
+}
+
+/* ----------------------------------------------------------------- texte */
+
+.contenu {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--marge);
+}
+
+.texte {
+  width: 100%;
+  max-width: var(--bloc);
+  text-align: center;
+  transform: translateY(calc(-1 * var(--remontee)));
+}
+
+.accroche {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--encre);
+  text-wrap: balance;
+}
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--gris);
+  text-wrap: pretty;
+}
+
+.accroche + .corps { margin-top: 44px; }
+.corps + .corps { margin-top: 30px; }
+
+/* Le seul procédé de mise en valeur de la série. Pas de couleur, pas de gras :
+   un filet noir sous le mot, décollé de la ligne de base pour ne pas manger
+   les jambages. */
+u {
+  text-decoration: none;
+  border-bottom: 3px solid var(--encre);
+  padding-bottom: 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Une locution courte ne se coupe pas : son filet resterait brisé en deux. */
+u.insecable { white-space: nowrap; }
+
+/* ------------------------------- story 6 : la phrase seule, un cran plus haut */
+
+.story--haut .accroche {
+  font-size: 64px;
+  line-height: 1.2;
+}

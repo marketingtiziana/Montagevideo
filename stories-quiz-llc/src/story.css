@@ -1,0 +1,224 @@
+/* Fynovates — « Le quiz LLC »
+   Six stories 1080 × 1920 (9:16). Minimalisme strict : pas d'illustration, pas
+   de photo, rien d'importé. La typographie est le seul matériau, et les cases à
+   cocher sont dessinées en CSS pur.
+
+   Grille
+     marges latérales   110px
+     largeur utile      860px   (le filet de l'en-tête la matérialise)
+     bloc de texte      820px maximum
+     zone morte basse   300px   (rien sous 1620px ; sous 1450px sur la story 6,
+                                 où la barre de commentaire vient se poser)
+
+   Le seul accent de toute la série est le jaune surligneur. Aucune autre
+   couleur, aucun gras coloré, aucun souligné, aucune ombre.
+*/
+
+:root {
+  --w: 1080px;
+  --h: 1920px;
+
+  --papier: #FAFAF8;
+  --encre: #111111;
+  --corps: #3A3A3A;
+  --greffe: #999999;   /* en-tête et pagination */
+  --filet: #DDDDDD;
+  --jaune: #FFE24D;
+
+  --marge: 110px;
+  --utile: 860px;      /* 1080 − 2 × 110 */
+  --bloc: 820px;
+
+  /* Haut de la zone de contenu. Injecté par le build : constante sur les
+     stories 2 à 5 pour que les « Q » se superposent d'une story à l'autre,
+     calculé pour le centre optique sur les stories 1 et 6. */
+  --contenu-haut: 560px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: var(--papier);
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: var(--papier);
+}
+
+/* ============================================ l'en-tête, façon copie d'examen */
+
+.entete {
+  position: absolute;
+  top: var(--marge);
+  left: var(--marge);
+  width: var(--utile);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--filet);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--greffe);
+}
+
+/* La pagination ne porte pas l'interlettrage du titre : « 1/6 » espacé se lit
+   comme trois signes séparés au lieu d'un rapport. */
+.entete .page { letter-spacing: 2px; }
+
+/* ===================================================== la zone de contenu */
+
+.contenu {
+  position: absolute;
+  top: var(--contenu-haut);
+  left: var(--marge);
+  width: var(--bloc);
+}
+
+/* --- le « Q » géant des stories 2 à 5 ------------------------------------ */
+
+/* Interlignage resserré sous 1 : le texte vient s'appuyer sous le chiffre au
+   lieu de flotter derrière une ligne vide. C'est ce qui fait l'effet éditorial. */
+.q {
+  font-size: 220px;
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: -0.045em;
+  color: var(--encre);
+  /* le letter-spacing négatif rogne la droite : on rend le rognage à gauche
+     pour que le « Q » s'aligne au pixel sur la colonne de texte */
+  margin-left: -0.012em;
+  margin-bottom: 44px;
+}
+
+/* --- les cases à cocher des stories 1 et 6 ------------------------------- */
+
+.cases {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.ligne-case {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.case {
+  position: relative;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--encre);
+}
+
+/* La coche : deux bords d'une boîte vide, pivotés. Aucun glyphe, aucune image —
+   le trait garde ainsi exactement la graisse qu'on lui donne. */
+.case--cochee::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 6px;
+  width: 22px;
+  height: 40px;
+  border-right: 6px solid var(--encre);
+  border-bottom: 6px solid var(--encre);
+  transform: rotate(42deg);
+}
+
+.etiquette {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--corps);
+}
+
+/* --------------------------------------------------------------- le texte */
+
+.accroche {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--encre);
+  text-wrap: pretty;
+}
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+.accroche + .corps { margin-top: 38px; }
+.corps + .corps { margin-top: 28px; }
+
+/* --- story 6 : le mot final --------------------------------------------- */
+
+.final {
+  margin-top: 54px;
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--encre);
+}
+
+/* ================================================= le surligneur, l'unique accent */
+
+/* Un vrai coup de stabilo, pas un fond de bouton : une bande calée sur la
+   hauteur des lettres et non sur la boîte de ligne, qui déborde légèrement de
+   part et d'autre du mot et laisse dépasser le haut des capitales.
+   La bande est exprimée en em, donc identique d'un corps à l'autre — une bande
+   proportionnelle à l'interligne donnerait l'impression de deux marqueurs
+   différents entre l'accroche (1.2) et le corps (1.5). */
+mark {
+  --bande: 0.86em;
+  --debord: 0.10em;
+
+  /* Un surlignage ne se coupe jamais en fin de ligne : le fragment de gauche
+     étire alors sa bande jusqu'au bord de la colonne et on ne lit plus un trait
+     de marqueur mais un aplat. Les locutions surlignées de la série sont toutes
+     assez courtes pour tenir sur une ligne — le build le vérifie. */
+  white-space: nowrap;
+
+  background-color: transparent;
+  background-image: linear-gradient(var(--jaune), var(--jaune));
+  background-repeat: no-repeat;
+  background-size: calc(100% + 2 * var(--debord)) var(--bande);
+  background-position: calc(-1 * var(--debord)) 64%;
+  color: inherit;
+  /* le débord doit mordre sur le voisin, pas pousser le texte */
+  margin: 0 calc(-1 * var(--debord));
+  padding: 0 var(--debord);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Sur le mot final, la bande couvre presque toute la hauteur des capitales :
+   c'est un aplat assumé, le point d'arrivée de la série. */
+.final mark {
+  --bande: 0.80em;
+  --debord: 0.055em;
+  background-position: calc(-1 * var(--debord)) 58%;
+}
