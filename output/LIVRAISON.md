@@ -28,6 +28,19 @@ Sonde brouillon → master : le brouillon (540×960, 51 s de rendu) a servi à v
 ## Viralité
 Le `virality_predictor` de Higgsfield n'accepte que des vidéos de 16 s maximum. J'ai donc analysé les **15 premières secondes du master** (hook, idée 1 et début de l'idée 2), la partie qui décide de la rétention. Job `7d752bd7-0e6f-44ad-a533-7e716436673e` (media `2f259867-6f7f-455b-908a-092da3e81b96`).
 
+| Score (proxy 0–100) | Valeur |
+|---|---|
+| Overall | **48** |
+| Hook (fenêtre 0–3 s) | **34** |
+| Brain engagement | 42 |
+| Viral potential | 47 |
+| Sustain | **93** |
+| Pic d'activité | 0:00 |
+
+Rapport interactif : https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20260923_141217_7d752bd7-0e6f-44ad-a533-7e716436673e.html
+
+Lecture : la rétention est très bonne (93), mais l'accroche est faible (34). Les 1,5 premières secondes (« S'il vous plaît, ») sont calmes, et le mot fort « ARRÊTEZ » n'arrive qu'à 1,48 s. Piste pour une V2 : démarrer directement sur « Arrêtez de vous associer » et remonter le titre à 0 s. Ce n'est pas appliqué, le PLAN validé prévoyait ce hook.
+
 ## Fichiers dans ce dossier
 - `PLAN.md` : plan validé + timeline finale exécutée
 - `edit.js` : script Higgsedit final (généré, données incluses) ; `edit.template.js` + `gen_edit.py` : sources
