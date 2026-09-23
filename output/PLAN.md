@@ -135,7 +135,7 @@ La carte « COMBIEN DE FOIS ? » est retirée : elle tombait sur la B-roll allia
 ### C3 — déclencheurs trouvés dans `transcript.json`
 | Idée | Mots | Déclencheur C3 | Choix |
 |---|---|---|---|
-| Hook | « S'il vous plaît, arrêtez de vous associer » | aucun (hook) | **Typo cinétique (C2-11)**, natif Higgsedit : 4 groupes de mots, un par temps, scale 1,18→1 + blur 14→0 en 0,2 s, « ARRÊTEZ » en accent, fond `#0F0F12`, visage en PIP 260 px avec anneau accent. 0 → 3,6 s (au lieu de 3 s pour que « ASSOCIER » ait le temps d'être lu). Objectif : relever le score d'accroche (34/100). |
+| Hook | « S'il vous plaît, arrêtez de vous associer » | aucun (hook) | **v5 (demande de la cliente) : les mots s'affichent sur la vidéo en plein cadre, à hauteur du buste, avec une bande sombre dégradée derrière. Plus de fond noir ni de PIP, et le punch-in sur « arrêtez » est rétabli.** Version v4 : **Typo cinétique (C2-11)**, natif Higgsedit : 4 groupes de mots, un par temps, scale 1,18→1 + blur 14→0 en 0,2 s, « ARRÊTEZ » en accent, fond `#0F0F12`, visage en PIP 260 px avec anneau accent. 0 → 3,6 s (au lieu de 3 s pour que « ASSOCIER » ait le temps d'être lu). Objectif : relever le score d'accroche (34/100). |
 | 1 | « collaborer, mais sans vous associer » | « au lieu de » faible | pas de mockup : la carte native COLLABORER ≠ S'ASSOCIER suffit, et la B-roll arrive juste après |
 | 2 | « prendre des ampleurs qu'on n'arrive pas à gérer » | pas de chiffre | schéma natif « courbe » conservé |
 | 3 | « combien de fois ? » | « fois » → compteur | **refusé** : aucun chiffre réel dans le script, un compteur inventerait une donnée |

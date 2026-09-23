@@ -3,7 +3,8 @@
 ## Fichiers hébergés (Higgsfield)
 | Élément | URL |
 |---|---|
-| **Master v4 (Modules B + C : voix studio, B-roll Pexels, typo cinétique, checklist)** 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/235d65b8-5e0d-4027-9340-f5b069698e1f.mp4 |
+| **Master v5 (hook en plein cadre, sans écran noir ni PIP)** 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/3b8020eb-3330-4e0c-a2a5-f6dd9e19fe28.mp4 |
+| Master v4 (Modules B + C, hook sur fond noir + PIP) 1080×1920, 30 fps, 46,67 s, −14,2 LUFS | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/235d65b8-5e0d-4027-9340-f5b069698e1f.mp4 |
 | B-roll 1 étalonnée (Yan Krukau / Pexels) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/3ceecd20-aaaf-4cdc-8758-26f5b57cfe2e.mp4 |
 | B-roll 2 étalonnée (Ebahir / Pexels) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/823163eb-54dc-4e4d-bd32-0fc76971cb68.mp4 |
 | Mockup checklist (ProRes 4444 + alpha) | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/56fafbfb-a006-4b3f-85fc-9c51ab8f30c9.mp4 |

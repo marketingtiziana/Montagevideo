@@ -49,7 +49,7 @@ acc = 0.0
 for s, e in keep[:-1]:
     acc += e - s; cuts.append(round(acc, 3))
 WHIPS = [remap(t) for t in (8.94, 25.32, 33.72, 44.92)]
-PUNCH = [remap(t) for t in (18.76, 42.30, 48.64)]           # 2.28 is under the kinetic hook, 31.46 under the rings B-roll
+PUNCH = [remap(t) for t in (2.28, 18.76, 42.30, 48.64)]     # 31.46 falls under the rings B-roll
 WH = 3 / FPS                                          # 6 frames total: 3 in, 3 out
 keys = [(0.0, 1.0, "linear")]
 events = sorted([(t, "p") for t in PUNCH] + [(t, "w") for t in WHIPS])

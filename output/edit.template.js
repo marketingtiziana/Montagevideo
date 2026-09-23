@@ -88,24 +88,21 @@ export default async ({ project, text, rect, media, path, frame, icon }) => {
     fill: { kind: "linear", angle: 180, stops: [{ offset: 0, color: "#000000", opacity: 0 }, { offset: 0.45, color: "#000000", opacity: 0.38 }, { offset: 1, color: "#000000", opacity: 0.55 }] } }),
     { at: 0, dur: D.DUR, name: "scrim" });
 
-  // ---- Module C: kinetic-type hook (0–3.6 s) on the plain background, face kept in a PIP circle ----
+  // ---- Module C: kinetic-type hook (0–3.6 s) over the full-frame talking head, chest band, face untouched ----
   {
-    const K = D.hook, words = K.words;
-    const nodes = [rect({ x: 0, y: 0, width: W, height: H, fill: PAL.bg })];
+    const K = D.hook, words = K.words, CY = 1150;
+    const nodes = [rect({ x: 0, y: 900, width: W, height: 520,
+      fill: { kind: "linear", angle: 180, stops: [{ offset: 0, color: "#000000", opacity: 0 }, { offset: 0.5, color: "#000000", opacity: 0.45 }, { offset: 1, color: "#000000", opacity: 0 }] } })];
     words.forEach(([w, at, c], i) => {
       const next = i + 1 < words.length ? words[i + 1][1] : K.end;
-      const size = Math.min(170, Math.floor(170 * 880 / tw(w, 170)));
+      const size = Math.min(150, Math.floor(150 * 880 / tw(w, 150)));
       const ww = tw(w, size), hh = Math.round(size * 1.3);
-      nodes.push(frame({ x: (W - ww) / 2, y: 700 - hh / 2, width: ww, height: hh, origin: "center", layout: "none", at, duration: next - at,
+      nodes.push(frame({ x: (W - ww) / 2, y: CY - hh / 2, width: ww, height: hh, origin: "center", layout: "none", at, duration: next - at,
         motion: { enter: { from: { scale: 1.18, opacity: 0 }, duration: 0.2, easing: EASE } } },
         [text(w, { x: 0, y: 0, width: ww, height: hh, align: "center", fontFamily: FONT, fontWeight: 700, fontSize: size, color: col(c),
+          shadow: { x: 0, y: 8, blur: 30, color: "#000000C0" },
           animate: [{ property: "blur", keyframes: [{ at: 0, value: 14, easing: EASE }, { at: 0.2, value: 0 }] }] })]));
     });
-    // PIP: the talking head at 50 %, masked to a 260 px circle centred on the face, bottom-right inside the safe zone
-    const PX = 760, PY = 1080, R0 = 130;
-    nodes.push(media({ file: v, x: PX + R0 - 270, y: PY + R0 - 250, width: 540, height: 960, fit: "cover", trimStart: 0,
-      mask: { shape: "ellipse", x: 270 - R0, y: 250 - R0, width: 2 * R0, height: 2 * R0 }, shadow: { x: 0, y: 18, blur: 40, color: "#0000004D" } }));
-    nodes.push(rect({ x: PX - 3, y: PY - 3, width: 2 * R0 + 6, height: 2 * R0 + 6, radius: R0 + 3, fill: "#00000000", strokeColor: PAL.accent, strokeWidth: 4 }));
     p.compose(nodes, { at: 0, dur: K.end, name: "kinetic hook" });
   }
 

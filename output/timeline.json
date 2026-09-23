@@ -1090,6 +1090,26 @@
      "easing": "linear"
     },
     {
+     "at": 1.48,
+     "value": 1.0,
+     "easing": "ease-out"
+    },
+    {
+     "at": 1.73,
+     "value": 1.08,
+     "easing": "hold"
+    },
+    {
+     "at": 1.934,
+     "value": 1.08,
+     "easing": "hold"
+    },
+    {
+     "at": 1.967,
+     "value": 1.0,
+     "easing": "linear"
+    },
+    {
      "at": 7.139,
      "value": 1.0
     }
