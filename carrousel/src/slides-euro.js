@@ -22,7 +22,7 @@ const badge = t => `<div class="head"><span class="badge">${t}</span></div>`;
 function gauge({ pct, val, prev = '', label = '', mod = '' }) {
   return `
     <div class="gauge ${mod}">
-      <div class="gauge-top">${prev ? `<span class="gauge-prev">${prev}</span>` : ''}</div>
+      ${prev ? `<div class="gauge-top"><span class="gauge-prev">${prev}</span></div>` : ''}
       <div class="gauge-bar">
         <div class="gauge-fill" style="width:${pct}%"><span class="gauge-val">${val}</span></div>
       </div>
