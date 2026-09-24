@@ -1,0 +1,473 @@
+/* ============================================================
+   FYNOVATES / Madame Caci — Design system carrousel (fond clair)
+   1080 x 1350 — marges 80px
+   ============================================================ */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+:root {
+  --bg:    #F7F8FC;  /* blanc cassé légèrement bleuté */
+  --ink:   #12121F;  /* noir bleuté profond */
+  --blue:  #4353FF;  /* bleu signature */
+  --grey:  #8A8FA3;  /* texte secondaire */
+  --card:  #EFF1F7;  /* cards claires */
+  --line:  #E3E6F0;  /* filets de séparation */
+  --shadow-blue: 0 20px 60px rgba(67, 83, 255, 0.35);
+  --r: 24px;         /* radius des cards */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1080px; height: 1350px; overflow: hidden;
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.slide {
+  position: relative;
+  width: 1080px; height: 1350px;
+  padding: 80px;
+  display: flex; flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* ---------- décor en filigrane ---------- */
+.decor { position: absolute; inset: 0; width: 1080px; height: 1350px; pointer-events: none; }
+
+/* ---------- 1. NUMÉRO DE SLIDE (outline) ---------- */
+.num {
+  position: absolute; top: 80px; right: 80px;
+  font-size: 240px; font-weight: 900; line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(67, 83, 255, 0.20);
+}
+
+/* ---------- 2. BADGE CATÉGORIE ---------- */
+.head { flex: none; height: 62px; display: flex; align-items: center; }
+.badge {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: var(--card); border-radius: 999px;
+  padding: 16px 30px;
+  font-size: 24px; font-weight: 700; color: var(--blue);
+  letter-spacing: 0.08em;
+}
+.badge::before {
+  content: ''; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--blue); flex: none;
+}
+
+/* ---------- titres ---------- */
+.title {
+  flex: none;
+  margin-top: 130px;
+  font-size: 76px; font-weight: 900;
+  line-height: 1.02; letter-spacing: -0.02em; word-spacing: 0.06em;
+  color: var(--ink);
+}
+.title--hero  { font-size: 84px; }
+.title--codex { font-size: 104px; }
+.blue { color: var(--blue); }
+
+/* zone centrale : composant centré entre le titre et la chute */
+.zone { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+
+/* ---------- corps de texte ---------- */
+.body {
+  font-size: 34px; font-weight: 600; line-height: 1.4;
+  color: var(--ink); max-width: 860px;
+}
+.body .blue { font-weight: 700; }
+.muted { color: var(--grey); font-weight: 500; }
+
+/* ---------- phrase de chute ---------- */
+.chute {
+  flex: none;
+  font-size: 40px; font-weight: 800; line-height: 1.25;
+  letter-spacing: -0.015em; word-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* ---------- 3. CARD STAT ---------- */
+.stat { border-radius: var(--r); padding: 48px; }
+.stat--light { background: var(--card); }
+.stat--blue  { background: var(--blue); box-shadow: var(--shadow-blue); }
+.stat-fig    { font-size: 104px; font-weight: 900; line-height: 0.95; letter-spacing: -0.035em; }
+.stat--light .stat-fig { color: var(--ink); }
+.stat--blue  .stat-fig { color: #FFFFFF; }
+.stat-sub    { margin-top: 18px; font-size: 30px; font-weight: 500; line-height: 1.35; }
+.stat--light .stat-sub { color: var(--grey); }
+.stat--blue  .stat-sub { color: rgba(255, 255, 255, 0.80); }
+
+/* ---------- 4. LIGNES COMPARATIVES ---------- */
+.rows { display: flex; flex-direction: column; }
+.row {
+  display: flex; justify-content: space-between; align-items: center; gap: 32px;
+  padding: 34px 6px; border-bottom: 1px solid var(--line);
+}
+.row-l { font-size: 32px; font-weight: 600; color: var(--grey); }
+.row-v { font-size: 42px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; text-align: right; }
+.row--struck { opacity: 0.55; text-decoration: line-through; }
+
+.row-card {
+  display: flex; justify-content: space-between; align-items: center; gap: 32px;
+  margin-top: 30px;
+  background: var(--blue); border-radius: var(--r);
+  box-shadow: var(--shadow-blue);
+  padding: 42px 44px;
+}
+.row-card .row-l { color: rgba(255, 255, 255, 0.80); font-weight: 600; }
+.row-card .row-v { color: #FFFFFF; }
+
+/* ---------- 5. PILLS TAGS ---------- */
+.pills { display: flex; gap: 16px; flex-wrap: wrap; }
+.pill {
+  background: var(--card); border-radius: 999px;
+  padding: 16px 30px;
+  font-size: 24px; font-weight: 700; color: var(--ink);
+}
+
+/* ---------- 6. BOUTON SWIPE ---------- */
+.swipe { display: flex; align-items: center; gap: 24px; }
+.swipe-txt { font-size: 24px; font-weight: 600; color: var(--grey); letter-spacing: 0.3em; }
+.swipe-dot {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--ink); color: #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; font-weight: 600;
+}
+
+/* ---------- 7. BADGE FLOTTANT (outline) ---------- */
+.float {
+  position: absolute;
+  display: inline-flex; align-items: center;
+  border: 1.5px solid rgba(67, 83, 255, 0.45); border-radius: 999px;
+  padding: 13px 26px;
+  font-size: 22px; font-weight: 700; color: var(--blue);
+  background: rgba(247, 248, 252, 0.92);
+}
+
+/* ---------- flux de cards (slide 4) ---------- */
+.flow { display: flex; flex-direction: column; align-items: stretch; }
+.flow-card { border-radius: var(--r); padding: 38px 44px; display: flex; align-items: baseline; gap: 16px; }
+.flow-card--light { background: var(--card); }
+.flow-card--blue  { background: var(--blue); box-shadow: var(--shadow-blue); }
+.flow-name { font-size: 30px; font-weight: 900; letter-spacing: 0.04em; color: var(--ink); flex: none; }
+.flow-desc { font-size: 30px; font-weight: 500; color: var(--grey); }
+.flow-card--blue .flow-name { color: #FFFFFF; }
+.flow-card--blue .flow-desc { color: rgba(255, 255, 255, 0.80); }
+.flow-arrow { align-self: center; display: block; }
+
+/* ---------- duo de cards (slide 5) ---------- */
+.duo { display: flex; gap: 36px; }
+.duo-card { flex: 1; border-radius: var(--r); padding: 48px; display: flex; flex-direction: column; }
+.duo-card--light { background: var(--card); }
+.duo-card--blue  { background: var(--blue); box-shadow: var(--shadow-blue); }
+.duo-kicker { font-size: 24px; font-weight: 700; letter-spacing: 0.18em; color: var(--grey); }
+.duo-card--blue .duo-kicker { color: rgba(255, 255, 255, 0.75); }
+.duo-txt { margin-top: 36px; font-size: 36px; font-weight: 800; line-height: 1.22; letter-spacing: -0.015em; color: var(--ink); }
+.duo-card--blue .duo-txt { color: #FFFFFF; }
+
+/* ---------- liste à puces carrées (slide 7) ---------- */
+.ticks { display: flex; flex-direction: column; }
+.tick {
+  display: flex; align-items: center; gap: 26px;
+  padding: 30px 6px; border-bottom: 1px solid var(--line);
+  font-size: 34px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
+}
+.tick::before {
+  content: ''; flex: none; width: 14px; height: 14px;
+  border-radius: 4px; background: var(--blue);
+}
+
+/* ---------- photo découpée (slide 1) ---------- */
+.photo { position: absolute; left: 0; bottom: 0; height: 742px; }
+.photo-ph {
+  position: absolute; left: 40px; bottom: 0; width: 470px; height: 742px;
+  border: 2px dashed rgba(67, 83, 255, 0.28); border-top-left-radius: 200px; border-top-right-radius: 200px;
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: 40px;
+  font-size: 20px; font-weight: 600; color: rgba(67, 83, 255, 0.40); letter-spacing: 0.16em; white-space: nowrap;
+}
+.row-v--txt { font-size: 30px; font-weight: 700; }
+.row--struck .row-l, .row--struck .row-v { font-size: 30px; }
+
+/* ---------- bulles de messages (deck DM, slide 2) ---------- */
+.bubbles { display: flex; flex-direction: column; gap: 26px; width: 100%; }
+.bubble {
+  background: var(--card); border-radius: var(--r);
+  padding: 34px 40px;
+  font-size: 30px; font-weight: 600; line-height: 1.3; color: var(--ink);
+}
+.bubble--l { align-self: flex-start; max-width: 84%; border-bottom-left-radius: 8px; }
+.bubble--r { align-self: flex-end;  max-width: 80%; border-bottom-right-radius: 8px; text-align: right; }
+
+/* ---------- illustration de couverture (deck DM, slide 1) ---------- */
+.illus {
+  position: absolute; left: 44px; bottom: 0; height: 742px;
+  filter: drop-shadow(0 34px 64px rgba(67, 83, 255, 0.22))
+          drop-shadow(0 8px 18px rgba(18, 18, 31, 0.10));
+}
+.illus-ph {
+  position: absolute; left: 40px; bottom: 60px; width: 470px; height: 560px;
+  border: 2px dashed rgba(67, 83, 255, 0.28); border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 600; color: rgba(67, 83, 255, 0.40); letter-spacing: 0.16em;
+}
+/* slide 7 du deck DM : lignes sans puce carrée */
+.ticks--plain .tick::before { display: none; }
+.ticks--plain .tick { gap: 0; }
+
+/* icone bulle de message : suit la couleur du texte, donc reste dans la palette */
+.ico {
+  width: 0.92em; height: 0.92em;
+  display: inline-block; vertical-align: -0.08em;
+  margin-left: 0.34em; fill: currentColor;
+}
+
+/* ============================================================
+   JAUGE D'EURO (deck « euro ») — barre de montant restant
+   ============================================================ */
+.gauges { display: flex; flex-direction: column; gap: 22px; width: 100%; }
+.gauge  { width: 100%; }
+
+.gauge-top { display: flex; justify-content: flex-end; height: 36px; margin-bottom: 12px; }
+.gauge-prev {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px; font-weight: 400; color: var(--grey);
+  text-decoration: line-through;
+}
+.gauge-bar {
+  position: relative; height: 72px;
+  border-radius: 999px; background: var(--card); overflow: hidden;
+}
+.gauge-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  border-radius: 999px; background: var(--blue);
+  display: flex; align-items: center; padding-left: 36px;
+}
+.gauge-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 34px; font-weight: 700; color: #FFFFFF;
+  letter-spacing: -0.02em; white-space: nowrap;
+}
+.gauge-label { margin-top: 18px; font-size: 26px; font-weight: 500; color: var(--grey); }
+
+/* rappel des étapes précédentes */
+.gauge--mini { opacity: 0.6; }
+.gauge--mini .gauge-top, .gauge--mini .gauge-label { display: none; }
+.gauge--mini .gauge-bar  { height: 38px; }
+.gauge--mini .gauge-fill { padding-left: 20px; }
+.gauge--mini .gauge-val  { font-size: 20px; }
+
+/* face-à-face : la structure française en gris */
+.gauge--grey .gauge-fill { background: var(--grey); }
+
+/* posée dans une card bleue pleine : couleurs inversées */
+.gauge--invert .gauge-bar   { background: rgba(255, 255, 255, 0.20); }
+.gauge--invert .gauge-fill  { background: #FFFFFF; }
+.gauge--invert .gauge-val   { color: var(--blue); }
+.gauge--invert .gauge-prev  { color: rgba(255, 255, 255, 0.65); }
+.gauge--invert .gauge-label { color: rgba(255, 255, 255, 0.80); }
+
+
+
+/* ============================================================
+   COUVERTURE « le reçu de caisse »
+   ============================================================ */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../fonts/IBMPlexMono-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../fonts/IBMPlexMono-Bold.ttf') format('truetype');
+  font-weight: 700; font-style: normal;
+}
+
+.receipt-wrap {
+  position: absolute; top: 505px; right: 72px;
+  width: 500px; height: 635px;
+  transform: rotate(2deg);
+  /* ombre neutre douce + liseré bleu très diffus ; drop-shadow épouse le bord dentelé */
+  filter: drop-shadow(0 16px 34px rgba(18, 18, 31, 0.09))
+          drop-shadow(0 30px 70px rgba(67, 83, 255, 0.18));
+}
+.receipt {
+  width: 100%; height: 100%;
+  background: #FFFFFF;                 /* blanc pur : seule exception à la palette */
+  padding: 40px 32px 0;
+  display: flex; flex-direction: column;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--ink);
+}
+
+.rc-head {
+  text-align: center; font-size: 22px; font-weight: 700;
+  letter-spacing: 0.22em; text-indent: 0.22em;
+}
+.rc-dots  { height: 0; border-top: 2px dotted var(--grey); margin: 26px 0; }
+.rc-rule  { height: 0; border-top: 3px dashed var(--ink); margin: 26px 0; opacity: 0.85; }
+
+.rc-line {
+  font-size: 22px; font-weight: 400; line-height: 1.85;
+  white-space: pre;                    /* les points d'alignement sont dans la chaîne */
+}
+
+.rc-total { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+.rc-total-lbl { font-size: 26px; font-weight: 700; letter-spacing: 0.04em; }
+.rc-total-val { font-size: 50px; font-weight: 700; color: var(--blue); letter-spacing: -0.02em; }
+
+.rc-foot {
+  margin-top: auto; padding-bottom: 46px;
+  text-align: center; font-size: 15px; font-weight: 400;
+  letter-spacing: 0.14em; text-indent: 0.14em; color: var(--grey);
+}
+
+/* tampon à cheval sur le bas du ticket */
+.stamp { position: absolute; left: 392px; top: 1024px; width: 210px; height: 210px; opacity: 0.85; }
+.stamp-ring { font-family: 'IBM Plex Mono', monospace; font-weight: 700; fill: var(--blue); letter-spacing: 1.5px; }
+.stamp-mid  { font-family: 'Inter', sans-serif; font-weight: 900; fill: var(--blue); letter-spacing: -0.02em; }
+
+/* ============================================================
+   LANGAGE « TICKET » — fragments, surlignage, tampons
+   ============================================================ */
+
+/* fragment de ticket : même inclinaison, même ombre, même dentelé que la couverture */
+.frag-wrap {
+  width: 880px; margin: 0 auto;
+  transform: rotate(2deg);
+  filter: drop-shadow(0 16px 34px rgba(18, 18, 31, 0.09))
+          drop-shadow(0 30px 70px rgba(67, 83, 255, 0.18));
+}
+.frag {
+  background: #FFFFFF; padding: 44px 44px 46px;
+  font-family: 'IBM Plex Mono', monospace; color: var(--ink);
+}
+.frag-line { font-size: 36px; font-weight: 400; line-height: 1.6; white-space: pre; }
+.frag-head {
+  text-align: center; font-size: 24px; font-weight: 700;
+  letter-spacing: 0.22em; text-indent: 0.22em; margin-bottom: 26px;
+}
+
+/* surlignage marqueur de la ligne de l'étape en cours */
+.frag-hl {
+  background: rgba(67, 83, 255, 0.15);
+  border-radius: 6px; padding: 4px 10px; margin: 0 -10px;
+}
+
+/* ticket « propre » de la slide 7 : droit, pas de travers */
+.ticket7-wrap {
+  width: 620px; margin: 0 auto;
+  filter: drop-shadow(0 16px 34px rgba(18, 18, 31, 0.09))
+          drop-shadow(0 30px 70px rgba(67, 83, 255, 0.18));
+}
+.ticket7 {
+  background: #FFFFFF; padding: 46px 40px 50px;
+  font-family: 'IBM Plex Mono', monospace; color: var(--ink);
+}
+.ticket7 .frag-line { font-size: 27px; line-height: 1.85; }
+
+/* tampon rectangulaire pour les verdicts (texte long, même famille que le tampon rond) */
+.stamp-box {
+  position: absolute; z-index: 2;
+  border: 3px solid var(--blue); border-radius: 14px;
+  padding: 15px 26px;
+  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 30px;
+  letter-spacing: 0.05em; color: var(--blue);
+  background: rgba(247, 248, 252, 0.88);
+  opacity: 0.85;
+}
+.stamp-box::after {                    /* double filet, comme un vrai tampon */
+  content: ''; position: absolute; inset: 5px;
+  border: 1.5px solid var(--blue); border-radius: 8px;
+}
+
+/* séparateurs pointillés de ticket dans les listes */
+.ticks--dot .tick { border-bottom: 2px dotted var(--grey); }
+.mono { font-family: 'IBM Plex Mono', monospace; font-weight: 700; letter-spacing: -0.02em; }
+
+/* ============================================================
+   SLIDE 10 — LE CODEX, l'objet qu'on reçoit
+   ============================================================ */
+.codex-scene {
+  position: relative; height: 560px;
+  display: flex; align-items: center; justify-content: center;
+  perspective: 1200px;
+}
+
+/* le ticket des slides précédentes, relégué en arrière-plan */
+.codex-bg {
+  position: absolute; top: 50%; left: 50%;
+  width: 880px; transform: translate(-50%, -50%) rotate(6deg);
+  opacity: 0.5;
+  background: #FFFFFF;
+  /* plis suggérés par de fines bandes diagonales */
+  background-image: linear-gradient(105deg,
+      rgba(18,18,31,0.05) 0 1.5%, transparent 1.5% 17%,
+      rgba(18,18,31,0.04) 17% 18%, transparent 18% 45%,
+      rgba(18,18,31,0.05) 45% 46%, transparent 46% 71%,
+      rgba(18,18,31,0.04) 71% 72%, transparent 72%);
+  padding: 40px 44px 44px;
+  font-family: 'IBM Plex Mono', monospace; color: var(--ink);
+  border: 1px solid rgba(18, 18, 31, 0.08);
+  filter: drop-shadow(0 18px 42px rgba(18, 18, 31, 0.20));
+}
+.codex-bg .rc-total-lbl { font-size: 22px; }
+.codex-bg .rc-total-val { font-size: 46px; }
+
+/* le livre */
+.codex-holder { position: relative; width: 400px; }
+.codex {
+  position: relative; width: 400px; height: 560px;
+  transform: rotateY(6deg) rotate(-2deg);
+  border-radius: 16px; background: #0E1230;          /* bleu nuit : seule extension de palette */
+  box-shadow: 0 44px 96px rgba(67, 83, 255, 0.42),
+              0 18px 44px rgba(14, 18, 48, 0.32);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.codex::before {                                      /* cadre intérieur */
+  content: ''; position: absolute; inset: 24px;
+  border: 1px solid rgba(67, 83, 255, 0.40); border-radius: 8px;
+}
+.codex-spine {                                        /* tranche visible côté gauche */
+  position: absolute; left: 0; top: 0; bottom: 0; width: 20px;
+  border-radius: 16px 0 0 16px;
+  background: linear-gradient(90deg, #1A2050, #0E1230);
+}
+.codex-rule { width: 40px; height: 2px; background: var(--blue); margin-bottom: 30px; }
+.codex-title {
+  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 36px;
+  color: #FFFFFF; letter-spacing: 0.25em; text-indent: 0.25em;
+}
+.codex-sub {
+  margin-top: 22px; font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: 13px; color: var(--grey); letter-spacing: 0.10em; text-indent: 0.10em;
+}
+
+/* ligne de ticket sous le livre */
+.codex-line {
+  margin-top: 52px; text-align: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 24px;
+  color: var(--grey);
+}
+
+/* bouton géant : radius plein, pour trancher avec les cards carrées */
+.cta-pill {
+  display: block; width: 70%; margin: 36px auto 0;
+  background: var(--blue); border-radius: 999px;
+  padding: 34px 40px; text-align: center;
+  font-size: 58px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.02em;
+  box-shadow: 0 26px 64px rgba(67, 83, 255, 0.42);
+}
