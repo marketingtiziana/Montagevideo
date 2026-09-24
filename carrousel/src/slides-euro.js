@@ -32,37 +32,67 @@ function gauge({ pct, val, prev = '', label = '', mod = '' }) {
 /* rappel d'une étape déjà franchie */
 const mini = (pct, val) => gauge({ pct, val, mod: 'gauge--mini' });
 
+/* --- bord inferieur dentele du ticket (clip-path en dents de scie) --- */
+const TEAR = (() => {
+  const TEETH = 22, pts = ['0% 0%', '100% 0%'];
+  for (let i = TEETH; i >= 0; i--) {
+    pts.push(`${(i * 100 / TEETH).toFixed(3)}% ${i % 2 === 0 ? '100%' : 'calc(100% - 14px)'}`);
+  }
+  return pts.join(', ');
+})();
+
+/* --- tampon rond a cheval sur le bas du ticket --- */
+const STAMP = `
+<svg class="stamp" viewBox="0 0 210 210" aria-hidden="true" style="transform:rotate(-12deg)">
+  <defs>
+    <path id="ring" fill="none"
+          d="M105,105 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+  </defs>
+  <circle cx="105" cy="105" r="101" fill="none" stroke="#4353FF" stroke-width="3"/>
+  <circle cx="105" cy="105" r="66"  fill="none" stroke="#4353FF" stroke-width="2"/>
+  <text class="stamp-ring" font-size="15">
+    <textPath href="#ring" startOffset="0">STRUCTURE FRANÇAISE • STRUCTURE FRANÇAISE •</textPath>
+  </text>
+  <text class="stamp-mid" x="105" y="120" text-anchor="middle" font-size="40">−57%</text>
+</svg>`;
+
 module.exports = { DECOR, slides: [
 
-  /* ================= 01 · COUVERTURE ================= */
+  /* ================= 01 · COUVERTURE « le reçu de caisse » ================= */
   {
     main: `
       ${badge("LE VOYAGE D'UN EURO")}
 
-      <h1 class="title" style="margin-top:158px;font-size:74px;max-width:620px">
-        Ton client<br>
-        paie <span class="blue">100€</span>.<br>
-        Toi, tu touches<br>
-        <span style="font-size:1.4em;line-height:1.02;display:inline-block">
-          <span class="blue u-thick">43€</span>.
-        </span>
+      <h1 class="title" style="margin-top:58px;font-size:60px;max-width:620px">
+        Voici le vrai<br>ticket de caisse<br>de ton<br><span class="blue">BUSINESS</span>.
       </h1>
 
-      <span class="float" style="top:548px;left:372px;transform:rotate(3deg)">&minus;&nbsp;57%</span>
-
-      <p class="muted" style="margin-top:56px;max-width:620px;font-size:34px;font-weight:500;line-height:1.4">
-        Chaque étape du trajet, slide par slide.
+      <p class="muted" style="margin-top:55px;max-width:380px;font-size:34px;font-weight:500;line-height:1.4">
+        Ton client paie 100€. Suis le trajet.
       </p>
 
-      <div class="coins bleed">
-        <div class="coins-col">
-          <div class="coin-x coin-1" style="transform:translateX(0)">100€</div>
-          <div class="coin-x coin-2" style="transform:translateX(-10px)">83€</div>
-          <div class="coin-x coin-3" style="transform:translateX(12px)">62€</div>
-          <div class="coin-x coin-4" style="transform:translateX(-8px)">43€</div>
-        </div>
-        <div class="coin-tag">ta poche</div>
+      <div style="margin-top:40px">
+        <span class="pill" style="font-size:24px">slide par slide &rarr;</span>
       </div>
+
+      <div class="receipt-wrap bleed">
+        <div class="receipt" style="clip-path:polygon(${TEAR})">
+          <div class="rc-head">TON BUSINESS</div>
+          <div class="rc-dots"></div>
+          <div class="rc-line">Paiement client ........ 100,00€</div>
+          <div class="rc-line">TVA .................... −16,67€</div>
+          <div class="rc-line">Impôt sociétés ......... −20,83€</div>
+          <div class="rc-line">Sortie (flat tax) ...... −19,00€</div>
+          <div class="rc-rule"></div>
+          <div class="rc-total">
+            <span class="rc-total-lbl">RESTE POUR TOI</span>
+            <span class="rc-total-val">43,50€</span>
+          </div>
+          <div class="rc-foot">MERCI DE VOTRE FIDÉLITÉ</div>
+        </div>
+      </div>
+
+      ${STAMP}
 
       <div class="swipe" style="position:absolute;bottom:80px;right:80px">
         <span class="swipe-txt">SWIPE</span><span class="swipe-dot">&rarr;</span>

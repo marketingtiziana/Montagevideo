@@ -75,6 +75,8 @@ ${slide.main}
       const slide = document.querySelector('.slide');
       const box = slide.getBoundingClientRect();
       const label = el => (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 42);
+      // sur un element SVG, className est un SVGAnimatedString : pas de .split()
+      const cls = el => (typeof el.className === 'string' ? el.className : el.getAttribute('class') || '');
       // `.bleed` (décor, photo détourée) : autorisé à sortir du cadre
       const bleeds = el => el.closest('.bleed') !== null;
 
@@ -103,7 +105,7 @@ ${slide.main}
         if (!r.width && !r.height) return;
         if (r.left < in_.l - 0.5 || r.right > in_.r + 0.5 ||
             r.top < in_.t - 0.5 || r.bottom > in_.b + 0.5) {
-          out.issues.push(`marge ${MARGIN}px: .${el.className.split(' ')[0]} "${label(el)}"`);
+          out.issues.push(`marge ${MARGIN}px: .${cls(el).split(' ')[0] || el.tagName.toLowerCase()} "${label(el)}"`);
         }
       });
       return out;
