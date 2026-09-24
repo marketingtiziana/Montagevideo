@@ -233,3 +233,55 @@ html, body {
   display: inline-block; vertical-align: -0.08em;
   margin-left: 0.34em; fill: currentColor;
 }
+
+/* ============================================================
+   JAUGE D'EURO (deck « euro ») — barre de montant restant
+   ============================================================ */
+.gauges { display: flex; flex-direction: column; gap: 22px; width: 100%; }
+.gauge  { width: 100%; }
+
+.gauge-top { display: flex; justify-content: flex-end; height: 36px; margin-bottom: 12px; }
+.gauge-prev {
+  font-size: 28px; font-weight: 600; color: var(--grey);
+  text-decoration: line-through;
+}
+.gauge-bar {
+  position: relative; height: 88px;
+  border-radius: 999px; background: var(--card); overflow: hidden;
+}
+.gauge-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  border-radius: 999px; background: var(--blue);
+  display: flex; align-items: center; padding-left: 36px;
+}
+.gauge-val {
+  font-size: 40px; font-weight: 900; color: #FFFFFF;
+  letter-spacing: -0.02em; white-space: nowrap;
+}
+.gauge-label { margin-top: 18px; font-size: 26px; font-weight: 500; color: var(--grey); }
+
+/* rappel des étapes précédentes */
+.gauge--mini { opacity: 0.6; }
+.gauge--mini .gauge-top, .gauge--mini .gauge-label { display: none; }
+.gauge--mini .gauge-bar  { height: 40px; }
+.gauge--mini .gauge-fill { padding-left: 20px; }
+.gauge--mini .gauge-val  { font-size: 22px; }
+
+/* face-à-face : la structure française en gris */
+.gauge--grey .gauge-fill { background: var(--grey); }
+
+/* posée dans une card bleue pleine : couleurs inversées */
+.gauge--invert .gauge-bar   { background: rgba(255, 255, 255, 0.20); }
+.gauge--invert .gauge-fill  { background: #FFFFFF; }
+.gauge--invert .gauge-val   { color: var(--blue); }
+.gauge--invert .gauge-prev  { color: rgba(255, 255, 255, 0.65); }
+.gauge--invert .gauge-label { color: rgba(255, 255, 255, 0.80); }
+
+/* pièce de couverture (slide 1) */
+.coin {
+  position: absolute; left: 80px; bottom: 150px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: var(--blue); box-shadow: var(--shadow-blue);
+  display: flex; align-items: center; justify-content: center;
+}
+.coin span { font-size: 180px; font-weight: 900; color: #FFFFFF; line-height: 1; }
