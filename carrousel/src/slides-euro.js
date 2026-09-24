@@ -254,19 +254,41 @@ module.exports = { DECOR, slides: [
       <p class="chute">L'architecture fait tout.<br>L'improvisation <span class="blue">détruit tout</span>.</p>`
   },
 
-  /* ================= 10 · CTA ================= */
+  /* ================= 10 · CTA — LE CODEX ================= */
   {
     main: `
-      ${badge('TON TOUR')}
-      <h1 class="title" style="font-size:58px">Chaque euro que tu encaisses<br>fait <span class="blue">ce voyage</span>.</h1>
-      <div class="zone">
-        ${frag({ lines: [tline('Ton ticket à toi', '???,??€', 34)] })}
-        <div class="stat stat--blue" style="padding:52px;text-align:center;margin-top:70px">
-          <div style="font-size:60px;font-weight:900;color:#FFFFFF;letter-spacing:-0.02em">Commente VOYAGE</div>
+      ${badge('LA SOLUTION')}
+
+      <h1 class="title" style="text-align:center;font-size:56px;margin-top:78px">
+        Ton euro mérite<br><span class="blue">un meilleur voyage</span>.
+      </h1>
+
+      <div class="codex-scene" style="margin-top:46px">
+        <div class="codex-bg bleed">
+          <div class="rc-dots" style="margin:0 0 24px"></div>
+          <div class="rc-total">
+            <span class="rc-total-lbl">RESTE POUR TOI</span>
+            <span class="rc-total-val">43,50€</span>
+          </div>
         </div>
-        <p class="muted" style="font-size:30px;font-weight:500;margin-top:34px;text-align:center">
-          Échange offert. On analyse ton tuyau ensemble.
-        </p>
-      </div>`
+
+        <div class="codex-holder">
+          <div class="codex">
+            <div class="codex-spine"></div>
+            <div class="codex-rule"></div>
+            <div class="codex-title">LE CODEX</div>
+            <div class="codex-sub">STRUCTURES · PAYS · MÉCANISMES</div>
+          </div>
+          ${stampBox('GRATUIT', 'right:-78px;bottom:-28px;transform:rotate(-10deg)')}
+        </div>
+      </div>
+
+      <div class="codex-line">Structures ... Holdings ... Juridictions ... Étapes</div>
+
+      <span class="cta-pill">Commente CODEX</span>
+
+      <p class="muted" style="text-align:center;margin-top:32px;font-size:30px;font-weight:500">
+        Je te l'envoie en DM. Gratuitement.
+      </p>`
   }
 ]};
