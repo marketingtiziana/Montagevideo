@@ -32,14 +32,34 @@ function gauge({ pct, val, prev = '', label = '', mod = '' }) {
 /* rappel d'une étape déjà franchie */
 const mini = (pct, val) => gauge({ pct, val, mod: 'gauge--mini' });
 
-/* --- bord inferieur dentele du ticket (clip-path en dents de scie) --- */
-const TEAR = (() => {
-  const TEETH = 22, pts = ['0% 0%', '100% 0%'];
-  for (let i = TEETH; i >= 0; i--) {
-    pts.push(`${(i * 100 / TEETH).toFixed(3)}% ${i % 2 === 0 ? '100%' : 'calc(100% - 14px)'}`);
+/* --- bord dentele : ~23px de pas, comme la couverture (500px / 22 dents) --- */
+const tear = (width) => {
+  let teeth = Math.round(width / 22.7);
+  if (teeth % 2) teeth += 1;                       // nombre pair : la dentelure boucle proprement
+  const pts = ['0% 0%', '100% 0%'];
+  for (let i = teeth; i >= 0; i--) {
+    pts.push(`${(i * 100 / teeth).toFixed(3)}% ${i % 2 === 0 ? '100%' : 'calc(100% - 14px)'}`);
   }
   return pts.join(', ');
-})();
+};
+const TEAR = tear(500);                            // couverture (slide 1)
+
+/* --- ligne de ticket : les points de conduite sont calcules pour que
+       tous les montants d'un meme bloc tombent sur la meme colonne --- */
+const tline = (label, amount, cells) =>
+  `${label} ${'.'.repeat(cells - label.length - amount.length - 2)} ${amount}`;
+
+/* --- fragment de ticket : zoom sur une ou deux lignes --- */
+const frag = ({ head = '', lines, hl = false }) => `
+<div class="frag-wrap bleed">
+  <div class="frag" style="clip-path:polygon(${tear(880)})">
+    ${head ? `<div class="frag-head">${head}</div>` : ''}
+    ${lines.map(l => `<div class="frag-line">${hl ? `<span class="frag-hl">${l}</span>` : l}</div>`).join('')}
+  </div>
+</div>`;
+
+/* --- tampon de verdict --- */
+const stampBox = (txt, style) => `<span class="stamp-box" style="${style}">${txt}</span>`;
 
 /* --- tampon rond a cheval sur le bas du ticket --- */
 const STAMP = `
@@ -103,15 +123,10 @@ module.exports = { DECOR, slides: [
   {
     main: `
       ${badge('LE DÉPART')}
-      <h1 class="title">Ton client<br>paie <span class="blue">100€</span>.</h1>
+      <h1 class="title">Ton client<br>paie <span class="blue mono">100€</span>.</h1>
       <div class="zone">
-        <div class="stat stat--light">
-          <div class="stat-fig" style="font-size:160px">100€</div>
-          <div class="stat-sub" style="font-size:30px;margin-top:20px">
-            Il clique. C'est débité. Tout le monde est content.
-          </div>
-        </div>
-        <div style="margin-top:44px">${gauge({ pct: 100, val: '100€' })}</div>
+        ${frag({ head: 'TON BUSINESS', lines: [tline('Paiement client', '100,00€', 32)] })}
+        <div style="margin-top:64px">${gauge({ pct: 100, val: '100€' })}</div>
       </div>
       <p class="chute">Ces 100€ commencent un<br><span class="blue">parcours d'obstacles</span>.</p>`
   },
@@ -122,8 +137,13 @@ module.exports = { DECOR, slides: [
       ${badge('ÉTAPE 1 — LA TVA')}
       <h1 class="title">20% ne t'ont<br><span class="blue">jamais</span> appartenu.</h1>
       <div class="zone">
-        ${gauge({ pct: 83, val: '83€', prev: '100€', label: 'après TVA' })}
-        <p class="body" style="margin-top:56px">Tu n'es que le collecteur.</p>
+        <div style="position:relative;width:880px;margin:0 auto">
+          ${frag({ lines: [tline('TVA', '−16,67€', 32)], hl: true })}
+          ${stampBox('COLLECTEUR', 'right:10px;bottom:-32px;transform:rotate(-10deg)')}
+        </div>
+        <div style="margin-top:80px">
+          ${gauge({ pct: 83, val: '83€', prev: '100€', label: 'après TVA' })}
+        </div>
       </div>
       <p class="chute">Mal collectée&nbsp;?<br>Tu la rembourses de ta poche.</p>`
   },
@@ -134,11 +154,11 @@ module.exports = { DECOR, slides: [
       ${badge("ÉTAPE 2 — L'IS")}
       <h1 class="title">L'impôt sur les<br>sociétés <span class="blue">se sert</span>.</h1>
       <div class="zone">
-        <div class="gauges">
-          ${mini(100, '100€')}
-          ${mini(83, '83€')}
+        <div style="position:relative;width:880px;margin:0 auto">
+          ${frag({ lines: [tline('Impôt sociétés', '−20,83€', 32)], hl: true })}
+          ${stampBox('PAS ENCORE À TOI', 'right:10px;bottom:-32px;transform:rotate(-8deg)')}
         </div>
-        <div style="margin-top:40px">
+        <div style="margin-top:80px">
           ${gauge({ pct: 62, val: '62€', prev: '83€', label: 'après IS (25%)' })}
         </div>
       </div>
@@ -151,26 +171,15 @@ module.exports = { DECOR, slides: [
       ${badge('ÉTAPE 3 — LA SORTIE')}
       <h1 class="title">Sortir l'argent&nbsp;:<br>le <span class="blue">grand final</span>.</h1>
       <div class="zone">
-        <div class="rows">
-          <div class="row">
-            <span class="row-l">Salaire</span>
-            <span class="row-v row-v--txt">jusqu'à 80% de charges sur le net</span>
-          </div>
-          <div class="row">
-            <span class="row-l">Dividendes</span>
-            <span class="row-v row-v--txt">flat tax 30%</span>
-          </div>
-        </div>
-        <div class="gauges" style="margin-top:44px">
-          ${mini(100, '100€')}
-          ${mini(83, '83€')}
-          ${mini(62, '62€')}
-        </div>
-        <div style="margin-top:36px">
+        ${frag({ lines: [
+            tline('Salaire', "jusqu'à −80% net", 36),
+            tline('Dividendes', '−30% flat', 36)
+          ] })}
+        <div style="margin-top:64px">
           ${gauge({ pct: 43, val: '43€', prev: '62€', label: 'dans ta poche' })}
         </div>
       </div>
-      <p class="chute">Ton client a payé 100.<br>Tu touches <span class="blue">43</span>.</p>`
+      <p class="chute">Ton client a payé 100.<br>Tu touches <span class="blue mono">43</span>.</p>`
   },
 
   /* ================= 06 · SUR UNE ANNÉE ================= */
@@ -180,8 +189,8 @@ module.exports = { DECOR, slides: [
       <h1 class="title">Maintenant,<br><span class="blue">multiplie</span>.</h1>
       <div class="zone">
         <div class="stat stat--blue" style="padding:56px">
-          <div class="stat-fig" style="font-size:140px">170 000€</div>
-          <div class="stat-sub" style="font-size:32px;margin-top:22px">
+          <div class="stat-fig mono" style="font-size:130px;font-weight:700">170 000€</div>
+          <div class="stat-sub" style="font-size:32px;margin-top:24px">
             évaporés sur 300 000€ encaissés. Chaque année.
           </div>
         </div>
@@ -194,16 +203,24 @@ module.exports = { DECOR, slides: [
     main: `
       ${badge('AUTRE STRUCTURE')}
       <h1 class="title">Le même euro,<br>autre <span class="blue">TUYAU</span>.</h1>
-      <p class="body" style="margin-top:40px">
+      <p class="body" style="margin-top:38px">
         Juridiction territoriale, résidence adaptée, TVA gérée via l'OSS.
       </p>
       <div class="zone">
-        <div class="stat stat--blue" style="padding:52px 56px">
-          ${gauge({ pct: 95, val: '95€', label: 'dans ta poche', mod: 'gauge--invert' })}
-        </div>
-        <div class="pills" style="margin-top:44px">
-          <span class="pill">IS faible ou nul</span>
-          <span class="pill">Sortie quasi sans friction</span>
+        <div style="position:relative;width:620px;margin:0 auto">
+          <div class="ticket7-wrap bleed">
+            <div class="ticket7" style="clip-path:polygon(${tear(620)})">
+              <div class="frag-line">${tline('Paiement client', '100,00€', 33)}</div>
+              <div class="frag-line">${tline('Structure territoriale', '−2,00€', 33)}</div>
+              <div class="frag-line">${tline('Sortie optimisée', '−3,00€', 33)}</div>
+              <div class="rc-rule"></div>
+              <div class="rc-total">
+                <span class="rc-total-lbl">RESTE POUR TOI</span>
+                <span class="rc-total-val">95,00€</span>
+              </div>
+            </div>
+          </div>
+          ${stampBox('95€/100€', 'right:-64px;bottom:-34px;transform:rotate(-12deg)')}
         </div>
       </div>`
   },
@@ -214,7 +231,7 @@ module.exports = { DECOR, slides: [
       ${badge('LE FACE-À-FACE')}
       <h1 class="title" style="font-size:66px">Ce n'est pas ton <span class="blue">travail</span><br>qui change.</h1>
       <div class="zone">
-        <div class="gauges" style="gap:48px">
+        <div class="gauges" style="gap:52px">
           ${gauge({ pct: 43, val: '43€', label: 'structure française', mod: 'gauge--grey' })}
           ${gauge({ pct: 95, val: '95€', label: 'structure internationale' })}
         </div>
@@ -228,7 +245,7 @@ module.exports = { DECOR, slides: [
       ${badge('LA PARTIE SÉRIEUSE')}
       <h1 class="title">Ce tuyau a des<br><span class="blue">conditions</span>.</h1>
       <div class="zone">
-        <div class="ticks">
+        <div class="ticks ticks--dot">
           <div class="tick" style="font-size:32px">Vraie résidence à l'étranger</div>
           <div class="tick" style="font-size:32px">Vraie substance</div>
           <div class="tick" style="font-size:32px">TVA européenne collectée quoi qu'il arrive</div>
@@ -241,12 +258,13 @@ module.exports = { DECOR, slides: [
   {
     main: `
       ${badge('TON TOUR')}
-      <h1 class="title" style="font-size:64px">Chaque euro que tu encaisses<br>fait <span class="blue">ce voyage</span>.</h1>
+      <h1 class="title" style="font-size:58px">Chaque euro que tu encaisses<br>fait <span class="blue">ce voyage</span>.</h1>
       <div class="zone">
-        <div class="stat stat--blue" style="padding:56px;text-align:center">
+        ${frag({ lines: [tline('Ton ticket à toi', '???,??€', 34)] })}
+        <div class="stat stat--blue" style="padding:52px;text-align:center;margin-top:70px">
           <div style="font-size:60px;font-weight:900;color:#FFFFFF;letter-spacing:-0.02em">Commente VOYAGE</div>
         </div>
-        <p class="muted" style="font-size:30px;font-weight:500;margin-top:36px;text-align:center">
+        <p class="muted" style="font-size:30px;font-weight:500;margin-top:34px;text-align:center">
           Échange offert. On analyse ton tuyau ensemble.
         </p>
       </div>`

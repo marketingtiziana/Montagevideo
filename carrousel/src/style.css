@@ -242,11 +242,12 @@ html, body {
 
 .gauge-top { display: flex; justify-content: flex-end; height: 36px; margin-bottom: 12px; }
 .gauge-prev {
-  font-size: 28px; font-weight: 600; color: var(--grey);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px; font-weight: 400; color: var(--grey);
   text-decoration: line-through;
 }
 .gauge-bar {
-  position: relative; height: 88px;
+  position: relative; height: 72px;
   border-radius: 999px; background: var(--card); overflow: hidden;
 }
 .gauge-fill {
@@ -255,7 +256,8 @@ html, body {
   display: flex; align-items: center; padding-left: 36px;
 }
 .gauge-val {
-  font-size: 40px; font-weight: 900; color: #FFFFFF;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 34px; font-weight: 700; color: #FFFFFF;
   letter-spacing: -0.02em; white-space: nowrap;
 }
 .gauge-label { margin-top: 18px; font-size: 26px; font-weight: 500; color: var(--grey); }
@@ -263,9 +265,9 @@ html, body {
 /* rappel des étapes précédentes */
 .gauge--mini { opacity: 0.6; }
 .gauge--mini .gauge-top, .gauge--mini .gauge-label { display: none; }
-.gauge--mini .gauge-bar  { height: 40px; }
+.gauge--mini .gauge-bar  { height: 38px; }
 .gauge--mini .gauge-fill { padding-left: 20px; }
-.gauge--mini .gauge-val  { font-size: 22px; }
+.gauge--mini .gauge-val  { font-size: 20px; }
 
 /* face-à-face : la structure française en gris */
 .gauge--grey .gauge-fill { background: var(--grey); }
@@ -336,3 +338,61 @@ html, body {
 .stamp { position: absolute; left: 392px; top: 1024px; width: 210px; height: 210px; opacity: 0.85; }
 .stamp-ring { font-family: 'IBM Plex Mono', monospace; font-weight: 700; fill: var(--blue); letter-spacing: 1.5px; }
 .stamp-mid  { font-family: 'Inter', sans-serif; font-weight: 900; fill: var(--blue); letter-spacing: -0.02em; }
+
+/* ============================================================
+   LANGAGE « TICKET » — fragments, surlignage, tampons
+   ============================================================ */
+
+/* fragment de ticket : même inclinaison, même ombre, même dentelé que la couverture */
+.frag-wrap {
+  width: 880px; margin: 0 auto;
+  transform: rotate(2deg);
+  filter: drop-shadow(0 16px 34px rgba(18, 18, 31, 0.09))
+          drop-shadow(0 30px 70px rgba(67, 83, 255, 0.18));
+}
+.frag {
+  background: #FFFFFF; padding: 44px 44px 46px;
+  font-family: 'IBM Plex Mono', monospace; color: var(--ink);
+}
+.frag-line { font-size: 36px; font-weight: 400; line-height: 1.6; white-space: pre; }
+.frag-head {
+  text-align: center; font-size: 24px; font-weight: 700;
+  letter-spacing: 0.22em; text-indent: 0.22em; margin-bottom: 26px;
+}
+
+/* surlignage marqueur de la ligne de l'étape en cours */
+.frag-hl {
+  background: rgba(67, 83, 255, 0.15);
+  border-radius: 6px; padding: 4px 10px; margin: 0 -10px;
+}
+
+/* ticket « propre » de la slide 7 : droit, pas de travers */
+.ticket7-wrap {
+  width: 620px; margin: 0 auto;
+  filter: drop-shadow(0 16px 34px rgba(18, 18, 31, 0.09))
+          drop-shadow(0 30px 70px rgba(67, 83, 255, 0.18));
+}
+.ticket7 {
+  background: #FFFFFF; padding: 46px 40px 50px;
+  font-family: 'IBM Plex Mono', monospace; color: var(--ink);
+}
+.ticket7 .frag-line { font-size: 27px; line-height: 1.85; }
+
+/* tampon rectangulaire pour les verdicts (texte long, même famille que le tampon rond) */
+.stamp-box {
+  position: absolute; z-index: 2;
+  border: 3px solid var(--blue); border-radius: 14px;
+  padding: 15px 26px;
+  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 30px;
+  letter-spacing: 0.05em; color: var(--blue);
+  background: rgba(247, 248, 252, 0.88);
+  opacity: 0.85;
+}
+.stamp-box::after {                    /* double filet, comme un vrai tampon */
+  content: ''; position: absolute; inset: 5px;
+  border: 1.5px solid var(--blue); border-radius: 8px;
+}
+
+/* séparateurs pointillés de ticket dans les listes */
+.ticks--dot .tick { border-bottom: 2px dotted var(--grey); }
+.mono { font-family: 'IBM Plex Mono', monospace; font-weight: 700; letter-spacing: -0.02em; }
