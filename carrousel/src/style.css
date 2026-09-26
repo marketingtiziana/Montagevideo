@@ -471,3 +471,82 @@ html, body {
   font-size: 58px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.02em;
   box-shadow: 0 26px 64px rgba(67, 83, 255, 0.42);
 }
+
+/* ============================================================
+   DECK « vatican » — langage architectural (SVG outline)
+   Architecture et géométrie uniquement : arches, coupole,
+   colonnades, plan de la place, sceaux, filets typographiques.
+   ============================================================ */
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay.ttf') format('truetype');
+  font-weight: 400 900; font-style: normal;
+}
+
+/* mot-repère latin : serif en petites capitales espacées, une seule par slide */
+.serif-cap {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 500; color: var(--grey);
+  letter-spacing: 0.36em; text-indent: 0.36em;
+}
+.serif-cap--sm { font-size: 22px; letter-spacing: 0.28em; text-indent: 0.28em; }
+
+/* filet typographique double, façon imprimerie ancienne */
+.rule-dbl { position: relative; height: 5px; }
+.rule-dbl::before, .rule-dbl::after {
+  content: ''; position: absolute; left: 0; right: 0;
+  border-top: 1px solid var(--line);
+}
+.rule-dbl::before { top: 0; }
+.rule-dbl::after  { top: 4px; }
+.rule-dbl--blue::before, .rule-dbl--blue::after { border-top-color: rgba(67, 83, 255, 0.35); }
+
+/* liste précédée d'une petite arche (slide 7) */
+.arches { display: flex; flex-direction: column; }
+.arch-row {
+  display: flex; align-items: center; gap: 26px;
+  padding: 28px 6px;
+  font-size: 34px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
+}
+.arch-row svg { flex: none; }
+
+/* schéma « patrimoines séparés » (slide 4) */
+.vault { display: flex; gap: 28px; }
+.vault-card {
+  flex: 1; background: var(--card); border-radius: var(--r);
+  padding: 32px 26px 30px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.vault-name {
+  font-size: 25px; font-weight: 900; color: var(--ink);
+  letter-spacing: 0.06em; text-align: center; white-space: nowrap;
+}
+
+/* socle / fantôme du face-à-face statut vs taille (slide 6) */
+.versus { display: flex; align-items: flex-end; gap: 36px; }
+.plinth {
+  background: var(--blue); border-radius: var(--r); box-shadow: var(--shadow-blue);
+  padding: 26px 20px; text-align: center;
+  font-size: 24px; font-weight: 900; color: #FFFFFF; letter-spacing: 0.08em;
+}
+.ghost {
+  position: relative; border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px;
+}
+.ghost::before {                     /* masse floue : présente, mais sans contour net */
+  content: ''; position: absolute; inset: 0;
+  background: var(--card); border-radius: var(--r);
+  filter: blur(7px);
+}
+.ghost span {
+  position: relative;
+  font-size: 30px; font-weight: 900; color: var(--grey);
+  letter-spacing: 0.08em; text-align: center;
+}
+
+/* légendes des points de la carte (slide 5) */
+.map-label {
+  font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 700;
+  fill: var(--grey); letter-spacing: 0.14em;
+}

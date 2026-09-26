@@ -17,4 +17,7 @@ mkdir -p fonts
 [ -f fonts/IBMPlexMono-Bold.ttf ] || curl -sSL -o fonts/IBMPlexMono-Bold.ttf \
   "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Bold.ttf"
 
+[ -f fonts/PlayfairDisplay.ttf ] || curl -sSL -o fonts/PlayfairDisplay.ttf \
+  "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
+
 echo ">> Prêt : node src/render.js [numéros de slides]"
