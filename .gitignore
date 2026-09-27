@@ -14,3 +14,6 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Polices téléchargées pour les visuels stories
+stories/typo/

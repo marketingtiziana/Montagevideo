@@ -1,0 +1,264 @@
+/* ==========================================================================
+   Fynovates — « Le classement des pires conseils fiscaux d'Instagram »
+   Gabarit Instagram Story 1080 × 1920 (9:16 exact).
+
+   Trois couches, dans cet ordre :
+     1. la photo, avec le color grading commun aux 6 ;
+     2. les dégradés de lisibilité — le dégradé principal imposé par la DA,
+        plus deux renforts locaux, en haut pour la ligne d'en-tête et en bas
+        pour le corps de texte ;
+     3. le texte et le système graphique du classement.
+
+   Zones mortes : 160 px en haut, 300 px en bas (stickers Instagram).
+   La story 6 accueille le sticker « Posez-moi une question » : chez elle tout
+   le texte s'arrête avant 950 px du haut.
+   ========================================================================== */
+
+:root {
+  --or:      #D4AF37;
+  --rouge:   #E05C5C;
+  --gris:    #9CA3AF;
+  --corps:   #E5E7EB;
+  --blanc:   rgba(255, 255, 255, 0.95);
+
+  --marge:   100px;   /* marges latérales, identiques sur les 6 */
+  --colonne: 800px;   /* largeur maximale du bloc texte */
+  --haut:    160px;   /* ligne d'en-tête : rien au-dessus */
+  --bas:     1620px;  /* 1920 − 300 : rien en dessous */
+
+  /* Le numéro du classement est posé à un Y fixe, identique sur les stories
+     2 à 5 — c'est le repère visuel de la série. La valeur est calée sur la
+     story la plus longue (N°3), dont le bloc vient mourir sur la ligne
+     des 1620 px. Les rangs plus courts s'arrêtent un peu plus haut. */
+  --rang-top: 706px;
+
+  /* Story 6 : le texte descend depuis ce Y et doit finir avant 950 px. */
+  --faq-top:  248px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1920px; }
+
+body {
+  background: #040710;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------ couche 1 : la photographie */
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* grading uniforme sur les 6 — imposé par la direction artistique */
+  filter: saturate(0.85) contrast(1.08);
+}
+
+/* ------------------------------------------------- couche 2 : la lisibilité */
+
+/* Dégradé principal : la photo reste lisible en haut, le texte vit dans la
+   moitié basse assombrie. */
+.grade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 10, 22, 0.25) 0%,
+    rgba(6, 10, 22, 0.55) 45%,
+    rgba(4, 7, 16, 0.92) 100%
+  );
+}
+
+/* Renfort haut : l'or (#D4AF37) a une luminance relative de 0,45. Pour tenir
+   le 3:1 du « large text » il lui faut un fond sous 0,117 — autrement dit
+   franchement noir. Plutôt que d'assombrir toute la moitié haute, le renfort
+   est une bande courte, pleine sous la ligne d'en-tête puis en chute rapide :
+   le sujet de la photo, qui vit en dessous de 360 px, reste intact. */
+.renfort-haut {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 360px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0.84) 0%,
+    rgba(4, 7, 16, 0.82) 55%,
+    rgba(4, 7, 16, 0.34) 78%,
+    rgba(4, 7, 16, 0) 100%
+  );
+}
+
+/* Renfort bas : sous le bloc texte, là où l'or et le rouge à 40 px doivent
+   passer le AA même sur une photo claire. */
+.renfort-bas {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1180px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.45) 34%,
+    rgba(4, 7, 16, 0.80) 68%,
+    rgba(4, 7, 16, 0.88) 100%
+  );
+}
+
+/* Story 6 : le texte vit dans le tiers haut, la moitié basse est laissée nue
+   pour le sticker « Posez-moi une question ». Le renfort couvre donc le haut
+   et redescend à zéro — mais sur une très longue traîne (jusqu'à 1500 px) :
+   un fondu court laisse une arête horizontale parfaitement visible en travers
+   de la table, juste sous la dernière ligne. */
+.story--faq .renfort-bas {
+  top: 0;
+  bottom: auto;
+  height: 1500px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0.24) 0%,
+    rgba(4, 7, 16, 0.46) 10%,
+    rgba(4, 7, 16, 0.50) 42%,
+    rgba(4, 7, 16, 0.40) 58%,
+    rgba(4, 7, 16, 0.24) 74%,
+    rgba(4, 7, 16, 0.10) 87%,
+    rgba(4, 7, 16, 0) 100%
+  );
+}
+
+/* --------------------------------------------- couche 3 : en-tête de série */
+
+.kicker,
+.compteur {
+  position: absolute;
+  top: var(--haut);
+  font-size: 24px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.kicker {
+  left: var(--marge);
+  color: var(--or);
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.compteur {
+  right: var(--marge);
+  color: var(--gris);
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+/* ------------------------------------------------------ couche 3 : le texte */
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+.corps + .corps { margin-top: 26px; }
+
+/* Mots-clés. L'or porte le point de bascule, le rouge la sanction. */
+em, i {
+  font-style: normal;
+  font-weight: 600;
+}
+em { color: var(--or); }
+i  { color: var(--rouge); }
+
+/* --- gabarit « ouverture » : story 1, texte à gauche, ancré en bas -------- */
+
+.story--ouverture .contenu {
+  position: absolute;
+  left: var(--marge);
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+}
+
+.story--ouverture .accroche {
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  margin-bottom: 40px;
+  text-wrap: balance;
+}
+
+/* --- gabarit « rang » : stories 2 à 5 ------------------------------------- */
+
+.story--rang .contenu {
+  position: absolute;
+  left: var(--marge);
+  top: var(--rang-top);
+  width: var(--colonne);
+}
+
+/* Le numéro géant. Hauteur constante (une ligne, line-height 1), donc tout ce
+   qui suit démarre au même Y sur les quatre stories. */
+.story--rang .rang {
+  font-size: 190px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--blanc);
+  /* l'interligne d'Inter laisse un talon sous la ligne de base : on le
+     compense pour que le filet doré colle optiquement au chiffre */
+  margin-bottom: 4px;
+}
+
+/* Le filet doré sous le numéro. */
+.story--rang .filet {
+  width: 200px;
+  height: 2px;
+  background: var(--or);
+  margin-bottom: 44px;
+}
+
+.story--rang .citation {
+  font-size: 54px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.26;
+  color: #FFFFFF;
+  margin-bottom: 38px;
+  text-wrap: pretty;
+}
+
+/* --- gabarit « faq » : story 6, centré, tiers haut ------------------------ */
+
+.story--faq .contenu {
+  position: absolute;
+  left: 0; right: 0;
+  top: var(--faq-top);
+  width: var(--colonne);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.story--faq .accroche {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin-bottom: 40px;
+  text-wrap: pretty;
+}
+
+.story--faq .corps { text-wrap: pretty; }

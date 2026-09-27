@@ -1,0 +1,16 @@
+{
+  "name": "fynovates-client-annule",
+  "version": "1.0.0",
+  "description": "Séquence Instagram Story « Le client qui a annulé son départ » — Fynovates",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^25.11.0"
+  },
+  "type": "module"
+}
