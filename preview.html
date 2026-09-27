@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carousel solitude, aperçu</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0B0E1C; color: #C5CCE8; font-family: system-ui, sans-serif; padding: 32px 16px; }
+  h1 { font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; max-width: 1400px; margin: 0 auto; }
+  figure { display: flex; flex-direction: column; gap: 6px; }
+  img { width: 100%; aspect-ratio: 1080 / 1350; display: block; }
+  figcaption { font-size: 12px; opacity: .7; text-align: center; }
+</style>
+</head>
+<body>
+  <h1>Carousel solitude : 15 slides, 1080 x 1350</h1>
+  <div class="grid" id="grid"></div>
+  <script>
+    const grid = document.getElementById('grid');
+    for (let i = 1; i <= 15; i++) {
+      const n = String(i).padStart(2, '0');
+      grid.insertAdjacentHTML('beforeend',
+        `<figure><a href="output/carousel-solitude/${n}.png" target="_blank"><img src="output/carousel-solitude/${n}.png" alt="Slide ${n}"></a><figcaption>${n}</figcaption></figure>`);
+    }
+  </script>
+</body>
+</html>
