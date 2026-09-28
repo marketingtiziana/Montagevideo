@@ -38,7 +38,7 @@
 ## Reproduire
 ```bash
 python3 prep.py && (cd audio && python3 voice_chain.py ../source.mov)
-ffmpeg -i source.mov -filter_complex_script fv.txt -map "[v]" -c:v libx264 -crf 16 cut_video.mp4   # fv.txt : crop 1080x1036 + jump cuts de cuts.json
+ffmpeg -i source.mov -filter_complex_script fv.txt -map "[vo]" -c:v libx264 -crf 16 cut_video.mp4   # fv.txt : crop 1080x1036 + jump cuts de cuts.json
 ffmpeg -i cut_video.mp4 -i audio/voice_studio.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -af apad -t 49.867 cut.mp4
 python3 gen_edit.py && node tests/lint.mjs
 # sandbox Higgsfield, avec /home/user/w2/cut.mp4 :
