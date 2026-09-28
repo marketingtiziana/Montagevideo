@@ -1,4 +1,4 @@
-# SCENES — Reel split-screen « Holding : régime mère-fille »
+# SCENES — Reel split-screen « Holding : régime mère-fille » (version finale exécutée)
 
 ## Source
 | | |
@@ -10,13 +10,13 @@
 | Transcription | faster-whisper medium, mot à mot, 51,5 s de parole |
 | Jump cuts | 5 pauses de plus de 0,45 s coupées (120 ms de respiration gardée) : 51,8 s → **49,87 s de parole + end card 2 s = 51,9 s** |
 
-## Variables proposées (à valider)
+## Variables (validées)
 | Variable | Proposition |
 |---|---|
 | PALETTE | fond `#FFFFFF` · texte `#111111` · **accent `#0B6E4F`** (vert émeraude : holding, gain, coches) · **accent2 `#D1453B`** (rouge : impôt, perte, croix). Ces deux couleurs sont lisibles sur blanc (contraste ≥ 4,5:1), l'or du reel précédent ne l'était pas. |
 | TYPO | Montserrat ExtraBold (titres, captions) + SemiBold (corps). Il faudra charger les fichiers 800 et 600, Higgsedit n'embarque que le 700. |
-| Lower third 0–3 s | **À fournir : prénom + titre** (ex. « Prénom · Experte fiscalité des dirigeants ») |
-| MARQUE / HANDLE | **À fournir** (end card + handle discret à y 1610) |
+| Lower third 0–3 s | **Aucun** : ni prénom ni titre fournis |
+| MARQUE / HANDLE | **Aucun** : end card sans handle, zone morte y 1570–1920 laissée vide |
 | Musique | aucune |
 
 ## Points à trancher
@@ -64,3 +64,18 @@ Module A complet : DeepFilterNet3 → Pedalboard → de-esser → loudnorm à �
 - Synchro captions/voix sous 80 ms, et avance des effets de 100 à 200 ms, vérifiée sur 5 scènes.
 - Stabilité des yeux : ±20 px.
 - Master à −14 ±1 LUFS.
+
+## Écarts entre le storyboard validé et le montage final
+| Point | Storyboard | Final | Raison |
+|---|---|---|---|
+| Frontière scènes 2 → 3 | 6,80 s | **6,70 s** | « 30 % » tombe à 6,89 s : la ligne de l'impôt doit arriver à 6,74 s (150 ms d'avance), donc le reçu doit déjà être à l'écran |
+| Dérive 2.5D | échelle + position 1–2 % | **position seule** (±4 px en x, 10 px en y par scène) | Higgsedit refuse qu'un parent anime l'échelle quand ses enfants ont un pop en ressort sur l'échelle (« one owner per property ») |
+| Séparateur | trait 3 px OU ombre 24 px + barre de progression | **ombre douce 24 px + barre de progression accent 6 px** sur toute la durée | |
+| Scène 9 | titre « 1 règle simple » réduit en haut | le titre **sort** à « filiale » (32,24 s) | sinon le flux vertical passait sur le mot « simple » ; le stage reste à 3 éléments maximum |
+| Scène 11 | entrée en swipe | **pas d'entrée propre** : le wipe de 41,00 s fait la transition | deux transitions empilées sur la même coupe |
+| Scène 8 | « activé » à droite du toggle | « activé » **sous** le toggle | chevauchait l'icône |
+| Tampon « DÉFINITIVEMENT » | sur la ligne −30 000 € | posé en travers du haut du reçu | laisse lisibles la croix rouge et « Il te reste 70 000 € » |
+| Captions | — | décalage +20 ms | le brouillon avec +60 ms (valeur du reel 1) donnait un biais de +37 ms |
+| End card | logo/marque, CTA, handle | cloche + « Abonne-toi » + « Régime mère-fille : 95 % exonérés » | pas de marque ni de handle fournis |
+
+Les chiffres à l'écran restent ceux prononcés : 100 000 €, 30 %, 70 000 €, 30 000 €, 2 ans, 5 %, 95 %, 5 000 €. La partie grise de la barre (scène 11) porte seulement « exonéré », sans montant, parce que « 95 000 € » n'est pas dit.

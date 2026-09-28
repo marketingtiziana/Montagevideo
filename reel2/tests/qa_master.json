@@ -1,0 +1,78 @@
+{
+ "file": "master.mp4",
+ "size": "1080x1920",
+ "fps": 29.999623438209976,
+ "static": {
+  "longest_s": 0.1,
+  "top5": [
+   [
+    1.37,
+    0.1
+   ],
+   [
+    5.27,
+    0.1
+   ],
+   [
+    19.93,
+    0.1
+   ],
+   [
+    28.23,
+    0.1
+   ],
+   [
+    5.07,
+    0.07
+   ]
+  ],
+  "over_1_2s": []
+ },
+ "eyes": {
+  "samples": 79,
+  "median_y": 289.0,
+  "p5": 249.5,
+  "p95": 356.17,
+  "within_300pm20": 0.392
+ },
+ "captions": {
+  "matched": 96,
+  "shown": 116,
+  "median_ms": 27,
+  "p90_ms": 103,
+  "bias_ms": -1,
+  "under_80ms": 0.854
+ },
+ "effects_lead": [
+  {
+   "effet": "compteur 100 000 €",
+   "effet_s": 1.51,
+   "mot_s": 1.68,
+   "avance_ms": 170
+  },
+  {
+   "effet": "tampon DÉFINITIVEMENT",
+   "effet_s": 12.56,
+   "mot_s": 12.7,
+   "avance_ms": 140
+  },
+  {
+   "effet": "toggle + impact",
+   "effet_s": 24.88,
+   "mot_s": 25.02,
+   "avance_ms": 140
+  },
+  {
+   "effet": "compteur 95 %",
+   "effet_s": 39.21,
+   "mot_s": 39.34,
+   "avance_ms": 130
+  },
+  {
+   "effet": "étiquette réintégrés",
+   "effet_s": 45.4,
+   "mot_s": 45.54,
+   "avance_ms": 140
+  }
+ ]
+}
