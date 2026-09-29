@@ -46,7 +46,7 @@ if mode == "frames":
 elif mode.startswith("master"):   # masterA / masterB: half of the timeline each (a full 1080p pass does not fit one sandbox lease)
     a, b = (0, 27) if mode == "masterA" else (27, 54)
     L += ["REEL_MODE=none higgsedit build edit.jsx 2>&1 | tail -3",
-          f"higgsedit render reel --range {a}:{b} --bitrate 12M --out reel/renders/{mode}.mp4 2>&1 | tail -4",
+          f"higgsedit render reel --range {a}:{b} --shards 3 --concurrency 3 --bitrate 12M --out renders/{mode}.mp4 2>&1 | grep -v \"^    at \" | tail -12",
           f"ls -la reel/renders/{mode}.mp4",
           f"curl -sS -o /dev/null -w 'PUT %{{http_code}}\\n' -X PUT -H 'Content-Type: video/mp4' -H 'If-None-Match: *' --data-binary @reel/renders/{mode}.mp4 '{put_url}'"]
 else:

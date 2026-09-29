@@ -147,11 +147,15 @@ mix = np.stack([L, R], 1)
 fade = int(0.35 * SR); mix[-fade:] *= np.linspace(1, 0, fade)[:, None]
 mix[: int((DROP - 0.25) * SR)] *= 0.55                    # the mystery section sits ~5 dB under the groove, so the drop lands
 meter = pyln.Meter(SR)
-def soft(x, k=0.66, top=0.80):
-    a = np.abs(x); over = a > k
-    y = x.copy(); y[over] = np.sign(x[over]) * (k + (top - k) * np.tanh((a[over] - k) / (top - k)))
-    return y
-for _ in range(5):                                         # normalise -> soft-knee limit, until it converges on -14 LUFS
-    mix = soft(pyln.normalize.loudness(mix, meter.integrated_loudness(mix), -14.0))
+from scipy.ndimage import minimum_filter1d, uniform_filter1d
+def limit(x, ceil=0.70, look=0.006):
+    """Look-ahead brickwall: per-sample gain, 6 ms min-hold, 6 ms smoothing -> no waveshaping, no AAC overshoot."""
+    need = np.minimum(1.0, ceil / np.maximum(np.abs(x).max(1), 1e-9))
+    n = int(look * SR)
+    g = minimum_filter1d(need, size=2 * n + 1)
+    g = uniform_filter1d(g, size=n)
+    return x * np.minimum(g, need * 0 + 1)[:, None]
+for _ in range(6):                                         # normalise -> limit, until it converges on -14 LUFS
+    mix = limit(pyln.normalize.loudness(mix, meter.integrated_loudness(mix), -14.0))
 print("LUFS", round(meter.integrated_loudness(mix), 2), "peak dBFS", round(20 * np.log10(np.abs(mix).max()), 2))
 wavfile.write("score.wav", SR, (mix * 32767).astype(np.int16))
