@@ -10,10 +10,17 @@ const path = require('path');
 const B = '#4353FF';
 
 /* Visuel de couverture : valise détourée (Higgsfield), ombre refaite en CSS */
-const CASE = path.join(__dirname, '..', 'assets', 'surcote-valise.png');
-const caseBlock = fs.existsSync(CASE)
-  ? `<img class="case bleed" src="REL_TOKEN/assets/surcote-valise.png" alt="">`
-  : `<div class="case-ph bleed">VISUEL VALISE</div>`;
+const PLANE = path.join(__dirname, '..', 'assets', 'surcote-avion.png');
+const planeBlock = fs.existsSync(PLANE)
+  ? `<img class="plane bleed" src="REL_TOKEN/assets/surcote-avion.png" alt="">`
+  : `<div class="plane-ph bleed">VISUEL AVION</div>`;
+
+/* trajectoire en pointillés, derrière l'avion */
+const TRAJ = `
+<svg class="decor bleed" viewBox="0 0 1080 1350" aria-hidden="true">
+  <path d="M96,1232 C330,1222 560,1148 742,992" fill="none" stroke="${B}" stroke-opacity="0.30"
+        stroke-width="3" stroke-linecap="round" stroke-dasharray="2 18"/>
+</svg>`;
 
 /* Décor en filigrane : grilles carrées en coin (identique aux decks validés) */
 const DECOR = `
@@ -91,23 +98,14 @@ module.exports = { DECOR, slides: [
     main: `
       <div class="head"></div>
       <h1 class="title title--hero">
-        Les 5 destinations<br>les plus<br>
-        <span class="blue ul-blue">SURCOTÉES</span><br>de 2026.
+        Les 5 destinations<br>les plus <span class="blue">surcotées</span><br>
+        pour s'expatrier<br>en 2026.
       </h1>
-      <p class="body muted" style="margin-top:30px">Tout le monde en parle. Beaucoup regrettent.</p>
-      <div class="halo bleed" style="left:478px;top:650px;width:740px;height:740px"></div>
-      <div class="case-floor bleed" style="left:700px;top:1272px;width:300px;height:52px"></div>
-      ${caseBlock}
-      <span class="rating" style="left:556px;top:880px;transform:rotate(-6deg)">
+      <div class="halo bleed" style="left:400px;top:700px;width:800px;height:800px"></div>
+      ${planeBlock}
+      <span class="rating" style="left:360px;top:1012px;transform:rotate(-6deg)">
         ${stars(2, { size: 36 })}
       </span>
-      <div class="fan" style="position:absolute;left:84px;top:792px">
-        <span class="cc cc--mini" style="transform:rotate(-9deg) translateY(12px)"><span class="cc-code">AE</span></span>
-        <span class="cc cc--mini" style="transform:rotate(-5deg) translateY(5px)"><span class="cc-code">ID</span></span>
-        <span class="cc cc--mini"><span class="cc-code">MT</span></span>
-        <span class="cc cc--mini" style="transform:rotate(5deg) translateY(5px)"><span class="cc-code">EE</span></span>
-        <span class="cc cc--mini" style="transform:rotate(9deg) translateY(12px)"><span class="cc-code">PT</span></span>
-      </div>
       <div class="swipe" style="position:absolute;bottom:80px;left:80px">
         <span class="swipe-txt">SWIPE</span><span class="swipe-dot">&rarr;</span>
       </div>`
