@@ -94,17 +94,19 @@ module.exports = { DECOR, slides: [
         Les 5 destinations<br>les plus<br>
         <span class="blue ul-blue">SURCOTÉES</span><br>de 2026.
       </h1>
-      <p class="body muted" style="margin-top:40px">Tout le monde en parle. Beaucoup regrettent.</p>
+      <p class="body muted" style="margin-top:30px">Tout le monde en parle. Beaucoup regrettent.</p>
+      <div class="halo bleed" style="left:478px;top:650px;width:740px;height:740px"></div>
+      <div class="case-floor bleed" style="left:700px;top:1272px;width:300px;height:52px"></div>
       ${caseBlock}
-      <div style="position:absolute;left:84px;bottom:236px">
-        <div class="hv-stars" style="margin-left:8px;gap:12px">${stars(2, { size: 38 })}</div>
-        <div class="fan" style="margin-top:26px">
-          <span class="cc cc--mini" style="transform:rotate(-9deg) translateY(12px)"><span class="cc-code">AE</span></span>
-          <span class="cc cc--mini" style="transform:rotate(-5deg) translateY(5px)"><span class="cc-code">ID</span></span>
-          <span class="cc cc--mini"><span class="cc-code">MT</span></span>
-          <span class="cc cc--mini" style="transform:rotate(5deg) translateY(5px)"><span class="cc-code">EE</span></span>
-          <span class="cc cc--mini" style="transform:rotate(9deg) translateY(12px)"><span class="cc-code">PT</span></span>
-        </div>
+      <span class="rating" style="left:556px;top:880px;transform:rotate(-6deg)">
+        ${stars(2, { size: 36 })}
+      </span>
+      <div class="fan" style="position:absolute;left:84px;top:792px">
+        <span class="cc cc--mini" style="transform:rotate(-9deg) translateY(12px)"><span class="cc-code">AE</span></span>
+        <span class="cc cc--mini" style="transform:rotate(-5deg) translateY(5px)"><span class="cc-code">ID</span></span>
+        <span class="cc cc--mini"><span class="cc-code">MT</span></span>
+        <span class="cc cc--mini" style="transform:rotate(5deg) translateY(5px)"><span class="cc-code">EE</span></span>
+        <span class="cc cc--mini" style="transform:rotate(9deg) translateY(12px)"><span class="cc-code">PT</span></span>
       </div>
       <div class="swipe" style="position:absolute;bottom:80px;left:80px">
         <span class="swipe-txt">SWIPE</span><span class="swipe-dot">&rarr;</span>
