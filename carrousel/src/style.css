@@ -550,3 +550,65 @@ html, body {
   font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 700;
   fill: var(--grey); letter-spacing: 0.14em;
 }
+
+/* ============================================================
+   DECK « surcoté » — anti-classement : hype vs réalité
+   ============================================================ */
+
+/* rang du compte à rebours + pill pays, en tête de slide */
+.rankrow { flex: none; display: flex; align-items: center; gap: 26px; height: 124px; }
+.rank {
+  font-size: 140px; font-weight: 900; line-height: 0.8; letter-spacing: -0.045em;
+  color: transparent; -webkit-text-stroke: 3px var(--blue);
+}
+.cc {
+  display: inline-flex; align-items: center; gap: 16px;
+  background: var(--card); border-radius: 999px; padding: 15px 30px;
+}
+.cc-code {
+  font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 26px;
+  color: var(--blue); letter-spacing: 0.08em;
+}
+.cc-name { font-size: 30px; font-weight: 800; color: var(--ink); letter-spacing: 0.02em; }
+.cc--mini { padding: 13px 22px; }
+.cc--mini .cc-code { font-size: 24px; }
+
+/* le composant central : ce qu'on te vend / ce qui est vrai */
+.hv { display: flex; flex-direction: column; align-items: stretch; width: 100%; }
+.hv-card {
+  position: relative; border-radius: var(--r);
+  background: var(--card); padding: 40px 40px 42px;
+}
+/* le fond du tampon deborde de 62px dans la card : on lui reserve sa voie */
+.hv-card--real { background: #FFFFFF; border: 2px solid var(--blue); padding-bottom: 76px; }
+.hv-tag {                                  /* étiquette de coin */
+  position: absolute; top: -17px; right: 30px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 999px;
+  padding: 8px 22px; font-size: 21px; font-weight: 600; color: var(--grey);
+}
+.hv-tag--blue { background: var(--blue); border-color: var(--blue); color: #FFFFFF; font-weight: 700; }
+.hv-kicker { font-size: 24px; font-weight: 800; letter-spacing: 0.16em; color: var(--grey); }
+.hv-card--real .hv-kicker { color: var(--blue); }
+.hv-stars { display: flex; gap: 10px; margin-top: 20px; }
+.hv-txt { margin-top: 24px; font-size: 34px; font-weight: 600; line-height: 1.34; color: var(--grey); }
+.hv-card--real .hv-txt { color: var(--ink); font-weight: 600; }
+.hv-arrow { align-self: center; display: block; margin: 16px 0; }
+
+/* soulignement incliné du mot-clé (couverture) */
+.ul-blue { position: relative; display: inline-block; }
+.ul-blue::after {
+  content: ''; position: absolute; left: 2px; right: 2px; bottom: 4px; height: 8px;
+  background: var(--blue); transform: rotate(-1deg);
+}
+
+/* éventail de codes pays (couverture) */
+.fan { display: flex; align-items: flex-end; gap: 14px; }
+
+/* pill document du CTA */
+.listpill {
+  display: inline-flex; align-items: center;
+  background: #FFFFFF; border: 2px solid var(--blue); border-radius: 999px;
+  padding: 16px 36px;
+  font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 28px;
+  color: var(--blue); letter-spacing: 0.16em; text-indent: 0.16em;
+}
