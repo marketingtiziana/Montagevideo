@@ -597,7 +597,7 @@ html, body {
 /* soulignement incliné du mot-clé (couverture) */
 .ul-blue { position: relative; display: inline-block; }
 .ul-blue::after {
-  content: ''; position: absolute; left: 2px; right: 2px; bottom: 4px; height: 8px;
+  content: ''; position: absolute; left: 2px; right: 2px; bottom: -6px; height: 8px;
   background: var(--blue); transform: rotate(-1deg);
 }
 
