@@ -101,9 +101,9 @@ module.exports = { DECOR, slides: [
         Les 5 destinations<br>les plus <span class="blue">surcotées</span><br>
         pour s'expatrier<br>en 2026.
       </h1>
-      <div class="halo bleed" style="left:400px;top:700px;width:800px;height:800px"></div>
+      <div class="halo bleed" style="left:140px;top:560px;width:860px;height:860px"></div>
       ${planeBlock}
-      <span class="rating" style="left:360px;top:1012px;transform:rotate(-6deg)">
+      <span class="rating" style="left:286px;top:1046px;transform:rotate(-6deg)">
         ${stars(2, { size: 36 })}
       </span>
       <div class="swipe" style="position:absolute;bottom:80px;left:80px">

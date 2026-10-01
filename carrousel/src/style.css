@@ -615,7 +615,7 @@ html, body {
 
 /* visuel détouré de la couverture « surcoté » : l'avion de ligne */
 .plane {
-  position: absolute; left: 200px; top: 820px; width: 960px;
+  position: absolute; left: -50px; top: 742px; width: 1180px;
   filter: drop-shadow(0 34px 66px rgba(67, 83, 255, 0.22))
           drop-shadow(0 12px 26px rgba(18, 18, 31, 0.10));
 }
