@@ -4,7 +4,16 @@
    Langage visuel : hype vs réalité, compte à rebours N°5 → N°1
    ============================================================ */
 
+const fs = require('fs');
+const path = require('path');
+
 const B = '#4353FF';
+
+/* Visuel de couverture : valise détourée (Higgsfield), ombre refaite en CSS */
+const CASE = path.join(__dirname, '..', 'assets', 'surcote-valise.png');
+const caseBlock = fs.existsSync(CASE)
+  ? `<img class="case bleed" src="REL_TOKEN/assets/surcote-valise.png" alt="">`
+  : `<div class="case-ph bleed">VISUEL VALISE</div>`;
 
 /* Décor en filigrane : grilles carrées en coin (identique aux decks validés) */
 const DECOR = `
@@ -86,7 +95,8 @@ module.exports = { DECOR, slides: [
         <span class="blue ul-blue">SURCOTÉES</span><br>de 2026.
       </h1>
       <p class="body muted" style="margin-top:40px">Tout le monde en parle. Beaucoup regrettent.</p>
-      <div style="position:absolute;left:84px;bottom:176px">
+      ${caseBlock}
+      <div style="position:absolute;left:84px;bottom:236px">
         <div class="hv-stars" style="margin-left:8px;gap:12px">${stars(2, { size: 38 })}</div>
         <div class="fan" style="margin-top:26px">
           <span class="cc cc--mini" style="transform:rotate(-9deg) translateY(12px)"><span class="cc-code">AE</span></span>
@@ -96,7 +106,7 @@ module.exports = { DECOR, slides: [
           <span class="cc cc--mini" style="transform:rotate(9deg) translateY(12px)"><span class="cc-code">PT</span></span>
         </div>
       </div>
-      <div class="swipe" style="position:absolute;bottom:80px;right:80px">
+      <div class="swipe" style="position:absolute;bottom:80px;left:80px">
         <span class="swipe-txt">SWIPE</span><span class="swipe-dot">&rarr;</span>
       </div>`
   },
