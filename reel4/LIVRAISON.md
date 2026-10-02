@@ -40,6 +40,20 @@ Script `tests/qa4.py`, résultats dans `tests/qa_master60.json` et `tests/qa_mas
 | Zones sûres | rien d'important en y < 250 ni en y > 1570 | contenu entre y 262 et y 1505 | ✅ |
 | Un mot accent par écran | 23/23 | 23/23 (or #E8B04A, rouge pour le piège) | ✅ |
 
+## Virality predictor (Higgsfield, `virality.json`)
+
+L'outil limite les vidéos à 16 s : il a été lancé sur deux extraits du master 60 fps. Les scores sont des indicateurs prédictifs normalisés de 0 à 100, pas une garantie de performance.
+
+| Extrait | Global | Engagement | Hook (3 premières s) | Potentiel viral | Maintien | Pic |
+|---|---|---|---|---|---|---|
+| 0–15,9 s (hook + début du countdown) | 48 | 40 | **32** | 47 | **100** | 15 s |
+| 24–40 s (drop, N°1, bloc Hong Kong) | 50 | 44 | 37 | 47 | 94 | 0 s (24 s du reel) |
+
+**Lecture des scores :**
+- Le maintien est excellent (94–100) : le rythme ne lâche jamais.
+- Le point faible est la **toute première seconde**. Le reel ouvre sur un plan nocturne sombre avec un texte de taille moyenne (hook 32).
+- **Piste d'amélioration**, non appliquée car hors du script validé : ouvrir directement sur la Burj Khalifa avec « DUBAÏ » derrière la tour, et faire apparaître le chiffre « 5 » en 420 px dès la première image.
+
 ## Écarts au brief, avec leur raison
 
 1. **6 plans remplacés après vérification du lieu.** Le titre Pexels de chaque plan a été contrôlé :
