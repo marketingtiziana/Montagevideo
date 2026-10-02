@@ -36,7 +36,7 @@ while True:
     prev = g
 diffs = np.array(diffs); t = np.arange(len(diffs)) / fps
 # longest window where mean abs frame difference stays under 0.35 (visually frozen)
-still = diffs < 0.35   # brief: zero static frames, max still window 1.0 s; best = cur = 0
+still = diffs < 0.35; best = cur = 0   # brief: zero static frames, max still window 1.0 s
 for s in still[1:]:
     cur = cur + 1 if s else 0; best = max(best, cur)
 res["motion"] = {"longest_still_s": round(best / fps, 2), "median_diff": round(float(np.median(diffs[1:])), 3)}
