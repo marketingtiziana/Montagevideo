@@ -1,0 +1,90 @@
+{
+ "s01": {
+  "file": "u/s01.mp4",
+  "from": 0.15
+ },
+ "s02a": {
+  "file": "u/s02a.mp4",
+  "from": 0.15
+ },
+ "s02b": {
+  "file": "u/s02b.mp4",
+  "from": 0.15
+ },
+ "s03": {
+  "file": "u/s03.mp4",
+  "from": 0.15
+ },
+ "s04": {
+  "file": "u/s04.mp4",
+  "from": 0.15
+ },
+ "s05": {
+  "file": "u/s05.mp4",
+  "from": 0.15
+ },
+ "s06": {
+  "file": "u/s06.mp4",
+  "from": 0.15
+ },
+ "s07": {
+  "file": "u/s07.mp4",
+  "from": 0.15
+ },
+ "s08": {
+  "file": "u/s08.mp4",
+  "from": 0.15
+ },
+ "s09": {
+  "file": "u/s09.mp4",
+  "from": 0.15
+ },
+ "s10": {
+  "file": "u/s10.mp4",
+  "from": 0.15
+ },
+ "s11": {
+  "file": "u/s11.mp4",
+  "from": 0.15
+ },
+ "s12": {
+  "file": "u/s12.mp4",
+  "from": 0.15
+ },
+ "s13": {
+  "file": "u/s13.mp4",
+  "from": 0.15
+ },
+ "s14": {
+  "file": "u/s14.mp4",
+  "from": 0.15
+ },
+ "s15": {
+  "file": "u/s15.mp4",
+  "from": 0.15
+ },
+ "s16": {
+  "file": "u/s16.mp4",
+  "from": 0.15
+ },
+ "s17": {
+  "file": "u/s17.mp4",
+  "from": 0.15
+ },
+ "s18": {
+  "file": "u/s18.mp4",
+  "from": 0.15
+ },
+ "s19": {
+  "file": "u/s19.mp4",
+  "from": 0.15
+ },
+ "s20": {
+  "file": "u/s20.mp4",
+  "from": 0.15
+ },
+ "s21": {
+  "file": "u/s21slow.mp4",
+  "from": 0.1
+ }
+}

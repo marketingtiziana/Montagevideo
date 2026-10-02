@@ -1,0 +1,156 @@
+{
+ "src_media": {
+  "s01": "a5162cea-e838-458f-88c9-4ac42d0c368e",
+  "s02a": "0a62664c-d52a-41ec-a5c6-09728cd41f87",
+  "s02b": "a892431a-be77-4963-b2ec-29e08ea7c6e4",
+  "s03": "38d38c17-231f-48f8-8277-fc3f7319774a",
+  "s04": "fba599c8-9af9-4d67-a137-6f1c42ce2df2",
+  "s05": "5858729f-5e6d-495a-8fe8-3714d1617e32",
+  "s06": "457c3fe7-93e1-4925-b3fc-95c563708afc",
+  "s07": "ca7ece0c-ccc1-437c-9d54-fefa347f0e90",
+  "s08": "40b3e31c-7688-4e3f-ad7e-b4700861c653",
+  "s09": "5b1e3689-0282-4bfb-8e2f-b96664128c70",
+  "s10": "fd59a66e-5ff1-4601-8e15-75734d7d321a",
+  "s11": "48ab1d6f-e4a4-40c7-9242-7ef7320be3b9",
+  "s12": "fbe0794f-7cef-4839-8430-60934e7d28eb",
+  "s13": "59fecce1-54d2-4cdb-a35f-5756539bcc83",
+  "s14": "c641c465-06c9-4255-9194-bae4e60c688a",
+  "s15": "14e54cb5-4d89-4d57-8f53-461ac75cf848",
+  "s16": "301511ba-b774-47aa-bee0-f1e099e277a3",
+  "s17": "bbf6810b-f96c-44c4-baaf-4514de8786eb",
+  "s18": "f848d43c-d10c-4188-aadb-1046a6c4d864",
+  "s19": "3ebfc98c-1557-47c4-a08e-af7e3dec911d",
+  "s20": "b48ff818-3c58-4f87-8bd8-a8042e9b927b",
+  "s21": "55ce6aea-270e-4fb9-be81-ab34f1221b17"
+ },
+ "upscale_jobs": {
+  "s01": "bbb77d99-b6e3-4188-82cb-bae4fb22cc26",
+  "s02b": "bfaa3198-00dd-44c7-a907-ec534c923efa",
+  "s03": "4be38f76-a6b0-4c0a-9105-dd22ae3da5a1",
+  "s04": "875235ae-f01a-4d88-a2bf-987fd897cfc5",
+  "s02a": "9ab4997d-8ab6-42b8-ace5-5a8ad5e3bbc3",
+  "s05": "bdcb3793-373b-4260-826d-a471aad1b7d7",
+  "s07": "972ea767-949f-4110-be83-529ac450b80c",
+  "s08": "cd03399c-1146-4651-8c66-6e5dffdb9d87",
+  "s09": "f361b7bb-47b4-4549-a38d-09c60e2dd1db",
+  "s10": "75ea8992-cc56-4003-98ae-ab74cb2d1549",
+  "s11": "0fa53cf2-5a1d-4cbb-87c0-285f0905606e",
+  "s12": "86e0db1c-8a14-4f97-855b-f725e3c54438",
+  "s13": "a165cc5a-0edd-4f25-91c4-255bce0b4275",
+  "s18": "ae70f9c2-1e95-45aa-bd13-bf9562b2da1f",
+  "s20": "16303eb3-754d-42ef-bca1-fd7a358872ad",
+  "s21": "ff367e7c-2a06-48d3-b35c-1bf4794246f4",
+  "s06": "e17e234f-e067-493b-a598-fb0325d118cb",
+  "s14": "daa8db93-2fdc-424a-bd8d-4046f9d695f5",
+  "s15": "139d603c-ae51-48cf-a773-4ccf456fe6a5",
+  "s16": "a660456f-61d2-4442-b246-aa7eca60b01c",
+  "s17": "c8cd41d3-d54f-4d81-951b-9d1658ba97d6",
+  "s19": "bfcfd229-03cb-4dc7-bc7e-de09690b83ff"
+ },
+ "upscaled": {
+  "s01": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_171658_bbb77d99-b6e3-4188-82cb-bae4fb22cc26.mp4",
+  "s02b": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_171723_bfaa3198-00dd-44c7-a907-ec534c923efa.mp4",
+  "s03": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_171725_4be38f76-a6b0-4c0a-9105-dd22ae3da5a1.mp4",
+  "s04": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_171727_875235ae-f01a-4d88-a2bf-987fd897cfc5.mp4",
+  "s02a": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172038_9ab4997d-8ab6-42b8-ace5-5a8ad5e3bbc3.mp4",
+  "s05": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172040_bdcb3793-373b-4260-826d-a471aad1b7d7.mp4",
+  "s07": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172044_972ea767-949f-4110-be83-529ac450b80c.mp4",
+  "s08": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172421_cd03399c-1146-4651-8c66-6e5dffdb9d87.mp4",
+  "s09": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172422_f361b7bb-47b4-4549-a38d-09c60e2dd1db.mp4",
+  "s10": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172424_75ea8992-cc56-4003-98ae-ab74cb2d1549.mp4",
+  "s11": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172425_0fa53cf2-5a1d-4cbb-87c0-285f0905606e.mp4",
+  "s12": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173121_86e0db1c-8a14-4f97-855b-f725e3c54438.mp4",
+  "s13": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173122_a165cc5a-0edd-4f25-91c4-255bce0b4275.mp4",
+  "s18": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173517_ae70f9c2-1e95-45aa-bd13-bf9562b2da1f.mp4",
+  "s20": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173522_16303eb3-754d-42ef-bca1-fd7a358872ad.mp4",
+  "s21": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_174827_ff367e7c-2a06-48d3-b35c-1bf4794246f4.mp4",
+  "s06": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_175812_e17e234f-e067-493b-a598-fb0325d118cb.mp4",
+  "s14": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_175816_daa8db93-2fdc-424a-bd8d-4046f9d695f5.mp4",
+  "s15": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_175817_139d603c-ae51-48cf-a773-4ccf456fe6a5.mp4",
+  "s16": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_175819_a660456f-61d2-4442-b246-aa7eca60b01c.mp4",
+  "s17": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_180013_c8cd41d3-d54f-4d81-951b-9d1658ba97d6.mp4",
+  "s19": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_180015_bfcfd229-03cb-4dc7-bc7e-de09690b83ff.mp4"
+ },
+ "cover": {
+  "job": "303ebef5-72b8-453e-a3b9-b2589c9487bf",
+  "model": "gpt_image_2_5",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172246_303ebef5-72b8-453e-a3b9-b2589c9487bf.png"
+ },
+ "book_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/d2089228-5050-4504-a8e8-15e5a35f3c88.mp4",
+ "analysis": {
+  "s01": "f7c08d3e-8196-41f3-845b-f0cb5dcdf754",
+  "s02a": "d5e2fdf1-ede4-4725-9b53-24d6450fa1ca",
+  "s02b": "9fb677d0-5994-4fed-b549-730fc7662886",
+  "s03": "691d00d8-d328-4da1-a6ac-b0b157600c08",
+  "s04": "de465803-717b-43af-995d-b162f1c9bf8c",
+  "s05": "1555478c-f47c-4336-9eb4-1dac810c5d36",
+  "s07": "75f05aa0-5d6b-457b-99aa-bb78bde0e29d",
+  "s08": "f3d0b1a0-c29d-42dd-bc7f-ddfa683efb5b",
+  "s09": "efe716cb-31e3-4364-bc07-931baa5e9c94",
+  "s10": "f678972a-4e9d-4c08-9de1-9702f11790ee",
+  "s11": "5c01892a-159e-479f-8851-8073031b0139",
+  "s12": "de2ec2ff-fda5-4bf1-817b-b9ee2b302590",
+  "s13": "bd60624a-c598-48b7-bb1d-723ccb900e8b",
+  "s18": "f7f1c5f1-2bf3-4955-ae67-14aa6a5b0890",
+  "s20": "b886ad2a-684e-487a-85f4-878d64c9184f",
+  "s21": "a9850675-e4f1-4beb-83a4-25aff19a5fcc",
+  "s06": "5488ec4e-a73c-4bc4-9629-0e2736f0eb45",
+  "s14": "97a780d6-9c66-4578-b89c-39020c9fbeb6",
+  "s15": "9b1959f9-6397-4a47-bef1-0b1dbf48e83e",
+  "s16": "ce3aa754-6e21-4ab7-9bda-8cdc54709a3c",
+  "s17": "d1413f0d-22da-4265-8faa-3b6535b1a3ed",
+  "s19": "00270ba5-b0ad-417a-85fa-ed5d277ed06c"
+ },
+ "mattes": {
+  "s12": {
+   "job": "67ea1fe1-4359-4b34-b510-de9697512bda",
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_174621_67ea1fe1-4359-4b34-b510-de9697512bda.mp4",
+   "rejected": "matte not clean: blobby edges, dark windows key out, reflection halo"
+  },
+  "s02a": {
+   "job": "ed954a80-20c4-4fca-b79b-f438df83a1b4",
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_174624_ed954a80-20c4-4fca-b79b-f438df83a1b4.mp4"
+  }
+ },
+ "mattes_used": {
+  "s02a": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_174624_ed954a80-20c4-4fca-b79b-f438df83a1b4.mp4"
+ },
+ "replaced": {
+  "s06": {
+   "old_pexels": 19444205,
+   "reason": "title does not confirm Dubai",
+   "old_src_media": "a9d70490-c429-48db-b8f0-761c3c3c7835",
+   "old_upscaled": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_172043_f2e98cca-8132-46c1-b5f8-07a659ae4092.mp4"
+  },
+  "s14": {
+   "old_pexels": 9671000,
+   "reason": "title does not confirm Hong Kong",
+   "old_src_media": "2cc6040f-ee51-4d76-a370-01eb960b7cc8",
+   "old_upscaled": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173126_99348778-3a62-4023-a38b-f2d77e542256.mp4"
+  },
+  "s15": {
+   "old_pexels": 34551432,
+   "reason": "filmed in Istanbul (Bosphorus), not Hong Kong",
+   "old_src_media": "10c43737-2d2f-47fc-947e-9dab7cfad4d1",
+   "old_upscaled": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_174825_bee2b95c-6f1a-49cf-9bb8-93566be2e94c.mp4"
+  },
+  "s16": {
+   "old_pexels": 30073056,
+   "reason": "title does not confirm Hong Kong",
+   "old_src_media": "ea3c9a8f-5ebe-4a26-aa1a-692b9f37e2a9",
+   "old_upscaled": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173516_5dff8d24-77b5-4990-b03b-339509dcbd09.mp4"
+  },
+  "s17": {
+   "old_pexels": 35213929,
+   "reason": "filmed in Sweden, not Hong Kong",
+   "old_src_media": "e4acf936-2939-4436-a759-9dccb25776c6",
+   "old_upscaled": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173127_0f804df9-75a5-465f-9310-1e115fb866ac.mp4"
+  },
+  "s19": {
+   "old_pexels": 5272112,
+   "reason": "title does not confirm Hong Kong",
+   "old_src_media": "dd58df44-06a5-45ed-86a7-c9da08e94119",
+   "old_upscaled": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_173519_edcf0cac-ab38-4624-baa5-0508d66ebbb8.mp4"
+  }
+ }
+}

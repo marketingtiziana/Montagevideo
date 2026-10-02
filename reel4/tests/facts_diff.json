@@ -1,0 +1,204 @@
+{
+ "numbers_on_screen": [
+  {
+   "screen": 1,
+   "value": "5",
+   "text": "Les 5 meilleurs pays",
+   "fact": "",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 2,
+   "value": "1",
+   "text": "Le n°1 n'est ni Dubaï…",
+   "fact": "",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 3,
+   "value": "4",
+   "text": "On a noté sur 4 critères.",
+   "fact": "",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 5,
+   "value": "22 %",
+   "text": "22 % sur les dividendes",
+   "fact": "E1 E2",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 5,
+   "value": "0 %",
+   "text": "0 % sur les bénéfices gardés",
+   "fact": "E1 E2",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 7,
+   "value": "9 %",
+   "text": "9 % d'IS depuis 2023",
+   "fact": "D1 D2",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 7,
+   "value": "2023",
+   "text": "9 % d'IS depuis 2023",
+   "fact": "D1 D2",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 7,
+   "value": "0 %",
+   "text": "0 % d'impôt perso",
+   "fact": "D1 D2",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 9,
+   "value": "5472",
+   "text": "Oubli 5472 : 25 000 $",
+   "fact": "U2 U4",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 9,
+   "value": "25 000 $",
+   "text": "Oubli 5472 : 25 000 $",
+   "fact": "U2 U4",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 9,
+   "value": "0 %",
+   "text": "0 % fédéral hors activité US",
+   "fact": "U2 U4",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 13,
+   "value": "0 %",
+   "text": "0 %",
+   "fact": "H1 H2",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 14,
+   "value": "2 M HK$",
+   "text": "sur les premiers 2 M HK$",
+   "fact": "H3",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 14,
+   "value": "8,25 %",
+   "text": "8,25 %",
+   "fact": "H3",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 14,
+   "value": "16,5 %",
+   "text": "puis 16,5 % au-delà.",
+   "fact": "H3",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 15,
+   "value": "0 %",
+   "text": "0 % TVA",
+   "fact": "H4 H5 H6",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 15,
+   "value": "0 %",
+   "text": "0 % DIVIDENDES",
+   "fact": "H4 H5 H6",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 15,
+   "value": "0 %",
+   "text": "0 % PLUS-VALUES en capital",
+   "fact": "H4 H5 H6",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 16,
+   "value": "100 %",
+   "text": "100 % étrangère.",
+   "fact": "H7 H8",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 16,
+   "value": "0",
+   "text": "0 capital minimum.",
+   "fact": "H7 H8",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 16,
+   "value": "24 h",
+   "text": "24 h",
+   "fact": "H7 H8",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 17,
+   "value": "0",
+   "text": "0 droit de douane.",
+   "fact": "H11",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 19,
+   "value": "0 %",
+   "text": "Vers la Chine : 0 % de droits.",
+   "fact": "H14",
+   "in_FACTS": true,
+   "ok": true
+  },
+  {
+   "screen": 19,
+   "value": "0 %",
+   "text": "0 %",
+   "fact": "H14",
+   "in_FACTS": true,
+   "ok": true
+  }
+ ],
+ "editorial_scores_labelled_NOTRE_NOTE": {
+  "ee": 6.5,
+  "ae": 7.0,
+  "us": 7.5,
+  "sg": 8.5,
+  "hk": 9.5
+ },
+ "unsourced": 0
+}
