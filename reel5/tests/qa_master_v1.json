@@ -1,0 +1,102 @@
+{
+ "file": "master.mp4",
+ "size": "1080x1920",
+ "fps": 29.999347159053816,
+ "static": {
+  "longest_s": 0.3,
+  "top5": [
+   [
+    0.03,
+    0.3
+   ],
+   [
+    24.83,
+    0.3
+   ],
+   [
+    35.63,
+    0.27
+   ],
+   [
+    38.33,
+    0.23
+   ],
+   [
+    29.83,
+    0.07
+   ]
+  ],
+  "over_1_2s": []
+ },
+ "eyes": {
+  "samples": 124,
+  "median_y": 313.6,
+  "p5": 274.09499999999997,
+  "p95": 388.3999999999999,
+  "within_300pm20": 0.484
+ },
+ "captions": {
+  "matched": 179,
+  "shown": 193,
+  "median_ms": 20,
+  "p90_ms": 47,
+  "bias_ms": 14,
+  "under_80ms": 0.961
+ },
+ "effects_lead": [
+  {
+   "effet": "tampon REDRESSEMENT + impact 1",
+   "effet_s": 2.65,
+   "mot_s": 2.8,
+   "avance_ms": 150
+  },
+  {
+   "effet": "pièce manquante ?",
+   "effet_s": 4.84,
+   "mot_s": 5.0,
+   "avance_ms": 160
+  },
+  {
+   "effet": "compteur 30 min",
+   "effet_s": 11.34,
+   "mot_s": 11.48,
+   "avance_ms": 140
+  },
+  {
+   "effet": "mot cinétique SUBSTANCE",
+   "effet_s": 22.56,
+   "mot_s": 22.7,
+   "avance_ms": 140
+  },
+  {
+   "effet": "ligne Tes décisions",
+   "effet_s": 30.4,
+   "mot_s": 30.56,
+   "avance_ms": 160
+  },
+  {
+   "effet": "impact 2",
+   "effet_s": 47.03,
+   "mot_s": 47.18,
+   "avance_ms": 150
+  },
+  {
+   "effet": "tampon REQUALIFIÉE + impact 3",
+   "effet_s": 56.47,
+   "mot_s": 56.62,
+   "avance_ms": 150
+  },
+  {
+   "effet": "carte papier",
+   "effet_s": 43.14,
+   "mot_s": 43.3,
+   "avance_ms": 160
+  },
+  {
+   "effet": "ligne pile 1",
+   "effet_s": 38.54,
+   "mot_s": 38.76,
+   "avance_ms": 220
+  }
+ ]
+}

@@ -1,4 +1,4 @@
-# SCENES — Reel split-screen « La substance » (storyboard, à valider)
+# SCENES — Reel split-screen « La substance » (version finale exécutée)
 
 ## Source
 | | |
@@ -11,9 +11,9 @@
 | Jump cuts | 21 pauses de plus de 0,28 s raccourcies, 100 ms de respiration gardées de chaque côté (`prep.py`, `cuts.json`) |
 | Durée | 57,83 s de parole + end card 2 s = **59,83 s** (avec la coupe proposée au point 1) |
 
-## Points à trancher
+## Points tranchés (validés)
 1. **Durée.** Sans coupe de texte, les pauses raccourcies donnent 59,75 s de parole. Avec l'end card de 2 s, on arrive à **61,8 s**, au-dessus des 60 s du brief.
-   - **Ma proposition :** couper la phrase « Et c'est toujours la même chose. » (source 6,78 → 9,32 s). Elle redit la phrase précédente. On tombe alors à **59,83 s**, et la suite reste fluide : « …ce qui manque à chaque fois. Une vidéo t'apprend… ».
+   - **Validé :** couper la phrase « Et c'est toujours la même chose. » (source 6,78 → 9,32 s). Elle redit la phrase précédente. On tombe alors à **59,83 s**, et la suite reste fluide : « …ce qui manque à chaque fois. Une vidéo t'apprend… ».
    - Si tu préfères garder la phrase, le reel fera 61,8 s.
 2. **Correction de transcription.** Whisper a entendu « le fils que le voit ». J'écris **« le fisc, lui, le voit »** à l'écran.
 3. **Zoom de la zone A : 155 % au lieu de 105 %**, comme pour le reel 2.
@@ -110,3 +110,24 @@ Module A complet, comme au reel 2 : DeepFilterNet3 → Pedalboard → de-esser �
 - Synchro captions/voix sous 80 ms, et avance des effets de 100 à 200 ms, vérifiée sur 5 scènes tirées au hasard.
 - Stabilité des yeux : ±20 px de y = 300.
 - Master à −14 ±1 LUFS.
+
+## Écarts entre le storyboard validé et le montage final
+
+| Point | Storyboard | Final | Raison |
+|---|---|---|---|
+| Zoom zone A | 155 % fixe | **170 % de base**, montant lentement jusqu'à 192 % quand elle relève la tête | (1) |
+| Suivi du visage | détecteur Haar, 1 image/s, lissage 4 s | **YuNet** (repères des yeux), 5 images/s, lissage gaussien 0,5 s puis 0,3 s sur la timeline montée | Haar était trop bruité pour suivre ses mouvements de tête |
+| Scène 3 | pastille « TUTO » sur « tuto » (9,59 s) | sur « suis » (9,31 s) | à 9,44 s, elle n'aurait vécu que 0,41 s, moins que son entrée en ressort (0,5 s) |
+| Scène 7 | « c'est simple » sur « simple » (24,66 s) | sur « c'est » (24,41 s) | même raison : la scène se termine à 24,80 s |
+| Scène 14 | feuille 3 sur « intérêts » (53,49 s) | sur « Où sont tes… » (52,49 s) | « intérêts » tombe 0,4 s avant la fin de la scène, trop tard pour tracer la branche et faire entrer la feuille |
+| Transition 14 → 15 | morph (les feuilles convergent vers l'épingle) | **swipe latéral** | la 3ᵉ feuille venait d'apparaître : la faire converger aussitôt la rendait illisible. La règle « jamais deux fois la même transition de suite » reste respectée (morph 13→14, swipe 14→15, fondu vers l'end card) |
+| Transition 8 → 9 | morph avec réduction d'échelle | morph par **déplacement + fondu** vers la 1ʳᵉ ligne de la checklist | Higgsedit refuse une échelle animée sur un parent quand les enfants ont leur propre pop en ressort |
+| Pops sur des cadres déjà animés | ressort | pop émulé par images clés (0,6 → 1,06 → 1) sur un cadre intérieur | règle « un seul propriétaire par propriété » de Higgsedit |
+| Contours ondulés (ligne d'eau) | courbes `T` | courbes `Q` explicites | Higgsedit n'accepte que M/L/H/V/C/Q/Z |
+
+(1) Zoom zone A. Dans la source, ses yeux varient de y 140 à 233 :
+- à 170 %, les yeux restent sous y 282 tant qu'elle ne relève pas la tête ;
+- quand elle la relève (8,6 % du temps), un zoom fixe ne pourrait pas garder les yeux à 300 ± 20 sans découvrir le bord haut de l'image ;
+- le zoom monte donc doucement, lissé, sans à-coup.
+
+Les chiffres affichés restent ceux qu'elle prononce : seulement « 30 min ».
