@@ -48,3 +48,36 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
   sous-titres, surtout pour du contenu fiscal.
 - Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
   réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+
+---
+
+# Carousels Instagram (15 slides, 1080 x 1350)
+
+Fond uni + texte centré, Inter (Google Fonts), palette navy / indigo / gris bleuté.
+Un dossier par carousel dans `slides/` : `solitude`, `lancement`.
+
+```bash
+npm install                    # playwright + sharp
+node build.js                  # tous les carousels
+node build.js lancement        # un seul : slides/lancement/ -> output/carousel-lancement/
+```
+
+Puis ouvrir `preview.html?c=lancement` (ou `?c=solitude`) pour voir les 15 PNG en grille.
+
+| Fichier | Rôle |
+|---|---|
+| `slides/<carousel>/slide-01.html` … `slide-15.html` | Une slide autonome par fichier (HTML + une balise `<style>`). Texte, couleurs et tailles s'éditent directement ici. |
+| `build.js` | Rend chaque slide avec Playwright (`deviceScaleFactor: 2`), downscale Lanczos en 1080 x 1350 via sharp. |
+| `preview.html` | Grille des 15 PNG d'un carousel (`?c=<carousel>`). |
+| `output/carousel-<carousel>/` | Les 15 PNG finaux. |
+
+Garde-fous de `build.js` :
+- **Débordement** : si le bloc de texte dépasse 1110 px (1350 moins 2 x 120 de marge), le corps
+  (`--body-size`) est réduit par paliers de 2 px, jusqu'à 26 px, et la valeur retenue est réécrite
+  dans le HTML. Sous 26 px, le build s'arrête et liste les slides concernées, sans tronquer.
+- **Police** : échec si une graisse utilisée n'est pas réellement chargée en Inter (pas de police de repli).
+- **Tiret cadratin** : échec si un fichier en contient un.
+- Les requêtes Google Fonts passent par Playwright (Node), ce qui fonctionne aussi derrière un proxy TLS.
+
+Mots en gras dans le corps : `<strong>` (Inter 900, même couleur). Espaces insécables ajoutées avant
+`: ? !` et dans les nombres (`12 000€`, `6 000€`) pour éviter qu'un signe se retrouve seul en début de ligne.
