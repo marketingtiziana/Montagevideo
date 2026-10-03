@@ -51,23 +51,25 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 
 ---
 
-# Carousel Instagram « solitude » (15 slides, 1080 x 1350)
+# Carousels Instagram (15 slides, 1080 x 1350)
 
 Fond uni + texte centré, Inter (Google Fonts), palette navy / indigo / gris bleuté.
+Un dossier par carousel dans `slides/` : `solitude`, `lancement`.
 
 ```bash
-npm install          # playwright + sharp
-node build.js        # slides/slide-XX.html -> output/carousel-solitude/XX.png
+npm install                    # playwright + sharp
+node build.js                  # tous les carousels
+node build.js lancement        # un seul : slides/lancement/ -> output/carousel-lancement/
 ```
 
-Puis ouvrir `preview.html` pour voir les 15 PNG en grille.
+Puis ouvrir `preview.html?c=lancement` (ou `?c=solitude`) pour voir les 15 PNG en grille.
 
 | Fichier | Rôle |
 |---|---|
-| `slides/slide-01.html` … `slide-15.html` | Une slide autonome par fichier (HTML + une balise `<style>`). Texte, couleurs et tailles s'éditent directement ici. |
+| `slides/<carousel>/slide-01.html` … `slide-15.html` | Une slide autonome par fichier (HTML + une balise `<style>`). Texte, couleurs et tailles s'éditent directement ici. |
 | `build.js` | Rend chaque slide avec Playwright (`deviceScaleFactor: 2`), downscale Lanczos en 1080 x 1350 via sharp. |
-| `preview.html` | Grille des 15 PNG pour validation. |
-| `output/carousel-solitude/` | Les 15 PNG finaux. |
+| `preview.html` | Grille des 15 PNG d'un carousel (`?c=<carousel>`). |
+| `output/carousel-<carousel>/` | Les 15 PNG finaux. |
 
 Garde-fous de `build.js` :
 - **Débordement** : si le bloc de texte dépasse 1110 px (1350 moins 2 x 120 de marge), le corps
@@ -78,4 +80,4 @@ Garde-fous de `build.js` :
 - Les requêtes Google Fonts passent par Playwright (Node), ce qui fonctionne aussi derrière un proxy TLS.
 
 Mots en gras dans le corps : `<strong>` (Inter 900, même couleur). Espaces insécables ajoutées avant
-`: ? !` et dans `12 000€` pour éviter qu'un signe se retrouve seul en début de ligne.
+`: ? !` et dans les nombres (`12 000€`, `6 000€`) pour éviter qu'un signe se retrouve seul en début de ligne.
