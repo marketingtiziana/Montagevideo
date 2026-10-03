@@ -1,0 +1,50 @@
+<!doctype html>
+<!-- Reel 5, scene 3 — landscape phone playing a neutral "tuto" video (no platform UI, no logo). 780x400, 3.4 s, rendered to .mov alpha. -->
+<html><head><meta charset="utf-8"><style>
+@font-face { font-family: M; src: url(fonts/Montserrat-wght.ttf); font-weight: 100 900; }
+html, body { margin: 0; background: transparent; width: 780px; height: 400px; overflow: hidden; font-family: M; }
+:root { --acc: #0B6E4F; --fg: #111111; --ease: cubic-bezier(0.2, 0.8, 0.2, 1); }
+.phone { position: absolute; left: 20px; top: 20px; width: 740px; height: 360px; border-radius: 56px; background: #111;
+  box-shadow: 0 14px 36px rgba(0,0,0,.18); }
+.screen { position: absolute; left: 22px; top: 18px; right: 22px; bottom: 18px; border-radius: 38px; overflow: hidden; background: #F3F6F4; }
+.notch { position: absolute; left: 6px; top: 140px; width: 10px; height: 80px; border-radius: 6px; background: #000; }
+/* tuto "slide": title + a form that fills itself (screen recording look) */
+.title { position: absolute; left: 40px; top: 30px; font-weight: 800; font-size: 34px; color: var(--fg); letter-spacing: .5px; }
+.title b { color: var(--acc); }
+.form { position: absolute; left: 40px; top: 92px; width: 360px; }
+.field { height: 30px; margin-bottom: 14px; border-radius: 10px; background: #fff; border: 2px solid #E4E7E5; position: relative; overflow: hidden; }
+.field i { position: absolute; left: 10px; top: 10px; height: 8px; border-radius: 4px; background: #B9C0BC; width: 0; animation: fill .7s var(--ease) forwards; }
+.f1 i { animation-delay: .55s; } .f2 i { animation-delay: 1.15s; } .f3 i { animation-delay: 1.75s; }
+.btn { position: absolute; left: 40px; top: 228px; width: 170px; height: 40px; border-radius: 20px; background: var(--acc); color: #fff; font-weight: 800;
+  font-size: 18px; line-height: 40px; text-align: center; opacity: .35; animation: arm .2s linear 2.45s forwards; }
+@keyframes fill { to { width: 300px; } }
+@keyframes arm { to { opacity: 1; } }
+/* building icon (Lucide building-2 path) that pops when the form is sent */
+.done { position: absolute; left: 470px; top: 70px; width: 170px; height: 170px; border-radius: 85px; background: #E3F1EA; transform: scale(0); opacity: 0;
+  animation: pop .5s cubic-bezier(.3,1.6,.5,1) 2.6s forwards; display: flex; align-items: center; justify-content: center; }
+@keyframes pop { 0% { transform: scale(.4); opacity: 0 } 30% { opacity: 1 } 100% { transform: scale(1); opacity: 1 } }
+/* cursor travelling over the form */
+.cur { position: absolute; left: 330px; top: 70px; width: 26px; height: 26px; animation: cur 2.6s var(--ease) .3s forwards; }
+@keyframes cur { 0% { transform: translate(0,0) } 25% { transform: translate(-40px,40px) } 50% { transform: translate(-30px,84px) } 75% { transform: translate(-60px,128px) } 100% { transform: translate(-170px,176px) } }
+/* player chrome: neutral progress bar + big play button that disappears when playback starts */
+.bar { position: absolute; left: 30px; right: 30px; bottom: 18px; height: 6px; border-radius: 3px; background: rgba(17,17,17,.15); }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 4%; border-radius: 3px; background: var(--acc); animation: prog 3.2s linear .2s forwards; }
+.bar s { position: absolute; top: -5px; width: 16px; height: 16px; border-radius: 8px; background: var(--acc); left: 4%; margin-left: -8px; animation: knob 3.2s linear .2s forwards; }
+@keyframes prog { to { width: 72%; } } @keyframes knob { to { left: 72%; } }
+.play { position: absolute; left: 50%; top: 50%; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 55px; background: rgba(17,17,17,.82);
+  animation: press .35s var(--ease) .12s forwards; }
+.play:after { content: ""; position: absolute; left: 42px; top: 31px; border-left: 38px solid #fff; border-top: 24px solid transparent; border-bottom: 24px solid transparent; }
+@keyframes press { 0% { transform: scale(1); opacity: 1 } 40% { transform: scale(.88); opacity: 1 } 100% { transform: scale(1.25); opacity: 0 } }
+</style></head><body>
+<div class="phone"><div class="notch"></div><div class="screen">
+  <div class="title">CRÉER TA <b>SOCIÉTÉ</b></div>
+  <div class="form"><div class="field f1"><i></i></div><div class="field f2"><i></i></div><div class="field f3"><i></i></div></div>
+  <div class="btn">Valider</div>
+  <div class="done"><svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="#0B6E4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+    <path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></div>
+  <svg class="cur" viewBox="0 0 24 24" fill="#111" stroke="#fff" stroke-width="1.5"><path d="M4 2 L4 20 L9 15 L13 23 L16 21.5 L12 14 L19 14 Z"/></svg>
+  <div class="bar"><i></i><s></s></div>
+  <div class="play"></div>
+</div></div>
+</body></html>

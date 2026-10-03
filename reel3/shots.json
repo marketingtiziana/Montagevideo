@@ -1,0 +1,83 @@
+{
+ "c27": {
+  "file": "i27.mp4",
+  "from": 0.4
+ },
+ "t102": {
+  "file": "t102.mp4",
+  "from": 1.0
+ },
+ "map": {
+  "file": "t101.mp4",
+  "from": 0.5,
+  "blur": 16
+ },
+ "c28": {
+  "file": "i28.mp4",
+  "from": 0.4
+ },
+ "px34368610a": {
+  "file": "pxroad.mp4",
+  "from": 0
+ },
+ "t106": {
+  "file": "t106.mp4",
+  "from": 1.5
+ },
+ "c22": {
+  "file": "i22.mp4",
+  "from": 0.4
+ },
+ "c05": {
+  "file": "i05.mp4",
+  "from": 0.4
+ },
+ "px35009532": {
+  "file": "pxreveal.mp4",
+  "from": 0
+ },
+ "px34368610b": {
+  "file": "pxvalley.mp4",
+  "from": 0
+ },
+ "c14": {
+  "file": "i14.mp4",
+  "from": 0.3
+ },
+ "c01": {
+  "file": "i01.mp4",
+  "from": 0.3
+ },
+ "c12": {
+  "file": "i12.mp4",
+  "from": 0.3
+ },
+ "c31": {
+  "file": "i31.mp4",
+  "from": 0.3
+ },
+ "px38238599": {
+  "file": "pxbridge.mp4",
+  "from": 0
+ },
+ "c18": {
+  "file": "i18.mp4",
+  "from": 0.3
+ },
+ "c00": {
+  "file": "i00.mp4",
+  "from": 0.3
+ },
+ "c34": {
+  "file": "i34.mp4",
+  "from": 0.3
+ },
+ "c35": {
+  "file": "i35.mp4",
+  "from": 0.3
+ },
+ "t121": {
+  "file": "t121.mp4",
+  "from": 0
+ }
+}

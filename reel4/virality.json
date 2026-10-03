@@ -1,0 +1,36 @@
+{
+ "_note": "Higgsfield virality_predictor (model brain_activity) only accepts videos <= 16 s: run on two excerpts of the 60 fps master. Scores are normalized predictive proxies (0..100), not guaranteed performance.",
+ "master60": "https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/afaeb5ed-09d7-46d3-8339-25faabfb260a.mp4",
+ "hook_0_15.9": {
+  "range": "0-15.9 s",
+  "job": "ca50ba45-f23c-4c77-b045-2def50bfda59",
+  "dashboard": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_183250_ca50ba45-f23c-4c77-b045-2def50bfda59.html",
+  "scores": {
+   "overall_score": 48,
+   "brain_engagement": 40,
+   "hook_score": 32,
+   "viral_potential": 47,
+   "sustain": 100,
+   "peak_second": 15,
+   "peak_frame_index": 15,
+   "peak_score": 0.438318
+  },
+  "regions": []
+ },
+ "reveal_24_40": {
+  "range": "24-40 s",
+  "job": "00de7e33-dadf-45d3-8eab-9c3214bd59c6",
+  "dashboard": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261002_183204_00de7e33-dadf-45d3-8eab-9c3214bd59c6.html",
+  "scores": {
+   "overall_score": 50,
+   "brain_engagement": 44,
+   "hook_score": 37,
+   "viral_potential": 47,
+   "sustain": 94,
+   "peak_second": 0,
+   "peak_frame_index": 0,
+   "peak_score": 0.47374
+  },
+  "regions": []
+ }
+}
