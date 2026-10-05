@@ -17,6 +17,7 @@
   --grey:  #8A8FA3;  /* texte secondaire */
   --card:  #EFF1F7;  /* cards claires */
   --line:  #E3E6F0;  /* filets de séparation */
+  --red:   #D81E34;  /* alerte : seule extension de palette de ce carrousel */
   --shadow-blue: 0 20px 60px rgba(67, 83, 255, 0.35);
   --r: 24px;         /* radius des cards */
 }
@@ -78,6 +79,7 @@ html, body {
 .title--hero  { font-size: 84px; }
 .title--codex { font-size: 104px; }
 .blue { color: var(--blue); }
+.red  { color: var(--red); }
 
 /* zone centrale : composant centré entre le titre et la chute */
 .zone { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }

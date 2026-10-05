@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const B = '#4353FF';
+const R = '#D81E34';   /* alerte */
 
 /* Décor en filigrane : grilles carrées en coin (identique aux decks validés) */
 const DECOR = `
@@ -147,11 +148,11 @@ const D = {
 };
 
 /* --- la case à cocher : carré 72px, coche épaisse tracée d'un geste --- */
-const cbox = (checked, size = 72, style = '', solid = false) => `
+const cbox = (checked, size = 72, style = '', solid = false, tone = B) => `
 <svg class="cbox" width="${size}" height="${size}" viewBox="0 0 72 72" aria-hidden="true" style="${style}">
   <rect x="2.5" y="2.5" width="67" height="67" rx="16"
-        fill="${solid ? '#F7F8FC' : 'none'}" stroke="${B}" stroke-width="3"/>
-  ${checked ? `<path d="M17,38 L30,52 L56,19" fill="none" stroke="${B}" stroke-width="6"
+        fill="${solid ? '#F7F8FC' : 'none'}" stroke="${tone}" stroke-width="3"/>
+  ${checked ? `<path d="M17,38 L30,52 L56,19" fill="none" stroke="${tone}" stroke-width="6"
        stroke-linecap="round" stroke-linejoin="round"/>` : ''}
 </svg>`;
 
@@ -189,11 +190,11 @@ module.exports = { DECOR, slides: [
       <div class="head"></div>
       <h1 class="title title--hero" style="font-size:78px;white-space:nowrap">
         2 cases cochées :<br>dossier intéressant.<br>3 cases :<br>
-        <span class="blue ul-blue">PRIORITÉ</span> du fisc.
+        <span class="red">PRIORITÉ</span> du fisc.
       </h1>
       <p class="body muted" style="margin-top:40px">Expatrié français ? Compte tes cases.</p>
       <div class="cbox-fan" style="position:absolute;left:80px;top:748px;gap:18px">
-        ${cbox(true, 48)}${cbox(true, 48)}${cbox(true, 48)}
+        ${cbox(true, 48, '', false, R)}${cbox(true, 48, '', false, R)}${cbox(true, 48, '', false, R)}
         ${cbox(false, 48)}${cbox(false, 48)}${cbox(false, 48)}
       </div>
       <div class="swipe" style="position:absolute;top:740px;right:80px">

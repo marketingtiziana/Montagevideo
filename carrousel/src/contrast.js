@@ -15,6 +15,8 @@ const cases = [
   ['#8A8FA3', CARD, 'gris secondaire sur card claire',        4.5],
   ['#6B7085', BG,   'gris alternatif propose sur le fond',    4.5],
   ['#6B7085', CARD, 'gris alternatif propose sur card',       4.5],
+  ['#D81E34', BG,   'rouge alerte sur le fond',                4.5],
+  ['#D81E34', CARD, 'rouge alerte sur card claire',            4.5],
 ];
 console.log('\n=== CONTRASTES ===');
 let ko = 0;
