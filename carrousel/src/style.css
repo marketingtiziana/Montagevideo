@@ -699,3 +699,11 @@ html, body {
   background: rgba(247, 248, 252, 0.92); border-radius: 999px;
   padding: 8px 8px 8px 28px; gap: 20px;
 }
+/* schémas des slides fisc : un bloc SVG sous le texte de la card */
+.diag { display: block; margin-top: 30px; }
+/* proposition B : la photo en carte portrait, légèrement inclinée */
+.shot--portrait {
+  position: absolute; left: 560px; top: 620px; width: 420px; height: 620px; bottom: auto;
+  transform: rotate(-3deg);
+}
+.checklist { position: absolute; display: flex; flex-direction: column; gap: 18px; }
