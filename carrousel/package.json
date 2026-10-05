@@ -1,0 +1,17 @@
+{
+  "name": "fynovates-carrousel",
+  "version": "1.0.0",
+  "description": "Carrousel Instagram Fynovates — rendu HTML/CSS + SVG en PNG 1080x1350",
+  "main": "index.js",
+  "scripts": {
+    "render": "node src/render.js",
+    "contrast": "node src/contrast.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.63.0"
+  },
+  "private": true
+}
