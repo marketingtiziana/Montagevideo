@@ -683,7 +683,7 @@ html, body {
 
 /* photo de couverture (deck « fisc ») : bandeau cadré, radius et ombre maison */
 .shot {
-  position: absolute; left: 80px; bottom: 80px; width: 920px; height: 520px;
+  position: absolute; left: 80px; bottom: 80px; width: 920px; height: 440px;
   border-radius: var(--r); overflow: hidden;
   box-shadow: 0 30px 70px rgba(67, 83, 255, 0.18), 0 10px 24px rgba(18, 18, 31, 0.08);
 }

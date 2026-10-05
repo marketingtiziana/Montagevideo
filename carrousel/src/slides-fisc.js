@@ -192,18 +192,14 @@ module.exports = { DECOR, slides: [
         <span class="blue ul-blue">PRIORITÉ</span> du fisc.
       </h1>
       <p class="body muted" style="margin-top:40px">Expatrié français ? Compte tes cases.</p>
-      ${shotBlock}
-      <div class="cbox-fan" style="position:absolute;left:112px;top:748px">
-        ${cbox(true, 64, 'transform:rotate(-9deg) translateY(14px)', true)}
-        ${cbox(true, 64, 'transform:rotate(-5deg) translateY(6px)', true)}
-        ${cbox(true, 64, 'transform:rotate(-2deg)', true)}
-        ${cbox(false, 64, 'transform:rotate(2deg)', true)}
-        ${cbox(false, 64, 'transform:rotate(5deg) translateY(6px)', true)}
-        ${cbox(false, 64, 'transform:rotate(9deg) translateY(14px)', true)}
+      <div class="cbox-fan" style="position:absolute;left:80px;top:748px;gap:18px">
+        ${cbox(true, 48)}${cbox(true, 48)}${cbox(true, 48)}
+        ${cbox(false, 48)}${cbox(false, 48)}${cbox(false, 48)}
       </div>
-      <div class="swipe swipe--plate" style="position:absolute;top:758px;right:112px">
+      <div class="swipe" style="position:absolute;top:740px;right:80px">
         <span class="swipe-txt">SWIPE</span><span class="swipe-dot">&rarr;</span>
-      </div>`
+      </div>
+      ${shotBlock}`
   },
 
   /* ================= 02 · COMMENT ÇA MARCHE ================= */
