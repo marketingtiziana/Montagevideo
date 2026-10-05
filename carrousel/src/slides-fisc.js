@@ -4,6 +4,9 @@
    Fil rouge visuel : la case à cocher + le compteur de menace
    ============================================================ */
 
+const fs = require('fs');
+const path = require('path');
+
 const B = '#4353FF';
 
 /* Décor en filigrane : grilles carrées en coin (identique aux decks validés) */
@@ -21,10 +24,17 @@ const DECOR = `
 
 const badge = t => `<div class="head"><span class="badge">${t}</span></div>`;
 
+/* Photo de couverture : bandeau recadré sur le bureau */
+const SHOT = path.join(__dirname, '..', 'assets', 'fisc-bureau.jpg');
+const shotBlock = fs.existsSync(SHOT)
+  ? `<div class="shot"><img src="REL_TOKEN/assets/fisc-bureau.jpg" alt=""></div>`
+  : `<div class="shot-ph">PHOTO BUREAU</div>`;
+
 /* --- la case à cocher : carré 72px, coche épaisse tracée d'un geste --- */
-const cbox = (checked, size = 72, style = '') => `
+const cbox = (checked, size = 72, style = '', solid = false) => `
 <svg class="cbox" width="${size}" height="${size}" viewBox="0 0 72 72" aria-hidden="true" style="${style}">
-  <rect x="2.5" y="2.5" width="67" height="67" rx="16" fill="none" stroke="${B}" stroke-width="3"/>
+  <rect x="2.5" y="2.5" width="67" height="67" rx="16"
+        fill="${solid ? '#F7F8FC' : 'none'}" stroke="${B}" stroke-width="3"/>
   ${checked ? `<path d="M17,38 L30,52 L56,19" fill="none" stroke="${B}" stroke-width="6"
        stroke-linecap="round" stroke-linejoin="round"/>` : ''}
 </svg>`;
@@ -65,15 +75,16 @@ module.exports = { DECOR, slides: [
         <span class="blue ul-blue">PRIORITÉ</span> du fisc.
       </h1>
       <p class="body muted" style="margin-top:40px">Expatrié français ? Compte tes cases.</p>
-      <div class="cbox-fan" style="position:absolute;left:84px;bottom:190px">
-        ${cbox(true, 64, 'transform:rotate(-9deg) translateY(14px)')}
-        ${cbox(true, 64, 'transform:rotate(-5deg) translateY(6px)')}
-        ${cbox(true, 64, 'transform:rotate(-2deg)')}
-        ${cbox(false, 64, 'transform:rotate(2deg)')}
-        ${cbox(false, 64, 'transform:rotate(5deg) translateY(6px)')}
-        ${cbox(false, 64, 'transform:rotate(9deg) translateY(14px)')}
+      ${shotBlock}
+      <div class="cbox-fan" style="position:absolute;left:112px;top:748px">
+        ${cbox(true, 64, 'transform:rotate(-9deg) translateY(14px)', true)}
+        ${cbox(true, 64, 'transform:rotate(-5deg) translateY(6px)', true)}
+        ${cbox(true, 64, 'transform:rotate(-2deg)', true)}
+        ${cbox(false, 64, 'transform:rotate(2deg)', true)}
+        ${cbox(false, 64, 'transform:rotate(5deg) translateY(6px)', true)}
+        ${cbox(false, 64, 'transform:rotate(9deg) translateY(14px)', true)}
       </div>
-      <div class="swipe" style="position:absolute;bottom:80px;right:80px">
+      <div class="swipe swipe--plate" style="position:absolute;top:758px;right:112px">
         <span class="swipe-txt">SWIPE</span><span class="swipe-dot">&rarr;</span>
       </div>`
   },
