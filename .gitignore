@@ -16,3 +16,4 @@ transcript.txt
 __pycache__/
 *.mp3
 *.mov
+scratch/
