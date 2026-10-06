@@ -1,0 +1,56 @@
+{
+ "file": "draft.mp4",
+ "size": "540x960",
+ "fps": 60.0,
+ "static": {
+  "frames": 3592,
+  "longest_s": 0.05,
+  "over_1_2s": []
+ },
+ "captions": {
+  "matched": 173,
+  "shown": 192,
+  "median_ms": 10,
+  "p90_ms": 33,
+  "bias_ms": 3,
+  "under_60ms": 0.948
+ },
+ "effects_lead": [
+  {
+   "element": "tracable",
+   "start_s": 22.133,
+   "word_s": 22.3,
+   "lead_ms": 167
+  },
+  {
+   "element": "onlyfans1",
+   "start_s": 2.767,
+   "word_s": 2.92,
+   "lead_ms": 153
+  },
+  {
+   "element": "unan",
+   "start_s": 40.417,
+   "word_s": 40.54,
+   "lead_ms": 123
+  },
+  {
+   "element": "cotis",
+   "start_s": 34.017,
+   "word_s": 34.16,
+   "lead_ms": 143
+  },
+  {
+   "element": "impots",
+   "start_s": 0.867,
+   "word_s": 1.02,
+   "lead_ms": 153
+  }
+ ],
+ "loudness": {
+  "I_lufs": -14.0,
+  "LRA": 2.8,
+  "true_peak_dbfs": -2.1,
+  "noise_floor_p5_dbfs": -41.5
+ }
+}

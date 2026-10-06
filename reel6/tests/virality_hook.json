@@ -1,0 +1,46 @@
+{
+ "global_scores_by_frame": [
+  0.403624,
+  0.348321,
+  0.359789,
+  0.366911,
+  0.375532,
+  0.387916,
+  0.379361,
+  0.399976,
+  0.392736,
+  0.411968,
+  0.4351,
+  0.446916,
+  0.444991,
+  0.445631,
+  0.429821,
+  0.43486
+ ],
+ "analysis_score": 40,
+ "peak_frame_index": 11,
+ "peak_second": 11,
+ "peak_score": 0.446916,
+ "sustain_score": 0.985517,
+ "scores": {
+  "overall_score": 47,
+  "brain_engagement": 40,
+  "hook_score": 30,
+  "viral_potential": 48,
+  "sustain": 99,
+  "peak_second": 11,
+  "peak_frame_index": 11,
+  "peak_score": 0.446916
+ },
+ "score_details": {
+  "hook_window_seconds": [
+   0,
+   3
+  ],
+  "normalization": "scores are normalized prediction proxies in range 0..100",
+  "disclaimer": "Predictive proxy metrics, not guaranteed performance or clinical measures."
+ },
+ "job_id": "d613ce85-ca76-4914-aaee-7dfc0c64961b",
+ "dashboard": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261006_190953_d613ce85-ca76-4914-aaee-7dfc0c64961b.html",
+ "input": "hook16.mp4 = 0–15,9 s du master 60 fps (media e7a56e9c-e683-4831-8fc4-9c1aa2e82ca1) ; Virality Predictor refuse les vidéos > 16 s"
+}

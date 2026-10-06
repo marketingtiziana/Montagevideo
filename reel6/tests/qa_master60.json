@@ -1,0 +1,56 @@
+{
+ "file": "master60.mp4",
+ "size": "1080x1920",
+ "fps": 60.0,
+ "static": {
+  "frames": 3546,
+  "longest_s": 0.03,
+  "over_1_2s": []
+ },
+ "captions": {
+  "matched": 172,
+  "shown": 192,
+  "median_ms": 10,
+  "p90_ms": 30,
+  "bias_ms": 2,
+  "under_60ms": 0.948
+ },
+ "effects_lead": [
+  {
+   "element": "tracable",
+   "start_s": 21.367,
+   "word_s": 21.52,
+   "lead_ms": 153
+  },
+  {
+   "element": "onlyfans1",
+   "start_s": 2.767,
+   "word_s": 2.92,
+   "lead_ms": 153
+  },
+  {
+   "element": "unan",
+   "start_s": 39.65,
+   "word_s": 39.76,
+   "lead_ms": 110
+  },
+  {
+   "element": "cotis",
+   "start_s": 33.25,
+   "word_s": 33.38,
+   "lead_ms": 130
+  },
+  {
+   "element": "impots",
+   "start_s": 0.867,
+   "word_s": 1.02,
+   "lead_ms": 153
+  }
+ ],
+ "loudness": {
+  "I_lufs": -14.0,
+  "LRA": 2.9,
+  "true_peak_dbfs": -1.8,
+  "noise_floor_p5_dbfs": -40.5
+ }
+}

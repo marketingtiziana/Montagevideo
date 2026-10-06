@@ -5,7 +5,7 @@ import json, os
 FPS, PAD, END = 60, 0.10, 87.78
 DROP = [
     (7.30, 8.30),     # « Tu démarres. »
-    (13.04, 15.40),   # « et tu te dis, c'est mon argent, je l'ai gagné. »
+    (13.04, 16.20),   # « et tu te dis, c'est mon argent, je l'ai gagné. » (whisper ends it at 15.4; the energy shows « gagné » until 16.1)
     (20.62, 22.98),   # « C'est de l'argent qui vient de l'étranger. »
     (26.22, 29.40),   # « Et la plateforme garde une trace de tout ce qu'elle te verse. »
     (31.40, 32.98),   # « que ça passe sous le radar, »
@@ -34,7 +34,8 @@ def remap(x):
         if x <= e: return round(acc + x - s, 3)
         acc += e - s
     return round(acc, 3)
-dropped = lambda x: any(a <= x < b for a, b in DROP)
+DROP_WORDS = [(a, 8.20) if a == 7.30 else (a, b) for a, b in DROP]   # whisper puts « Au » at 8.26 (it is spoken after the 8.17–8.63 pause)
+dropped = lambda x: any(a <= x < b for a, b in DROP_WORDS)
 DUR = round(sum(e - s for s, e in keep), 3)
 if __name__ == "__main__":
     T = json.load(open("transcript.json"))

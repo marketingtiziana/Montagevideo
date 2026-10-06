@@ -1,4 +1,4 @@
-# Reel 6 — « Impôts & OnlyFans » : plan d'illustration (à valider)
+# Reel 6 — « Impôts & OnlyFans » : plan d'illustration (validé « ok », version finale en section 7)
 
 **Source** : 1080×1920, 59,94 fps, 88,4 s. Elle parle face caméra, plein cadre, micro devant elle.
 **Analyse** : faster-whisper large-v3 mot à mot (`transcript.json`), visage mediapipe FaceLandmarker 2×/s (`faces_raw.json`, puis lissage 0,6 s sur la timeline montée dans `face_track.json`), silences `-30 dB / 0,35 s` (`silences.txt`).
@@ -89,7 +89,7 @@ En retirant seulement les silences (avec 100 ms de respiration gardées), le mon
   - Mockups (cartes, jauges, checklist, notification générique) : purement illustratifs. Aucun faux relevé, aucun faux montant, aucun faux avis, aucune UI d'OnlyFans inventée.
 - **Chiffres affichés** : uniquement ceux qu'elle prononce (5 000, 10 000, 20 000 par mois, la moitié ≈ 50 %, 1 an, 100 %).
 
-## 6. À valider (une seule fois)
+## 6. Validé (« ok ») : coupes, palette, CTA sans handle
 
 1. **Coupes** : la liste de la section 1 pour tenir en 59,9 s.
 2. **Palette** (non fournie) :
@@ -100,3 +100,28 @@ En retirant seulement les silences (avec 100 ms de respiration gardées), le mon
    J'écarte volontairement le bleu OnlyFans, pour qu'on ne lise pas un partenariat.
 3. **Marque / handle pour la carte CTA** : non fournis. Sans réponse, la carte affiche seulement « Commande ton diagnostic » et le lien en bio.
 4. **CTA** : elle dit « commande diagnostic ». Je sous-titre exactement ce qu'elle dit, et la carte affiche « Commande ton diagnostic ».
+
+## 7. Version finale livrée (ce qui diffère du plan ci-dessus)
+
+Les temps des sections 1 et 3 sont ceux du plan validé. Le montage final fait **59,1 s**, à cause d'une coupe supplémentaire (voir le point 1 ci-dessous). Tous les déclencheurs ont donc glissé de 0 à 0,8 s. `gen_edit.py` les retrouve désormais par leur horaire dans la vidéo **source**, puis les convertit en temps de timeline. Chaque élément démarre 150 ms avant son mot.
+
+**Mots déclencheurs finaux (timeline, s)** :
+- impôts 1,02 · OnlyFans 2,92 · mal 6,30 · Au début 6,75 · centaines 7,68
+- 5 000 9,42 · 10 000 9,88 · 20 000 10,32 · Première 11,25 · OnlyFans 12,65 · Royaume-Uni 14,27
+- Mais 15,07 · France 16,05 · déclares 16,77 · discret 19,58 · non 20,12 · traçable 21,52
+- Deuxième 22,68 · fisc 24,22 · professionnelle 26,25 · déclaré 27,78 · statut 29,38 · mal 30,72
+- l'impôt 31,72 · c'est 32,93 · cotisations 33,40 · disparaître 36,90 · moitié 37,98 · un an 39,80
+- réclame 40,83 · coule 44,25 · fraudé 46,23 · moitié 48,55 · n'importe 51,08
+- structurer 53,48 · discrète 55,33 · 100 % 56,13 · commande 58,12
+
+**Écarts au plan**
+
+1. **Coupe en plus** : le reste de « …je l'ai **gagné** » restait audible après la 1ʳᵉ coupe. La coupe source va maintenant de 13,04 s à 16,20 s. Durée : 59,1 s au lieu de 59,9 s.
+2. **Punch-ins 107 %** : 15 au lieu de 4, ancrés entre les yeux et la bouche. Ils tombent sur OnlyFans, mal, 20 000, Royaume-Uni, non, fisc, statut, mal, cotisations, moitié, réclame, coule, fraudé, 100 % et commande. Ils tiennent le rythme d'un événement toutes les 2–3 s sur les passages sans fenêtre.
+3. **Bloc 17** : la jauge part de « ≈ 100 % » et descend en roll jusqu'à « ≈ 50 % » sur « moitié ». C'est plus lisible qu'une jauge seule.
+4. **Bloc 23 (B-roll)** : femme au balcon avec un laptop (Pexels 12691932) au lieu de « terrasse face à la mer ». Le cadrage 9:16 natif évite un recadrage.
+5. **Bloc 25 (CTA)** : « Commande ton diagnostic » + « lien en bio » (pas de handle, validé).
+6. **Mise en page** :
+   - fenêtres macOS / navigateur en 820×520, entre y 790 et 1310, avec les sous-titres à y 1420 pendant qu'elles sont à l'écran ;
+   - iPhone à l'échelle 0,95 sur la droite (x 676–1046), avec les sous-titres dans une colonne à gauche.
+7. **Sous-titres** : chaque mot clé réserve 20 % de largeur en plus. Le pop à 1,25 ne chevauche donc jamais ses voisins (défaut vu sur le brouillon : « l'Étatréclame », « lescotisations »).
