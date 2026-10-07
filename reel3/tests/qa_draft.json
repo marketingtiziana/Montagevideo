@@ -1,0 +1,208 @@
+{
+ "format": {
+  "video": [
+   "h264",
+   "540",
+   "960",
+   "1951",
+   "30"
+  ],
+  "audio": [
+   "aac",
+   "48000",
+   null
+  ],
+  "duration": 54.0,
+  "faststart": true
+ },
+ "loudness": {
+  "I_LUFS": -14.1,
+  "LRA": 7.3,
+  "true_peak_dBFS": 0.2
+ },
+ "motion": {
+  "longest_still_s": 1.0,
+  "median_diff": 2.508
+ },
+ "cuts": {
+  "detected": [
+   2.0,
+   4.0,
+   6.033,
+   8.0,
+   10.0,
+   12.0,
+   14.0,
+   16.0,
+   20.8,
+   23.6,
+   26.4,
+   29.2,
+   32.0,
+   34.8,
+   37.6,
+   40.4,
+   43.2,
+   46.0,
+   52.433,
+   53.533
+  ],
+  "vs_script": [
+   {
+    "planned": 2.0,
+    "detected": 2.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 4.0,
+    "detected": 4.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 6.0,
+    "detected": 6.033,
+    "err_ms": 33
+   },
+   {
+    "planned": 8.0,
+    "detected": 8.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 10.0,
+    "detected": 10.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 12.0,
+    "detected": 12.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 14.0,
+    "detected": 14.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 16.0,
+    "detected": 16.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 18.0,
+    "detected": null,
+    "err_ms": null
+   },
+   {
+    "planned": 20.8,
+    "detected": 20.8,
+    "err_ms": 0
+   },
+   {
+    "planned": 23.6,
+    "detected": 23.6,
+    "err_ms": 0
+   },
+   {
+    "planned": 26.4,
+    "detected": 26.4,
+    "err_ms": 0
+   },
+   {
+    "planned": 29.2,
+    "detected": 29.2,
+    "err_ms": 0
+   },
+   {
+    "planned": 32.0,
+    "detected": 32.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 34.8,
+    "detected": 34.8,
+    "err_ms": 0
+   },
+   {
+    "planned": 37.6,
+    "detected": 37.6,
+    "err_ms": 0
+   },
+   {
+    "planned": 40.4,
+    "detected": 40.4,
+    "err_ms": 0
+   },
+   {
+    "planned": 43.2,
+    "detected": 43.2,
+    "err_ms": 0
+   },
+   {
+    "planned": 46.0,
+    "detected": 46.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 49.6,
+    "detected": null,
+    "err_ms": null
+   },
+   {
+    "planned": 52.4,
+    "detected": 52.433,
+    "err_ms": 33
+   }
+  ]
+ },
+ "audio_hits": [
+  {
+   "screen": 9,
+   "cut": 16.0,
+   "onset": 16.0,
+   "err_ms": 0
+  },
+  {
+   "screen": 10,
+   "cut": 18.0,
+   "onset": 18.01,
+   "err_ms": 10
+  },
+  {
+   "screen": 11,
+   "cut": 20.8,
+   "onset": 20.8,
+   "err_ms": 0
+  },
+  {
+   "screen": 12,
+   "cut": 23.6,
+   "onset": 23.6,
+   "err_ms": 0
+  },
+  {
+   "screen": 13,
+   "cut": 26.4,
+   "onset": 26.4,
+   "err_ms": 0
+  },
+  {
+   "screen": 14,
+   "cut": 29.2,
+   "onset": 29.2,
+   "err_ms": 0
+  },
+  {
+   "screen": 15,
+   "cut": 32.0,
+   "onset": 32.0,
+   "err_ms": 0
+  },
+  {
+   "screen": 21,
+   "cut": 49.6,
+   "onset": 49.6,
+   "err_ms": 0
+  }
+ ]
+}

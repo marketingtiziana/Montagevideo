@@ -1,0 +1,2038 @@
+{
+ "T": {
+  "impots": 1.0166666666666666,
+  "onlyfans1": 2.9166666666666665,
+  "mal1": 6.3,
+  "debut": 6.75,
+  "centaines": 7.683333333333334,
+  "n5": 9.416666666666666,
+  "n10": 9.883333333333333,
+  "n20": 10.316666666666666,
+  "premiere": 11.25,
+  "onlyfans2": 12.65,
+  "ru": 14.266666666666667,
+  "mais": 15.066666666666666,
+  "france": 16.05,
+  "declares": 16.766666666666666,
+  "discret": 19.583333333333332,
+  "non": 20.116666666666667,
+  "tracable": 21.516666666666666,
+  "deuxieme": 22.683333333333334,
+  "fisc": 24.216666666666665,
+  "pro": 26.25,
+  "declare": 27.783333333333335,
+  "statut": 29.383333333333333,
+  "mal2": 30.716666666666665,
+  "impot": 31.716666666666665,
+  "cest": 32.93333333333333,
+  "cotis": 33.4,
+  "dispa": 36.9,
+  "moitie1": 37.983333333333334,
+  "unan": 39.8,
+  "reclame": 40.833333333333336,
+  "coule": 44.25,
+  "fraude": 46.233333333333334,
+  "moitie2": 48.55,
+  "importe": 51.083333333333336,
+  "structurer": 53.483333333333334,
+  "discrete": 55.333333333333336,
+  "cent": 56.13333333333333,
+  "comment": 57.63333333333333,
+  "commande": 58.11666666666667
+ },
+ "caps": [
+  {
+   "at": 0.0,
+   "dur": 1.5167,
+   "mode": "win",
+   "w": [
+    {
+     "t": "Comment",
+     "w": 403,
+     "on": 0.0,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "déclarer",
+     "w": 339,
+     "on": 0.38,
+     "off": 0.9,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tes",
+     "w": 130,
+     "on": 0.9,
+     "off": 1.02,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "impôts",
+     "w": 325,
+     "on": 1.02,
+     "off": 1.52,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 1.5166666666666666,
+   "dur": 1.2667,
+   "mode": "win",
+   "w": [
+    {
+     "t": "quand",
+     "w": 265,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.14,
+     "off": 0.34,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "exploses",
+     "w": 358,
+     "on": 0.34,
+     "off": 1.08,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "grâce",
+     "w": 233,
+     "on": 1.08,
+     "off": 1.26,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 2.783333333333333,
+   "dur": 0.7167,
+   "mode": "win",
+   "w": [
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "OnlyFans ?",
+     "w": 449,
+     "on": 0.14,
+     "off": 0.72,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 3.5,
+   "dur": 0.5,
+   "mode": "win",
+   "w": [
+    {
+     "t": "Je",
+     "w": 99,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "vais",
+     "w": 165,
+     "on": 0.097,
+     "off": 0.217,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "te",
+     "w": 89,
+     "on": 0.217,
+     "off": 0.317,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "dire",
+     "w": 166,
+     "on": 0.297,
+     "off": 0.497,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 4.0,
+   "dur": 0.9333,
+   "mode": "win",
+   "w": [
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "truc",
+     "w": 173,
+     "on": 0.12,
+     "off": 0.42,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.42,
+     "off": 0.56,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "personne",
+     "w": 386,
+     "on": 0.56,
+     "off": 0.94,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 4.933333333333334,
+   "dur": 0.95,
+   "mode": "base",
+   "w": [
+    {
+     "t": "ne",
+     "w": 110,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "t'explique",
+     "w": 404,
+     "on": 0.14,
+     "off": 0.62,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "et",
+     "w": 91,
+     "on": 0.62,
+     "off": 0.8,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "ça",
+     "w": 101,
+     "on": 0.8,
+     "off": 0.94,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 5.883333333333334,
+   "dur": 0.8667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "va",
+     "w": 101,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "te",
+     "w": 89,
+     "on": 0.14,
+     "off": 0.24,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "faire",
+     "w": 190,
+     "on": 0.22,
+     "off": 0.42,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "mal",
+     "w": 179,
+     "on": 0.42,
+     "off": 0.873,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 6.75,
+   "dur": 0.4833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Au",
+     "w": 119,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "début",
+     "w": 247,
+     "on": 0.087,
+     "off": 0.487,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 7.233333333333333,
+   "dur": 1.2667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.26,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "quelques",
+     "w": 378,
+     "on": 0.26,
+     "off": 0.44,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "centaines",
+     "w": 399,
+     "on": 0.44,
+     "off": 0.9,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "d'euros",
+     "w": 302,
+     "on": 0.9,
+     "off": 1.26,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 8.5,
+   "dur": 0.65,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Puis",
+     "w": 181,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "ça",
+     "w": 101,
+     "on": 0.18,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "part",
+     "w": 175,
+     "on": 0.38,
+     "off": 0.66,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 9.15,
+   "dur": 0.7333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.0,
+     "off": 0.26,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "5 000",
+     "w": 261,
+     "on": 0.26,
+     "off": 0.72,
+     "key": true,
+     "shake": false,
+     "num": [
+      5,
+      " 000"
+     ]
+    }
+   ]
+  },
+  {
+   "at": 9.883333333333333,
+   "dur": 0.4333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "10 000",
+     "w": 302,
+     "on": 0.0,
+     "off": 0.44,
+     "key": true,
+     "shake": false,
+     "num": [
+      10,
+      " 000"
+     ]
+    }
+   ]
+  },
+  {
+   "at": 10.316666666666666,
+   "dur": 1.25,
+   "mode": "base",
+   "w": [
+    {
+     "t": "20 000",
+     "w": 318,
+     "on": 0.0,
+     "off": 0.46,
+     "key": true,
+     "shake": false,
+     "num": [
+      20,
+      " 000"
+     ]
+    },
+    {
+     "t": "par",
+     "w": 141,
+     "on": 0.46,
+     "off": 0.8,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "mois",
+     "w": 202,
+     "on": 0.8,
+     "off": 0.933,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "Première",
+     "w": 375,
+     "on": 0.933,
+     "off": 1.246,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 11.566666666666666,
+   "dur": 1.0833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "chose",
+     "w": 246,
+     "on": 0.0,
+     "off": 0.28,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.28,
+     "off": 0.5,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "comprendre",
+     "w": 501,
+     "on": 0.5,
+     "off": 1.08,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 12.65,
+   "dur": 1.2333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "OnlyFans",
+     "w": 432,
+     "on": 0.0,
+     "off": 0.62,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "te",
+     "w": 89,
+     "on": 0.62,
+     "off": 0.937,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "paye",
+     "w": 200,
+     "on": 0.937,
+     "off": 1.237,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 13.883333333333333,
+   "dur": 1.1833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "depuis",
+     "w": 278,
+     "on": 0.0,
+     "off": 0.16,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.16,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "Royaume-Uni",
+     "w": 621,
+     "on": 0.38,
+     "off": 1.193,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 15.066666666666666,
+   "dur": 0.6667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Mais",
+     "w": 192,
+     "on": 0.0,
+     "off": 0.4,
+     "key": false,
+     "shake": true
+    },
+    {
+     "t": "si",
+     "w": 73,
+     "on": 0.4,
+     "off": 0.54,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.54,
+     "off": 0.66,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 15.733333333333333,
+   "dur": 0.7833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "vis",
+     "w": 120,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.18,
+     "off": 0.32,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "France",
+     "w": 316,
+     "on": 0.32,
+     "off": 0.78,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 16.516666666666666,
+   "dur": 0.6833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.0,
+     "off": 0.154,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.154,
+     "off": 0.254,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "déclares",
+     "w": 347,
+     "on": 0.254,
+     "off": 0.694,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 17.2,
+   "dur": 0.9,
+   "mode": "base",
+   "w": [
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.22,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "France",
+     "w": 316,
+     "on": 0.22,
+     "off": 0.9,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 18.1,
+   "dur": 0.9833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Donc",
+     "w": 219,
+     "on": 0.0,
+     "off": 0.46,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "l'idée",
+     "w": 223,
+     "on": 0.46,
+     "off": 0.72,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.72,
+     "off": 0.98,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 19.083333333333332,
+   "dur": 1.0333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.5,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "discret",
+     "w": 323,
+     "on": 0.5,
+     "off": 1.036,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 20.116666666666667,
+   "dur": 0.4333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "non",
+     "w": 164,
+     "on": 0.0,
+     "off": 0.42,
+     "key": false,
+     "shake": true
+    }
+   ]
+  },
+  {
+   "at": 20.55,
+   "dur": 0.6,
+   "mode": "base",
+   "w": [
+    {
+     "t": "oublie",
+     "w": 258,
+     "on": 0.0,
+     "off": 0.6,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 21.15,
+   "dur": 1.3667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "traçable",
+     "w": 381,
+     "on": 0.38,
+     "off": 1.38,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 22.683333333333334,
+   "dur": 1.05,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Deuxième",
+     "w": 416,
+     "on": 0.0,
+     "off": 0.52,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "chose",
+     "w": 246,
+     "on": 0.52,
+     "off": 1.053,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 23.733333333333334,
+   "dur": 1.05,
+   "mode": "win",
+   "w": [
+    {
+     "t": "aux",
+     "w": 154,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "yeux",
+     "w": 201,
+     "on": 0.084,
+     "off": 0.324,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "du",
+     "w": 113,
+     "on": 0.324,
+     "off": 0.484,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "fisc",
+     "w": 169,
+     "on": 0.484,
+     "off": 1.044,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 24.783333333333335,
+   "dur": 0.8167,
+   "mode": "win",
+   "w": [
+    {
+     "t": "OnlyFans",
+     "w": 432,
+     "on": 0.0,
+     "off": 0.82,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 25.6,
+   "dur": 1.5167,
+   "mode": "win",
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.2,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "une",
+     "w": 162,
+     "on": 0.2,
+     "off": 0.3,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "activité",
+     "w": 310,
+     "on": 0.28,
+     "off": 0.66,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "professionnelle",
+     "w": 708,
+     "on": 0.66,
+     "off": 1.52,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 27.116666666666667,
+   "dur": 1.1167,
+   "mode": "base",
+   "w": [
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.0,
+     "off": 0.3,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "dois",
+     "w": 176,
+     "on": 0.3,
+     "off": 0.52,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "être",
+     "w": 171,
+     "on": 0.52,
+     "off": 0.66,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "déclaré",
+     "w": 306,
+     "on": 0.66,
+     "off": 1.12,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 28.233333333333334,
+   "dur": 1.8833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "avec",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.5,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "un",
+     "w": 113,
+     "on": 0.5,
+     "off": 0.76,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "vrai",
+     "w": 157,
+     "on": 0.76,
+     "off": 1.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "statut",
+     "w": 281,
+     "on": 1.14,
+     "off": 1.88,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 30.116666666666667,
+   "dur": 1.1,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Ce",
+     "w": 111,
+     "on": 0.0,
+     "off": 0.26,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "qui",
+     "w": 136,
+     "on": 0.26,
+     "off": 0.42,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "fait",
+     "w": 143,
+     "on": 0.42,
+     "off": 0.6,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "mal",
+     "w": 179,
+     "on": 0.6,
+     "off": 1.1,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 31.216666666666665,
+   "dur": 0.9667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "ce",
+     "w": 102,
+     "on": 0.0,
+     "off": 0.2,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "n'est",
+     "w": 201,
+     "on": 0.2,
+     "off": 0.3,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "pas",
+     "w": 148,
+     "on": 0.3,
+     "off": 0.5,
+     "key": false,
+     "shake": true
+    },
+    {
+     "t": "l'impôt",
+     "w": 288,
+     "on": 0.5,
+     "off": 0.96,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 32.18333333333333,
+   "dur": 0.75,
+   "mode": "base",
+   "w": [
+    {
+     "t": "sur",
+     "w": 135,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.14,
+     "off": 0.24,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "revenu",
+     "w": 287,
+     "on": 0.24,
+     "off": 0.76,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 32.93333333333333,
+   "dur": 1.8167,
+   "mode": "win",
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.313,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "les",
+     "w": 122,
+     "on": 0.313,
+     "off": 0.453,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "cotisations",
+     "w": 508,
+     "on": 0.453,
+     "off": 1.113,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "sociales",
+     "w": 328,
+     "on": 1.113,
+     "off": 1.817,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 34.75,
+   "dur": 1.0833,
+   "mode": "win",
+   "w": [
+    {
+     "t": "entre",
+     "w": 224,
+     "on": 0.0,
+     "off": 0.36,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "l'impôt",
+     "w": 288,
+     "on": 0.36,
+     "off": 0.98,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "et",
+     "w": 91,
+     "on": 0.98,
+     "off": 1.08,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 35.833333333333336,
+   "dur": 0.5833,
+   "mode": "win",
+   "w": [
+    {
+     "t": "les",
+     "w": 122,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "charges",
+     "w": 328,
+     "on": 0.12,
+     "off": 0.58,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 36.416666666666664,
+   "dur": 0.4833,
+   "mode": "win",
+   "w": [
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "peux",
+     "w": 207,
+     "on": 0.12,
+     "off": 0.28,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "voir",
+     "w": 161,
+     "on": 0.28,
+     "off": 0.48,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 36.9,
+   "dur": 0.95,
+   "mode": "base",
+   "w": [
+    {
+     "t": "disparaître",
+     "w": 498,
+     "on": 0.0,
+     "off": 0.5,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "quasiment",
+     "w": 437,
+     "on": 0.5,
+     "off": 0.96,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 37.85,
+   "dur": 0.9833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "La",
+     "w": 102,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "moitié",
+     "w": 301,
+     "on": 0.12,
+     "off": 0.7,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.7,
+     "off": 0.88,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "ce",
+     "w": 102,
+     "on": 0.88,
+     "off": 0.98,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 38.833333333333336,
+   "dur": 0.6333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.12,
+     "off": 0.22,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "gagnes",
+     "w": 304,
+     "on": 0.22,
+     "off": 0.636,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 39.46666666666667,
+   "dur": 0.6,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Et",
+     "w": 93,
+     "on": 0.0,
+     "off": 0.32,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "un",
+     "w": 113,
+     "on": 0.32,
+     "off": 0.44,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "an",
+     "w": 108,
+     "on": 0.44,
+     "off": 0.6,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 40.06666666666667,
+   "dur": 0.5333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "plus",
+     "w": 177,
+     "on": 0.0,
+     "off": 0.16,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tard",
+     "w": 173,
+     "on": 0.16,
+     "off": 0.52,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 40.6,
+   "dur": 0.9167,
+   "mode": "phone",
+   "w": [
+    {
+     "t": "l'État",
+     "w": 214,
+     "on": 0.0,
+     "off": 0.24,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "réclame",
+     "w": 376,
+     "on": 0.24,
+     "off": 0.54,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "sa",
+     "w": 97,
+     "on": 0.54,
+     "off": 0.68,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "part",
+     "w": 175,
+     "on": 0.68,
+     "off": 0.92,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 41.516666666666666,
+   "dur": 1.05,
+   "mode": "phone",
+   "w": [
+    {
+     "t": "sur",
+     "w": 135,
+     "on": 0.0,
+     "off": 0.48,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "l'argent",
+     "w": 317,
+     "on": 0.48,
+     "off": 0.78,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.78,
+     "off": 0.98,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.98,
+     "off": 1.08,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 42.56666666666667,
+   "dur": 1.0333,
+   "mode": "phone",
+   "w": [
+    {
+     "t": "as",
+     "w": 97,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "déjà",
+     "w": 180,
+     "on": 0.1,
+     "off": 0.28,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "dépensé",
+     "w": 351,
+     "on": 0.28,
+     "off": 1.02,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 43.6,
+   "dur": 1.0833,
+   "mode": "phone",
+   "w": [
+    {
+     "t": "C'est",
+     "w": 203,
+     "on": 0.0,
+     "off": 0.284,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "ça",
+     "w": 101,
+     "on": 0.284,
+     "off": 0.464,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "qui",
+     "w": 136,
+     "on": 0.464,
+     "off": 0.664,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "coule",
+     "w": 257,
+     "on": 0.664,
+     "off": 1.084,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 44.68333333333333,
+   "dur": 0.8,
+   "mode": "base",
+   "w": [
+    {
+     "t": "les",
+     "w": 122,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "créatrices",
+     "w": 405,
+     "on": 0.14,
+     "off": 0.8,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 45.483333333333334,
+   "dur": 0.6,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Pas",
+     "w": 151,
+     "on": 0.0,
+     "off": 0.28,
+     "key": false,
+     "shake": true
+    },
+    {
+     "t": "parce",
+     "w": 233,
+     "on": 0.28,
+     "off": 0.46,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "qu'elles",
+     "w": 314,
+     "on": 0.46,
+     "off": 0.6,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 46.083333333333336,
+   "dur": 0.6333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "ont",
+     "w": 145,
+     "on": 0.0,
+     "off": 0.16,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "fraudé",
+     "w": 305,
+     "on": 0.16,
+     "off": 0.64,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 46.71666666666667,
+   "dur": 1.1667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "parce",
+     "w": 233,
+     "on": 0.0,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.38,
+     "off": 0.52,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "personne",
+     "w": 386,
+     "on": 0.52,
+     "off": 1.02,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "ne",
+     "w": 110,
+     "on": 1.02,
+     "off": 1.16,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 47.88333333333333,
+   "dur": 0.55,
+   "mode": "base",
+   "w": [
+    {
+     "t": "leur",
+     "w": 166,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "a",
+     "w": 56,
+     "on": 0.12,
+     "off": 0.22,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "dit",
+     "w": 118,
+     "on": 0.22,
+     "off": 0.42,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.42,
+     "off": 0.56,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 48.43333333333333,
+   "dur": 1.1667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "la",
+     "w": 80,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "moitié",
+     "w": 301,
+     "on": 0.12,
+     "off": 0.42,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "n'était",
+     "w": 263,
+     "on": 0.42,
+     "off": 0.68,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "jamais",
+     "w": 270,
+     "on": 0.68,
+     "off": 1.16,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 49.6,
+   "dur": 0.65,
+   "mode": "base",
+   "w": [
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "elles",
+     "w": 193,
+     "on": 0.18,
+     "off": 0.66,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 50.25,
+   "dur": 0.75,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Tu",
+     "w": 108,
+     "on": 0.0,
+     "off": 0.22,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "peux",
+     "w": 207,
+     "on": 0.22,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "bosser",
+     "w": 274,
+     "on": 0.38,
+     "off": 0.74,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 51.0,
+   "dur": 0.7,
+   "mode": "base",
+   "w": [
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "n'importe",
+     "w": 398,
+     "on": 0.08,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "où",
+     "w": 111,
+     "on": 0.38,
+     "off": 0.7,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 51.7,
+   "dur": 1.2333,
+   "mode": "base",
+   "w": [
+    {
+     "t": "C'est",
+     "w": 203,
+     "on": 0.0,
+     "off": 0.24,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "exactement",
+     "w": 488,
+     "on": 0.24,
+     "off": 0.5,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.5,
+     "off": 0.78,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "profil",
+     "w": 222,
+     "on": 0.78,
+     "off": 1.24,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 52.93333333333333,
+   "dur": 1.15,
+   "mode": "base",
+   "w": [
+    {
+     "t": "qui",
+     "w": 136,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "gagne",
+     "w": 263,
+     "on": 0.12,
+     "off": 0.38,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.38,
+     "off": 0.54,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "structurer",
+     "w": 414,
+     "on": 0.54,
+     "off": 1.14,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 54.083333333333336,
+   "dur": 1.7667,
+   "mode": "base",
+   "w": [
+    {
+     "t": "proprement",
+     "w": 489,
+     "on": 0.0,
+     "off": 0.6,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.6,
+     "off": 0.96,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "restant",
+     "w": 296,
+     "on": 0.96,
+     "off": 1.26,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "discrète",
+     "w": 376,
+     "on": 1.26,
+     "off": 1.78,
+     "key": true,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 55.85,
+   "dur": 1.35,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Et",
+     "w": 93,
+     "on": 0.0,
+     "off": 0.28,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "100 %",
+     "w": 262,
+     "on": 0.28,
+     "off": 0.96,
+     "key": true,
+     "shake": false,
+     "num": [
+      100,
+      " %"
+     ]
+    },
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.96,
+     "off": 1.06,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "règle",
+     "w": 214,
+     "on": 1.04,
+     "off": 1.34,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 57.2,
+   "dur": 0.3167,
+   "mode": "base",
+   "w": [
+    {
+     "t": "Si",
+     "w": 81,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.1,
+     "off": 0.2,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "veux",
+     "w": 201,
+     "on": 0.18,
+     "off": 0.32,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 57.516666666666666,
+   "dur": 0.6,
+   "mode": "base",
+   "w": [
+    {
+     "t": "savoir",
+     "w": 248,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false
+    },
+    {
+     "t": "comment",
+     "w": 395,
+     "on": 0.12,
+     "off": 0.6,
+     "key": false,
+     "shake": false
+    }
+   ]
+  },
+  {
+   "at": 58.11666666666667,
+   "dur": 0.9833,
+   "mode": "base",
+   "w": [
+    {
+     "t": "commande",
+     "w": 521,
+     "on": 0.0,
+     "off": 0.44,
+     "key": true,
+     "shake": false
+    },
+    {
+     "t": "diagnostic",
+     "w": 488,
+     "on": 0.44,
+     "off": 0.983,
+     "key": true,
+     "shake": false
+    }
+   ]
+  }
+ ]
+}

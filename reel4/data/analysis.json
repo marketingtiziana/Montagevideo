@@ -1,0 +1,91 @@
+{
+ "_method": "Higgsfield video_analysis_create on every conformed shot (ids in data/jobs.json 'analysis'); verdict = reviewed for artefacts, faces, logos, location consistency",
+ "s01": {
+  "verdict": "ok",
+  "note": "night aerial city lights, no landmark, no faces"
+ },
+ "s02a": {
+  "verdict": "ok",
+  "note": "Burj Khalifa; small corporate signage on surrounding towers (distant)"
+ },
+ "s02b": {
+  "verdict": "ok",
+  "note": "Empire State Building at sunset, no people"
+ },
+ "s03": {
+  "verdict": "ok",
+  "note": "desk, papers, a hand with a watch enters; no face"
+ },
+ "s04": {
+  "verdict": "ok",
+  "note": "Tallinn old town aerial, overcast"
+ },
+ "s05": {
+  "verdict": "ok",
+  "note": "Tallinn towers and walls, autumn"
+ },
+ "s06": {
+  "verdict": "ok (replacement)",
+  "note": "Dubai Marina interchange with tram track; first pick dropped (title did not confirm Dubai)"
+ },
+ "s07": {
+  "verdict": "ok",
+  "note": "Dubai highway at twilight, light trails"
+ },
+ "s08": {
+  "verdict": "ok",
+  "note": "Empire State Building lit at twilight"
+ },
+ "s09": {
+  "verdict": "ok",
+  "note": "Manhattan drone at sunset"
+ },
+ "s10": {
+  "verdict": "ok",
+  "note": "Marina Bay Sands at night"
+ },
+ "s11": {
+  "verdict": "ok, minor",
+  "note": "Singapore Flyer at night; analysis mentions a building logo on the left (small, distant, partly under the cards)"
+ },
+ "s12": {
+  "verdict": "visual check ok",
+  "note": "Victoria Harbour at night; Higgsfield analysis job still 'in_progress' after 45 min (no result); checked on the contact sheet. Small rooftop signage on distant towers"
+ },
+ "s13": {
+  "verdict": "ok",
+  "note": "Victoria Harbour pan at night"
+ },
+ "s14": {
+  "verdict": "ok (replacement)",
+  "note": "Hong Kong double-decker tram, taxis, daylight"
+ },
+ "s15": {
+  "verdict": "ok (replacement)",
+  "note": "ferry crossing Hong Kong harbour; first pick was Istanbul (dropped)"
+ },
+ "s16": {
+  "verdict": "ok (replacement)",
+  "note": "Hong Kong street at night, red-and-silver taxis; pedestrians small, no identifiable face"
+ },
+ "s17": {
+  "verdict": "ok (replacement)",
+  "note": "Hong Kong harbour waterfront, ferry and cargo barge; first pick was Sweden (dropped)"
+ },
+ "s18": {
+  "verdict": "ok",
+  "note": "Hong Kong skyline from the Peak at night (Bank of China tower)"
+ },
+ "s19": {
+  "verdict": "ok (replacement)",
+  "note": "POV drive across Tsing Ma bridge at twilight, white MPV ahead, no people"
+ },
+ "s20": {
+  "verdict": "ok",
+  "note": "Hong Kong night intersection, red bus and taxi"
+ },
+ "s21": {
+  "verdict": "ok",
+  "note": "Hong Kong harbour at sunset, junk boat"
+ }
+}

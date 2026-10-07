@@ -1,0 +1,622 @@
+{
+ "dur": 54.0,
+ "drop": 16.0,
+ "cta_hit": 49.6,
+ "end": 52.4,
+ "screens": [
+  {
+   "n": 1,
+   "t0": 0.0,
+   "t1": 2.0,
+   "lines": [
+    [
+     {
+      "t": "Il existe un ",
+      "acc": false
+     },
+     {
+      "t": "pays",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "entre la France",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "et l'Espagne…",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c27",
+   "sfx": "breath",
+   "fact": "G1"
+  },
+  {
+   "n": 2,
+   "t0": 2.0,
+   "t1": 4.0,
+   "lines": [
+    [
+     {
+      "t": "…dont presque",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "personne",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "ne parle.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "t102",
+   "sfx": "tick",
+   "fact": ""
+  },
+  {
+   "n": 3,
+   "t0": 4.0,
+   "t1": 6.0,
+   "lines": [
+    [
+     {
+      "t": "468 km²",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "Coincé entre",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "deux géants.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "map",
+   "sfx": "scratch",
+   "fact": "G1"
+  },
+  {
+   "n": 4,
+   "t0": 6.0,
+   "t1": 8.0,
+   "lines": [
+    [
+     {
+      "t": "Moins de",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "90 000",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "habitants.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c28",
+   "sfx": "pop",
+   "fact": "G2"
+  },
+  {
+   "n": 5,
+   "t0": 8.0,
+   "t1": 10.0,
+   "lines": [
+    [
+     {
+      "t": "Pas d'",
+      "acc": false
+     },
+     {
+      "t": "aéroport",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "Pas de train.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "px34368610a",
+   "sfx": "whoosh",
+   "fact": "G5 G6"
+  },
+  {
+   "n": 6,
+   "t0": 10.0,
+   "t1": 12.0,
+   "lines": [
+    [
+     {
+      "t": "Et sa population",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "n'arrête pas",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "de ",
+      "acc": false
+     },
+     {
+      "t": "grimper",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "t106",
+   "sfx": "riser_short",
+   "fact": "G2"
+  },
+  {
+   "n": 7,
+   "t0": 12.0,
+   "t1": 14.0,
+   "lines": [
+    [
+     {
+      "t": "Mais les places",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "sont ",
+      "acc": false
+     },
+     {
+      "t": "comptées",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c22",
+   "sfx": "heartbeat",
+   "fact": "R1"
+  },
+  {
+   "n": 8,
+   "t0": 14.0,
+   "t1": 16.0,
+   "lines": [
+    [
+     {
+      "t": "Permis de résidence :",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "quotas en ",
+      "acc": false
+     },
+     {
+      "t": "baisse",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c05",
+   "sfx": "none",
+   "fact": "R1"
+  },
+  {
+   "n": 9,
+   "t0": 16.0,
+   "t1": 18.0,
+   "lines": [
+    [
+     {
+      "t": "ANDORRE",
+      "acc": true
+     }
+    ]
+   ],
+   "shot": "px35009532",
+   "sfx": "drop",
+   "fact": ""
+  },
+  {
+   "n": 10,
+   "t0": 18.0,
+   "t1": 20.8,
+   "lines": [
+    [
+     {
+      "t": "Impôt sur le revenu :",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "10 %",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "maximum.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "px34368610b",
+   "sfx": "hit",
+   "fact": "F1"
+  },
+  {
+   "n": 11,
+   "t0": 20.8,
+   "t1": 23.6,
+   "lines": [
+    [
+     {
+      "t": "0 %",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "jusqu'à 24 000 €",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "de revenus.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c14",
+   "sfx": "hit",
+   "fact": "F1"
+  },
+  {
+   "n": 12,
+   "t0": 23.6,
+   "t1": 26.4,
+   "lines": [
+    [
+     {
+      "t": "Impôt sur",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "les sociétés :",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "10 %",
+      "acc": true
+     }
+    ]
+   ],
+   "shot": "c01",
+   "sfx": "hit",
+   "fact": "F2"
+  },
+  {
+   "n": 13,
+   "t0": 26.4,
+   "t1": 29.2,
+   "lines": [
+    [
+     {
+      "t": "TVA :",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "4,5 %",
+      "acc": true
+     }
+    ]
+   ],
+   "shot": "c12",
+   "sfx": "ding",
+   "fact": "F3"
+  },
+  {
+   "n": 14,
+   "t0": 29.2,
+   "t1": 32.0,
+   "lines": [
+    [
+     {
+      "t": "Impôt sur la fortune :",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "zéro",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c35",
+   "sfx": "hit_low",
+   "fact": "F4"
+  },
+  {
+   "n": 15,
+   "t0": 32.0,
+   "t1": 34.8,
+   "lines": [
+    [
+     {
+      "t": "Droits de succession :",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "zéro",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c31",
+   "sfx": "hit_low",
+   "fact": "F5"
+  },
+  {
+   "n": 16,
+   "t0": 34.8,
+   "t1": 37.6,
+   "lines": [
+    [
+     {
+      "t": "Un des pays",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "les plus ",
+      "acc": false
+     },
+     {
+      "t": "sûrs",
+      "acc": true
+     },
+     {
+      "t": ".",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "px38238599",
+   "sfx": "pad",
+   "fact": "Q4"
+  },
+  {
+   "n": 17,
+   "t0": 37.6,
+   "t1": 40.4,
+   "lines": [
+    [
+     {
+      "t": "215 km",
+      "acc": true
+     },
+     {
+      "t": " de pistes.",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "Le plus grand domaine",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "des Pyrénées.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c18",
+   "sfx": "ski",
+   "fact": "Q1"
+  },
+  {
+   "n": 18,
+   "t0": 40.4,
+   "t1": 43.2,
+   "lines": [
+    [
+     {
+      "t": "Le plus grand ",
+      "acc": false
+     },
+     {
+      "t": "spa",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "thermal du sud",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "de l'Europe.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c00",
+   "sfx": "water",
+   "fact": "Q2"
+  },
+  {
+   "n": 19,
+   "t0": 43.2,
+   "t1": 46.0,
+   "lines": [
+    [
+     {
+      "t": "À moins de ",
+      "acc": false
+     },
+     {
+      "t": "3 h",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "de Toulouse.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "c34",
+   "sfx": "car",
+   "fact": "G7"
+  },
+  {
+   "n": 20,
+   "t0": 46.0,
+   "t1": 49.6,
+   "lines": [
+    [
+     {
+      "t": "On a compilé",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "LA LISTE",
+      "acc": true
+     }
+    ],
+    [
+     {
+      "t": "tout pour s'installer",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "en Andorre.",
+      "acc": false
+     }
+    ]
+   ],
+   "shot": "t121",
+   "sfx": "riser",
+   "fact": ""
+  },
+  {
+   "n": 21,
+   "t0": 49.6,
+   "t1": 52.4,
+   "lines": [
+    [
+     {
+      "t": "Commente",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "LISTE",
+      "acc": true
+     }
+    ]
+   ],
+   "shot": "t121",
+   "sfx": "cta",
+   "fact": ""
+  },
+  {
+   "n": 22,
+   "t0": 52.4,
+   "t1": 54.0,
+   "lines": [
+    [
+     {
+      "t": "Commente",
+      "acc": false
+     }
+    ],
+    [
+     {
+      "t": "LISTE",
+      "acc": true
+     }
+    ]
+   ],
+   "shot": "t121",
+   "sfx": "end",
+   "fact": ""
+  }
+ ]
+}

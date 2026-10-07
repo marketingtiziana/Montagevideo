@@ -1,0 +1,42 @@
+{
+ "t2v": {
+  "t101": "7c8584f4-9fd0-46bf-bc92-bdfb5fc4e8db",
+  "t102": "85e83c3d-cdca-48fe-a1d9-8f4a2f40d9dc",
+  "t106": "9662f341-d222-4821-9220-f389d5851341",
+  "t120": "0d40570f-9c3a-49be-a238-7fc2b0075ce5",
+  "t121": "37d5185e-23c2-4760-b6e8-a2f8d3f53ee5"
+ },
+ "i2v": {
+  "c27": "acd23b5e-d86e-4646-a78f-80a0be75a0db",
+  "c28": "d28eb4fe-a65e-42c8-bb42-9ff8e06065b0",
+  "c22": "21dcc53a-0208-4d3d-bcf3-92f57b29060c",
+  "c05": "4be7f305-6706-4bd4-9592-b62490cc0317",
+  "c01": "953cd7b8-9fbb-4a20-8c5d-c8578ade7e64",
+  "c14": "f06835fc-120c-48d5-aeb7-ba87c2f3c7ef",
+  "c12": "edccfdf9-7fb7-437b-bab2-f5a686bc6bfe",
+  "c31": "c3aae495-b6b7-40a0-9192-780331e82ff1",
+  "c09": "83e87b85-f2e0-4e87-adc1-31c1a5be9e06",
+  "c18": "9e6bfc9a-37b7-4a21-a33a-6dee0c500d3a",
+  "c00": "81a11461-c288-421f-9f52-0889e26b1b53",
+  "c34": "81e7b4ad-2bd7-445c-af37-75da71a6281b",
+  "c35": "443d6d99-c2b2-4e1e-a148-86a7ec004438"
+ },
+ "image_media_ids": {
+  "c27": "92097219-6796-4cf5-ad30-14079e1f1d5b",
+  "c28": "f78038ec-a362-4f77-a7e8-aac9b8602d11",
+  "c22": "d153fc9a-2624-4045-8689-410b3ed9b24a",
+  "c05": "2762b3cd-9ea3-4552-82ad-701d90742833",
+  "c01": "7b01f912-3e78-4bc0-aaa5-142d04d1878c",
+  "c14": "92983aaa-e0e0-44ea-88fa-0e5ec3348203",
+  "c12": "7712214c-6110-4a56-a620-6203ea906645",
+  "c31": "5e04a73e-5ffd-4d3e-a77f-d649047ac4bf",
+  "c09": "f30485d2-79e1-42d8-bc4c-90a39fe95c6f",
+  "c18": "c8de7f09-61a9-4d00-83e3-cd1d8f3c9d6e",
+  "c00": "f0624f3c-54a6-4e5b-8d3d-4d247404426a",
+  "c34": "2c39e9a5-dad2-47dd-87d8-507858fd9437",
+  "c35": "04ee9494-3e9c-4ecc-a499-b6046f6cf874"
+ },
+ "t2v_rejected": {
+  "t120": "sunset: a volcano-like peak that could be read as a real landmark"
+ }
+}

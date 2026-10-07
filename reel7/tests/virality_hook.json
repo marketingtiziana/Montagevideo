@@ -1,0 +1,34 @@
+{
+ "global_scores_by_frame": [
+  0.356614,
+  0.318897,
+  0.33986,
+  0.363139,
+  0.36187,
+  0.380491,
+  0.378146,
+  0.361913,
+  0.354462,
+  0.370682,
+  0.388024,
+  0.395585,
+  0.422474,
+  0.443941,
+  0.478259,
+  0.562442
+ ],
+ "analysis_score": 39,
+ "scores": {
+  "overall_score": 49,
+  "brain_engagement": 39,
+  "hook_score": 28,
+  "viral_potential": 56,
+  "sustain": 100,
+  "peak_second": 15,
+  "peak_frame_index": 15,
+  "peak_score": 0.562442
+ },
+ "job_id": "3d7c0ce8-44f7-4779-85b3-8fe8e8ff86a9",
+ "dashboard": "https://d8j0ntlcm91z4.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/hf_20261007_191124_3d7c0ce8-44f7-4779-85b3-8fe8e8ff86a9.html",
+ "input": "reel7_hook.mp4 = 0–15 s du master 60 fps (media fa267bb5-d73d-411d-8a98-de2456b0ec46) ; Virality Predictor refuse les vidéos > 16 s"
+}

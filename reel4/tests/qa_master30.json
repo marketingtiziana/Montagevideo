@@ -1,0 +1,281 @@
+{
+ "format": {
+  "video": [
+   "h264",
+   "1080",
+   "1920",
+   "9873",
+   "30"
+  ],
+  "audio": [
+   "aac",
+   "48000",
+   null
+  ],
+  "duration": 57.0,
+  "faststart": true
+ },
+ "loudness": {
+  "I_LUFS": -14.1,
+  "LRA": 4.9,
+  "true_peak_dBFS": -2.6
+ },
+ "motion": {
+  "longest_still_s": 0.03,
+  "median_diff": 2.937
+ },
+ "beat_grid": {
+  "all_cuts_on_beat": true
+ },
+ "cuts": {
+  "detected": [
+   0.167,
+   2.0,
+   3.0,
+   4.1,
+   7.0,
+   9.5,
+   12.1,
+   14.5,
+   17.0,
+   19.5,
+   22.033,
+   24.5,
+   26.9,
+   27.067,
+   28.033,
+   29.0,
+   32.0,
+   35.067,
+   37.533,
+   40.5,
+   43.0,
+   46.067,
+   48.533,
+   51.067
+  ],
+  "vs_script": [
+   {
+    "planned": 2.0,
+    "detected": 2.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 3.0,
+    "detected": 3.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 4.0,
+    "detected": 4.1,
+    "err_ms": 100
+   },
+   {
+    "planned": 7.0,
+    "detected": 7.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 9.5,
+    "detected": 9.5,
+    "err_ms": 0
+   },
+   {
+    "planned": 12.0,
+    "detected": 12.1,
+    "err_ms": 100
+   },
+   {
+    "planned": 14.5,
+    "detected": 14.5,
+    "err_ms": 0
+   },
+   {
+    "planned": 17.0,
+    "detected": 17.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 19.5,
+    "detected": 19.5,
+    "err_ms": 0
+   },
+   {
+    "planned": 22.0,
+    "detected": 22.033,
+    "err_ms": 33
+   },
+   {
+    "planned": 24.5,
+    "detected": 24.5,
+    "err_ms": 0
+   },
+   {
+    "planned": 27.0,
+    "detected": 26.9,
+    "err_ms": -100
+   },
+   {
+    "planned": 29.0,
+    "detected": 29.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 32.0,
+    "detected": 32.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 35.0,
+    "detected": 35.067,
+    "err_ms": 67
+   },
+   {
+    "planned": 37.5,
+    "detected": 37.533,
+    "err_ms": 33
+   },
+   {
+    "planned": 40.5,
+    "detected": 40.5,
+    "err_ms": 0
+   },
+   {
+    "planned": 43.0,
+    "detected": 43.0,
+    "err_ms": 0
+   },
+   {
+    "planned": 46.0,
+    "detected": 46.067,
+    "err_ms": 67
+   },
+   {
+    "planned": 48.5,
+    "detected": 48.533,
+    "err_ms": 33
+   },
+   {
+    "planned": 51.0,
+    "detected": 51.067,
+    "err_ms": 67
+   }
+  ]
+ },
+ "audio_hits": [
+  {
+   "event": "impact",
+   "t": 7.0,
+   "onset": 7.05,
+   "err_ms": 50
+  },
+  {
+   "event": "ding",
+   "t": 9.55,
+   "onset": 9.51,
+   "err_ms": -40
+  },
+  {
+   "event": "impact",
+   "t": 12.0,
+   "onset": 12.05,
+   "err_ms": 50
+  },
+  {
+   "event": "ding",
+   "t": 14.55,
+   "onset": 14.51,
+   "err_ms": -40
+  },
+  {
+   "event": "impact",
+   "t": 17.0,
+   "onset": 17.02,
+   "err_ms": 20
+  },
+  {
+   "event": "ding",
+   "t": 19.55,
+   "onset": 19.5,
+   "err_ms": -50
+  },
+  {
+   "event": "impact",
+   "t": 22.0,
+   "onset": 22.0,
+   "err_ms": 0
+  },
+  {
+   "event": "ding",
+   "t": 24.55,
+   "onset": 24.51,
+   "err_ms": -40
+  },
+  {
+   "event": "drop",
+   "t": 27.0,
+   "onset": 27.0,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 27.067,
+   "onset": 27.0,
+   "err_ms": -67
+  },
+  {
+   "event": "impact",
+   "t": 28.0,
+   "onset": 28.0,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 29.0,
+   "onset": 29.06,
+   "err_ms": 60
+  },
+  {
+   "event": "impact",
+   "t": 32.0,
+   "onset": 32.0,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 35.0,
+   "onset": 35.0,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 35.5,
+   "onset": 35.5,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 36.0,
+   "onset": 36.0,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 37.5,
+   "onset": 37.5,
+   "err_ms": 0
+  },
+  {
+   "event": "impact",
+   "t": 46.0,
+   "onset": 46.06,
+   "err_ms": 60
+  },
+  {
+   "event": "impact_soft",
+   "t": 55.0,
+   "onset": 55.04,
+   "err_ms": 40
+  }
+ ]
+}

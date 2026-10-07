@@ -1,0 +1,44 @@
+{
+ "file": "reel7_master_60fps.mp4",
+ "size": "1080x1920",
+ "fps": 59.999,
+ "static": {
+  "frames": 3449,
+  "longest_s": 0.25,
+  "over_1_2s": []
+ },
+ "captions": {
+  "matched": 182,
+  "shown": 198,
+  "median_ms": 7,
+  "p90_ms": 23,
+  "bias_ms": 4,
+  "under_60ms": 0.984
+ },
+ "effects_lead": [
+  {
+   "element": "trois0",
+   "start_s": 2.617,
+   "word_s": 2.76,
+   "lead_ms": 143
+  },
+  {
+   "element": "regle",
+   "start_s": 18.05,
+   "word_s": 18.2,
+   "lead_ms": 150
+  },
+  {
+   "element": "france",
+   "start_s": 7.517,
+   "word_s": 7.66,
+   "lead_ms": 143
+  }
+ ],
+ "loudness": {
+  "I_lufs": -14.0,
+  "LRA": 2.4,
+  "true_peak_dbfs": -3.0,
+  "noise_floor_p5_dbfs": -41.8
+ }
+}

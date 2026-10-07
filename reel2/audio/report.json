@@ -1,0 +1,28 @@
+{
+ "before": {
+  "lufs": -23.377707740859417,
+  "noise_floor_dbfs": -46.11098382463564,
+  "true_peak_dbtp": -0.5,
+  "bleed_vs_voice_db": -36.651815748895366,
+  "demucs_used": false,
+  "noise_floor_at_-14LUFS": -36.73327608377622,
+  "bands_db": {
+   "low_60_250": -3.9,
+   "mid_250_2k": -2.5,
+   "pres_2k_6k": -19.4,
+   "air_6k_16k": -16.9
+  }
+ },
+ "after": {
+  "lufs": -14.1,
+  "noise_floor_dbfs": -36.50214611165551,
+  "true_peak_dbtp": -4.0,
+  "bands_db": {
+   "low_60_250": -3.5,
+   "mid_250_2k": -2.9,
+   "pres_2k_6k": -15.8,
+   "air_6k_16k": -18.3
+  }
+ },
+ "deepfilter_atten_lim": null
+}

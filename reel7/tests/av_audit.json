@@ -1,0 +1,109 @@
+{
+ "file": "reel7_master_60fps.mp4",
+ "lipsync": {
+  "points": [
+   {
+    "t": 1.0,
+    "master_lag_frames": 2,
+    "ref_lag_frames": 2,
+    "edit_error_ms": 0.0,
+    "corr": 0.17
+   },
+   {
+    "t": 17.0,
+    "master_lag_frames": 1,
+    "ref_lag_frames": 1,
+    "edit_error_ms": 0.0,
+    "corr": 0.22
+   },
+   {
+    "t": 23.0,
+    "master_lag_frames": 2,
+    "ref_lag_frames": 2,
+    "edit_error_ms": 0.0,
+    "corr": 0.09
+   },
+   {
+    "t": 37.5,
+    "master_lag_frames": 3,
+    "ref_lag_frames": 3,
+    "edit_error_ms": 0.0,
+    "corr": 0.16
+   },
+   {
+    "t": 52.2,
+    "master_lag_frames": 2,
+    "ref_lag_frames": 2,
+    "edit_error_ms": 0.0,
+    "corr": 0.16
+   }
+  ],
+  "max_edit_error_ms": 0.0,
+  "under_1_frame": true
+ },
+ "cuts": {
+  "points": [
+   {
+    "t": 7.319,
+    "level": "a",
+    "base_head": 0.065,
+    "master_head": 0.15
+   },
+   {
+    "t": 14.852,
+    "level": "c",
+    "base_head": 0.177,
+    "master_head": 0.054
+   },
+   {
+    "t": 19.261,
+    "level": "a",
+    "base_head": 0.014,
+    "master_head": 0.049
+   },
+   {
+    "t": 25.19,
+    "level": "b",
+    "base_head": 0.234,
+    "master_head": 0.187
+   },
+   {
+    "t": 29.71,
+    "level": "b",
+    "base_head": 0.121,
+    "master_head": 0.089
+   },
+   {
+    "t": 34.226,
+    "level": "a",
+    "base_head": 0.026,
+    "master_head": 0.078
+   },
+   {
+    "t": 36.098,
+    "level": "a",
+    "base_head": 0.01,
+    "master_head": 0.019
+   },
+   {
+    "t": 41.034,
+    "level": "a",
+    "base_head": 0.019,
+    "master_head": 0.011
+   },
+   {
+    "t": 45.243,
+    "level": "b",
+    "base_head": 0.0,
+    "master_head": null
+   },
+   {
+    "t": 47.34,
+    "level": "b",
+    "base_head": 0.193,
+    "master_head": null
+   }
+  ],
+  "max_base_head": 0.234
+ }
+}

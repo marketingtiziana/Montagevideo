@@ -1,0 +1,13 @@
+/* Design tokens partagés par tous les mockups du reel (palette, typo, radius, ombres). */
+@font-face { font-family: "Montserrat"; src: url("../typo/Montserrat-wght.ttf") format("truetype"); font-weight: 100 900; }
+:root {
+  --fond: #0F0F12;
+  --principal: #FFFFFF;
+  --accent: #F2B544;
+  --muted: rgba(255, 255, 255, 0.55);
+  --card: rgba(15, 15, 18, 0.91);
+  --radius: 30px;
+  --radius-sm: 12px;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.30);
+  --font: "Montserrat", sans-serif;
+}

@@ -1,0 +1,3451 @@
+{
+ "T": {
+  "tva0": 0.9333333333333333,
+  "trois0": 2.7666666666666666,
+  "truc": 4.6,
+  "personne": 5.033333333333333,
+  "france": 7.666666666666667,
+  "vingt": 9.516666666666667,
+  "tout": 10.3,
+  "logique": 10.966666666666667,
+  "non2": 12.366666666666667,
+  "toutp": 13.583333333333334,
+  "monde": 13.883333333333333,
+  "plante": 14.216666666666667,
+  "formation": 15.083333333333334,
+  "particulier": 17.066666666666666,
+  "regle": 18.2,
+  "personne2": 19.733333333333334,
+  "tonpays": 22.533333333333335,
+  "cest": 23.3,
+  "client": 24.366666666666667,
+  "pays_client": 23.966666666666665,
+  "trois1": 26.266666666666666,
+  "une": 27.433333333333334,
+  "trois2": 29.116666666666667,
+  "piege": 30.2,
+  "mauvaise": 31.9,
+  "pasde": 32.96666666666667,
+  "argent": 34.11666666666667,
+  "etat": 36.03333333333333,
+  "reclame": 37.18333333333333,
+  "plus": 39.28333333333333,
+  "poche": 40.53333333333333,
+  "bonne": 41.21666666666667,
+  "systeme": 42.766666666666666,
+  "enregistrer": 43.81666666666667,
+  "trois3": 44.53333333333333,
+  "guichet": 46.38333333333333,
+  "internationale": 48.016666666666666,
+  "pasp": 49.833333333333336,
+  "en": 50.083333333333336,
+  "panique": 50.333333333333336,
+  "concoit": 51.5,
+  "structure": 53.06666666666667,
+  "international": 54.483333333333334,
+  "doute": 55.93333333333333,
+  "commente": 56.31666666666667,
+  "tvaend": 56.78333333333333
+ },
+ "caps": [
+  {
+   "at": 0.31666666666666665,
+   "dur": 1.0,
+   "w": [
+    {
+     "t": "Comment",
+     "w": 403,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "gérer",
+     "w": 224,
+     "on": 0.12,
+     "off": 0.52,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "la",
+     "w": 80,
+     "on": 0.52,
+     "off": 0.62,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.62,
+     "off": 1.0,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 1.3166666666666667,
+   "dur": 0.7667,
+   "w": [
+    {
+     "t": "quand",
+     "w": 265,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.18,
+     "off": 0.4,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "vends",
+     "w": 248,
+     "on": 0.4,
+     "off": 0.62,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "une",
+     "w": 162,
+     "on": 0.62,
+     "off": 0.76,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 2.0833333333333335,
+   "dur": 1.6333,
+   "w": [
+    {
+     "t": "formation",
+     "w": 460,
+     "on": 0.0,
+     "off": 0.38,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "dans",
+     "w": 202,
+     "on": 0.38,
+     "off": 0.68,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "trois",
+     "w": 215,
+     "on": 0.68,
+     "off": 0.92,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pays",
+     "w": 219,
+     "on": 0.92,
+     "off": 1.64,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 3.7333333333333334,
+   "dur": 0.7333,
+   "w": [
+    {
+     "t": "Je",
+     "w": 99,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "vais",
+     "w": 165,
+     "on": 0.14,
+     "off": 0.28,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "te",
+     "w": 89,
+     "on": 0.28,
+     "off": 0.4,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "dire",
+     "w": 166,
+     "on": 0.4,
+     "off": 0.72,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 4.466666666666667,
+   "dur": 0.9167,
+   "w": [
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "truc",
+     "w": 173,
+     "on": 0.14,
+     "off": 0.46,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.46,
+     "off": 0.58,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "personne",
+     "w": 386,
+     "on": 0.58,
+     "off": 0.92,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 5.383333333333334,
+   "dur": 1.1333,
+   "w": [
+    {
+     "t": "ne",
+     "w": 110,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "t'explique",
+     "w": 404,
+     "on": 0.14,
+     "off": 0.74,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.74,
+     "off": 0.88,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "propos",
+     "w": 287,
+     "on": 0.88,
+     "off": 1.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 6.516666666666667,
+   "dur": 0.7667,
+   "w": [
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.22,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ce",
+     "w": 102,
+     "on": 0.22,
+     "off": 0.38,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "cas",
+     "w": 142,
+     "on": 0.38,
+     "off": 0.76,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 7.283333333333333,
+   "dur": 0.25,
+   "w": [
+    {
+     "t": "Toi",
+     "w": 126,
+     "on": 0.0,
+     "off": 0.16,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.16,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "es",
+     "w": 98,
+     "on": 0.26,
+     "off": 0.36,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 7.533333333333333,
+   "dur": 0.5667,
+   "w": [
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "France",
+     "w": 316,
+     "on": 0.12,
+     "off": 0.56,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 8.1,
+   "dur": 0.6,
+   "w": [
+    {
+     "t": "donc",
+     "w": 209,
+     "on": 0.0,
+     "off": 0.22,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.22,
+     "off": 0.34,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "factures",
+     "w": 339,
+     "on": 0.34,
+     "off": 0.6,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 8.7,
+   "dur": 0.8167,
+   "w": [
+    {
+     "t": "ta",
+     "w": 88,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.1,
+     "off": 0.38,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "française",
+     "w": 375,
+     "on": 0.38,
+     "off": 0.82,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 9.516666666666667,
+   "dur": 0.9167,
+   "w": [
+    {
+     "t": "20 %",
+     "w": 220,
+     "on": 0.0,
+     "off": 0.54,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.54,
+     "off": 0.78,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tout",
+     "w": 177,
+     "on": 0.78,
+     "off": 0.92,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 10.433333333333334,
+   "dur": 0.5333,
+   "w": [
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "monde",
+     "w": 291,
+     "on": 0.1,
+     "off": 0.52,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 10.966666666666667,
+   "dur": 0.9667,
+   "w": [
+    {
+     "t": "Logique",
+     "w": 377,
+     "on": 0.0,
+     "off": 0.38,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "non",
+     "w": 185,
+     "on": 0.38,
+     "off": 0.98,
+     "key": true,
+     "shake": true,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 11.933333333333334,
+   "dur": 0.85,
+   "w": [
+    {
+     "t": "Eh",
+     "w": 112,
+     "on": 0.0,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "bien",
+     "w": 185,
+     "on": 0.26,
+     "off": 0.42,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "non",
+     "w": 185,
+     "on": 0.42,
+     "off": 0.84,
+     "key": true,
+     "shake": true,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 12.783333333333333,
+   "dur": 0.9333,
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.58,
+     "key": false,
+     "shake": true,
+     "impact": false
+    },
+    {
+     "t": "là",
+     "w": 80,
+     "on": 0.58,
+     "off": 0.68,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.66,
+     "off": 0.8,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tout",
+     "w": 177,
+     "on": 0.8,
+     "off": 0.94,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 13.716666666666667,
+   "dur": 1.1,
+   "w": [
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.0,
+     "off": 0.16,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "monde",
+     "w": 291,
+     "on": 0.16,
+     "off": 0.36,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "se",
+     "w": 98,
+     "on": 0.36,
+     "off": 0.5,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "plante",
+     "w": 299,
+     "on": 0.5,
+     "off": 1.1,
+     "key": true,
+     "shake": false,
+     "impact": true
+    }
+   ],
+   "mode": "hide"
+  },
+  {
+   "at": 14.816666666666666,
+   "dur": 0.5833,
+   "w": [
+    {
+     "t": "Pour",
+     "w": 198,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "une",
+     "w": 162,
+     "on": 0.14,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "formation",
+     "w": 460,
+     "on": 0.26,
+     "off": 0.58,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 15.4,
+   "dur": 1.2,
+   "w": [
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.42,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ligne",
+     "w": 210,
+     "on": 0.42,
+     "off": 0.6,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "vendue",
+     "w": 307,
+     "on": 0.6,
+     "off": 1.2,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 16.6,
+   "dur": 1.2667,
+   "w": [
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.0,
+     "off": 0.38,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "un",
+     "w": 113,
+     "on": 0.38,
+     "off": 0.48,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "particulier",
+     "w": 480,
+     "on": 0.46,
+     "off": 1.26,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 17.866666666666667,
+   "dur": 1.3167,
+   "w": [
+    {
+     "t": "la",
+     "w": 80,
+     "on": 0.0,
+     "off": 0.34,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "règle",
+     "w": 242,
+     "on": 0.34,
+     "off": 0.66,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "est",
+     "w": 132,
+     "on": 0.66,
+     "off": 0.76,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "simple",
+     "w": 275,
+     "on": 0.76,
+     "off": 1.32,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 19.183333333333334,
+   "dur": 0.9833,
+   "w": [
+    {
+     "t": "mais",
+     "w": 199,
+     "on": 0.0,
+     "off": 0.3,
+     "key": false,
+     "shake": true,
+     "impact": false
+    },
+    {
+     "t": "quasi",
+     "w": 225,
+     "on": 0.3,
+     "off": 0.56,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "personne",
+     "w": 386,
+     "on": 0.56,
+     "off": 0.98,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 20.166666666666668,
+   "dur": 0.75,
+   "w": [
+    {
+     "t": "ne",
+     "w": 110,
+     "on": 0.0,
+     "off": 0.16,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "la",
+     "w": 80,
+     "on": 0.16,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "connaît",
+     "w": 312,
+     "on": 0.26,
+     "off": 0.76,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 20.916666666666668,
+   "dur": 1.0,
+   "w": [
+    {
+     "t": "La",
+     "w": 102,
+     "on": 0.0,
+     "off": 0.24,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.24,
+     "off": 0.76,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ce",
+     "w": 102,
+     "on": 0.76,
+     "off": 1.0,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 21.916666666666668,
+   "dur": 0.45,
+   "w": [
+    {
+     "t": "n'est",
+     "w": 201,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pas",
+     "w": 148,
+     "on": 0.12,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "celle",
+     "w": 197,
+     "on": 0.26,
+     "off": 0.44,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 22.366666666666667,
+   "dur": 0.9333,
+   "w": [
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ton",
+     "w": 143,
+     "on": 0.18,
+     "off": 0.46,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pays",
+     "w": 219,
+     "on": 0.46,
+     "off": 0.94,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 23.3,
+   "dur": 0.6667,
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.38,
+     "key": false,
+     "shake": true,
+     "impact": false
+    },
+    {
+     "t": "celle",
+     "w": 197,
+     "on": 0.38,
+     "off": 0.5,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "du",
+     "w": 113,
+     "on": 0.5,
+     "off": 0.66,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 23.966666666666665,
+   "dur": 1.15,
+   "w": [
+    {
+     "t": "pays",
+     "w": 219,
+     "on": 0.0,
+     "off": 0.22,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "du",
+     "w": 113,
+     "on": 0.22,
+     "off": 0.4,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "client",
+     "w": 266,
+     "on": 0.4,
+     "off": 1.16,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 25.116666666666667,
+   "dur": 1.0167,
+   "w": [
+    {
+     "t": "Donc",
+     "w": 219,
+     "on": 0.0,
+     "off": 0.42,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "quand",
+     "w": 265,
+     "on": 0.42,
+     "off": 0.62,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.62,
+     "off": 0.8,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "vends",
+     "w": 248,
+     "on": 0.8,
+     "off": 1.02,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 26.133333333333333,
+   "dur": 0.8,
+   "w": [
+    {
+     "t": "dans",
+     "w": 202,
+     "on": 0.0,
+     "off": 0.12,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "trois",
+     "w": 215,
+     "on": 0.12,
+     "off": 0.38,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pays",
+     "w": 219,
+     "on": 0.38,
+     "off": 0.8,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 26.933333333333334,
+   "dur": 1.0,
+   "w": [
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.0,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "n'as",
+     "w": 167,
+     "on": 0.26,
+     "off": 0.36,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pas",
+     "w": 148,
+     "on": 0.34,
+     "off": 0.5,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "une",
+     "w": 162,
+     "on": 0.5,
+     "off": 1.0,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 27.933333333333334,
+   "dur": 0.8667,
+   "w": [
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.0,
+     "off": 0.44,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.44,
+     "off": 0.54,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "gérer",
+     "w": 224,
+     "on": 0.5,
+     "off": 0.86,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 28.8,
+   "dur": 1.0333,
+   "w": [
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.1,
+     "off": 0.2,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "as",
+     "w": 97,
+     "on": 0.18,
+     "off": 0.32,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "trois",
+     "w": 215,
+     "on": 0.32,
+     "off": 1.04,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 30.0,
+   "dur": 1.3,
+   "w": [
+    {
+     "t": "Le",
+     "w": 103,
+     "on": 0.0,
+     "off": 0.2,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "piège",
+     "w": 264,
+     "on": 0.2,
+     "off": 0.82,
+     "key": true,
+     "shake": false,
+     "impact": true
+    },
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.82,
+     "off": 1.28,
+     "key": false,
+     "shake": true,
+     "impact": false
+    },
+    {
+     "t": "de",
+     "w": 109,
+     "on": 1.28,
+     "off": 1.38,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 31.3,
+   "dur": 1.3667,
+   "w": [
+    {
+     "t": "facturer",
+     "w": 332,
+     "on": 0.0,
+     "off": 0.46,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "la",
+     "w": 80,
+     "on": 0.46,
+     "off": 0.6,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "mauvaise",
+     "w": 442,
+     "on": 0.6,
+     "off": 0.94,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.94,
+     "off": 1.36,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 32.666666666666664,
+   "dur": 1.0167,
+   "w": [
+    {
+     "t": "ou",
+     "w": 111,
+     "on": 0.0,
+     "off": 0.3,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pas",
+     "w": 148,
+     "on": 0.3,
+     "off": 0.54,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.54,
+     "off": 0.68,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.68,
+     "off": 1.02,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 33.68333333333333,
+   "dur": 0.4333,
+   "w": [
+    {
+     "t": "du",
+     "w": 113,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tout",
+     "w": 177,
+     "on": 0.1,
+     "off": 0.44,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 34.11666666666667,
+   "dur": 0.9667,
+   "w": [
+    {
+     "t": "L'argent",
+     "w": 339,
+     "on": 0.0,
+     "off": 0.54,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.54,
+     "off": 0.84,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.84,
+     "off": 0.96,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 35.083333333333336,
+   "dur": 0.95,
+   "w": [
+    {
+     "t": "aurais",
+     "w": 250,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "dû",
+     "w": 113,
+     "on": 0.14,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "récolter",
+     "w": 322,
+     "on": 0.26,
+     "off": 0.96,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 36.03333333333333,
+   "dur": 1.15,
+   "w": [
+    {
+     "t": "l'État",
+     "w": 242,
+     "on": 0.0,
+     "off": 0.56,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "te",
+     "w": 89,
+     "on": 0.56,
+     "off": 1.06,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "le",
+     "w": 81,
+     "on": 1.06,
+     "off": 1.16,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 37.18333333333333,
+   "dur": 1.0167,
+   "w": [
+    {
+     "t": "réclame",
+     "w": 376,
+     "on": 0.0,
+     "off": 0.48,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "quand",
+     "w": 265,
+     "on": 0.48,
+     "off": 0.6,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "même",
+     "w": 263,
+     "on": 0.6,
+     "off": 1.02,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 38.2,
+   "dur": 0.7167,
+   "w": [
+    {
+     "t": "Sauf",
+     "w": 187,
+     "on": 0.0,
+     "off": 0.38,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.38,
+     "off": 0.48,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "là",
+     "w": 80,
+     "on": 0.46,
+     "off": 0.72,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 38.916666666666664,
+   "dur": 0.7,
+   "w": [
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ne",
+     "w": 110,
+     "on": 0.18,
+     "off": 0.28,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "l'as",
+     "w": 139,
+     "on": 0.26,
+     "off": 0.36,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "plus",
+     "w": 177,
+     "on": 0.36,
+     "off": 0.7,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "phone"
+  },
+  {
+   "at": 39.61666666666667,
+   "dur": 0.8167,
+   "w": [
+    {
+     "t": "il",
+     "w": 56,
+     "on": 0.0,
+     "off": 0.48,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "sort",
+     "w": 168,
+     "on": 0.48,
+     "off": 0.68,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.68,
+     "off": 0.82,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 40.43333333333333,
+   "dur": 0.5667,
+   "w": [
+    {
+     "t": "ta",
+     "w": 88,
+     "on": 0.0,
+     "off": 0.1,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "poche",
+     "w": 291,
+     "on": 0.1,
+     "off": 0.56,
+     "key": true,
+     "shake": false,
+     "impact": true
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 41.0,
+   "dur": 0.8,
+   "w": [
+    {
+     "t": "La",
+     "w": 102,
+     "on": 0.0,
+     "off": 0.22,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "bonne",
+     "w": 264,
+     "on": 0.22,
+     "off": 0.4,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "nouvelle",
+     "w": 352,
+     "on": 0.4,
+     "off": 0.8,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 41.8,
+   "dur": 0.9667,
+   "w": [
+    {
+     "t": "c'est",
+     "w": 194,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": true,
+     "impact": false
+    },
+    {
+     "t": "qu'il",
+     "w": 178,
+     "on": 0.18,
+     "off": 0.28,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "existe",
+     "w": 247,
+     "on": 0.28,
+     "off": 0.72,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "un",
+     "w": 113,
+     "on": 0.72,
+     "off": 0.96,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 42.766666666666666,
+   "dur": 1.05,
+   "w": [
+    {
+     "t": "système",
+     "w": 390,
+     "on": 0.0,
+     "off": 0.36,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pour",
+     "w": 196,
+     "on": 0.36,
+     "off": 0.54,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "éviter",
+     "w": 240,
+     "on": 0.54,
+     "off": 0.92,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "de",
+     "w": 109,
+     "on": 0.92,
+     "off": 1.06,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 43.81666666666667,
+   "dur": 1.4,
+   "w": [
+    {
+     "t": "t'enregistrer",
+     "w": 505,
+     "on": 0.0,
+     "off": 0.64,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "dans",
+     "w": 202,
+     "on": 0.64,
+     "off": 0.74,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "trois",
+     "w": 215,
+     "on": 0.72,
+     "off": 0.92,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "pays",
+     "w": 219,
+     "on": 0.92,
+     "off": 1.4,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 45.21666666666667,
+   "dur": 1.1667,
+   "w": [
+    {
+     "t": "Ça",
+     "w": 111,
+     "on": 0.0,
+     "off": 0.2,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "s'appelle",
+     "w": 363,
+     "on": 0.2,
+     "off": 0.58,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "le",
+     "w": 81,
+     "on": 0.58,
+     "off": 1.16,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 46.38333333333333,
+   "dur": 0.9333,
+   "w": [
+    {
+     "t": "guichet",
+     "w": 358,
+     "on": 0.0,
+     "off": 0.58,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "unique",
+     "w": 327,
+     "on": 0.58,
+     "off": 0.94,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 47.31666666666667,
+   "dur": 1.5167,
+   "w": [
+    {
+     "t": "La",
+     "w": 102,
+     "on": 0.0,
+     "off": 0.26,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.26,
+     "off": 0.7,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "internationale",
+     "w": 651,
+     "on": 0.7,
+     "off": 1.52,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "win"
+  },
+  {
+   "at": 48.833333333333336,
+   "dur": 1.0,
+   "w": [
+    {
+     "t": "ça",
+     "w": 101,
+     "on": 0.0,
+     "off": 0.36,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ne",
+     "w": 110,
+     "on": 0.36,
+     "off": 0.48,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "se",
+     "w": 98,
+     "on": 0.48,
+     "off": 0.58,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "rattrape",
+     "w": 331,
+     "on": 0.56,
+     "off": 1.0,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 49.833333333333336,
+   "dur": 1.1667,
+   "w": [
+    {
+     "t": "pas",
+     "w": 148,
+     "on": 0.0,
+     "off": 0.24,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.24,
+     "off": 0.5,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "panique",
+     "w": 379,
+     "on": 0.5,
+     "off": 1.16,
+     "key": true,
+     "shake": false,
+     "impact": true
+    }
+   ],
+   "mode": "hide"
+  },
+  {
+   "at": 51.0,
+   "dur": 1.2333,
+   "w": [
+    {
+     "t": "Ça",
+     "w": 111,
+     "on": 0.0,
+     "off": 0.36,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "se",
+     "w": 98,
+     "on": 0.36,
+     "off": 0.5,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "conçoit",
+     "w": 308,
+     "on": 0.5,
+     "off": 1.24,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 52.233333333333334,
+   "dur": 0.5833,
+   "w": [
+    {
+     "t": "en",
+     "w": 109,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "même",
+     "w": 263,
+     "on": 0.14,
+     "off": 0.34,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "temps",
+     "w": 261,
+     "on": 0.34,
+     "off": 0.58,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 52.81666666666667,
+   "dur": 0.95,
+   "w": [
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.0,
+     "off": 0.18,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "ta",
+     "w": 88,
+     "on": 0.18,
+     "off": 0.28,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "structure",
+     "w": 431,
+     "on": 0.24,
+     "off": 0.94,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 53.766666666666666,
+   "dur": 0.7167,
+   "w": [
+    {
+     "t": "Si",
+     "w": 81,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 0.14,
+     "off": 0.32,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "vends",
+     "w": 248,
+     "on": 0.32,
+     "off": 0.62,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "à",
+     "w": 56,
+     "on": 0.62,
+     "off": 0.72,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 54.483333333333334,
+   "dur": 1.2333,
+   "w": [
+    {
+     "t": "l'international",
+     "w": 569,
+     "on": 0.0,
+     "off": 0.5,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "et",
+     "w": 91,
+     "on": 0.5,
+     "off": 0.92,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "que",
+     "w": 161,
+     "on": 0.92,
+     "off": 1.12,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "tu",
+     "w": 94,
+     "on": 1.12,
+     "off": 1.24,
+     "key": false,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 55.71666666666667,
+   "dur": 0.6,
+   "w": [
+    {
+     "t": "as",
+     "w": 97,
+     "on": 0.0,
+     "off": 0.14,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "un",
+     "w": 113,
+     "on": 0.14,
+     "off": 0.24,
+     "key": false,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "doute",
+     "w": 276,
+     "on": 0.22,
+     "off": 0.6,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  },
+  {
+   "at": 56.31666666666667,
+   "dur": 1.1667,
+   "w": [
+    {
+     "t": "commente",
+     "w": 500,
+     "on": 0.0,
+     "off": 0.46,
+     "key": true,
+     "shake": false,
+     "impact": false
+    },
+    {
+     "t": "TVA",
+     "w": 191,
+     "on": 0.46,
+     "off": 1.163,
+     "key": true,
+     "shake": false,
+     "impact": false
+    }
+   ],
+   "mode": "base"
+  }
+ ],
+ "words": [
+  {
+   "w": "Comment",
+   "s": 0.32,
+   "e": 0.44,
+   "p": 0.955
+  },
+  {
+   "w": "gérer",
+   "s": 0.44,
+   "e": 0.84,
+   "p": 1.0
+  },
+  {
+   "w": "la",
+   "s": 0.84,
+   "e": 0.94,
+   "p": 0.998
+  },
+  {
+   "w": "TVA",
+   "s": 0.94,
+   "e": 1.32,
+   "p": 0.999
+  },
+  {
+   "w": "quand",
+   "s": 1.32,
+   "e": 1.5,
+   "p": 0.999
+  },
+  {
+   "w": "tu",
+   "s": 1.5,
+   "e": 1.72,
+   "p": 0.999
+  },
+  {
+   "w": "vends",
+   "s": 1.72,
+   "e": 1.94,
+   "p": 1.0
+  },
+  {
+   "w": "une",
+   "s": 1.94,
+   "e": 2.08,
+   "p": 1.0
+  },
+  {
+   "w": "formation",
+   "s": 2.08,
+   "e": 2.46,
+   "p": 1.0
+  },
+  {
+   "w": "dans",
+   "s": 2.46,
+   "e": 2.76,
+   "p": 0.991
+  },
+  {
+   "w": "trois",
+   "s": 2.76,
+   "e": 3.0,
+   "p": 0.822
+  },
+  {
+   "w": "pays?",
+   "s": 3.0,
+   "e": 3.32,
+   "p": 0.963
+  },
+  {
+   "w": "Je",
+   "s": 3.74,
+   "e": 3.88,
+   "p": 0.995
+  },
+  {
+   "w": "vais",
+   "s": 3.88,
+   "e": 4.02,
+   "p": 1.0
+  },
+  {
+   "w": "te",
+   "s": 4.02,
+   "e": 4.14,
+   "p": 1.0
+  },
+  {
+   "w": "dire",
+   "s": 4.14,
+   "e": 4.46,
+   "p": 1.0
+  },
+  {
+   "w": "le",
+   "s": 4.46,
+   "e": 4.6,
+   "p": 1.0
+  },
+  {
+   "w": "truc",
+   "s": 4.6,
+   "e": 4.92,
+   "p": 1.0
+  },
+  {
+   "w": "que",
+   "s": 4.92,
+   "e": 5.04,
+   "p": 0.999
+  },
+  {
+   "w": "personne",
+   "s": 5.04,
+   "e": 5.38,
+   "p": 1.0
+  },
+  {
+   "w": "ne",
+   "s": 5.38,
+   "e": 5.52,
+   "p": 1.0
+  },
+  {
+   "w": "t'explique",
+   "s": 5.52,
+   "e": 6.12,
+   "p": 1.0
+  },
+  {
+   "w": "à",
+   "s": 6.12,
+   "e": 6.26,
+   "p": 0.999
+  },
+  {
+   "w": "propos",
+   "s": 6.26,
+   "e": 6.52,
+   "p": 1.0
+  },
+  {
+   "w": "de",
+   "s": 6.52,
+   "e": 6.74,
+   "p": 1.0
+  },
+  {
+   "w": "ce",
+   "s": 6.74,
+   "e": 6.9,
+   "p": 1.0
+  },
+  {
+   "w": "cas.",
+   "s": 6.9,
+   "e": 7.14,
+   "p": 1.0
+  },
+  {
+   "w": "Toi,",
+   "s": 7.28,
+   "e": 7.44,
+   "p": 0.995
+  },
+  {
+   "w": "tu",
+   "s": 7.44,
+   "e": 7.54,
+   "p": 0.89
+  },
+  {
+   "w": "es",
+   "s": 7.54,
+   "e": 7.54,
+   "p": 1.0
+  },
+  {
+   "w": "en",
+   "s": 7.54,
+   "e": 7.66,
+   "p": 1.0
+  },
+  {
+   "w": "France,",
+   "s": 7.66,
+   "e": 8.02,
+   "p": 1.0
+  },
+  {
+   "w": "donc",
+   "s": 8.1,
+   "e": 8.32,
+   "p": 1.0
+  },
+  {
+   "w": "tu",
+   "s": 8.32,
+   "e": 8.44,
+   "p": 1.0
+  },
+  {
+   "w": "factures",
+   "s": 8.44,
+   "e": 8.7,
+   "p": 1.0
+  },
+  {
+   "w": "ta",
+   "s": 8.7,
+   "e": 8.8,
+   "p": 1.0
+  },
+  {
+   "w": "TVA",
+   "s": 8.8,
+   "e": 9.08,
+   "p": 1.0
+  },
+  {
+   "w": "française,",
+   "s": 9.08,
+   "e": 9.32,
+   "p": 1.0
+  },
+  {
+   "w": "20%,",
+   "s": 9.52,
+   "e": 10.06,
+   "p": 0.817
+  },
+  {
+   "w": "à",
+   "s": 10.06,
+   "e": 10.3,
+   "p": 1.0
+  },
+  {
+   "w": "tout",
+   "s": 10.3,
+   "e": 10.44,
+   "p": 1.0
+  },
+  {
+   "w": "le",
+   "s": 10.44,
+   "e": 10.54,
+   "p": 1.0
+  },
+  {
+   "w": "monde.",
+   "s": 10.54,
+   "e": 10.74,
+   "p": 1.0
+  },
+  {
+   "w": "Logique,",
+   "s": 10.96,
+   "e": 11.34,
+   "p": 0.999
+  },
+  {
+   "w": "non?",
+   "s": 11.34,
+   "e": 11.94,
+   "p": 1.0
+  },
+  {
+   "w": "Eh",
+   "s": 11.94,
+   "e": 12.2,
+   "p": 0.987
+  },
+  {
+   "w": "bien",
+   "s": 12.2,
+   "e": 12.36,
+   "p": 1.0
+  },
+  {
+   "w": "non,",
+   "s": 12.36,
+   "e": 12.66,
+   "p": 0.768
+  },
+  {
+   "w": "c'est",
+   "s": 12.78,
+   "e": 13.36,
+   "p": 1.0
+  },
+  {
+   "w": "là",
+   "s": 13.36,
+   "e": 13.44,
+   "p": 1.0
+  },
+  {
+   "w": "que",
+   "s": 13.44,
+   "e": 13.58,
+   "p": 1.0
+  },
+  {
+   "w": "tout",
+   "s": 13.58,
+   "e": 13.72,
+   "p": 1.0
+  },
+  {
+   "w": "le",
+   "s": 13.72,
+   "e": 13.88,
+   "p": 1.0
+  },
+  {
+   "w": "monde",
+   "s": 13.88,
+   "e": 14.08,
+   "p": 1.0
+  },
+  {
+   "w": "se",
+   "s": 14.08,
+   "e": 14.22,
+   "p": 1.0
+  },
+  {
+   "w": "plante.",
+   "s": 14.22,
+   "e": 14.58,
+   "p": 0.999
+  },
+  {
+   "w": "Pour",
+   "s": 14.82,
+   "e": 14.96,
+   "p": 1.0
+  },
+  {
+   "w": "une",
+   "s": 14.96,
+   "e": 15.08,
+   "p": 1.0
+  },
+  {
+   "w": "formation",
+   "s": 15.08,
+   "e": 15.4,
+   "p": 1.0
+  },
+  {
+   "w": "en",
+   "s": 15.4,
+   "e": 15.82,
+   "p": 1.0
+  },
+  {
+   "w": "ligne",
+   "s": 15.82,
+   "e": 16.0,
+   "p": 1.0
+  },
+  {
+   "w": "vendue",
+   "s": 16.0,
+   "e": 16.6,
+   "p": 1.0
+  },
+  {
+   "w": "à",
+   "s": 16.6,
+   "e": 16.98,
+   "p": 0.999
+  },
+  {
+   "w": "un",
+   "s": 16.98,
+   "e": 17.06,
+   "p": 1.0
+  },
+  {
+   "w": "particulier,",
+   "s": 17.06,
+   "e": 17.56,
+   "p": 1.0
+  },
+  {
+   "w": "la",
+   "s": 17.86,
+   "e": 18.2,
+   "p": 1.0
+  },
+  {
+   "w": "règle",
+   "s": 18.2,
+   "e": 18.52,
+   "p": 1.0
+  },
+  {
+   "w": "est",
+   "s": 18.52,
+   "e": 18.62,
+   "p": 1.0
+  },
+  {
+   "w": "simple,",
+   "s": 18.62,
+   "e": 19.04,
+   "p": 1.0
+  },
+  {
+   "w": "mais",
+   "s": 19.18,
+   "e": 19.48,
+   "p": 1.0
+  },
+  {
+   "w": "quasi",
+   "s": 19.48,
+   "e": 19.74,
+   "p": 0.961
+  },
+  {
+   "w": "personne",
+   "s": 19.74,
+   "e": 20.16,
+   "p": 1.0
+  },
+  {
+   "w": "ne",
+   "s": 20.16,
+   "e": 20.32,
+   "p": 1.0
+  },
+  {
+   "w": "la",
+   "s": 20.32,
+   "e": 20.42,
+   "p": 1.0
+  },
+  {
+   "w": "connaît.",
+   "s": 20.42,
+   "e": 20.76,
+   "p": 1.0
+  },
+  {
+   "w": "La",
+   "s": 20.92,
+   "e": 21.16,
+   "p": 1.0
+  },
+  {
+   "w": "TVA,",
+   "s": 21.16,
+   "e": 21.68,
+   "p": 1.0
+  },
+  {
+   "w": "ce",
+   "s": 21.68,
+   "e": 21.92,
+   "p": 0.955
+  },
+  {
+   "w": "n'est",
+   "s": 21.92,
+   "e": 22.04,
+   "p": 1.0
+  },
+  {
+   "w": "pas",
+   "s": 22.04,
+   "e": 22.18,
+   "p": 1.0
+  },
+  {
+   "w": "celle",
+   "s": 22.18,
+   "e": 22.36,
+   "p": 1.0
+  },
+  {
+   "w": "de",
+   "s": 22.36,
+   "e": 22.54,
+   "p": 1.0
+  },
+  {
+   "w": "ton",
+   "s": 22.54,
+   "e": 22.82,
+   "p": 1.0
+  },
+  {
+   "w": "pays,",
+   "s": 22.82,
+   "e": 23.14,
+   "p": 1.0
+  },
+  {
+   "w": "c'est",
+   "s": 23.3,
+   "e": 23.68,
+   "p": 1.0
+  },
+  {
+   "w": "celle",
+   "s": 23.68,
+   "e": 23.8,
+   "p": 1.0
+  },
+  {
+   "w": "du",
+   "s": 23.8,
+   "e": 23.96,
+   "p": 1.0
+  },
+  {
+   "w": "pays",
+   "s": 23.96,
+   "e": 24.18,
+   "p": 0.997
+  },
+  {
+   "w": "du",
+   "s": 24.18,
+   "e": 24.36,
+   "p": 1.0
+  },
+  {
+   "w": "client.",
+   "s": 24.36,
+   "e": 24.76,
+   "p": 1.0
+  },
+  {
+   "w": "Donc,",
+   "s": 25.12,
+   "e": 25.5,
+   "p": 0.998
+  },
+  {
+   "w": "quand",
+   "s": 25.54,
+   "e": 25.74,
+   "p": 1.0
+  },
+  {
+   "w": "tu",
+   "s": 25.74,
+   "e": 25.92,
+   "p": 1.0
+  },
+  {
+   "w": "vends",
+   "s": 25.92,
+   "e": 26.14,
+   "p": 0.986
+  },
+  {
+   "w": "dans",
+   "s": 26.14,
+   "e": 26.26,
+   "p": 1.0
+  },
+  {
+   "w": "trois",
+   "s": 26.26,
+   "e": 26.52,
+   "p": 1.0
+  },
+  {
+   "w": "pays,",
+   "s": 26.52,
+   "e": 26.8,
+   "p": 1.0
+  },
+  {
+   "w": "tu",
+   "s": 26.94,
+   "e": 27.2,
+   "p": 0.995
+  },
+  {
+   "w": "n'as",
+   "s": 27.2,
+   "e": 27.28,
+   "p": 1.0
+  },
+  {
+   "w": "pas",
+   "s": 27.28,
+   "e": 27.44,
+   "p": 1.0
+  },
+  {
+   "w": "une",
+   "s": 27.44,
+   "e": 27.94,
+   "p": 1.0
+  },
+  {
+   "w": "TVA",
+   "s": 27.94,
+   "e": 28.38,
+   "p": 0.999
+  },
+  {
+   "w": "à",
+   "s": 28.38,
+   "e": 28.44,
+   "p": 0.528
+  },
+  {
+   "w": "gérer,",
+   "s": 28.44,
+   "e": 28.66,
+   "p": 1.0
+  },
+  {
+   "w": "tu",
+   "s": 28.8,
+   "e": 28.9,
+   "p": 0.994
+  },
+  {
+   "w": "en",
+   "s": 28.9,
+   "e": 28.98,
+   "p": 0.999
+  },
+  {
+   "w": "as",
+   "s": 28.98,
+   "e": 29.12,
+   "p": 1.0
+  },
+  {
+   "w": "trois.",
+   "s": 29.12,
+   "e": 29.44,
+   "p": 1.0
+  },
+  {
+   "w": "Le",
+   "s": 30.0,
+   "e": 30.2,
+   "p": 0.959
+  },
+  {
+   "w": "piège,",
+   "s": 30.2,
+   "e": 30.78,
+   "p": 0.999
+  },
+  {
+   "w": "c'est",
+   "s": 30.82,
+   "e": 31.28,
+   "p": 0.816
+  },
+  {
+   "w": "de",
+   "s": 31.28,
+   "e": 31.3,
+   "p": 0.369
+  },
+  {
+   "w": "facturer",
+   "s": 31.3,
+   "e": 31.76,
+   "p": 0.981
+  },
+  {
+   "w": "la",
+   "s": 31.76,
+   "e": 31.9,
+   "p": 0.978
+  },
+  {
+   "w": "mauvaise",
+   "s": 31.9,
+   "e": 32.24,
+   "p": 0.996
+  },
+  {
+   "w": "TVA",
+   "s": 32.24,
+   "e": 32.66,
+   "p": 0.998
+  },
+  {
+   "w": "ou",
+   "s": 32.66,
+   "e": 32.96,
+   "p": 0.881
+  },
+  {
+   "w": "pas",
+   "s": 32.96,
+   "e": 33.2,
+   "p": 0.994
+  },
+  {
+   "w": "de",
+   "s": 33.2,
+   "e": 33.34,
+   "p": 0.995
+  },
+  {
+   "w": "TVA",
+   "s": 33.34,
+   "e": 33.68,
+   "p": 0.999
+  },
+  {
+   "w": "du",
+   "s": 33.68,
+   "e": 33.78,
+   "p": 0.995
+  },
+  {
+   "w": "tout.",
+   "s": 33.78,
+   "e": 33.98,
+   "p": 1.0
+  },
+  {
+   "w": "L'argent",
+   "s": 34.12,
+   "e": 34.66,
+   "p": 0.996
+  },
+  {
+   "w": "que",
+   "s": 34.66,
+   "e": 34.96,
+   "p": 0.997
+  },
+  {
+   "w": "tu",
+   "s": 34.96,
+   "e": 35.08,
+   "p": 0.747
+  },
+  {
+   "w": "aurais",
+   "s": 35.08,
+   "e": 35.22,
+   "p": 0.999
+  },
+  {
+   "w": "dû",
+   "s": 35.22,
+   "e": 35.34,
+   "p": 0.997
+  },
+  {
+   "w": "récolter,",
+   "s": 35.34,
+   "e": 35.86,
+   "p": 0.999
+  },
+  {
+   "w": "l'État",
+   "s": 36.04,
+   "e": 36.6,
+   "p": 0.996
+  },
+  {
+   "w": "te",
+   "s": 36.6,
+   "e": 37.1,
+   "p": 0.965
+  },
+  {
+   "w": "le",
+   "s": 37.1,
+   "e": 37.18,
+   "p": 0.996
+  },
+  {
+   "w": "réclame",
+   "s": 37.18,
+   "e": 37.66,
+   "p": 1.0
+  },
+  {
+   "w": "quand",
+   "s": 37.66,
+   "e": 37.78,
+   "p": 0.995
+  },
+  {
+   "w": "même.",
+   "s": 37.78,
+   "e": 38.06,
+   "p": 0.998
+  },
+  {
+   "w": "Sauf",
+   "s": 38.2,
+   "e": 38.58,
+   "p": 1.0
+  },
+  {
+   "w": "que",
+   "s": 38.58,
+   "e": 38.66,
+   "p": 1.0
+  },
+  {
+   "w": "là,",
+   "s": 38.66,
+   "e": 38.86,
+   "p": 0.999
+  },
+  {
+   "w": "tu",
+   "s": 38.92,
+   "e": 39.1,
+   "p": 1.0
+  },
+  {
+   "w": "ne",
+   "s": 39.1,
+   "e": 39.18,
+   "p": 0.506
+  },
+  {
+   "w": "l'as",
+   "s": 39.18,
+   "e": 39.28,
+   "p": 0.991
+  },
+  {
+   "w": "plus,",
+   "s": 39.28,
+   "e": 39.44,
+   "p": 1.0
+  },
+  {
+   "w": "il",
+   "s": 39.62,
+   "e": 40.1,
+   "p": 0.998
+  },
+  {
+   "w": "sort",
+   "s": 40.1,
+   "e": 40.3,
+   "p": 0.989
+  },
+  {
+   "w": "de",
+   "s": 40.3,
+   "e": 40.44,
+   "p": 1.0
+  },
+  {
+   "w": "ta",
+   "s": 40.44,
+   "e": 40.54,
+   "p": 1.0
+  },
+  {
+   "w": "poche.",
+   "s": 40.54,
+   "e": 40.92,
+   "p": 1.0
+  },
+  {
+   "w": "La",
+   "s": 41.0,
+   "e": 41.22,
+   "p": 1.0
+  },
+  {
+   "w": "bonne",
+   "s": 41.22,
+   "e": 41.4,
+   "p": 0.999
+  },
+  {
+   "w": "nouvelle,",
+   "s": 41.4,
+   "e": 41.72,
+   "p": 1.0
+  },
+  {
+   "w": "c'est",
+   "s": 41.8,
+   "e": 41.98,
+   "p": 1.0
+  },
+  {
+   "w": "qu'il",
+   "s": 41.98,
+   "e": 42.08,
+   "p": 1.0
+  },
+  {
+   "w": "existe",
+   "s": 42.08,
+   "e": 42.52,
+   "p": 1.0
+  },
+  {
+   "w": "un",
+   "s": 42.52,
+   "e": 42.76,
+   "p": 1.0
+  },
+  {
+   "w": "système",
+   "s": 42.76,
+   "e": 43.12,
+   "p": 1.0
+  },
+  {
+   "w": "pour",
+   "s": 43.12,
+   "e": 43.3,
+   "p": 1.0
+  },
+  {
+   "w": "éviter",
+   "s": 43.3,
+   "e": 43.68,
+   "p": 1.0
+  },
+  {
+   "w": "de",
+   "s": 43.68,
+   "e": 43.82,
+   "p": 1.0
+  },
+  {
+   "w": "t'enregistrer",
+   "s": 43.82,
+   "e": 44.46,
+   "p": 0.995
+  },
+  {
+   "w": "dans",
+   "s": 44.46,
+   "e": 44.54,
+   "p": 1.0
+  },
+  {
+   "w": "trois",
+   "s": 44.54,
+   "e": 44.74,
+   "p": 0.923
+  },
+  {
+   "w": "pays.",
+   "s": 44.74,
+   "e": 45.08,
+   "p": 1.0
+  },
+  {
+   "w": "Ça",
+   "s": 45.22,
+   "e": 45.42,
+   "p": 0.997
+  },
+  {
+   "w": "s'appelle",
+   "s": 45.42,
+   "e": 45.8,
+   "p": 1.0
+  },
+  {
+   "w": "le",
+   "s": 45.8,
+   "e": 46.38,
+   "p": 0.999
+  },
+  {
+   "w": "guichet",
+   "s": 46.38,
+   "e": 46.96,
+   "p": 0.999
+  },
+  {
+   "w": "unique.",
+   "s": 46.96,
+   "e": 47.14,
+   "p": 0.455
+  },
+  {
+   "w": "La",
+   "s": 47.32,
+   "e": 47.58,
+   "p": 1.0
+  },
+  {
+   "w": "TVA",
+   "s": 47.58,
+   "e": 48.02,
+   "p": 1.0
+  },
+  {
+   "w": "internationale,",
+   "s": 48.02,
+   "e": 48.84,
+   "p": 0.998
+  },
+  {
+   "w": "ça",
+   "s": 48.84,
+   "e": 49.2,
+   "p": 1.0
+  },
+  {
+   "w": "ne",
+   "s": 49.2,
+   "e": 49.32,
+   "p": 0.965
+  },
+  {
+   "w": "se",
+   "s": 49.32,
+   "e": 49.4,
+   "p": 1.0
+  },
+  {
+   "w": "rattrape",
+   "s": 49.4,
+   "e": 49.84,
+   "p": 0.999
+  },
+  {
+   "w": "pas",
+   "s": 49.84,
+   "e": 50.08,
+   "p": 1.0
+  },
+  {
+   "w": "en",
+   "s": 50.08,
+   "e": 50.34,
+   "p": 1.0
+  },
+  {
+   "w": "panique.",
+   "s": 50.34,
+   "e": 50.94,
+   "p": 1.0
+  },
+  {
+   "w": "Ça",
+   "s": 51.0,
+   "e": 51.36,
+   "p": 1.0
+  },
+  {
+   "w": "se",
+   "s": 51.36,
+   "e": 51.5,
+   "p": 1.0
+  },
+  {
+   "w": "conçoit",
+   "s": 51.5,
+   "e": 52.24,
+   "p": 1.0
+  },
+  {
+   "w": "en",
+   "s": 52.24,
+   "e": 52.38,
+   "p": 1.0
+  },
+  {
+   "w": "même",
+   "s": 52.38,
+   "e": 52.58,
+   "p": 1.0
+  },
+  {
+   "w": "temps",
+   "s": 52.58,
+   "e": 52.82,
+   "p": 1.0
+  },
+  {
+   "w": "que",
+   "s": 52.82,
+   "e": 53.0,
+   "p": 1.0
+  },
+  {
+   "w": "ta",
+   "s": 53.0,
+   "e": 53.06,
+   "p": 0.999
+  },
+  {
+   "w": "structure.",
+   "s": 53.06,
+   "e": 53.36,
+   "p": 1.0
+  },
+  {
+   "w": "Si",
+   "s": 53.76,
+   "e": 53.9,
+   "p": 1.0
+  },
+  {
+   "w": "tu",
+   "s": 53.9,
+   "e": 54.08,
+   "p": 1.0
+  },
+  {
+   "w": "vends",
+   "s": 54.08,
+   "e": 54.38,
+   "p": 0.999
+  },
+  {
+   "w": "à",
+   "s": 54.38,
+   "e": 54.48,
+   "p": 1.0
+  },
+  {
+   "w": "l'international",
+   "s": 54.48,
+   "e": 54.98,
+   "p": 1.0
+  },
+  {
+   "w": "et",
+   "s": 54.98,
+   "e": 55.4,
+   "p": 0.999
+  },
+  {
+   "w": "que",
+   "s": 55.4,
+   "e": 55.6,
+   "p": 1.0
+  },
+  {
+   "w": "tu",
+   "s": 55.6,
+   "e": 55.72,
+   "p": 0.999
+  },
+  {
+   "w": "as",
+   "s": 55.72,
+   "e": 55.86,
+   "p": 1.0
+  },
+  {
+   "w": "un",
+   "s": 55.86,
+   "e": 55.94,
+   "p": 1.0
+  },
+  {
+   "w": "doute,",
+   "s": 55.94,
+   "e": 56.18,
+   "p": 1.0
+  },
+  {
+   "w": "commente",
+   "s": 56.32,
+   "e": 56.78,
+   "p": 0.985
+  },
+  {
+   "w": "TVA.",
+   "s": 56.78,
+   "e": 57.22,
+   "p": 1.0
+  }
+ ]
+}
