@@ -63,4 +63,29 @@ Pour chaque coupe :
 3. Rendu de 1 s à 0,25× et planche de 8 images.
 4. Re-transcription des 2 s autour de la coupe : les mots avant et après doivent être intacts.
 
-Une coupe qui échoue descend d'un niveau et repasse l'audit. Les résultats seront ajoutés dans ce fichier à la livraison.
+Une coupe qui échoue descend d'un niveau et repasse l'audit.
+
+### Résultats (master 60 fps livré)
+
+Scripts : `tests_audit.py` (1 et 4 → `tests/audit_audio.json`) et `tests/av_audit.py` (2 et 3 → `tests/av_audit.json`, planche `tests/cuts_strip.jpg`).
+
+| # | t (s) | niveau | (1) RMS −60 / +60 ms (dBFS) | (2) déplacement du nez / écart des yeux : base60 / master | (3) planche 0,25× | (4) re-transcription | décision |
+|---|---|---|---|---|---|---|---|
+| 1 | 7.32 | a | -49.3 / -45.0 ✅ | 0.065 / 0.150 | ✅ | « cas. \| Toi, » ✅ | **a retenu** |
+| 2 | 14.85 | c | -43.8 / -45.9 ✅ | 0.177 / 0.054 | ✅ | « plante. \| Pour » ✅ | **c retenu** |
+| 3 | 19.26 | a | -42.5 / -54.7 ✅ | 0.014 / 0.049 | ✅ | « simple, \| mais » ✅ | **a retenu** |
+| 4 | 25.19 | b | -50.9 / -55.8 ✅ | 0.234 / 0.187 | ✅ | « client. \| Donc, » ✅ | **b retenu** |
+| 5 | 29.71 | b | -44.0 / -51.7 ✅ | 0.121 / 0.089 | ✅ | « trois. \| Le » ✅ | **b retenu** |
+| 6 | 34.23 | a | -37.7 / -47.5 ✅ | 0.026 / 0.078 | ✅ | « tout, \| l » ✅ | **a retenu** |
+| 7 | 36.10 | a | -39.5 / -53.4 ✅ | 0.010 / 0.019 | ✅ | « récolter, \| l » ✅ | **a retenu** |
+| 8 | 41.03 | a | -44.9 / -50.3 ✅ | 0.019 / 0.011 | ✅ | « poche. \| La » ✅ | **a retenu** |
+| 9 | 45.24 | b | -44.9 / -53.3 ✅ | 0.000 / — | ✅ | « pays. \| Ça » ✅ | **b retenu** |
+| 10 | 47.34 | b | -49.6 / -46.5 ✅ | 0.193 / — | ✅ | « unique. \| La » ✅ | **b retenu** |
+
+Lecture :
+- **(2)** : sur base60, les coupes **a** bougent de 0,010 à 0,065 écart d'yeux (≈ 1 à 6 px).
+  - Sur le master, l'écart inclut le punch-in de 104 % voulu sur le côté sortant.
+  - Les coupes **b** (0,12 à 0,23) sont couvertes par le zoom-whip ou par la fenêtre plein cadre (« — » : pas de visage détecté, fenêtre impots.gouv.fr en plein cadre).
+  - La coupe **c** (0,177) passe par le morph de 6 images.
+- **Coupe 2, règle de repli** : le morph a été contrôlé image par image (`scratch/morph_*.jpg`). Il reste un léger double trait sur la mâchoire pendant 2 images, masqué par la typographie cinétique « TOUT LE MONDE SE PLANTE ». La coupe reste donc en **c** ; le repli en **d** n'a pas été nécessaire.
+- Aucune coupe n'a échoué, aucune n'a été rétrogradée.

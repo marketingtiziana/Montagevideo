@@ -73,13 +73,22 @@
   - Jamais deux à la fois, jamais sur une syllabe.
   - Musique : aucune (non fournie).
 
-## 4. À valider (une seule fois)
+## 4. Validé (« je valide »)
 
-1. **Coupes** : `CUTS.md`, 57,5 s, 10 coupes, avec la règle de repli de la coupe 2.
-2. **Hook** : je sous-titre « une formation **dans trois pays** ». Whisper hésite avec « d'entreprise ».
-3. **CTA** : whisper entend « commande TVA ». Vu le format, je pense qu'elle dit « **commente TVA** » (mot-clé en commentaire), et la carte de fin dirait « Commente « TVA » ».
-   - ⚠️ Même doute rétroactif sur le reel 6 : « commande diagnostic » serait alors « commente diagnostic ». Dis-moi si je dois corriger la carte de fin et le sous-titre du reel 6.
-4. **Variables non fournies, défauts proposés** :
-   - palette du reel 6 : accent `#FFC83D`, accent2 `#E5484D`, fenêtres **light** ;
-   - pas de marque ni de handle ;
-   - pas de clés Pexels / Unsplash nécessaires (aucun B-roll).
+Coupes (57,5 s, 10 coupes, repli de la coupe 2), hook « dans trois pays », CTA « Commente « TVA » », palette du reel 6 (#FFC83D / #E5484D, fenêtres light), sans handle.
+
+## 5. Écarts au plan, décidés au contrôle des images
+
+- **3 · « LE TRUC » derrière l'épaule** : sur une seule ligne de 230 px, le mot passait presque entièrement derrière la tête (« LE … UC »).
+  - Il est maintenant sur 2 lignes à gauche de la tête : « LE » 96 px, « TRUC » 128 px.
+  - Seule la fin du « C » glisse derrière les cheveux, et la main passe devant le mot.
+  - Le détourage reçoit le même étalonnage que l'image de base (vignettage recalé en coordonnées plein cadre), donc plus de couture visible sur le visage.
+- **9 · LA RÈGLE (flip) et 14 · trésorerie** : le moteur refuse un `scale` d'entrée sur un cadre dont un enfant anime `scaleX` (flip, barre qui se vide). Ces deux cartes entrent donc en glissé vertical (ressort) au lieu d'un zoom.
+- **20 · freeze-frame** : le contour blanc suivait aussi le bord du bureau (le détourage inclut le plateau). Il est coupé sous y = 1600 et ne dessine plus que la silhouette.
+- **Sous-titres** :
+  - les chiffres restent fixes (« 20 % ») ; le compteur 0 → 20 ne vit que sur la carte ;
+  - en mode fenêtre, les sous-titres descendent de 45 px pour ne plus toucher le bas des fenêtres ;
+  - ils sont masqués pendant la typographie cinétique, qui reprend les mêmes mots.
+- **Planche contact** : elle est tirée du master livré (`tests/contact_elements.jpg`, une vignette par déclencheur à +0,45 s) et non de `higgsedit sheet`.
+  - Le bac à sable Higgsfield est remis à zéro entre deux appels et le rendu complet y a calé (`ConsumerStalled` à 466 ms/image).
+  - Le master a donc été rendu en 6 segments de 10 s (`higgsedit render --range`) puis assemblé sans réencodage.

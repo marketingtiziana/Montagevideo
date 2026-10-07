@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- Reel 7, element 12 — generic invoice shown inside a macOS window. Illustration only: no seller, no customer name,
+     no invoice number, no amounts (grey bars). 760x440 CSS px, captured at 2x (1520x880) as the window content. -->
+<html><head><meta charset="utf-8"><style>
+@font-face { font-family: I; src: url(Inter.ttf); font-weight: 100 900; }
+html, body { margin: 0; width: 760px; height: 440px; background: #fff; font-family: I; color: #111; }
+.h { position: absolute; left: 40px; top: 30px; font-size: 30px; font-weight: 800; letter-spacing: 1px; }
+.meta { position: absolute; right: 40px; top: 34px; text-align: right; font-size: 15px; color: #6E6E73; line-height: 22px; }
+.to { position: absolute; left: 40px; top: 86px; font-size: 15px; color: #3A3A3C; line-height: 22px; }
+.to b { color: #111; }
+table { position: absolute; left: 40px; top: 150px; width: 680px; border-collapse: collapse; font-size: 18px; }
+td { padding: 14px 0; border-bottom: 1px solid #E5E5EA; }
+td.r { text-align: right; width: 160px; }
+.bar { display: inline-block; width: 110px; height: 14px; border-radius: 7px; background: #D1D1D6; vertical-align: middle; }
+tr.tot td { border-bottom: none; font-weight: 800; padding-top: 18px; }
+.lbl { font-size: 13px; color: #8E8E93; display: block; margin-top: 2px; }
+</style></head><body>
+<div class="h">FACTURE</div>
+<div class="meta">Vente en ligne<br>Paiement par carte</div>
+<div class="to">Client : <b>particulier</b><br>Pays du client : <b>Belgique</b></div>
+<table>
+  <tr id="l1"><td>Formation en ligne<span class="lbl">accès à vie</span></td><td class="r"><span class="bar"></span></td></tr>
+  <tr id="l2"><td>TVA 20 % (France)</td><td class="r"><span class="bar"></span></td></tr>
+  <tr id="l3"><td>TVA 0 %</td><td class="r"><span class="bar"></span></td></tr>
+  <tr class="tot"><td>Total TTC</td><td class="r"><span class="bar" style="background:#AEAEB2"></span></td></tr>
+</table>
+</body></html>
