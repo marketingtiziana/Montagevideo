@@ -1,0 +1,34 @@
+{
+  "slug": "exemple-3-erreurs",
+  "cta": "COMMENTE « AUDIT »",
+  "timeline": {
+    "labels": ["ERREUR 1", "ERREUR 2", "ERREUR 3"],
+    "slides": {"2": 0, "3": 1, "4": 2}
+  },
+  "posts": [
+    [
+      "Tu peux faire une expatriation parfaite sur le papier.",
+      "Et tout perdre sur 3 détails que personne ne t'explique.",
+      "Je t'explique ➡️"
+    ],
+    [
+      "❌ ERREUR 1 : partir avant de couper.",
+      "Tu t'installes ailleurs. Mais ton bail, tes comptes, ta société : tout reste en France.",
+      "Pour le fisc, tu n'es jamais parti.\nTu cumules deux fiscalités au lieu d'une."
+    ],
+    [
+      "❌ ERREUR 2 : choisir la destination sur Instagram.",
+      "Le pays qui va à ton voisin ne va pas forcément à ton activité, ta famille, tes objectifs.",
+      "Le bon montage part de TON profil.\nPas d'une story au bord d'une piscine."
+    ],
+    [
+      "❌ ERREUR 3 : décider trop tard.",
+      "Une expatriation propre demande 10 à 12 semaines.\nVisa, structure, logement, banque, rupture fiscale.",
+      "Chaque mois d'hésitation a un prix. Et il est mensuel."
+    ],
+    [
+      "🟢 La bonne nouvelle : les 3 se corrigent AVANT le départ.",
+      "🎁 Je t'offre un échange pour analyser ta situation.\n🎁 Commente AUDIT ou envoie-moi un DM."
+    ]
+  ]
+}

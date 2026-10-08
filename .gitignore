@@ -16,3 +16,5 @@ transcript.txt
 __pycache__/
 carousel/out/html/
 carousel/out_white/html/
+carousel/decks/*/html/
+carousel/out_test/

@@ -21,3 +21,18 @@ filet de progression, flèche « SUITE → », frise texte sur les slides rétro
 ```bash
 python3 carousel/build_carousel_white.py   # -> carousel/out_white/
 ```
+
+## Nouveau carrousel sur un autre sujet (même design, même écriture Threads)
+
+`threads_text.py` reproduit le rendu texte de l'app Threads iPhone (calé sur les screens
+d'origine : Inter 600 à 49 px, interligne 75 px, 23 px entre paragraphes, pastille grise n/N).
+`make_carousel.py` enchaîne : texte → écrans « Threads » → slides blanches.
+
+```bash
+cp carousel/exemple_contenu.json carousel/mon_sujet.json   # éditer slug, cta, timeline, posts
+python3 carousel/make_carousel.py carousel/mon_sujet.json  # -> carousel/decks/<slug>/
+```
+
+Chaque post est une liste de paragraphes ; un `\n` dans un paragraphe fait un simple retour
+à la ligne (comme dans Threads). Les emoji sont rendus avec Noto Color Emoji, pas les emoji
+Apple : c'est la seule différence visible avec un vrai screen.

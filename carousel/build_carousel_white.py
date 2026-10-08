@@ -63,26 +63,34 @@ body { font-family: 'Inter', sans-serif; background: #fff; color: #000; position
 """
 
 
-def build_html(i: int, kicker: str, step: int | None) -> str:
+def build_html(
+    i: int,
+    step: int | None,
+    *,
+    screens: Path = SCREENS,
+    total: int = len(SLIDES),
+    timeline_labels: list[str] = TIMELINE,
+    cta: str = "COMMENTE « JANVIER »",
+) -> str:
     n = i + 1
-    img = SCREENS / f"{n}.jpg"
+    img = screens / f"{n}.jpg"
     zone_bottom = 290 if step is not None else 220
     avail_h = (H - zone_bottom) - 190
     scale = min(1.0, avail_h / card_height_hint(img, inner_w=888))
     shot_w = int(888 * scale)
-    pct = (i + 1) / len(SLIDES) * 100
+    pct = (i + 1) / total * 100
 
     timeline = ""
     if step is not None:
         cells = "".join(
             f'<div class="tl {"now" if k == step else "done" if k < step else ""}">{m}</div>'
-            for k, m in enumerate(TIMELINE)
+            for k, m in enumerate(timeline_labels)
         )
         timeline = f'<div class="timeline">{cells}</div>'
     logo = "" if step is not None else f'<div class="logo">{THREADS_LOGO}<span>Threads</span></div>'
     bottom_right = (
-        '<div class="cta">COMMENTE « JANVIER »</div>'
-        if n == len(SLIDES)
+        f'<div class="cta">{cta}</div>'
+        if n == total
         else '<div class="swipe">SUITE <span class="arr">→</span></div>'
     )
     return f"""<!doctype html><html lang="fr"><head><meta charset="utf-8">
@@ -90,7 +98,7 @@ def build_html(i: int, kicker: str, step: int | None) -> str:
 <body>
 <div class="top">
   <div></div>
-  <div class="counter"><b>{n:02d}</b> / {len(SLIDES)}</div>
+  <div class="counter"><b>{n:02d}</b> / {total}</div>
 </div>
 <div class="shot-wrap" style="bottom:{zone_bottom}px">
   <div class="shot" style="width:{shot_w}px"><img src="{img_data_uri(img)}" alt="screen {n}"></div>
@@ -104,25 +112,42 @@ def build_html(i: int, kicker: str, step: int | None) -> str:
 </body></html>"""
 
 
-def main() -> None:
-    HTML.mkdir(parents=True, exist_ok=True)
+def build_deck(
+    screens: Path,
+    out: Path,
+    steps: list[int | None],
+    *,
+    timeline_labels: list[str] = TIMELINE,
+    cta: str = "COMMENTE « JANVIER »",
+) -> list[Path]:
+    """Génère un carrousel blanc complet : steps[i] = étape de frise de la slide i (ou None)."""
+    html_dir = out / "html"
+    html_dir.mkdir(parents=True, exist_ok=True)
     pngs: list[Path] = []
-    for i, (kicker, _title, _accent, step) in enumerate(SLIDES):
-        html = HTML / f"slide_{i + 1:02d}.html"
-        png = OUT / f"slide_{i + 1:02d}.png"
-        html.write_text(build_html(i, kicker, step), encoding="utf-8")
+    for i, step in enumerate(steps):
+        html = html_dir / f"slide_{i + 1:02d}.html"
+        png = out / f"slide_{i + 1:02d}.png"
+        html.write_text(
+            build_html(i, step, screens=screens, total=len(steps), timeline_labels=timeline_labels, cta=cta),
+            encoding="utf-8",
+        )
         render(html, png)
         pngs.append(png)
         print("ok", png.name)
-    contact_sheet(pngs, OUT / "planche.jpg", bg="#EDEDED")
+    contact_sheet(pngs, out / "planche.jpg", bg="#EDEDED")
     preview = "".join(
         f'<img src="{p.name}" style="width:360px;margin:8px;border:1px solid #ddd">' for p in pngs
     )
-    (OUT / "preview.html").write_text(
+    (out / "preview.html").write_text(
         f'<!doctype html><meta charset="utf-8"><body style="background:#f4f4f4;padding:20px">{preview}</body>',
         encoding="utf-8",
     )
     print("ok planche.jpg, preview.html")
+    return pngs
+
+
+def main() -> None:
+    build_deck(SCREENS, OUT, [step for (_k, _t, _a, step) in SLIDES])
 
 
 if __name__ == "__main__":
