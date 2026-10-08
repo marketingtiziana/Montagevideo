@@ -12,3 +12,12 @@ python3 carousel/build_carousel.py   # -> carousel/out/slide_01.png … slide_10
 ```
 
 Textes de chapitres et couleurs d'accent : liste `SLIDES` en tête de `build_carousel.py`.
+
+## Variante blanche minimaliste
+
+Fond blanc pur, screen posé tel quel sans carte, repère de chapitre gris, compteur,
+filet de progression, flèche « SUITE → », frise texte sur les slides rétroplanning.
+
+```bash
+python3 carousel/build_carousel_white.py   # -> carousel/out_white/
+```

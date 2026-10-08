@@ -221,11 +221,11 @@ def render(html_path: Path, png_path: Path) -> None:
     Image.open(png_path).crop((0, 0, W, H)).save(png_path)
 
 
-def contact_sheet(pngs: list[Path], dest: Path) -> None:
+def contact_sheet(pngs: list[Path], dest: Path, bg: str = "#1A1D26") -> None:
     cols, pad = 5, 30
     tw, th = 400, 500
     rows = (len(pngs) + cols - 1) // cols
-    sheet = Image.new("RGB", (cols * tw + (cols + 1) * pad, rows * th + (rows + 1) * pad), "#1A1D26")
+    sheet = Image.new("RGB", (cols * tw + (cols + 1) * pad, rows * th + (rows + 1) * pad), bg)
     for k, p in enumerate(pngs):
         im = Image.open(p).resize((tw, th), Image.LANCZOS)
         x = pad + (k % cols) * (tw + pad)
