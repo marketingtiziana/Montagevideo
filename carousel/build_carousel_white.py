@@ -2,8 +2,8 @@
 """Variante blanche et minimaliste du carrousel (10 slides 1080x1350).
 
 Fond blanc pur, le screen Threads posé tel quel (sans carte ni ombre : il est
-déjà blanc, il se fond dans la slide). Autour, seulement : un repère de chapitre
-en gris, le compteur, un filet de progression et une flèche. Sur les slides
+déjà blanc, il se fond dans la slide). Autour, seulement :
+le compteur, un filet de progression et une flèche. Sur les slides
 rétroplanning, une frise texte OCT · NOV · DÉC · 1ER JANV, étape courante en noir.
 
 Usage :  python3 carousel/build_carousel_white.py
@@ -89,7 +89,7 @@ def build_html(i: int, kicker: str, step: int | None) -> str:
 <style>{CSS}</style></head>
 <body>
 <div class="top">
-  <div class="kicker">{kicker}</div>
+  <div></div>
   <div class="counter"><b>{n:02d}</b> / {len(SLIDES)}</div>
 </div>
 <div class="shot-wrap" style="bottom:{zone_bottom}px">

@@ -15,7 +15,7 @@ Textes de chapitres et couleurs d'accent : liste `SLIDES` en tête de `build_car
 
 ## Variante blanche minimaliste
 
-Fond blanc pur, screen posé tel quel sans carte, repère de chapitre gris, compteur,
+Fond blanc pur, screen posé tel quel sans carte, compteur,
 filet de progression, flèche « SUITE → », frise texte sur les slides rétroplanning.
 
 ```bash
