@@ -5,12 +5,17 @@ Modifier ce fichier puis relancer `bash reel_broll/build.sh` regenere le reel.
 Aucune voix : musique seule + un hook qui s'affiche.
 """
 
-SRC = "still.jpg"            # source : photo (.jpg/.png) OU video (.mp4/.mov)
+SRC = "clip.mov"             # source : photo (.jpg/.png) OU video (.mp4/.mov)
 SRC_START = 0.0             # video seulement : debut de la fenetre a garder (s)
+SRC_LEN = 0.0               # video seulement : longueur de la fenetre dans la SOURCE.
+                            # 0 = meme longueur que DURATION (vitesse normale).
+                            # Sinon la fenetre est etiree sur DURATION : un rush de
+                            # 9,10 s avec SRC_LEN = 9.10 et DURATION = 10 passe a 91 %
+                            # de vitesse, soit un ralenti de 9 % imperceptible.
 OUT = "final_broll.mp4"
 OUT_W, OUT_H = 1080, 1920
 FPS = 30
-DURATION = 10.0             # duree exacte du reel (s)
+DURATION = 9.10             # duree du reel (s) — ici celle du rush, non modifie
 
 # ---------------------------------------------------------------------------
 # 1. MOUVEMENT DE CAMERA
@@ -22,25 +27,22 @@ DURATION = 10.0             # duree exacte du reel (s)
 #         lissee), donc un zoom ne decadre jamais le sujet.
 #         Mettre ZOOM_START = ZOOM_END = 1.0 pour une coupe franche sans zoom.
 ZOOM_START = 1.000
-ZOOM_END   = 1.080
+ZOOM_END   = 1.000
 # Point vers lequel le cadre derive (fractions de l'image source).
 # Le visage detecte est centre en (0.567, 0.399).
 ANCHOR_X, ANCHOR_Y = 0.567, 0.440
 ANCHOR_PULL = 0.35          # 0 = zoom centre image ; 1 = zoom plein sur l'ancre
                             # (photo seulement ; en video on suit le visage reel)
 TRACK_SMOOTH = 20           # video : lissage de la trajectoire du visage (+/- images)
-FOLLOW = 0.80               # video : 1.0 = colle au visage ; <1 laisse respirer
+FOLLOW = 0.00               # video : 1.0 = colle au visage ; <1 laisse respirer
+FACE_Y_TARGET = 0.42        # video : hauteur ou l'on pose le visage dans le cadre
+                            # (<0.5 = sujet dans le tiers haut, place pour le hook)
 
 # ---------------------------------------------------------------------------
 # 2. ETALONNAGE — premium et naturel, peau preservee
 # ---------------------------------------------------------------------------
-GRADE = (
-    "curves=r='0/0.015 0.25/0.248 0.75/0.780 1/0.988'"
-          ":g='0/0.015 0.25/0.245 0.75/0.775 1/0.988'"
-          ":b='0/0.026 0.25/0.252 0.75/0.765 1/0.978',"
-    "eq=contrast=1.055:saturation=1.06:gamma=0.985,"
-    "unsharp=5:5:0.50:5:5:0.0"
-)
+# "" = aucun etalonnage : l'image sort telle quelle.
+GRADE = ""
 
 # Voile sombre en bas : rend le texte lisible sans poser de "boite" dessus.
 SCRIM_TOP    = 0.50         # ou le voile commence (fraction de hauteur)
@@ -66,7 +68,7 @@ HOOK_PAD_X = 37               # marge laterale dans le cartouche
 HOOK_PAD_TOP, HOOK_PAD_BOTTOM = 34, 32
 HOOK_RADIUS = 20              # rayon des coins
 HOOK_MAX_W = 0.86             # largeur max du cartouche ; au-dela la police retrecit
-HOOK_Y = 0.615                # haut du cartouche (fraction de hauteur)
+HOOK_Y = 0.650                # haut du cartouche (fraction de hauteur)
 
 SUB_CAP = 32                  # hauteur de capitale de la mention
 SUB_GAP = 29                  # ecart entre le cartouche et la mention
@@ -81,8 +83,9 @@ HOOK_FADE = 0.26              # duree du fondu d'apparition (s)
 # 4. SON — musique seule, aucune voix
 # ---------------------------------------------------------------------------
 MUSIC = True
-MUSIC_BPM = 96              # 4 mesures de 2,5 s = 10 s pile
+MUSIC_HAT = False           # charley : False = arrangement plus calme
+MUSIC_BPM = 0               # 0 = cale 4 mesures sur DURATION (la boucle tombe juste)
 MUSIC_GAIN = 0.60
-WHOOSH_AT = 0.45            # bruitage sur l'arrivee du hook
+WHOOSH_AT = 0.0             # 0 = aucun bruitage (musique seule)
 WHOOSH_GAIN = 0.16
 TARGET_LUFS = -14.0         # norme plateformes

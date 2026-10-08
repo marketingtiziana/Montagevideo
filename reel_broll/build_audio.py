@@ -12,7 +12,7 @@ import numpy as np
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
-from config import (DURATION, MUSIC, MUSIC_BPM, MUSIC_GAIN,
+from config import (DURATION, MUSIC, MUSIC_BPM, MUSIC_GAIN, MUSIC_HAT,
                     WHOOSH_AT, WHOOSH_GAIN, TARGET_LUFS)
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
@@ -21,8 +21,11 @@ OUT = "a_broll.wav"
 N = int(round(DURATION * SR))
 t = np.arange(N) / SR
 
-BEAT = 60.0 / MUSIC_BPM            # 0.625 s
-BAR = 4 * BEAT                     # 2.5 s
+# MUSIC_BPM = 0 : on cale 4 mesures sur la duree du reel, sinon la boucle se
+# fait couper au milieu d'une mesure.
+BPM = MUSIC_BPM if MUSIC_BPM > 0 else 4 * 4 * 60.0 / DURATION
+BEAT = 60.0 / BPM
+BAR = 4 * BEAT
 
 
 def note(freq, start, dur, amp, decay, harm=(1.0, 0.35, 0.12), attack=0.004):
@@ -110,15 +113,16 @@ if MUSIC:
     for b, (root, chord) in enumerate(PROG):
         t0 = b * BAR
         sub(root, t0, BAR * 0.95)
-        pad([f / 2 for f in chord[:3]], t0, BAR * 1.02, amp=0.09)
+        pad([f / 2 for f in chord[:3]], t0, BAR * 1.02, amp=0.125)
         # arpege en croches : monte puis redescend, legerement swingue
         order = [0, 1, 2, 3, 2, 1, 2, 3]
         for k, idx in enumerate(order):
             swing = 0.012 if k % 2 else 0.0
-            note(chord[idx], t0 + k * BEAT / 2 + swing, 0.55, 0.16, decay=7.0)
-        for k in range(8):
-            if k % 2:
-                hat(t0 + k * BEAT / 2, amp=0.035)
+            note(chord[idx], t0 + k * BEAT / 2 + swing, 0.60, 0.115, decay=5.5)
+        if MUSIC_HAT:
+            for k in range(8):
+                if k % 2:
+                    hat(t0 + k * BEAT / 2, amp=0.035)
 
     # fondu de sortie : la boucle se referme au lieu d'etre coupee
     tail = int(1.1 * SR)
@@ -144,4 +148,4 @@ subprocess.run(
             f"aformat=channel_layouts=stereo,aresample={SR}",
      "-c:a", "pcm_s16le", OUT], check=True)
 
-print(f"-> {OUT}  {DURATION:.2f}s  ({MUSIC_BPM} BPM, 4 mesures, musique seule)")
+print(f"-> {OUT}  {DURATION:.2f}s  ({BPM:.1f} BPM, 4 mesures de {BAR:.2f}s, musique seule)")
