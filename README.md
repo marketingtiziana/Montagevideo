@@ -81,3 +81,49 @@ Modifier ce fichier et relancer `build.sh` suffit.
 - `build_video.py` vérifie que le nombre d'images produit correspond à la timeline ;
 - après rendu, une passe de détection de visage confirme que la tête n'est jamais coupée
   et que le visage ne descend jamais dans la zone des sous-titres.
+
+## `reel_broll/` — réel B-roll 10 s à partir d'une photo
+
+Transforme une photo verticale (`still.jpg`) en un réel **1080×1920 / 10 s**,
+**sans voix** : musique seule et un hook qui s'affiche.
+
+```bash
+bash reel_broll/build.sh     # still.jpg -> final_broll.mp4
+```
+
+| Fichier | Rôle |
+|---|---|
+| `config.py` | **fichier de projet** : hook, cadrage, étalonnage, musique |
+| `build_video.py` | Ken Burns ancré sur le visage + étalonnage → `v_broll.mp4` |
+| `gen_hook.py` | voile dégradé, trait d'accent, lignes de hook (PNG) + `layout.json` |
+| `build_audio.py` | musique synthétisée (96 BPM, 4 mesures) → `a_broll.wav` |
+| `compose.py` | incrustations animées + mixage → `final_broll.mp4` |
+| `check.py` | contrôles automatiques, sort en erreur si un critère échoue |
+
+Changer le hook, le cadrage ou la musique = éditer `config.py` et relancer
+`build.sh`. Les temps sont en secondes sur la timeline finale.
+
+### Points techniques
+
+- **Ligne de base commune.** Caler chaque glyphe sur son propre haut de boîte
+  fait flotter les capitales accentuées (le É de RÉUSSITE descendait sous les
+  autres lettres) ; le tracé se fait donc sur une baseline fixe, en avançant
+  avec la chasse réelle du glyphe.
+- **`layout.json`.** La hauteur de ligne dépend des métriques de la police
+  chargée. `gen_hook.py` la publie, `compose.py` la lit : recalculer la même
+  valeur des deux côtés la ferait dériver des PNG à la première retouche.
+- **`-loop 1` sur les images fixes.** Une image fixe n'a qu'un seul point de
+  temps : sans boucle, les fondus basés sur `t` ne se déclenchent jamais.
+- **Zoom limité à 8 %.** Au-delà, le visage descend dans le cadre et le hook
+  finit par empiéter sur la zone du menton.
+
+### Contrôles passés
+
+Durée exacte (300 images / 10,00 s) ; visage détecté sur 300/300 images, jamais
+coupé en haut ni recouvert par le hook (marge 34 px) ; bloc de texte au-dessus
+de la zone d'interface des plateformes (bas à 0,815) ; audio sans silence ni
+saturation, normalisé à −14 LUFS.
+
+> La musique est **synthétisée** par `build_audio.py`, pas une piste sous
+> licence : `MUSIC = False` la coupe, ou remplacez `a_broll.wav` par votre
+> propre piste avant `compose.py`.
