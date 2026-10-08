@@ -30,6 +30,8 @@ python3 pipeline/gen_ass.py            # -> subs.ass
 python3 pipeline/make_assets.py        # -> assets/*.png (drapeaux, pastilles de taux, badges)
 python3 pipeline/build_final_video.py  # -> finalv.mp4 (sous-titres + incrustations + flashs)
 bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier final
+
+python3 pipeline/make_cover.py photo.jpg jaune   # -> covers/vignette_reel_jaune.jpg (cover 1080x1920)
 ```
 
 ## Fichiers
@@ -42,6 +44,7 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 | `make_assets.py` | Dessine les incrustations (drapeaux, pastilles de taux, badges ×3 / OSS) en PNG transparents |
 | `build_final_video.py` | Compose `base.mp4` + sous-titres + incrustations animées (fondu/glissé) + flashs de transition |
 | `mix_audio.sh` | Mixe les bruitages (whoosh/pop) et scelle le fichier final |
+| `make_cover.py` | Vignette de réel 9:16 : photo recadrée + dégradé sombre + titre Anton empilé, badge YouTube, « FAUX ! » en accent (jaune ou rouge) |
 
 ## Notes
 - Le modèle `base` fait des fautes (chiffres, noms propres) : **toujours relire/corriger** le texte des
