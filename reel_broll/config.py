@@ -37,34 +37,37 @@ GRADE = (
 # Voile sombre en bas : rend le texte lisible sans poser de "boite" dessus.
 SCRIM_TOP    = 0.50         # ou le voile commence (fraction de hauteur)
 SCRIM_BOTTOM = 0.96         # ou il atteint son maximum
-SCRIM_ALPHA  = 0.46         # opacite max
+SCRIM_ALPHA  = 0.0          # 0 = pas de voile (le cartouche porte le texte)
 
 # ---------------------------------------------------------------------------
-# 3. HOOK — le seul texte du reel
+# 3. HOOK — cartouche blanc + mention, dans le style demande
 # ---------------------------------------------------------------------------
-# Une ligne par element de la liste. ~mot~ = mot mis en avant (ambre).
+# Deux lignes centrees, noir sur cartouche blanc arronde ; la largeur du
+# cartouche suit le texte (il ne reste jamais de blanc vide sur les cotes).
 HOOK = [
-    "S'EXPATRIER",
-    "NE VOUS REND PAS",
-    "~NON-RÉSIDENT FISCAL~",
+    "POURQUOI S’EXPATRIER",
+    "NE SUFFIT PAS ?",
 ]
-HOOK_FONT = "fonts/Anton-Regular.ttf"
-HOOK_SIZE = 86
-HOOK_TRACKING = 2           # interlettrage
-HOOK_LINE_GAP = 12          # espace entre les lignes (px)
-HOOK_X = 0.085              # bord gauche du bloc (fraction de largeur)
-HOOK_Y = 0.598              # haut du bloc (fraction de hauteur) — sous le visage
-HOOK_IN = 0.55              # apparition de la 1re ligne (s)
-HOOK_STAGGER = 0.13         # decalage entre les lignes (s)
-HOOK_RISE = 30              # montee a l'apparition (px)
-HOOK_FADE = 0.34            # duree du fondu d'apparition (s)
-HOOK_ACCENT = (255, 196, 77)   # ambre chaud
-HOOK_WHITE = (255, 255, 255)
+HOOK_SUB = "LIS LA DESCRIPTION"       # mention sous le cartouche ; "" pour l'enlever
 
-# Petit trait d'accent au-dessus du hook
-BAR_W, BAR_H = 124, 6
-BAR_GAP = 30                # espace entre le trait et la 1re ligne
-BAR_IN = 0.34               # le trait arrive avant le texte
+# Liberation Sans Bold = clone metrique d'Arial, la graisse du modele.
+HOOK_FONT = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
+HOOK_CAP = 45                 # hauteur de capitale visee (px) — releve sur le modele
+HOOK_PITCH = 72               # pas entre les deux lignes (px)
+HOOK_PAD_X = 37               # marge laterale dans le cartouche
+HOOK_PAD_TOP, HOOK_PAD_BOTTOM = 34, 32
+HOOK_RADIUS = 20              # rayon des coins
+HOOK_MAX_W = 0.86             # largeur max du cartouche ; au-dela la police retrecit
+HOOK_Y = 0.615                # haut du cartouche (fraction de hauteur)
+
+SUB_CAP = 32                  # hauteur de capitale de la mention
+SUB_GAP = 29                  # ecart entre le cartouche et la mention
+SUB_STROKE = 5                # contour noir : lisible sur n'importe quel fond
+
+HOOK_IN = 0.45                # apparition du cartouche (s)
+SUB_IN = 0.60                 # apparition de la mention (s)
+HOOK_RISE = 26                # montee a l'apparition (px)
+HOOK_FADE = 0.26              # duree du fondu d'apparition (s)
 
 # ---------------------------------------------------------------------------
 # 4. SON — musique seule, aucune voix
@@ -72,6 +75,6 @@ BAR_IN = 0.34               # le trait arrive avant le texte
 MUSIC = True
 MUSIC_BPM = 96              # 4 mesures de 2,5 s = 10 s pile
 MUSIC_GAIN = 0.60
-WHOOSH_AT = 0.34            # bruitage sur l'arrivee du hook
+WHOOSH_AT = 0.45            # bruitage sur l'arrivee du hook
 WHOOSH_GAIN = 0.16
 TARGET_LUFS = -14.0         # norme plateformes

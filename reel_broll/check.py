@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
 """Controles automatiques du reel rendu. Sort en erreur si un critere echoue."""
-import json, os, subprocess, sys
+import json, subprocess, sys
 import cv2
 import numpy as np
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
-from config import OUT, OUT_W, OUT_H, FPS, DURATION, HOOK_Y, BAR_GAP, BAR_H
+from config import OUT, OUT_W, OUT_H, FPS, DURATION, HOOK_Y, HOOK_SUB, SUB_GAP
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 fail = []
 
-# --- geometrie du hook (lue sur les PNG, pas redevinee) ---------------------
 lay = json.load(open("assets_broll/layout.json"))
-base_y = int(HOOK_Y * OUT_H)
-alpha = np.array(cv2.imread("assets_broll/hook0.png", cv2.IMREAD_UNCHANGED))[..., 3]
-ink_top = base_y - lay["pad"] + np.where(alpha.max(axis=1) > 24)[0].min()
-top_element = min(ink_top, base_y - BAR_GAP - BAR_H)
+hook_top = int(HOOK_Y * OUT_H)
+hook_bottom = hook_top + lay["box_h"]
+if HOOK_SUB:
+    hook_bottom += SUB_GAP + lay["sub_h"]
 
-# --- 1. duree exacte --------------------------------------------------------
+# --- duree, visage entier, hook qui ne couvre pas le visage ------------------
 cap = cv2.VideoCapture(OUT)
 det = cv2.FaceDetectorYN.create("models/yunet.onnx", "", (OUT_W, OUT_H), 0.6)
 n, miss, tops, bottoms = 0, 0, [], []
@@ -41,29 +40,29 @@ print(f"duree               : {n} images = {n/FPS:.2f}s (attendu {want} / {DURAT
 if n != want:
     fail.append(f"duree {n} images au lieu de {want}")
 
-# --- 2. le visage reste entier et jamais couvert par le hook ----------------
 print(f"visage detecte      : {n-miss}/{n} images")
 if miss:
     fail.append(f"{miss} images sans visage detecte")
 print(f"haut du visage      : min {min(tops):.3f} (>0 = tete jamais coupee)")
 if min(tops) <= 0.004:
     fail.append("tete coupee en haut du cadre")
-marge = top_element - max(bottoms) * OUT_H
-print(f"bas du visage       : max {max(bottoms):.3f} ; 1er element du hook "
-      f"{top_element/OUT_H:.3f} -> marge {marge:+.0f} px")
+
+marge = hook_top - max(bottoms) * OUT_H
+print(f"bas du visage       : max {max(bottoms):.3f} ; haut du cartouche "
+      f"{hook_top/OUT_H:.3f} -> marge {marge:+.0f} px")
 if marge < 0:
-    fail.append(f"le hook empiete de {-marge:.0f} px sur la boite visage")
+    fail.append(f"le cartouche empiete de {-marge:.0f} px sur la boite visage")
 
-# --- 3. le hook est bas, hors de la zone d'interface des plateformes --------
-lines = 0
-while os.path.exists(f"assets_broll/hook{lines}.png"):
-    lines += 1
-bottom = (base_y + (lines - 1) * (lay["text_h"] + 12) + lay["text_h"]) / OUT_H
-print(f"bas du bloc hook    : {bottom:.3f} (zone sure : < 0.840)")
-if bottom > 0.840:
-    fail.append(f"le hook descend a {bottom:.3f}, dans la zone d'interface")
+# --- zone sure des plateformes ----------------------------------------------
+print(f"bas du hook         : {hook_bottom/OUT_H:.3f} (zone sure : < 0.840)")
+if hook_bottom / OUT_H > 0.840:
+    fail.append(f"le hook descend a {hook_bottom/OUT_H:.3f}, dans la zone d'interface")
+left = (OUT_W - lay["box_w"]) / 2 / OUT_W
+print(f"marges laterales    : {left:.3f} de chaque cote (zone sure : > 0.040)")
+if left < 0.040:
+    fail.append(f"cartouche trop large : marge laterale {left:.3f}")
 
-# --- 4. audio present, sans silence ni saturation ---------------------------
+# --- audio present, sans silence ni saturation ------------------------------
 raw = subprocess.run(
     [FF, "-hide_banner", "-loglevel", "error", "-i", OUT, "-vn",
      "-ac", "1", "-ar", "48000", "-f", "s16le", "-"],

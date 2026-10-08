@@ -95,34 +95,44 @@ bash reel_broll/build.sh     # still.jpg -> final_broll.mp4
 |---|---|
 | `config.py` | **fichier de projet** : hook, cadrage, étalonnage, musique |
 | `build_video.py` | Ken Burns ancré sur le visage + étalonnage → `v_broll.mp4` |
-| `gen_hook.py` | voile dégradé, trait d'accent, lignes de hook (PNG) + `layout.json` |
+| `gen_hook.py` | cartouche blanc, mention, voile (PNG) + `layout.json` |
 | `build_audio.py` | musique synthétisée (96 BPM, 4 mesures) → `a_broll.wav` |
 | `compose.py` | incrustations animées + mixage → `final_broll.mp4` |
 | `check.py` | contrôles automatiques, sort en erreur si un critère échoue |
 
 Changer le hook, le cadrage ou la musique = éditer `config.py` et relancer
-`build.sh`. Les temps sont en secondes sur la timeline finale.
+`build.sh`.
+
+### Le hook
+
+Deux lignes noires centrées sur un cartouche blanc arrondi, plus une mention
+contournée en dessous. La géométrie est relevée sur un modèle fourni :
+cartouche à ~0,8 de la largeur, hauteur de capitale 45 px, pas de 72 px entre
+les lignes, mention 29 px sous le cartouche. Police : Liberation Sans Bold,
+clone métrique d'Arial.
+
+- **On vise une hauteur de CAPITALE, pas une taille nominale.** C'est ce qui se
+  mesure sur un modèle, et le rapport capitale/em change d'une police à l'autre.
+- **Le cartouche suit le texte.** Sa largeur est celle de la ligne la plus
+  longue plus les marges : jamais de blanc vide sur les côtés. Si le texte
+  déborde de `HOOK_MAX_W`, la police rétrécit au lieu de sortir du cadre.
+- **`layout.json`.** Les dimensions réelles dépendent de la police chargée.
+  `gen_hook.py` les publie, `compose.py` les lit : recalculer les mêmes valeurs
+  des deux côtés les ferait dériver des PNG à la première retouche.
 
 ### Points techniques
 
-- **Ligne de base commune.** Caler chaque glyphe sur son propre haut de boîte
-  fait flotter les capitales accentuées (le É de RÉUSSITE descendait sous les
-  autres lettres) ; le tracé se fait donc sur une baseline fixe, en avançant
-  avec la chasse réelle du glyphe.
-- **`layout.json`.** La hauteur de ligne dépend des métriques de la police
-  chargée. `gen_hook.py` la publie, `compose.py` la lit : recalculer la même
-  valeur des deux côtés la ferait dériver des PNG à la première retouche.
 - **`-loop 1` sur les images fixes.** Une image fixe n'a qu'un seul point de
   temps : sans boucle, les fondus basés sur `t` ne se déclenchent jamais.
-- **Zoom limité à 8 %.** Au-delà, le visage descend dans le cadre et le hook
-  finit par empiéter sur la zone du menton.
+- **Zoom limité à 8 %.** Au-delà, le visage descend dans le cadre et finit par
+  rejoindre la zone du hook.
 
 ### Contrôles passés
 
 Durée exacte (300 images / 10,00 s) ; visage détecté sur 300/300 images, jamais
-coupé en haut ni recouvert par le hook (marge 34 px) ; bloc de texte au-dessus
-de la zone d'interface des plateformes (bas à 0,815) ; audio sans silence ni
-saturation, normalisé à −14 LUFS.
+coupé en haut ni recouvert par le cartouche (marge 115 px) ; hook au-dessus de
+la zone d'interface des plateformes (bas à 0,742) et marges latérales de 0,098 ;
+audio sans silence ni saturation, normalisé à −14 LUFS.
 
 > La musique est **synthétisée** par `build_audio.py`, pas une piste sous
 > licence : `MUSIC = False` la coupe, ou remplacez `a_broll.wav` par votre

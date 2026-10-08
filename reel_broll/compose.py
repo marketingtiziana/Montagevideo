@@ -1,67 +1,61 @@
 # -*- coding: utf-8 -*-
-"""Composition finale : image animee + voile + hook + musique.
+"""Composition finale : image animee + hook + musique.
 
 Sortie : final_broll.mp4 (1080x1920, H.264 High / AAC, pret a publier).
 """
 import json, subprocess, sys, os
-from PIL import Image
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
-from config import (OUT, OUT_W, OUT_H, FPS, DURATION, HOOK,
-                    HOOK_LINE_GAP, HOOK_X, HOOK_Y, HOOK_IN, HOOK_STAGGER,
-                    HOOK_RISE, HOOK_FADE, BAR_H, BAR_GAP, BAR_IN)
+from config import (OUT, OUT_W, OUT_H, FPS, DURATION, HOOK_SUB, HOOK_Y,
+                    SUB_GAP, SCRIM_ALPHA, HOOK_IN, SUB_IN, HOOK_RISE, HOOK_FADE)
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 A = "assets_broll"
+
 # Geometrie reelle produite par gen_hook.py (elle depend des metriques de la
 # police) : la recalculer ici la ferait deriver des PNG a la premiere retouche.
 with open(f"{A}/layout.json") as f:
-    _lay = json.load(f)
-PAD, TEXT_H = _lay["pad"], _lay["text_h"]
+    lay = json.load(f)
+M = lay["margin"]
 
-base_x = int(HOOK_X * OUT_W)
-base_y = int(HOOK_Y * OUT_H)
+box_y = int(HOOK_Y * OUT_H)
+box_x = (OUT_W - lay["box_w"]) // 2
+sub_y = box_y + lay["box_h"] + SUB_GAP
+
 
 # Une image fixe n'a qu'un seul point de temps : sans -loop elle ne dure pas,
 # et les fondus bases sur t ne se declenchent jamais.
 def still(path):
     return ["-loop", "1", "-framerate", str(FPS), "-t", f"{DURATION:.3f}", "-i", path]
 
+
 inputs = ["-i", "v_broll.mp4", "-i", "a_broll.wav"]
-inputs += still(f"{A}/scrim.png")
-inputs += still(f"{A}/bar.png")
-for i in range(len(HOOK)):
-    inputs += still(f"{A}/hook{i}.png")
+layers = []                      # (chemin, x, y, instant d'apparition)
 
-chain = []
+if SCRIM_ALPHA > 0:
+    layers.append((f"{A}/scrim.png", 0, 0, 0.10))
+layers.append((f"{A}/hookbox.png", box_x - M, box_y - M, HOOK_IN))
+if HOOK_SUB:
+    sub_x = (OUT_W - lay["sub_w"]) // 2
+    layers.append((f"{A}/hooksub.png",
+                   sub_x - (M + lay.get("sub_stroke", 0)), sub_y - M, SUB_IN))
 
-# --- voile : arrive en douceur, la premiere image reste la photo nette --------
-chain.append("[2:v]format=rgba,fade=t=in:st=0.10:d=0.60:alpha=1[scrim]")
-chain.append("[0:v][scrim]overlay=0:0[v0]")
+for path, _, _, _ in layers:
+    inputs += still(path)
 
-prev = "v0"
-idx = 1
-
-
-def rise(tag, src, x, y, t0):
-    """Fondu + montee de HOOK_RISE px : l'element arrive, il n'apparait pas d'un bloc."""
-    global prev, idx
+chain, prev = [], "0:v"
+for i, (path, x, y, t0) in enumerate(layers):
+    src = 2 + i
+    rise = 0 if "scrim" in path else HOOK_RISE
     chain.append(f"[{src}:v]format=rgba,"
-                 f"fade=t=in:st={t0:.2f}:d={HOOK_FADE:.2f}:alpha=1[{tag}]")
+                 f"fade=t=in:st={t0:.2f}:d={HOOK_FADE:.2f}:alpha=1[g{i}]")
+    # fondu + montee : l'element arrive, il n'apparait pas d'un bloc
     chain.append(
-        f"[{prev}][{tag}]overlay=x={x}:"
-        f"y='{y}+{HOOK_RISE}*(1-min(1\\,max(0\\,(t-{t0:.2f})/{HOOK_FADE:.2f})))':"
-        f"enable='gte(t,{t0:.2f})'[v{idx}]")
-    prev = f"v{idx}"
-    idx += 1
-
-
-# trait d'accent, puis les lignes du hook en cascade
-rise("bar", 3, base_x - PAD, base_y - BAR_GAP - BAR_H - PAD, BAR_IN)
-for i in range(len(HOOK)):
-    y = base_y + i * (TEXT_H + HOOK_LINE_GAP) - PAD
-    rise(f"h{i}", 4 + i, base_x - PAD, y, HOOK_IN + i * HOOK_STAGGER)
+        f"[{prev}][g{i}]overlay=x={x}:"
+        f"y='{y}+{rise}*(1-min(1\\,max(0\\,(t-{t0:.2f})/{HOOK_FADE:.2f})))':"
+        f"enable='gte(t,{t0:.2f})'[v{i}]")
+    prev = f"v{i}"
 
 cmd = [FF, "-y", "-hide_banner", "-loglevel", "error", *inputs,
        "-filter_complex", ";".join(chain),
@@ -74,4 +68,6 @@ cmd = [FF, "-y", "-hide_banner", "-loglevel", "error", *inputs,
        "-movflags", "+faststart", "-t", f"{DURATION:.3f}", OUT]
 
 subprocess.run(cmd, check=True)
-print(f"-> {OUT}  ({os.path.getsize(OUT)/1e6:.1f} Mo)")
+print(f"-> {OUT}  cartouche a y={box_y} ({box_y/OUT_H:.3f}), "
+      f"mention a y={sub_y} ({sub_y/OUT_H:.3f})  "
+      f"({os.path.getsize(OUT)/1e6:.1f} Mo)")
