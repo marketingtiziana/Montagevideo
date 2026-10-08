@@ -55,8 +55,8 @@ SCRIM_ALPHA  = 0.0          # 0 = pas de voile (le cartouche porte le texte)
 # Deux lignes centrees, noir sur cartouche blanc arronde ; la largeur du
 # cartouche suit le texte (il ne reste jamais de blanc vide sur les cotes).
 HOOK = [
-    "POURQUOI S’EXPATRIER",
-    "NE SUFFIT PAS ?",
+    "VOUS ÊTES EXPATRIÉ",
+    "MAIS IMPOSÉ OÙ ?",
 ]
 HOOK_SUB = "LIS LA DESCRIPTION"       # mention sous le cartouche ; "" pour l'enlever
 
@@ -74,10 +74,10 @@ SUB_CAP = 32                  # hauteur de capitale de la mention
 SUB_GAP = 29                  # ecart entre le cartouche et la mention
 SUB_STROKE = 5                # contour noir : lisible sur n'importe quel fond
 
-HOOK_IN = 0.45                # apparition du cartouche (s)
-SUB_IN = 0.60                 # apparition de la mention (s)
+HOOK_IN = 0.0                 # apparition du cartouche (s) ; 0 = des la 1re image
+SUB_IN = 0.0                  # apparition de la mention (s) ; 0 = des la 1re image
 HOOK_RISE = 26                # montee a l'apparition (px)
-HOOK_FADE = 0.26              # duree du fondu d'apparition (s)
+HOOK_FADE = 0.0               # duree du fondu d'apparition (s) ; 0 = pas d'animation
 
 # ---------------------------------------------------------------------------
 # 4. SON — musique seule, aucune voix

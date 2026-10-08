@@ -47,14 +47,20 @@ for path, _, _, _ in layers:
 chain, prev = [], "0:v"
 for i, (path, x, y, t0) in enumerate(layers):
     src = 2 + i
-    rise = 0 if "scrim" in path else HOOK_RISE
-    chain.append(f"[{src}:v]format=rgba,"
-                 f"fade=t=in:st={t0:.2f}:d={HOOK_FADE:.2f}:alpha=1[g{i}]")
-    # fondu + montee : l'element arrive, il n'apparait pas d'un bloc
-    chain.append(
-        f"[{prev}][g{i}]overlay=x={x}:"
-        f"y='{y}+{rise}*(1-min(1\\,max(0\\,(t-{t0:.2f})/{HOOK_FADE:.2f})))':"
-        f"enable='gte(t,{t0:.2f})'[v{i}]")
+    if HOOK_FADE <= 0:
+        # Pose fixe : le hook est present des la premiere image. Pas de fondu,
+        # donc pas de division par une duree nulle dans l'expression overlay.
+        chain.append(f"[{src}:v]format=rgba[g{i}]")
+        chain.append(f"[{prev}][g{i}]overlay=x={x}:y={y}[v{i}]")
+    else:
+        rise = 0 if "scrim" in path else HOOK_RISE
+        chain.append(f"[{src}:v]format=rgba,"
+                     f"fade=t=in:st={t0:.2f}:d={HOOK_FADE:.2f}:alpha=1[g{i}]")
+        # fondu + montee : l'element arrive, il n'apparait pas d'un bloc
+        chain.append(
+            f"[{prev}][g{i}]overlay=x={x}:"
+            f"y='{y}+{rise}*(1-min(1\\,max(0\\,(t-{t0:.2f})/{HOOK_FADE:.2f})))':"
+            f"enable='gte(t,{t0:.2f})'[v{i}]")
     prev = f"v{i}"
 
 cmd = [FF, "-y", "-hide_banner", "-loglevel", "error", *inputs,
