@@ -84,12 +84,25 @@ Modifier ce fichier et relancer `build.sh` suffit.
 
 ## `reel_broll/` — réel B-roll 10 s à partir d'une photo
 
-Transforme une photo verticale (`still.jpg`) en un réel **1080×1920 / 10 s**,
-**sans voix** : musique seule et un hook qui s'affiche.
+Transforme une **photo** ou une **vidéo** verticale en un réel
+**1080×1920 / 10 s**, **sans voix** : musique seule et un hook qui s'affiche.
 
 ```bash
-bash reel_broll/build.sh     # still.jpg -> final_broll.mp4
+bash reel_broll/build.sh     # SRC -> final_broll.mp4
 ```
+
+La source se choisit sur une ligne de `config.py` :
+
+```python
+SRC = "still.jpg"     # photo  -> Ken Burns ancré sur le visage
+SRC = "clip.mp4"      # vidéo  -> fenêtre de 10 s, son jeté, recadrage qui suit le visage
+SRC_START = 12.0      # vidéo seulement : début de la fenêtre
+```
+
+Sur une **vidéo**, le mouvement existe déjà : la chaîne coupe la fenêtre voulue,
+jette le son et recadre en 9:16 en suivant la position lissée du visage, pour
+qu'un resserrage ne décadre jamais un sujet qui bouge.
+`ZOOM_START = ZOOM_END = 1.0` donne une coupe franche sans zoom.
 
 | Fichier | Rôle |
 |---|---|

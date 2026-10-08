@@ -5,23 +5,31 @@ Modifier ce fichier puis relancer `bash reel_broll/build.sh` regenere le reel.
 Aucune voix : musique seule + un hook qui s'affiche.
 """
 
-SRC = "still.jpg"            # photo source (9:16)
+SRC = "still.jpg"            # source : photo (.jpg/.png) OU video (.mp4/.mov)
+SRC_START = 0.0             # video seulement : debut de la fenetre a garder (s)
 OUT = "final_broll.mp4"
 OUT_W, OUT_H = 1080, 1920
 FPS = 30
 DURATION = 10.0             # duree exacte du reel (s)
 
 # ---------------------------------------------------------------------------
-# 1. MOUVEMENT DE CAMERA  (Ken Burns : une photo fixe doit respirer)
+# 1. MOUVEMENT DE CAMERA
 # ---------------------------------------------------------------------------
-# Un zoom lent et regulier, ancre sur le visage : le cadre se resserre sans
-# jamais decadrer. Trop de zoom = effet diaporama ; 10 % suffisent sur 10 s.
+# PHOTO : Ken Burns. Une image fixe doit respirer, sinon c'est un diaporama ;
+#         un zoom lent ancre sur le visage suffit, 10 % sur 10 s.
+# VIDEO : le mouvement existe deja. Le zoom sert alors seulement a resserrer
+#         le cadrage, et le recadrage SUIT LE VISAGE image par image (position
+#         lissee), donc un zoom ne decadre jamais le sujet.
+#         Mettre ZOOM_START = ZOOM_END = 1.0 pour une coupe franche sans zoom.
 ZOOM_START = 1.000
 ZOOM_END   = 1.080
 # Point vers lequel le cadre derive (fractions de l'image source).
 # Le visage detecte est centre en (0.567, 0.399).
 ANCHOR_X, ANCHOR_Y = 0.567, 0.440
 ANCHOR_PULL = 0.35          # 0 = zoom centre image ; 1 = zoom plein sur l'ancre
+                            # (photo seulement ; en video on suit le visage reel)
+TRACK_SMOOTH = 20           # video : lissage de la trajectoire du visage (+/- images)
+FOLLOW = 0.80               # video : 1.0 = colle au visage ; <1 laisse respirer
 
 # ---------------------------------------------------------------------------
 # 2. ETALONNAGE — premium et naturel, peau preservee
