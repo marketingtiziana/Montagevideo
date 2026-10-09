@@ -54,7 +54,7 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 # Carousels Instagram (15 slides, 1080 x 1350)
 
 Fond uni + texte centré, Inter (Google Fonts), palette navy / indigo / gris bleuté.
-Un dossier par carousel dans `slides/` : `solitude`, `lancement`.
+Un dossier par carousel dans `slides/` : `solitude`, `lancement`, `commentaire`.
 
 ```bash
 npm install                    # playwright + sharp
