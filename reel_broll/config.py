@@ -5,7 +5,7 @@ Modifier ce fichier puis relancer `bash reel_broll/build.sh` regenere le reel.
 Aucune voix : musique seule + un hook qui s'affiche.
 """
 
-SRC = "clip.mov"             # source : photo (.jpg/.png) OU video (.mp4/.mov)
+SRC = "clip2.mp4"            # source : photo (.jpg/.png) OU video (.mp4/.mov)
 SRC_START = 0.0             # video seulement : debut de la fenetre a garder (s)
 SRC_LEN = 0.0               # video seulement : longueur de la fenetre dans la SOURCE.
                             # 0 = meme longueur que DURATION (vitesse normale).
@@ -13,9 +13,9 @@ SRC_LEN = 0.0               # video seulement : longueur de la fenetre dans la S
                             # 9,10 s avec SRC_LEN = 9.10 et DURATION = 10 passe a 91 %
                             # de vitesse, soit un ralenti de 9 % imperceptible.
 OUT = "final_broll.mp4"
-OUT_W, OUT_H = 1080, 1920
+OUT_W, OUT_H = 720, 1280    # on garde la resolution native du rush
 FPS = 30
-DURATION = 9.10             # duree du reel (s) — ici celle du rush, non modifie
+DURATION = 0.0              # duree du reel (s) ; 0 = toute la source, telle quelle
 
 # ---------------------------------------------------------------------------
 # 1. MOUVEMENT DE CAMERA
@@ -55,20 +55,25 @@ SCRIM_ALPHA  = 0.0          # 0 = pas de voile (le cartouche porte le texte)
 # Deux lignes centrees, noir sur cartouche blanc arronde ; la largeur du
 # cartouche suit le texte (il ne reste jamais de blanc vide sur les cotes).
 HOOK = [
-    "VOUS ÊTES EXPATRIÉ",
-    "MAIS IMPOSÉ OÙ ?",
+    "CE QUI VIENT DE CHANGER",
+    "EN FRANCE DEVRAIT",
+    "INQUIÉTER TOUS LES",
+    "ENTREPRENEURS EN LIGNE",
 ]
 HOOK_SUB = "LIS LA DESCRIPTION"       # mention sous le cartouche ; "" pour l'enlever
 
 # Liberation Sans Bold = clone metrique d'Arial, la graisse du modele.
 HOOK_FONT = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
+# Toutes les cotes du hook sont donnees pour une largeur de reference de
+# 1080 px ; gen_hook.py les met a l'echelle de OUT_W. Le dessin reste donc
+# identique quelle que soit la resolution du rush.
 HOOK_CAP = 45                 # hauteur de capitale visee (px) — releve sur le modele
 HOOK_PITCH = 72               # pas entre les deux lignes (px)
 HOOK_PAD_X = 37               # marge laterale dans le cartouche
 HOOK_PAD_TOP, HOOK_PAD_BOTTOM = 34, 32
 HOOK_RADIUS = 20              # rayon des coins
 HOOK_MAX_W = 0.86             # largeur max du cartouche ; au-dela la police retrecit
-HOOK_Y = 0.650                # haut du cartouche (fraction de hauteur)
+HOOK_Y = 0.600                # haut du cartouche (fraction de hauteur)
 
 SUB_CAP = 32                  # hauteur de capitale de la mention
 SUB_GAP = 29                  # ecart entre le cartouche et la mention
@@ -82,6 +87,7 @@ HOOK_FADE = 0.0               # duree du fondu d'apparition (s) ; 0 = pas d'anim
 # ---------------------------------------------------------------------------
 # 4. SON — musique seule, aucune voix
 # ---------------------------------------------------------------------------
+AUDIO = False               # False = aucune piste son du tout
 MUSIC = True
 MUSIC_HAT = False           # charley : False = arrangement plus calme
 MUSIC_BPM = 0               # 0 = cale 4 mesures sur DURATION (la boucle tombe juste)

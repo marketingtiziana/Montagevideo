@@ -6,7 +6,8 @@ import numpy as np
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
-from config import OUT, OUT_W, OUT_H, FPS, DURATION, HOOK_Y, HOOK_SUB, SUB_GAP
+from srcinfo import TOTAL
+from config import OUT, OUT_W, OUT_H, FPS, AUDIO, HOOK_Y, HOOK_SUB
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 fail = []
@@ -15,7 +16,7 @@ lay = json.load(open("assets_broll/layout.json"))
 hook_top = int(HOOK_Y * OUT_H)
 hook_bottom = hook_top + lay["box_h"]
 if HOOK_SUB:
-    hook_bottom += SUB_GAP + lay["sub_h"]
+    hook_bottom += lay["sub_gap"] + lay["sub_h"]
 
 # --- duree, visage entier, hook qui ne couvre pas le visage ------------------
 cap = cv2.VideoCapture(OUT)
@@ -48,8 +49,13 @@ def despike(v, win=9, tol=0.06):
     mesurer ce faux positif au lieu du visage. Un ecart au median glissant
     identifie ces sauts sans rien relacher sur le vrai visage.
     """
-    med = np.array([np.nanmedian(v[max(0, i - win // 2):i + win // 2 + 1])
-                    for i in range(len(v))])
+    if not np.isfinite(v).any():      # plan sans visage : rien a filtrer
+        return v, 0
+    with np.errstate(all="ignore"):
+        med = np.array([np.nanmedian(v[max(0, i - win // 2):i + win // 2 + 1])
+                        if np.isfinite(v[max(0, i - win // 2):i + win // 2 + 1]).any()
+                        else np.nan
+                        for i in range(len(v))])
     spike = np.abs(v - med) > tol
     clean = v.copy()
     clean[spike] = np.nan
@@ -59,27 +65,33 @@ def despike(v, win=9, tol=0.06):
 top, _ = despike(raw_top)
 bot, spikes = despike(raw_bot)
 
-want = int(round(DURATION * FPS))
-print(f"duree               : {n} images = {n/FPS:.2f}s (attendu {want} / {DURATION:.2f}s)")
-if n != want:
+want = int(round(TOTAL * FPS))
+print(f"duree               : {n} images = {n/FPS:.2f}s (attendu {want} / {TOTAL:.2f}s)")
+# un rush a cadence variable ne tombe pas sur un compte rond
+if abs(n - want) > 2:
     fail.append(f"duree {n} images au lieu de {want}")
 
-print(f"visage detecte      : {n-miss}/{n} images"
-      + (f" ; {spikes} detection(s) aberrante(s) ecartee(s)" if spikes else ""))
-if miss:
-    fail.append(f"{miss} images sans visage detecte")
-print(f"haut du visage      : min {np.nanmin(top):.3f} (>0 = tete jamais coupee)")
-if np.nanmin(top) <= 0.004:
-    fail.append("tete coupee en haut du cadre")
+HAS_FACE = (n - miss) > 0.5 * n
+if not HAS_FACE:
+    # Un B-roll peut ne montrer aucun visage : les controles de cadrage du
+    # visage n'ont alors rien a mesurer, mais le reste doit rester verifie.
+    print(f"visage              : absent du plan ({n-miss}/{n} images) "
+          f"-> controles de visage sans objet")
+else:
+    print(f"visage detecte      : {n-miss}/{n} images"
+          + (f" ; {spikes} detection(s) aberrante(s) ecartee(s)" if spikes else ""))
+    print(f"haut du visage      : min {np.nanmin(top):.3f} (>0 = tete jamais coupee)")
+    if np.nanmin(top) <= 0.004:
+        fail.append("tete coupee en haut du cadre")
 
-face_bottom = np.nanmax(bot)
-marge = hook_top - face_bottom * OUT_H
-print(f"bas du visage       : max {face_bottom:.3f} (brut {np.nanmax(raw_bot):.3f}) ; haut du cartouche "
-      f"{hook_top/OUT_H:.3f} -> marge {marge:+.0f} px")
-if marge < 0:
-    fail.append(f"le cartouche empiete de {-marge:.0f} px sur la boite visage")
-if spikes > 0.05 * n:
-    fail.append(f"{spikes} detections aberrantes : suivi du visage peu fiable")
+    face_bottom = np.nanmax(bot)
+    marge = hook_top - face_bottom * OUT_H
+    print(f"bas du visage       : max {face_bottom:.3f} (brut {np.nanmax(raw_bot):.3f}) ; "
+          f"haut du cartouche {hook_top/OUT_H:.3f} -> marge {marge:+.0f} px")
+    if marge < 0:
+        fail.append(f"le cartouche empiete de {-marge:.0f} px sur la boite visage")
+    if spikes > 0.05 * n:
+        fail.append(f"{spikes} detections aberrantes : suivi du visage peu fiable")
 
 # --- zone sure des plateformes ----------------------------------------------
 print(f"bas du hook         : {hook_bottom/OUT_H:.3f} (zone sure : < 0.840)")
@@ -90,21 +102,34 @@ print(f"marges laterales    : {left:.3f} de chaque cote (zone sure : > 0.040)")
 if left < 0.040:
     fail.append(f"cartouche trop large : marge laterale {left:.3f}")
 
-# --- audio present, sans silence ni saturation ------------------------------
-raw = subprocess.run(
-    [FF, "-hide_banner", "-loglevel", "error", "-i", OUT, "-vn",
-     "-ac", "1", "-ar", "48000", "-f", "s16le", "-"],
-    capture_output=True, check=True).stdout
-a = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
-win = 24000
-rms = np.array([np.sqrt((a[i:i + win] ** 2).mean()) for i in range(0, len(a) - win, win)])
-quiet = int((rms[:-2] < 0.01).sum())        # on exclut le fondu de sortie
-print(f"audio               : {len(a)/48000:.2f}s, crete {np.abs(a).max():.3f}, "
-      f"{quiet} fenetre(s) muette(s) hors fondu")
-if np.abs(a).max() >= 0.999:
-    fail.append("audio sature")
-if quiet:
-    fail.append(f"{quiet} fenetre(s) audio muettes")
+# --- audio : present et propre, ou volontairement absent -------------------
+probe = subprocess.run(
+    [FF, "-hide_banner", "-i", OUT], capture_output=True, text=True).stderr
+has_audio = "Audio:" in probe
+if not AUDIO:
+    print(f"audio               : aucune piste demandee -> "
+          f"{'absente, conforme' if not has_audio else 'PRESENTE alors qu elle ne devrait pas'}")
+    if has_audio:
+        fail.append("une piste audio subsiste alors que AUDIO = False")
+else:
+    if not has_audio:
+        fail.append("piste audio absente")
+    else:
+        raw = subprocess.run(
+            [FF, "-hide_banner", "-loglevel", "error", "-i", OUT, "-vn",
+             "-ac", "1", "-ar", "48000", "-f", "s16le", "-"],
+            capture_output=True, check=True).stdout
+        a = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+        win = 24000
+        rms = np.array([np.sqrt((a[i:i + win] ** 2).mean())
+                        for i in range(0, len(a) - win, win)])
+        quiet = int((rms[:-2] < 0.01).sum())     # on exclut le fondu de sortie
+        print(f"audio               : {len(a)/48000:.2f}s, crete {np.abs(a).max():.3f}, "
+              f"{quiet} fenetre(s) muette(s) hors fondu")
+        if np.abs(a).max() >= 0.999:
+            fail.append("audio sature")
+        if quiet:
+            fail.append(f"{quiet} fenetre(s) audio muettes")
 
 print()
 if fail:

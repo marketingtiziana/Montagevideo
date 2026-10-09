@@ -91,6 +91,10 @@ Transforme une **photo** ou une **vidéo** verticale en un réel
 bash reel_broll/build.sh     # SRC -> final_broll.mp4
 ```
 
+La chaîne s'adapte à la source : **toute résolution** (les cotes du hook sont
+relevées pour 1080 px de large et mises à l'échelle de `OUT_W`), **avec ou sans
+visage** dans le plan, **avec ou sans piste son** (`AUDIO = False`).
+
 La source se choisit sur une ligne de `config.py` :
 
 ```python

@@ -7,8 +7,9 @@ import json, subprocess, sys, os
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
-from config import (OUT, OUT_W, OUT_H, FPS, DURATION, HOOK_SUB, HOOK_Y,
-                    SUB_GAP, SCRIM_ALPHA, HOOK_IN, SUB_IN, HOOK_RISE, HOOK_FADE)
+from srcinfo import TOTAL
+from config import (OUT, OUT_W, OUT_H, FPS, AUDIO, HOOK_SUB, HOOK_Y,
+                    SCRIM_ALPHA, HOOK_IN, SUB_IN, HOOK_RISE, HOOK_FADE)
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 A = "assets_broll"
@@ -21,16 +22,18 @@ M = lay["margin"]
 
 box_y = int(HOOK_Y * OUT_H)
 box_x = (OUT_W - lay["box_w"]) // 2
-sub_y = box_y + lay["box_h"] + SUB_GAP
+sub_y = box_y + lay["box_h"] + lay["sub_gap"]
 
 
 # Une image fixe n'a qu'un seul point de temps : sans -loop elle ne dure pas,
 # et les fondus bases sur t ne se declenchent jamais.
 def still(path):
-    return ["-loop", "1", "-framerate", str(FPS), "-t", f"{DURATION:.3f}", "-i", path]
+    return ["-loop", "1", "-framerate", str(FPS), "-t", f"{TOTAL:.3f}", "-i", path]
 
 
-inputs = ["-i", "v_broll.mp4", "-i", "a_broll.wav"]
+inputs = ["-i", "v_broll.mp4"]
+if AUDIO:
+    inputs += ["-i", "a_broll.wav"]
 layers = []                      # (chemin, x, y, instant d'apparition)
 
 if SCRIM_ALPHA > 0:
@@ -44,9 +47,12 @@ if HOOK_SUB:
 for path, _, _, _ in layers:
     inputs += still(path)
 
+# le 1er index libre depend de la presence ou non de la piste son
+FIRST = 2 if AUDIO else 1
+
 chain, prev = [], "0:v"
 for i, (path, x, y, t0) in enumerate(layers):
-    src = 2 + i
+    src = FIRST + i
     if HOOK_FADE <= 0:
         # Pose fixe : le hook est present des la premiere image. Pas de fondu,
         # donc pas de division par une duree nulle dans l'expression overlay.
@@ -65,13 +71,13 @@ for i, (path, x, y, t0) in enumerate(layers):
 
 cmd = [FF, "-y", "-hide_banner", "-loglevel", "error", *inputs,
        "-filter_complex", ";".join(chain),
-       "-map", f"[{prev}]", "-map", "1:a",
+       "-map", f"[{prev}]", *(["-map", "1:a"] if AUDIO else ["-an"]),
        "-c:v", "libx264", "-profile:v", "high", "-level", "4.1",
        "-preset", "slow", "-crf", "20", "-maxrate", "4200k", "-bufsize", "8400k",
        "-pix_fmt", "yuv420p", "-r", str(FPS),
        "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
-       "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
-       "-movflags", "+faststart", "-t", f"{DURATION:.3f}", OUT]
+       *(["-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2"] if AUDIO else []),
+       "-movflags", "+faststart", "-t", f"{TOTAL:.3f}", OUT]
 
 subprocess.run(cmd, check=True)
 print(f"-> {OUT}  cartouche a y={box_y} ({box_y/OUT_H:.3f}), "

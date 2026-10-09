@@ -15,12 +15,29 @@ from PIL import Image, ImageDraw, ImageFont
 sys.path.insert(0, "reel_broll")
 from config import (OUT_W, OUT_H, HOOK, HOOK_SUB, HOOK_FONT, HOOK_CAP,
                     HOOK_PITCH, HOOK_PAD_X, HOOK_PAD_TOP, HOOK_PAD_BOTTOM,
-                    HOOK_RADIUS, HOOK_MAX_W, SUB_CAP, SUB_STROKE,
+                    HOOK_RADIUS, HOOK_MAX_W, SUB_CAP, SUB_GAP, SUB_STROKE,
                     SCRIM_TOP, SCRIM_BOTTOM, SCRIM_ALPHA)
 
 OUTDIR = "assets_broll"
 os.makedirs(OUTDIR, exist_ok=True)
-MARGIN = 24                    # marge de securite autour des PNG
+
+# Les cotes du hook sont relevees sur un modele en 1080 de large. On les met a
+# l'echelle de la sortie pour que le dessin soit identique a toute resolution.
+S = OUT_W / 1080.0
+
+
+def px(v):
+    return max(1, int(round(v * S)))
+
+
+CAP = px(HOOK_CAP)
+PITCH = px(HOOK_PITCH)
+PAD_X = px(HOOK_PAD_X)
+PAD_TOP, PAD_BOTTOM = px(HOOK_PAD_TOP), px(HOOK_PAD_BOTTOM)
+RADIUS = px(HOOK_RADIUS)
+SUBCAP = px(SUB_CAP)
+STROKE = px(SUB_STROKE)
+MARGIN = px(24)                # marge de securite autour des PNG
 
 
 def font_for_cap(cap_px):
@@ -36,49 +53,54 @@ def font_for_cap(cap_px):
 
 
 def draw_box(path):
-    cap = HOOK_CAP
+    cap = CAP
     # Si le texte deborde, on retrecit plutot que de laisser sortir du cadre.
     while True:
         font = font_for_cap(cap)
         widths = [font.getlength(l) for l in HOOK]
-        box_w = int(max(widths)) + HOOK_PAD_X * 2
-        if box_w <= HOOK_MAX_W * OUT_W or cap <= 24:
+        box_w = int(max(widths)) + PAD_X * 2
+        if box_w <= HOOK_MAX_W * OUT_W or cap <= px(24):
             break
         cap -= 1
-    if cap != HOOK_CAP:
+    if cap != CAP:
         print(f"   (texte long : hauteur de capitale ramenee a {cap} px)")
 
-    pitch = int(round(HOOK_PITCH * cap / HOOK_CAP))
-    cap_h = font.getbbox("H")[3] - font.getbbox("H")[1]
-    box_h = HOOK_PAD_TOP + cap_h + (len(HOOK) - 1) * pitch + HOOK_PAD_BOTTOM
+    pitch = int(round(PITCH * cap / CAP))
+    hb = font.getbbox("H")
+    cap_h = hb[3] - hb[1]
+    box_h = PAD_TOP + cap_h + (len(HOOK) - 1) * pitch + PAD_BOTTOM
 
     img = Image.new("RGBA", (box_w + MARGIN * 2, box_h + MARGIN * 2), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rounded_rectangle(
         [MARGIN, MARGIN, MARGIN + box_w, MARGIN + box_h],
-        radius=HOOK_RADIUS, fill=(255, 255, 255, 255))
+        radius=RADIUS, fill=(255, 255, 255, 255))
 
-    # chaque ligne centree sur l'axe du cartouche, calee par le haut de capitale
+    # Chaque ligne centree sur l'axe du cartouche et calee sur une LIGNE DE BASE
+    # commune. Un ancrage par le haut de l'encre ("mt") ferait descendre les
+    # lignes contenant une capitale accentuee (le E d'INQUIETER), car l'accent
+    # devient alors le point le plus haut : l'interligne deviendrait irregulier.
     cx = MARGIN + box_w / 2
     for i, line in enumerate(HOOK):
-        top = MARGIN + HOOK_PAD_TOP + i * pitch
-        d.text((cx, top), line, font=font, fill=(0, 0, 0, 255), anchor="mt")
+        baseline = MARGIN + PAD_TOP + cap_h + i * pitch
+        d.text((cx, baseline), line, font=font, fill=(0, 0, 0, 255), anchor="ms")
 
     img.save(path)
     return img.size, box_w, box_h
 
 
 def draw_sub(path):
-    font = font_for_cap(SUB_CAP)
+    font = font_for_cap(SUBCAP)
     w = int(font.getlength(HOOK_SUB))
     cap_h = font.getbbox("H")[3] - font.getbbox("H")[1]
-    pad = MARGIN + SUB_STROKE
+    pad = MARGIN + STROKE
     img = Image.new("RGBA", (w + pad * 2, cap_h + pad * 2), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     # contour noir : la mention est posee sur l'image, sans cartouche
-    d.text((img.size[0] / 2, pad), HOOK_SUB, font=font, anchor="mt",
+    hb = font.getbbox("H")
+    d.text((img.size[0] / 2, pad + (hb[3] - hb[1])), HOOK_SUB, font=font, anchor="ms",
            fill=(255, 255, 255, 255),
-           stroke_width=SUB_STROKE, stroke_fill=(0, 0, 0, 235))
+           stroke_width=STROKE, stroke_fill=(0, 0, 0, 235))
     img.save(path)
     return img.size, w, cap_h
 
@@ -93,7 +115,7 @@ def draw_scrim(path):
     Image.fromarray(rgba, "RGBA").save(path)
 
 
-lay = {"margin": MARGIN}
+lay = {"margin": MARGIN, "sub_gap": px(SUB_GAP)}
 
 size, box_w, box_h = draw_box(f"{OUTDIR}/hookbox.png")
 lay["box_w"], lay["box_h"] = box_w, box_h

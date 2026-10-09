@@ -21,13 +21,14 @@ import numpy as np
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
+from srcinfo import TOTAL, SRC_DUR
 from config import (SRC, SRC_START, SRC_LEN, OUT_W, OUT_H, FPS, DURATION, GRADE,
                     ZOOM_START, ZOOM_END, ANCHOR_X, ANCHOR_Y, ANCHOR_PULL,
                     TRACK_SMOOTH, FOLLOW, FACE_Y_TARGET)
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 TMP = "v_broll.mp4"
-N = int(round(DURATION * FPS))
+N = int(round(TOTAL * FPS))
 AR = OUT_W / OUT_H
 IS_VIDEO = os.path.splitext(SRC)[1].lower() in (".mp4", ".mov", ".m4v", ".avi", ".mkv")
 
@@ -61,12 +62,12 @@ def source_indices():
     cap.release()
 
     avail = total / src_fps - SRC_START
-    want = SRC_LEN if SRC_LEN > 0 else DURATION
+    want = SRC_LEN if SRC_LEN > 0 else TOTAL
     if want > avail + 1e-6:
         raise SystemExit(
             f"{SRC} : fenetre de {want:.2f}s demandee a partir de {SRC_START:.2f}s, "
             f"mais il ne reste que {avail:.2f}s")
-    speed = want / DURATION
+    speed = want / TOTAL
     idx = [min(total - 1,
                int(round((SRC_START + (k / FPS) * speed) * src_fps)))
            for k in range(N)]
@@ -130,7 +131,7 @@ def passthrough_ok():
         return False
     if ZOOM_START != 1.0 or ZOOM_END != 1.0:
         return False
-    if SRC_LEN not in (0.0, DURATION):
+    if SRC_LEN not in (0.0, TOTAL):
         return False
     cap = cv2.VideoCapture(SRC)
     w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -142,10 +143,13 @@ def passthrough_ok():
 if passthrough_ok():
     # On recopie le flux video sans le re-encoder : pas de perte de generation,
     # l'image livree est exactement celle du rush.
+    # -t seulement si l'on coupe : sur un rush a cadence variable, le fixer
+    # inutilement rognerait les dernieres images.
+    cut = [] if TOTAL >= SRC_DUR - 1e-3 else ["-t", f"{TOTAL:.3f}"]
     subprocess.run(
         [FF, "-y", "-hide_banner", "-loglevel", "error", "-i", SRC,
-         "-t", f"{DURATION:.3f}", "-an", "-c:v", "copy", TMP], check=True)
-    print(f"-> {TMP}  video recopiee telle quelle ({DURATION:.2f}s, son jete, "
+         *cut, "-an", "-c:v", "copy", TMP], check=True)
+    print(f"-> {TMP}  video recopiee telle quelle ({TOTAL:.2f}s, son jete, "
           f"aucun re-encodage)")
     sys.exit(0)
 
@@ -154,7 +158,7 @@ if IS_VIDEO:
     tx, ty, found = scan_faces(idx, SW, SH)
     dup = N - len(set(idx))
     print(f"{SRC} : {total} images a {src_fps:.2f} i/s ; fenetre {SRC_START:.2f}s "
-          f"-> {SRC_START+want:.2f}s ({want:.2f}s) etiree sur {DURATION:.2f}s "
+          f"-> {SRC_START+want:.2f}s ({want:.2f}s) etiree sur {TOTAL:.2f}s "
           f"= {speed*100:.0f}% de vitesse")
     print(f"   visage detecte sur {found}/{N} images ; {dup} image(s) source repetee(s)")
 
