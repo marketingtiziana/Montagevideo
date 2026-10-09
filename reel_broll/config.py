@@ -72,7 +72,7 @@ HOOK_PITCH = 72               # pas entre les deux lignes (px)
 HOOK_PAD_X = 37               # marge laterale dans le cartouche
 HOOK_PAD_TOP, HOOK_PAD_BOTTOM = 34, 32
 HOOK_RADIUS = 20              # rayon des coins
-HOOK_MAX_W = 0.86             # largeur max du cartouche ; au-dela la police retrecit
+HOOK_MAX_W = 0.72             # largeur max du cartouche ; au-dela la police retrecit
 HOOK_Y = 0.600                # haut du cartouche (fraction de hauteur)
 
 SUB_CAP = 32                  # hauteur de capitale de la mention

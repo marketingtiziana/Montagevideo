@@ -86,11 +86,11 @@ def draw_box(path):
         d.text((cx, baseline), line, font=font, fill=(0, 0, 0, 255), anchor="ms")
 
     img.save(path)
-    return img.size, box_w, box_h
+    return img.size, box_w, box_h, cap / CAP
 
 
-def draw_sub(path):
-    font = font_for_cap(SUBCAP)
+def draw_sub(path, scale=1.0):
+    font = font_for_cap(max(10, int(round(SUBCAP * scale))))
     w = int(font.getlength(HOOK_SUB))
     cap_h = font.getbbox("H")[3] - font.getbbox("H")[1]
     pad = MARGIN + STROKE
@@ -117,13 +117,14 @@ def draw_scrim(path):
 
 lay = {"margin": MARGIN, "sub_gap": px(SUB_GAP)}
 
-size, box_w, box_h = draw_box(f"{OUTDIR}/hookbox.png")
+size, box_w, box_h, scale = draw_box(f"{OUTDIR}/hookbox.png")
 lay["box_w"], lay["box_h"] = box_w, box_h
+lay["sub_gap"] = max(6, int(round(px(SUB_GAP) * scale)))
 print(f"-> {OUTDIR}/hookbox.png {size}  cartouche {box_w}x{box_h} px "
       f"({box_w/OUT_W:.3f} de la largeur)")
 
 if HOOK_SUB:
-    size, sub_w, sub_h = draw_sub(f"{OUTDIR}/hooksub.png")
+    size, sub_w, sub_h = draw_sub(f"{OUTDIR}/hooksub.png", scale)
     lay["sub_w"], lay["sub_h"] = sub_w, sub_h
     print(f"-> {OUTDIR}/hooksub.png {size}  mention {sub_w}x{sub_h} px")
 
