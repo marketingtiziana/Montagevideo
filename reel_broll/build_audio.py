@@ -12,18 +12,19 @@ import numpy as np
 import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
-from config import (DURATION, MUSIC, MUSIC_BPM, MUSIC_GAIN, MUSIC_HAT,
+from srcinfo import TOTAL
+from config import (MUSIC, MUSIC_BARS, MUSIC_BPM, MUSIC_GAIN, MUSIC_HAT,
                     WHOOSH_AT, WHOOSH_GAIN, TARGET_LUFS)
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 SR = 48000
 OUT = "a_broll.wav"
-N = int(round(DURATION * SR))
+N = int(round(TOTAL * SR))
 t = np.arange(N) / SR
 
 # MUSIC_BPM = 0 : on cale 4 mesures sur la duree du reel, sinon la boucle se
 # fait couper au milieu d'une mesure.
-BPM = MUSIC_BPM if MUSIC_BPM > 0 else 4 * 4 * 60.0 / DURATION
+BPM = MUSIC_BPM if MUSIC_BPM > 0 else MUSIC_BARS * 4 * 60.0 / TOTAL
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
 
@@ -103,26 +104,27 @@ def whoosh(start, amp):
 buf = np.zeros(N, dtype=np.float32)
 
 if MUSIC:
-    # Am -> Fmaj7 -> Cmaj7 -> G : quatre mesures, chaud et ouvert
+    # Deux accords lents, septiemes ouvertes : c'est l'harmonie qui pose le
+    # morceau, pas le tempo. Une suite de quatre accords sur 5 s se bouscule.
     PROG = [
-        (55.00,  [220.00, 261.63, 329.63, 440.00]),   # Am
-        (43.65,  [174.61, 261.63, 329.63, 440.00]),   # Fmaj7
-        (65.41,  [261.63, 329.63, 392.00, 493.88]),   # Cmaj7
-        (49.00,  [196.00, 246.94, 293.66, 392.00]),   # G
+        (55.00, [220.00, 261.63, 329.63, 392.00]),    # Am7
+        (43.65, [174.61, 261.63, 329.63, 440.00]),    # Fmaj7
     ]
-    for b, (root, chord) in enumerate(PROG):
+    for b in range(MUSIC_BARS):
+        root, chord = PROG[b % len(PROG)]
         t0 = b * BAR
-        sub(root, t0, BAR * 0.95)
-        pad([f / 2 for f in chord[:3]], t0, BAR * 1.02, amp=0.125)
-        # arpege en croches : monte puis redescend, legerement swingue
-        order = [0, 1, 2, 3, 2, 1, 2, 3]
-        for k, idx in enumerate(order):
-            swing = 0.012 if k % 2 else 0.0
-            note(chord[idx], t0 + k * BEAT / 2 + swing, 0.60, 0.115, decay=5.5)
+        sub(root, t0, BAR * 0.98, amp=0.24)
+        pad(chord[:3], t0, BAR * 1.04, amp=0.11)
+        # arpege a la noire, longue traine : les notes se recouvrent et
+        # sonnent comme une harpe au lieu d'un motif rythmique
+        for k, idx in enumerate([0, 2, 1, 3]):
+            # une octave au-dessus : sans cette presence le morceau n'est qu'un
+            # bourdon grave, feutre au point d'etre pateux
+            note(chord[idx] * 2, t0 + k * BEAT, BEAT * 2.6, 0.155, decay=2.0,
+                 harm=(1.0, 0.30, 0.10))
         if MUSIC_HAT:
-            for k in range(8):
-                if k % 2:
-                    hat(t0 + k * BEAT / 2, amp=0.035)
+            for k in range(4):
+                hat(t0 + k * BEAT + BEAT / 2, amp=0.03)
 
     # fondu de sortie : la boucle se referme au lieu d'etre coupee
     tail = int(1.1 * SR)
@@ -148,4 +150,5 @@ subprocess.run(
             f"aformat=channel_layouts=stereo,aresample={SR}",
      "-c:a", "pcm_s16le", OUT], check=True)
 
-print(f"-> {OUT}  {DURATION:.2f}s  ({BPM:.1f} BPM, 4 mesures de {BAR:.2f}s, musique seule)")
+print(f"-> {OUT}  {TOTAL:.2f}s  ({BPM:.1f} BPM, {MUSIC_BARS} mesures de {BAR:.2f}s, "
+      f"musique seule)")
