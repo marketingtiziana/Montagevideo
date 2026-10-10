@@ -14,3 +14,17 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+face_track.json
+words_*.json
+_voice_raw.wav
+_beds.wav
+_test.mp4
+
+# reel_broll/
+assets_broll/
+still.jpg
+_music_raw.wav
+ref_hook.jpg
+clip.mov
+clip2.mp4
+clip3.mp4
