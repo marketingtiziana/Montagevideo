@@ -17,8 +17,14 @@ node build.mjs      # génère src/story-N.html, output/story-N.png et preview.h
 | Fichier | Rôle |
 |---|---|
 | `output/story-1.png` … `story-6.png` | les 6 visuels finaux, 1080 × 1920 |
+| `output/fynovates-dubai-stress-test.zip` | les 6 PNG en une archive, pour les récupérer d'un coup |
 | `preview.html` | les 6 côte à côte, avec les repères de grille posés à l'échelle |
 | `src/story-N.html` | une page par story, régénérée à chaque build — ne pas éditer à la main |
+
+L'archive est un contenant, pas une conversion : les PNG y sont copiés tels
+quels, sans réencodage. Ce qu'on en extrait est bit à bit ce qu'il y a dans
+`output/`. Elle n'est pas versionnée — elle dupliquerait 8 Mo déjà présents
+dans le dépôt ; `node build.mjs` la régénère.
 
 Le texte vit dans `src/content.js`, la mise en page dans `src/story.css`. Les
 pages HTML sont dérivées : toute modification directe est écrasée au build

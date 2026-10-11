@@ -10,6 +10,7 @@
  * Entrées : backgrounds/bg-1.jpg … bg-6.jpg + src/story.css + src/content.js
  * Sorties : src/story-N.html   une page HTML par story
  *           output/story-N.png les 6 visuels finaux
+ *           output/*.zip       les 6 PNG en une archive, pour les récupérer d'un coup
  *           preview.html       les 6 côte à côte pour validation
  *
  * Cinq contrôles bloquants à chaque build :
@@ -20,7 +21,8 @@
  *   5. l'export fait 1080×1920 exactement.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, rmSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import puppeteer from 'puppeteer-core';
@@ -33,6 +35,7 @@ const OUT = join(ROOT, 'output');
 
 const W = 1080;
 const H = 1920;
+const ARCHIVE = 'fynovates-dubai-stress-test.zip';
 const LIGNE_HAUT = 160;   // rien au-dessus
 const LIGNE_BAS = 1620;   // 1920 − 300, rien en dessous
 
@@ -458,8 +461,30 @@ async function main() {
   }
   console.log(`  ✓ les 6 PNG font ${W}×${H} exactement`);
 
+  archive(rapport);
   preview(rapport);
   return rapport;
+}
+
+/**
+ * Les 6 PNG en une archive, pour les récupérer d'un seul téléchargement.
+ *
+ * Les PNG sont déjà compressés : l'archive ne les réduit quasiment pas et ne
+ * les réencode surtout pas — c'est un contenant, pas une conversion. La qualité
+ * livrée est donc exactement celle des fichiers de output/.
+ */
+function archive(rapport) {
+  const dst = join(OUT, ARCHIVE);
+  rmSync(dst, { force: true });          // zip ajoute à l'existant, il faut repartir à zéro
+  execFileSync(
+    'zip',
+    // -j : pas d'arborescence dans l'archive — les 6 PNG à la racine
+    // -X : pas d'attributs de fichier superflus
+    ['-j', '-q', '-X', dst, ...rapport.map((r) => join(OUT, `story-${r.n}.png`))],
+    { stdio: 'inherit' },
+  );
+  const ko = Math.round(statSync(dst).size / 1024);
+  console.log(`  ✓ output/${ARCHIVE} — les ${rapport.length} PNG, ${ko} ko`);
 }
 
 function preview(rapport) {
