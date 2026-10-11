@@ -41,10 +41,10 @@ suivant.
   Les six blocs de texte viennent tous mourir exactement sur la ligne basse.
 - **Colonne** : 800 px de large, marges latérales de 100 px, alignée à gauche —
   sauf la story 6, centrée autour du bloc CODEX.
-- **En-tête de série** : `DUBAÏ · LE STRESS TEST` en 24 px doré à gauche,
-  pagination grise à droite, tous deux posés exactement sur la ligne des 160 px.
-  Le build compare leur empreinte géométrique complète entre les six et refuse
-  de livrer au moindre écart.
+- **Pagination** : seule occupante de la ligne haute, en 24 px gris calée sur
+  la marge droite, exactement sur la ligne des 160 px. La série ne porte pas de
+  titre répété d'une story à l'autre. Le build compare l'empreinte géométrique
+  complète de la pagination entre les six et refuse de livrer au moindre écart.
 
 ## Le relevé chiffré de la story 2
 
@@ -69,11 +69,11 @@ Grading identique sur les 6 (`saturate(0.85) contrast(1.08)`), le dégradé de
 série, puis deux renforts locaux qui ne font qu'approfondir un dégradé déjà
 présent.
 
-Le renfort du haut existe à cause d'un calcul : l'or `#D4AF37` a une luminance
-relative de 0,45, et pour tenir le 3:1 du « large text » il lui faut un fond
-sous 0,117 — autrement dit franchement noir. C'est une bande courte, pleine
-sous la ligne d'en-tête, qui retombe à zéro avant 360 px : le sujet de la photo
-reste intact.
+Le renfort du haut existe à cause d'un calcul : le gris de pagination
+`#9CA3AF` a une luminance relative de 0,36, et pour tenir le 3:1 du « large
+text » il lui faut un fond sous 0,088 — autrement dit franchement noir. C'est
+une bande courte, pleine sous la ligne de pagination, qui retombe à zéro avant
+360 px : le sujet de la photo reste intact.
 
 La story 6 a son propre renfort, à longue traîne, parce qu'un fondu court pose
 une arête horizontale visible en travers de l'image.
@@ -84,7 +84,7 @@ une arête horizontale visible en travers de l'image.
 
 1. aucun texte au-dessus de 160 px ;
 2. aucun texte sous 1620 px ;
-3. l'en-tête de série identique sur les six — plus, sur la story 2, la
+3. la pagination identique sur les six — plus, sur la story 2, la
    non-régression du relevé chiffré décrite plus haut ;
 4. **contraste WCAG 2.1 AA mesuré, pas supposé** : une seconde passe rend la
    page texte masqué, et chaque run est comparé aux pixels réels du fond

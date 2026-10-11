@@ -17,8 +17,6 @@
 
 export const TOTAL = 6;
 
-export const KICKER = 'Dubaï · Le stress test';
-
 export const STORIES = [
   {
     n: 1,

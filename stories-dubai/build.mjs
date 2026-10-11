@@ -15,7 +15,7 @@
  * Cinq contrôles bloquants à chaque build :
  *   1. rien au-dessus de la ligne des 160 px ;
  *   2. rien sous la ligne des 1620 px (zone des stickers) ;
- *   3. l'en-tête de série est géométriquement identique sur les six ;
+ *   3. la pagination est géométriquement identique sur les six ;
  *   4. chaque couleur de texte atteint WCAG 2.1 AA sur son fond réel ;
  *   5. l'export fait 1080×1920 exactement.
  */
@@ -24,7 +24,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSy
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import puppeteer from 'puppeteer-core';
-import { STORIES, TOTAL, KICKER } from './src/content.js';
+import { STORIES, TOTAL } from './src/content.js';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const SRC = join(ROOT, 'src');
@@ -142,8 +142,7 @@ ${css}
     <div class="renfort-bas"></div>
     <div class="renfort-haut"></div>
 
-    <!-- couche 3 : en-tête de série -->
-    <div class="kicker">${escapeHtml(KICKER)}</div>
+    <!-- couche 3 : pagination -->
     <div class="compteur">${story.n}/${TOTAL}</div>
 
     <!-- couche 3 : le texte -->
@@ -160,7 +159,7 @@ ${accroche}${releve}${corps}${cta}
 /* --------------------------------------------------------------- contrôles */
 
 const SELECTEURS_TEXTE =
-  '.kicker, .compteur, .accroche, .corps, .valeur, .legende, .cta, .consigne';
+  '.compteur, .accroche, .corps, .valeur, .legende, .cta, .consigne';
 
 /** Bornes verticales du texte, et l'élément responsable de chaque extrême. */
 const MESURE_BORNES = (sel) => {
@@ -181,25 +180,19 @@ const MESURE_BORNES = (sel) => {
   };
 };
 
-/** Empreinte géométrique de l'en-tête, comparée d'une story à l'autre. */
+/** Empreinte géométrique de la pagination, comparée d'une story à l'autre. */
 const MESURE_ENTETE = () => {
-  const lire = (s) => {
-    const r = document.querySelector(s).getBoundingClientRect();
-    const st = getComputedStyle(document.querySelector(s));
-    return {
-      top: Math.round(r.top * 100) / 100,
-      hauteur: Math.round(r.height * 100) / 100,
-      taille: st.fontSize,
-      graisse: st.fontWeight,
-      interlettre: st.letterSpacing,
-    };
-  };
-  const k = document.querySelector('.kicker').getBoundingClientRect();
-  const c = document.querySelector('.compteur').getBoundingClientRect();
+  const n = document.querySelector('.compteur');
+  const r = n.getBoundingClientRect();
+  const st = getComputedStyle(n);
   return {
-    kicker: { ...lire('.kicker'), gauche: Math.round(k.left * 100) / 100 },
-    // le compteur est calé sur la marge droite : c'est son bord droit qui compte
-    compteur: { ...lire('.compteur'), droite: Math.round((1080 - c.right) * 100) / 100 },
+    top: Math.round(r.top * 100) / 100,
+    hauteur: Math.round(r.height * 100) / 100,
+    // la pagination est calée sur la marge droite : c'est son bord droit qui compte
+    droite: Math.round((1080 - r.right) * 100) / 100,
+    taille: st.fontSize,
+    graisse: st.fontWeight,
+    interlettre: st.letterSpacing,
   };
 };
 
@@ -395,7 +388,7 @@ async function main() {
 
       // passe « fond seul » : le texte masqué, les dégradés et la photo intacts
       await page.addStyleTag({
-        content: '.contenu, .kicker, .compteur { visibility: hidden !important; }',
+        content: '.contenu, .compteur { visibility: hidden !important; }',
       });
       const fond = await page.screenshot({
         encoding: 'base64', type: 'png',
@@ -436,19 +429,19 @@ async function main() {
     await browser.close();
   }
 
-  /* ---- contrôle 3 : le même en-tête sur les six ------------------------- */
+  /* ---- contrôle 3 : la même pagination sur les six ---------------------- */
   const ref = JSON.stringify(rapport[0].entete);
   for (const r of rapport.slice(1)) {
     if (JSON.stringify(r.entete) !== ref) {
       throw new Error(
-        `L'en-tête de série diffère entre les stories ${rapport[0].n} et ${r.n} :\n` +
+        `La pagination diffère entre les stories ${rapport[0].n} et ${r.n} :\n` +
         `  ${ref}\n  ${JSON.stringify(r.entete)}`
       );
     }
   }
   console.log(
-    `  ✓ en-tête identique sur les 6 — y=${rapport[0].entete.kicker.top}, ` +
-    `marges ${rapport[0].entete.kicker.gauche}px / ${rapport[0].entete.compteur.droite}px`
+    `  ✓ pagination identique sur les 6 — y=${rapport[0].entete.top}, ` +
+    `marge droite ${rapport[0].entete.droite}px`
   );
 
   /* ---- contrôle 5 : dimensions réelles des PNG livrés -------------------- */
@@ -516,7 +509,7 @@ function preview(rapport) {
 <body>
   <h1>Dubaï, le stress test</h1>
   <p class="sous">Les 6 stories dans l'ordre de publication. Même grading, même grille,
-  même en-tête. Les repères sont posés à l'échelle&nbsp;: aucun texte ne les franchit.</p>
+  même pagination. Les repères sont posés à l'échelle&nbsp;: aucun texte ne les franchit.</p>
   <p class="legende"><i class="pastille"></i><b>160&nbsp;px / 1620&nbsp;px</b> — zones mortes des stickers Instagram</p>
   <div class="planche">
 ${cartes}

@@ -330,11 +330,12 @@ body {
   );
 }
 
-/* Renfort haut : l'or (#D4AF37) a une luminance relative de 0,45. Pour tenir
-   le 3:1 du « large text » il lui faut un fond sous 0,117 — autrement dit
-   franchement noir. Plutôt que d'assombrir toute la moitié haute, le renfort
-   est une bande courte, pleine sous la ligne d'en-tête puis en chute rapide :
-   le sujet de la photo, qui vit en dessous de 360 px, reste intact. */
+/* Renfort haut : le gris de pagination (#9CA3AF) a une luminance relative de
+   0,36. Pour tenir le 3:1 du « large text » il lui faut un fond sous 0,088 —
+   autrement dit franchement noir. Plutôt que d'assombrir toute la moitié
+   haute, le renfort est une bande courte, pleine sous la ligne de pagination
+   puis en chute rapide : le sujet de la photo, en dessous de 360 px, reste
+   intact. */
 .renfort-haut {
   position: absolute;
   left: 0; right: 0; top: 0;
@@ -380,26 +381,17 @@ body {
   );
 }
 
-/* --------------------------------------------- couche 3 : en-tête de série */
+/* ---------------------------------------------- couche 3 : la pagination */
 
-.kicker,
+/* Seule la pagination occupe la ligne haute : la série ne porte pas de titre
+   répété d'une story à l'autre. */
 .compteur {
   position: absolute;
   top: var(--haut);
+  right: var(--marge);
   font-size: 24px;
   line-height: 1;
   text-transform: uppercase;
-}
-
-.kicker {
-  left: var(--marge);
-  color: var(--or);
-  font-weight: 700;
-  letter-spacing: 4px;
-}
-
-.compteur {
-  right: var(--marge);
   color: var(--gris);
   font-weight: 600;
   letter-spacing: 3px;
@@ -547,8 +539,7 @@ i  { color: var(--rouge); }
     <div class="renfort-bas"></div>
     <div class="renfort-haut"></div>
 
-    <!-- couche 3 : en-tête de série -->
-    <div class="kicker">Dubaï · Le stress test</div>
+    <!-- couche 3 : pagination -->
     <div class="compteur">1/6</div>
 
     <!-- couche 3 : le texte -->
