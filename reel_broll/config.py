@@ -5,7 +5,7 @@ Modifier ce fichier puis relancer `bash reel_broll/build.sh` regenere le reel.
 Aucune voix : musique seule + un hook qui s'affiche.
 """
 
-SRC = "clip3.mp4"            # source : photo (.jpg/.png) OU video (.mp4/.mov)
+SRC = "clip4.mp4"            # source : photo (.jpg/.png) OU video (.mp4/.mov)
 SRC_START = 0.0             # video seulement : debut de la fenetre a garder (s)
 SRC_LEN = 0.0               # video seulement : longueur de la fenetre dans la SOURCE.
                             # 0 = meme longueur que DURATION (vitesse normale).
@@ -55,10 +55,11 @@ SCRIM_ALPHA  = 0.0          # 0 = pas de voile (le cartouche porte le texte)
 # Deux lignes centrees, noir sur cartouche blanc arronde ; la largeur du
 # cartouche suit le texte (il ne reste jamais de blanc vide sur les cotes).
 HOOK = [
-    "PAYER MOINS D’IMPÔTS",
-    "LÉGALEMENT ET FRAUDER,",
-    "C’EST PAS LA MÊME CHOSE.",
-    "JE T’EXPLIQUE",
+    "MÊME SI TA LLC A FAIT 0€",
+    "CETTE ANNÉE,",
+    "LE GOUVERNEMENT AMÉRICAIN",
+    "PEUT QUAND MÊME",
+    "TE RÉCLAMER 25 000$",
 ]
 HOOK_SUB = "LIS LA DESCRIPTION"       # mention sous le cartouche ; "" pour l'enlever
 
@@ -73,7 +74,7 @@ HOOK_PAD_X = 37               # marge laterale dans le cartouche
 HOOK_PAD_TOP, HOOK_PAD_BOTTOM = 34, 32
 HOOK_RADIUS = 20              # rayon des coins
 HOOK_MAX_W = 0.72             # largeur max du cartouche ; au-dela la police retrecit
-HOOK_Y = 0.600                # haut du cartouche (fraction de hauteur)
+HOOK_Y = 0.620                # haut du cartouche (fraction de hauteur)
 
 SUB_CAP = 32                  # hauteur de capitale de la mention
 SUB_GAP = 29                  # ecart entre le cartouche et la mention
@@ -90,7 +91,8 @@ HOOK_FADE = 0.0               # duree du fondu d'apparition (s) ; 0 = pas d'anim
 AUDIO = True                # False = aucune piste son du tout
 MUSIC = True
 MUSIC_HAT = False           # charley : False = arrangement plus calme
-MUSIC_BARS = 2              # nombre de mesures sur la duree ; moins = plus posé
+MUSIC_STYLE = "suspense"    # "chill" (arpege chaud) | "suspense" (tension)
+MUSIC_BARS = 2              # chill : nombre de mesures sur la duree ; moins = plus posé
 MUSIC_BPM = 0               # 0 = cale MUSIC_BARS sur DURATION (la boucle tombe juste)
 MUSIC_GAIN = 0.55
 WHOOSH_AT = 0.0             # 0 = aucun bruitage (musique seule)

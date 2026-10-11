@@ -13,7 +13,7 @@ import imageio_ffmpeg
 
 sys.path.insert(0, "reel_broll")
 from srcinfo import TOTAL
-from config import (MUSIC, MUSIC_BARS, MUSIC_BPM, MUSIC_GAIN, MUSIC_HAT,
+from config import (MUSIC, MUSIC_STYLE, MUSIC_BARS, MUSIC_BPM, MUSIC_GAIN, MUSIC_HAT,
                     WHOOSH_AT, WHOOSH_GAIN, TARGET_LUFS)
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
@@ -101,9 +101,92 @@ def whoosh(start, amp):
     buf[i0:i0 + n] += x / (np.abs(x).max() + 1e-9) * amp
 
 
+def tick(start, amp=0.05, f0=1250.0):
+    """Petit clic sec facon horloge : marque le temps sans faire de rythme."""
+    i0 = int(start * SR)
+    n = min(int(0.05 * SR), N - i0)
+    if n <= 0:
+        return
+    lt = np.arange(n) / SR
+    x = (np.sin(2 * np.pi * f0 * lt) * np.exp(-lt * 150)
+         + np.sin(2 * np.pi * f0 * 1.7 * lt) * np.exp(-lt * 200) * 0.4)
+    buf[i0:i0 + n] += x.astype(np.float32) * amp
+
+
+def thud(start, amp=0.30, f0=70.0):
+    """Battement sourd : la pulsation du suspense, une frappe grave qui tombe."""
+    i0 = int(start * SR)
+    n = min(int(0.55 * SR), N - i0)
+    if n <= 0:
+        return
+    lt = np.arange(n) / SR
+    f = f0 * np.exp(-lt * 9) + f0 * 0.55
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-lt * 7.5)
+    x *= np.minimum(lt / 0.004, 1.0)                     # anti-clic
+    buf[i0:i0 + n] += x.astype(np.float32) * amp
+
+
+def riser(dur, amp=0.09):
+    """Montee continue sur toute la duree : c'est elle qui cree l'attente.
+
+    Elle doit rester SOMBRE. Un bruit qui s'ouvre vers l'aigu donne un sifflement
+    de bouilloire, pas de la tension : ici le bruit reste filtre et c'est le
+    glissando, qui monte de 110 a 330 Hz, qui porte la montee.
+    """
+    n = min(int(dur * SR), N)
+    lt = np.arange(n) / SR
+    u = lt / max(dur, 1e-6)
+    rng = np.random.RandomState(23)
+    nz = np.convolve(rng.randn(n).astype(np.float32), np.ones(90) / 90, mode="same")
+    gliss = np.sin(2 * np.pi * np.cumsum(120 + 320 * u ** 1.6) / SR).astype(np.float32)
+    x = (nz * 0.30 + gliss * 0.70) * (u ** 1.8)
+    buf[:n] += x * amp
+
+
+def drone(freqs, dur, amp=0.16):
+    """Nappe tenue, legerement desaccordee : le battement entretient le malaise."""
+    n = min(int(dur * SR), N)
+    lt = np.arange(n) / SR
+    env = np.clip(np.minimum(lt / 0.8, 1.0) * np.minimum((dur - lt) / 0.5, 1.0), 0, 1)
+    acc = np.zeros(n, dtype=np.float32)
+    for f in freqs:
+        acc += np.sin(2 * np.pi * f * lt).astype(np.float32)
+        acc += np.sin(2 * np.pi * f * 1.007 * lt).astype(np.float32) * 0.7
+    acc = np.convolve(acc, np.ones(25) / 25, mode="same")
+    buf[:n] += acc / len(freqs) * env * amp
+
+
 buf = np.zeros(N, dtype=np.float32)
 
-if MUSIC:
+if MUSIC and MUSIC_STYLE == "suspense":
+    # Pas d'harmonie qui avance : une tenue grave, une pulsation lente et une
+    # montee. Le suspense vient de ce qui ne se resout pas.
+    ROOT = 73.42                                   # Re1
+    drone([ROOT, ROOT * 1.5, ROOT * 3], TOTAL, amp=0.15)  # quinte + octave-quinte
+    drone([ROOT * 4 * 1.0595], TOTAL * 0.92, amp=0.028)   # seconde mineure, tres bas
+    riser(TOTAL, amp=0.085)
+
+    PULSE = 60.0 / 58.0                            # ~58 BPM : un pouls, pas un tempo
+    k = 0
+    while k * PULSE < TOTAL - 0.15:
+        u = (k * PULSE) / TOTAL
+        thud(k * PULSE, amp=0.18 + 0.30 * u)       # la frappe se rapproche
+        if k % 2 == 1:
+            tick(k * PULSE + PULSE / 2, amp=0.045 + 0.045 * u)
+        k += 1
+
+    # La montee doit s'ENTENDRE : sans cette rampe globale, tout joue au meme
+    # niveau du debut a la fin et la tension ne va nulle part.
+    ramp = np.linspace(0.30, 1.0, N, dtype=np.float32) ** 1.5
+    buf *= ramp
+
+    # fondu de sortie court : on laisse la tension ouverte
+    tail = int(0.35 * SR)
+    buf[-tail:] *= np.linspace(1, 0, tail, dtype=np.float32)
+    buf[:int(0.08 * SR)] *= np.linspace(0, 1, int(0.08 * SR), dtype=np.float32)
+    buf *= MUSIC_GAIN
+
+elif MUSIC:
     # Deux accords lents, septiemes ouvertes : c'est l'harmonie qui pose le
     # morceau, pas le tempo. Une suite de quatre accords sur 5 s se bouscule.
     PROG = [
