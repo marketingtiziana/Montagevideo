@@ -206,7 +206,7 @@ P(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}} motion={{{{ 
   f'<media file={{F[{js(MOCK["board"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.32, to: 0.32, duration: {s03["dur"]} }}]}} effects={{[{{ kind: "layer-blur", params: {{ radius: 2 }} }}]}} />'
   f'</frame>, {{ at: {s03["t0"]}, dur: {s03["dur"]}, name: "vfx_board" }});')
 P(f'  p.compose(<media file={{F[{js(MOCK["hud"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" trimStart={{1.0}} animate={{[{{ property: "opacity", from: 0.22, to: 0.22, duration: {min(2.0, s04["dur"])} }}]}} />, {{ at: {s04["t0"]}, dur: {min(2.0, s04["dur"])}, name: "vfx_radar" }});')
-P(f'  p.compose(<media file={{F[{js(MOCK["alert"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.9, to: 0.9, duration: {round(s04["t1"] - s03["t0"], 3)} }}]}} />, {{ at: {s03["t0"]}, dur: {round(s04["t1"] - s03["t0"], 3)}, name: "vfx_alert" }});')
+P(f'  p.compose(<media file={{F[{js(MOCK["alert"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.9, to: 0.9, duration: {min(round(s04["t1"] - s03["t0"], 3), 3.9)} }}]}} />, {{ at: {s03["t0"]}, dur: {min(round(s04["t1"] - s03["t0"], 3), 3.9)}, name: "vfx_alert" }});')
 # light leak froid 1 fois (s05)
 s05 = S[4]
 P(f'  p.compose(<rect width={{1400}} height={{1400}} x={{-700}} y={{200}} fill={{{{ kind: "radial", stops: [{{ offset: 0, color: "#9FC9FF", opacity: 0.45 }}, {{ offset: 0.6, color: "#9FC9FF", opacity: 0.0 }}] }}}} blendMode="screen" '
