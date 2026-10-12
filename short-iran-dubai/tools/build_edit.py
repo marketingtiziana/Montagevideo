@@ -125,9 +125,13 @@ TOTAL = S[-1]['t1']
 IMPACTS = [0.0, 10.0, 12.0, 25.333, 28.0, 31.667, 35.333, 38.667, 42.333, 50.333]  # sub + vibration (acte 1 seulement)
 
 out = []
+txt = []
 P = out.append
+def T(line):
+    out.append(line); txt.append(line)
 P('// edit.jsx — généré par tools/build_edit.py (ne pas éditer à la main : relancer le générateur)')
 P('export default async ({ project, icon }) => {')
+HEAD_T = [f'  const p = await project({{ dir: ".", size: "1080x1920", fps: {A.fps}, background: "#777777" }});', '  const EB = await p.add("fonts/Montserrat-ExtraBold.ttf");', '  const SB = await p.add("fonts/Montserrat-SemiBold.ttf");', '  const tryIcon = (name, o) => { try { return icon ? icon(name, o) : null; } catch (e) { return null; } };']
 P(f'  const p = await project({{ dir: ".", size: "1080x1920", fps: {A.fps}, background: "#0A0A0A" }});')
 P('  const EB = await p.add("fonts/Montserrat-ExtraBold.ttf");')
 P('  const SB = await p.add("fonts/Montserrat-SemiBold.ttf");')
@@ -250,7 +254,7 @@ for s in S:
     top = CY - block_h / 2
     assert BOX['y0'] + SHADOW_PAD <= top and top + block_h <= BOX['y1'] - SHADOW_PAD, f'{sid} hors boîte verticale ({block_h}px)'
     words_out = []
-    P(f'  // écran {sid} : {s["text"]}')
+    T(f'  // écran {sid} : {s["text"]}')
     root_anim = ''
     vib = [t for t in IMPACTS if s['t0'] - 1e-6 <= t < s['t1'] - 0.3] if not s['act2'] else []
     tracks = []
@@ -265,26 +269,26 @@ for s in S:
     if sid == 's01':  # scintillement d'opacité sur le hook
         tracks.append('{ property: "opacity", keyframes: [{ at: 0.35, value: 1 }, { at: 0.42, value: 0.82 }, { at: 0.47, value: 1 }, { at: 0.9, value: 1 }, { at: 0.95, value: 0.88 }, { at: 1.0, value: 1 }] }')
     if tracks: root_anim = f' animate={{[{", ".join(tracks)}]}}'
-    P(f'  p.compose(<frame name="txt_{sid}" layout="none" width={{1080}} height={{1920}} motion={{{{ exit: {{ to: {{ opacity: 0 }}, duration: 0.2, anchor: "end" }} }}}}{root_anim}>')
+    T(f'  p.compose(<frame name="txt_{sid}" layout="none" width={{1080}} height={{1920}} motion={{{{ exit: {{ to: {{ opacity: 0 }}, duration: 0.2, anchor: "end" }} }}}}{root_anim}>')
     y = top
     # carte « verre » (solutions) et carte CTA
     if num:
-        P(f'    <frame layout="none" x={{{BOX["x0"]}}} y={{{round(top - 40)}}} width={{840}} height={{{round(block_h + 80)}}} background="#FFFFFF14" radius={{32}} origin="center" '
+        T(f'    <frame layout="none" x={{{BOX["x0"]}}} y={{{round(top - 40)}}} width={{840}} height={{{round(block_h + 80)}}} background="#FFFFFF14" radius={{32}} origin="center" '
           f'motion={{{{ enter: {{ from: {{ y: 60, opacity: 0, scale: 0.96 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} />')
         ic = ICONS[sid]
-        P(f'    <frame layout="none" x={{{CX - 60}}} y={{{round(y)}}} width={{120}} height={{120}} origin="center" motion={{{{ enter: {{ from: {{ scale: 0.6, opacity: 0 }}, duration: 0.45, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
+        T(f'    <frame layout="none" x={{{CX - 60}}} y={{{round(y)}}} width={{120}} height={{120}} origin="center" motion={{{{ enter: {{ from: {{ scale: 0.6, opacity: 0 }}, duration: 0.45, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
           f'{{tryIcon("{ic}", {{ size: 120, color: "{acc}", strokeWidth: 1.5 }})}}</frame>')
         y += 120 + 14
         nf = font('ExtraBold', 160); nw = adv(nf, str(num)) + 8
-        P(f'    <frame layout="none" x={{{round(CX - 100)}}} y={{{round(y - 12)}}} width={{200}} height={{200}} origin="center" clip reveal={{{{ from: "left", at: 0.1, duration: 0.3 }}}}>'
+        T(f'    <frame layout="none" x={{{round(CX - 100)}}} y={{{round(y - 12)}}} width={{200}} height={{200}} origin="center" clip reveal={{{{ from: "left", at: 0.1, duration: 0.3 }}}}>'
           f'<path d={js(circle_path(100, 100, 92))} x={{0}} y={{0}} width={{200}} height={{200}} stroke={{{{ color: "{acc}", width: 4 }}}} /></frame>')
-        P(f'    <frame layout="none" x={{{round(CX - nw/2)}}} y={{{round(y)}}} width={{{round(nw)}}} height={{176}} origin="center" motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.3, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
+        T(f'    <frame layout="none" x={{{round(CX - nw/2)}}} y={{{round(y)}}} width={{{round(nw)}}} height={{176}} origin="center" motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.3, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
           + text_node(str(num), 0, 0, round(nw), 176, 160, 'ExtraBold', acc) + '</frame>')
-        P(f'    <frame layout="none" x={{{CX + 76}}} y={{{round(y + 8)}}} width={{64}} height={{64}} origin="center" at={{{round(d - 0.45, 3)}}} motion={{{{ enter: {{ from: {{ scale: 0.4, opacity: 0 }}, duration: 0.25, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
+        T(f'    <frame layout="none" x={{{CX + 76}}} y={{{round(y + 8)}}} width={{64}} height={{64}} origin="center" at={{{round(d - 0.45, 3)}}} motion={{{{ enter: {{ from: {{ scale: 0.4, opacity: 0 }}, duration: 0.25, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
           f'{{tryIcon("check", {{ size: 64, color: "{acc}", strokeWidth: 3 }})}}</frame>')
         y += 176 + 12
     if sid == 's21':
-        P(f'    <frame layout="none" x={{0}} y={{{round(top - 120)}}} width={{1080}} height={{{round(block_h + 240)}}} background="{ACC_S}" opacity={{0.92}} '
+        T(f'    <frame layout="none" x={{0}} y={{{round(top - 120)}}} width={{1080}} height={{{round(block_h + 240)}}} background="{ACC_S}" opacity={{0.92}} '
           f'motion={{{{ enter: {{ from: {{ y: 900, opacity: 0 }}, duration: 0.6, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} />')
     # mots
     wi = 0
@@ -304,11 +308,11 @@ for s in S:
             if is_acc and cnt and sid in COUNTERS and w == lw[-1] and li == len(lines) - 1 and False:
                 pass
             # entrée mot par mot sur beat : scale 1.3→1 + opacité (0,2 s), easing cubic-bezier(0.2,0.8,0.2,1)
-            P(f'    <frame name="w_{sid}_{wi}" layout="none" x={{{round(x, 1)}}} y={{{round(y)}}} width={{{bw}}} height={{{bh}}} origin="center" at={{{delay}}} '
+            T(f'    <frame name="w_{sid}_{wi}" layout="none" x={{{round(x, 1)}}} y={{{round(y)}}} width={{{bw}}} height={{{bh}}} origin="center" at={{{delay}}} '
               f'motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.2, easing: {js(EASE)} }} }}}}>{inner}</frame>')
             if is_acc:
                 # soulignement qui se trace 0,25 s
-                P(f'    <frame layout="none" x={{{round(x, 1)}}} y={{{round(y + size * 1.06)}}} width={{{round(ww)}}} height={{6}} clip reveal={{{{ from: "left", at: {round(delay + 0.15, 3)}, duration: 0.25 }}}}>'
+                T(f'    <frame layout="none" x={{{round(x, 1)}}} y={{{round(y + size * 1.06)}}} width={{{round(ww)}}} height={{6}} clip reveal={{{{ from: "left", at: {round(delay + 0.15, 3)}, duration: 0.25 }}}}>'
                   f'<rect width={{{round(ww)}}} height={{6}} fill="{acc}" radius={{3}} /></frame>')
             words_out.append(dict(word=w, x=round(x, 1), y=round(y), w=bw, h=bh, accent=is_acc, delay=delay))
             x += ww + space; wi += 1
@@ -325,7 +329,7 @@ for s in S:
         y += 12
         sf_ = font('SemiBold', 28); sw = adv(sf_, sub) + 20
         assert sw <= MAXW, f'sous-titre trop long {sid}'
-        P(f'    <frame layout="none" x={{{round(CX - sw/2)}}} y={{{round(y)}}} width={{{round(sw)}}} height={{40}} at={{{round(min(0.5, d/3), 3)}}} motion={{{{ enter: {{ from: {{ y: 10, opacity: 0 }}, duration: 0.3, easing: {js(EASE)} }} }}}}>'
+        T(f'    <frame layout="none" x={{{round(CX - sw/2)}}} y={{{round(y)}}} width={{{round(sw)}}} height={{40}} at={{{round(min(0.5, d/3), 3)}}} motion={{{{ enter: {{ from: {{ y: 10, opacity: 0 }}, duration: 0.3, easing: {js(EASE)} }} }}}}>'
           + text_node(sub, 0, 0, round(sw), 40, 28, 'SemiBold', '#E6E6E6' if sid != 's21' else '#0A0A0A',
                       extra='animate={[{ property: "opacity", keyframes: [{ at: 0, value: 1 }, { at: 0.5, value: 0.55 }, { at: 1.0, value: 1 }, { at: 1.5, value: 0.55 }, { at: 2.0, value: 1 }] }]}' if sid == 's21' else '') + '</frame>')
         words_out.append(dict(word=sub, x=round(CX - sw/2), y=round(y), w=round(sw), h=40, accent=False, delay=0.5, sub=True))
@@ -333,13 +337,13 @@ for s in S:
     if sid == 's21':
         y += 16
         hf_ = font('SemiBold', 36); hw = adv(hf_, A.handle) + 20
-        P(f'    <frame layout="none" x={{{round(CX - hw/2)}}} y={{{round(y)}}} width={{{round(hw)}}} height={{44}} at={{0.6}} motion={{{{ enter: {{ from: {{ y: 10, opacity: 0 }}, duration: 0.3 }} }}}}>'
+        T(f'    <frame layout="none" x={{{round(CX - hw/2)}}} y={{{round(y)}}} width={{{round(hw)}}} height={{44}} at={{0.6}} motion={{{{ enter: {{ from: {{ y: 10, opacity: 0 }}, duration: 0.3 }} }}}}>'
           + text_node(A.handle, 0, 0, round(hw), 44, 36, 'SemiBold', '#0A0A0A') + '</frame>')
         words_out.append(dict(word=A.handle, x=round(CX - hw/2), y=round(y), w=round(hw), h=44, accent=False, delay=0.6, sub=True))
         y += 44 + 16
-        P(f'    <frame layout="none" x={{{CX - 20}}} y={{{round(y)}}} width={{40}} height={{40}} origin="center" at={{0.8}} animate={{[{{ property: "offsetY", keyframes: [{{ at: 0, value: 0 }}, {{ at: 0.4, value: 8 }}, {{ at: 0.8, value: 0 }}], repeat: 3 }}]}}>'
+        T(f'    <frame layout="none" x={{{CX - 20}}} y={{{round(y)}}} width={{40}} height={{40}} origin="center" at={{0.8}} animate={{[{{ property: "offsetY", keyframes: [{{ at: 0, value: 0 }}, {{ at: 0.4, value: 8 }}, {{ at: 0.8, value: 0 }}], repeat: 3 }}]}}>'
           f'{{tryIcon("arrow-down", {{ size: 40, color: "#0A0A0A", strokeWidth: 3 }})}}</frame>')
-    P(f'  </frame>, {{ at: {s["t0"]}, dur: {d}, name: "txt_{sid}" }});')
+    T(f'  </frame>, {{ at: {s["t0"]}, dur: {d}, name: "txt_{sid}" }});')
     layout[sid] = dict(size=size, lines=[' '.join(l) for l in lines], words=words_out, t0=s['t0'], t1=s['t1'], block_h=round(block_h), top=round(top))
 
 # ---- compteurs (superposés) ----
@@ -351,7 +355,7 @@ for sid, cnt in COUNTERS.items():
     x0 = min(w['x'] for w in tgt); x1 = max(w['x'] + w['w'] for w in tgt); y0 = tgt[0]['y']; h = tgt[0]['h']
     delay = tgt[0]['delay']; size = lay['size']
     # le compteur occupe exactement la place des mots accent pendant 0,6 s puis claque ; les mots accent entrent ensuite
-    P(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}}>'
+    T(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}}>'
       f'<frame name="cnt_{sid}" layout="none" x={{{x0}}} y={{{y0}}} width={{{round(x1 - x0)}}} height={{{h}}} origin="center" at={{{delay}}} duration={{{round(0.62, 3)}}} '
       f'motion={{{{ timeline: {{ duration: 0.6, easing: "linear", targets: [{{ target: "cv_{sid}", counter: {{ from: 0, to: {cnt["to"]}, decimals: 0, prefix: {js(cnt["prefix"])}, suffix: {js(cnt["suffix"])} }} }}] }} }}}}>'
       f'<frame name="cv_{sid}" layout="none" x={{0}} y={{0}} width={{{round(x1 - x0)}}} height={{{h}}}>'
@@ -365,6 +369,12 @@ P(f'  if (MODE === "master") await p.render("renders/master{A.fps}.mp4", {{ bitr
 P('};')
 
 open(A.out, 'w').write('\n'.join(out) + '\n')
+tl = ['// edit_text.jsx — couche texte seule (QA marges), fond gris neutre', 'export default async ({ project, icon }) => {'] + HEAD_T + txt
+for s in S:
+    tm = round((s['t0'] + s['t1']) / 2, 3)
+    tl.append(f'  await p.frame({tm}, "renders/text/{s["id"]}.png");')
+tl.append('};')
+open(A.out.replace('edit.jsx', 'edit_text.jsx'), 'w').write('\n'.join(tl) + '\n')
 json.dump(dict(screens=layout, total=TOTAL, fps=A.fps, box=BOX, handle=A.handle, cta=A.cta), open(A.layout_out, 'w'), indent=1, ensure_ascii=False)
 print('edit.jsx écrit :', A.out, '| durée', TOTAL, 's |', len(S), 'écrans')
 for sid, l in layout.items():
