@@ -1,0 +1,160 @@
+[
+ {
+  "id": "s01",
+  "text": "La guerre en Iran va-t-elle tuer l'expatriation à Dubaï ?",
+  "accent": "l'expatriation",
+  "in": 0.0,
+  "out": 3.0
+ },
+ {
+  "id": "s02",
+  "text": "Dubaï ↔ côte iranienne : 150 km",
+  "accent": "150 km",
+  "sub": "vérifié le 12/10/2026",
+  "in": 3.0,
+  "out": 5.6
+ },
+ {
+  "id": "s03",
+  "text": "28 février 2026 : espace aérien partiellement fermé",
+  "accent": "partiellement fermé",
+  "sub": "vérifié le 12/10/2026",
+  "in": 5.6,
+  "out": 8.0
+ },
+ {
+  "id": "s04",
+  "text": "16 mars 2026 : vols suspendus à DXB",
+  "accent": "suspendus",
+  "sub": "vérifié le 12/10/2026",
+  "in": 8.0,
+  "out": 10.0
+ },
+ {
+  "id": "s05",
+  "text": "Mais la vraie question n'est pas la sécurité.",
+  "accent": "sécurité",
+  "in": 10.0,
+  "out": 12.0
+ },
+ {
+  "id": "s06",
+  "text": "C'est ta structure.",
+  "accent": "ta structure",
+  "in": 12.0,
+  "out": 14.0
+ },
+ {
+  "id": "s07",
+  "text": "DXB, 1er semestre 2026 : –31 % de passagers",
+  "accent": "–31 %",
+  "sub": "vérifié le 12/10/2026",
+  "in": 14.0,
+  "out": 16.8
+ },
+ {
+  "id": "s08",
+  "text": "Assurance santé : la guerre est une clause d'exclusion",
+  "accent": "clause d'exclusion",
+  "sub": "vérifié le 12/10/2026",
+  "in": 16.8,
+  "out": 19.6
+ },
+ {
+  "id": "s09",
+  "text": "180 jours hors des EAU : visa de résidence annulé",
+  "accent": "annulé",
+  "sub": "hors Golden Visa · règle ICP",
+  "in": 19.6,
+  "out": 22.4
+ },
+ {
+  "id": "s10",
+  "text": "Ventes immobilières à Dubaï : –38 % au 3e trimestre 2026",
+  "accent": "–38 %",
+  "sub": "vérifié le 12/10/2026 · Cavendish Maxwell",
+  "in": 22.4,
+  "out": 25.2
+ },
+ {
+  "id": "s11",
+  "text": "Si tu dois partir 3 mois… où es-tu résident fiscal ?",
+  "accent": "résident fiscal",
+  "sub": "183 jours EAU · un seul critère suffit en France",
+  "in": 25.2,
+  "out": 28.0
+ },
+ {
+  "id": "s12",
+  "text": "Une résidence de secours dans un 2ᵉ pays",
+  "accent": "2ᵉ pays",
+  "in": 28.0,
+  "out": 31.6
+ },
+ {
+  "id": "s13",
+  "text": "Une structure qui ne dépend pas d'un seul pays",
+  "accent": "un seul pays",
+  "sub": "holding + société opérationnelle",
+  "in": 31.6,
+  "out": 35.2
+ },
+ {
+  "id": "s14",
+  "text": "Une banque dans 2 juridictions",
+  "accent": "2 juridictions",
+  "in": 35.2,
+  "out": 38.8
+ },
+ {
+  "id": "s15",
+  "text": "Une assurance qui couvre conflit + rapatriement",
+  "accent": "rapatriement",
+  "in": 38.8,
+  "out": 42.4
+ },
+ {
+  "id": "s16",
+  "text": "Un calendrier de présence documenté, où que tu sois",
+  "accent": "documenté",
+  "in": 42.4,
+  "out": 46.0
+ },
+ {
+  "id": "s17",
+  "text": "Une expatriation qui dépend d'un seul pays",
+  "accent": "un seul pays",
+  "in": 46.0,
+  "out": 48.4
+ },
+ {
+  "id": "s18",
+  "text": "n'est pas une stratégie.",
+  "accent": "stratégie",
+  "in": 48.4,
+  "out": 50.4
+ },
+ {
+  "id": "s19",
+  "text": "C'est un pari.",
+  "accent": "pari",
+  "in": 50.4,
+  "out": 52.0
+ },
+ {
+  "id": "s20",
+  "text": "On a construit le PLAN B Dubaï.",
+  "accent": "PLAN B",
+  "in": 52.0,
+  "out": 54.5
+ },
+ {
+  "id": "s21",
+  "text": "PLAN B DUBAÏ",
+  "accent": "PLAN B DUBAÏ",
+  "start": 140,
+  "sub": "Commente PLAN B",
+  "in": 54.5,
+  "out": 58.0
+ }
+]

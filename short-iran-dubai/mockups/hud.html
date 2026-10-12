@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>hud</title>
+<style>
+  /* HUD radar minimal — abstrait, aucun texte, aucun symbole militaire. Fond noir : composité en mode « screen ». */
+  html,body{margin:0;width:1080px;height:1920px;background:#000;overflow:hidden}
+  svg{position:absolute;left:0;top:0}
+</style></head><body>
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sweep" gradientUnits="userSpaceOnUse" x1="540" y1="960" x2="540" y2="540">
+      <stop offset="0" stop-color="#D9822B" stop-opacity="0"/><stop offset="1" stop-color="#D9822B" stop-opacity=".55"/>
+    </linearGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="#D9822B" stop-opacity=".9"/><stop offset="1" stop-color="#D9822B" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g id="grid" stroke="#fff" stroke-opacity=".10" stroke-width="1"></g>
+  <g id="rings" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2">
+    <circle cx="540" cy="960" r="110"/><circle cx="540" cy="960" r="220"/><circle cx="540" cy="960" r="330"/><circle cx="540" cy="960" r="420"/>
+  </g>
+  <line x1="120" y1="960" x2="960" y2="960" stroke="#fff" stroke-opacity=".22" stroke-width="2"/>
+  <line x1="540" y1="540" x2="540" y2="1380" stroke="#fff" stroke-opacity=".22" stroke-width="2"/>
+  <g id="sweepG" transform="rotate(0 540 960)">
+    <path d="M540 960 L540 540 A420 420 0 0 1 757 584 Z" fill="url(#sweep)"/>
+    <line x1="540" y1="960" x2="540" y2="540" stroke="#D9822B" stroke-width="3"/>
+  </g>
+  <g id="blips"></g>
+  <circle cx="540" cy="960" r="7" fill="#D9822B"/>
+</svg>
+<script>
+  var g=document.getElementById('grid'); var s='';
+  for(var x=120;x<=960;x+=60) s+='<line x1="'+x+'" y1="540" x2="'+x+'" y2="1380"/>';
+  for(var y=540;y<=1380;y+=60) s+='<line x1="120" y1="'+y+'" x2="960" y2="'+y+'"/>';
+  g.innerHTML=s;
+  var pts=[[640,760],[430,1120],[700,1060],[480,820],[760,900]];
+  window.__setTime=function(t){
+    var ang=(t*120)%360; document.getElementById('sweepG').setAttribute('transform','rotate('+ang+' 540 960)');
+    var b=''; pts.forEach(function(p,i){
+      var pa=((Math.atan2(p[1]-960,p[0]-540)*180/Math.PI)+90+360)%360; var d=(ang-pa+360)%360; var o=Math.max(0,1-d/160);
+      b+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(10+6*o)+'" fill="url(#glow)" opacity="'+o.toFixed(2)+'"/>';
+    });
+    document.getElementById('blips').innerHTML=b;
+    // apparition globale 0→0.6 s
+    document.querySelector('svg').style.opacity=Math.min(1,t/0.6);
+  };
+</script>
+</body></html>
