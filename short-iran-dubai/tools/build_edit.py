@@ -275,18 +275,18 @@ for s in S:
     # carte « verre » (solutions) et carte CTA
     if num:
         T(f'    <frame layout="none" x={{{BOX["x0"]}}} y={{{round(top - 40)}}} width={{840}} height={{{round(block_h + 80)}}} origin="center" '
-          f'motion={{{{ enter: {{ from: {{ y: 60, scale: 0.96 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.3 }}]}}><rect x={{0}} y={{0}} width={{840}} height={{{round(block_h + 80)}}} fill="#FFFFFF14" radius={{32}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} /></frame>')
+          f'motion={{{{ enter: {{ from: {{ y: 60, scale: 0.96 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.3 }}]}}><rect x={{0}} y={{0}} width={{840}} height={{{round(block_h + 80)}}} fill="#FFFFFF14" radius={{32}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} /></frame> // PROP')
         ic = ICONS[sid]
         T(f'    <frame layout="none" x={{{CX - 60}}} y={{{round(y)}}} width={{120}} height={{120}} origin="center" motion={{{{ enter: {{ from: {{ scale: 0.6 }}, duration: 0.55, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.3 }}]}}>'
-          f'{{tryIcon("{ic}", {{ size: 120, color: "{acc}", strokeWidth: 1.5 }})}}</frame>')
+          f'{{tryIcon("{ic}", {{ size: 120, color: "{acc}", strokeWidth: 1.5 }})}}</frame> // PROP')
         y += 120 + 14
         nf = font('ExtraBold', 160); nw = adv(nf, str(num)) + 8
         T(f'    <frame layout="none" x={{{round(CX - 100)}}} y={{{round(y - 12)}}} width={{200}} height={{200}} origin="center" clip reveal={{{{ from: "left", at: 0.1, duration: 0.3 }}}}>'
-          f'<path d={js(circle_path(100, 100, 92))} x={{0}} y={{0}} width={{200}} height={{200}} stroke={{{{ color: "{acc}", width: 4 }}}} /></frame>')
+          f'<path d={js(circle_path(100, 100, 92))} x={{0}} y={{0}} width={{200}} height={{200}} stroke={{{{ color: "{acc}", width: 4 }}}} /></frame> // PROP')
         T(f'    <frame layout="none" x={{{round(CX - nw/2)}}} y={{{round(y)}}} width={{{round(nw)}}} height={{176}} origin="center" motion={{{{ enter: {{ from: {{ scale: 1.3 }}, duration: 0.55, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.2 }}]}}>'
           + text_node(str(num), 0, 0, round(nw), 176, 160, 'ExtraBold', acc) + '</frame>')
         T(f'    <frame layout="none" x={{{CX + 76}}} y={{{round(y + 8)}}} width={{64}} height={{64}} origin="center" at={{{round(d - 0.65, 3)}}} motion={{{{ enter: {{ from: {{ scale: 0.4 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.15 }}]}}>'
-          f'{{tryIcon("check", {{ size: 64, color: "{acc}", strokeWidth: 3 }})}}</frame>')
+          f'{{tryIcon("check", {{ size: 64, color: "{acc}", strokeWidth: 3 }})}}</frame> // PROP')
         y += 176 + 12
     if sid == 's21':
         T(f'    <frame layout="none" x={{0}} y={{{round(top - 120)}}} width={{1080}} height={{{round(block_h + 240)}}} background="{ACC_S}EB" '
@@ -303,17 +303,20 @@ for s in S:
             ww = widths[wj]; is_acc = (w.strip('.,?!') in s['accent'] and s['accent'] != '') or (s['accent'] and w in s['accent'].split(' ') and len(s['accent'].split(' ')) > 1 and w in s['accent'])
             delay = round(min(wi * stagger, max(d - 0.6, 0.3)), 3)
             color = acc if is_acc else WHITE
+            cnt_screen = sid in COUNTERS and is_acc
             bw = round(ww + 14); bh = round(size * 1.25)
             inner = text_node(w, 0, 0, bw, bh, size, weight, color)
             cnt = COUNTERS.get(sid)
             if is_acc and cnt and sid in COUNTERS and w == lw[-1] and li == len(lines) - 1 and False:
                 pass
             # entrée mot par mot sur beat : scale 1.3→1 + opacité (0,2 s), easing cubic-bezier(0.2,0.8,0.2,1)
-            T(f'    <frame name="w_{sid}_{wi}" layout="none" x={{{round(x, 1)}}} y={{{round(y)}}} width={{{bw}}} height={{{bh}}} origin="center" at={{{delay}}} '
-              f'motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.2, easing: "ease-out" }} }}}}>{inner}</frame>')
+            w_at = round(delay + 0.62, 3) if cnt_screen else delay
+            w_enter = '{ from: { scale: 1.08 }, duration: 0.15, easing: "ease-out" }' if cnt_screen else '{ from: { scale: 1.3, opacity: 0 }, duration: 0.2, easing: "ease-out" }'
+            T(f'    <frame name="w_{sid}_{wi}" layout="none" x={{{round(x, 1)}}} y={{{round(y)}}} width={{{bw}}} height={{{bh}}} origin="center" at={{{w_at}}} '
+              f'motion={{{{ enter: {w_enter} }}}}>{inner}</frame>')
             if is_acc:
                 # soulignement qui se trace 0,25 s
-                T(f'    <frame layout="none" x={{{round(x, 1)}}} y={{{round(y + size * 1.06)}}} width={{{round(ww)}}} height={{6}} clip reveal={{{{ from: "left", at: {round(delay + 0.15, 3)}, duration: 0.25 }}}}>'
+                T(f'    <frame layout="none" x={{{round(x, 1)}}} y={{{round(y + size * 1.06)}}} width={{{round(ww)}}} height={{6}} clip reveal={{{{ from: "left", at: {round((delay + 0.62 if cnt_screen else delay) + 0.15, 3)}, duration: 0.25 }}}}>'
                   f'<rect width={{{round(ww)}}} height={{6}} fill="{acc}" radius={{3}} /></frame>')
             words_out.append(dict(word=w, x=round(x, 1), y=round(y), w=bw, h=bh, accent=is_acc, delay=delay))
             x += ww + space; wi += 1
@@ -343,7 +346,7 @@ for s in S:
         words_out.append(dict(word=A.handle, x=round(CX - hw/2), y=round(y), w=round(hw), h=44, accent=False, delay=0.6, sub=True))
         y += 44 + 16
         T(f'    <frame layout="none" x={{{CX - 20}}} y={{{round(y)}}} width={{40}} height={{40}} origin="center" at={{0.8}} animate={{[{{ property: "offsetY", keyframes: [{{ at: 0, value: 0 }}, {{ at: 0.4, value: 8 }}, {{ at: 0.8, value: 0 }}], repeat: 3 }}]}}>'
-          f'{{tryIcon("arrow-down", {{ size: 40, color: "#0A0A0A", strokeWidth: 3 }})}}</frame>')
+          f'{{tryIcon("arrow-down", {{ size: 40, color: "#0A0A0A", strokeWidth: 3 }})}}</frame> // PROP')
     T(f'  </frame>, {{ at: {s["t0"]}, dur: {d}, name: "txt_{sid}" }});')
     layout[sid] = dict(size=size, lines=[' '.join(l) for l in lines], words=words_out, t0=s['t0'], t1=s['t1'], block_h=round(block_h), top=round(top))
 
@@ -391,9 +394,9 @@ def sort_composes(lines):
     head = [l for l in head if l not in tail]
     return head + body + tail
 
-out = sort_composes(out)
+out = [l.replace(' // PROP', '') for l in sort_composes(out)]
 open(A.out, 'w').write('\n'.join(out) + '\n')
-tl = ['// edit_text.jsx — couche texte seule (QA marges), fond gris neutre', 'export default async ({ project, icon }) => {'] + HEAD_T + sort_composes(txt)
+tl = ['// edit_text.jsx — couche texte seule (QA marges), fond gris neutre', 'export default async ({ project, icon }) => {'] + HEAD_T + sort_composes([l for l in txt if not (l.rstrip().endswith('// PROP') or '#3EC1A8EB' in l or '#FFFFFF14' in l)])
 for s in S:
     tm = round((s['t0'] + s['t1']) / 2, 3)
     tl.append(f'  await p.frame({tm}, "renders/text/{s["id"]}.png");')
