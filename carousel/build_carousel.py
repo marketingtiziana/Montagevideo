@@ -202,7 +202,8 @@ def build_html(i: int, kicker: str, title: str, accent: str, step: int | None) -
 </body></html>"""
 
 
-def render(html_path: Path, png_path: Path) -> None:
+def render(html_path: Path, png_path: Path, scale: int = 1) -> None:
+    """Capture la slide. scale=2 rend en 2160x2700 (fichier @2x) puis réduit en 1080x1350 (LANCZOS)."""
     subprocess.run(
         [
             CHROME,
@@ -210,7 +211,7 @@ def render(html_path: Path, png_path: Path) -> None:
             "--no-sandbox",
             "--disable-gpu",
             "--hide-scrollbars",
-            "--force-device-scale-factor=1",
+            f"--force-device-scale-factor={scale}",
             f"--window-size={W},{H + 300}",  # la fenêtre inclut ~80px de chrome : on recadre ensuite
             f"--screenshot={png_path}",
             html_path.as_uri(),
@@ -218,7 +219,11 @@ def render(html_path: Path, png_path: Path) -> None:
         check=True,
         capture_output=True,
     )
-    Image.open(png_path).crop((0, 0, W, H)).save(png_path)
+    im = Image.open(png_path).crop((0, 0, W * scale, H * scale))
+    if scale > 1:
+        im.save(png_path.with_name(png_path.stem + "@2x.png"))
+        im = im.resize((W, H), Image.LANCZOS)
+    im.save(png_path)
 
 
 def contact_sheet(pngs: list[Path], dest: Path, bg: str = "#1A1D26") -> None:

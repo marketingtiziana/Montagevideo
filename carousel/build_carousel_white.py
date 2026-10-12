@@ -42,8 +42,10 @@ body { font-family: 'Inter', sans-serif; background: #fff; color: #000; position
 .counter { font-family: 'Inter Display'; font-weight: 500; font-size: 22px; letter-spacing: .06em; color: #9A9A9A; font-variant-numeric: tabular-nums; }
 .counter b { color: #000; font-weight: 600; }
 
-.shot-wrap { position: absolute; left: 96px; right: 96px; top: 190px; display: flex; align-items: center; justify-content: center; }
+.shot-wrap { position: absolute; left: 96px; right: 96px; top: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 44px; }
 .shot img { display: block; width: 100%; height: auto; }
+.illus { width: 888px; display: flex; justify-content: center; }
+.illus svg { display: block; }
 
 .timeline { position: absolute; left: 96px; right: 96px; bottom: 212px; display: flex; justify-content: space-between; }
 .tl { font-family: 'Inter Display'; font-weight: 600; font-size: 22px; letter-spacing: .18em; color: #C8C8C8; padding-bottom: 10px; border-bottom: 2px solid transparent; }
@@ -71,13 +73,16 @@ def build_html(
     total: int = len(SLIDES),
     timeline_labels: list[str] = TIMELINE,
     cta: str = "COMMENTE « JANVIER »",
+    illus: str | None = None,
+    illus_h: int = 0,
 ) -> str:
     n = i + 1
     img = screens / f"{n}.jpg"
     zone_bottom = 290 if step is not None else 220
-    avail_h = (H - zone_bottom) - 190
+    avail_h = (H - zone_bottom) - 190 - (illus_h + 44 if illus else 0)
     scale = min(1.0, avail_h / card_height_hint(img, inner_w=888))
     shot_w = int(888 * scale)
+    illus_html = f'<div class="illus">{illus}</div>' if illus else ""
     pct = (i + 1) / total * 100
 
     timeline = ""
@@ -102,6 +107,7 @@ def build_html(
 </div>
 <div class="shot-wrap" style="bottom:{zone_bottom}px">
   <div class="shot" style="width:{shot_w}px"><img src="{img_data_uri(img)}" alt="screen {n}"></div>
+  {illus_html}
 </div>
 {logo}
 {timeline}
@@ -119,19 +125,30 @@ def build_deck(
     *,
     timeline_labels: list[str] = TIMELINE,
     cta: str = "COMMENTE « JANVIER »",
+    illustrations: dict[int, tuple[str, int]] | None = None,
+    scale: int = 2,
 ) -> list[Path]:
-    """Génère un carrousel blanc complet : steps[i] = étape de frise de la slide i (ou None)."""
+    """Génère un carrousel blanc complet : steps[i] = étape de frise de la slide i (ou None).
+
+    illustrations : {n° de slide (1-based): (svg_html, hauteur_px)} dessiné sous le texte.
+    scale=2 : rendu HD (fichier @2x conservé + 1080x1350 réduit en LANCZOS).
+    """
+    illustrations = illustrations or {}
     html_dir = out / "html"
     html_dir.mkdir(parents=True, exist_ok=True)
     pngs: list[Path] = []
     for i, step in enumerate(steps):
         html = html_dir / f"slide_{i + 1:02d}.html"
         png = out / f"slide_{i + 1:02d}.png"
+        il = illustrations.get(i + 1)
         html.write_text(
-            build_html(i, step, screens=screens, total=len(steps), timeline_labels=timeline_labels, cta=cta),
+            build_html(
+                i, step, screens=screens, total=len(steps), timeline_labels=timeline_labels, cta=cta,
+                illus=il[0] if il else None, illus_h=il[1] if il else 0,
+            ),
             encoding="utf-8",
         )
-        render(html, png)
+        render(html, png, scale=scale)
         pngs.append(png)
         print("ok", png.name)
     contact_sheet(pngs, out / "planche.jpg", bg="#EDEDED")
@@ -147,7 +164,7 @@ def build_deck(
 
 
 def main() -> None:
-    build_deck(SCREENS, OUT, [step for (_k, _t, _a, step) in SLIDES])
+    build_deck(SCREENS, OUT, [step for (_k, _t, _a, step) in SLIDES], scale=1)
 
 
 if __name__ == "__main__":

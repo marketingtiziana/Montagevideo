@@ -28,6 +28,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from build_carousel_white import build_deck  # noqa: E402
+from illustrations import ILLUSTRATIONS  # noqa: E402
 from threads_text import render_post  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
@@ -47,12 +48,14 @@ def main(cfg_path: Path) -> None:
     tl = cfg.get("timeline") or {}
     slide_steps = {int(k): v for k, v in tl.get("slides", {}).items()}
     steps = [slide_steps.get(n) for n in range(1, total + 1)]
+    illus = {int(k): ILLUSTRATIONS[v] for k, v in (cfg.get("illustrations") or {}).items()}
     build_deck(
         screens,
         out,
         steps,
         timeline_labels=tl.get("labels", []),
         cta=cfg.get("cta", "COMMENTE"),
+        illustrations=illus,
     )
 
 

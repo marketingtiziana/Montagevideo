@@ -36,3 +36,12 @@ python3 carousel/make_carousel.py carousel/mon_sujet.json  # -> carousel/decks/<
 Chaque post est une liste de paragraphes ; un `\n` dans un paragraphe fait un simple retour
 à la ligne (comme dans Threads). Les emoji sont rendus avec Noto Color Emoji, pas les emoji
 Apple : c'est la seule différence visible avec un vrai screen.
+
+## Illustrations et rendu HD
+
+- `illustrations.py` : dessins vectoriels monochromes (SVG) à poser sous le texte d'une slide ;
+  dans le JSON, `"illustrations": {"2": "phone_back"}` (noms : phone_front, phone_back, geo, laptop,
+  trio, rules, codex). Le texte se réduit automatiquement pour laisser la place.
+- Rendu en 2x (2160 × 2700, fichiers `@2x.png` non versionnés) puis réduit en 1080 × 1350 LANCZOS :
+  texte et traits nets. Les écrans Threads sont aussi rendus en 2x.
+- Exemple complet : `python3 carousel/make_carousel.py carousel/iphone_contenu.json`

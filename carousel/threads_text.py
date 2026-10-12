@@ -67,8 +67,8 @@ def build_html(paragraphs: list[str], counter: str | None) -> str:
     return f"<!doctype html><html lang='fr'><head><meta charset='utf-8'><style>{CSS}</style></head><body>{''.join(ps)}</body></html>"
 
 
-def render_post(paragraphs: list[str], counter: str | None, dest: Path) -> Path:
-    """Rend un post en JPG, recadré à la hauteur du texte (comme un screen)."""
+def render_post(paragraphs: list[str], counter: str | None, dest: Path, scale: int = 2) -> Path:
+    """Rend un post en JPG (scale=2 : 2368 px de large, net une fois réduit), recadré à la hauteur du texte."""
     with tempfile.TemporaryDirectory() as td:
         html_path = Path(td) / "post.html"
         png_path = Path(td) / "post.png"
@@ -76,7 +76,7 @@ def render_post(paragraphs: list[str], counter: str | None, dest: Path) -> Path:
         subprocess.run(
             [
                 CHROME, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars",
-                "--force-device-scale-factor=1", f"--window-size={WIDTH},2400",
+                f"--force-device-scale-factor={scale}", f"--window-size={WIDTH},2400",
                 f"--screenshot={png_path}", html_path.as_uri(),
             ],
             check=True, capture_output=True,
@@ -89,7 +89,7 @@ def render_post(paragraphs: list[str], counter: str | None, dest: Path) -> Path:
         if any(px[x, y] != (255, 255, 255) for x in range(0, im.width, 4)):
             last = y
             break
-    im = im.crop((0, 0, WIDTH, min(im.height, last + PAD_BOTTOM + 1)))
+    im = im.crop((0, 0, WIDTH * scale, min(im.height, last + PAD_BOTTOM * scale + 1)))
     dest.parent.mkdir(parents=True, exist_ok=True)
     im.save(dest, quality=95)
     return dest
