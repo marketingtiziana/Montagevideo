@@ -181,11 +181,11 @@ P(f'  p.compose(<rect width={{1080}} height={{1920}} fill="#FFFFFF" animate={{[{
 s02 = S[1]
 dx, dy = mapd['dubai_px']; ix, iy = mapd['iran_coast_px']
 P(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}} motion={{{{ exit: {{ to: {{ opacity: 0 }}, duration: 0.2, anchor: "end" }} }}}}>')
-P(f'    <media file={{F[{js(MOCK["hud"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" opacity={{0.35}} animate={{[{{ property: "offsetY", from: 10, to: -10, duration: {s02["dur"]}, easing: "linear" }}]}} />')
+P(f'    <media file={{F[{js(MOCK["hud"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.35, to: 0.35, duration: {s02["dur"]} }}, {{ property: "offsetY", from: 10, to: -10, duration: {s02["dur"]}, easing: "linear" }}]}} />')
 for name, dpath in mapd['paths'].items():
     main = name in ('Iran', 'United Arab Emirates')
     P(f'    <frame layout="none" x={{0}} y={{0}} width={{1080}} height={{1920}} clip reveal={{{{ from: "left", at: 0.05, duration: 1.2, easing: "ease-out" }}}}>'
-      f'<path d={js(dpath)} x={{0}} y={{0}} width={{1080}} height={{1920}} stroke={{{{ color: "#FFFFFF", width: {3 if main else 1.5}, cap: "round" }}}} opacity={{{1.0 if main else 0.45}}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} /></frame>')
+      f'<path d={js(dpath)} x={{0}} y={{0}} width={{1080}} height={{1920}} stroke={{{{ color: "#FFFFFF", width: {3 if main else 1.5}, cap: "round" }}}} animate={{[{{ property: "opacity", from: {1.0 if main else 0.45}, to: {1.0 if main else 0.45}, duration: {s02["dur"]} }}]}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} /></frame>')
 # ligne Dubaï -> côte iranienne (tracée 0,5 s après la carte)
 P(f'    <frame layout="none" x={{0}} y={{0}} width={{1080}} height={{1920}} clip reveal={{{{ from: "bottom", at: 1.25, duration: 0.5, easing: "ease-out" }}}}>'
   f'<path d="M{dx} {dy} L{ix} {iy}" x={{0}} y={{0}} width={{1080}} height={{1920}} stroke={{{{ color: "{ACC_T}", width: 4, cap: "round" }}}} dash={{[14, 10]}} /></frame>')
@@ -197,16 +197,16 @@ def circle_path(cx, cy, r):
 P(f'    <frame layout="none" x={{{dx - 30}}} y={{{dy - 30}}} width={{60}} height={{60}} origin="center" at={{1.1}} '
   f'animate={{[{{ property: "scale", keyframes: [{{ at: 0, value: 0.6 }}, {{ at: 0.35, value: 1.25 }}, {{ at: 0.7, value: 0.9 }}, {{ at: 1.05, value: 1.2 }}, {{ at: 1.4, value: 1.0 }}] }}]}}>'
   f'<path d={js(circle_path(30, 30, 11))} x={{0}} y={{0}} width={{60}} height={{60}} fill="{ACC_T}" />'
-  f'<path d={js(circle_path(30, 30, 24))} x={{0}} y={{0}} width={{60}} height={{60}} stroke={{{{ color: "{ACC_T}", width: 2 }}}} opacity={{0.6}} /></frame>')
+  f'<path d={js(circle_path(30, 30, 24))} x={{0}} y={{0}} width={{60}} height={{60}} stroke={{{{ color: "{ACC_T}", width: 2 }}}} animate={{[{{ property: "opacity", from: 0.6, to: 0.6, duration: 1.4 }}]}} /></frame>')
 P(f'  </frame>, {{ at: {s02["t0"]}, dur: {s02["dur"]}, name: "vfx_map" }});')
 
 # balayage radar 1 fois + tableau des départs (s03) + bandeau d'alerte (s03-s04)
 s03 = S[2]; s04 = S[3]
 P(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}} motion={{{{ enter: {{ from: {{ opacity: 0 }}, duration: 0.25 }}, exit: {{ to: {{ opacity: 0 }}, duration: 0.2, anchor: "end" }} }}}}>'
-  f'<media file={{F[{js(MOCK["board"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" opacity={{0.32}} effects={{[{{ kind: "layer-blur", params: {{ radius: 2 }} }}]}} />'
+  f'<media file={{F[{js(MOCK["board"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.32, to: 0.32, duration: {s03["dur"]} }}]}} effects={{[{{ kind: "layer-blur", params: {{ radius: 2 }} }}]}} />'
   f'</frame>, {{ at: {s03["t0"]}, dur: {s03["dur"]}, name: "vfx_board" }});')
-P(f'  p.compose(<media file={{F[{js(MOCK["hud"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" opacity={{0.22}} trimStart={{1.0}} />, {{ at: {s04["t0"]}, dur: {min(2.0, s04["dur"])}, name: "vfx_radar" }});')
-P(f'  p.compose(<media file={{F[{js(MOCK["alert"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" opacity={{0.9}} />, {{ at: {s03["t0"]}, dur: {round(s04["t1"] - s03["t0"], 3)}, name: "vfx_alert" }});')
+P(f'  p.compose(<media file={{F[{js(MOCK["hud"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" trimStart={{1.0}} animate={{[{{ property: "opacity", from: 0.22, to: 0.22, duration: {min(2.0, s04["dur"])} }}]}} />, {{ at: {s04["t0"]}, dur: {min(2.0, s04["dur"])}, name: "vfx_radar" }});')
+P(f'  p.compose(<media file={{F[{js(MOCK["alert"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.9, to: 0.9, duration: {round(s04["t1"] - s03["t0"], 3)} }}]}} />, {{ at: {s03["t0"]}, dur: {round(s04["t1"] - s03["t0"], 3)}, name: "vfx_alert" }});')
 # light leak froid 1 fois (s05)
 s05 = S[4]
 P(f'  p.compose(<rect width={{1400}} height={{1400}} x={{-700}} y={{200}} fill={{{{ kind: "radial", stops: [{{ offset: 0, color: "#9FC9FF", opacity: 0.45 }}, {{ offset: 0.6, color: "#9FC9FF", opacity: 0.0 }}] }}}} blendMode="screen" '
@@ -214,22 +214,22 @@ P(f'  p.compose(<rect width={{1400}} height={{1400}} x={{-700}} y={{200}} fill={
   f'{{ at: {s05["t0"]}, dur: {s05["dur"]}, name: "vfx_leak" }});')
 # nuages abstraits en surimpression (s11, question fiscale) + brume (s01 hook) — ambiance Higgsfield abstraite
 s01 = S[0]; s11 = S[10]
-P(f'  p.compose(<media file={{F[{js(AMBIANCE["fog"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" opacity={{0.22}} />, {{ at: {s01["t0"]}, dur: {s01["dur"]}, name: "amb_fog" }});')
-P(f'  p.compose(<media file={{F[{js(AMBIANCE["clouds"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" opacity={{0.18}} />, {{ at: {s11["t0"]}, dur: {s11["dur"]}, name: "amb_clouds" }});')
+P(f'  p.compose(<media file={{F[{js(AMBIANCE["fog"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.22, to: 0.22, duration: {s01["dur"]} }}]}} />, {{ at: {s01["t0"]}, dur: {s01["dur"]}, name: "amb_fog" }});')
+P(f'  p.compose(<media file={{F[{js(AMBIANCE["clouds"])}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" blendMode="screen" animate={{[{{ property: "opacity", from: 0.18, to: 0.18, duration: {s11["dur"]} }}]}} />, {{ at: {s11["t0"]}, dur: {s11["dur"]}, name: "amb_clouds" }});')
 # ---- VFX acte solution : particules lentes 20 %, light sweep chaud 1 fois (s12)
 s12 = S[11]
-P(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}} opacity={{0.2}}>')
+P(f'  p.compose(<frame layout="none" width={{1080}} height={{1920}}>')
 import random
 rnd = random.Random(12)
 for k in range(14):
-    x = rnd.randint(140, 940); y = rnd.randint(300, 1700); r = rnd.choice([3, 4, 5, 6]); dur = rnd.uniform(8, 14)
-    P(f'    <path d={js(circle_path(r, r, r))} x={{{x}}} y={{{y}}} width={{{2*r}}} height={{{2*r}}} fill="#FFFFFF" animate={{[{{ property: "offsetY", from: 0, to: {-rnd.randint(120, 260)}, duration: {round(dur,2)}, easing: "linear", repeat: 3 }}, {{ property: "offsetX", from: 0, to: {rnd.randint(-40, 40)}, duration: {round(dur,2)}, easing: "linear", repeat: 3 }}]}} />')
+    x = rnd.randint(140, 940); y = rnd.randint(300, 1700); r = rnd.choice([3, 4, 5, 6]); dur = rnd.uniform(7, 9.5)
+    P(f'    <path d={js(circle_path(r, r, r))} x={{{x}}} y={{{y}}} width={{{2*r}}} height={{{2*r}}} fill="#FFFFFF" animate={{[{{ property: "opacity", from: 0.2, to: 0.2, duration: {round(TOTAL - ACT2_START, 3)} }}, {{ property: "offsetY", keyframes: [{{ at: 0, value: 0, easing: "linear" }}, {{ at: {round(dur/2,2)}, value: {-rnd.randint(120, 260)}, easing: "linear" }}, {{ at: {round(dur,2)}, value: 0 }}], repeat: 2 }}, {{ property: "offsetX", keyframes: [{{ at: 0, value: 0, easing: "linear" }}, {{ at: {round(dur/2,2)}, value: {rnd.randint(-40, 40)}, easing: "linear" }}, {{ at: {round(dur,2)}, value: 0 }}], repeat: 2 }}]}} />')
 P(f'  </frame>, {{ at: {ACT2_START}, dur: {round(TOTAL - ACT2_START, 3)}, name: "vfx_particles" }});')
-P(f'  p.compose(<rect width={{520}} height={{2400}} x={{-600}} y={{-240}} fill={{{{ kind: "linear", angle: 90, stops: [{{ offset: 0, color: "#FFE2B0", opacity: 0 }}, {{ offset: 0.5, color: "#FFE2B0", opacity: 0.35 }}, {{ offset: 1, color: "#FFE2B0", opacity: 0 }}] }}}} blendMode="screen" rotation={{18}} '
+P(f'  p.compose(<rect width={{520}} height={{2400}} x={{-600}} y={{-240}} fill={{{{ kind: "linear", angle: 90, stops: [{{ offset: 0, color: "#FFE2B0", opacity: 0 }}, {{ offset: 0.5, color: "#FFE2B0", opacity: 0.35 }}, {{ offset: 1, color: "#FFE2B0", opacity: 0 }}] }}}} blendMode="screen" '
   f'animate={{[{{ property: "offsetX", from: 0, to: 2200, duration: {s12["dur"]}, easing: "ease-in-out" }}]}} />, {{ at: {s12["t0"]}, dur: {s12["dur"]}, name: "vfx_sweep" }});')
 
 # ---- barre de progression 4 px (haut) ----
-P(f'  p.compose(<frame layout="none" x={{0}} y={{0}} width={{1}} height={{4}} background="#FFFFFF" opacity={{0.6}} animate={{[{{ property: "width", from: 1, to: 1080, duration: {TOTAL}, easing: "linear" }}]}} />, {{ at: 0, dur: {TOTAL}, name: "progress" }});')
+P(f'  p.compose(<frame layout="none" x={{0}} y={{0}} width={{1}} height={{4}} background="#FFFFFF99" animate={{[{{ property: "width", from: 1, to: 1080, duration: {TOTAL}, easing: "linear" }}]}} />, {{ at: 0, dur: {TOTAL}, name: "progress" }});')
 
 # ---------- texte cinétique ----------
 def text_node(txt, x, y, w, h, size, weight, color, extra=''):
@@ -266,30 +266,31 @@ for s in S:
                 keys.append(dict(at=round(lt + k / A.fps + 0.0005, 4), value=(1 if k % 2 == 0 else -1) if k < 6 else 0))
         keys = sorted({k['at']: k for k in keys}.values(), key=lambda k: k['at'])
         tracks.append(f'{{ property: "offsetX", keyframes: {js(keys)} }}')
-    if sid == 's01':  # scintillement d'opacité sur le hook
-        tracks.append('{ property: "opacity", keyframes: [{ at: 0.35, value: 1 }, { at: 0.42, value: 0.82 }, { at: 0.47, value: 1 }, { at: 0.9, value: 1 }, { at: 0.95, value: 0.88 }, { at: 1.0, value: 1 }] }')
+    if sid == 's01':  # scintillement d'opacité sur le hook (+ sortie fondue intégrée : un seul propriétaire de l'opacité)
+        tracks.append('{ property: "opacity", keyframes: [{ at: 0, value: 1 }, { at: 0.35, value: 1 }, { at: 0.42, value: 0.82 }, { at: 0.47, value: 1 }, { at: 0.9, value: 1 }, { at: 0.95, value: 0.88 }, { at: 1.0, value: 1 }, { at: %s, value: 1 }, { at: %s, value: 0 }] }' % (round(d - 0.2, 3), round(d - 1 / A.fps, 3)))
     if tracks: root_anim = f' animate={{[{", ".join(tracks)}]}}'
-    T(f'  p.compose(<frame name="txt_{sid}" layout="none" width={{1080}} height={{1920}} motion={{{{ exit: {{ to: {{ opacity: 0 }}, duration: 0.2, anchor: "end" }} }}}}{root_anim}>')
+    exit_m = '' if sid == 's01' else ' motion={{ exit: { to: { opacity: 0 }, duration: 0.2, anchor: "end" } }}'
+    T(f'  p.compose(<frame name="txt_{sid}" layout="none" width={{1080}} height={{1920}}{exit_m}{root_anim}>')
     y = top
     # carte « verre » (solutions) et carte CTA
     if num:
-        T(f'    <frame layout="none" x={{{BOX["x0"]}}} y={{{round(top - 40)}}} width={{840}} height={{{round(block_h + 80)}}} background="#FFFFFF14" radius={{32}} origin="center" '
-          f'motion={{{{ enter: {{ from: {{ y: 60, opacity: 0, scale: 0.96 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} />')
+        T(f'    <frame layout="none" x={{{BOX["x0"]}}} y={{{round(top - 40)}}} width={{840}} height={{{round(block_h + 80)}}} origin="center" '
+          f'motion={{{{ enter: {{ from: {{ y: 60, scale: 0.96 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.3 }}]}}><rect x={{0}} y={{0}} width={{840}} height={{{round(block_h + 80)}}} fill="#FFFFFF14" radius={{32}} shadow={{{{ x: 0, y: 8, blur: 32, color: "#00000073" }}}} /></frame>')
         ic = ICONS[sid]
-        T(f'    <frame layout="none" x={{{CX - 60}}} y={{{round(y)}}} width={{120}} height={{120}} origin="center" motion={{{{ enter: {{ from: {{ scale: 0.6, opacity: 0 }}, duration: 0.45, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
+        T(f'    <frame layout="none" x={{{CX - 60}}} y={{{round(y)}}} width={{120}} height={{120}} origin="center" motion={{{{ enter: {{ from: {{ scale: 0.6 }}, duration: 0.55, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.3 }}]}}>'
           f'{{tryIcon("{ic}", {{ size: 120, color: "{acc}", strokeWidth: 1.5 }})}}</frame>')
         y += 120 + 14
         nf = font('ExtraBold', 160); nw = adv(nf, str(num)) + 8
         T(f'    <frame layout="none" x={{{round(CX - 100)}}} y={{{round(y - 12)}}} width={{200}} height={{200}} origin="center" clip reveal={{{{ from: "left", at: 0.1, duration: 0.3 }}}}>'
           f'<path d={js(circle_path(100, 100, 92))} x={{0}} y={{0}} width={{200}} height={{200}} stroke={{{{ color: "{acc}", width: 4 }}}} /></frame>')
-        T(f'    <frame layout="none" x={{{round(CX - nw/2)}}} y={{{round(y)}}} width={{{round(nw)}}} height={{176}} origin="center" motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.3, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
+        T(f'    <frame layout="none" x={{{round(CX - nw/2)}}} y={{{round(y)}}} width={{{round(nw)}}} height={{176}} origin="center" motion={{{{ enter: {{ from: {{ scale: 1.3 }}, duration: 0.55, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.2 }}]}}>'
           + text_node(str(num), 0, 0, round(nw), 176, 160, 'ExtraBold', acc) + '</frame>')
-        T(f'    <frame layout="none" x={{{CX + 76}}} y={{{round(y + 8)}}} width={{64}} height={{64}} origin="center" at={{{round(d - 0.45, 3)}}} motion={{{{ enter: {{ from: {{ scale: 0.4, opacity: 0 }}, duration: 0.25, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}}>'
+        T(f'    <frame layout="none" x={{{CX + 76}}} y={{{round(y + 8)}}} width={{64}} height={{64}} origin="center" at={{{round(d - 0.65, 3)}}} motion={{{{ enter: {{ from: {{ scale: 0.4 }}, duration: 0.5, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.15 }}]}}>'
           f'{{tryIcon("check", {{ size: 64, color: "{acc}", strokeWidth: 3 }})}}</frame>')
         y += 176 + 12
     if sid == 's21':
-        T(f'    <frame layout="none" x={{0}} y={{{round(top - 120)}}} width={{1080}} height={{{round(block_h + 240)}}} background="{ACC_S}" opacity={{0.92}} '
-          f'motion={{{{ enter: {{ from: {{ y: 900, opacity: 0 }}, duration: 0.6, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} />')
+        T(f'    <frame layout="none" x={{0}} y={{{round(top - 120)}}} width={{1080}} height={{{round(block_h + 240)}}} background="{ACC_S}EB" '
+          f'motion={{{{ enter: {{ from: {{ y: 900 }}, duration: 0.6, easing: {{ kind: "spring", stiffness: 300, damping: 22 }} }} }}}} animate={{[{{ property: "opacity", from: 0, to: 1, duration: 0.3 }}]}} />')
     # mots
     wi = 0
     stagger = BEAT / 4 if d >= 2.6 else 0.1
@@ -309,7 +310,7 @@ for s in S:
                 pass
             # entrée mot par mot sur beat : scale 1.3→1 + opacité (0,2 s), easing cubic-bezier(0.2,0.8,0.2,1)
             T(f'    <frame name="w_{sid}_{wi}" layout="none" x={{{round(x, 1)}}} y={{{round(y)}}} width={{{bw}}} height={{{bh}}} origin="center" at={{{delay}}} '
-              f'motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.2, easing: {js(EASE)} }} }}}}>{inner}</frame>')
+              f'motion={{{{ enter: {{ from: {{ scale: 1.3, opacity: 0 }}, duration: 0.2, easing: "ease-out" }} }}}}>{inner}</frame>')
             if is_acc:
                 # soulignement qui se trace 0,25 s
                 T(f'    <frame layout="none" x={{{round(x, 1)}}} y={{{round(y + size * 1.06)}}} width={{{round(ww)}}} height={{6}} clip reveal={{{{ from: "left", at: {round(delay + 0.15, 3)}, duration: 0.25 }}}}>'
@@ -329,7 +330,7 @@ for s in S:
         y += 12
         sf_ = font('SemiBold', 28); sw = adv(sf_, sub) + 20
         assert sw <= MAXW, f'sous-titre trop long {sid}'
-        T(f'    <frame layout="none" x={{{round(CX - sw/2)}}} y={{{round(y)}}} width={{{round(sw)}}} height={{40}} at={{{round(min(0.5, d/3), 3)}}} motion={{{{ enter: {{ from: {{ y: 10, opacity: 0 }}, duration: 0.3, easing: {js(EASE)} }} }}}}>'
+        T(f'    <frame layout="none" x={{{round(CX - sw/2)}}} y={{{round(y)}}} width={{{round(sw)}}} height={{40}} at={{{round(min(0.5, d/3), 3)}}} motion={{{{ enter: {{ from: {{ y: 10, opacity: 0 }}, duration: 0.3, easing: "ease-out" }} }}}}>'
           + text_node(sub, 0, 0, round(sw), 40, 28, 'SemiBold', '#E6E6E6' if sid != 's21' else '#0A0A0A',
                       extra='animate={[{ property: "opacity", keyframes: [{ at: 0, value: 1 }, { at: 0.5, value: 0.55 }, { at: 1.0, value: 1 }, { at: 1.5, value: 0.55 }, { at: 2.0, value: 1 }] }]}' if sid == 's21' else '') + '</frame>')
         words_out.append(dict(word=sub, x=round(CX - sw/2), y=round(y), w=round(sw), h=40, accent=False, delay=0.5, sub=True))
@@ -368,8 +369,31 @@ P('  if (MODE === "draft") await p.render("renders/draft.mp4", { draft: true });
 P(f'  if (MODE === "master") await p.render("renders/master{A.fps}.mp4", {{ bitrate: {12_000_000 if A.fps == 60 else 10_000_000} }});')
 P('};')
 
+
+import re as _re
+def sort_composes(lines):
+    """Regroupe les instructions p.compose(...) et les trie par `at` (ordre chronologique) :
+    l'API de script attribue les pistes par « lanes » gloutonnes, cohérentes seulement si les composes arrivent dans l'ordre du temps."""
+    head, stmts, cur = [], [], None
+    for l in lines:
+        if cur is None and l.startswith('  p.compose('):
+            cur = [l]
+        elif cur is not None:
+            cur.append(l)
+        else:
+            head.append(l); continue
+        if cur is not None and l.rstrip().endswith('});'):
+            m = _re.search(r'\{ at: ([0-9.]+), dur: [0-9.]+', cur[-1])
+            stmts.append((float(m.group(1)) if m else 0.0, len(stmts), cur)); cur = None
+    stmts.sort(key=lambda s: (s[0], s[1]))
+    body = [l for _, _, c in stmts for l in c]
+    tail = [l for l in head if l.startswith('  const MODE') or l.startswith('  if (MODE') or l == '};']
+    head = [l for l in head if l not in tail]
+    return head + body + tail
+
+out = sort_composes(out)
 open(A.out, 'w').write('\n'.join(out) + '\n')
-tl = ['// edit_text.jsx — couche texte seule (QA marges), fond gris neutre', 'export default async ({ project, icon }) => {'] + HEAD_T + txt
+tl = ['// edit_text.jsx — couche texte seule (QA marges), fond gris neutre', 'export default async ({ project, icon }) => {'] + HEAD_T + sort_composes(txt)
 for s in S:
     tm = round((s['t0'] + s['t1']) / 2, 3)
     tl.append(f'  await p.frame({tm}, "renders/text/{s["id"]}.png");')
