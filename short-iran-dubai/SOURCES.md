@@ -79,6 +79,9 @@ Vidéo réelle b04 (Klaus Hesse, CC BY 3.0) : segments 2–12 s (A380 au sol, DX
 - SFX : `sfx/*.wav` synthétisés par `tools/gen_sfx.py` (production interne).
 - Beats : grille 90 BPM (`build/beats_synth.json`, librosa).
 
-## 7. Faits à l'écran
+## 7. Fluidité 60 fps
+Les clips Kling sortent en 24 fps ; l'interpolation 60 fps a été faite avec ffmpeg `minterpolate` (mci/aobmc/bidir) dans le sandbox, puis ralenti 0,5× pour le dernier plan. `upscale_video` ByteDance (fps 60) n'a pas été utilisé : coût non préflightable et clips déjà en 1080×1920 après recadrage.
+
+## 8. Faits à l'écran
 Voir `FACTS.md` (vérifié le 12/10/2026) et le diff automatique `build/facts_diff.md`.
 
