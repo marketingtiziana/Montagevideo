@@ -92,7 +92,7 @@ def build_html(
             for k, m in enumerate(timeline_labels)
         )
         timeline = f'<div class="timeline">{cells}</div>'
-    logo = "" if step is not None else f'<div class="logo">{THREADS_LOGO}<span>Threads</span></div>'
+    logo = ""  # plus de mention Threads
     bottom_right = (
         f'<div class="cta">{cta}</div>'
         if n == total
@@ -112,7 +112,7 @@ def build_html(
 {logo}
 {timeline}
 <div class="bottom">
-  <div class="progress"><i style="width:{pct:.1f}%"></i></div>
+  <div></div>
   {bottom_right}
 </div>
 </body></html>"""
