@@ -5,13 +5,13 @@ Faits vérifiés le **12/10/2026** (FACTS.md). Rendu v1 le 12/10/2026, rendu v2 
 ## Masters
 | Fichier | Spéc | URL |
 |---|---|---|
-| **final60_v2.mp4** (à publier) | 60 fps, 12 Mb/s, mix -14 LUFS / TP -1 dBTP — s08 et s14 corrigés | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/7a5e1563-03ce-4c81-9712-42027bf123fd.mp4 |
-| **final30_v2.mp4** (à publier) | 30 fps (fallback), 10 Mb/s — s08 et s14 corrigés | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/68e2bbc1-bfa9-44c0-8b1b-5ab28a2a9b0d.mp4 |
+| **final60_v2.mp4** (à publier) | 60 fps, 12 Mb/s, 3 480 frames, -13,9 LUFS / pic -1,1 dBFS — s08 et s14 corrigés | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/178992a1-7a78-4c38-a179-663fb4c5ce4a.mp4 |
+| **final30_v2.mp4** (à publier) | 30 fps (fallback), 10 Mb/s, 1 740 frames, -13,9 LUFS / pic -1,1 dBFS — s08 et s14 corrigés | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/2178daea-7b42-42cb-8c8f-c489ac7f305d.mp4 |
 | final60.mp4 (v1, remplacé) | 60 fps, 12 Mb/s | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/a7d21d1b-7077-4bf6-8fab-e18d3c87b928.mp4 |
 | final30.mp4 (v1, remplacé) | 30 fps, 10 Mb/s | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/14ca7404-22b4-4921-b3bd-7e1077cdbfd8.mp4 |
 | hook15.mp4 (15,5 s, entrée du prédicteur de viralité) | 60 fps, 12 Mb/s | https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/af8ad3fa-4e32-4d94-83fd-07bffc7c549b.mp4 |
 
-Contact sheets v2 : https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/58c45402-b03e-4f3e-b13f-12002ec1c315.png (écrans), https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/a620b778-310b-45b5-8d05-c42e54fa12f8.png (transitions). Archive v2 (masters v2 + sheets + QA) : https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/a666c444-dbad-4684-8bc8-13abf35862f3.zip.
+Contact sheets v2 : https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/044dda1e-4623-422c-ae88-1a7119ea8b7f.png (écrans), https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/26d99880-f821-43ac-b64a-16143ae7e757.png (transitions). Archive v2 (masters v2 + sheets + QA) : https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHTQ0tBbMqoUI/9fbe7fa7-cb6e-48a7-8c31-2426c8b24371.zip.
 
 ## Dossier de production (ce dépôt, `short-iran-dubai/`)
 - `FACTS.md` — faits datés et sourcés, liste fermée des faits autorisés à l'écran.
@@ -50,7 +50,7 @@ Contact sheets v2 : https://d2ol7oe51mr4n9.cloudfront.net/user_38f1ll4gSRAstfkHT
 Chaque clip 60 fps 9:16 a été décrit par l'analyseur ; la description a servi de contrôle brand safety indépendant du contact sheet.
 - 19 clips propres : aucun visage, aucune personne, aucun objet ajouté, aucun média identifiable (k01 Terre de nuit, k02 aéroport vu du ciel, k03 skyline golden hour, k05 tarmac, k06 contrat, k08 skyline nuit, k09 hublot, k10 hublot aile, k11 marina coucher, k12 tour, k14 piste POV, k15 skyline nuit, k16 autoroute nuit, k17 marina, k19 Burj Khalifa nuit, k26 désert, k31 brume, k32 nuages d'orage, k33 gouttes/bokeh).
 - **k07 (écran s08, contrat + stylo)** : Kling a ajouté deux mains à partir de 1 s — contraire à la consigne « no new elements ». Correctif v2 : s08 utilise k32 (nuages d'orage, t2v abstrait, sans lieu ni événement). `tools/build_edit.py` et `SOURCES.md` mis à jour.
-- **k13 (écran s14, Banque nationale de Roumanie)** : une passante (≈ 60 px, non identifiable) et un halo orange (artefact de lens-flare Kling) en bas à gauche. Correctif v2 : zoom 1,25× ancré en haut à droite (`ZOOM = {'s14': 1.25}`), la zone est hors cadre ; vérifié image par image à 36,4 s et 38,5 s.
+- **k13 (écran s14, Banque nationale de Roumanie)** : une passante (≈ 60 px, non identifiable) et un halo orange (artefact de lens-flare Kling) en bas à gauche. Correctif v2 : zoom 1,25× ancré en haut à droite (`ZOOM = {'s14': 1.25}`), la zone est hors cadre ; vérifié image par image à 36,4 s et 38,5 s. QA v2 : 0 frame statique > 1 s, 0 strobing (8,0 / 14,0 / 31,667 s), `qa_frames_v2.txt` dans l'archive v2.
 - Ces deux points n'apparaissaient pas sur le contact sheet des plans (frame unique à 2 s) : la v1 reste en ligne pour comparaison mais **ne doit pas être publiée**.
 
 ## Viralité (`virality_predictor`, modèle brain_activity, entrée hook15.mp4 = 15,5 premières secondes, limite 16 s de l'outil)
