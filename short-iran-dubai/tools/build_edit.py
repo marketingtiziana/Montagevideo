@@ -72,7 +72,7 @@ def snap(t):
 PLAN = {
  's01': ('clips/k01.mp4', 0.0), 's02': ('clips/k02.mp4', 0.0), 's03': ('clips/k03.mp4', 0.0),
  's04': ('clips/a380_taxi_916.mp4', 1.0), 's05': ('clips/k33.mp4', 0.0), 's06': ('clips/k05.mp4', 0.0),
- 's07': ('clips/k06.mp4', 0.0), 's08': ('clips/k07.mp4', 0.0), 's09': ('clips/k08.mp4', 0.0),
+ 's07': ('clips/k06.mp4', 0.0), 's08': ('clips/k32.mp4', 0.0), 's09': ('clips/k08.mp4', 0.0),
  's10': ('clips/k09.mp4', 0.0), 's11': ('clips/a380_aerial_916.mp4', 2.0), 's12': ('clips/k11.mp4', 0.0),
  's13': ('clips/k12.mp4', 0.0), 's14': ('clips/k13.mp4', 0.0), 's15': ('clips/k14.mp4', 0.0),
  's16': ('clips/k15.mp4', 0.0), 's17': ('clips/k16.mp4', 0.0), 's18': ('clips/k17.mp4', 0.0),
@@ -80,6 +80,9 @@ PLAN = {
 }
 AMBIANCE = {'fog': 'clips/k31.mp4', 'clouds': 'clips/k32.mp4'}
 MOCK = {'board': 'mockups/board_black.mp4', 'hud': 'mockups/hud_black.mp4', 'alert': 'mockups/alert_black.mp4'}
+# s08 : k07 (contrat) remplacé par k32 (nuages d'orage, t2v abstrait) — Kling avait ajouté une main (analyse vidéo), contraire à « no new elements »
+# s14 (k13, Banque nationale de Roumanie) : zoom 1,25 ancré haut-droite — exclut une passante et un halo de lens-flare (artefact Kling) en bas à gauche
+ZOOM = {'s14': 1.25}
 ICONS = {'s12': 'globe', 's13': 'building', 's14': 'landmark', 's15': 'shield', 's16': 'calendar'}
 SOLUTION_NUM = {'s12': 1, 's13': 2, 's14': 3, 's15': 4, 's16': 5}
 COUNTERS = {'s02': dict(prefix='', to=150, suffix=' km'), 's07': dict(prefix='–', to=31, suffix=' %'),
@@ -150,10 +153,12 @@ for s in S:
     f, trim = PLAN[s['id']]
     d = s['dur']; whip = (s['idx'] % 3 == 2) and s['idx'] < len(S) - 1
     g = grade_params(s['act2'])
-    kf = [dict(at=0, value=1.0), dict(at=round(d - 0.1, 3), value=1.06)]
+    z = ZOOM.get(s['id'], 1.0)   # zoom ancré en haut à droite (exclut un coin bas-gauche)
+    kf = [dict(at=0, value=round(1.0 * z, 4)), dict(at=round(d - 0.1, 3), value=round(1.06 * z, 4))]
     if whip:
-        kf = [dict(at=0, value=1.0, easing='linear'), dict(at=round(d - 5 / A.fps - 0.001, 3), value=1.06, easing='ease-in'),
-              dict(at=round(d - 1 / A.fps - 0.001, 3), value=1.32)]
+        kf = [dict(at=0, value=round(1.0 * z, 4), easing='linear'), dict(at=round(d - 5 / A.fps - 0.001, 3), value=round(1.06 * z, 4), easing='ease-in'),
+              dict(at=round(d - 1 / A.fps - 0.001, 3), value=round(1.32 * z, 4))]
+    zx, zy = round(-(z - 1) * 540), round((z - 1) * 960)   # centre du cadre vers le bas-gauche : la fenêtre visible est le haut-droite du média
     ca_track = ''
     imp = [t for t in IMPACTS if s['t0'] - 1e-6 <= t < s['t1'] - 0.2]
     if imp and not s['act2']:
@@ -165,7 +170,7 @@ for s in S:
         keys = sorted({k['at']: k for k in keys}.values(), key=lambda k: k['at'])
         ca_track = f', {{ property: "effectParam", effectIndex: 0, effectParam: "ca", keyframes: {js(keys)} }}'
     P(f'  // plan {s["id"]} : {f}')
-    P(f'  p.compose(<frame name="plan_{s["id"]}" layout="none" width={{1080}} height={{1920}} origin="center" '
+    P(f'  p.compose(<frame name="plan_{s["id"]}" layout="none" x={{{zx}}} y={{{zy}}} width={{1080}} height={{1920}} origin="center" '
       f'{"motionBlur={{ samples: 8, shutter: 0.6 }} " if whip else ""}'
       f'animate={{[{{ property: "scale", keyframes: {js(kf)} }}]}}>'
       f'<media file={{F[{js(f)}]}} x={{0}} y={{0}} width={{1080}} height={{1920}} fit="cover" trimStart={{{trim}}} '

@@ -1,6 +1,6 @@
 # SOURCES.md — provenance, auteurs, licences, horodatage d'usage
 
-Généré le 2026-10-12T17:07:29Z. Short « La guerre en Iran menace-t-elle l'expatriation à Dubaï ? » — 1080×1920, 60 fps (+ 30 fps).
+Généré le 2026-10-13T11:44:17Z. Short « La guerre en Iran menace-t-elle l'expatriation à Dubaï ? » — 1080×1920, 60 fps (+ 30 fps).
 
 ## 1. Photos et vidéo réelles (Wikimedia Commons) — animées par Higgsfield Kling 3.0 (image-to-video, « no new elements »)
 
@@ -14,7 +14,7 @@ Les clés API Pexels / Pixabay / Unsplash n'étaient pas disponibles dans l'envi
 | b04 | File:Emirates A380 in Dubai Airport.webm | 1920x1080 (vidéo) | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | Klaus Hesse | [page](https://commons.wikimedia.org/wiki/File%3AEmirates_A380_in_Dubai_Airport.webm) | 2026-10-12T16:12:45Z | s04, s11 |
 | b05 | File:Emirates Towers in Dubai at dawn.jpg | 3264x2448 | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | Jackardsiffant | [page](https://commons.wikimedia.org/wiki/File%3AEmirates_Towers_in_Dubai_at_dawn.jpg) | 2026-10-12T16:12:45Z | s06 |
 | b06 | File:1 Dubai International Airport Terminal 3.jpg | 4000x3000 | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | EditQ | [page](https://commons.wikimedia.org/wiki/File%3A1_Dubai_International_Airport_Terminal_3.jpg) | 2026-10-12T16:12:48Z | s07 |
-| b07 | File:Legal Contract & Signature - Warm Tones.jpg | 6000x4500 | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | Blogtrepreneur | [page](https://commons.wikimedia.org/wiki/File%3ALegal_Contract_%26_Signature_-_Warm_Tones.jpg) | 2026-10-12T16:13:08Z | s08 |
+| b07 | File:Legal Contract & Signature - Warm Tones.jpg | 6000x4500 | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | Blogtrepreneur | [page](https://commons.wikimedia.org/wiki/File%3ALegal_Contract_%26_Signature_-_Warm_Tones.jpg) | 2026-10-12T16:13:08Z | — |
 | b08 | File:Four Different Passports.jpg | 4032x2268 | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | Horizon206 | [page](https://commons.wikimedia.org/wiki/File%3AFour_Different_Passports.jpg) | 2026-10-12T16:13:05Z | s09 |
 | b09 | File:Dubai Marina Skyline.jpg | 6000x4000 | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | Norlando Pobre | [page](https://commons.wikimedia.org/wiki/File%3ADubai_Marina_Skyline.jpg) | 2026-10-12T16:12:48Z | s10 |
 | b10 | File:In flight above scattered clouds (Unsplash).jpg | 4032x3024 | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | Harry Knight | [page](https://commons.wikimedia.org/wiki/File%3AIn_flight_above_scattered_clouds_%28Unsplash%29.jpg) | 2026-10-12T16:12:48Z | — |
@@ -79,9 +79,6 @@ Vidéo réelle b04 (Klaus Hesse, CC BY 3.0) : segments 2–12 s (A380 au sol, DX
 - SFX : `sfx/*.wav` synthétisés par `tools/gen_sfx.py` (production interne).
 - Beats : grille 90 BPM (`build/beats_synth.json`, librosa).
 
-## 7. Fluidité 60 fps
-Les clips Kling sortent en 24 fps ; l'interpolation 60 fps a été faite avec ffmpeg `minterpolate` (mci/aobmc/bidir) dans le sandbox, puis ralenti 0,5× pour le dernier plan. `upscale_video` ByteDance (fps 60) n'a pas été utilisé : coût non préflightable et clips déjà en 1080×1920 après recadrage.
-
-## 8. Faits à l'écran
+## 7. Faits à l'écran
 Voir `FACTS.md` (vérifié le 12/10/2026) et le diff automatique `build/facts_diff.md`.
 

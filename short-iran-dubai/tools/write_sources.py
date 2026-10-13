@@ -5,7 +5,7 @@ import json, csv, sys, datetime
 rows = list(csv.reader(open('build/commons_manifest.tsv'), delimiter='\t'))
 clips = json.load(open('build/clips.json'))
 lay = json.load(open('build/layout.json'))
-PLAN = {'s01': 'k01', 's02': 'k02', 's03': 'k03', 's04': 'a380_taxi (b04)', 's05': 'k33', 's06': 'k05', 's07': 'k06', 's08': 'k07',
+PLAN = {'s01': 'k01', 's02': 'k02', 's03': 'k03', 's04': 'a380_taxi (b04)', 's05': 'k33', 's06': 'k05', 's07': 'k06', 's08': 'k32',
         's09': 'k08', 's10': 'k09', 's11': 'a380_aerial (b04)', 's12': 'k11', 's13': 'k12', 's14': 'k13', 's15': 'k14',
         's16': 'k15', 's17': 'k16', 's18': 'k17', 's19': 'k26', 's20': 'k19', 's21': 'k20 (ralenti 0,5×)'}
 used_b = {}
