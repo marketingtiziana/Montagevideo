@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>alert</title>
+<style>
+  /* Bandeau d'alerte sans logo, sans texte : chevrons ambre qui défilent, dans la boîte de sécurité. */
+  html,body{margin:0;width:1080px;height:1920px;background:#000;overflow:hidden}
+  .bar{position:absolute;left:120px;top:1280px;width:840px;height:56px;border-radius:10px;overflow:hidden;background:rgba(217,130,43,.18);border:1px solid rgba(217,130,43,.6)}
+  .chev{position:absolute;top:0;left:0;height:56px;width:1700px;background:repeating-linear-gradient(115deg,rgba(217,130,43,.75) 0 24px,transparent 24px 60px)}
+  .dot{position:absolute;left:540px;top:1230px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#D9822B;box-shadow:0 0 24px #D9822B}
+</style></head><body>
+<div class="bar"><div class="chev" id="chev"></div></div>
+<div class="dot" id="dot"></div>
+<script>
+  window.__setTime=function(t){
+    document.getElementById('chev').style.transform='translateX('+(-((t*120)%60))+'px)';
+    var p=0.5+0.5*Math.sin(t*2*Math.PI*1.5); document.getElementById('dot').style.opacity=(0.35+0.65*p).toFixed(2);
+    document.body.style.opacity=Math.min(1,t/0.3);
+  };
+</script>
+</body></html>

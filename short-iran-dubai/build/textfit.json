@@ -1,0 +1,340 @@
+{
+ "s01": {
+  "title": {
+   "size": 64,
+   "lines": [
+    "La guerre en Iran",
+    "va-t-elle tuer",
+    "l'expatriation à Dubaï ?"
+   ],
+   "width_px": 786,
+   "height_px": 211
+  },
+  "sub": null
+ },
+ "s02": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "Dubaï ↔ côte",
+    "iranienne :",
+    "150 km"
+   ],
+   "width_px": 667,
+   "height_px": 317
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "vérifié le 12/10/2026"
+   ],
+   "width_px": 278,
+   "height_px": 31
+  }
+ },
+ "s03": {
+  "title": {
+   "size": 72,
+   "lines": [
+    "28 février 2026 :",
+    "espace aérien",
+    "partiellement fermé"
+   ],
+   "width_px": 774,
+   "height_px": 238
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "vérifié le 12/10/2026"
+   ],
+   "width_px": 278,
+   "height_px": 31
+  }
+ },
+ "s04": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "16 mars 2026 :",
+    "vols suspendus",
+    "à DXB"
+   ],
+   "width_px": 788,
+   "height_px": 317
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "vérifié le 12/10/2026"
+   ],
+   "width_px": 278,
+   "height_px": 31
+  }
+ },
+ "s05": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "Mais la vraie",
+    "question n'est",
+    "pas la sécurité."
+   ],
+   "width_px": 766,
+   "height_px": 317
+  },
+  "sub": null
+ },
+ "s06": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "C'est",
+    "ta structure."
+   ],
+   "width_px": 633,
+   "height_px": 211
+  },
+  "sub": null
+ },
+ "s07": {
+  "title": {
+   "size": 80,
+   "lines": [
+    "DXB, 1er semestre",
+    "2026 : –31 % de",
+    "passagers"
+   ],
+   "width_px": 768,
+   "height_px": 264
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "vérifié le 12/10/2026"
+   ],
+   "width_px": 278,
+   "height_px": 31
+  }
+ },
+ "s08": {
+  "title": {
+   "size": 80,
+   "lines": [
+    "Assurance santé :",
+    "la guerre est une",
+    "clause d'exclusion"
+   ],
+   "width_px": 776,
+   "height_px": 264
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "vérifié le 12/10/2026"
+   ],
+   "width_px": 278,
+   "height_px": 31
+  }
+ },
+ "s09": {
+  "title": {
+   "size": 84,
+   "lines": [
+    "180 jours hors",
+    "des EAU : visa de",
+    "résidence annulé"
+   ],
+   "width_px": 771,
+   "height_px": 277
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "hors Golden Visa · règle ICP"
+   ],
+   "width_px": 397,
+   "height_px": 31
+  }
+ },
+ "s10": {
+  "title": {
+   "size": 72,
+   "lines": [
+    "Ventes immobilières",
+    "à Dubaï : –38 % au",
+    "3e trimestre 2026"
+   ],
+   "width_px": 789,
+   "height_px": 238
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "vérifié le 12/10/2026 · Cavendish Maxwell"
+   ],
+   "width_px": 577,
+   "height_px": 31
+  }
+ },
+ "s11": {
+  "title": {
+   "size": 84,
+   "lines": [
+    "Si tu dois partir",
+    "3 mois… où es-tu",
+    "résident fiscal ?"
+   ],
+   "width_px": 757,
+   "height_px": 277
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "183 jours EAU · un seul critère suffit en France"
+   ],
+   "width_px": 655,
+   "height_px": 31
+  }
+ },
+ "s12": {
+  "title": {
+   "size": 92,
+   "lines": [
+    "Une résidence",
+    "de secours",
+    "dans un 2ᵉ pays"
+   ],
+   "width_px": 771,
+   "height_px": 304
+  },
+  "sub": null
+ },
+ "s13": {
+  "title": {
+   "size": 84,
+   "lines": [
+    "Une structure qui",
+    "ne dépend pas",
+    "d'un seul pays"
+   ],
+   "width_px": 787,
+   "height_px": 277
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "holding + société opérationnelle"
+   ],
+   "width_px": 464,
+   "height_px": 31
+  }
+ },
+ "s14": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "Une banque",
+    "dans",
+    "2 juridictions"
+   ],
+   "width_px": 668,
+   "height_px": 317
+  },
+  "sub": null
+ },
+ "s15": {
+  "title": {
+   "size": 84,
+   "lines": [
+    "Une assurance",
+    "qui couvre conflit",
+    "+ rapatriement"
+   ],
+   "width_px": 787,
+   "height_px": 277
+  },
+  "sub": null
+ },
+ "s16": {
+  "title": {
+   "size": 68,
+   "lines": [
+    "Un calendrier de",
+    "présence documenté,",
+    "où que tu sois"
+   ],
+   "width_px": 789,
+   "height_px": 224
+  },
+  "sub": null
+ },
+ "s17": {
+  "title": {
+   "size": 88,
+   "lines": [
+    "Une expatriation",
+    "qui dépend d'un",
+    "seul pays"
+   ],
+   "width_px": 786,
+   "height_px": 290
+  },
+  "sub": null
+ },
+ "s18": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "n'est pas une",
+    "stratégie."
+   ],
+   "width_px": 675,
+   "height_px": 211
+  },
+  "sub": null
+ },
+ "s19": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "C'est un pari."
+   ],
+   "width_px": 663,
+   "height_px": 106
+  },
+  "sub": null
+ },
+ "s20": {
+  "title": {
+   "size": 96,
+   "lines": [
+    "On a construit",
+    "le PLAN B",
+    "Dubaï."
+   ],
+   "width_px": 730,
+   "height_px": 317
+  },
+  "sub": null
+ },
+ "s21": {
+  "title": {
+   "size": 140,
+   "lines": [
+    "PLAN B",
+    "DUBAÏ"
+   ],
+   "width_px": 559,
+   "height_px": 308
+  },
+  "sub": {
+   "size": 28,
+   "lines": [
+    "Commente PLAN B"
+   ],
+   "width_px": 279,
+   "height_px": 31
+  }
+ }
+}

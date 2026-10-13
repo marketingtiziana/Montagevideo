@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>board</title>
+<style>
+  /* Tableau des départs stylisé — illustration, pas une preuve. Aucune compagnie, aucun logo. */
+  html,body{margin:0;width:1080px;height:1920px;background:#000;overflow:hidden;font-family:Montserrat,"Metropolis",sans-serif}
+  .board{position:absolute;left:120px;top:560px;width:840px;height:800px;border:2px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(10,10,10,.55);padding:22px 26px;box-sizing:border-box;color:#e6e6e6}
+  .head{display:flex;justify-content:space-between;font-size:26px;letter-spacing:.14em;color:#9aa;margin-bottom:18px;font-weight:600}
+  .row{display:grid;grid-template-columns:150px 1fr 230px;gap:16px;height:62px;align-items:center;border-top:1px solid rgba(255,255,255,.08);font-size:30px;font-weight:700}
+  .row .t{color:#cfd3d8;font-variant-numeric:tabular-nums}
+  .row .d{color:#f2f2f2;letter-spacing:.04em}
+  .row .s{text-align:right;font-weight:800;letter-spacing:.08em;font-size:24px;color:#9fd39f}
+  .row.dl .s{color:#D9822B}
+  .row.cx .s{color:#D9822B}
+  .flip{display:inline-block;animation:flip .5s steps(1) both}
+  @keyframes flip{0%{filter:brightness(2)}20%{opacity:.2}40%{opacity:1}60%{opacity:.3}100%{opacity:1}}
+  /* apparition séquentielle des statuts (CSS : la timeline est pilotée par Web Animations API dans le script de rendu) */
+</style></head><body>
+<div class="board">
+  <div class="head"><span>DÉPARTS</span><span>STATUT</span></div>
+  <div class="row" data-t="0.2"><span class="t">06:10</span><span class="d">EUROPE</span><span class="s">À L'HEURE</span></div>
+  <div class="row dl" data-t="0.6"><span class="t">06:25</span><span class="d">ASIE</span><span class="s">RETARDÉ</span></div>
+  <div class="row cx" data-t="0.9"><span class="t">06:40</span><span class="d">MOYEN-ORIENT</span><span class="s">ANNULÉ</span></div>
+  <div class="row cx" data-t="1.2"><span class="t">06:55</span><span class="d">EUROPE</span><span class="s">ANNULÉ</span></div>
+  <div class="row dl" data-t="1.5"><span class="t">07:05</span><span class="d">AFRIQUE</span><span class="s">RETARDÉ</span></div>
+  <div class="row cx" data-t="1.8"><span class="t">07:20</span><span class="d">ASIE</span><span class="s">ANNULÉ</span></div>
+  <div class="row dl" data-t="2.1"><span class="t">07:35</span><span class="d">EUROPE</span><span class="s">RETARDÉ</span></div>
+  <div class="row cx" data-t="2.4"><span class="t">07:50</span><span class="d">AMÉRIQUES</span><span class="s">ANNULÉ</span></div>
+  <div class="row cx" data-t="2.7"><span class="t">08:05</span><span class="d">EUROPE</span><span class="s">ANNULÉ</span></div>
+  <div class="row dl" data-t="3.0"><span class="t">08:15</span><span class="d">ASIE</span><span class="s">RETARDÉ</span></div>
+</div>
+<script>
+  // Rendu déterministe : window.__setTime(t) fixe l'état à t secondes.
+  window.__setTime = function(t){
+    document.querySelectorAll('.row').forEach(function(r){
+      var at=parseFloat(r.dataset.t); var s=r.querySelector('.s');
+      if(t<at){ s.style.color='#9fd39f'; s.textContent="À L'HEURE"; r.style.opacity=0.85; }
+      else {
+        var k=Math.min(1,(t-at)/0.5);
+        var cls=r.classList.contains('cx')?'ANNULÉ':'RETARDÉ';
+        s.textContent = k<0.5 ? (Math.floor(k*20)%2?'■■■■■':'▒▒▒▒▒') : cls;
+        s.style.color = k<0.5 ? '#ddd' : '#D9822B';
+        r.style.opacity = 1;
+      }
+    });
+  };
+</script>
+</body></html>

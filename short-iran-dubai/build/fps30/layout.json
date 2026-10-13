@@ -1,0 +1,1640 @@
+{
+ "screens": {
+  "s01": {
+   "size": 64,
+   "lines": [
+    "La guerre en Iran",
+    "va-t-elle tuer",
+    "l'expatriation à Dubaï ?"
+   ],
+   "words": [
+    {
+     "word": "La",
+     "x": 249.2,
+     "y": 855,
+     "w": 94,
+     "h": 80,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "guerre",
+     "x": 347.6,
+     "y": 855,
+     "w": 242,
+     "h": 80,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "en Iran",
+     "x": 593.9,
+     "y": 855,
+     "w": 251,
+     "h": 80,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "va-t-elle",
+     "x": 319.7,
+     "y": 925,
+     "w": 294,
+     "h": 80,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "tuer",
+     "x": 618.0,
+     "y": 925,
+     "w": 156,
+     "h": 80,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "l'expatriation",
+     "x": 146.8,
+     "y": 995,
+     "w": 465,
+     "h": 80,
+     "accent": true,
+     "delay": 0.833
+    },
+    {
+     "word": "à Dubaï",
+     "x": 616.5,
+     "y": 995,
+     "w": 274,
+     "h": 80,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "?",
+     "x": 895.0,
+     "y": 995,
+     "w": 52,
+     "h": 80,
+     "accent": true,
+     "delay": 1.167
+    }
+   ],
+   "t0": 0.0,
+   "t1": 3.0,
+   "block_h": 210,
+   "top": 855
+  },
+  "s02": {
+   "size": 96,
+   "lines": [
+    "Dubaï ↔ côte",
+    "iranienne :",
+    "150 km"
+   ],
+   "words": [
+    {
+     "word": "Dubaï",
+     "x": 206.5,
+     "y": 775,
+     "w": 316,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "↔",
+     "x": 536.0,
+     "y": 775,
+     "w": 99,
+     "h": 120,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "côte",
+     "x": 649.3,
+     "y": 775,
+     "w": 238,
+     "h": 120,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "iranienne",
+     "x": 270.5,
+     "y": 881,
+     "w": 498,
+     "h": 120,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": ":",
+     "x": 782.3,
+     "y": 881,
+     "w": 41,
+     "h": 120,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "150 km",
+     "x": 362.0,
+     "y": 987,
+     "w": 370,
+     "h": 120,
+     "accent": true,
+     "delay": 0.833
+    },
+    {
+     "word": "vérifié le 12/10/2026",
+     "x": 392,
+     "y": 1105,
+     "w": 297,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 3.0,
+   "t1": 5.667,
+   "block_h": 370,
+   "top": 775,
+   "counter": {
+    "x": 362.0,
+    "y": 987,
+    "w": 370,
+    "h": 120,
+    "delay": 0.833
+   }
+  },
+  "s03": {
+   "size": 72,
+   "lines": [
+    "28 février 2026 :",
+    "espace aérien",
+    "partiellement fermé"
+   ],
+   "words": [
+    {
+     "word": "28 février",
+     "x": 236.2,
+     "y": 816,
+     "w": 378,
+     "h": 90,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "2026",
+     "x": 620.7,
+     "y": 816,
+     "w": 196,
+     "h": 90,
+     "accent": false,
+     "delay": 0.1
+    },
+    {
+     "word": ":",
+     "x": 823.5,
+     "y": 816,
+     "w": 34,
+     "h": 90,
+     "accent": false,
+     "delay": 0.2
+    },
+    {
+     "word": "espace",
+     "x": 273.4,
+     "y": 894,
+     "w": 284,
+     "h": 90,
+     "accent": false,
+     "delay": 0.3
+    },
+    {
+     "word": "aérien",
+     "x": 564.1,
+     "y": 894,
+     "w": 257,
+     "h": 90,
+     "accent": false,
+     "delay": 0.4
+    },
+    {
+     "word": "partiellement",
+     "x": 153.2,
+     "y": 974,
+     "w": 538,
+     "h": 90,
+     "accent": true,
+     "delay": 0.5
+    },
+    {
+     "word": "fermé",
+     "x": 698.0,
+     "y": 974,
+     "w": 243,
+     "h": 90,
+     "accent": true,
+     "delay": 0.6
+    },
+    {
+     "word": "vérifié le 12/10/2026",
+     "x": 392,
+     "y": 1064,
+     "w": 297,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 5.667,
+   "t1": 8.0,
+   "block_h": 289,
+   "top": 816
+  },
+  "s04": {
+   "size": 96,
+   "lines": [
+    "16 mars 2026 :",
+    "vols suspendus",
+    "à DXB"
+   ],
+   "words": [
+    {
+     "word": "16 mars",
+     "x": 184.9,
+     "y": 775,
+     "w": 399,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "2026",
+     "x": 597.6,
+     "y": 775,
+     "w": 256,
+     "h": 120,
+     "accent": false,
+     "delay": 0.1
+    },
+    {
+     "word": ":",
+     "x": 867.9,
+     "y": 775,
+     "w": 41,
+     "h": 120,
+     "accent": false,
+     "delay": 0.2
+    },
+    {
+     "word": "vols",
+     "x": 147.1,
+     "y": 881,
+     "w": 219,
+     "h": 120,
+     "accent": false,
+     "delay": 0.3
+    },
+    {
+     "word": "suspendus",
+     "x": 379.6,
+     "y": 881,
+     "w": 567,
+     "h": 120,
+     "accent": true,
+     "delay": 0.4
+    },
+    {
+     "word": "à DXB",
+     "x": 386.1,
+     "y": 987,
+     "w": 322,
+     "h": 120,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "vérifié le 12/10/2026",
+     "x": 392,
+     "y": 1105,
+     "w": 297,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 8.0,
+   "t1": 10.0,
+   "block_h": 370,
+   "top": 775
+  },
+  "s05": {
+   "size": 96,
+   "lines": [
+    "Mais la vraie",
+    "question n'est",
+    "pas la sécurité."
+   ],
+   "words": [
+    {
+     "word": "Mais",
+     "x": 224.4,
+     "y": 801,
+     "w": 248,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "la",
+     "x": 486.7,
+     "y": 801,
+     "w": 104,
+     "h": 120,
+     "accent": false,
+     "delay": 0.1
+    },
+    {
+     "word": "vraie",
+     "x": 605.0,
+     "y": 801,
+     "w": 265,
+     "h": 120,
+     "accent": false,
+     "delay": 0.2
+    },
+    {
+     "word": "question",
+     "x": 177.7,
+     "y": 907,
+     "w": 465,
+     "h": 120,
+     "accent": false,
+     "delay": 0.3
+    },
+    {
+     "word": "n'est",
+     "x": 656.6,
+     "y": 907,
+     "w": 260,
+     "h": 120,
+     "accent": false,
+     "delay": 0.4
+    },
+    {
+     "word": "pas",
+     "x": 157.2,
+     "y": 1013,
+     "w": 192,
+     "h": 120,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "la",
+     "x": 363.5,
+     "y": 1013,
+     "w": 104,
+     "h": 120,
+     "accent": false,
+     "delay": 0.6
+    },
+    {
+     "word": "sécurité.",
+     "x": 481.8,
+     "y": 1013,
+     "w": 455,
+     "h": 120,
+     "accent": true,
+     "delay": 0.7
+    }
+   ],
+   "t0": 10.0,
+   "t1": 12.0,
+   "block_h": 318,
+   "top": 801
+  },
+  "s06": {
+   "size": 96,
+   "lines": [
+    "C'est",
+    "ta structure."
+   ],
+   "words": [
+    {
+     "word": "C'est",
+     "x": 415.5,
+     "y": 854,
+     "w": 263,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "ta structure.",
+     "x": 223.7,
+     "y": 960,
+     "w": 647,
+     "h": 120,
+     "accent": true,
+     "delay": 0.1
+    }
+   ],
+   "t0": 12.0,
+   "t1": 14.0,
+   "block_h": 212,
+   "top": 854
+  },
+  "s07": {
+   "size": 80,
+   "lines": [
+    "DXB, 1er semestre",
+    "2026 : –31 % de",
+    "passagers"
+   ],
+   "words": [
+    {
+     "word": "DXB,",
+     "x": 155.8,
+     "y": 802,
+     "w": 220,
+     "h": 100,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "1er semestre",
+     "x": 385.3,
+     "y": 802,
+     "w": 553,
+     "h": 100,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "2026",
+     "x": 232.1,
+     "y": 890,
+     "w": 216,
+     "h": 100,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": ":",
+     "x": 457.4,
+     "y": 890,
+     "w": 37,
+     "h": 100,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "–31 %",
+     "x": 503.3,
+     "y": 890,
+     "w": 228,
+     "h": 100,
+     "accent": true,
+     "delay": 0.667
+    },
+    {
+     "word": "de",
+     "x": 740.7,
+     "y": 890,
+     "w": 121,
+     "h": 100,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "passagers",
+     "x": 324.9,
+     "y": 978,
+     "w": 444,
+     "h": 100,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "vérifié le 12/10/2026",
+     "x": 392,
+     "y": 1078,
+     "w": 297,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 14.0,
+   "t1": 16.667,
+   "block_h": 316,
+   "top": 802,
+   "counter": {
+    "x": 503.3,
+    "y": 890,
+    "w": 228,
+    "h": 100,
+    "delay": 0.667
+   }
+  },
+  "s08": {
+   "size": 80,
+   "lines": [
+    "Assurance santé :",
+    "la guerre est une",
+    "clause d'exclusion"
+   ],
+   "words": [
+    {
+     "word": "Assurance",
+     "x": 165.8,
+     "y": 802,
+     "w": 458,
+     "h": 100,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "santé",
+     "x": 632.7,
+     "y": 802,
+     "w": 250,
+     "h": 100,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": ":",
+     "x": 891.5,
+     "y": 802,
+     "w": 37,
+     "h": 100,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "la",
+     "x": 178.2,
+     "y": 890,
+     "w": 89,
+     "h": 100,
+     "accent": true,
+     "delay": 0.5
+    },
+    {
+     "word": "guerre",
+     "x": 276.8,
+     "y": 890,
+     "w": 299,
+     "h": 100,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "est",
+     "x": 584.7,
+     "y": 890,
+     "w": 145,
+     "h": 100,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "une",
+     "x": 738.8,
+     "y": 890,
+     "w": 177,
+     "h": 100,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "clause",
+     "x": 152.1,
+     "y": 978,
+     "w": 288,
+     "h": 100,
+     "accent": true,
+     "delay": 1.167
+    },
+    {
+     "word": "d'exclusion",
+     "x": 449.2,
+     "y": 978,
+     "w": 493,
+     "h": 100,
+     "accent": true,
+     "delay": 1.333
+    },
+    {
+     "word": "vérifié le 12/10/2026",
+     "x": 392,
+     "y": 1078,
+     "w": 297,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 16.667,
+   "t1": 19.667,
+   "block_h": 316,
+   "top": 802
+  },
+  "s09": {
+   "size": 84,
+   "lines": [
+    "180 jours hors",
+    "des EAU : visa de",
+    "résidence annulé"
+   ],
+   "words": [
+    {
+     "word": "180 jours",
+     "x": 230.5,
+     "y": 796,
+     "w": 410,
+     "h": 105,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "hors",
+     "x": 651.3,
+     "y": 796,
+     "w": 212,
+     "h": 105,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "des",
+     "x": 161.6,
+     "y": 888,
+     "w": 172,
+     "h": 105,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "EAU",
+     "x": 344.5,
+     "y": 888,
+     "w": 201,
+     "h": 105,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": ":",
+     "x": 556.2,
+     "y": 888,
+     "w": 38,
+     "h": 105,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "visa",
+     "x": 604.4,
+     "y": 888,
+     "w": 191,
+     "h": 105,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "de",
+     "x": 805.9,
+     "y": 888,
+     "w": 127,
+     "h": 105,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "résidence",
+     "x": 154.5,
+     "y": 980,
+     "w": 452,
+     "h": 105,
+     "accent": false,
+     "delay": 1.167
+    },
+    {
+     "word": "annulé",
+     "x": 617.4,
+     "y": 980,
+     "w": 322,
+     "h": 105,
+     "accent": true,
+     "delay": 1.333
+    },
+    {
+     "word": "hors Golden Visa · règle ICP",
+     "x": 332,
+     "y": 1084,
+     "w": 417,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 19.667,
+   "t1": 22.333,
+   "block_h": 328,
+   "top": 796
+  },
+  "s10": {
+   "size": 72,
+   "lines": [
+    "Ventes immobilières",
+    "à Dubaï : –38 % au",
+    "3e trimestre 2026"
+   ],
+   "words": [
+    {
+     "word": "Ventes",
+     "x": 146.3,
+     "y": 816,
+     "w": 278,
+     "h": 90,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "immobilières",
+     "x": 431.4,
+     "y": 816,
+     "w": 516,
+     "h": 90,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "à Dubaï",
+     "x": 198.8,
+     "y": 894,
+     "w": 306,
+     "h": 90,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": ":",
+     "x": 512.2,
+     "y": 894,
+     "w": 34,
+     "h": 90,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "–38 %",
+     "x": 553.5,
+     "y": 894,
+     "w": 226,
+     "h": 90,
+     "accent": true,
+     "delay": 0.667
+    },
+    {
+     "word": "au",
+     "x": 786.1,
+     "y": 894,
+     "w": 109,
+     "h": 90,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "3e trimestre",
+     "x": 204.5,
+     "y": 974,
+     "w": 482,
+     "h": 90,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "2026",
+     "x": 693.7,
+     "y": 974,
+     "w": 196,
+     "h": 90,
+     "accent": false,
+     "delay": 1.167
+    },
+    {
+     "word": "vérifié le 12/10/2026 · Cavendish Maxwell",
+     "x": 242,
+     "y": 1064,
+     "w": 596,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 22.333,
+   "t1": 25.333,
+   "block_h": 289,
+   "top": 816,
+   "counter": {
+    "x": 553.5,
+    "y": 894,
+    "w": 226,
+    "h": 90,
+    "delay": 0.667
+   }
+  },
+  "s11": {
+   "size": 88,
+   "lines": [
+    "Si tu dois partir",
+    "3 mois… où es-tu",
+    "résident fiscal ?"
+   ],
+   "words": [
+    {
+     "word": "Si",
+     "x": 180.6,
+     "y": 788,
+     "w": 98,
+     "h": 110,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "tu",
+     "x": 290.7,
+     "y": 788,
+     "w": 114,
+     "h": 110,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "dois",
+     "x": 416.5,
+     "y": 788,
+     "w": 210,
+     "h": 110,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "partir",
+     "x": 637.9,
+     "y": 788,
+     "w": 276,
+     "h": 110,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "3 mois…",
+     "x": 144.2,
+     "y": 886,
+     "w": 395,
+     "h": 110,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "où",
+     "x": 550.8,
+     "y": 886,
+     "w": 134,
+     "h": 110,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "es-tu",
+     "x": 695.9,
+     "y": 886,
+     "w": 254,
+     "h": 110,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "résident fiscal",
+     "x": 169.6,
+     "y": 982,
+     "w": 677,
+     "h": 110,
+     "accent": true,
+     "delay": 1.167
+    },
+    {
+     "word": "?",
+     "x": 857.8,
+     "y": 982,
+     "w": 67,
+     "h": 110,
+     "accent": true,
+     "delay": 1.333
+    },
+    {
+     "word": "183 jours EAU · un seul critère suffit en France",
+     "x": 202,
+     "y": 1092,
+     "w": 675,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 25.333,
+   "t1": 28.0,
+   "block_h": 343,
+   "top": 788
+  },
+  "s12": {
+   "size": 92,
+   "lines": [
+    "Une résidence",
+    "de secours",
+    "dans un 2ᵉ pays"
+   ],
+   "words": [
+    {
+     "word": "Une",
+     "x": 188.5,
+     "y": 970,
+     "w": 210,
+     "h": 115,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "résidence",
+     "x": 411.3,
+     "y": 970,
+     "w": 494,
+     "h": 115,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "de",
+     "x": 274.8,
+     "y": 1070,
+     "w": 137,
+     "h": 115,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "secours",
+     "x": 424.9,
+     "y": 1070,
+     "w": 394,
+     "h": 115,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "dans",
+     "x": 154.3,
+     "y": 1172,
+     "w": 250,
+     "h": 115,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "un",
+     "x": 417.4,
+     "y": 1172,
+     "w": 142,
+     "h": 115,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "2ᵉ pays",
+     "x": 571.9,
+     "y": 1172,
+     "w": 368,
+     "h": 115,
+     "accent": true,
+     "delay": 1.0
+    }
+   ],
+   "t0": 28.0,
+   "t1": 31.667,
+   "block_h": 625,
+   "top": 648
+  },
+  "s13": {
+   "size": 84,
+   "lines": [
+    "Une structure qui",
+    "ne dépend pas",
+    "d'un seul pays"
+   ],
+   "words": [
+    {
+     "word": "Une",
+     "x": 146.4,
+     "y": 957,
+     "w": 193,
+     "h": 105,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "structure",
+     "x": 349.9,
+     "y": 957,
+     "w": 430,
+     "h": 105,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "qui",
+     "x": 790.8,
+     "y": 957,
+     "w": 157,
+     "h": 105,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "ne",
+     "x": 209.8,
+     "y": 1049,
+     "w": 127,
+     "h": 105,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "dépend",
+     "x": 347.2,
+     "y": 1049,
+     "w": 357,
+     "h": 105,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "pas",
+     "x": 714.2,
+     "y": 1049,
+     "w": 170,
+     "h": 105,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "d'un",
+     "x": 222.2,
+     "y": 1141,
+     "w": 210,
+     "h": 105,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "seul pays",
+     "x": 442.1,
+     "y": 1141,
+     "w": 430,
+     "h": 105,
+     "accent": true,
+     "delay": 1.167
+    },
+    {
+     "word": "holding + société opérationnelle",
+     "x": 298,
+     "y": 1245,
+     "w": 484,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    }
+   ],
+   "t0": 31.667,
+   "t1": 35.333,
+   "block_h": 650,
+   "top": 635
+  },
+  "s14": {
+   "size": 96,
+   "lines": [
+    "Une banque",
+    "dans",
+    "2 juridictions"
+   ],
+   "words": [
+    {
+     "word": "Une",
+     "x": 229.7,
+     "y": 962,
+     "w": 219,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "banque",
+     "x": 462.2,
+     "y": 962,
+     "w": 402,
+     "h": 120,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "dans",
+     "x": 416.7,
+     "y": 1068,
+     "w": 261,
+     "h": 120,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "2 juridictions",
+     "x": 206.5,
+     "y": 1174,
+     "w": 681,
+     "h": 120,
+     "accent": true,
+     "delay": 0.5
+    }
+   ],
+   "t0": 35.333,
+   "t1": 38.667,
+   "block_h": 640,
+   "top": 640
+  },
+  "s15": {
+   "size": 84,
+   "lines": [
+    "Une assurance",
+    "qui couvre conflit",
+    "+ rapatriement"
+   ],
+   "words": [
+    {
+     "word": "Une",
+     "x": 211.8,
+     "y": 983,
+     "w": 193,
+     "h": 105,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "assurance",
+     "x": 415.2,
+     "y": 983,
+     "w": 467,
+     "h": 105,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "qui",
+     "x": 146.3,
+     "y": 1075,
+     "w": 157,
+     "h": 105,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "couvre",
+     "x": 313.6,
+     "y": 1075,
+     "w": 321,
+     "h": 105,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "conflit",
+     "x": 644.9,
+     "y": 1075,
+     "w": 303,
+     "h": 105,
+     "accent": false,
+     "delay": 0.667
+    },
+    {
+     "word": "+",
+     "x": 207.1,
+     "y": 1167,
+     "w": 65,
+     "h": 105,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "rapatriement",
+     "x": 282.7,
+     "y": 1167,
+     "w": 604,
+     "h": 105,
+     "accent": true,
+     "delay": 1.0
+    }
+   ],
+   "t0": 38.667,
+   "t1": 42.333,
+   "block_h": 598,
+   "top": 661
+  },
+  "s16": {
+   "size": 68,
+   "lines": [
+    "Un calendrier de",
+    "présence documenté,",
+    "où que tu sois"
+   ],
+   "words": [
+    {
+     "word": "Un",
+     "x": 239.8,
+     "y": 1008,
+     "w": 115,
+     "h": 85,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "calendrier",
+     "x": 360.4,
+     "y": 1008,
+     "w": 383,
+     "h": 85,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "de",
+     "x": 749.1,
+     "y": 1008,
+     "w": 105,
+     "h": 85,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "présence",
+     "x": 145.6,
+     "y": 1084,
+     "w": 347,
+     "h": 85,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "documenté,",
+     "x": 498.9,
+     "y": 1084,
+     "w": 450,
+     "h": 85,
+     "accent": true,
+     "delay": 0.667
+    },
+    {
+     "word": "où",
+     "x": 286.0,
+     "y": 1158,
+     "w": 106,
+     "h": 85,
+     "accent": false,
+     "delay": 0.833
+    },
+    {
+     "word": "que",
+     "x": 398.1,
+     "y": 1158,
+     "w": 152,
+     "h": 85,
+     "accent": false,
+     "delay": 1.0
+    },
+    {
+     "word": "tu",
+     "x": 555.8,
+     "y": 1158,
+     "w": 91,
+     "h": 85,
+     "accent": false,
+     "delay": 1.167
+    },
+    {
+     "word": "sois",
+     "x": 653.1,
+     "y": 1158,
+     "w": 155,
+     "h": 85,
+     "accent": false,
+     "delay": 1.333
+    }
+   ],
+   "t0": 42.333,
+   "t1": 46.0,
+   "block_h": 547,
+   "top": 686
+  },
+  "s17": {
+   "size": 88,
+   "lines": [
+    "Une expatriation",
+    "qui dépend d'un",
+    "seul pays"
+   ],
+   "words": [
+    {
+     "word": "Une",
+     "x": 147.1,
+     "y": 814,
+     "w": 202,
+     "h": 110,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "expatriation",
+     "x": 360.2,
+     "y": 814,
+     "w": 587,
+     "h": 110,
+     "accent": false,
+     "delay": 0.1
+    },
+    {
+     "word": "qui",
+     "x": 157.7,
+     "y": 912,
+     "w": 164,
+     "h": 110,
+     "accent": false,
+     "delay": 0.2
+    },
+    {
+     "word": "dépend",
+     "x": 332.9,
+     "y": 912,
+     "w": 373,
+     "h": 110,
+     "accent": false,
+     "delay": 0.3
+    },
+    {
+     "word": "d'un",
+     "x": 717.4,
+     "y": 912,
+     "w": 219,
+     "h": 110,
+     "accent": false,
+     "delay": 0.4
+    },
+    {
+     "word": "seul pays",
+     "x": 322.2,
+     "y": 1008,
+     "w": 450,
+     "h": 110,
+     "accent": true,
+     "delay": 0.5
+    }
+   ],
+   "t0": 46.0,
+   "t1": 48.333,
+   "block_h": 291,
+   "top": 814
+  },
+  "s18": {
+   "size": 96,
+   "lines": [
+    "n'est pas une",
+    "stratégie."
+   ],
+   "words": [
+    {
+     "word": "n'est",
+     "x": 202.3,
+     "y": 854,
+     "w": 260,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "pas",
+     "x": 475.9,
+     "y": 854,
+     "w": 192,
+     "h": 120,
+     "accent": false,
+     "delay": 0.1
+    },
+    {
+     "word": "une",
+     "x": 682.2,
+     "y": 854,
+     "w": 210,
+     "h": 120,
+     "accent": false,
+     "delay": 0.2
+    },
+    {
+     "word": "stratégie.",
+     "x": 297.8,
+     "y": 960,
+     "w": 498,
+     "h": 120,
+     "accent": true,
+     "delay": 0.3
+    }
+   ],
+   "t0": 48.333,
+   "t1": 50.333,
+   "block_h": 212,
+   "top": 854
+  },
+  "s19": {
+   "size": 96,
+   "lines": [
+    "C'est un pari."
+   ],
+   "words": [
+    {
+     "word": "C'est",
+     "x": 208.3,
+     "y": 907,
+     "w": 263,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "un pari.",
+     "x": 485.1,
+     "y": 907,
+     "w": 401,
+     "h": 120,
+     "accent": false,
+     "delay": 0.1
+    }
+   ],
+   "t0": 50.333,
+   "t1": 52.0,
+   "block_h": 106,
+   "top": 907
+  },
+  "s20": {
+   "size": 96,
+   "lines": [
+    "On a construit",
+    "le PLAN B",
+    "Dubaï."
+   ],
+   "words": [
+    {
+     "word": "On",
+     "x": 175.2,
+     "y": 801,
+     "w": 162,
+     "h": 120,
+     "accent": false,
+     "delay": 0.0
+    },
+    {
+     "word": "a",
+     "x": 351.2,
+     "y": 801,
+     "w": 74,
+     "h": 120,
+     "accent": false,
+     "delay": 0.167
+    },
+    {
+     "word": "construit",
+     "x": 439.4,
+     "y": 801,
+     "w": 479,
+     "h": 120,
+     "accent": false,
+     "delay": 0.333
+    },
+    {
+     "word": "le",
+     "x": 288.4,
+     "y": 907,
+     "w": 106,
+     "h": 120,
+     "accent": false,
+     "delay": 0.5
+    },
+    {
+     "word": "PLAN B",
+     "x": 408.0,
+     "y": 907,
+     "w": 398,
+     "h": 120,
+     "accent": true,
+     "delay": 0.667
+    },
+    {
+     "word": "Dubaï.",
+     "x": 375.6,
+     "y": 1013,
+     "w": 343,
+     "h": 120,
+     "accent": false,
+     "delay": 0.833
+    }
+   ],
+   "t0": 52.0,
+   "t1": 54.667,
+   "block_h": 318,
+   "top": 801
+  },
+  "s21": {
+   "size": 140,
+   "lines": [
+    "PLAN B",
+    "DUBAÏ"
+   ],
+   "words": [
+    {
+     "word": "PLAN B",
+     "x": 260.3,
+     "y": 722,
+     "w": 573,
+     "h": 175,
+     "accent": true,
+     "delay": 0.0
+    },
+    {
+     "word": "DUBAÏ",
+     "x": 294.6,
+     "y": 876,
+     "w": 505,
+     "h": 175,
+     "accent": true,
+     "delay": 0.167
+    },
+    {
+     "word": "Commente PLAN B",
+     "x": 390,
+     "y": 1042,
+     "w": 299,
+     "h": 40,
+     "accent": false,
+     "delay": 0.5,
+     "sub": true
+    },
+    {
+     "word": "@fynovates",
+     "x": 422,
+     "y": 1098,
+     "w": 236,
+     "h": 44,
+     "accent": false,
+     "delay": 0.6,
+     "sub": true
+    }
+   ],
+   "t0": 54.667,
+   "t1": 58.0,
+   "block_h": 476,
+   "top": 722
+  }
+ },
+ "total": 58.0,
+ "fps": 30,
+ "box": {
+  "x0": 120,
+  "x1": 960,
+  "y0": 520,
+  "y1": 1400
+ },
+ "handle": "@fynovates",
+ "cta": "Commente PLAN B"
+}
