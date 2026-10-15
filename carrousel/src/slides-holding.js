@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const COVER = Number(process.env.COVER_BAND || 702);   /* hauteur du bandeau de couverture */
+const COVER = Number(process.env.COVER_BAND || 648);   /* hauteur du bandeau de couverture */
 
 const DECOR = '';                     /* aucun décor : c'est la règle du style */
 
@@ -40,8 +40,8 @@ module.exports = { DECOR, slides: [
     photo: band('01-paris.jpg', 'paris rooftops eiffel tower', 0, COVER),
     blocks: `
         <h1 class="h1" style="font-size:${COVER > 760 ? 78 : 92}px">La holding<br>française.</h1>
-        <p class="p" style="font-size:26px;margin-top:40px;max-width:880px">L'arme fiscale que les
-          riches utilisent sans quitter Paris.</p>`
+        <p class="p" style="font-size:36px;font-weight:400;line-height:1.5;margin-top:44px;max-width:640px">
+          L'arme fiscale que les riches utilisent sans quitter Paris.</p>`
   }),
 
   /* ================= 02 · LE PARADOXE ================= */
