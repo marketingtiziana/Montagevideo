@@ -7,6 +7,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const COVER = Number(process.env.COVER_BAND || 702);   /* hauteur du bandeau de couverture */
+
 const DECOR = '';                     /* aucun décor : c'est la règle du style */
 
 /* bandeau photo : noir et blanc, bords francs ; repli gris si le fichier manque */
@@ -26,7 +28,7 @@ const slide = ({ n, photo = '', free: [t, b] = [0, 1350], blocks, swipe = false,
       <div class="stack" style="top:${Math.round((t + b) / 2) + shift}px">
         ${blocks}
       </div>
-      ${swipe ? `<div class="ed-swipe" style="top:${b - 184}px">glisser &rarr;</div>` : ''}
+      ${swipe ? `<div class="ed-swipe" style="top:${b - 150}px">glisser &rarr;</div>` : ''}
       <div class="ed-sign" style="top:${b - 112 - Math.round((sign - 19) * 1.3)}px;font-size:${sign}px">MADAME CACI</div>`
 });
 
@@ -34,11 +36,12 @@ module.exports = { DECOR, slides: [
 
   /* ================= 01 · COUVERTURE ================= */
   slide({
-    n: 1, free: [600, 1350], swipe: true, shift: -16,
-    photo: band('01-haussmann.jpg', 'paris haussmann architecture facade', 0, 600),
+    n: 1, free: [COVER, 1350], swipe: true, shift: -6,
+    photo: band('01-paris.jpg', 'paris rooftops eiffel tower', 0, COVER),
     blocks: `
-        <h1 class="h1" style="font-size:92px">La holding<br>française.</h1>
-        <p class="p" style="max-width:480px">L'arme fiscale que les riches utilisent sans quitter Paris.</p>`
+        <h1 class="h1" style="font-size:${COVER > 760 ? 78 : 92}px">La holding<br>française.</h1>
+        <p class="p" style="font-size:26px;margin-top:40px;max-width:880px">L'arme fiscale que les
+          riches utilisent sans quitter Paris.</p>`
   }),
 
   /* ================= 02 · LE PARADOXE ================= */

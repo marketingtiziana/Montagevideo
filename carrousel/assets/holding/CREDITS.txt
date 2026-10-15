@@ -6,7 +6,7 @@ Les pages unsplash.com correspondantes n'ont pas pu être ouvertes depuis cet
 environnement : pour créditer les auteurs, ouvrir l'URL du CDN dans un navigateur
 et remonter à la photo via la recherche Unsplash.
 
-01-haussmann.jpg    https://images.unsplash.com/photo-1614349214089-e969a07e033b
+01-paris.jpg        https://images.unsplash.com/photo-1622748376718-fcb779eb23ac
 02-fenetre.jpg      https://images.unsplash.com/photo-1694114018513-2b1eac3aab79
 04-coffre.jpg       https://images.unsplash.com/photo-1582139329536-e7284fece509
 06-architecture.jpg https://images.unsplash.com/photo-1483366774565-c783b9f70e2c
