@@ -1,0 +1,4 @@
+node_modules/
+
+# L'archive dupliquerait les PNG déjà versionnés — le build la régénère
+output/*.zip

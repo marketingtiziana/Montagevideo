@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fynovates — Les dispositifs 1 / 6</title>
+<!-- Inter (Google Fonts), vendorisée dans src/inter/ pour un rendu déterministe hors ligne -->
+<style>
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-be4919d4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-92c85383.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-cb10a075.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-96a9ce1d.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-02c9c631.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-8dc625c5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-148e78b8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-390b9077.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-d4047416.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-a656acc8.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-9f07a550.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-0583c36d.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-ba680146.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-1fab01e7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-390b9077.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-d4047416.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-a656acc8.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-9f07a550.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-0583c36d.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-ba680146.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-1fab01e7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-390b9077.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-d4047416.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-a656acc8.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-9f07a550.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-0583c36d.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-ba680146.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-1fab01e7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
+   Fynovates — « Les dispositifs que personne n'active »
+   Gabarit Instagram Story 1080 × 1920 (9:16 exact).
+
+   Trois couches, dans cet ordre :
+     1. la photo, avec le color grading commun aux 6 ;
+     2. les dégradés de lisibilité — le dégradé principal de la série, plus
+        deux renforts locaux, en haut pour la pagination et en bas pour le
+        corps de texte ;
+     3. le texte et le système graphique.
+
+   Zones mortes : 160 px en haut, 300 px en bas (stickers Instagram).
+
+   La signature de la série est l'entrée nommée : un filet doré, un nom de
+   dispositif en capitales dorées, puis son effet en clair dessous. C'est une
+   page de code des impôts, pas une liste à puces — et c'est le même filet qui
+   sépare les deux fiscalités de la story 5.
+   ========================================================================== */
+
+:root {
+  --or:      #D4AF37;
+  --rouge:   #E05C5C;
+  --gris:    #9CA3AF;
+  --corps:   #E5E7EB;
+
+  --marge:   100px;   /* marges latérales, identiques sur les 6 */
+  --colonne: 800px;   /* largeur maximale du bloc texte */
+  --haut:    160px;   /* ligne d'en-tête : rien au-dessus */
+  --bas:     1620px;  /* 1920 − 300 : rien en dessous */
+
+  /* La ligne des exemples. Les stories 2 à 4 ne s'ancrent pas en bas comme les
+     autres : elles partent toutes les trois d'ici et descendent. C'est ce qui
+     fige l'étiquette « Exemple N » au pixel quand on tape de l'une à l'autre.
+     La valeur est dictée par le bloc le plus haut des trois (749 px, story 4),
+     posé de façon à dégager la ligne basse. */
+  --exemples: 860px;
+
+  /* le filet de la série, partagé par les entrées nommées des stories 2 à 4
+     et par les deux fiscalités de la story 5 — une seule valeur pour qu'ils
+     ne divergent jamais */
+  --filet:   rgba(212, 175, 55, 0.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1920px; }
+
+body {
+  background: #040710;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------ couche 1 : la photographie */
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* grading uniforme sur les 6 */
+  filter: saturate(0.85) contrast(1.08);
+}
+
+/* ------------------------------------------------- couche 2 : la lisibilité */
+
+/* Dégradé principal : la photo reste lisible en haut, le texte vit dans la
+   moitié basse assombrie. */
+.grade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 10, 22, 0.25) 0%,
+    rgba(6, 10, 22, 0.55) 45%,
+    rgba(4, 7, 16, 0.92) 100%
+  );
+}
+
+/* Renfort haut : le gris de pagination (#9CA3AF) a une luminance relative de
+   0,36. Pour tenir le 3:1 du « large text » il lui faut un fond sous 0,088 —
+   autrement dit franchement noir. Plutôt que d'assombrir toute la moitié
+   haute, le renfort est une bande courte, pleine sous la ligne de pagination
+   puis en chute rapide : le sujet de la photo, en dessous de 360 px, reste
+   intact. */
+.renfort-haut {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 360px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0.84) 0%,
+    rgba(4, 7, 16, 0.82) 55%,
+    rgba(4, 7, 16, 0.34) 78%,
+    rgba(4, 7, 16, 0) 100%
+  );
+}
+
+/* Renfort bas : sous le bloc texte, là où l'or doit passer le AA même sur une
+   photo claire. Les trois stories « exemple » remplissent la moitié basse de
+   texte sur presque 800 px de hauteur, et leurs fonds de bureau sont les plus
+   lumineux de la série — d'où un renfort long et franc. */
+.renfort-bas {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1400px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.48) 20%,
+    rgba(4, 7, 16, 0.82) 45%,
+    rgba(4, 7, 16, 0.91) 70%,
+    rgba(4, 7, 16, 0.94) 100%
+  );
+}
+
+/* La story 6 est centrée et son bloc remonte : le renfort suit, avec une
+   longue traîne pour ne pas poser d'arête visible en travers de l'image. */
+.story--cta .renfort-bas {
+  top: 240px;
+  bottom: auto;
+  height: 1680px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.54) 13%,
+    rgba(4, 7, 16, 0.80) 42%,
+    rgba(4, 7, 16, 0.88) 72%,
+    rgba(4, 7, 16, 0.90) 100%
+  );
+}
+
+/* ---------------------------------------------- couche 3 : la pagination */
+
+/* Seule la pagination occupe la ligne haute : la série ne porte pas de titre
+   répété d'une story à l'autre. */
+.compteur {
+  position: absolute;
+  top: var(--haut);
+  right: var(--marge);
+  font-size: 24px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gris);
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+/* ------------------------------------------------------ couche 3 : le texte */
+
+.accroche {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  text-wrap: pretty;
+}
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+.accroche + .corps { margin-top: 40px; }
+.corps + .corps    { margin-top: 26px; }
+
+/* Mots-clés. L'or porte ce qui est tenu, le rouge ce qui est subi. */
+em, i {
+  font-style: normal;
+  font-weight: 600;
+}
+em { color: var(--or); }
+i  { color: var(--rouge); }
+
+.chute {
+  margin-top: 36px;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+/* --- gabarits à texte ancré en bas : stories 1 à 5 ----------------------- */
+
+.story--ouverture .contenu,
+.story--exemple .contenu,
+.story--deux .contenu {
+  position: absolute;
+  left: var(--marge);
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+}
+
+/* Les trois exemples s'ancrent par le haut : voir --exemples. Le contrôle de
+   zone morte basse reste le garde-fou — si un texte s'allonge au point de
+   franchir les 1620 px, le build refuse de livrer. */
+.story--exemple .contenu {
+  top: var(--exemples);
+  bottom: auto;
+}
+
+/* --- les exemples : stories 2, 3 et 4 ------------------------------------ */
+
+/* L'étiquette est l'ancre de la série : les trois stories « exemple » doivent
+   se superposer au pixel quand on tape d'une story à l'autre. Le build compare
+   son empreinte géométrique entre les trois et refuse un écart. */
+.etiquette {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--or);
+}
+
+/* Sur ces stories l'accroche est une question, pas un titre : elle descend à
+   46 px pour laisser les noms de dispositifs porter le regard. */
+.story--exemple .accroche {
+  margin-top: 22px;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.18;
+}
+
+.dispositifs { margin: 40px 0 0; }
+
+/* Une entrée = un filet, un nom, un effet. Le filet au-dessus plutôt qu'en
+   dessous : la liste s'ouvre sur une ligne dorée et ne se referme pas, ce qui
+   laisse la chute respirer juste après. */
+.dispositif {
+  padding: 26px 0;
+  border-top: 1px solid var(--filet);
+}
+
+/* Le nom est ce que le client demandera à son conseil : il se lit comme une
+   référence, en capitales dorées. Il doit tenir sur une seule ligne — le build
+   le vérifie, car un nom qui passe à la ligne cesse d'être une étiquette. */
+.nom {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--or);
+}
+
+.effet {
+  margin-top: 10px;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.38;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+/* --- les deux fiscalités : story 5 --------------------------------------- */
+
+/* Sur cette story l'accroche annonce, elle ne conclut pas : même traitement
+   que la question des exemples. */
+.story--deux .accroche {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.18;
+}
+
+.fiscalites { margin: 40px 0 0; }
+
+/* Même filet que les entrées nommées, même rythme : la story 5 est la story
+   « exemple » retournée contre elle-même. */
+.fiscalite {
+  padding: 28px 0;
+  border-top: 1px solid var(--filet);
+}
+
+.regime {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+/* Le qualificatif tranche : c'est lui qui porte la couleur, et la seule chose
+   que l'œil retient en passant. Deux couleurs distinctes, vérifiées au build. */
+.qualif {
+  margin-top: 12px;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.qualif--rouge { color: var(--rouge); }
+.qualif--or    { color: var(--or); }
+
+.pour {
+  margin-top: 8px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--gris);
+}
+
+/* --- le CTA : story 6, centré -------------------------------------------- */
+
+.story--cta .contenu {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.story--cta .corps { text-wrap: pretty; }
+
+.cta {
+  display: inline-block;
+  margin-top: 70px;
+  font-size: 132px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  /* le letter-spacing pousse un blanc après la dernière lettre : on le reprend
+     pour que le mot reste optiquement centré dans son encadré */
+  text-indent: 0.04em;
+  color: var(--or);
+  border: 2.5px solid var(--or);
+  border-radius: 26px;
+  padding: 26px 76px;
+}
+
+.consigne {
+  margin-top: 44px;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #FFFFFF;
+  text-wrap: balance;
+}
+
+</style>
+</head>
+<body>
+  <div class="story story--ouverture">
+
+    <!-- couche 1 : la photo et son grading -->
+    <img class="photo" src="../backgrounds/bg-1.jpg" alt="">
+
+    <!-- couche 2 : lisibilité -->
+    <div class="grade"></div>
+    <div class="renfort-bas"></div>
+    <div class="renfort-haut"></div>
+
+    <!-- couche 3 : pagination -->
+    <div class="compteur">1/6</div>
+
+    <!-- couche 3 : le texte -->
+    <div class="contenu">
+        <p class="accroche">Phrase interdite sur ce compte : « la France est un paradis fiscal ».</p>
+        <p class="corps">Pas pour tout le monde. Pour ceux qui <em>savent lire les règles</em>.</p>
+        <p class="corps">Laisse-moi te montrer ce que ton comptable n’active jamais.</p>
+    </div>
+
+  </div>
+</body>
+</html>

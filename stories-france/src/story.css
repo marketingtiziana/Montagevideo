@@ -1,0 +1,301 @@
+/* ==========================================================================
+   Fynovates — « Rester en France, mais structuré »
+   Gabarit Instagram Story 1080 × 1920 (9:16 exact).
+
+   Trois couches, dans cet ordre :
+     1. la photo, avec le color grading commun aux 6 ;
+     2. les dégradés de lisibilité — le dégradé principal de la série, plus
+        deux renforts locaux, en haut pour la pagination et en bas pour le
+        corps de texte ;
+     3. le texte et le système graphique.
+
+   Zones mortes : 160 px en haut, 300 px en bas (stickers Instagram).
+
+   Le filet doré est la signature de la série : il tient les deux camps de la
+   story 2 et la liste des leviers de la story 3. C'est le même or, à la même
+   opacité, dans les deux cas.
+   ========================================================================== */
+
+:root {
+  --or:      #D4AF37;
+  --rouge:   #E05C5C;
+  --gris:    #9CA3AF;
+  --corps:   #E5E7EB;
+
+  --marge:   100px;   /* marges latérales, identiques sur les 6 */
+  --colonne: 800px;   /* largeur maximale du bloc texte */
+  --haut:    160px;   /* ligne d'en-tête : rien au-dessus */
+  --bas:     1620px;  /* 1920 − 300 : rien en dessous */
+
+  /* le filet de la série, partagé par le bloc « camps » et la liste des
+     leviers — une seule valeur pour qu'ils ne divergent jamais */
+  --filet:   rgba(212, 175, 55, 0.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1920px; }
+
+body {
+  background: #040710;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------ couche 1 : la photographie */
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* grading uniforme sur les 6 */
+  filter: saturate(0.85) contrast(1.08);
+}
+
+/* ------------------------------------------------- couche 2 : la lisibilité */
+
+/* Dégradé principal : la photo reste lisible en haut, le texte vit dans la
+   moitié basse assombrie. */
+.grade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 10, 22, 0.25) 0%,
+    rgba(6, 10, 22, 0.55) 45%,
+    rgba(4, 7, 16, 0.92) 100%
+  );
+}
+
+/* Renfort haut : le gris de pagination (#9CA3AF) a une luminance relative de
+   0,36. Pour tenir le 3:1 du « large text » il lui faut un fond sous 0,088 —
+   autrement dit franchement noir. Plutôt que d'assombrir toute la moitié
+   haute, le renfort est une bande courte, pleine sous la ligne de pagination
+   puis en chute rapide : le sujet de la photo, en dessous de 360 px, reste
+   intact. */
+.renfort-haut {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 360px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0.84) 0%,
+    rgba(4, 7, 16, 0.82) 55%,
+    rgba(4, 7, 16, 0.34) 78%,
+    rgba(4, 7, 16, 0) 100%
+  );
+}
+
+/* Renfort bas : sous le bloc texte, là où l'or et le rouge doivent passer le
+   AA même sur une photo claire. Trois des six fonds de cette série sont très
+   lumineux dans leur moitié basse — colonnes de pierre au soleil, marbre
+   réfléchissant, table en noyer traversée de lumière rasante — d'où un
+   renfort plus opaque que sur les séries précédentes. */
+.renfort-bas {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1400px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.48) 20%,
+    rgba(4, 7, 16, 0.82) 45%,
+    rgba(4, 7, 16, 0.91) 70%,
+    rgba(4, 7, 16, 0.94) 100%
+  );
+}
+
+/* La story 6 est centrée et son bloc remonte : le renfort suit, avec une
+   longue traîne pour ne pas poser d'arête visible en travers de l'image. */
+.story--cta .renfort-bas {
+  top: 240px;
+  bottom: auto;
+  height: 1680px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.54) 13%,
+    rgba(4, 7, 16, 0.80) 42%,
+    rgba(4, 7, 16, 0.88) 72%,
+    rgba(4, 7, 16, 0.90) 100%
+  );
+}
+
+/* ---------------------------------------------- couche 3 : la pagination */
+
+/* Seule la pagination occupe la ligne haute : la série ne porte pas de titre
+   répété d'une story à l'autre. */
+.compteur {
+  position: absolute;
+  top: var(--haut);
+  right: var(--marge);
+  font-size: 24px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gris);
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+/* ------------------------------------------------------ couche 3 : le texte */
+
+.accroche {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  text-wrap: pretty;
+}
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+.accroche + .corps { margin-top: 40px; }
+.corps + .corps    { margin-top: 26px; }
+
+/* Mots-clés. L'or porte ce qui est tenu, le rouge ce qui est subi. */
+em, i {
+  font-style: normal;
+  font-weight: 600;
+}
+em { color: var(--or); }
+i  { color: var(--rouge); }
+
+/* --- gabarits à texte ancré en bas : stories 1 à 5 ----------------------- */
+
+.story--ouverture .contenu,
+.story--opposition .contenu,
+.story--leviers .contenu,
+.story--corps .contenu {
+  position: absolute;
+  left: var(--marge);
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+}
+
+/* --- les deux camps : story 2 -------------------------------------------- */
+
+/* Sur cette story l'accroche n'est pas un titre mais une amorce : elle passe
+   au corps de texte pour laisser les deux verdicts porter la hiérarchie. */
+.story--opposition .accroche {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--corps);
+}
+
+.camps {
+  margin: 46px 0 0;
+  border-top: 1px solid var(--filet);
+}
+
+.camp {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--filet);
+}
+
+/* Le profil annonce, le verdict tranche : deux tailles très écartées pour que
+   l'œil lise d'abord les deux verdicts, puis remonte au profil. */
+.profil {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--gris);
+  text-wrap: pretty;
+}
+
+.verdict {
+  margin-top: 10px;
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.verdict--rouge { color: var(--rouge); }
+.verdict--or    { color: var(--or); }
+
+/* --- les leviers : story 3 ----------------------------------------------- */
+
+/* Le filet passe à la verticale : c'est la même ligne dorée que celle qui
+   sépare les camps de la story 2, tournée d'un quart de tour. */
+.leviers {
+  margin: 40px 0 38px;
+  padding-left: 34px;
+  border-left: 2px solid var(--or);
+}
+
+.levier {
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.32;
+  color: #FFFFFF;
+  text-wrap: pretty;
+}
+
+.levier + .levier { margin-top: 22px; }
+
+.chute {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+/* --- le CTA : story 6, centré -------------------------------------------- */
+
+.story--cta .contenu {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.story--cta .corps { text-wrap: pretty; }
+
+.cta {
+  display: inline-block;
+  margin-top: 70px;
+  font-size: 132px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  /* le letter-spacing pousse un blanc après la dernière lettre : on le reprend
+     pour que le mot reste optiquement centré dans son encadré */
+  text-indent: 0.04em;
+  color: var(--or);
+  border: 2.5px solid var(--or);
+  border-radius: 26px;
+  padding: 26px 76px;
+}
+
+.consigne {
+  margin-top: 44px;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #FFFFFF;
+  text-wrap: balance;
+}

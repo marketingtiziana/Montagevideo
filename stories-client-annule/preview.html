@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fynovates — Le client qui a annulé son départ</title>
+<style>
+  :root { color-scheme: dark; }
+  body { background:#0B0E16; color:#9CA3AF; font:14px/1.6 ui-sans-serif,system-ui,sans-serif; margin:0; padding:40px; }
+  h1 { color:#D4AF37; font-size:15px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin:0 0 6px; }
+  p.sous { margin:0 0 32px; max-width:760px; }
+  .planche { display:flex; flex-wrap:wrap; gap:28px; padding-bottom:20px; }
+  figure { margin:0; flex:0 0 auto; }
+  img { width:320px; display:block; border-radius:8px; box-shadow:0 8px 40px rgba(0,0,0,.5); }
+  figcaption { margin-top:10px; font-size:12px; letter-spacing:2px; text-transform:uppercase; }
+  /* repères de grille, pour vérifier les zones mortes d'un coup d'œil */
+  figure { position:relative; }
+  figure::before, figure::after {
+    content:''; position:absolute; left:0; right:0; height:1px;
+    background:rgba(212,175,55,.35); pointer-events:none;
+  }
+  figure::before { top: calc(320px / 1080 * 160); }   /* ligne des 160px */
+  figure::after  { top: calc(320px / 1080 * 1620); }  /* ligne des 1620px */
+</style>
+</head>
+<body>
+  <h1>Le client qui a annulé son départ</h1>
+  <p class="sous">Les 6 stories dans l'ordre de publication. Les deux filets dorés marquent
+  les zones mortes : 160&nbsp;px en haut, 300&nbsp;px en bas. Aucun texte ne doit les franchir.</p>
+  <div class="planche">
+  <figure>
+    <img src="output/story-1.png" alt="Chapitre 01">
+    <figcaption>Chapitre 01 — bas</figcaption>
+  </figure>
+  <figure>
+    <img src="output/story-2.png" alt="Chapitre 02">
+    <figcaption>Chapitre 02 — bas</figcaption>
+  </figure>
+  <figure>
+    <img src="output/story-3.png" alt="Chapitre 03">
+    <figcaption>Chapitre 03 — bas</figcaption>
+  </figure>
+  <figure>
+    <img src="output/story-4.png" alt="Chapitre 04">
+    <figcaption>Chapitre 04 — centre</figcaption>
+  </figure>
+  <figure>
+    <img src="output/story-5.png" alt="Chapitre 05">
+    <figcaption>Chapitre 05 — bas</figcaption>
+  </figure>
+  <figure>
+    <img src="output/story-6.png" alt="Chapitre 06">
+    <figcaption>Chapitre 06 — cta</figcaption>
+  </figure>
+  </div>
+</body>
+</html>

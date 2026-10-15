@@ -1,0 +1,168 @@
+/* Fynovates — « Les 3 phrases de fin d'appel »
+   Grille commune aux 6 stories. 1080 × 1920 (9:16).
+
+   Réserves d'interface Instagram :
+     haut  168px  (avatar / pseudo)
+     bas   280px  (zone strictement vide — contrainte du brief)
+*/
+
+:root {
+  --w: 1080px;
+  --h: 1920px;
+
+  --or: #D4AF37;          /* doré        */
+  --rouge: #E05C5C;       /* accent      */
+  --blanc: #FFFFFF;
+  --gris: #9CA3AF;        /* pagination  */
+
+  --safe-top: 168px;
+  --safe-bottom: 280px;   /* aucun contenu sous cette limite */
+  --bloc-max: 850px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+}
+
+/* --- photo plein écran ------------------------------------------------- */
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* --- dégradé sombre ----------------------------------------------------
+   Noir 0 % en haut → 65 % vers le centre-bas, puis maintenu jusqu'en bas.
+   Léger voile en tout début de cadre pour que la pagination reste lisible
+   sur les photos claires (stories 4 et 6).                                */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.34) 0%,
+    rgba(0, 0, 0, 0.10) 14%,
+    rgba(0, 0, 0, 0.30) 34%,
+    rgba(0, 0, 0, 0.58) 52%,
+    rgba(0, 0, 0, 0.65) 72%,
+    rgba(0, 0, 0, 0.62) 100%
+  );
+}
+
+/* --- couche de contenu -------------------------------------------------- */
+.content {
+  position: absolute;
+  inset: 0;
+  padding: var(--safe-top) 88px var(--safe-bottom) 88px;
+  color: var(--blanc);
+}
+
+/* pagination « 1/6 » en haut à droite */
+.count {
+  position: absolute;
+  top: var(--safe-top);
+  right: 88px;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--gris);
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+
+/* bloc texte : centré horizontalement ET verticalement */
+.bloc {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bloc > * { max-width: var(--bloc-max); }
+
+/* --- hiérarchie typographique ------------------------------------------ */
+.badge {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: 36px;
+}
+
+.quote {
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: 46px;
+}
+
+.lead {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.body {
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.48;
+  color: rgba(255, 255, 255, 0.95);
+  text-wrap: pretty;
+}
+
+.lead + .body,
+.body + .body { margin-top: 30px; }
+
+/* --- CTA « GO » (story 6) ---------------------------------------------- */
+.cta {
+  margin-top: 62px;
+  font-size: 128px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--or);
+  border: 2px solid var(--or);
+  border-radius: 24px;
+  padding: 40px 88px 48px;
+}
+
+/* --- accents inline ----------------------------------------------------- */
+b  { font-weight: 700; color: var(--blanc); }
+em { font-style: normal; font-weight: 600; color: var(--or); }
+i  { font-style: normal; font-weight: 600; color: var(--rouge); }
+
+/* lisibilité : ombre portée très diffuse, invisible à l'œil mais qui
+   sécurise le contraste sur les zones claires des photos */
+.badge, .quote, .lead, .body, .cta {
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.35);
+}

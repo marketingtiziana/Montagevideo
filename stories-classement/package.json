@@ -1,0 +1,13 @@
+{
+  "name": "fynovates-classement-conseils-toxiques",
+  "version": "1.0.0",
+  "description": "Série Instagram Story « Le classement des pires conseils fiscaux d'Instagram » — Fynovates",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^25.11.0"
+  },
+  "type": "module"
+}

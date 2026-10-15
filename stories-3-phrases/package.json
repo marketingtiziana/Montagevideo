@@ -1,0 +1,16 @@
+{
+  "name": "fynovates-stories-3-phrases",
+  "version": "1.0.0",
+  "description": "Séquence Instagram Story « Les 3 phrases de fin d'appel » — Fynovates",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^25.11.0"
+  },
+  "type": "module"
+}

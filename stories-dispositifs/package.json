@@ -1,0 +1,13 @@
+{
+  "name": "fynovates-dubai-stress-test",
+  "version": "1.0.0",
+  "description": "Série Instagram Story « Dubaï, le stress test » — Fynovates",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^25.11.0"
+  },
+  "type": "module"
+}

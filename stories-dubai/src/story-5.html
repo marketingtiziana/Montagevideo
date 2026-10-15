@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fynovates — Dubaï 5 / 6</title>
+<!-- Inter (Google Fonts), vendorisée dans src/inter/ pour un rendu déterministe hors ligne -->
+<style>
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-be4919d4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-92c85383.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-cb10a075.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-96a9ce1d.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-02c9c631.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-8dc625c5.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-148e78b8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-390b9077.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-d4047416.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-a656acc8.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-9f07a550.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-0583c36d.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-ba680146.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(inter/inter-1fab01e7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-390b9077.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-d4047416.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-a656acc8.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-9f07a550.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-0583c36d.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-ba680146.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(inter/inter-1fab01e7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-390b9077.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-d4047416.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-a656acc8.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-9f07a550.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-0583c36d.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-ba680146.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(inter/inter-1fab01e7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
+   Fynovates — « Dubaï, le stress test »
+   Gabarit Instagram Story 1080 × 1920 (9:16 exact).
+
+   Trois couches, dans cet ordre :
+     1. la photo, avec le color grading commun aux 6 ;
+     2. les dégradés de lisibilité — le dégradé principal de la série, plus
+        deux renforts locaux, en haut pour la ligne d'en-tête et en bas pour
+        le corps de texte ;
+     3. le texte et le système graphique.
+
+   Zones mortes : 160 px en haut, 300 px en bas (stickers Instagram).
+   ========================================================================== */
+
+:root {
+  --or:      #D4AF37;
+  --rouge:   #E05C5C;
+  --gris:    #9CA3AF;
+  --corps:   #E5E7EB;
+
+  --marge:   100px;   /* marges latérales, identiques sur les 6 */
+  --colonne: 800px;   /* largeur maximale du bloc texte */
+  --haut:    160px;   /* ligne d'en-tête : rien au-dessus */
+  --bas:     1620px;  /* 1920 − 300 : rien en dessous */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1920px; }
+
+body {
+  background: #040710;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.story {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------ couche 1 : la photographie */
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* grading uniforme sur les 6 */
+  filter: saturate(0.85) contrast(1.08);
+}
+
+/* ------------------------------------------------- couche 2 : la lisibilité */
+
+/* Dégradé principal : la photo reste lisible en haut, le texte vit dans la
+   moitié basse assombrie. */
+.grade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 10, 22, 0.25) 0%,
+    rgba(6, 10, 22, 0.55) 45%,
+    rgba(4, 7, 16, 0.92) 100%
+  );
+}
+
+/* Renfort haut : le gris de pagination (#9CA3AF) a une luminance relative de
+   0,36. Pour tenir le 3:1 du « large text » il lui faut un fond sous 0,088 —
+   autrement dit franchement noir. Plutôt que d'assombrir toute la moitié
+   haute, le renfort est une bande courte, pleine sous la ligne de pagination
+   puis en chute rapide : le sujet de la photo, en dessous de 360 px, reste
+   intact. */
+.renfort-haut {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 360px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0.84) 0%,
+    rgba(4, 7, 16, 0.82) 55%,
+    rgba(4, 7, 16, 0.34) 78%,
+    rgba(4, 7, 16, 0) 100%
+  );
+}
+
+/* Renfort bas : sous le bloc texte, là où l'or et le rouge doivent passer le
+   AA même sur une photo claire. */
+.renfort-bas {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1180px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.45) 34%,
+    rgba(4, 7, 16, 0.80) 68%,
+    rgba(4, 7, 16, 0.88) 100%
+  );
+}
+
+/* La story 6 est centrée et son bloc remonte : le renfort suit, avec une
+   longue traîne pour ne pas poser d'arête visible en travers de l'image. */
+.story--cta .renfort-bas {
+  top: 240px;
+  bottom: auto;
+  height: 1500px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 16, 0) 0%,
+    rgba(4, 7, 16, 0.52) 14%,
+    rgba(4, 7, 16, 0.72) 45%,
+    rgba(4, 7, 16, 0.60) 72%,
+    rgba(4, 7, 16, 0.24) 89%,
+    rgba(4, 7, 16, 0) 100%
+  );
+}
+
+/* ---------------------------------------------- couche 3 : la pagination */
+
+/* Seule la pagination occupe la ligne haute : la série ne porte pas de titre
+   répété d'une story à l'autre. */
+.compteur {
+  position: absolute;
+  top: var(--haut);
+  right: var(--marge);
+  font-size: 24px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gris);
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+/* ------------------------------------------------------ couche 3 : le texte */
+
+.accroche {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  text-wrap: pretty;
+}
+
+.corps {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+.accroche + .corps { margin-top: 40px; }
+.corps + .corps    { margin-top: 26px; }
+
+/* Mots-clés. L'or porte le point de bascule, le rouge la sanction. */
+em, i {
+  font-style: normal;
+  font-weight: 600;
+}
+em { color: var(--or); }
+i  { color: var(--rouge); }
+
+/* --- gabarits à texte ancré en bas : stories 1 à 5 ----------------------- */
+
+.story--ouverture .contenu,
+.story--chiffres .contenu,
+.story--corps .contenu {
+  position: absolute;
+  left: var(--marge);
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+}
+
+/* --- le relevé chiffré : story 2 ----------------------------------------- */
+
+/* Sur cette story l'accroche n'est pas un titre mais une amorce : elle passe
+   au corps de texte pour laisser les trois valeurs porter la hiérarchie. */
+.story--chiffres .accroche {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--corps);
+}
+
+.releve {
+  margin: 48px 0 44px;
+  border-top: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.ligne {
+  display: flex;
+  /* centré et non aligné sur la ligne de base : une légende qui passe sur deux
+     lignes déséquilibrait visuellement sa rangée face au chiffre géant */
+  align-items: center;
+  gap: 28px;
+  padding: 26px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.valeur {
+  /* colonne FIXE, pas un minimum : « 120 Md$ » mesure 309 px et débordait d'un
+     min-width, ce qui décalait sa légende de 66 px par rapport aux deux autres */
+  flex: 0 0 340px;
+  /* une valeur ne se coupe jamais : « 120 Md$ » passait sur deux lignes et
+     cassait l'alignement de la rangée. Le build refuse tout débordement. */
+  white-space: nowrap;
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--or);
+  font-variant-numeric: tabular-nums;
+}
+
+.legende {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--corps);
+  text-wrap: pretty;
+}
+
+/* --- le CTA : story 6, centré -------------------------------------------- */
+
+.story--cta .contenu {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(1920px - var(--bas));
+  width: var(--colonne);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.story--cta .corps { text-wrap: pretty; }
+
+.cta {
+  display: inline-block;
+  margin-top: 70px;
+  font-size: 132px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  /* le letter-spacing pousse un blanc après la dernière lettre : on le reprend
+     pour que le mot reste optiquement centré dans son encadré */
+  text-indent: 0.04em;
+  color: var(--or);
+  border: 2.5px solid var(--or);
+  border-radius: 26px;
+  padding: 26px 76px;
+}
+
+.consigne {
+  margin-top: 44px;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #FFFFFF;
+  text-wrap: balance;
+}
+
+</style>
+</head>
+<body>
+  <div class="story story--corps">
+
+    <!-- couche 1 : la photo et son grading -->
+    <img class="photo" src="../backgrounds/bg-5.jpg" alt="">
+
+    <!-- couche 2 : lisibilité -->
+    <div class="grade"></div>
+    <div class="renfort-bas"></div>
+    <div class="renfort-haut"></div>
+
+    <!-- couche 3 : pagination -->
+    <div class="compteur">5/6</div>
+
+    <!-- couche 3 : le texte -->
+    <div class="contenu">
+        <p class="accroche">Une expatriation sérieuse ne se construit jamais sur UNE destination à la mode.</p>
+        <p class="corps">Elle se construit sur un comparatif : fiscalité, oui, mais aussi <em>stabilité, visa, coût réel, plan B</em>.</p>
+        <p class="corps">Ceux qui avaient choisi sur Instagram révisent tout aujourd’hui. Ceux qui avaient comparé dorment tranquilles.</p>
+    </div>
+
+  </div>
+</body>
+</html>
