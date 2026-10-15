@@ -39,29 +39,33 @@ html, body {
 }
 .num { display: none; }            /* la pagination de ce deck est « 01 / 10 » */
 
-/* ---------- navigation ---------- */
+/* ---------- navigation : centrée, haut et bas ---------- */
 .ed-nav, .ed-sign, .ed-swipe {
-  position: absolute; font-family: 'Inter', sans-serif; color: var(--nav);
-  font-weight: 400; white-space: nowrap;
+  position: absolute; left: 100px; width: 880px; text-align: center;
+  font-family: 'Inter', sans-serif; color: var(--nav); font-weight: 400;
 }
-.ed-nav   { font-size: 24px; letter-spacing: 0.2em; }
-.ed-sign  { font-size: 20px; letter-spacing: 0.3em; }
-.ed-swipe { font-size: 22px; letter-spacing: 0.12em; }
+.ed-nav   { font-size: 22px; letter-spacing: 0.22em; text-indent: 0.22em; }
+.ed-sign  { font-size: 19px; letter-spacing: 0.32em; text-indent: 0.32em; }
+.ed-swipe { font-size: 21px; letter-spacing: 0.14em; text-indent: 0.14em; }
+
+/* ---------- la colonne de texte : centrée dans le blanc disponible ---------- */
+.stack {                      /* centré sur le milieu du blanc, quelle que soit sa hauteur */
+  position: absolute; left: 100px; width: 880px; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.stack > * + * { margin-top: 54px; }
 
 /* ---------- typographie ---------- */
 .h1 {
-  position: absolute;
   font-family: 'Playfair Display', serif; font-weight: 900;
   line-height: 1.05; letter-spacing: -0.012em; color: var(--ink);
 }
 .p {
-  position: absolute;
-  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 32px;
-  line-height: 1.6; color: var(--ink);
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 30px;
+  line-height: 1.7; color: var(--ink); max-width: 720px;
 }
 .p b { font-weight: 600; }
 .it {
-  position: absolute;
   font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
   line-height: 1.28; color: var(--ink);
 }
