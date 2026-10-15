@@ -14,3 +14,7 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+node_modules/
+*.zip
+carousel-*.pdf
