@@ -35,14 +35,19 @@ const slide = ({ n, photo = '', free: [t, b] = [0, 1350], blocks, swipe = false,
 module.exports = { DECOR, slides: [
 
   /* ================= 01 · COUVERTURE ================= */
-  slide({
-    n: 1, free: [COVER, 1350], swipe: true, shift: -6,
-    photo: band('01-paris.jpg', 'paris rooftops eiffel tower', 0, COVER),
-    blocks: `
-        <h1 class="h1" style="font-size:${COVER > 760 ? 78 : 92}px">La holding<br>française.</h1>
-        <p class="p" style="font-size:36px;font-weight:400;line-height:1.5;margin-top:44px;max-width:640px">
-          L'arme fiscale que les riches utilisent sans quitter Paris.</p>`
-  }),
+  {
+    main: `
+      <div class="cover-ph bleed"><img src="REL_TOKEN/assets/holding/01-paris.jpg" alt=""></div>
+      <div class="cover-veil bleed"></div>
+      <div class="ed-nav ed-nav--w" style="top:120px">01 / 10</div>
+      <div class="stack on-dark" style="top:669px">
+        <h1 class="h1" style="font-size:100px">La holding<br>française.</h1>
+        <p class="p" style="font-size:36px;font-weight:400;line-height:1.5;margin-top:46px;max-width:620px">
+          L'arme fiscale que les riches utilisent sans quitter Paris.</p>
+      </div>
+      <div class="ed-swipe ed-swipe--w" style="top:1150px">glisser &rarr;</div>
+      <div class="ed-sign ed-sign--w" style="top:1226px">MADAME CACI</div>`
+  },
 
   /* ================= 02 · LE PARADOXE ================= */
   slide({
