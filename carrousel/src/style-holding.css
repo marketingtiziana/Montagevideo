@@ -1,0 +1,107 @@
+/* ============================================================
+   FYNOVATES / Madame Caci — Deck « holding »
+   Direction artistique éditoriale : noir sur blanc, photos N&B,
+   blocs nets, marges 100px. Rien de la charte bleue ici.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay.ttf') format('truetype');
+  font-weight: 400 900; font-style: normal;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay-Italic.ttf') format('truetype');
+  font-weight: 400 900; font-style: italic;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter.ttf') format('truetype');
+  font-weight: 100 900; font-style: normal;
+}
+
+:root {
+  --ink:  #0A0A0A;   /* noir pur : le contraste est le style */
+  --nav:  #9A9A9A;   /* gris réservé à la navigation */
+  --miss: #F4F4F4;   /* bloc de remplacement si une photo manque */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1080px; height: 1350px; overflow: hidden; background: #FFFFFF;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+}
+.slide {
+  position: relative; width: 1080px; height: 1350px;
+  background: #FFFFFF; color: var(--ink);
+  font-family: 'Inter', sans-serif; overflow: hidden;
+}
+.num { display: none; }            /* la pagination de ce deck est « 01 / 10 » */
+
+/* ---------- navigation : centrée, haut et bas ---------- */
+.ed-nav, .ed-sign, .ed-swipe {
+  position: absolute; left: 100px; width: 880px; text-align: center;
+  font-family: 'Inter', sans-serif; color: var(--nav); font-weight: 400;
+}
+.ed-nav   { font-size: 22px; letter-spacing: 0.22em; text-indent: 0.22em; }
+.ed-sign  { font-size: 19px; letter-spacing: 0.32em; text-indent: 0.32em; }
+.ed-swipe { font-size: 21px; letter-spacing: 0.14em; text-indent: 0.14em; }
+
+/* ---------- la colonne de texte : centrée dans le blanc disponible ---------- */
+.stack {                      /* centré sur le milieu du blanc, quelle que soit sa hauteur */
+  position: absolute; left: 100px; width: 880px; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.stack > * + * { margin-top: 54px; }
+
+/* ---------- typographie ---------- */
+.h1 {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  line-height: 1.05; letter-spacing: -0.012em; color: var(--ink);
+}
+.p {
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 30px;
+  line-height: 1.7; color: var(--ink); max-width: 720px;
+}
+.p b { font-weight: 600; }
+.it {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
+  line-height: 1.28; color: var(--ink);
+}
+.fig {
+  position: relative; display: inline-block;
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  line-height: 1; color: var(--ink);
+}
+.fig--struck::after {            /* trait fin de rature */
+  content: ''; position: absolute; left: -6px; right: -6px; top: 48%;
+  height: 2px; background: var(--ink);
+}
+.fig--ul::after {                /* soulignement fin */
+  content: ''; position: absolute; left: 0; right: 0; bottom: -18px;
+  height: 2px; background: var(--ink);
+}
+
+/* ---------- photos : blocs nets, noir et blanc ---------- */
+.ph { position: absolute; overflow: hidden; }
+.ph img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(100%) contrast(1.08);
+}
+.ph-miss {
+  position: absolute; background: var(--miss);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 400;
+  letter-spacing: 0.2em; color: var(--nav); text-align: center; padding: 0 40px;
+}
+
+/* ---------- couverture pleine page : photo au fond, texte blanc ---------- */
+.cover-ph { position: absolute; inset: 0; }
+.cover-ph img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(100%) contrast(1.06) brightness(0.78);
+}
+.cover-veil { position: absolute; inset: 0; background: rgba(10, 10, 10, 0.30); }
+.on-dark, .on-dark .h1, .on-dark .p { color: #FFFFFF; }
+.ed-nav--w, .ed-sign--w, .ed-swipe--w { color: rgba(255, 255, 255, 0.78); }
