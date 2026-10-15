@@ -14,6 +14,8 @@ const DECK = di !== -1 ? argv[di + 1] : null;
 if (di !== -1) argv.splice(di, 2);
 
 const { DECOR, slides } = require(DECK ? `./slides-${DECK}.js` : './slides.js');
+// feuille de styles propre au deck si elle existe (direction artistique distincte)
+const CSS = DECK && fs.existsSync(path.join(__dirname, `style-${DECK}.css`)) ? `style-${DECK}.css` : 'style.css';
 
 const ROOT = path.join(__dirname, '..');
 const SUB = DECK ? path.join('', DECK) : '';          // sous-dossier par deck
@@ -31,7 +33,7 @@ function html(slide, i) {
 <head>
 <meta charset="utf-8">
 <title>Fynovates — slide ${pad2(n)}</title>
-<link rel="stylesheet" href="REL_TOKEN/src/style.css">
+<link rel="stylesheet" href="REL_TOKEN/src/${CSS}">
 </head>
 <body>
 <div class="slide">
