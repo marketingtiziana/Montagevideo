@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "render": "node src/render.js",
-    "contrast": "node src/contrast.js"
+    "contrast": "node src/contrast.js",
+    "render:2x": "node src/render.js --scale 2",
+    "pack": "node src/pack.js"
   },
   "keywords": [],
   "author": "",

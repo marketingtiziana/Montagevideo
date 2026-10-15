@@ -1,7 +1,9 @@
 /* ============================================================
    FYNOVATES — Rendu HTML -> PNG 1080x1350 (Playwright / Chromium)
-   Usage : node src/render.js            (les 9 slides)
-           node src/render.js 1 2 4      (seulement 01, 02 et 04)
+   Usage : node src/render.js                  (les 9 slides)
+           node src/render.js 1 2 4            (seulement 01, 02 et 04)
+           node src/render.js --deck holding   (un autre carrousel)
+           node src/render.js --scale 2        (export 2160x2700 dans output-2x/)
    ============================================================ */
 
 const fs = require('fs');
@@ -12,6 +14,10 @@ const argv = process.argv.slice(2);
 const di = argv.indexOf('--deck');
 const DECK = di !== -1 ? argv[di + 1] : null;
 if (di !== -1) argv.splice(di, 2);
+// Facteur d'echelle : 1 = 1080x1350 (taille native Instagram), 2 = 2160x2700
+const si = argv.indexOf('--scale');
+const SCALE = si !== -1 ? Math.max(1, Math.round(Number(argv[si + 1]))) : 1;
+if (si !== -1) argv.splice(si, 2);
 
 const { DECOR, slides } = require(DECK ? `./slides-${DECK}.js` : './slides.js');
 // feuille de styles propre au deck si elle existe (direction artistique distincte)
@@ -21,7 +27,7 @@ const ROOT = path.join(__dirname, '..');
 const SUB = DECK ? path.join('', DECK) : '';          // sous-dossier par deck
 const REL = DECK ? '../..' : '..';                     // profondeur vers la racine du projet
 const DIR_HTML = path.join(ROOT, 'slides', SUB);
-const DIR_PNG  = path.join(ROOT, 'output', SUB);
+const DIR_PNG  = path.join(ROOT, SCALE > 1 ? `output-${SCALE}x` : 'output', SUB);
 const W = 1080, H = 1350, MARGIN = 80;
 
 const pad2 = n => String(n).padStart(2, '0');
@@ -58,7 +64,7 @@ ${slide.main}
   // Chromium pré-installé dans l'environnement (pas de téléchargement)
   const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
   const browser = await chromium.launch(fs.existsSync(CHROME) ? { executablePath: CHROME } : {});
-  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: SCALE });
 
   const report = [];
 
@@ -120,7 +126,7 @@ ${slide.main}
     report.push({
       slide: pad2(n),
       png: `${buf.readUInt32BE(16)}x${buf.readUInt32BE(20)}`,
-      dims_ok: buf.readUInt32BE(16) === W && buf.readUInt32BE(20) === H,
+      dims_ok: buf.readUInt32BE(16) === W * SCALE && buf.readUInt32BE(20) === H * SCALE,
       dom_ok: audit.docW === W && audit.docH === H,
       issues: audit.issues
     });
@@ -128,7 +134,7 @@ ${slide.main}
 
   await browser.close();
 
-  console.log('\n=== RENDU ===');
+  console.log(`\n=== RENDU ${DECK || 'salaire'} — ${W * SCALE}x${H * SCALE} ===`);
   let fail = 0;
   for (const r of report) {
     const ok = r.dims_ok && r.dom_ok && r.issues.length === 0;
