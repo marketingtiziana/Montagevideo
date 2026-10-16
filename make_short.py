@@ -51,7 +51,11 @@ STRUCT = {"llc", "ltd", "holding", "sci", "sarl", "sas", "trust",
 PLACES = {"dubai", "dubaï", "singapour", "suisse", "monaco", "portugal",
           "malte", "chypre", "andorre", "panama", "emirats", "émirats",
           "etats-unis", "états-unis", "paraguay", "thailande", "thaïlande",
-          "bulgarie", "estonie", "maroc", "canada", "france", "espagne"}
+          "bulgarie", "estonie", "maroc", "canada", "france", "espagne",
+          "bali", "europe", "asie", "indonesie", "vietnam", "qatar", "londres",
+          "miami", "italie", "grece", "israel", "mexique", "bresil"}
+KEY = {"expatriation", "immobilier", "statistiques", "fiscalite", "fiscal",
+       "residence", "patrimoine", "imposition"}
 
 
 def norm(w):
@@ -194,7 +198,10 @@ def cards(words):
         while i < n and len(g) < 4:
             g.append(words[i])
             i += 1
-            if len(g) >= 2 and SENT.search(g[-1]["w"]):
+            if SENT.search(g[-1]["w"]) and (
+                    len(g) >= 2 or i >= n
+                    or line_w(" ".join(x["w"] for x in g + [words[i]]).upper(),
+                              SUB_FS) > SUB_SAFE):
                 break
             if len(g) >= 3 and norm(g[-1]["w"]) not in GLUE:
                 break
@@ -217,7 +224,9 @@ def cards(words):
 
     k = 1
     while k < len(out):                       # un mot reste seul : il rejoint
-        if len(out[k]) == 1 and len(out[k - 1]) <= 3:   # le groupe precedent
+        if (len(out[k]) == 1 and len(out[k - 1]) <= 3   # le groupe precedent,
+                and line_w(" ".join(x["w"] for x in out[k - 1] + out[k]).upper(),
+                           SUB_FS) <= SUB_SAFE):         # si la ligne tient
             out[k - 1] += out.pop(k)
             continue
         k += 1
@@ -234,13 +243,37 @@ def ts(t):
 
 # -------------------------------------------------------------- illustrations
 def animations(segs, total):
-    """Callouts tires du transcript : chiffres, structures, listes de pays."""
+    """Illustrations tirees du transcript : chiffres, lieux, mots-sujets."""
     flat = [(w, s) for s in segs for w in s["words"]]
-    found = []
+
+    def base(w):
+        return norm(w["w"]).split("'")[-1]
+
+    found, taken = [], set()
+
+    # une enumeration de lieux devient une liste a puces
+    i = 0
+    while i < len(flat):
+        if base(flat[i][0]) in PLACES:
+            j, items = i, []
+            while j < len(flat) and j - i < 8:
+                ww, ss = flat[j]
+                if base(ww) in PLACES and len(items) < 3:
+                    items.append((re.sub(r"[,.;:?!]", "", ww["w"]).upper(),
+                                  ww["a"] + ss["off"], id(ww)))
+                j += 1
+            if len(items) >= 2:
+                taken.update(it[2] for it in items)
+                found.append({"kind": "list", "t": items[0][1],
+                              "items": [(t, u) for t, u, _ in items]})
+                i = j
+                continue
+        i += 1
 
     i = 0
     while i < len(flat):
         w, s = flat[i]
+        t = w["a"] + s["off"]
         if re.search(r"\d", w["w"]):
             j, parts = i, [w["w"]]
             while j + 1 < len(flat):
@@ -258,45 +291,35 @@ def animations(segs, total):
             if i and norm(flat[i - 1][0]["w"]) in LEADIN:
                 parts.insert(0, flat[i - 1][0]["w"])
             txt = re.sub(r"\s*/\s*", "/", " ".join(parts))
-            found.append({"kind": "callout", "t": w["a"] + s["off"],
-                          "txt": re.sub(r"[,.;:]$", "", txt).upper()})
+            found.append({"kind": "callout", "t": t,
+                          "txt": re.sub(r"[,.;:?!]", "", txt).strip().upper()})
             i = j + 1
             continue
-        if norm(w["w"]) in STRUCT:
-            found.append({"kind": "callout", "t": w["a"] + s["off"],
-                          "txt": re.sub(r"[,.;:]$", "", w["w"]).upper()})
+        b = base(w)
+        if id(w) not in taken and (b in STRUCT or b in KEY
+                                   or b in PLACES):
+            found.append({"kind": "callout", "t": t,
+                          "txt": re.sub(r"[,.;:?!]", "", b).upper()})
         i += 1
 
-    # liste : 2-3 lieux cites a la suite -> lignes a puces qui montent une a une
-    i = 0
-    while i < len(flat):
-        if norm(flat[i][0]["w"]) in PLACES:
-            j, items = i, []
-            while j < len(flat) and j - i < 8:
-                ww, ss = flat[j]
-                if norm(ww["w"]) in PLACES and len(items) < 3:
-                    items.append((re.sub(r"[,.;:]$", "", ww["w"]).upper(),
-                                  ww["a"] + ss["off"]))
-                j += 1
-            if len(items) >= 2:
-                found.append({"kind": "list", "t": items[0][1], "items": items})
-                i = j
-                continue
-        i += 1
-
-    # comparaison explicite "avant / apres" ou "A vs B"
+    # comparaison explicite "A vs B"
     for k in range(len(flat) - 1):
         if norm(flat[k][0]["w"]) in ("vs", "versus"):
-            a = flat[k - 1][0]["w"] if k else ""
-            b = flat[k + 1][0]["w"]
-            found.append({"kind": "vs", "t": flat[k][0]["a"] + flat[k][1]["off"],
-                          "a": a.upper(), "b": re.sub(r"[,.;:]$", "", b).upper()})
+            found.append({"kind": "vs",
+                          "t": flat[k][0]["a"] + flat[k][1]["off"],
+                          "a": flat[k - 1][0]["w"].upper() if k else "",
+                          "b": re.sub(r"[,.;:?!]", "",
+                                      flat[k + 1][0]["w"]).upper()})
 
     found.sort(key=lambda d: d["t"])
-    keep, last = [], -99.0
+    keep, last, seen = [], -99.0, set()
     for d in found:
+        label = d.get("txt") or d["kind"]
         if d["t"] - last < 4.0 or d["t"] > total - 2.5 or d["t"] < 1.0:
             continue
+        if label in seen:
+            continue                          # jamais deux fois le meme mot
+        seen.add(label)
         keep.append(d)
         last = d["t"]
         if len(keep) == 5:
