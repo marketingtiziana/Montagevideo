@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Reel IA vs Expert</title>
+<style>
+/* Fontes embarquees : aucune requete reseau au rendu. */
+@font-face{font-family:'PlexMono';src:url('fonts/plexmono-400.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:'PlexMono';src:url('fonts/plexmono-600.woff2') format('woff2');font-weight:600;font-display:block}
+@font-face{font-family:'ArchivoBlack';src:url('fonts/archivoblack.woff2') format('woff2');font-weight:400;font-display:block}
+
+:root{
+  --bleu:#4353FF; --encre:#12121F; --gris:#8A8FA3;
+  --clair:#F7F8FC; --sombre:#0E1230; --rouge:#FF2E4D;
+  --carte:#171C44; --bord:#2B3268;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0E1230}
+body{font-family:'Inter','Inter Display',sans-serif;-webkit-font-smoothing:antialiased;
+     text-rendering:geometricPrecision}
+
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--sombre)}
+.sc{position:absolute;inset:0;display:none}
+.sc.on{display:block}
+.zoom{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform}
+.pad{position:absolute;left:80px;right:80px}
+
+/* --- briques typographiques --- */
+.t1{font-family:'ArchivoBlack','Inter Black','Inter',sans-serif;font-weight:400;
+    font-size:96px;line-height:1.03;letter-spacing:-0.02em;color:#fff}
+.t1.sm{font-size:66px}
+.ln{white-space:nowrap}
+.sub{font-family:'Inter',sans-serif;font-weight:600;font-size:50px;line-height:1.25;
+     color:var(--gris);letter-spacing:-0.01em}
+.badge{display:inline-block;font-family:'PlexMono',monospace;font-weight:600;font-size:44px;
+       letter-spacing:0.16em;color:#fff;background:var(--bleu);padding:16px 28px;border-radius:14px;
+       box-shadow:0 18px 60px rgba(67,83,255,.45)}
+.mono{font-family:'PlexMono',monospace;font-weight:400;font-size:46px;line-height:1.45;color:#E8EAF6}
+
+/* --- interface de chat simulee (generique, sans marque) --- */
+.app{position:absolute;left:70px;right:70px;top:380px;bottom:520px;background:var(--carte);
+     border:2px solid var(--bord);border-radius:24px;box-shadow:0 50px 140px rgba(67,83,255,.35);
+     overflow:hidden}
+.app .bar{display:flex;align-items:center;gap:18px;padding:34px 40px;border-bottom:2px solid var(--bord)}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--bleu);box-shadow:0 0 28px rgba(67,83,255,.9)}
+.bar .lab{font-family:'PlexMono',monospace;font-size:44px;letter-spacing:.14em;color:var(--gris)}
+.field{position:absolute;left:40px;right:40px;bottom:40px;min-height:132px;border:2px solid var(--bord);
+       border-radius:28px;background:#10153A;padding:34px 36px;display:flex;align-items:center}
+.field .txt{font-family:'PlexMono',monospace;font-size:46px;color:#fff;line-height:1.3}
+.caret{display:inline-block;width:5px;height:52px;background:var(--bleu);vertical-align:-10px;margin-left:6px}
+.bub{position:absolute;border-radius:26px;padding:30px 34px}
+.bub.me{right:40px;background:var(--bleu);color:#fff;max-width:760px;
+        font-family:'PlexMono',monospace;font-size:46px;line-height:1.35;
+        box-shadow:0 24px 70px rgba(67,83,255,.45)}
+.bub.ia{left:40px;right:140px;background:#101643;border:2px solid var(--bord);overflow:hidden}
+.stream{height:330px;overflow:hidden;position:relative}
+.stream .roll{position:absolute;left:0;right:0;top:0}
+.stream .roll div{font-family:'PlexMono',monospace;font-size:44px;line-height:1.5;color:#9AA2D8;
+                  white-space:nowrap}
+.streammask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,22,67,.95) 0%,
+            rgba(16,22,67,0) 22%,rgba(16,22,67,0) 72%,rgba(16,22,67,.95) 100%)}
+
+/* --- STOP --- */
+#stop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+#stop span{font-family:'ArchivoBlack','Inter Black',sans-serif;font-size:300px;letter-spacing:-0.04em;
+           color:#fff;text-shadow:0 0 90px rgba(67,83,255,.75)}
+
+/* --- tampon --- */
+.stamp{position:absolute;font-family:'ArchivoBlack','Inter Black',sans-serif;font-size:76px;
+       letter-spacing:-0.01em;color:var(--rouge);border:7px solid var(--rouge);border-radius:18px;
+       padding:20px 30px;background:rgba(14,18,48,.35);
+       text-shadow:7px 5px 0 rgba(67,83,255,.85)}
+
+/* --- formulaire vide --- */
+.row{display:flex;align-items:center;gap:30px;padding:22px 0;position:relative}
+.box{width:56px;height:56px;border:5px solid var(--bleu);border-radius:12px;flex:none}
+.row .q{font-family:'PlexMono',monospace;font-size:52px;color:#fff;position:relative;white-space:nowrap}
+.row .strike{position:absolute;left:0;top:52%;height:6px;background:var(--rouge);width:0}
+
+/* --- lettre administrative --- */
+.letter{position:absolute;width:660px;left:60px;background:#fff;border-radius:18px;padding:52px 48px;
+        box-shadow:0 60px 140px rgba(0,0,0,.55)}
+.letter .h{height:26px;background:#0E1230;width:56%;border-radius:6px}
+.letter .l{height:16px;background:#CDD2E6;border-radius:6px;margin-top:26px}
+
+/* --- dossier (scene 6) --- */
+.folder{position:absolute;left:90px;right:90px;border-radius:24px;border:5px solid var(--bleu);
+        background:rgba(67,83,255,.07)}
+.folder .tab{position:absolute;top:-46px;left:48px;background:var(--bleu);color:#fff;border-radius:14px 14px 0 0;
+             font-family:'PlexMono',monospace;font-weight:600;font-size:44px;letter-spacing:.1em;padding:12px 26px}
+.chip{position:absolute;left:30px;right:30px;height:142px;display:flex;align-items:center;background:#fff;border-radius:20px;padding:26px 30px;
+      font-family:'PlexMono',monospace;font-size:44px;line-height:1.3;color:#12121F;
+      border-left:10px solid var(--rouge);box-shadow:0 26px 70px rgba(18,18,31,.16)}
+
+/* --- liste a coches (scene 7) --- */
+.chk{display:flex;align-items:flex-start;gap:30px;margin-bottom:46px}
+.chk svg{flex:none;margin-top:6px}
+.chk .lbl{font-family:'Inter',sans-serif;font-weight:700;font-size:56px;line-height:1.2;
+          color:var(--encre);letter-spacing:-0.01em}
+
+/* --- CTA (scene 8) --- */
+#card8{position:absolute;inset:20px;background:var(--bleu);border-radius:24px;
+       box-shadow:0 -40px 140px rgba(67,83,255,.45)}
+.w1{font-family:'ArchivoBlack','Inter Black',sans-serif;font-size:66px;line-height:1.08;
+    letter-spacing:-0.02em;color:#fff}
+.giant{font-family:'ArchivoBlack','Inter Black',sans-serif;font-size:118px;line-height:1.0;
+       letter-spacing:-0.03em;color:#fff}
+.sign{font-family:'Inter',sans-serif;font-weight:800;font-size:44px;color:rgba(255,255,255,.92);white-space:nowrap}
+.pill{display:inline-block;background:#fff;color:var(--bleu);border-radius:24px;padding:6px 30px 14px;margin-top:14px}
+
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#veil{position:absolute;inset:0;background:var(--clair);opacity:0;pointer-events:none;z-index:0}
+.sc{z-index:1}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="veil"></div>
+
+  <!-- ============ 1 : HOOK ============ -->
+  <section class="sc" id="s1"><div class="zoom">
+    <div class="app" id="s1app">
+      <div class="bar"><div class="dot"></div><div class="lab">ASSISTANT IA</div></div>
+      <div class="bub me" id="s1me" style="top:150px"></div>
+      <div class="bub ia" id="s1ia" style="top:330px">
+        <div class="stream"><div class="roll" id="s1roll"></div><div class="streammask"></div></div>
+      </div>
+      <div class="field" id="s1field"><div class="txt"><span id="s1q"></span><i class="caret" id="s1car"></i></div></div>
+    </div>
+    <div id="stop"><span id="s1stop">STOP.</span></div>
+  </div></section>
+
+  <!-- ============ 2 ============ -->
+  <section class="sc" id="s2"><div class="zoom">
+    <div class="pad" style="top:560px">
+      <div class="t1" id="s2t">Des milliers d'entrepreneurs montent leur expatriation avec une IA.</div>
+      <div class="sub" id="s2s" style="margin-top:56px">Sans jamais vérifier ses réponses.</div>
+    </div>
+  </div></section>
+
+  <!-- ============ 3 : DANGER 1 ============ -->
+  <section class="sc" id="s3"><div class="zoom">
+    <div class="pad" style="top:300px">
+      <div><span class="badge" id="s3b">DANGER N°1</span></div>
+      <div class="t1 sm" id="s3t" style="margin-top:48px"><div class="ln">Elle est sûre d'elle.</div><div class="ln">Même quand elle a faux.</div></div>
+    </div>
+    <div class="pad" id="s3bubwrap" style="top:860px">
+      <div style="position:relative">
+        <div class="bub ia" id="s3bub" style="position:relative;left:0;right:0;padding:36px 40px">
+          <div class="mono" id="s3mono"></div>
+        </div>
+        <div class="stamp" id="s3stamp" style="left:40px;top:175px;font-size:58px;white-space:nowrap">FERMÉ DEPUIS 2023</div>
+      </div>
+    </div>
+    <div class="pad sub" id="s3s" style="top:1360px">Les règles fiscales changent chaque année.<br>Pas ses données.</div>
+  </div></section>
+
+  <!-- ============ 4 : DANGER 2 ============ -->
+  <section class="sc" id="s4"><div class="zoom">
+    <div class="pad" style="top:300px">
+      <div><span class="badge" id="s4b">DANGER N°2</span></div>
+      <div class="t1 sm" id="s4t" style="margin-top:48px"><div class="ln">Elle ne connaît pas</div><div class="ln">TA situation.</div></div>
+    </div>
+    <div class="pad" id="s4form" style="top:900px"></div>
+    <div class="pad sub" id="s4s" style="top:1540px">Un montage se construit sur un dossier complet.<br>Pas sur un prompt.</div>
+  </div></section>
+
+  <!-- ============ 5 : DANGER 3 ============ -->
+  <section class="sc" id="s5"><div class="zoom">
+    <div class="pad" style="top:280px">
+      <div><span class="badge" id="s5b">DANGER N°3</span></div>
+      <div class="t1 sm" id="s5t" style="margin-top:48px"><div class="ln">Elle ne signe rien.</div><div class="ln">Elle ne répond de rien.</div></div>
+    </div>
+    <div class="letter" id="s5let" style="top:700px;left:70px;width:580px">
+      <div class="h"></div><div class="l" style="width:92%"></div><div class="l" style="width:84%"></div>
+      <div class="l" style="width:88%"></div><div class="l" style="width:62%"></div>
+      <div class="l" style="width:78%"></div><div class="l" style="width:48%"></div>
+    </div>
+    <div class="stamp" id="s5stamp" style="left:120px;top:960px;font-size:60px">CONTRÔLE FISCAL</div>
+    <div class="bub ia" id="s5bub" style="left:390px;right:60px;top:1180px;padding:30px 32px">
+      <div class="mono" id="s5mono"></div>
+    </div>
+    <div class="pad sub" id="s5s" style="top:1560px">Le redressement, c'est toi qui le paies.<br>Pas elle.</div>
+  </div></section>
+
+  <!-- ============ 6 : BASCULE ============ -->
+  <section class="sc" id="s6"><div class="zoom">
+    <div class="pad" style="top:330px">
+      <div class="t1" id="s6t1" style="font-size:80px"><div class="ln">Une IA est un outil</div><div class="ln">génial.</div></div>
+      <div class="t1" id="s6t2" style="margin-top:34px;font-size:84px"><div class="ln">Pour explorer.</div><div class="ln">Pas pour décider.</div></div>
+    </div>
+    <div class="folder" id="s6fold" style="top:1060px;height:640px;left:80px;right:80px">
+      <div class="tab" id="s6tab">À VÉRIFIER PAR UN HUMAIN</div>
+    </div>
+    <div class="pad" id="s6chips" style="top:0"></div>
+  </div></section>
+
+  <!-- ============ 7 : SOLUTION ============ -->
+  <section class="sc" id="s7"><div class="zoom">
+    <div class="pad" style="top:330px">
+      <div class="t1" id="s7t" style="color:var(--encre);font-size:88px"><div class="ln">Un expert,</div><div class="ln">c'est l'inverse.</div></div>
+    </div>
+    <div class="pad" id="s7list" style="top:760px"></div>
+    <div class="pad sub" id="s7s" style="top:1500px">8 ans d'expertise.<br>+800 entrepreneurs accompagnés.</div>
+  </div></section>
+
+  <!-- ============ 8 : CTA ============ -->
+  <section class="sc" id="s8"><div class="zoom">
+    <div id="card8">
+      <div class="pad" style="left:70px;right:70px;top:280px">
+        <div class="w1" id="s8w1"><div class="ln">Ton projet mérite mieux</div><div class="ln">qu'une réponse générée.</div></div>
+      </div>
+      <div class="pad" style="left:70px;right:70px;top:740px">
+        <div class="giant" id="s8g"><div class="ln">Commente</div><div class="ln"><span class="pill" id="s8pill">EXPERT</span></div></div>
+      </div>
+      <div class="pad" style="left:70px;right:70px;top:1200px">
+        <div class="sub" id="s8s" style="color:rgba(255,255,255,.9)">Échange offert avec une vraie humaine.</div>
+      </div>
+      <div class="pad" style="left:70px;right:70px;top:1660px">
+        <div class="sign" id="s8sig">MADAME CACI — FYNOVATES</div>
+      </div>
+    </div>
+  </div></section>
+
+  <div id="flash"></div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------ outils */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const cl=x=>x<0?0:x>1?1:x;
+const eo=p=>1-Math.pow(1-p,4);            // ease-out prononce
+const eo6=p=>1-Math.pow(1-p,6);           // ease-out tres marque
+const eio=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const tw=(lt,s,d,f)=>(f||eo)(cl((lt-s)/d));
+const mix=(a,b,p)=>a+(b-a)*p;
+const hex=(c1,c2,p)=>{const f=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+  const a=f(c1),b=f(c2);return 'rgb('+a.map((v,i)=>Math.round(mix(v,b[i],p))).join(',')+')';};
+const rnd=n=>{const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};
+
+function rise(el,p,dy){el.style.opacity=p;el.style.transform='translateY('+((1-p)*(dy===undefined?70:dy))+'px)';}
+function pop(el,p,from){const s=mix(from===undefined?.86:from,1,p);
+  el.style.opacity=p;el.style.transform='scale('+s+')';}
+function type(el,txt,p){el.textContent=txt.slice(0,Math.round(p*txt.length));}
+
+/* -------------------------------------------------------------- la timeline */
+const SC=[['s1',0,4],['s2',4,9],['s3',9,16],['s4',16,23],['s5',23,30],
+          ['s6',30,37],['s7',37,45],['s8',45,52]];
+const DUR=52;
+
+/* contenus repetitifs construits une fois */
+const QUESTION="Comment payer 0% d'impôts en partant de France ?";
+const FLUX=["> analyse de la demande…","const regime = 'non-résident'","  // seuil 183 jours : vérifié",
+  "exit tax → art. 167 bis CGI","foyer fiscal : à déterminer","  convention FR/AE 1989 art. 4",
+  "centre des intérêts économiques","substance locale : score 0.42","bénéficiaire effectif → UBO",
+  "CFC rules → art. 209 B","prix de transfert : n/a","  // confiance : non évaluée",
+  "trust discrétionnaire ?","établissement stable : ?","résidence effective → calcul"];
+$('#s1roll').innerHTML=FLUX.concat(FLUX).map(l=>'<div>'+l+'</div>').join('');
+
+const QS=["Ta famille ?","Ton CA réel ?","Tes clients ?","Ton historique ?","Tes contrats ?"];
+$('#s4form').innerHTML=QS.map((q,i)=>
+  '<div class="row" id="r'+i+'"><div class="box"></div><div class="q">'+q+
+  '<span class="strike"></span></div></div>').join('');
+
+const CHIPS=["Le régime RNH du Portugal vous permet de...","Ta famille ? Ton CA réel ?",
+             "Je ne peux pas être tenue responsable..."];
+$('#s6chips').innerHTML=CHIPS.map((c,i)=>'<div class="chip" id="c'+i+'" style="top:'+(1150+i*168)+'px">'+c+'</div>').join('');
+
+const LIGNES=["Des règles vérifiées, à jour, sourcées.","TON dossier étudié en entier.",
+              "Un professionnel engagé sur ses conseils."];
+$('#s7list').innerHTML=LIGNES.map((l,i)=>
+  '<div class="chk" id="k'+i+'"><svg width="72" height="72" viewBox="0 0 72 72">'+
+  '<circle cx="36" cy="36" r="31" fill="none" stroke="#4353FF" stroke-width="7" '+
+  'stroke-linecap="round" stroke-dasharray="195" stroke-dashoffset="195" id="kc'+i+'"/>'+
+  '<path d="M21 37.5 L31.5 48 L51 27" fill="none" stroke="#4353FF" stroke-width="8" '+
+  'stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="48" '+
+  'stroke-dashoffset="48" id="kp'+i+'"/></svg>'+
+  '<div class="lbl">'+l+'</div></div>').join('');
+
+/* ------------------------------------------------------------------ scenes */
+function sc1(lt){
+  pop($('#s1app'),tw(lt,0,.5,eo6),.93);
+  const p=cl((lt-.25)/1.8);
+  type($('#s1q'),QUESTION,lt<2.1?p:1);
+  $('#s1car').style.opacity=(lt<2.15 && Math.floor(lt*2.6)%2===0)?1:0;
+  // la question part en bulle, le flux de reponse se deroule trop vite pour etre lu
+  const sent=lt>=2.15;
+  $('#s1field').style.opacity=sent?.45:1;
+  if(sent) $('#s1q').textContent='';
+  const pm=tw(lt,2.15,.35,eo6);
+  $('#s1me').textContent=QUESTION;
+  $('#s1me').style.opacity=sent?pm:0;
+  $('#s1me').style.transform='translateY('+mix(40,0,pm)+'px)';
+  const pi=tw(lt,2.35,.25);
+  $('#s1ia').style.opacity=pi;
+  const roll=cl((lt-2.35)/1.0);
+  $('#s1roll').style.transform='translateY('+(-roll*1650)+'px)';
+  $('#s1roll').style.filter='blur('+mix(0,2.2,roll)+'px)';
+  // STOP : claque, puis l'interface recule derriere
+  const ps=tw(lt,2.95,.42,eo6);
+  const st=$('#s1stop');
+  st.style.opacity=ps<.02?0:1;
+  st.style.transform='scale('+mix(3.4,1,ps)+') rotate('+mix(-5,0,ps)+'deg)';
+  const after=cl((lt-3.3)/.7);
+  $('#s1app').style.filter='blur('+mix(0,7,ps)+'px) brightness('+mix(1,.5,ps)+')';
+  st.style.letterSpacing=mix(.06,-.04,ps)+'em';
+  st.parentElement.style.transform='scale('+mix(1,1.03,after)+')';
+}
+
+function sc2(lt){
+  rise($('#s2t'),tw(lt,.15,.75,eo6),90);
+  rise($('#s2s'),tw(lt,2.5,.6,eo6),50);
+  $('#s2s').style.color=hex('#8A8FA3','#FF2E4D',tw(lt,3.1,.8,eio));
+}
+
+function sc3(lt){
+  pop($('#s3b'),tw(lt,.1,.4,eo6),.8);
+  rise($('#s3t'),tw(lt,.35,.7,eo6),70);
+  const pb=tw(lt,1.2,.4,eo6);
+  $('#s3bub').style.opacity=pb;
+  $('#s3bub').style.transform='translateY('+mix(50,0,pb)+'px)';
+  type($('#s3mono'),"Le régime RNH du Portugal vous permet de...",cl((lt-1.5)/1.5));
+  // tampon : il tombe sur la bulle et la disqualifie
+  const pt=tw(lt,3.6,.45,eo6);
+  const sh=(lt>3.6&&lt<3.95)?(rnd(Math.round(lt*60))-.5)*14:0;
+  const sp=$('#s3stamp');
+  sp.style.opacity=pt<.02?0:1;
+  sp.style.transform='translate('+sh+'px,0) scale('+mix(2.6,1,pt)+') rotate('+mix(-18,-7,pt)+'deg)';
+  $('#s3bub').style.filter='grayscale('+pt*.7+') brightness('+mix(1,.75,pt)+')';
+  rise($('#s3s'),tw(lt,5.2,.6,eo6),50);
+  // glitch : ouverture de scene et impact du tampon
+  const g=(lt<.3?1-lt/.3:0)+(lt>3.58&&lt<3.82?1:0);
+  const z=$('#s3').querySelector('.zoom');
+  if(g>0){const j=(rnd(Math.round(lt*90))-.5)*18*g;
+    z.style.filter='drop-shadow('+(6*g)+'px 0 rgba(255,46,77,.9)) drop-shadow('+(-6*g)+'px 0 rgba(67,83,255,.9))';
+    z.dataset.gx=j;}
+  else {z.style.filter='none';z.dataset.gx=0;}
+}
+
+function sc4(lt){
+  pop($('#s4b'),tw(lt,.1,.4,eo6),.8);
+  rise($('#s4t'),tw(lt,.35,.7,eo6),70);
+  for(let i=0;i<5;i++){
+    const st=1.4+i*.62;
+    const p=tw(lt,st,.4,eo6);
+    const r=$('#r'+i);
+    r.style.opacity=p; r.style.transform='translateX('+mix(-40,0,p)+'px)';
+    r.querySelector('.strike').style.width=(tw(lt,st+.25,.3)*100)+'%';
+  }
+  rise($('#s4s'),tw(lt,5.3,.6,eo6),50);
+}
+
+function sc5(lt){
+  pop($('#s5b'),tw(lt,.1,.4,eo6),.8);
+  rise($('#s5t'),tw(lt,.35,.7,eo6),70);
+  // la lettre tombe et se cale, legere rotation residuelle
+  const pl=tw(lt,1.5,.6,eo6);
+  const el=$('#s5let');
+  el.style.opacity=pl<.02?0:1;
+  el.style.transform='translateY('+mix(-1100,0,pl)+'px) rotate('+mix(-14,-3,pl)+'deg)';
+  const pt=tw(lt,2.6,.4,eo6);
+  const sp=$('#s5stamp');
+  sp.style.opacity=pt<.02?0:1;
+  sp.style.transform='scale('+mix(2.4,1,pt)+') rotate('+mix(-22,-11,pt)+'deg)';
+  const pb=tw(lt,3.5,.45,eo6);
+  $('#s5bub').style.opacity=pb;
+  $('#s5bub').style.transform='translateY('+mix(60,0,pb)+'px)';
+  type($('#s5mono'),"Je ne peux pas être tenue responsable...",cl((lt-3.8)/1.3));
+  rise($('#s5s'),tw(lt,5.4,.6,eo6),50);
+}
+
+function sc6(lt){
+  rise($('#s6t1'),tw(lt,.2,.7,eo6),80);
+  const p2=tw(lt,3.0,.7,eo6);          // beat avant la seconde phrase
+  rise($('#s6t2'),p2,80);
+  // bascule du fond : l'univers passe de l'interface a l'humain
+  const sw=tw(lt,1.3,.8,eio);
+  $('#veil').style.opacity=sw;
+  const col=hex('#FFFFFF','#12121F',sw);
+  $('#s6t1').style.color=col; $('#s6t2').style.color=col;
+  const pf=tw(lt,3.6,.6,eo6);
+  $('#s6fold').style.opacity=pf;
+  $('#s6fold').style.transform='translateY('+mix(60,0,pf)+'px)';
+  $('#s6tab').style.opacity=tw(lt,3.9,.4,eo6);
+  // les trois bulles d'erreur se rangent dans le dossier
+  for(let i=0;i<3;i++){
+    const st=4.3+i*.55, c=$('#c'+i);
+    const pin=tw(lt,st,.55,eo6);
+    const y=mix(-900-i*80,0,pin);
+    const sc=mix(1.06,.9,pin);
+    c.style.opacity=pin<.02?0:Math.min(1,pin*2.2);
+    c.style.transform='translateY('+y+'px) scale('+sc+') rotate('+mix(-6+i*4,0,pin)+'deg)';
+  }
+}
+
+function sc7(lt){
+  rise($('#s7t'),tw(lt,.2,.7,eo6),80);
+  for(let i=0;i<3;i++){
+    const st=1.2+i*1.4, k=$('#k'+i);
+    const p=tw(lt,st,.5,eo6);
+    k.style.opacity=p; k.style.transform='translateY('+mix(44,0,p)+'px)';
+    $('#kc'+i).setAttribute('stroke-dashoffset',195*(1-tw(lt,st+.1,.45)));
+    $('#kp'+i).setAttribute('stroke-dashoffset',48*(1-tw(lt,st+.35,.35)));
+  }
+  rise($('#s7s'),tw(lt,5.8,.6,eo6),50);
+}
+
+function sc8(lt){
+  const pc=tw(lt,0,.9,eo6);
+  $('#card8').style.transform='translateY('+mix(1900,0,pc)+'px)';
+  rise($('#s8w1'),tw(lt,.8,.7,eo6),70);
+  const pg=tw(lt,2.6,.55,eo6);
+  $('#s8pill').style.transform='scale('+mix(.9,1,tw(lt,3.1,.5,eo6))+')';
+  $('#s8g').style.opacity=pg;
+  $('#s8g').style.transform='scale('+mix(.78,1,pg)+')';
+  $('#s8g').style.transformOrigin='left center';
+  rise($('#s8s'),tw(lt,4.2,.6,eo6),40);
+  const ps=tw(lt,5.4,.9,eo6);
+  $('#s8sig').style.opacity=ps;
+  $('#s8sig').style.letterSpacing=mix(.04,.16,ps)+'em';
+}
+
+const DRAW={s1:sc1,s2:sc2,s3:sc3,s4:sc4,s5:sc5,s6:sc6,s7:sc7,s8:sc8};
+
+/* --------------------------------------------------------------- le moteur */
+function seek(t){
+  t=Math.max(0,Math.min(DUR-0.001,t));
+  let cur=SC[0];
+  for(const s of SC) if(t>=s[1]&&t<s[2]) cur=s;
+  const [id,a,b]=cur, lt=t-a;
+
+  for(const s of SC) $('#'+s[0]).classList.toggle('on',s[0]===id);
+
+  // fond : sombre pour l'univers IA, clair des la bascule
+  const light = (id==='s7'||id==='s8');
+  $('#stage').style.background = light ? 'var(--clair)' : 'var(--sombre)';
+  if(id!=='s6') $('#veil').style.opacity=0;
+
+  // zoom lent permanent, propre a chaque scene
+  const z=$('#'+id+' .zoom');
+  const gx=parseFloat(z.dataset.gx||0)||0;
+  z.style.transform='translateX('+gx+'px) scale('+mix(1,1.04,lt/(b-a))+')';
+
+  DRAW[id](lt);
+
+  // tick visuel : flash court a chaque changement de scene
+  const f=lt<.14?(1-lt/.14):0;
+  $('#flash').style.opacity=(f*(light?.5:.32)).toFixed(3);
+  $('#flash').style.background=light?'#fff':'#9FB0FF';
+}
+window.seek=seek;
+window.DUR=DUR;
+window.SCENES=SC;
+seek(0);
+</script>
+</body>
+</html>
