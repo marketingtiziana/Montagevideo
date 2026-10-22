@@ -14,8 +14,8 @@ mkdirSync(outDir, { recursive: true });
 const pageUrl = pathToFileURL(join(here, 'index.html')).href;
 
 const W = 1080, H = 1920, TOP = 800, M = 80, STATES = 9;
-const ALLOWED = new Set(['#0F1535', '#FFFFFF', '#4F6BFF', '#8A93B8']);
-const NAVY = [15, 21, 53];
+const ALLOWED = new Set(['#111111']);
+const PAPER = [255, 255, 255];
 const problems = [];
 const fail = (m) => { problems.push(m); console.log('  ✗ ' + m); };
 const ok = (m) => console.log('  ✓ ' + m);
@@ -45,7 +45,7 @@ function zip(entries) {
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
-const geo = {};  // state -> { id: bbox }
+const geo = {};  // state -> { id: signature (coordonnees + path) }
 const files = [];
 
 for (let s = 1; s <= STATES; s++) {
@@ -58,24 +58,38 @@ for (let s = 1; s <= STATES; s++) {
   const info = await page.evaluate(() => {
     const vis = [...document.querySelectorAll('[data-visible="1"]')];
     const r = (v) => Math.round(v * 100) / 100;
-    const boxes = {};
-    const texts = [], shapes = [];
+    const sig = {}, texts = [], shapes = [];
+    /* boite d'encre reelle d'un texte (canvas measureText), puis rotation : la boite englobante du resultat */
+    const ctx = document.createElement('canvas').getContext('2d');
+    const inkBox = (el) => {
+      const size = +el.getAttribute('font-size'), x = +el.getAttribute('x'), y = +el.getAttribute('y');
+      ctx.font = `${el.getAttribute('font-weight')} ${size}px ${el.getAttribute('font-family')}`;
+      ctx.textAlign = { start: 'left', middle: 'center', end: 'right' }[el.getAttribute('text-anchor')];
+      const m = ctx.measureText(el.textContent);
+      const x0 = x - m.actualBoundingBoxLeft, x1 = x + m.actualBoundingBoxRight, y0 = y - m.actualBoundingBoxAscent, y1 = y + m.actualBoundingBoxDescent;
+      const [, a, px, py] = (el.getAttribute('transform') || '').match(/rotate\(([-\d.]+) ([-\d.]+) ([-\d.]+)\)/) || [0, 0, 0, 0];
+      const c = Math.cos(a * Math.PI / 180), s = Math.sin(a * Math.PI / 180);
+      const pts = [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].map(([qx, qy]) => [px + (qx - px) * c - (qy - py) * s, py + (qx - px) * s + (qy - py) * c]);
+      const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+      return { x: r(Math.min(...xs)), y: r(Math.min(...ys)), w: r(Math.max(...xs) - Math.min(...xs)), h: r(Math.max(...ys) - Math.min(...ys)) };
+    };
     for (const el of vis) {
       const b = el.getBBox();
-      const box = { x: r(b.x), y: r(b.y), w: r(b.width), h: r(b.height) };
-      boxes[el.dataset.id] = box;
-      if (el.dataset.kind === 'text') texts.push({ id: el.dataset.id, ...box });
-      else if (el.getAttribute('fill') && el.getAttribute('fill') !== 'none') shapes.push({ id: el.dataset.id, ...box });
+      const paths = [...el.querySelectorAll('path')].map((p) => p.getAttribute('d')).join('|');
+      sig[el.dataset.id] = { x: r(b.x), y: r(b.y), w: r(b.width), h: r(b.height), t: el.getAttribute('transform') || '', d: paths, text: el.textContent };
+      if (el.dataset.kind === 'text') texts.push({ id: el.dataset.id, group: el.dataset.group, ...inkBox(el) });
+      else if (el.dataset.kind === 'shape') { const c = el.getBoundingClientRect(); shapes.push({ id: el.dataset.id, group: el.dataset.group, x: r(c.left), y: r(c.top), w: r(c.width), h: r(c.height) }); }
     }
     const colors = new Set();
     for (const el of document.querySelectorAll('svg *')) {
       for (const a of ['fill', 'stroke']) { const v = el.getAttribute(a); if (v && v !== 'none') colors.add(v.toUpperCase()); }
+      const st = el.getAttribute('style'); if (st && /#|rgb/i.test(st)) colors.add('style:' + st);
     }
-    const rgb = getComputedStyle(document.body).backgroundColor;
-    const emDash = document.documentElement.outerHTML.includes('—');
-    return { boxes, texts, shapes, colors: [...colors], bodyBg: rgb, emDash };
+    return { sig, texts, shapes, colors: [...colors], bodyBg: getComputedStyle(document.body).backgroundColor,
+             emDash: document.documentElement.outerHTML.includes('\u2014'), fonts: window.__fonts };
   });
-  geo[s] = info.boxes;
+  geo[s] = info.sig;
+  if (s === 1 && !(info.fonts.caveat && info.fonts.patrick)) fail(`polices manuscrites non chargees : ${JSON.stringify(info.fonts)}`);
 
   console.log(`state ${s}: ${file}`);
   // dimensions PNG (IHDR)
@@ -84,7 +98,7 @@ for (let s = 1; s <= STATES; s++) {
   if (pw !== W || ph !== H) fail(`taille ${pw} x ${ph}`); else ok(`1080 x 1920`);
 
   // zone haute vide : on relit le PNG dans un canvas (data URL, pas de taint)
-  const top = await page.evaluate(async ({ b64, TOP, W, NAVY }) => {
+  const top = await page.evaluate(async ({ b64, TOP, W, PAPER }) => {
     const img = new Image(); img.src = 'data:image/png;base64,' + b64;
     await img.decode();
     const c = document.createElement('canvas'); c.width = W; c.height = TOP;
@@ -92,10 +106,10 @@ for (let s = 1; s <= STATES; s++) {
     const d = ctx.getImageData(0, 0, W, TOP).data;
     let bad = 0;
     for (let i = 0; i < d.length; i += 4)
-      if (d[i] !== NAVY[0] || d[i + 1] !== NAVY[1] || d[i + 2] !== NAVY[2] || d[i + 3] !== 255) bad++;
+      if (d[i] !== PAPER[0] || d[i + 1] !== PAPER[1] || d[i + 2] !== PAPER[2] || d[i + 3] !== 255) bad++;
     return { bad, opaque: img.width === W };
-  }, { b64: png.toString('base64'), TOP, W, NAVY });
-  if (top.bad) fail(`${top.bad} pixels non navy dans les 800 px du haut`); else ok('zone facecam vide (800 px navy opaques)');
+  }, { b64: png.toString('base64'), TOP, W, PAPER });
+  if (top.bad) fail(`${top.bad} pixels non blancs dans les 800 px du haut`); else ok('zone facecam vide (800 px blanc pur opaque)');
 
   // debordements et chevauchements
   const before = problems.length;
@@ -107,29 +121,32 @@ for (let s = 1; s <= STATES; s++) {
   for (let i = 0; i < info.texts.length; i++)
     for (let j = i + 1; j < info.texts.length; j++)
       if (inter(info.texts[i], info.texts[j])) fail(`chevauchement ${info.texts[i].id} / ${info.texts[j].id}`);
+  for (const sh of info.shapes) for (const t of info.texts)
+    if (sh.group !== t.group && inter(sh, t)) fail(`chevauchement ${sh.id} / ${t.id}`);
   if (problems.length === before) ok(`${info.texts.length} textes visibles, dans les marges, sans chevauchement`);
 
   // couleurs et tiret cadratin
   const extra = info.colors.filter((c) => !ALLOWED.has(c));
   if (extra.length) fail(`couleurs hors palette : ${extra.join(', ')}`); else ok(`couleurs DOM : ${info.colors.join(' ')}`);
-  if (info.bodyBg !== 'rgb(15, 21, 53)') fail(`fond body ${info.bodyBg}`);
+  if (info.bodyBg !== 'rgb(255, 255, 255)') fail(`fond body ${info.bodyBg}`);
   if (info.emDash) fail('tiret cadratin dans le DOM'); else ok('aucun tiret cadratin');
 
   if (s === 6) {
     const ids = info.shapes.map((x) => x.id).sort().join(', ');
-    if (info.shapes.length === 2 && ids === 'layer4-box, layer5-box') ok(`etat 6 : seules formes pleines = ${ids}`);
-    else fail(`etat 6 : formes pleines = ${ids || 'aucune'}`);
+    if (info.shapes.length === 2 && ids === 'layer4-ring, layer5-ring') ok(`etat 6 : seules formes fermees = ${ids}`);
+    else fail(`etat 6 : formes fermees = ${ids || 'aucune'}`);
   }
 }
 await browser.close();
 
-// Regle d'or : aucun noeud visible ne bouge entre deux etats consecutifs.
-console.log('\nDiff des coordonnees entre etats consecutifs :');
+// Regle d'or : aucun noeud visible ne bouge ni ne se redessine entre deux etats consecutifs.
+console.log('\nDiff des coordonnees et des paths entre etats consecutifs :');
 for (let s = 1; s < STATES; s++) {
   const a = geo[s], b = geo[s + 1];
   const common = Object.keys(a).filter((id) => id in b);
-  const moved = common.filter((id) => ['x', 'y', 'w', 'h'].some((k) => Math.abs(a[id][k] - b[id][k]) > 0.01));
-  const line = `  ${s} -> ${s + 1} : ${common.length} noeuds communs, ${moved.length} deplace(s)`;
+  const moved = common.filter((id) => ['x', 'y', 'w', 'h'].some((k) => Math.abs(a[id][k] - b[id][k]) > 0.01)
+    || ['t', 'd', 'text'].some((k) => a[id][k] !== b[id][k]));
+  const line = `  ${s} -> ${s + 1} : ${common.length} noeuds communs, ${moved.length} deplace(s) ou redessine(s)`;
   if (moved.length) fail(line + ' : ' + moved.join(', ')); else console.log(line + '  ✓');
 }
 
