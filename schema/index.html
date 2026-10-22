@@ -5,152 +5,109 @@
 <title>Schéma LTD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;900&display=swap">
 <style>
-  html, body { margin: 0; padding: 0; background: #FFFFFF; }
-  body { width: 1920px; height: 1080px; overflow: hidden; }
-  svg { display: block; }
-  svg text { white-space: pre; }
+  /* ---------- charte : 4 valeurs, rien d'autre ---------- */
+  :root {
+    --paper: #FFFFFF;
+    --navy: #0F1535;
+    --indigo: #4F6BFF;
+    --grey: #8A93B8;
+    --m: 96px;          /* marges */
+    --bottom-free: 80px; /* zone sous-titres, rien dedans */
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden; position: relative;
+    font-family: Inter, sans-serif; color: var(--navy); font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- grille de page : titre / (tableau | liste) / pied ---------- */
+  .page {
+    position: absolute; inset: var(--m) var(--m) var(--bottom-free) var(--m);
+    display: grid;
+    grid-template-columns: 1080px 1fr;   /* tableau a largeur fixe, la liste prend le reste */
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "title title" "table list" "footer footer";
+    column-gap: 64px;
+  }
+
+  /* 1. titre, filet indigo de la largeur du titre */
+  .title { grid-area: title; justify-self: start; }
+  .title h1 {
+    margin: 0; font-size: 72px; font-weight: 900; line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .title .rule { height: 6px; background: var(--indigo); margin-top: 14px; }
+
+  /* 2. tableau epure : filets 1 px, cellules vides */
+  .table { grid-area: table; align-self: start; margin-top: 64px; }
+  table { border-collapse: collapse; table-layout: fixed; width: 1080px; }
+  th, td { box-sizing: border-box; padding: 0; text-align: left; vertical-align: middle; font-weight: 600; font-size: 40px; }
+  thead th { height: 124px; vertical-align: top; padding-top: 8px; border-bottom: 1px solid var(--grey); }
+  thead th.corner { width: 384px; }
+  thead th.col { width: 232px; padding-left: 24px; border-left: 1px solid var(--grey); }
+  tbody th { height: 140px; border-bottom: 1px solid var(--grey); padding-right: 24px; white-space: nowrap; }
+  tbody td { height: 140px; border-bottom: 1px solid var(--grey); border-left: 1px solid var(--grey); }
+  .note { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 26px; font-weight: 500; color: var(--grey); }
+  .circle { display: block; flex: none; }
+  .circle circle { fill: none; stroke: var(--grey); stroke-width: 1.5; }
+
+  /* 3. liste "Ce qu'on oublie" : numero indigo, cercle a cocher, texte */
+  .list { grid-area: list; align-self: start; justify-self: start; margin-top: 64px; padding-bottom: 120px; }
+  .list h2 { margin: 0 0 28px; font-size: 34px; font-weight: 600; line-height: 1.2; }
+  .list ol { list-style: none; margin: 0; padding: 0; }
+  .list li { display: flex; align-items: center; gap: 16px; height: 56px; font-size: 30px; font-weight: 500; white-space: nowrap; }
+  .list .num { color: var(--indigo); font-weight: 600; width: 28px; text-align: right; }
+
+  /* 4. pied de page, bas gauche */
+  .footer { grid-area: footer; align-self: end; font-size: 26px; font-weight: 500; color: var(--grey); line-height: 1.2; }
 </style>
-<script src="rough.min.js"></script>
 </head>
 <body>
-<svg id="stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080"></svg>
+<div class="page">
+  <header class="title">
+    <h1 data-text>100 000 € dans ta LTD</h1>
+    <div class="rule" data-rule></div>
+  </header>
+
+  <section class="table">
+    <table>
+      <thead>
+        <tr>
+          <th class="corner"></th>
+          <th class="col"><span data-text>Dubaï</span></th>
+          <th class="col"><span data-text>Espagne</span>
+            <div class="note"><span data-text>Beckham</span><svg class="circle" width="28" height="28" viewBox="0 0 28 28" data-circle="note"><circle cx="14" cy="14" r="13.25"/></svg></div></th>
+          <th class="col"><span data-text>France</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th><span data-text>Salaire</span></th><td data-cell="1-1"></td><td data-cell="1-2"></td><td data-cell="1-3"></td></tr>
+        <tr><th><span data-text>Dividendes</span></th><td data-cell="2-1"></td><td data-cell="2-2"></td><td data-cell="2-3"></td></tr>
+        <tr><th><span data-text>Management fees</span></th><td data-cell="3-1"></td><td data-cell="3-2"></td><td data-cell="3-3"></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <aside class="list">
+    <h2 data-text>Ce qu'on oublie</h2>
+    <ol>
+      <li><span class="num" data-text>1</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Direction effective</span></li>
+      <li><span class="num" data-text>2</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Cotisations sociales</span></li>
+      <li><span class="num" data-text>3</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Convention entre les deux pays</span></li>
+      <li><span class="num" data-text>4</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Année de départ</span></li>
+      <li><span class="num" data-text>5</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Fees à soi-même = requalification</span></li>
+    </ol>
+  </aside>
+
+  <footer class="footer"><span data-text>Le bon choix est un calcul, pas une règle.</span></footer>
+</div>
 <script>
-/* =========================================================================
-   DONNEES : tout le contenu vit ici. Changer un texte = changer cet objet.
-   ========================================================================= */
-const schema = {
-  title: '100 000 € dans ta LTD',
-  table: {
-    rows: ['Salaire', 'Dividendes', 'Management fees'],
-    cols: ['Dubaï', 'Espagne', 'France'],
-    note: { under: 'Espagne', text: 'Beckham ?' },
-  },
-  list: {
-    title: 'Ce qu\'on oublie',
-    items: ['Direction effective', 'Cotisations sociales', 'Convention entre les deux pays', 'Année de départ', 'Fees à soi-même = requalification'],
-  },
-  footer: 'Le bon choix est un calcul, pas une règle.',
-};
-
-/* =========================================================================
-   STYLE : une encre, deux polices, des tailles.
-   ========================================================================= */
-const INK = '#111111';
-const FONT = { title: 'Caveat, cursive', body: '"Patrick Hand", cursive' };   /* changer la police : ici */
-const FS = { title: 72, table: 46, listTitle: 40, list: 34, small: 30 };
-const ROUGH = { roughness: 1.2, bowing: 1, strokeWidth: 3, stroke: INK, fill: 'none', disableMultiStroke: true };
-const G = {
-  W: 1920, H: 1080, M: 80, BOTTOM_FREE: 60,
-  title: { x: 80, y: 150 },
-  table: { xLabel: 80, xGrid: 420, colW: 240, yHeader: 300, yGrid: 332, rowH: 140, noteDy: 56 },
-  list: { x: 1300, yTitle: 300, yFirst: 372, gap: 60, circleR: 13, textDx: 56 },
-  footer: { x: 960, y: 996 },
-  wobble: { deg: 1.5, dy: 3 },
-};
-const CAP = 0.7;
-
-/* Hasard deterministe : une seed par element, derivee de son id. */
-function hash(str) { let h = 2166136261; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
-function rng(seed) { let a = seed; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-const seedOf = (id) => (hash(id) % 2147483646) + 1;
-
-const svg = document.getElementById('stage');
-const NS = 'http://www.w3.org/2000/svg';
-const rc = rough.svg(svg);
-const measurer = document.createElementNS(NS, 'text');
-measurer.setAttribute('visibility', 'hidden');
-svg.appendChild(measurer);
-function width(text, size, font, weight) {
-  measurer.setAttribute('font-size', size); measurer.setAttribute('font-family', font); measurer.setAttribute('font-weight', weight);
-  measurer.textContent = text;
-  return measurer.getComputedTextLength();
-}
-
-/* =========================================================================
-   LAYOUT : liste d'elements { id, kind, ...}. kind = text | stroke | circle.
-   ========================================================================= */
-function layout(s) {
-  const n = [];
-  const text = (id, str, x, y, size, font, weight, anchor = 'start') => {
-    const r = rng(seedOf(id)), w = width(str, size, font, weight);
-    const rot = Math.round((r() * 2 - 1) * G.wobble.deg * 100) / 100, dy = Math.round((r() * 2 - 1) * G.wobble.dy * 10) / 10;
-    const cx = anchor === 'start' ? x + w / 2 : anchor === 'end' ? x - w / 2 : x;   /* pivot : centre du texte */
-    n.push({ id, kind: 'text', text: str, x, y: y + dy, size, font, weight, anchor, rot, pivot: [Math.round(cx * 100) / 100, y + dy], w });
-    return w;
-  };
-  const stroke = (id, d, role) => n.push({ id, kind: 'stroke', d, role });
-  const circle = (id, cx, cy, r) => n.push({ id, kind: 'circle', cx, cy, r });
-
-  /* 1. titre souligne deux fois */
-  const t = G.title, tw = text('title', s.title, t.x, t.y, FS.title, FONT.title, 700);
-  stroke('title-underline1', `M ${t.x - 6} ${t.y + 18} L ${t.x + tw + 6} ${t.y + 15}`, 'underline');
-  stroke('title-underline2', `M ${t.x + 4} ${t.y + 32} L ${t.x + tw + 12} ${t.y + 29}`, 'underline');
-
-  /* 2. tableau : etiquettes, en-tetes, lignes ouvertes (pas de cadre) */
-  const T = G.table, nC = s.table.cols.length, nR = s.table.rows.length;
-  const xEnd = T.xGrid + nC * T.colW, yEnd = T.yGrid + nR * T.rowH;
-  s.table.cols.forEach((c, i) => text('col' + (i + 1), c, T.xGrid + T.colW * (i + 0.5), T.yHeader, FS.table, FONT.title, 700, 'middle'));
-  s.table.rows.forEach((r, i) => text('row' + (i + 1), r, T.xLabel, T.yGrid + T.rowH * (i + 0.5) + FS.table * CAP / 2, FS.table, FONT.title, 700));
-  for (let i = 0; i <= nR; i++) stroke('hline' + i, `M ${T.xLabel} ${T.yGrid + T.rowH * i} L ${xEnd + 10} ${T.yGrid + T.rowH * i}`, 'grid');
-  for (let i = 1; i < nC; i++) stroke('vline' + i, `M ${T.xGrid + T.colW * i} ${T.yHeader - FS.table * CAP - 10} L ${T.xGrid + T.colW * i} ${yEnd + 10}`, 'grid');
-  const cells = [];
-  for (let r = 0; r < nR; r++) for (let c = 0; c < nC; c++)
-    cells.push({ id: `cell-${r + 1}-${c + 1}`, x: T.xGrid + T.colW * c, y: T.yGrid + T.rowH * r, w: T.colW, h: T.rowH });
-  /* petite mention sous une colonne, avec un cercle vide a cocher */
-  const ci = s.table.cols.indexOf(s.table.note.under), nx = T.xGrid + T.colW * ci + 22, ny = yEnd + T.noteDy;
-  const nw = text('note', s.table.note.text, nx, ny, FS.small, FONT.body, 400);
-  circle('note-circle', nx + nw + 30, ny - FS.small * CAP / 2, 12);
-
-  /* 3. liste "Ce qu'on oublie" : titre souligne, cercles vides a cocher */
-  const L = G.list, lw = text('list-title', s.list.title, L.x, L.yTitle, FS.listTitle, FONT.title, 700);
-  stroke('list-underline', `M ${L.x - 4} ${L.yTitle + 12} L ${L.x + lw + 6} ${L.yTitle + 10}`, 'underline');
-  s.list.items.forEach((item, i) => {
-    const y = L.yFirst + L.gap * i;
-    circle('list-circle' + (i + 1), L.x + L.circleR + 2, y - FS.list * CAP / 2, L.circleR);
-    text('list-item' + (i + 1), item, L.x + L.textDx, y, FS.list, FONT.body, 400);
-  });
-
-  /* 4. phrase du bas, discrete */
-  text('footer', s.footer, G.footer.x, G.footer.y, FS.small, FONT.body, 400, 'middle');
-  return { nodes: n, cells };
-}
-
-/* =========================================================================
-   RENDU : un element SVG par noeud, seed fixee par noeud.
-   ========================================================================= */
-function render(nodes) {
-  for (const nd of nodes) {
-    let el;
-    const opts = { ...ROUGH, seed: seedOf(nd.id) };
-    if (nd.kind === 'text') {
-      el = document.createElementNS(NS, 'text');
-      el.setAttribute('x', nd.x); el.setAttribute('y', nd.y);
-      el.setAttribute('font-size', nd.size); el.setAttribute('font-family', nd.font); el.setAttribute('font-weight', nd.weight);
-      el.setAttribute('fill', INK); el.setAttribute('text-anchor', nd.anchor);
-      el.setAttribute('transform', `rotate(${nd.rot} ${nd.pivot[0]} ${nd.pivot[1]})`);
-      el.textContent = nd.text;
-    } else if (nd.kind === 'circle') {
-      el = rc.circle(nd.cx, nd.cy, nd.r * 2, opts);
-    } else {
-      el = rc.path(nd.d, opts);
-      if (nd.role) el.setAttribute('data-role', nd.role);
-    }
-    el.setAttribute('data-id', nd.id); el.setAttribute('data-kind', nd.kind);
-    svg.appendChild(el);
-  }
-}
-
-document.fonts.ready
-  .then(() => Promise.all([document.fonts.load('700 72px Caveat'), document.fonts.load('400 34px "Patrick Hand"')]).catch(() => {}))
-  .then(() => {
-    window.__fonts = { caveat: document.fonts.check('700 72px Caveat'), patrick: document.fonts.check('400 34px "Patrick Hand"') };
-    const { nodes, cells } = layout(schema);
-    render(nodes);
-    window.__cells = cells;
-    window.__ready = true;
-  });
+  /* signale a l'export que les polices sont pretes */
+  document.fonts.ready
+    .then(() => Promise.all([document.fonts.load('900 72px Inter'), document.fonts.load('600 40px Inter'), document.fonts.load('500 30px Inter')]).catch(() => {}))
+    .then(() => { window.__inter = document.fonts.check('900 72px Inter') && document.fonts.check('500 30px Inter'); window.__ready = true; });
 </script>
 </body>
 </html>

@@ -10,63 +10,71 @@ const { chromium } = require('playwright');
 const here = dirname(fileURLToPath(import.meta.url));
 const pageUrl = pathToFileURL(join(here, 'index.html')).href;
 
-const W = 1920, H = 1080, M = 80, BOTTOM_FREE = 60, MIN_FONT = 30, MIN_WHITE = 0.35, CELL_MIN = [180, 110];
+const W = 1920, H = 1080, M = 96, BOTTOM_FREE = 80, MIN_FONT = 26, MIN_WHITE = 0.40, CELL_MIN = [200, 120];
+const PALETTE = { '#FFFFFF': 'blanc', '#0F1535': 'navy', '#4F6BFF': 'indigo', '#8A93B8': 'gris' };
 const problems = [];
 const fail = (m) => { problems.push(m); console.log('  ✗ ' + m); };
 const ok = (m) => console.log('  ✓ ' + m);
 
 const browser = await chromium.launch();
-const outputs = [];
+let page, png;
 for (const scale of [1, 2]) {
-  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: scale });
-  await page.goto(pageUrl);
-  await page.waitForFunction(() => window.__ready === true);
+  const p = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: scale });
+  await p.goto(pageUrl);
+  await p.waitForFunction(() => window.__ready === true);
   const file = join(here, scale === 1 ? 'schema.png' : 'schema@2x.png');
-  await page.screenshot({ path: file, omitBackground: false });
-  const png = readFileSync(file);
-  const pw = png.readUInt32BE(16), ph = png.readUInt32BE(20);
+  await p.screenshot({ path: file, omitBackground: false });
+  const buf = readFileSync(file);
+  const pw = buf.readUInt32BE(16), ph = buf.readUInt32BE(20);
   console.log(`${file} : ${pw} x ${ph}`);
   if (pw !== W * scale || ph !== H * scale) fail(`taille attendue ${W * scale} x ${H * scale}`);
-  outputs.push({ page, file, png, scale });
+  if (scale === 1) { page = p; png = buf; } else await p.close();
 }
 
-const { page, png } = outputs[0];
-const info = await page.evaluate(({ M, W, H }) => {
+const info = await page.evaluate(() => {
   const r = (v) => Math.round(v * 100) / 100;
-  const ctx = document.createElement('canvas').getContext('2d');
-  const inkBox = (el) => {   /* boite d'encre reelle du texte, puis rotation */
-    const size = +el.getAttribute('font-size'), x = +el.getAttribute('x'), y = +el.getAttribute('y');
-    ctx.font = `${el.getAttribute('font-weight')} ${size}px ${el.getAttribute('font-family')}`;
-    ctx.textAlign = { start: 'left', middle: 'center', end: 'right' }[el.getAttribute('text-anchor')];
-    const m = ctx.measureText(el.textContent);
-    const x0 = x - m.actualBoundingBoxLeft, x1 = x + m.actualBoundingBoxRight, y0 = y - m.actualBoundingBoxAscent, y1 = y + m.actualBoundingBoxDescent;
-    const [, a, px, py] = (el.getAttribute('transform') || '').match(/rotate\(([-\d.]+) ([-\d.]+) ([-\d.]+)\)/) || [0, 0, 0, 0];
-    const c = Math.cos(a * Math.PI / 180), s = Math.sin(a * Math.PI / 180);
-    const pts = [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].map(([qx, qy]) => [px + (qx - px) * c - (qy - py) * s, py + (qx - px) * s + (qy - py) * c]);
-    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
-    return { x: r(Math.min(...xs)), y: r(Math.min(...ys)), w: r(Math.max(...xs) - Math.min(...xs)), h: r(Math.max(...ys) - Math.min(...ys)) };
+  const rect = (el) => { const b = el.getBoundingClientRect(); return { x: r(b.left), y: r(b.top), w: r(b.width), h: r(b.height) }; };
+  /* boite reelle des lignes de texte (Range), plus serree que la boite de l'element */
+  const textBox = (el) => {
+    const range = document.createRange(); range.selectNodeContents(el);
+    const rs = [...range.getClientRects()].filter((b) => b.width > 0);
+    const x0 = Math.min(...rs.map((b) => b.left)), y0 = Math.min(...rs.map((b) => b.top));
+    return { x: r(x0), y: r(y0), w: r(Math.max(...rs.map((b) => b.right)) - x0), h: r(Math.max(...rs.map((b) => b.bottom)) - y0) };
   };
-  const texts = [], others = [];
-  for (const el of document.querySelectorAll('[data-id]')) {
-    const id = el.dataset.id, kind = el.dataset.kind;
-    if (kind === 'text') texts.push({ id, size: +el.getAttribute('font-size'), ...inkBox(el) });
-    else { const b = el.getBBox(); others.push({ id, kind, role: el.dataset.role || '', x: r(b.x), y: r(b.y), w: r(b.width), h: r(b.height) }); }
-  }
+  const texts = [...document.querySelectorAll('[data-text]')].map((el, i) => ({
+    id: `"${el.textContent.trim()}"`, size: parseFloat(getComputedStyle(el).fontSize), weight: getComputedStyle(el).fontWeight, ...textBox(el) }));
+  const circles = [...document.querySelectorAll('[data-circle]')].map((el) => ({ id: 'cercle ' + el.dataset.circle, kind: el.dataset.circle, ...rect(el),
+    border: getComputedStyle(el.querySelector('circle')).strokeWidth }));
+  const cells = [...document.querySelectorAll('[data-cell]')].map((el) => ({ id: 'cellule ' + el.dataset.cell, ...rect(el) }));
+  const h1 = document.querySelector('h1'), rule = document.querySelector('[data-rule]');
+  const title = { textW: r(h1.getBoundingClientRect().width), ruleW: r(rule.getBoundingClientRect().width), ruleH: r(rule.getBoundingClientRect().height), ruleColor: getComputedStyle(rule).backgroundColor };
+  /* toutes les couleurs effectivement utilisees */
+  const toHex = (c) => { const m = c.match(/rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)/); if (!m || m[4] === '0') return null;
+    return '#' + [m[1], m[2], m[3]].map((v) => (+v).toString(16).padStart(2, '0')).join('').toUpperCase(); };
   const colors = new Set();
-  for (const el of document.querySelectorAll('svg *')) {
-    for (const a of ['fill', 'stroke']) { const v = el.getAttribute(a); if (v && v !== 'none') colors.add(v.toUpperCase()); }
-    const st = el.getAttribute('style'); if (st && /#|rgb/i.test(st)) colors.add('style:' + st);
+  for (const el of document.querySelectorAll('body, body *')) {
+    const cs = getComputedStyle(el);
+    const hasText = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+    if (hasText) colors.add(toHex(cs.color));
+    colors.add(toHex(cs.backgroundColor));
+    for (const side of ['Top', 'Right', 'Bottom', 'Left']) if (parseFloat(cs[`border${side}Width`]) > 0) colors.add(toHex(cs[`border${side}Color`]));
+    if (el instanceof SVGGraphicsElement && !(el instanceof SVGSVGElement)) { if (cs.fill !== 'none') colors.add(toHex(cs.fill)); if (cs.stroke !== 'none') colors.add(toHex(cs.stroke)); }
+    if (cs.backgroundImage !== 'none') colors.add('image:' + cs.backgroundImage);
+    if (cs.boxShadow !== 'none') colors.add('shadow:' + cs.boxShadow);
   }
-  return { texts, others, cells: window.__cells, colors: [...colors], bodyBg: getComputedStyle(document.body).backgroundColor,
-           emDash: document.documentElement.outerHTML.includes('—'), fonts: window.__fonts };
-}, { M, W, H });
+  colors.delete(null);
+  const fonts = new Set([...document.querySelectorAll('body *')].map((el) => getComputedStyle(el).fontFamily.split(',')[0].replace(/"/g, '')));
+  return { texts, circles, cells, title, colors: [...colors], fonts: [...fonts], inter: window.__inter,
+           emDash: document.documentElement.outerHTML.includes('—') };
+});
 
 console.log('\nVerifications :');
-if (!(info.fonts.caveat && info.fonts.patrick)) fail(`polices manuscrites non chargees : ${JSON.stringify(info.fonts)}`); else ok('Caveat 700 et Patrick Hand chargees');
-if (info.bodyBg !== 'rgb(255, 255, 255)') fail(`fond ${info.bodyBg}`); else ok('fond blanc #FFFFFF');
-const extra = info.colors.filter((c) => c !== '#111111');
-if (extra.length) fail(`couleurs hors encre : ${extra.join(', ')}`); else ok(`une seule encre dans le DOM : ${info.colors.join(' ')}`);
+if (!info.inter) fail('Inter non chargee'); else ok(`police : ${info.fonts.join(', ')}`);
 if (info.emDash) fail('tiret cadratin dans le DOM'); else ok('aucun tiret cadratin');
+const named = info.colors.map((c) => `${c}${PALETTE[c] ? ' (' + PALETTE[c] + ')' : ''}`);
+console.log(`  couleurs presentes dans le DOM : ${named.join(', ')}`);
+const extra = info.colors.filter((c) => !PALETTE[c]);
+if (extra.length) fail(`hors charte : ${extra.join(', ')}`); else ok('fond blanc, et 3 couleurs au plus pour les elements (navy, indigo, gris)');
 
 const inter = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 let before = problems.length;
@@ -74,27 +82,27 @@ for (const t of info.texts) {
   if (t.size < MIN_FONT) fail(`${t.id} : ${t.size} px, sous ${MIN_FONT} px`);
   if (t.x < M - 0.5 || t.x + t.w > W - M + 0.5 || t.y < M - 0.5) fail(`${t.id} hors marges : x ${t.x} a ${t.x + t.w}, y ${t.y}`);
 }
-for (const e of [...info.texts, ...info.others]) if (e.y + e.h > H - BOTTOM_FREE) fail(`${e.id} entre dans les ${BOTTOM_FREE} px du bas (y ${e.y + e.h})`);
+for (const e of [...info.texts, ...info.circles]) if (e.y + e.h > H - BOTTOM_FREE) fail(`${e.id} entre dans les ${BOTTOM_FREE} px du bas (y ${e.y + e.h})`);
 for (let i = 0; i < info.texts.length; i++) for (let j = i + 1; j < info.texts.length; j++)
   if (inter(info.texts[i], info.texts[j])) fail(`chevauchement ${info.texts[i].id} / ${info.texts[j].id}`);
-for (const o of info.others.filter((o) => o.role !== 'grid')) for (const t of info.texts)
-  if (inter(o, t)) fail(`chevauchement ${o.id} / ${t.id}`);
+for (const c of info.circles) for (const t of info.texts) if (inter(c, t)) fail(`chevauchement ${c.id} / ${t.id}`);
 if (problems.length === before) ok(`${info.texts.length} textes, tous >= ${MIN_FONT} px, dans les marges, sans chevauchement, rien dans les ${BOTTOM_FREE} px du bas`);
 
-/* cellules : vides (aucun texte, cercle ou soulignement ne les touche) et assez grandes */
 before = problems.length;
-const inset = (c) => ({ x: c.x + 6, y: c.y + 6, w: c.w - 12, h: c.h - 12 });
+const inset = (c) => ({ x: c.x + 2, y: c.y + 2, w: c.w - 4, h: c.h - 4 });
 for (const c of info.cells) {
   if (c.w < CELL_MIN[0] || c.h < CELL_MIN[1]) fail(`${c.id} : ${c.w} x ${c.h}, minimum ${CELL_MIN.join(' x ')}`);
-  for (const e of [...info.texts, ...info.others.filter((o) => o.role !== 'grid')]) if (inter(inset(c), e)) fail(`${c.id} contient ${e.id}`);
+  for (const e of [...info.texts, ...info.circles]) if (inter(inset(c), e)) fail(`${c.id} contient ${e.id}`);
 }
-if (problems.length === before) ok(`${info.cells.length} cellules vides de ${info.cells[0].w} x ${info.cells[0].h} px`);
-const circles = info.others.filter((o) => o.id.startsWith('list-circle'));
-if (circles.length === 5) ok('5 cercles vides dans la liste'); else fail(`${circles.length} cercles dans la liste`);
-const under = info.others.filter((o) => o.id.startsWith('title-underline'));
-if (under.length === 2) ok('titre souligne deux fois'); else fail(`${under.length} soulignement(s) du titre`);
+if (info.cells.length !== 9) fail(`${info.cells.length} cellules`);
+if (problems.length === before) ok(`9 cellules vides de ${info.cells[0].w} x ${info.cells[0].h} px`);
+const listCircles = info.circles.filter((c) => c.kind === 'list'), noteCircle = info.circles.find((c) => c.kind === 'note');
+if (listCircles.length === 5 && listCircles.every((c) => c.w === 24 && c.h === 24 && c.border === '1.5px')) ok('5 cercles vides de 24 px, trait 1,5 px, dans la liste');
+else fail(`cercles de la liste : ${JSON.stringify(listCircles)}`);
+if (noteCircle && noteCircle.w === 28) ok('cercle Beckham de 28 px'); else fail('cercle Beckham absent ou mal dimensionne');
+if (info.title.ruleColor === 'rgb(79, 107, 255)' && info.title.ruleH === 6 && Math.abs(info.title.ruleW - info.title.textW) < 1) ok(`titre souligne en indigo, filet 6 px de la largeur du titre (${info.title.ruleW} px)`);
+else fail(`filet du titre : ${JSON.stringify(info.title)}`);
 
-/* proportion de pixels blancs purs sur schema.png */
 const white = await page.evaluate(async ({ b64, W, H }) => {
   const img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
   const c = document.createElement('canvas'); c.width = W; c.height = H;
@@ -104,7 +112,7 @@ const white = await page.evaluate(async ({ b64, W, H }) => {
   for (let i = 0; i < d.length; i += 4) { if (d[i] === 255 && d[i + 1] === 255 && d[i + 2] === 255) w++; if (d[i + 3] !== 255) opaque = false; }
   return { ratio: w / (W * H), opaque };
 }, { b64: png.toString('base64'), W, H });
-console.log(`\nPixels blancs purs sur schema.png : ${(white.ratio * 100).toFixed(1)} %`);
+console.log(`\nPixels blancs purs sur schema.png : ${(white.ratio * 100).toFixed(1)} % (minimum ${MIN_WHITE * 100} %)`);
 if (white.ratio < MIN_WHITE) fail(`moins de ${MIN_WHITE * 100} % de blanc`);
 if (!white.opaque) fail('PNG non opaque');
 
