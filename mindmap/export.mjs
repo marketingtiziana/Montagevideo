@@ -1,5 +1,7 @@
-// Export des 9 etats en PNG 1080 x 1920 + verifications.
-// Usage : node export.mjs   (Playwright doit etre installe : npm i playwright)
+// Export des 9 etats en PNG + verifications, pour les deux formats (9x16 et 16x9).
+// Usage : node export.mjs            -> les deux formats
+//         node export.mjs 16x9       -> un seul format
+// (Playwright doit etre installe : npm i playwright)
 import { createRequire } from 'node:module';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -9,11 +11,11 @@ const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
 const here = dirname(fileURLToPath(import.meta.url));
-const outDir = join(here, 'out');
-mkdirSync(outDir, { recursive: true });
 const pageUrl = pathToFileURL(join(here, 'index.html')).href;
 
-const W = 1080, H = 1920, TOP = 800, M = 80, STATES = 9;
+const FORMATS = { '9x16': { W: 1080, H: 1920, TOP: 800 }, '16x9': { W: 1920, H: 1080, TOP: 0 } };
+const wanted = process.argv.slice(2).filter((a) => FORMATS[a]);
+const M = 80, STATES = 9;
 const ALLOWED = new Set(['#111111']);
 const PAPER = [255, 255, 255];
 const problems = [];
@@ -44,12 +46,17 @@ function zip(entries) {
 }
 
 const browser = await chromium.launch();
+for (const fmt of wanted.length ? wanted : Object.keys(FORMATS)) {
+const { W, H, TOP } = FORMATS[fmt];
+const outDir = join(here, 'out', fmt);
+mkdirSync(outDir, { recursive: true });
+console.log(`\n===== Format ${fmt} : ${W} x ${H} =====`);
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 const geo = {};  // state -> { id: signature (coordonnees + path) }
 const files = [];
 
 for (let s = 1; s <= STATES; s++) {
-  await page.goto(`${pageUrl}?state=${s}`);
+  await page.goto(`${pageUrl}?format=${fmt}&state=${s}`);
   await page.waitForFunction(() => window.__ready === true);
   const file = join(outDir, `mindmap_${String(s).padStart(2, '0')}.png`);
   await page.screenshot({ path: file, omitBackground: false, clip: { x: 0, y: 0, width: W, height: H } });
@@ -95,21 +102,22 @@ for (let s = 1; s <= STATES; s++) {
   // dimensions PNG (IHDR)
   const png = readFileSync(file);
   const pw = png.readUInt32BE(16), ph = png.readUInt32BE(20);
-  if (pw !== W || ph !== H) fail(`taille ${pw} x ${ph}`); else ok(`1080 x 1920`);
+  if (pw !== W || ph !== H) fail(`taille ${pw} x ${ph}`); else ok(`${W} x ${H}`);
 
   // zone haute vide : on relit le PNG dans un canvas (data URL, pas de taint)
   const top = await page.evaluate(async ({ b64, TOP, W, PAPER }) => {
     const img = new Image(); img.src = 'data:image/png;base64,' + b64;
     await img.decode();
-    const c = document.createElement('canvas'); c.width = W; c.height = TOP;
+    const c = document.createElement('canvas'); c.width = W; c.height = Math.max(TOP, 1);
     const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
-    const d = ctx.getImageData(0, 0, W, TOP).data;
+    const d = TOP ? ctx.getImageData(0, 0, W, TOP).data : [];
     let bad = 0;
     for (let i = 0; i < d.length; i += 4)
       if (d[i] !== PAPER[0] || d[i + 1] !== PAPER[1] || d[i + 2] !== PAPER[2] || d[i + 3] !== 255) bad++;
     return { bad, opaque: img.width === W };
   }, { b64: png.toString('base64'), TOP, W, PAPER });
-  if (top.bad) fail(`${top.bad} pixels non blancs dans les 800 px du haut`); else ok('zone facecam vide (800 px blanc pur opaque)');
+  if (TOP && top.bad) fail(`${top.bad} pixels non blancs dans les ${TOP} px du haut`); else if (TOP) ok(`zone facecam vide (${TOP} px blanc pur opaque)`);
+  if (!top.opaque) fail('PNG non opaque');
 
   // debordements et chevauchements
   const before = problems.length;
@@ -137,7 +145,7 @@ for (let s = 1; s <= STATES; s++) {
     else fail(`etat 6 : formes fermees = ${ids || 'aucune'}`);
   }
 }
-await browser.close();
+await page.close();
 
 // Regle d'or : aucun noeud visible ne bouge ni ne se redessine entre deux etats consecutifs.
 console.log('\nDiff des coordonnees et des paths entre etats consecutifs :');
@@ -151,9 +159,11 @@ for (let s = 1; s < STATES; s++) {
 }
 
 // Archive ZIP des 9 PNG (stockage sans compression, les PNG le sont deja) pour tout telecharger d'un coup.
-const zipFile = join(outDir, 'mindmap_png.zip');
+const zipFile = join(outDir, `mindmap_${fmt}_png.zip`);
 writeFileSync(zipFile, zip(files.map((f) => ({ name: f.name, data: readFileSync(f.path) }))));
 console.log(`\nArchive : ${zipFile}`);
+}
+await browser.close();
 
 console.log(problems.length ? `\n${problems.length} probleme(s)` : '\nTout est conforme.');
 process.exit(problems.length ? 1 : 0);
