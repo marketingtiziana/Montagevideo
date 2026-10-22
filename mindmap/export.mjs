@@ -1,7 +1,7 @@
 // Export des 9 etats en PNG 1080 x 1920 + verifications.
 // Usage : node export.mjs   (Playwright doit etre installe : npm i playwright)
 import { createRequire } from 'node:module';
-import { readFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -20,15 +20,40 @@ const problems = [];
 const fail = (m) => { problems.push(m); console.log('  ✗ ' + m); };
 const ok = (m) => console.log('  ✓ ' + m);
 
+// Mini ecrivain ZIP (methode "stored") : aucune dependance.
+const CRC = Int32Array.from({ length: 256 }, (_, n) => { for (let k = 0; k < 8; k++) n = n & 1 ? 0xEDB88320 ^ (n >>> 1) : n >>> 1; return n; });
+const crc32 = (buf) => { let c = -1; for (const b of buf) c = CRC[(c ^ b) & 0xFF] ^ (c >>> 8); return (c ^ -1) >>> 0; };
+function zip(entries) {
+  const locals = [], centrals = []; let offset = 0;
+  const now = new Date(), dosTime = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
+  const dosDate = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
+  for (const { name, data } of entries) {
+    const n = Buffer.from(name), crc = crc32(data);
+    const head = Buffer.alloc(30); head.writeUInt32LE(0x04034b50, 0); head.writeUInt16LE(20, 4); head.writeUInt16LE(0x800, 6);
+    head.writeUInt16LE(0, 8); head.writeUInt16LE(dosTime, 10); head.writeUInt16LE(dosDate, 12); head.writeUInt32LE(crc, 14);
+    head.writeUInt32LE(data.length, 18); head.writeUInt32LE(data.length, 22); head.writeUInt16LE(n.length, 26); head.writeUInt16LE(0, 28);
+    const cen = Buffer.alloc(46); cen.writeUInt32LE(0x02014b50, 0); cen.writeUInt16LE(20, 4); cen.writeUInt16LE(20, 6); cen.writeUInt16LE(0x800, 8);
+    cen.writeUInt16LE(0, 10); cen.writeUInt16LE(dosTime, 12); cen.writeUInt16LE(dosDate, 14); cen.writeUInt32LE(crc, 16);
+    cen.writeUInt32LE(data.length, 20); cen.writeUInt32LE(data.length, 24); cen.writeUInt16LE(n.length, 28); cen.writeUInt32LE(offset, 42);
+    locals.push(head, n, data); centrals.push(cen, n); offset += head.length + n.length + data.length;
+  }
+  const cenBuf = Buffer.concat(centrals), end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0); end.writeUInt16LE(entries.length, 8); end.writeUInt16LE(entries.length, 10);
+  end.writeUInt32LE(cenBuf.length, 12); end.writeUInt32LE(offset, 16);
+  return Buffer.concat([...locals, cenBuf, end]);
+}
+
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 const geo = {};  // state -> { id: bbox }
+const files = [];
 
 for (let s = 1; s <= STATES; s++) {
   await page.goto(`${pageUrl}?state=${s}`);
   await page.waitForFunction(() => window.__ready === true);
   const file = join(outDir, `mindmap_${String(s).padStart(2, '0')}.png`);
   await page.screenshot({ path: file, omitBackground: false, clip: { x: 0, y: 0, width: W, height: H } });
+  files.push({ name: `mindmap_${String(s).padStart(2, '0')}.png`, path: file });
 
   const info = await page.evaluate(() => {
     const vis = [...document.querySelectorAll('[data-visible="1"]')];
@@ -107,6 +132,11 @@ for (let s = 1; s < STATES; s++) {
   const line = `  ${s} -> ${s + 1} : ${common.length} noeuds communs, ${moved.length} deplace(s)`;
   if (moved.length) fail(line + ' : ' + moved.join(', ')); else console.log(line + '  ✓');
 }
+
+// Archive ZIP des 9 PNG (stockage sans compression, les PNG le sont deja) pour tout telecharger d'un coup.
+const zipFile = join(outDir, 'mindmap_png.zip');
+writeFileSync(zipFile, zip(files.map((f) => ({ name: f.name, data: readFileSync(f.path) }))));
+console.log(`\nArchive : ${zipFile}`);
 
 console.log(problems.length ? `\n${problems.length} probleme(s)` : '\nTout est conforme.');
 process.exit(problems.length ? 1 : 0);
