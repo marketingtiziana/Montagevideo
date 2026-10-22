@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mindmap LTD</title>
+<meta name="viewport" content="width=1080, height=1920">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #0F1535; }
+  body { width: 1080px; height: 1920px; overflow: hidden; }
+  svg { display: block; width: 1080px; height: 1920px; font-family: Inter, sans-serif; }
+  svg text { white-space: pre; }
+</style>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+<script>
+/* =========================================================================
+   DONNEES : tout le contenu de la mindmap vit ici. Modifier un texte = modifier
+   cet objet. Rien d'autre n'est ecrit a la main.
+   ========================================================================= */
+const tree = {
+  center: '100 000 € dans ta LTD',
+  branches: ['Salaire', 'Dividendes', 'Management fees'],
+  layers: [
+    { title: 'Pays de la société',
+      details: ['IS avant dividendes : 19 % puis 26,5 %', 'Salaire déductible'] },
+    { title: 'Pays de résidence',
+      details: ['Espagne : salaire 45-50 %, dividendes 19-30 %', 'Dubaï : 0 % partout, le salaire gagne'] },
+    { title: 'Régime spécial',
+      details: ['Beckham : salaire 24 %, dividendes étrangers 0 %', '6 ans, demande sous 6 mois'] },
+    { title: 'Direction effective', trap: true,
+      details: ['Ta société devient résidente là où tu vis'] },
+    { title: 'Management fees à toi-même', trap: true,
+      details: ['Salaire déguisé, requalification'] },
+  ],
+  periphery: ['Cotisations sociales', 'Convention fiscale', 'Année de départ'],
+  panel: {
+    title: 'Dans cet ordre',
+    items: ['Résidence et direction effective',
+            'Convention entre les deux pays',
+            'Régimes spéciaux et délais',
+            'Comparer net en poche, cotisations incluses',
+            'Documenter : contrats, décisions, substance'],
+  },
+  cta: 'Appel diagnostic, lien en bio',
+};
+
+/* Etats : pour chaque groupe, les etats ou il est visible, et ceux ou il est a 35 %. */
+const STATES = 9;
+const show = {
+  core:      [1,2,3,4,5,6,7,8,9],
+  layer1:    [2,3,4,5,6,7],
+  layer2:    [3,4,5,6,7],
+  layer3:    [4,5,6,7],
+  layer4:    [5,6,7],
+  layer5:    [6,7],
+  periphery: [7],
+  panel:     [8,9],
+  cta:       [9],
+};
+const dim = { layer1: [5,6,7], layer2: [5,6,7], layer3: [5,6,7] };
+
+/* =========================================================================
+   STYLE : 4 couleurs, une police, des tailles. Rien d'autre.
+   ========================================================================= */
+const C = { navy: '#0F1535', white: '#FFFFFF', indigo: '#4F6BFF', grey: '#8A93B8' };
+const FS = { center: 56, branch: 44, title: 40, detail: 34, grey: 32 };
+const LINE = { title: 50, detail: 42, item: 64 };
+const GEO = {
+  W: 1080, H: 1920, TOP: 800, M: 80,
+  cx: 540, xRail: 82, xStub: 102, xNum: 114, xText: 170,
+  yCenter: 862, yBus: 930, yBranch: 1010, yLayer1: 1090, layerGap: 44,
+  yPeriphery: 1884, ctaH: 100, ctaBottom: 64, radius: 12,
+  trapPad: { x: 16, top: 10, bottom: 12 },
+};
+const CAP = 0.727; /* hauteur de capitale d'Inter, en em */
+
+/* =========================================================================
+   MESURE : on mesure les textes avec de vrais glyphes (une seule fois).
+   ========================================================================= */
+const svg = document.getElementById('stage');
+const NS = 'http://www.w3.org/2000/svg';
+const measurer = document.createElementNS(NS, 'text');
+measurer.setAttribute('visibility', 'hidden');
+svg.appendChild(measurer);
+function width(text, size, weight) {
+  measurer.setAttribute('font-size', size);
+  measurer.setAttribute('font-weight', weight);
+  measurer.textContent = text;
+  return measurer.getComputedTextLength();
+}
+function wrap(text, size, weight, maxW) {
+  const words = [], lines = [];
+  for (const w of text.split(' ')) (w === '%' || w === ':') && words.length ? words[words.length - 1] += ' ' + w : words.push(w);
+  let cur = '';
+  for (const w of words) {
+    const t = cur ? cur + ' ' + w : w;
+    if (cur && width(t, size, weight) > maxW) { lines.push(cur); cur = w; } else cur = t;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+/* Chemin orthogonal a angles arrondis (arcs de cercle, pas de Bezier). */
+function elbow(points, r = GEO.radius) {
+  let d = `M ${points[0][0]} ${points[0][1]}`;
+  for (let i = 1; i < points.length - 1; i++) {
+    const [px, py] = points[i - 1], [x, y] = points[i], [nx, ny] = points[i + 1];
+    const dx1 = Math.sign(x - px), dy1 = Math.sign(y - py);
+    const dx2 = Math.sign(nx - x), dy2 = Math.sign(ny - y);
+    const ax = x - dx1 * r, ay = y - dy1 * r;      /* entree dans l'arrondi */
+    const bx = x + dx2 * r, by = y + dy2 * r;      /* sortie de l'arrondi */
+    const cross = dx1 * dy2 - dy1 * dx2;           /* sens de rotation */
+    d += ` L ${ax} ${ay} A ${r} ${r} 0 0 ${cross > 0 ? 1 : 0} ${bx} ${by}`;
+  }
+  const [lx, ly] = points[points.length - 1];
+  d += ` L ${lx} ${ly}`;
+  return d;
+}
+
+/* =========================================================================
+   LAYOUT : calcule UNE fois, sur l'arbre complet, la liste des noeuds.
+   Chaque noeud = { id, group, kind, ...geometrie }. Les etats ne touchent
+   jamais a la geometrie, seulement a la visibilite et a l'opacite.
+   ========================================================================= */
+function layout(t) {
+  const n = [];
+  const g = GEO;
+  const text = (id, group, str, x, y, size, weight, fill, anchor = 'start') =>
+    n.push({ id, group, kind: 'text', text: str, x, y, size, weight, fill, anchor });
+  const path = (id, group, pts) => n.push({ id, group, kind: 'path', d: elbow(pts) });
+
+  /* centre + branches */
+  text('center', 'core', t.center, g.cx, g.yCenter, FS.center, 900, C.white, 'middle');
+  const anchors = ['start', 'middle', 'end'];
+  const bw = t.branches.map((b) => width(b, FS.branch, 700));
+  const xMidGap = (g.xNum + bw[0] + (g.W - g.M - bw[2])) / 2;
+  const bxs = [g.xNum, xMidGap, g.W - g.M];
+  const bCenters = [g.xNum + bw[0] / 2, xMidGap, g.W - g.M - bw[2] / 2];
+  t.branches.forEach((b, i) =>
+    text('branch' + (i + 1), 'core', b, bxs[i], g.yBranch, FS.branch, 700, C.white, anchors[i]));
+  const yCenterBottom = g.yCenter + 18;
+  const yBranchTop = g.yBranch - FS.branch * CAP - 14;
+  path('link-center', 'core', [[g.cx, yCenterBottom], [g.cx, g.yBus]]);
+  path('link-bus', 'core', [[bCenters[0], yBranchTop], [bCenters[0], g.yBus], [bCenters[2], g.yBus], [bCenters[2], yBranchTop]]);
+  path('link-branch2', 'core', [[bCenters[1], g.yBus], [bCenters[1], yBranchTop]]);
+
+  /* couches */
+  const maxW = g.W - g.M - g.xText;
+  let y = g.yLayer1, prevRailY = g.yBus, railStartPts = [[bCenters[0] + g.radius, g.yBus], [g.xRail, g.yBus]];
+  t.layers.forEach((L, i) => {
+    const grp = 'layer' + (i + 1);
+    const yMid = y - FS.title * CAP / 2;
+    const pts = i === 0 ? [...railStartPts, [g.xRail, yMid], [g.xStub, yMid]]
+                        : [[g.xRail, prevRailY], [g.xRail, yMid], [g.xStub, yMid]];
+    path(`${grp}-link`, grp, pts);
+    prevRailY = yMid;
+    text(`${grp}-num`, grp, String(i + 1), g.xNum, y, FS.title, 700, C.indigo);
+    if (L.trap) {
+      const label = '⚠ ' + L.title;
+      const w = width(label, FS.title, 700);
+      n.push({ id: `${grp}-box`, group: grp, kind: 'rect',
+        x: g.xText - g.trapPad.x, y: y - FS.title * CAP - g.trapPad.top,
+        w: w + 2 * g.trapPad.x, h: FS.title * CAP + g.trapPad.top + g.trapPad.bottom, fill: C.indigo });
+      text(`${grp}-title`, grp, label, g.xText, y, FS.title, 700, C.white);
+    } else {
+      text(`${grp}-title`, grp, L.title, g.xText, y, FS.title, 700, C.white);
+    }
+    let yd = y + LINE.title;
+    L.details.forEach((dtl, j) => {
+      wrap(dtl, FS.detail, 500, maxW).forEach((line, k) => {
+        text(`${grp}-detail${j + 1}-${k + 1}`, grp, line, g.xText, yd, FS.detail, 500, C.white);
+        yd += LINE.detail;
+      });
+    });
+    y = yd + g.layerGap;
+  });
+
+  /* peripherie */
+  const pw = t.periphery.map((p) => width(p, FS.grey, 500));
+  const pxs = [g.M, (g.M + pw[0] + (g.W - g.M - pw[2])) / 2, g.W - g.M];
+  t.periphery.forEach((p, i) =>
+    text('periphery' + (i + 1), 'periphery', p, pxs[i], g.yPeriphery, FS.grey, 500, C.grey, anchors[i]));
+
+  /* panneau "Dans cet ordre" (meme place que les couches) */
+  const yT = g.yLayer1, yTmid = yT - FS.title * CAP / 2;
+  path('panel-link-title', 'panel', [...railStartPts, [g.xRail, yTmid], [g.xStub, yTmid]]);
+  text('panel-title', 'panel', t.panel.title, g.xNum, yT, FS.title, 700, C.white);
+  let yi = yT + 76, prev = yTmid;
+  t.panel.items.forEach((item, i) => {
+    const yMid = yi - FS.detail * CAP / 2;
+    path(`panel-link${i + 1}`, 'panel', [[g.xRail, prev], [g.xRail, yMid], [g.xStub, yMid]]);
+    prev = yMid;
+    text(`panel-num${i + 1}`, 'panel', String(i + 1), g.xNum, yi, FS.detail, 700, C.indigo);
+    text(`panel-item${i + 1}`, 'panel', item, g.xText, yi, FS.detail, 500, C.white);
+    yi += LINE.item;
+  });
+
+  /* bandeau CTA */
+  const ctaY = g.H - g.ctaBottom - g.ctaH;
+  n.push({ id: 'cta-box', group: 'cta', kind: 'rect', x: g.M, y: ctaY, w: g.W - 2 * g.M, h: g.ctaH, fill: C.indigo, rx: 20 });
+  text('cta-text', 'cta', t.cta, g.cx, ctaY + g.ctaH / 2 + FS.title * CAP / 2, FS.title, 700, C.white, 'middle');
+  return n;
+}
+
+/* =========================================================================
+   RENDU : un element SVG par noeud, une seule fois.
+   ========================================================================= */
+function render(nodes) {
+  const bg = document.createElementNS(NS, 'rect');
+  bg.setAttribute('width', GEO.W); bg.setAttribute('height', GEO.H); bg.setAttribute('fill', C.navy);
+  svg.appendChild(bg);
+  for (const nd of nodes) {
+    let el;
+    if (nd.kind === 'text') {
+      el = document.createElementNS(NS, 'text');
+      el.setAttribute('x', nd.x); el.setAttribute('y', nd.y);
+      el.setAttribute('font-size', nd.size); el.setAttribute('font-weight', nd.weight);
+      el.setAttribute('fill', nd.fill); el.setAttribute('text-anchor', nd.anchor);
+      el.textContent = nd.text;
+    } else if (nd.kind === 'path') {
+      el = document.createElementNS(NS, 'path');
+      el.setAttribute('d', nd.d); el.setAttribute('fill', 'none');
+      el.setAttribute('stroke', C.white); el.setAttribute('stroke-width', 2); el.setAttribute('stroke-opacity', 0.4);
+    } else {
+      el = document.createElementNS(NS, 'rect');
+      el.setAttribute('x', nd.x); el.setAttribute('y', nd.y);
+      el.setAttribute('width', nd.w); el.setAttribute('height', nd.h);
+      el.setAttribute('rx', nd.rx || GEO.radius); el.setAttribute('fill', nd.fill);
+    }
+    el.setAttribute('data-id', nd.id); el.setAttribute('data-group', nd.group); el.setAttribute('data-kind', nd.kind);
+    svg.appendChild(el);
+  }
+}
+
+/* =========================================================================
+   ETATS : montrer / cacher / baisser l'opacite. Rien ne bouge.
+   ========================================================================= */
+let state = 1;
+function applyState(s) {
+  state = Math.min(STATES, Math.max(1, s | 0));
+  for (const el of svg.querySelectorAll('[data-group]')) {
+    const grp = el.getAttribute('data-group');
+    const visible = (show[grp] || []).includes(state);
+    el.setAttribute('visibility', visible ? 'visible' : 'hidden');
+    el.setAttribute('data-visible', visible ? '1' : '0');
+    el.setAttribute('opacity', (dim[grp] || []).includes(state) ? 0.35 : 1);
+  }
+  const url = new URL(location.href); url.searchParams.set('state', state);
+  history.replaceState(null, '', url);
+  document.title = `Mindmap LTD ${state}/${STATES}`;
+}
+window.setState = applyState;
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') applyState(state + 1);
+  if (e.key === 'ArrowLeft') applyState(state - 1);
+});
+
+document.fonts.ready.then(() => Promise.all([
+  document.fonts.load('900 56px Inter'), document.fonts.load('700 44px Inter'), document.fonts.load('500 34px Inter'),
+]).catch(() => {})).then(() => {
+  render(layout(tree));
+  applyState(Number(new URLSearchParams(location.search).get('state')) || 1);
+  window.__ready = true;
+});
+</script>
+</body>
+</html>
