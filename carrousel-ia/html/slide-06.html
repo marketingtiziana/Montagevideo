@@ -1,0 +1,101 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>slide-6</title><style>
+@font-face{font-family:"IBM Plex Mono";src:url("file:///home/user/Montagevideo/carrousel-ia/fonts/IBMPlexMono-Regular.ttf");font-weight:400}
+@font-face{font-family:"IBM Plex Mono";src:url("file:///home/user/Montagevideo/carrousel-ia/fonts/IBMPlexMono-Medium.ttf");font-weight:500}
+@font-face{font-family:"IBM Plex Mono";src:url("file:///home/user/Montagevideo/carrousel-ia/fonts/IBMPlexMono-SemiBold.ttf");font-weight:600}
+@font-face{font-family:"IBM Plex Mono";src:url("file:///home/user/Montagevideo/carrousel-ia/fonts/IBMPlexMono-Bold.ttf");font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden}
+body{font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;padding:0 80px}
+.dark{background:#0E1230;color:#FFFFFF}
+.light{background:#F7F8FC;color:#12121F}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* --- bandes de signalisation --- */
+.hazard{position:absolute;left:0;right:0;height:12px;
+  background:repeating-linear-gradient(45deg,#4353FF 0 9px,transparent 9px 18px)}
+.hazard.top{top:0}.hazard.bottom{bottom:0}
+
+/* --- grille filigrane en coin --- */
+.grid{position:absolute;width:520px;height:520px;pointer-events:none;
+  background-image:linear-gradient(rgba(67,83,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(67,83,255,.10) 1px,transparent 1px);
+  background-size:40px 40px;background-position:0 0}
+.grid.br{right:0;bottom:0;-webkit-mask-image:radial-gradient(circle at 100% 100%,#000 0%,transparent 72%)}
+.grid.tl{left:0;top:0;-webkit-mask-image:radial-gradient(circle at 0% 0%,#000 0%,transparent 72%)}
+.grid.bl{left:0;bottom:0;-webkit-mask-image:radial-gradient(circle at 0% 100%,#000 0%,transparent 72%)}
+
+/* --- numéro géant outline --- */
+.num{position:absolute;top:34px;right:64px;font-weight:900;font-size:230px;line-height:1;letter-spacing:-0.04em;
+  color:transparent;-webkit-text-stroke:2px rgba(67,83,255,.25)}
+
+/* --- badge pill --- */
+.head{position:absolute;top:96px;left:80px;display:flex;align-items:center;gap:16px}
+.pill{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:999px;
+  font-weight:800;font-size:21px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#4353FF}
+.dark .pill{background:#1A2050}
+.light .pill{background:#EFF1F7}
+.tri{width:52px;height:52px;flex:0 0 auto}
+
+.content{position:absolute;left:80px;top:300px;width:920px}
+
+/* --- titres --- */
+.title{font-weight:900;font-size:92px;line-height:1.02;letter-spacing:-0.02em;white-space:nowrap}
+.title .k{color:#4353FF}
+.glitch{position:relative;display:inline-block}
+.glitch::before{content:attr(data-text);position:absolute;left:0;top:0;transform:translate(2px,-2px);color:rgba(67,83,255,.4);pointer-events:none}
+
+/* --- corps --- */
+.sub{font-weight:600;font-size:36px;line-height:1.3;color:#8A8FA3}
+.body{font-weight:600;font-size:36px;line-height:1.32}
+.dark .body{color:#FFFFFF}
+.light .body{color:#12121F}
+.punch{position:relative;font-weight:800;font-size:38px;line-height:1.25;padding-left:28px}
+.punch::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:6px;border-radius:3px;background:#4353FF}
+.dim{color:#8A8FA3}
+
+/* --- cards --- */
+.card{background:#1A2050;border-radius:24px;padding:40px 44px}
+.light .card{background:#EFF1F7}
+.card.blue{background:#4353FF;box-shadow:0 30px 70px rgba(67,83,255,.5);color:#fff}
+
+/* --- bulle IA --- */
+.bubble{position:relative;background:#1A2050;border:1px solid rgba(67,83,255,.3);border-radius:24px;border-bottom-left-radius:8px;
+  padding:34px 40px;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:31px;line-height:1.42;color:#E6E8F4}
+.bubble .dots{display:flex;gap:8px;margin-bottom:22px}
+.bubble .dots i{width:10px;height:10px;border-radius:2px;background:#4353FF;opacity:.45}
+.bubble .dots i:first-child{opacity:1}
+.cursor{display:inline-block;color:#4353FF;font-weight:700;margin-left:2px}
+
+/* --- tampon --- */
+.stamp{position:absolute;display:inline-block;padding:14px 26px;border:3px solid #4353FF;border-radius:10px;
+  box-shadow:inset 0 0 0 4px #0E1230,inset 0 0 0 5px rgba(67,83,255,.55);
+  background:rgba(14,18,48,.92);color:#4353FF;font-weight:900;font-size:44px;letter-spacing:.08em;text-transform:uppercase;
+  line-height:1;white-space:nowrap;transform:rotate(-10deg)}
+
+/* --- bouton swipe --- */
+.swipe{position:absolute;right:80px;bottom:72px;width:64px;height:64px;border-radius:50%;background:#4353FF;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(67,83,255,.5)}
+
+/* --- indicateur de progression --- */
+.prog{position:absolute;left:80px;bottom:88px;display:flex;gap:8px}
+.prog i{width:28px;height:4px;border-radius:2px;background:rgba(67,83,255,.22)}
+.prog i.on{background:#4353FF;width:56px}
+.light .prog i{background:rgba(67,83,255,.18)}
+.light .prog i.on{background:#4353FF}
+</style></head><body><div class="slide dark">
+<div class="grid tl"></div>
+<div class="num">06</div>
+<div class="head"><svg class="tri" viewBox="0 0 52 52" fill="none" stroke="#4353FF" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<path d="M26 6.5 L47.5 43.5 Q48.5 46 45.6 46 L6.4 46 Q3.5 46 4.5 43.5 Z"/>
+<path d="M26 19 L26 31" stroke-width="4"/><circle cx="26" cy="38.5" r="2.4" fill="#4353FF" stroke="none"/></svg><span class="pill">• DANGER N°4</span></div>
+<div class="content">
+<div class="title" style="font-size:96px">Personne ne paiera<br><span class="k">à ta place.</span></div>
+<div style="position:relative;margin-top:74px">
+<div class="bubble" ><div class="dots"><i></i><i></i><i></i></div>Je ne peux pas être tenue responsable de...<span class="cursor">▌</span></div>
+<div class="stamp" style="right:-10px;top:-62px">AUCUNE GARANTIE</div>
+</div>
+<div class="body" style="margin-top:84px;font-size:34px">Un expert engage sa responsabilité professionnelle. Une IA ne signe rien. Le contrôle tombe ? Redressement, pénalités, intérêts : tout est pour toi.</div>
+<div class="punch" style="margin-top:84px">Elle, elle s'excusera. Gratuitement.</div>
+</div>
+<div class="prog"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div>
+</div></body></html>
