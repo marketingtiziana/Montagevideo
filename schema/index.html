@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Schéma LTD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;900&display=swap">
+<style>
+  /* ---------- charte : 4 valeurs, rien d'autre ---------- */
+  :root {
+    --paper: #FFFFFF;
+    --navy: #0F1535;
+    --indigo: #4F6BFF;
+    --grey: #8A93B8;
+    --m: 96px;          /* marges */
+    --bottom-free: 80px; /* zone sous-titres, rien dedans */
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden; position: relative;
+    font-family: Inter, sans-serif; color: var(--navy); font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- grille de page : titre / (tableau | liste) / pied ---------- */
+  .page {
+    position: absolute; inset: var(--m) var(--m) var(--bottom-free) var(--m);
+    display: grid;
+    grid-template-columns: 1080px 1fr;   /* tableau a largeur fixe, la liste prend le reste */
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "title title" "table list" "footer footer";
+    column-gap: 64px;
+  }
+
+  /* 1. titre, filet indigo de la largeur du titre */
+  .title { grid-area: title; justify-self: start; }
+  .title h1 {
+    margin: 0; font-size: 72px; font-weight: 900; line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .title .rule { height: 6px; background: var(--indigo); margin-top: 14px; }
+
+  /* 2. tableau epure : filets 1 px, cellules vides */
+  .table { grid-area: table; align-self: start; margin-top: 64px; }
+  table { border-collapse: collapse; table-layout: fixed; width: 1080px; }
+  th, td { box-sizing: border-box; padding: 0; text-align: left; vertical-align: middle; font-weight: 600; font-size: 40px; }
+  thead th { height: 124px; vertical-align: top; padding-top: 8px; border-bottom: 1px solid var(--grey); }
+  thead th.corner { width: 384px; }
+  thead th.col { width: 232px; padding-left: 24px; border-left: 1px solid var(--grey); }
+  tbody th { height: 140px; border-bottom: 1px solid var(--grey); padding-right: 24px; white-space: nowrap; }
+  tbody td { height: 140px; border-bottom: 1px solid var(--grey); border-left: 1px solid var(--grey); }
+  .note { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 26px; font-weight: 500; color: var(--grey); }
+  .circle { display: block; flex: none; }
+  .circle circle { fill: none; stroke: var(--grey); stroke-width: 1.5; }
+
+  /* 3. liste "Ce qu'on oublie" : numero indigo, cercle a cocher, texte */
+  .list { grid-area: list; align-self: start; justify-self: start; margin-top: 64px; padding-bottom: 120px; }
+  .list h2 { margin: 0 0 28px; font-size: 34px; font-weight: 600; line-height: 1.2; }
+  .list ol { list-style: none; margin: 0; padding: 0; }
+  .list li { display: flex; align-items: center; gap: 16px; height: 56px; font-size: 30px; font-weight: 500; white-space: nowrap; }
+  .list .num { color: var(--indigo); font-weight: 600; width: 28px; text-align: right; }
+
+  /* 4. pied de page, bas gauche */
+  .footer { grid-area: footer; align-self: end; font-size: 26px; font-weight: 500; color: var(--grey); line-height: 1.2; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="title">
+    <h1 data-text>100 000 € dans ta LTD</h1>
+    <div class="rule" data-rule></div>
+  </header>
+
+  <section class="table">
+    <table>
+      <thead>
+        <tr>
+          <th class="corner"></th>
+          <th class="col"><span data-text>Dubaï</span></th>
+          <th class="col"><span data-text>Espagne</span>
+            <div class="note"><span data-text>Beckham</span><svg class="circle" width="28" height="28" viewBox="0 0 28 28" data-circle="note"><circle cx="14" cy="14" r="13.25"/></svg></div></th>
+          <th class="col"><span data-text>France</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th><span data-text>Salaire</span></th><td data-cell="1-1"></td><td data-cell="1-2"></td><td data-cell="1-3"></td></tr>
+        <tr><th><span data-text>Dividendes</span></th><td data-cell="2-1"></td><td data-cell="2-2"></td><td data-cell="2-3"></td></tr>
+        <tr><th><span data-text>Management fees</span></th><td data-cell="3-1"></td><td data-cell="3-2"></td><td data-cell="3-3"></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <aside class="list">
+    <h2 data-text>Ce qu'on oublie</h2>
+    <ol>
+      <li><span class="num" data-text>1</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Direction effective</span></li>
+      <li><span class="num" data-text>2</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Cotisations sociales</span></li>
+      <li><span class="num" data-text>3</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Convention entre les deux pays</span></li>
+      <li><span class="num" data-text>4</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Année de départ</span></li>
+      <li><span class="num" data-text>5</span><svg class="circle" width="24" height="24" viewBox="0 0 24 24" data-circle="list"><circle cx="12" cy="12" r="11.25"/></svg><span data-text>Fees à soi-même = requalification</span></li>
+    </ol>
+  </aside>
+
+  <footer class="footer"><span data-text>Le bon choix est un calcul, pas une règle.</span></footer>
+</div>
+<script>
+  /* signale a l'export que les polices sont pretes */
+  document.fonts.ready
+    .then(() => Promise.all([document.fonts.load('900 72px Inter'), document.fonts.load('600 40px Inter'), document.fonts.load('500 30px Inter')]).catch(() => {}))
+    .then(() => { window.__inter = document.fonts.check('900 72px Inter') && document.fonts.check('500 30px Inter'); window.__ready = true; });
+</script>
+</body>
+</html>

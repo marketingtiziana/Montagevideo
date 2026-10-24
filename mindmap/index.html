@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mindmap LTD</title>
+<meta name="viewport" content="width=1080, height=1920">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #FFFFFF; }
+  body { overflow: hidden; }
+  svg { display: block; }
+  svg text { white-space: pre; }
+</style>
+<script src="rough.min.js"></script>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+/* =========================================================================
+   DONNEES : tout le contenu vit ici. Changer un texte = changer cet objet.
+   ========================================================================= */
+const tree = {
+  center: '100 000 € dans ta LTD',
+  branches: ['Salaire', 'Dividendes', 'Management fees'],
+  layers: [
+    { title: 'Pays de la société',
+      details: ['IS avant dividendes : 19 % puis 26,5 %', 'Salaire déductible'] },
+    { title: 'Pays de résidence',
+      details: ['Espagne : salaire 45-50 %, dividendes 19-30 %', 'Dubaï : 0 % partout, le salaire gagne'] },
+    { title: 'Régime spécial',
+      details: ['Beckham : salaire 24 %, dividendes étrangers 0 %', '6 ans, demande sous 6 mois'] },
+    { title: 'Direction effective', trap: true,
+      details: ['Ta société devient résidente là où tu vis'] },
+    { title: 'Management fees à toi-même', trap: true,
+      details: ['Salaire déguisé, requalification'] },
+  ],
+  periphery: ['Cotisations sociales', 'Convention fiscale', 'Année de départ'],
+  panel: {
+    title: 'Dans cet ordre',
+    steps: ['Résidence et direction effective',
+            'Convention entre les deux pays',
+            'Régimes spéciaux et délais',
+            'Comparer net en poche, cotisations incluses',
+            'Documenter : contrats, décisions, substance'],
+  },
+  cta: 'Appel diagnostic, lien en bio',
+};
+
+/* Etats : pour chaque groupe, les etats ou il est visible, et ceux ou il est a 35 %. */
+const STATES = 9;
+const show = {
+  core:      [1,2,3,4,5,6,7,8,9],
+  layer1:    [2,3,4,5,6,7],
+  layer2:    [3,4,5,6,7],
+  layer3:    [4,5,6,7],
+  layer4:    [5,6,7],
+  layer5:    [6,7],
+  periphery: [7],
+  panel:     [8,9],
+  cta:       [9],
+};
+const dim = { layer1: [5,6,7], layer2: [5,6,7], layer3: [5,6,7], periphery: [7] };
+
+/* =========================================================================
+   STYLE : une encre, deux polices, des tailles. Rien d'autre.
+   ========================================================================= */
+const INK = '#111111';
+const FONT = { title: 'Caveat, cursive', body: '"Patrick Hand", cursive' };   /* changer la police : ici */
+const FS = { center: 60, branch: 46, title: 42, detail: 34, periphery: 32 };
+const LINE = { title: 56, detail: 46, step: 78 };
+const ROUGH = { roughness: 1.2, bowing: 1, strokeWidth: 2.5, stroke: INK, fill: 'none', disableMultiStroke: true };
+const FORMATS = {
+  /* Reel vertical : les 800 px du haut restent vides pour la facecam. */
+  '9x16': {
+    W: 1080, H: 1920, TOP: 800, M: 80, layout: 'portrait',
+    cx: 540, xRail: 82, xStub: 102, xNum: 114, xText: 170,
+    yCenter: 862, yBus: 936, yBranch: 1008, yLayer1: 1080, layerGap: 34, trapExtra: 14,
+    yPeriphery: 1884, cta: { x: 80, y: 1756, w: 920, h: 104 },
+  },
+  /* Ecran large : centre et branches a gauche, couches a droite, CTA en bas a gauche. */
+  '16x9': {
+    W: 1920, H: 1080, TOP: 0, M: 80, layout: 'landscape',
+    cx: 440, yCenter: 176, xBranchRail: 150, xBranchStub: 170, xBranch: 190, yBranch1: 330, branchGap: 74,
+    xRail: 870, xStub: 890, xNum: 902, xText: 958, yLayer1: 173, layerGap: 34, trapExtra: 14,
+    xPeriphery: 190, yPeriphery1: 640, peripheryGap: 56, cta: { x: 80, y: 896, w: 740, h: 104 },
+  },
+};
+const FORMAT = FORMATS[new URLSearchParams(location.search).get('format')] ? new URLSearchParams(location.search).get('format') : '9x16';
+const GEO = { radius: 14, wobble: { deg: 1.5, dy: 3, endShift: 4 }, ...FORMATS[FORMAT] };  /* rotation max en degres, bornee a endShift px en bout de texte */
+const CAP = 0.7;  /* hauteur approximative des capitales, en em */
+
+/* =========================================================================
+   HASARD DETERMINISTE : une seed par noeud, derivee de son id.
+   ========================================================================= */
+function hash(str) { let h = 2166136261; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function rng(seed) { let a = seed; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const seedOf = (id) => (hash(id) % 2147483646) + 1;
+
+/* =========================================================================
+   MESURE : on mesure les textes avec les vraies polices (une seule fois).
+   ========================================================================= */
+const svg = document.getElementById('stage');
+svg.setAttribute('viewBox', `0 0 ${GEO.W} ${GEO.H}`); svg.setAttribute('width', GEO.W); svg.setAttribute('height', GEO.H);
+document.body.style.width = GEO.W + 'px'; document.body.style.height = GEO.H + 'px';
+const NS = 'http://www.w3.org/2000/svg';
+const rc = rough.svg(svg);
+const measurer = document.createElementNS(NS, 'text');
+measurer.setAttribute('visibility', 'hidden');
+svg.appendChild(measurer);
+function width(text, size, font, weight) {
+  measurer.setAttribute('font-size', size); measurer.setAttribute('font-family', font); measurer.setAttribute('font-weight', weight);
+  measurer.textContent = text;
+  return measurer.getComputedTextLength();
+}
+function wrap(text, size, font, weight, maxW) {
+  const words = [], lines = [];
+  for (const w of text.split(' ')) (w === '%' || w === ':') && words.length ? words[words.length - 1] += ' ' + w : words.push(w);
+  let cur = '';
+  for (const w of words) {
+    const t = cur ? cur + ' ' + w : w;
+    if (cur && width(t, size, font, weight) > maxW) { lines.push(cur); cur = w; } else cur = t;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+/* Chemin orthogonal a angles arrondis (arcs) ; rough.js le retrace a la main. */
+function elbow(points, r = GEO.radius) {
+  let d = `M ${points[0][0]} ${points[0][1]}`;
+  for (let i = 1; i < points.length - 1; i++) {
+    const [px, py] = points[i - 1], [x, y] = points[i], [nx, ny] = points[i + 1];
+    const dx1 = Math.sign(x - px), dy1 = Math.sign(y - py), dx2 = Math.sign(nx - x), dy2 = Math.sign(ny - y);
+    const cross = dx1 * dy2 - dy1 * dx2;
+    d += ` L ${x - dx1 * r} ${y - dy1 * r} A ${r} ${r} 0 0 ${cross > 0 ? 1 : 0} ${x + dx2 * r} ${y + dy2 * r}`;
+  }
+  const [lx, ly] = points[points.length - 1];
+  return d + ` L ${lx} ${ly}`;
+}
+function roundedRect(x, y, w, h, r) {   /* un seul trait, la jonction au milieu du bord bas */
+  return `M ${x + w / 2} ${y + h} L ${x + r} ${y + h} A ${r} ${r} 0 0 1 ${x} ${y + h - r} L ${x} ${y + r} A ${r} ${r} 0 0 1 ${x + r} ${y}`
+       + ` L ${x + w - r} ${y} A ${r} ${r} 0 0 1 ${x + w} ${y + r} L ${x + w} ${y + h - r} A ${r} ${r} 0 0 1 ${x + w - r} ${y + h} L ${x + w / 2} ${y + h}`;
+}
+
+/* =========================================================================
+   LAYOUT : calcule UNE fois, sur l'arbre complet, la liste des noeuds.
+   kind = 'text' | 'stroke' (trait ouvert) | 'shape' (forme fermee).
+   Chaque texte recoit une rotation et un decalage vertical tires de sa seed.
+   ========================================================================= */
+function layout(t) {
+  const n = [], g = GEO;
+  const text = (id, group, str, x, y, size, font, weight, anchor = 'start') => {
+    const r = rng(seedOf(id)), w = width(str, size, font, weight);
+    const maxDeg = Math.min(g.wobble.deg, Math.atan2(g.wobble.endShift, w / 2) * 180 / Math.PI);
+    const rot = Math.round((r() * 2 - 1) * maxDeg * 100) / 100, dy = Math.round((r() * 2 - 1) * g.wobble.dy * 10) / 10;
+    const cx = anchor === 'start' ? x + w / 2 : anchor === 'end' ? x - w / 2 : x;   /* pivot : centre du texte */
+    n.push({ id, group, kind: 'text', text: str, x, y: y + dy, size, font, weight, anchor, rot, pivot: [Math.round(cx * 100) / 100, y + dy] });
+  };
+  const stroke = (id, group, d) => n.push({ id, group, kind: 'stroke', d });
+  const shape = (id, group, kind, d, extra) => n.push({ id, group, kind: 'shape', shape: kind, d, ...extra });
+  const anchors = ['start', 'middle', 'end'];
+
+  /* centre souligne deux fois */
+  const cw = width(t.center, FS.center, FONT.title, 700);
+  text('center', 'core', t.center, g.cx, g.yCenter, FS.center, FONT.title, 700, 'middle');
+  stroke('center-underline1', 'core', `M ${g.cx - cw / 2 - 6} ${g.yCenter + 14} L ${g.cx + cw / 2 + 4} ${g.yCenter + 12}`);
+  stroke('center-underline2', 'core', `M ${g.cx - cw / 2 + 2} ${g.yCenter + 24} L ${g.cx + cw / 2 + 10} ${g.yCenter + 22}`);
+
+  /* couches 1 a 5 : rail vertical, numero, titre (patate si piege), details */
+  const layers = (railStart) => {
+    const maxW = g.W - g.M - g.xText;
+    let y = g.yLayer1, prevRailY = null;
+    t.layers.forEach((L, i) => {
+      const grp = 'layer' + (i + 1);
+      const yMid = y - FS.title * CAP / 2;
+      const pts = i === 0 ? railStart(yMid) : [[g.xRail, prevRailY], [g.xRail, yMid], [g.xStub, yMid]];
+      stroke(`${grp}-link`, grp, elbow(pts));
+      prevRailY = yMid;
+      text(`${grp}-num`, grp, String(i + 1), g.xNum, y, FS.title, FONT.title, 700);
+      text(`${grp}-title`, grp, L.title, g.xText, y, FS.title, FONT.title, 700);
+      let yd = y + LINE.title;
+      if (L.trap) {
+        const w = width(L.title, FS.title, FONT.title, 700);
+        shape(`${grp}-ring`, grp, 'ellipse', null, { cx: g.xText + w / 2, cy: yMid, w: w + 44, h: FS.title * CAP + 50 });
+        text(`${grp}-bang`, grp, '!', g.xText + w + 48, y + 2, FS.branch, FONT.title, 700);
+        yd += g.trapExtra;
+      }
+      L.details.forEach((dtl, j) => {
+        wrap(dtl, FS.detail, FONT.body, 400, maxW).forEach((line, k) => {
+          text(`${grp}-detail${j + 1}-${k + 1}`, grp, line, g.xText, yd, FS.detail, FONT.body, 400);
+          yd += LINE.detail;
+        });
+      });
+      y = yd + g.layerGap;
+    });
+  };
+
+  /* panneau "Dans cet ordre" : titre souligne, etapes reliees par des fleches */
+  const panel = (xTitle) => {
+    const yT = g.yLayer1, tw = width(t.panel.title, FS.title, FONT.title, 700);
+    text('panel-title', 'panel', t.panel.title, xTitle, yT, FS.title, FONT.title, 700);
+    stroke('panel-underline', 'panel', `M ${xTitle - 4} ${yT + 12} L ${xTitle + tw + 6} ${yT + 10}`);
+    let ys = yT + 82;
+    t.panel.steps.forEach((step, i) => {
+      text(`panel-step${i + 1}`, 'panel', step, g.xText, ys, FS.detail, FONT.body, 400);
+      if (i < t.panel.steps.length - 1) {
+        const ax = g.xText + 26, y1 = ys + 12, y2 = ys + LINE.step - FS.detail * CAP - 10;
+        stroke(`panel-arrow${i + 1}`, 'panel', `M ${ax} ${y1} L ${ax} ${y2} M ${ax - 9} ${y2 - 10} L ${ax} ${y2} L ${ax + 9} ${y2 - 10}`);
+      }
+      ys += LINE.step;
+    });
+  };
+
+  /* bandeau CTA : un rectangle arrondi, un seul trait */
+  const cta = () => {
+    const c = g.cta;
+    shape('cta-box', 'cta', 'rect', roundedRect(c.x, c.y, c.w, c.h, 22));
+    text('cta-text', 'cta', t.cta, c.x + c.w / 2, c.y + c.h / 2 + FS.branch * CAP / 2, FS.branch, FONT.title, 700, 'middle');
+  };
+
+  if (g.layout === 'portrait') {
+    /* branches en ligne sous le centre : gauche, droite, la troisieme centree dans l'intervalle */
+    const bw = t.branches.map((b) => width(b, FS.branch, FONT.title, 700));
+    const xMidGap = (g.xNum + bw[0] + (g.W - g.M - bw[2])) / 2;
+    const bxs = [g.xNum, xMidGap, g.W - g.M];
+    const bCenters = [g.xNum + bw[0] / 2, xMidGap, g.W - g.M - bw[2] / 2];
+    t.branches.forEach((b, i) => text('branch' + (i + 1), 'core', b, bxs[i], g.yBranch, FS.branch, FONT.title, 700, anchors[i]));
+    const yBranchTop = g.yBranch - FS.branch * CAP - 12;
+    stroke('link-center', 'core', `M ${g.cx} ${g.yCenter + 36} L ${g.cx} ${g.yBus}`);
+    stroke('link-bus', 'core', elbow([[bCenters[0], yBranchTop], [bCenters[0], g.yBus], [bCenters[2], g.yBus], [bCenters[2], yBranchTop]]));
+    stroke('link-branch2', 'core', `M ${bCenters[1]} ${g.yBus} L ${bCenters[1]} ${yBranchTop}`);
+    /* le rail des couches part du bout gauche du bus */
+    layers((yMid) => [[bCenters[0] + g.radius, g.yBus], [g.xRail, g.yBus], [g.xRail, yMid], [g.xStub, yMid]]);
+    /* peripherie : trois textes en bas de zone */
+    const pw = t.periphery.map((p) => width(p, FS.periphery, FONT.body, 400));
+    const pxs = [g.M, (g.M + pw[0] + (g.W - g.M - pw[2])) / 2, g.W - g.M];
+    t.periphery.forEach((p, i) => text('periphery' + (i + 1), 'periphery', p, pxs[i], g.yPeriphery, FS.periphery, FONT.body, 400, anchors[i]));
+    panel(g.xNum);
+  } else {
+    /* branches empilees sous le centre, sur un rail a gauche */
+    let prevY = null;
+    t.branches.forEach((b, i) => {
+      const yB = g.yBranch1 + i * g.branchGap, yMid = yB - FS.branch * CAP / 2;
+      text('branch' + (i + 1), 'core', b, g.xBranch, yB, FS.branch, FONT.title, 700);
+      const pts = i === 0 ? [[g.cx, g.yCenter + 36], [g.cx, g.yCenter + 36 + 40], [g.xBranchRail, g.yCenter + 36 + 40], [g.xBranchRail, yMid], [g.xBranchStub, yMid]]
+                          : [[g.xBranchRail, prevY], [g.xBranchRail, yMid], [g.xBranchStub, yMid]];
+      stroke('link-branch' + (i + 1), 'core', elbow(pts));
+      prevY = yMid;
+    });
+    /* le rail des couches part du bout droit du centre, a l'horizontale */
+    const xCenterRight = g.cx + cw / 2 + 26;
+    layers((yMid) => [[xCenterRight, yMid], [g.xStub, yMid]]);
+    /* peripherie : trois textes empiles en bas a gauche */
+    t.periphery.forEach((p, i) => text('periphery' + (i + 1), 'periphery', p, g.xPeriphery, g.yPeriphery1 + i * g.peripheryGap, FS.periphery, FONT.body, 400));
+    panel(g.xNum);
+    /* le panneau est relie au centre comme les couches */
+    const yTmid = g.yLayer1 - FS.title * CAP / 2;
+    stroke('panel-link', 'panel', `M ${xCenterRight} ${yTmid} L ${g.xStub} ${yTmid}`);
+  }
+  cta();
+  return n;
+}
+
+/* =========================================================================
+   RENDU : un element SVG par noeud, une seule fois, seed fixee par noeud.
+   ========================================================================= */
+function render(nodes) {
+  for (const nd of nodes) {
+    let el;
+    const opts = { ...ROUGH, seed: seedOf(nd.id) };
+    if (nd.kind === 'text') {
+      el = document.createElementNS(NS, 'text');
+      el.setAttribute('x', nd.x); el.setAttribute('y', nd.y);
+      el.setAttribute('font-size', nd.size); el.setAttribute('font-family', nd.font); el.setAttribute('font-weight', nd.weight);
+      el.setAttribute('fill', INK); el.setAttribute('text-anchor', nd.anchor);
+      el.setAttribute('transform', `rotate(${nd.rot} ${nd.pivot[0]} ${nd.pivot[1]})`);
+      el.textContent = nd.text;
+    } else if (nd.kind === 'shape' && nd.shape === 'ellipse') {
+      el = rc.ellipse(nd.cx, nd.cy, nd.w, nd.h, opts);
+    } else {
+      el = rc.path(nd.d, opts);
+    }
+    el.setAttribute('data-id', nd.id); el.setAttribute('data-group', nd.group); el.setAttribute('data-kind', nd.kind);
+    svg.appendChild(el);
+  }
+}
+
+/* =========================================================================
+   ETATS : montrer / cacher / baisser l'opacite. Rien ne bouge, rien ne se redessine.
+   ========================================================================= */
+let state = 1;
+function applyState(s) {
+  state = Math.min(STATES, Math.max(1, s | 0));
+  for (const el of svg.querySelectorAll('[data-group]')) {
+    const grp = el.getAttribute('data-group');
+    const visible = (show[grp] || []).includes(state);
+    el.setAttribute('visibility', visible ? 'visible' : 'hidden');
+    el.setAttribute('data-visible', visible ? '1' : '0');
+    el.setAttribute('opacity', (dim[grp] || []).includes(state) ? 0.35 : 1);
+  }
+  const url = new URL(location.href); url.searchParams.set('state', state); url.searchParams.set('format', FORMAT);
+  history.replaceState(null, '', url);
+  document.title = `Mindmap LTD ${state}/${STATES}`;
+}
+window.setState = applyState;
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') applyState(state + 1);
+  if (e.key === 'ArrowLeft') applyState(state - 1);
+});
+
+document.fonts.ready
+  .then(() => Promise.all([document.fonts.load('700 42px Caveat'), document.fonts.load('400 34px "Patrick Hand"')]).catch(() => {}))
+  .then(() => {
+    window.__format = FORMAT;
+    window.__fonts = { caveat: document.fonts.check('700 42px Caveat'), patrick: document.fonts.check('400 34px "Patrick Hand"') };
+    render(layout(tree));
+    applyState(Number(new URLSearchParams(location.search).get('state')) || 1);
+    window.__ready = true;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Schéma Cohérent Incohérent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;900&display=swap">
+<style>
+  /* ---------- charte : 4 valeurs, rien d'autre ---------- */
+  :root {
+    --paper: #FFFFFF;
+    --navy: #0F1535;
+    --indigo: #4F6BFF;
+    --grey: #8A93B8;
+    --m: 96px;           /* marges */
+    --bottom-free: 80px; /* zone sous-titres, rien dedans */
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden; position: relative;
+    font-family: Inter, sans-serif; color: var(--navy); font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- grille de page : titre / tableau pleine largeur / (pied | ligne montant) ---------- */
+  .page {
+    position: absolute; inset: var(--m) var(--m) var(--bottom-free) var(--m);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "title title" "table table" "footer amount";
+  }
+
+  /* 1. titre, filet indigo de la largeur du titre, sous-titre gris a droite */
+  .title { grid-area: title; display: flex; align-items: baseline; gap: 40px; }
+  .title h1 { margin: 0; font-size: 72px; font-weight: 900; line-height: 1.25; letter-spacing: -0.01em; }
+  .title .rule { height: 6px; background: var(--indigo); margin-top: 14px; }
+  .title .sub { font-size: 26px; font-weight: 500; color: var(--grey); white-space: nowrap; }
+
+  /* 2. tableau pleine largeur : filets 1 px, cellules vides */
+  .table { grid-area: table; margin-top: 36px; }
+  table { border-collapse: collapse; table-layout: fixed; width: 100%; }
+  th, td { box-sizing: border-box; padding: 0; text-align: left; vertical-align: middle; }
+  thead th { height: 58px; font-size: 36px; font-weight: 600; vertical-align: bottom; padding: 0 0 14px 24px; border-bottom: 1px solid var(--grey); border-left: 1px solid var(--grey); white-space: nowrap; }
+  thead th.corner { width: 28%; border-left: none; padding-left: 0; }
+  tbody th { height: 120px; font-size: 30px; font-weight: 500; border-bottom: 1px solid var(--grey); padding-right: 24px; white-space: nowrap; }
+  tbody th .row { display: flex; align-items: center; gap: 16px; }
+  tbody td { height: 120px; border-bottom: 1px solid var(--grey); border-left: 1px solid var(--grey); }
+  .num { color: var(--indigo); font-weight: 600; width: 28px; text-align: right; flex: none; }
+
+  /* 3. ligne "Montant / critere" a droite sous le tableau, 100 px libres a droite, cercle a cocher */
+  .amount { grid-area: amount; align-self: end; justify-self: end; margin-right: 100px; display: flex; align-items: center; font-size: 30px; font-weight: 500; white-space: nowrap; }
+  .amount .circle { display: block; flex: none; margin-right: 16px; }
+  .amount .circle circle { fill: none; stroke: var(--grey); stroke-width: 1.5; }
+  .amount .gap { display: block; width: 40px; height: 1px; }   /* 40 px entre « Montant » et la zone vide */
+  .amount .blank { display: block; width: 60px; height: 36px; } /* 60 px vides, elle y ecrit le signe */
+
+  /* 4. pied de page, bas gauche */
+  .footer { grid-area: footer; align-self: end; font-size: 26px; font-weight: 500; color: var(--grey); line-height: 1.2; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="title">
+    <div>
+      <h1 data-text>Cohérent / Incohérent</h1>
+      <div class="rule" data-rule></div>
+    </div>
+    <span class="sub" data-text>Ce que le fisc compare, pas ce qu'il lit.</span>
+  </header>
+
+  <section class="table">
+    <table>
+      <thead>
+        <tr>
+          <th class="corner"></th>
+          <th><span data-text>Cohérent</span></th>
+          <th><span data-text>Incohérent</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th><span class="row"><span class="num" data-text>1</span><span data-text>Revenus vs train de vie</span></span></th><td data-cell="1-1"></td><td data-cell="1-2"></td></tr>
+        <tr><th><span class="row"><span class="num" data-text>2</span><span data-text>Structure vs flux</span></span></th><td data-cell="2-1"></td><td data-cell="2-2"></td></tr>
+        <tr><th><span class="row"><span class="num" data-text>3</span><span data-text>Statut vs résidence réelle</span></span></th><td data-cell="3-1"></td><td data-cell="3-2"></td></tr>
+        <tr><th><span class="row"><span class="num" data-text>4</span><span data-text>Plateformes vs déclaré</span></span></th><td data-cell="4-1"></td><td data-cell="4-2"></td></tr>
+        <tr><th><span class="row"><span class="num" data-text>5</span><span data-text>Comptes vs 3916</span></span></th><td data-cell="5-1"></td><td data-cell="5-2"></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="amount">
+    <svg class="circle" width="28" height="28" viewBox="0 0 28 28" data-circle><circle cx="14" cy="14" r="13.25"/></svg>
+    <span data-text>Montant</span><span class="gap" data-gap></span><span class="blank" data-blank></span><span data-text>critère</span>
+  </div>
+
+  <footer class="footer"><span data-text>Une histoire qui tient en une phrase, avec une preuve par mot.</span></footer>
+</div>
+<script>
+  /* signale a l'export que les polices sont pretes */
+  document.fonts.ready
+    .then(() => Promise.all([document.fonts.load('900 72px Inter'), document.fonts.load('600 36px Inter'), document.fonts.load('500 30px Inter')]).catch(() => {}))
+    .then(() => { window.__inter = document.fonts.check('900 72px Inter') && document.fonts.check('500 30px Inter'); window.__ready = true; });
+</script>
+</body>
+</html>

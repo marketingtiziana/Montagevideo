@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Schéma Trois cercles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;900&display=swap">
+<style>
+  /* ---------- charte : 4 valeurs, rien d'autre ---------- */
+  :root {
+    --paper: #FFFFFF;
+    --navy: #0F1535;
+    --indigo: #4F6BFF;
+    --grey: #8A93B8;
+    --m: 96px;           /* marges */
+    --bottom-free: 80px; /* zone sous-titres, rien dedans */
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden; position: relative;
+    font-family: Inter, sans-serif; color: var(--navy); font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 1. titre, filet indigo de la largeur du titre */
+  .title { position: absolute; left: var(--m); top: var(--m); }
+  .title h1 { margin: 0; font-size: 64px; font-weight: 900; line-height: 1.25; letter-spacing: -0.01em; white-space: nowrap; }
+  .title .rule { height: 6px; background: var(--indigo); margin-top: 14px; }
+
+  /* 2. diagramme : un SVG plein cadre, cercles sans remplissage, etiquettes a l'exterieur */
+  svg.venn { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; font-family: Inter, sans-serif; }
+  svg.venn circle { fill: none; stroke: var(--grey); stroke-width: 2; }
+  svg.venn .label { font-size: 40px; font-weight: 600; fill: var(--navy); }
+  svg.venn .sub { font-size: 26px; font-weight: 500; fill: var(--grey); }
+
+  /* 3. phrase du bas, centree, au-dessus de la zone sous-titres */
+  .footer { position: absolute; left: 0; right: 0; bottom: var(--bottom-free); text-align: center; font-size: 30px; font-weight: 500; line-height: 1.2; white-space: nowrap; }
+
+  /* 4. "1 · 2 · 3" en bas a droite, suivi de 160 px de vide */
+  .order { position: absolute; right: var(--m); bottom: var(--bottom-free); display: flex; align-items: center; font-size: 24px; font-weight: 500; color: var(--grey); line-height: 1.2; white-space: nowrap; }
+  .order .blank { display: block; width: 160px; height: 1px; }
+</style>
+</head>
+<body>
+<header class="title">
+  <h1 data-text>Trois cercles, une seule zone sûre</h1>
+  <div class="rule" data-rule></div>
+</header>
+
+<svg class="venn" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" id="venn"></svg>
+
+<footer class="footer"><span data-text>Quand les trois sont au même endroit, tu dors tranquille.</span></footer>
+<div class="order"><span data-text>1 · 2 · 3</span><span class="blank" data-blank></span></div>
+
+<script>
+  /* ---------- geometrie du diagramme : tout part de ces constantes ---------- */
+  const G = {
+    R: 250,            /* rayon des trois cercles */
+    cx: 960,           /* axe vertical du diagramme */
+    cyTop: 476,        /* centre des deux cercles du haut (bord haut a 226, sous le filet du titre) */
+    half: 160,         /* demi-ecart horizontal entre les deux cercles du haut */
+    drop: 204,         /* descente du centre du cercle du bas */
+    gap: 24,           /* espace entre un cercle et son etiquette */
+  };
+  const circles = [
+    { id: 'residence', cx: G.cx - G.half, cy: G.cyTop,          label: 'Résidence', sub: 'Où tu vis',                side: 'left'  },
+    { id: 'societe',   cx: G.cx + G.half, cy: G.cyTop,          label: 'Société',   sub: 'Où elle est immatriculée', side: 'right' },
+    { id: 'activite',  cx: G.cx,          cy: G.cyTop + G.drop, label: 'Activité',  sub: 'D\'où tu travailles',      side: 'bottom-left' },
+  ];
+  window.__geo = { R: G.R, circles: circles.map((c) => ({ id: c.id, cx: c.cx, cy: c.cy })) };
+
+  const NS = 'http://www.w3.org/2000/svg', svg = document.getElementById('venn');
+  const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text) e.textContent = text; svg.appendChild(e); return e; };
+  for (const c of circles) {
+    el('circle', { cx: c.cx, cy: c.cy, r: G.R, 'data-circle': c.id });
+    /* etiquette a l'exterieur, du cote oppose aux intersections */
+    let x, y, anchor;
+    if (c.side === 'left')  { x = c.cx - G.R - G.gap; y = c.cy - 8; anchor = 'end'; }
+    if (c.side === 'right') { x = c.cx + G.R + G.gap; y = c.cy - 8; anchor = 'start'; }
+    if (c.side === 'bottom-left') { x = c.cx - G.R - G.gap; y = c.cy + 70; anchor = 'end'; }
+    el('text', { x, y, 'text-anchor': anchor, class: 'label', 'data-text': '' }, c.label);
+    el('text', { x, y: y + 38, 'text-anchor': anchor, class: 'sub', 'data-text': '' }, c.sub);
+  }
+
+  /* signale a l'export que les polices sont pretes */
+  document.fonts.ready
+    .then(() => Promise.all([document.fonts.load('900 64px Inter'), document.fonts.load('600 40px Inter'), document.fonts.load('500 26px Inter')]).catch(() => {}))
+    .then(() => { window.__inter = document.fonts.check('900 64px Inter') && document.fonts.check('500 26px Inter'); window.__ready = true; });
+</script>
+</body>
+</html>
