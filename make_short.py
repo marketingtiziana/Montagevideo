@@ -20,11 +20,12 @@ FF = _ffmpeg()
 SRC, MUSIC, OUT = "INPUT.mp4", "MUSIC.mp3", "short_final.mp4"
 W, H, FPS = 1080, 1920, 30
 
-MIN_SIL = 0.50          # on ne coupe que dans un vrai silence inter-phrase
-LONG_SIL = 1.00         # silence si long qu'il vaut une fin de phrase
-PAD = 0.12              # marge gardee de chaque cote (prise sur le silence)
-XF = 0.15               # chaque raccord est un fondu, jamais un cut sec
-HEAD, TAIL = 0.30, 0.40 # respiration conservee au debut et a la fin
+SIL_DB = -34            # seuil au-dela duquel on considere qu'elle ne parle plus
+SIL_MIN = 0.45          # en-deca c'est une respiration : on la garde
+LEAD = 0.20             # on reprend AVANT l'attaque du mot, jamais dessus
+TAIL = 0.10             # on laisse la derniere syllabe finir
+HOLE = 0.12             # silence restant minimal : sous ce gain, pas de coupe
+XF = 0.12               # chaque raccord est un fondu, jamais un cut sec
 
 ZOOM = 0.05             # micro-zoom lent, avec ease-in/ease-out
 BR_XF = 0.30            # entree/sortie des B-roll et habillages
@@ -163,32 +164,83 @@ def doublons(words):
 
 
 # -------------------------------------------------------------- coupes douces
-def segments(words):
-    """Groupes de phrases : on ne coupe qu'entre deux phrases, dans le silence."""
-    groups, cur = [], [{"w": words[0], "pad": HEAD}]
-    for p, w in zip(words, words[1:]):
-        gap = w["a"] - p["b"]
-        cut = any(p["b"] - 0.06 <= s0 and e0 <= w["a"] + 0.06
-                  for s0, e0 in DROPPED)
-        if cut or (gap > MIN_SIL and (SENT.search(p["w"]) or gap > LONG_SIL)):
-            cur[-1]["pad_end"] = PAD_DROP if cut else PAD
-            groups.append(cur)
-            cur = [{"w": w, "pad": PAD_DROP if cut else PAD}]
-        else:
-            cur.append({"w": w})              # micro-pause de respiration : gardee
-    groups.append(cur)
+def silences(path):
+    """Les vrais silences de la bande son, pas les ecarts entre mots.
 
-    segs = []
-    for k, g in enumerate(groups):
-        while len(g) > 1 and norm(g[0]["w"]["w"]) in FILLERS:
-            g = g[1:]                         # hesitation isolee en tete de phrase
-        words_g = [x["w"] for x in g]
-        pa = g[0].get("pad", PAD)
-        pb = g[-1].get("pad_end", TAIL if k == len(groups) - 1 else PAD)
-        a = words_g[0]["a"] - pa
-        b = words_g[-1]["b"] + pb
-        segs.append({"a": max(0.0, a), "b": b, "words": words_g})
-    return segs
+    Whisper etire parfois un mot sur la pause qui le suit ("le..." tenu 2,7 s) :
+    un decoupage fonde sur ses horodatages laisse donc passer de longs blancs.
+    """
+    r = subprocess.run([FF, "-hide_banner", "-nostats", "-i", path,
+                        "-af", "silencedetect=n=%ddB:d=%.2f" % (SIL_DB, SIL_MIN),
+                        "-f", "null", "-"], capture_output=True, text=True)
+    out, start = [], None
+    for m in re.finditer(r"silence_(start|end): (-?\d+\.?\d*)", r.stderr):
+        if m.group(1) == "start":
+            start = float(m.group(2))
+        elif start is not None:
+            out.append((start, float(m.group(2))))
+            start = None
+    if start is not None:
+        out.append((start, duree(path)))
+    return out
+
+
+def duree(path):
+    r = subprocess.run([FF, "-hide_banner", "-i", path], capture_output=True,
+                       text=True)
+    m = re.search(r"Duration: (\d+):(\d+):(\d+\.\d+)", r.stderr)
+    h, mn, sec = m.groups()
+    return int(h) * 3600 + int(mn) * 60 + float(sec)
+
+
+def segments(words):
+    """Garde ce qui est parle, resserre les blancs, retire les passages coupes."""
+    total = duree(SRC)
+    sil = silences(SRC)
+    reprises = [e for _, e in sil]            # instants ou la parole repart
+    coupes = [(a + TAIL, b - LEAD) for a, b in sil]
+    coupes = [(a, b) for a, b in coupes if b - a > HOLE]
+    # un passage retire s'arrete 80 ms avant le mot suivant : whisper horodate
+    # parfois un mot sur une duree nulle, et la coupe avalait son attaque
+    for a, b in DROPPED:
+        if b - a > 0.2:
+            # la coupe s'arrete a la reprise de parole la plus proche, sinon
+            # elle mord sur l'attaque du mot suivant
+            proches = [e for e in reprises if b - 0.5 <= e <= b]
+            coupes.append((a + 0.02, min(proches) if proches else b - 0.08))
+        else:
+            coupes.append((a, b))
+    coupes.sort()
+
+    fusion = []                               # deux coupes qui se touchent n'en font qu'une
+    for a, b in coupes:
+        if fusion and a <= fusion[-1][1]:
+            fusion[-1][1] = max(fusion[-1][1], b)
+        else:
+            fusion.append([a, b])
+
+    gardes, t = [], 0.0
+    for a, b in fusion:
+        if a > t:
+            gardes.append([t, a])
+        t = max(t, b)
+    if t < total:
+        gardes.append([t, total])
+
+    segs = [{"a": a, "b": b, "words": []} for a, b in gardes if b - a >= 0.25]
+    # chaque mot va au segment qu'il recouvre le plus : whisper fait souvent
+    # deborder le dernier mot d'une phrase sur le silence qui suit
+    for w in words:
+        best, score = None, 0.0
+        for seg in segs:
+            ov = min(w["b"], seg["b"]) - max(w["a"], seg["a"])
+            if ov > score:
+                best, score = seg, ov
+        if best is None:
+            best = min(segs, key=lambda s: min(abs(s["b"] - w["a"]),
+                                               abs(s["a"] - w["b"])))
+        best["words"].append(w)
+    return [s for s in segs if s["words"]]    # sans parole : respiration ou bruit
 
 
 def timeline(segs):
@@ -455,8 +507,8 @@ def ass(segs, anims, path):
     for s in segs:
         cs = cards(s["words"])
         for j, c in enumerate(cs):
-            a = c[0]["a"] + s["off"]
-            b = (cs[j + 1][0]["a"] + s["off"]) if j + 1 < len(cs) \
+            a = max(c[0]["a"], s["a"]) + s["off"]
+            b = (max(cs[j + 1][0]["a"], s["a"]) + s["off"]) if j + 1 < len(cs) \
                 else min(c[-1]["b"] + 0.25, s["b"]) + s["off"]
             if double(a, b, c) or (HOOK and a < HOOK_MUTE):
                 continue
