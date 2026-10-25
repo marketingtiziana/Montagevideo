@@ -34,7 +34,7 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["C'EST QUOI", "UNE SASU ?"]
+HOOK = ["C'EST QUOI", "UNE SCI ?"]
 HOOK_END = 3.6          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 2.3         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -71,7 +71,11 @@ PLACES = {"dubai", "dubaï", "singapour", "suisse", "monaco", "portugal",
           "bali", "europe", "asie", "indonesie", "vietnam", "qatar", "londres",
           "miami", "italie", "grece", "israel", "mexique", "bresil"}
 KEY = {"expatriation", "immobilier", "statistiques", "fiscalite", "fiscal",
-       "residence", "patrimoine", "imposition"}
+       "residence", "patrimoine", "imposition", "indivision", "loyer",
+       "revente", "transmettre", "donation", "succession", "impot"}
+# un nombre ecrit en toutes lettres merite le meme traitement qu'un chiffre
+NUMWORDS = {"deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
+            "dix"}
 
 
 def norm(w):
@@ -413,6 +417,14 @@ def animations(segs, total):
             i = j + 1
             continue
         b = base(w)
+        if b in NUMWORDS and i + 1 < len(flat):
+            nx = base(flat[i + 1][0])
+            if nx not in GLUE and len(nx) > 3:
+                found.append({"kind": "callout", "t": t, "prio": 0,
+                              "txt": re.sub(r"[,.;:?!]", "", w["w"] + " "
+                                            + flat[i + 1][0]["w"]).upper()})
+                i += 2
+                continue
         if id(w) not in taken and (b in STRUCT or b in KEY
                                    or b in PLACES):
             found.append({"kind": "callout", "t": t,
