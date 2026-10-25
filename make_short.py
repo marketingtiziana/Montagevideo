@@ -8,11 +8,15 @@ Trois etapes, pour que le texte soit relu avant d'etre incruste :
 L'etape render applique corrections.json (meme nombre de mots) si le fichier
 existe : seul le texte change, jamais les horodatages.
 """
-import json, os, re, subprocess, sys
+import json, os, re, shutil, subprocess, sys
 
-import imageio_ffmpeg
 
-FF = imageio_ffmpeg.get_ffmpeg_exe()
+def _ffmpeg():
+    """Le binaire du systeme s'il existe, sinon celui livre par imageio-ffmpeg."""
+    return shutil.which("ffmpeg") or __import__("imageio_ffmpeg").get_ffmpeg_exe()
+
+
+FF = _ffmpeg()
 SRC, MUSIC, OUT = "INPUT.mp4", "MUSIC.mp3", "short_final.mp4"
 W, H, FPS = 1080, 1920, 30
 
@@ -24,6 +28,7 @@ HEAD, TAIL = 0.30, 0.40 # respiration conservee au debut et a la fin
 
 ZOOM = 0.05             # micro-zoom lent, avec ease-in/ease-out
 BR_XF = 0.30            # entree/sortie des B-roll et habillages
+ANIM_LAG = 0.8          # l'habillage arrive en echo, apres le mot prononce
 BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
@@ -264,7 +269,7 @@ def animations(segs, total):
                 j += 1
             if len(items) >= 2:
                 taken.update(it[2] for it in items)
-                found.append({"kind": "list", "t": items[0][1],
+                found.append({"kind": "list", "t": items[0][1], "prio": 1,
                               "items": [(t, u) for t, u, _ in items]})
                 i = j
                 continue
@@ -279,7 +284,8 @@ def animations(segs, total):
             while j + 1 < len(flat):
                 nx = flat[j + 1][0]
                 nn = norm(nx["w"])
-                if re.search(r"\d", nx["w"]) or nn in UNITS or nn == "/":
+                if (re.search(r"\d", nx["w"]) or nn in UNITS or nn == "/"
+                        or nx["w"].strip() in ("%", "€", "$")):
                     parts.append(nx["w"])
                     j += 1
                 elif (j + 2 < len(flat) and re.search(r"\d", flat[j + 2][0]["w"])
@@ -291,7 +297,7 @@ def animations(segs, total):
             if i and norm(flat[i - 1][0]["w"]) in LEADIN:
                 parts.insert(0, flat[i - 1][0]["w"])
             txt = re.sub(r"\s*/\s*", "/", " ".join(parts))
-            found.append({"kind": "callout", "t": t,
+            found.append({"kind": "callout", "t": t, "prio": 0,
                           "txt": re.sub(r"[,.;:?!]", "", txt).strip().upper()})
             i = j + 1
             continue
@@ -299,39 +305,38 @@ def animations(segs, total):
         if id(w) not in taken and (b in STRUCT or b in KEY
                                    or b in PLACES):
             found.append({"kind": "callout", "t": t,
+                          "prio": 1 if b in STRUCT else 2 if b in KEY else 4,
                           "txt": re.sub(r"[,.;:?!]", "", b).upper()})
         i += 1
 
     # comparaison explicite "A vs B"
     for k in range(len(flat) - 1):
         if norm(flat[k][0]["w"]) in ("vs", "versus"):
-            found.append({"kind": "vs",
+            found.append({"kind": "vs", "prio": 1,
                           "t": flat[k][0]["a"] + flat[k][1]["off"],
                           "a": flat[k - 1][0]["w"].upper() if k else "",
                           "b": re.sub(r"[,.;:?!]", "",
                                       flat[k + 1][0]["w"]).upper()})
 
-    found.sort(key=lambda d: d["t"])
-    keep, last, seen = [], -99.0, set()
-    for d in found:
+    keep, seen = [], set()
+    for d in sorted(found, key=lambda d: (d.get("prio", 3), d["t"])):
         label = d.get("txt") or d["kind"]
-        if d["t"] - last < 4.0 or d["t"] > total - 2.5 or d["t"] < 1.0:
-            continue
-        if label in seen:
+        if d["t"] > total - 3.6 or d["t"] < 1.0 or label in seen:
             continue                          # jamais deux fois le meme mot
+        if any(abs(d["t"] - k["t"]) < 4.0 for k in keep):
+            continue                          # on laisse respirer entre deux
         seen.add(label)
         keep.append(d)
-        last = d["t"]
         if len(keep) == 5:
             break
-    return keep
+    return sorted(keep, key=lambda d: d["t"])
 
 
 def anim_events(anims):
     """Chaque illustration : pop + leger glissement, tiers haut de l'image."""
     ev = []
     for d in anims:
-        a = d["t"]
+        a = d["t"] + ANIM_LAG
         if d["kind"] == "callout":
             txt = d["txt"]
             fs = max(70, min(132, int(1000 / (0.55 * max(1, len(txt))))))
@@ -373,12 +378,24 @@ def ass(segs, anims, path):
          "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, "
          "Effect, Text"]
 
+    # un callout reprend les mots prononces : on retire la carte de sous-titres
+    # qui dirait exactement la meme chose au meme instant
+    doubles = [(d["t"] + ANIM_LAG, d["t"] + ANIM_LAG + 1.9,
+                set(norm(x) for x in d["txt"].split()))
+               for d in anims if d["kind"] == "callout"]
+
+    def double(a, b, words):
+        w = set(norm(x["w"]) for x in words)
+        return any(a < t1 and b > t0 and w and w <= got for t0, t1, got in doubles)
+
     for s in segs:
         cs = cards(s["words"])
         for j, c in enumerate(cs):
             a = c[0]["a"] + s["off"]
             b = (cs[j + 1][0]["a"] + s["off"]) if j + 1 < len(cs) \
                 else min(c[-1]["b"] + 0.25, s["b"]) + s["off"]
+            if double(a, b, c):
+                continue
             txt = " ".join(w["w"] for w in c).upper().replace("\u2014", "-")
             txt = re.sub(r"\s+", " ", txt).strip()
             L.append("Dialogue: 0,%s,%s,S,,0,0,0,,{\\fs%d\\fscx90\\fscy90"
@@ -484,13 +501,26 @@ def lufs(args):
 
 # ------------------------------------------------------------------ rendu final
 def render(segs, brolls, anims, total):
+    """Un seul encodage. Chaque segment est une ENTREE a part (-ss/-t) et non
+    une branche trim du meme flux : un decodeur unique devait sinon garder en
+    memoire tout ce que les branches suivantes n'avaient pas encore consomme,
+    ce qui faisait tuer ffmpeg par le systeme sur une source longue en 1080p60.
+    """
     bw, bh = int(W * (1 + ZOOM)) // 2 * 2, int(H * (1 + ZOOM)) // 2 * 2
+    cmd = [FF, "-y", "-hide_banner", "-loglevel", "error"]
+    for s in segs:
+        cmd += ["-ss", "%.3f" % s["a"], "-t", "%.3f" % (s["b"] - s["a"]), "-i", SRC]
+    for b in brolls:
+        cmd += ["-i", b["path"]]
+    has_music = os.path.exists(MUSIC)
+    if has_music:
+        cmd += ["-i", MUSIC]
+
     chain = []
     for i, s in enumerate(segs):
-        chain.append("[0:v]trim=%.3f:%.3f,setpts=PTS-STARTPTS,fps=%d,"
-                     "format=yuv420p,setsar=1[v%d]" % (s["a"], s["b"], FPS, i))
-        chain.append("[0:a]atrim=%.3f:%.3f,asetpts=PTS-STARTPTS[a%d]"
-                     % (s["a"], s["b"], i))
+        chain.append("[%d:v]setpts=PTS-STARTPTS,fps=%d,format=yuv420p,setsar=1[v%d]"
+                     % (i, FPS, i))
+        chain.append("[%d:a]asetpts=PTS-STARTPTS,aresample=48000[a%d]" % (i, i))
 
     # raccords en fondu : la coupe se fait pendant le silence et ne se voit pas
     vprev, aprev, acc = "v0", "a0", segs[0]["b"] - segs[0]["a"]
@@ -513,6 +543,7 @@ def render(segs, brolls, anims, total):
                  "flags=bicubic,crop=%d:%d,setsar=1[tv]" % (W, z, H, z, W, H))
     vlast = "tv"
 
+    nseg = len(segs)
     for k, b in enumerate(brolls):
         zb = "(1+0.08*(t/%.3f))" % b["dur"]
         chain.append("[%d:v]trim=0:%.3f,setpts=PTS-STARTPTS,fps=%d,"
@@ -520,7 +551,7 @@ def render(segs, brolls, anims, total):
                      "crop=%d:%d,scale=w=trunc(%d*%s/2)*2:h=trunc(%d*%s/2)*2:"
                      "eval=frame:flags=bicubic,crop=%d:%d,setsar=1,"
                      "format=yuv420p[b%d]"
-                     % (k + 1, b["dur"], FPS, bw, bh, bw, bh, W, zb, H, zb,
+                     % (nseg + k, b["dur"], FPS, bw, bh, bw, bh, W, zb, H, zb,
                         W, H, k))
     off = 0.0
     for k, b in enumerate(brolls):
@@ -543,18 +574,16 @@ def render(segs, brolls, anims, total):
     chain.append("[%s]ass=subs_short.ass[vo]" % vlast)
 
     dur_out = acc + off
-    has_music = os.path.exists(MUSIC)
     voice = "[%s]loudnorm=I=%.0f:TP=-1.5:LRA=11,aresample=48000" % (aprev,
                                                                     VOICE_LUFS)
     if has_music:
-        mi = 1 + len(brolls)
-        gain = 0.0
+        mi = nseg + len(brolls)
         chain.append(voice + ",asplit=2[vx][key]")
         chain.append("[%d:a]aloop=loop=-1:size=2000000000,atrim=0:%.3f,"
-                     "loudnorm=I=%.0f:TP=-9:LRA=7,volume=%.1fdB,"
+                     "loudnorm=I=%.0f:TP=-9:LRA=7,"
                      "afade=t=in:st=0:d=0.5,afade=t=out:st=%.3f:d=1.5,"
                      "aresample=48000[mus]"
-                     % (mi, dur_out, MUSIC_LUFS, gain, max(0.0, dur_out - 1.5)))
+                     % (mi, dur_out, MUSIC_LUFS, max(0.0, dur_out - 1.5)))
         # ducking : la voix pilote la compression de la nappe
         chain.append("[mus][key]sidechaincompress=threshold=0.05:ratio=6:"
                      "attack=5:release=400[duck]")
@@ -565,11 +594,6 @@ def render(segs, brolls, anims, total):
 
     with open("fc.txt", "w") as f:            # depasse la limite d'arguments
         f.write(";".join(chain))
-    cmd = [FF, "-y", "-hide_banner", "-loglevel", "error", "-i", SRC]
-    for b in brolls:
-        cmd += ["-i", b["path"]]
-    if has_music:
-        cmd += ["-i", MUSIC]
     cmd += ["-filter_complex_script", "fc.txt", "-map", "[vo]", "-map", "[ao]",
             "-c:v", "libx264", "-preset", "medium", "-crf", "20",
             "-pix_fmt", "yuv420p", "-r", str(FPS),
