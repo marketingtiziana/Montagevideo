@@ -37,6 +37,8 @@ VOICE_LUFS = -16.0
 MIN_RATIO = 12.0        # ecart voix/musique minimal exige
 
 SENT = re.compile(r"[.!?\u2026:;]$")
+PAD_DROP = 0.03         # au bord d'un passage retire, pas de marge : elle le reinviterait
+DROPPED = []            # (debut, fin) des passages retires : faux departs, scories
 FILLERS = {"euh", "heu", "hein", "hum", "bah", "ben", "bon", "alors", "donc"}
 # mots qui ne peuvent pas terminer un groupe de sous-titres : ils appellent
 # le mot suivant (determinant, preposition, sujet, relatif)
@@ -96,39 +98,76 @@ def load_words():
             sys.exit("corrections.json : %d mots pour %d" % (len(fix), len(words)))
         for w, t in zip(words, fix):
             w["w"] = t
+    DROPPED.clear()
     out = []
     for w in words:
         t = w["w"].strip()
         if not t:
+            DROPPED.append((w["a"], w["b"]))  # vide par corrections.json : a couper
             continue
-        if out and (t.startswith("'") or t.startswith("\u2019")):
-            out[-1]["w"] += t                 # l + 'accès -> l'accès
+        if out and (t.startswith("'") or t.startswith("\u2019")
+                    or t.startswith("-")):
+            out[-1]["w"] += t                 # l + 'accès -> l'accès, toi + -même
             out[-1]["b"] = w["b"]
             continue
         out.append(dict(w, w=t))
+    return doublons(out)
+
+
+def doublons(words):
+    """Phrase redite a l'identique : on ne garde que la seconde prise.
+
+    Seules les repetitions mot pour mot sont retirees. Une anaphore voulue
+    ("Tu ne peux pas le cacher. Tu ne peux pas le deplacer.") n'est pas une
+    reprise : ses suites different, et elle doit rester.
+    """
+    keys = [norm(w["w"]) for w in words]
+    out, i, n = [], 0, len(words)
+    while i < n:
+        hit = 0
+        for size in range(8, 1, -1):
+            j = i + size
+            if j + size > n:
+                continue
+            if (keys[i:j] == keys[j:j + size]
+                    and words[j]["a"] - words[j - 1]["b"] < 2.5):
+                hit = j
+                break
+        if hit:
+            DROPPED.append((words[i]["a"], words[hit]["a"]))
+            i = hit
+            continue
+        out.append(words[i])
+        i += 1
     return out
 
 
 # -------------------------------------------------------------- coupes douces
 def segments(words):
     """Groupes de phrases : on ne coupe qu'entre deux phrases, dans le silence."""
-    groups, cur = [], [words[0]]
+    groups, cur = [], [{"w": words[0], "pad": HEAD}]
     for p, w in zip(words, words[1:]):
         gap = w["a"] - p["b"]
-        if gap > MIN_SIL and (SENT.search(p["w"]) or gap > LONG_SIL):
+        cut = any(p["b"] - 0.06 <= s0 and e0 <= w["a"] + 0.06
+                  for s0, e0 in DROPPED)
+        if cut or (gap > MIN_SIL and (SENT.search(p["w"]) or gap > LONG_SIL)):
+            cur[-1]["pad_end"] = PAD_DROP if cut else PAD
             groups.append(cur)
-            cur = [w]
+            cur = [{"w": w, "pad": PAD_DROP if cut else PAD}]
         else:
-            cur.append(w)                     # micro-pause de respiration : gardee
+            cur.append({"w": w})              # micro-pause de respiration : gardee
     groups.append(cur)
 
     segs = []
     for k, g in enumerate(groups):
-        while len(g) > 1 and norm(g[0]["w"]) in FILLERS:
+        while len(g) > 1 and norm(g[0]["w"]["w"]) in FILLERS:
             g = g[1:]                         # hesitation isolee en tete de phrase
-        a = g[0]["a"] - (HEAD if k == 0 else PAD)
-        b = g[-1]["b"] + (TAIL if k == len(groups) - 1 else PAD)
-        segs.append({"a": max(0.0, a), "b": b, "words": g})
+        words_g = [x["w"] for x in g]
+        pa = g[0].get("pad", PAD)
+        pb = g[-1].get("pad_end", TAIL if k == len(groups) - 1 else PAD)
+        a = words_g[0]["a"] - pa
+        b = words_g[-1]["b"] + pb
+        segs.append({"a": max(0.0, a), "b": b, "words": words_g})
     return segs
 
 
