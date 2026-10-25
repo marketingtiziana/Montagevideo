@@ -88,6 +88,63 @@ def norm(w):
 
 
 # ---------------------------------------------------------------- transcription
+ELIDE = {"d": "de", "l": "le", "n": "ne", "qu": "que", "j": "je", "m": "me",
+         "t": "te", "s": "se", "c": "ce"}
+
+
+def cle(w):
+    n = norm(w["w"]).replace("'", "")
+    return ELIDE.get(n, n)
+
+
+def reprises_cachees(model, words):
+    """Repetitions qu'un seul jeton a avalees.
+
+    Quand elle se reprend, whisper etire souvent un mot sur toute la reprise
+    ("SCI," tenu 2,7 s pour "a ta SCI, a ta SCI,"). On retranscrit ces jetons
+    anormalement longs pour voir ce qu'ils cachent.
+    """
+    spans = []
+    for w in words:
+        if w["b"] - w["a"] < 1.1:
+            continue
+        # deux fenetres : serree sur le jeton etire, puis large en amont, car
+        # le faux depart le precede parfois et whisper redecoupe autrement
+        for marge in (0.5, 1.8):
+          a, b = max(0.0, w["a"] - marge), w["b"] + 0.8
+          segs, _ = model.transcribe(SRC, language="fr", word_timestamps=True,
+                                     vad_filter=False, clip_timestamps=[a, b])
+          mots = [x for s in segs for x in (s.words or []) if x.word.strip()]
+          k = [cle({"w": x.word.strip()}) for x in mots]
+          fin = lambda x: re.sub(r"[\w'\u2019-]", "", x.word.strip()).strip()
+          # whisper n'ecrit pas toujours un sigle pareil d'une fois sur l'autre
+          # ("SEI," puis "SCI,") : la comparaison tolere ces ecarts de lettres
+          import difflib
+          pareil = lambda x, y: (x == y or
+                                 difflib.SequenceMatcher(None, x, y).ratio() >= .75)
+          for i in range(len(mots)):
+              for size in range(6, 1, -1):
+                  j = i + size
+                  if j + size > len(mots):
+                      continue
+                  if (all(pareil(k[i + t], k[j + t]) for t in range(size))
+                          and fin(mots[j - 1]) == fin(mots[j + size - 1])):
+                      spans.append([round(float(mots[i].start), 2),
+                                    round(float(mots[j].start), 2)])
+                      break
+              else:
+                  continue
+              break
+    spans.sort()
+    fusion = []                               # deux fenetres voient la meme reprise
+    for a, b in spans:
+        if fusion and a <= fusion[-1][1]:
+            fusion[-1][1] = max(fusion[-1][1], b)
+        else:
+            fusion.append([a, b])
+    return fusion
+
+
 def transcribe():
     from faster_whisper import WhisperModel
     m = WhisperModel("medium", device="cpu", compute_type="int8", cpu_threads=4)
@@ -97,6 +154,8 @@ def transcribe():
              for s in segs for w in (s.words or []) if w.word.strip()]
     with open("transcript.json", "w") as f:
         json.dump(words, f, ensure_ascii=False)
+    with open("cuts_auto.json", "w") as f:
+        json.dump(reprises_cachees(m, words), f)
     return words
 
 
@@ -112,8 +171,10 @@ def load_words():
         for w, t in zip(words, fix):
             w["w"] = t
     DROPPED.clear()
-    if os.path.exists("cuts.json"):           # passages retires a la main
-        with open("cuts.json") as f:
+    for fichier in ("cuts.json", "cuts_auto.json"):   # a la main, puis detectes
+        if not os.path.exists(fichier):
+            continue
+        with open(fichier) as f:
             for a, b in json.load(f):
                 DROPPED.append((float(a), float(b)))
                 words = [x for x in words
@@ -211,7 +272,8 @@ def segments(words):
             # la coupe s'arrete a la reprise de parole la plus proche, sinon
             # elle mord sur l'attaque du mot suivant
             proches = [e for e in reprises if b - 0.5 <= e <= b]
-            coupes.append((a + 0.02, min(proches) if proches else b - 0.08))
+            fin = (min(proches) - 0.18) if proches else b - 0.08
+            coupes.append((a + 0.02, max(a + 0.1, fin)))
         else:
             coupes.append((a, b))
     coupes.sort()
