@@ -99,6 +99,12 @@ def load_words():
         for w, t in zip(words, fix):
             w["w"] = t
     DROPPED.clear()
+    if os.path.exists("cuts.json"):           # passages retires a la main
+        with open("cuts.json") as f:
+            for a, b in json.load(f):
+                DROPPED.append((float(a), float(b)))
+                words = [x for x in words
+                         if not (a <= (x["a"] + x["b"]) / 2 <= b)]
     out = []
     for w in words:
         t = w["w"].strip()
