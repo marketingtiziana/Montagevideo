@@ -33,8 +33,9 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["L'ÉTAT PRÉPARE", "LE PLUS GROS BRAQUAGE", "DE L'HISTOIRE DE FRANCE"]
-HOOK_END = 4.5          # duree d'affichage, en secondes de sortie
+HOOK = ["C'EST QUOI", "UNE SASU ?"]
+HOOK_END = 3.6          # duree d'affichage, en secondes de sortie
+HOOK_MUTE = 2.3         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
 HOOK_Y = 1080           # sous le visage, au-dessus des sous-titres
 
@@ -45,7 +46,7 @@ MIN_RATIO = 12.0        # ecart voix/musique minimal exige
 SENT = re.compile(r"[.!?\u2026:;]$")
 PAD_DROP = 0.03         # au bord d'un passage retire, pas de marge : elle le reinviterait
 DROPPED = []            # (debut, fin) des passages retires : faux departs, scories
-FILLERS = {"euh", "heu", "hein", "hum", "bah", "ben", "bon", "alors", "donc"}
+FILLERS = {"euh", "heu", "hein", "hum", "bah", "ben", "bon"}
 # mots qui ne peuvent pas terminer un groupe de sous-titres : ils appellent
 # le mot suivant (determinant, preposition, sujet, relatif)
 GLUE = {"le", "la", "les", "un", "une", "des", "de", "du", "au", "aux", "en",
@@ -56,10 +57,11 @@ GLUE = {"le", "la", "les", "un", "une", "des", "de", "du", "au", "aux", "en",
         "c", "qu", "et", "ou", "mais", "a", "à", "plus", "tres", "très", "sans",
         "sous", "avec", "tout", "tous", "toute", "toutes", "quelque", "pas"}
 UNITS = {"milliards", "milliard", "millions", "million", "euros", "euro",
-         "dollars", "dollar", "ans", "an", "mois", "jours", "pourcent"}
+         "dollars", "dollar", "ans", "an", "mois", "jours", "pourcent",
+         "minutes", "minute", "heures", "heure", "semaines", "semaine"}
 LEADIN = {"directive", "loi", "article", "reglement", "règlement", "taux",
           "impot", "impôt", "amende", "seuil", "texte"}
-STRUCT = {"llc", "ltd", "holding", "sci", "sarl", "sas", "trust",
+STRUCT = {"llc", "ltd", "holding", "sci", "sarl", "sas", "sasu", "trust",
           "fondation", "offshore"}
 PLACES = {"dubai", "dubaï", "singapour", "suisse", "monaco", "portugal",
           "malte", "chypre", "andorre", "panama", "emirats", "émirats",
@@ -83,7 +85,7 @@ def norm(w):
 # ---------------------------------------------------------------- transcription
 def transcribe():
     from faster_whisper import WhisperModel
-    m = WhisperModel("small", device="cpu", compute_type="int8", cpu_threads=4)
+    m = WhisperModel("medium", device="cpu", compute_type="int8", cpu_threads=4)
     segs, _ = m.transcribe(SRC, language="fr", word_timestamps=True,
                            vad_filter=False)
     words = [{"w": w.word.strip(), "a": float(w.start), "b": float(w.end)}
@@ -117,6 +119,10 @@ def load_words():
         if not t:
             DROPPED.append((w["a"], w["b"]))  # vide par corrections.json : a couper
             continue
+        if out and not re.search(r"\w", t):
+            out[-1]["w"] += " " + t           # le "?" isole de whisper
+            out[-1]["b"] = w["b"]
+            continue
         if out and (t.startswith("'") or t.startswith("\u2019")
                     or t.startswith("-")):
             out[-1]["w"] += t                 # l + 'accès -> l'accès, toi + -même
@@ -141,7 +147,9 @@ def doublons(words):
             j = i + size
             if j + size > n:
                 continue
+            end = lambda x: re.sub(r"[\w'\u2019-]", "", x["w"]).strip()
             if (keys[i:j] == keys[j:j + size]
+                    and end(words[j - 1]) == end(words[j + size - 1])
                     and words[j]["a"] - words[j - 1]["b"] < 2.5):
                 hit = j
                 break
@@ -372,7 +380,8 @@ def animations(segs, total):
     keep, seen = [], set()
     for d in sorted(found, key=lambda d: (d.get("prio", 3), d["t"])):
         label = d.get("txt") or d["kind"]
-        if d["t"] > total - 3.6 or d["t"] < 1.0 or label in seen:
+        debut = HOOK_END + 0.4 if HOOK else 1.0   # pas pendant l'accroche
+        if d["t"] > total - 3.6 or d["t"] < debut or label in seen:
             continue                          # jamais deux fois le meme mot
         if any(abs(d["t"] - k["t"]) < 4.0 for k in keep):
             continue                          # on laisse respirer entre deux
@@ -449,7 +458,7 @@ def ass(segs, anims, path):
             a = c[0]["a"] + s["off"]
             b = (cs[j + 1][0]["a"] + s["off"]) if j + 1 < len(cs) \
                 else min(c[-1]["b"] + 0.25, s["b"]) + s["off"]
-            if double(a, b, c) or (HOOK and a < HOOK_END - 0.15):
+            if double(a, b, c) or (HOOK and a < HOOK_MUTE):
                 continue
             txt = " ".join(w["w"] for w in c).upper().replace("\u2014", "-")
             txt = re.sub(r"\s+", " ", txt).strip()
