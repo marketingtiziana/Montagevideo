@@ -32,6 +32,12 @@ ANIM_LAG = 0.8          # l'habillage arrive en echo, apres le mot prononce
 BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
+# Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
+HOOK = ["L'ÉTAT PRÉPARE", "LE PLUS GROS BRAQUAGE", "DE L'HISTOIRE DE FRANCE"]
+HOOK_END = 4.5          # duree d'affichage, en secondes de sortie
+HOOK_FS = 74
+HOOK_Y = 1080           # sous le visage, au-dessus des sous-titres
+
 MUSIC_LUFS = -44.0      # voix a -16 LUFS : la musique reste 28 dB dessous
 VOICE_LUFS = -16.0
 MIN_RATIO = 12.0        # ecart voix/musique minimal exige
@@ -418,7 +424,11 @@ def ass(segs, anims, path):
          "Style: S,%s,88,&H00FFFFFF,&H00FFFFFF,&H00000000,&H60000000,-1,0,0,0,"
          "100,100,0,0,1,3,1.5,2,70,70,420,1" % fn,
          "Style: C,%s,110,&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,-1,0,0,0,"
-         "100,100,1,0,1,5,3,5,60,60,60,1" % fn, "",
+         "100,100,1,0,1,5,3,5,60,60,60,1" % fn,
+         # BorderStyle 3 : le contour devient un bandeau plein, blanc, sous un
+         # texte noir ; Outline sert alors de marge interieure
+         "Style: H,%s,%d,&H00141414,&H00141414,&H00FFFFFF,&H00FFFFFF,-1,0,0,0,"
+         "100,100,0,0,3,16,0,5,60,60,60,1" % (fn, HOOK_FS), "",
          "[Events]",
          "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, "
          "Effect, Text"]
@@ -439,13 +449,17 @@ def ass(segs, anims, path):
             a = c[0]["a"] + s["off"]
             b = (cs[j + 1][0]["a"] + s["off"]) if j + 1 < len(cs) \
                 else min(c[-1]["b"] + 0.25, s["b"]) + s["off"]
-            if double(a, b, c):
+            if double(a, b, c) or (HOOK and a < HOOK_END - 0.15):
                 continue
             txt = " ".join(w["w"] for w in c).upper().replace("\u2014", "-")
             txt = re.sub(r"\s+", " ", txt).strip()
             L.append("Dialogue: 0,%s,%s,S,,0,0,0,,{\\fs%d\\fscx90\\fscy90"
                      "\\t(0,100,\\fscx100\\fscy100)\\fad(60,60)}%s"
                      % (ts(a), ts(b), card_fs(txt), txt))
+    if HOOK:
+        L.append("Dialogue: 2,%s,%s,H,,0,0,0,,{\\pos(%d,%d)\\fscx92\\fscy92"
+                 "\\t(0,150,\\fscx100\\fscy100)\\fad(0,280)}%s"
+                 % (ts(0), ts(HOOK_END), W // 2, HOOK_Y, "\\N".join(HOOK)))
     L += anim_events(anims)
     with open(path, "w") as f:
         f.write("\n".join(L) + "\n")
