@@ -34,7 +34,7 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["C'EST QUOI", "UNE SCI ?"]
+HOOK = ["C'EST QUOI", "UNE RÉSIDENCE", "FISCALE ?"]
 HOOK_END = 3.6          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 2.3         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -104,13 +104,16 @@ def reprises_cachees(model, words):
     ("SCI," tenu 2,7 s pour "a ta SCI, a ta SCI,"). On retranscrit ces jetons
     anormalement longs pour voir ce qu'ils cachent.
     """
+    import difflib
+    pareil = lambda x, y: (x == y or
+                           difflib.SequenceMatcher(None, x, y).ratio() >= .75)
     spans = []
     for w in words:
         if w["b"] - w["a"] < 1.1:
             continue
         # deux fenetres : serree sur le jeton etire, puis large en amont, car
         # le faux depart le precede parfois et whisper redecoupe autrement
-        for marge in (0.5, 1.8):
+        for marge in (0.5, 3.5):
           a, b = max(0.0, w["a"] - marge), w["b"] + 0.8
           segs, _ = model.transcribe(SRC, language="fr", word_timestamps=True,
                                      vad_filter=False, clip_timestamps=[a, b])
@@ -123,7 +126,7 @@ def reprises_cachees(model, words):
           pareil = lambda x, y: (x == y or
                                  difflib.SequenceMatcher(None, x, y).ratio() >= .75)
           for i in range(len(mots)):
-              for size in range(6, 1, -1):
+              for size in range(10, 1, -1):
                   j = i + size
                   if j + size > len(mots):
                       continue
@@ -135,6 +138,36 @@ def reprises_cachees(model, words):
               else:
                   continue
               break
+    # second cas : le jeton etire contient la reprise de ce qui le precede,
+    # elle recommence sa phrase et whisper n'ecrit que la premiere version
+    for idx, w in enumerate(words):
+        if w["b"] - w["a"] < 1.1 or idx < 4:
+            continue
+        a, b = max(0.0, w["a"] - 0.1), w["b"] + 0.4
+        segs, _ = model.transcribe(SRC, language="fr", word_timestamps=True,
+                                   vad_filter=False, clip_timestamps=[a, b])
+        inner = [x for s in segs for x in (s.words or []) if x.word.strip()]
+        trouve = False
+        for saut in range(0, 4):              # elle amorce parfois un autre mot
+            for k in range(10, 3, -1):
+                if len(inner) < saut + k or idx + 1 < k:
+                    continue
+                avant = words[idx + 1 - k:idx + 1]
+                if all(pareil(cle(x), cle({"w": y.word.strip()}))
+                       for x, y in zip(avant, inner[saut:saut + k])):
+                    j = idx + 1 - k
+                    # le mot juste avant la coupe est parfois deja celui par
+                    # lequel elle recommence : il part avec
+                    while j > 0 and pareil(cle(words[j - 1]),
+                                           cle({"w": inner[saut].word.strip()})):
+                        j -= 1
+                    spans.append([round(float(words[j]["a"]), 2),
+                                  round(float(inner[saut].start), 2)])
+                    trouve = True
+                    break
+            if trouve:
+                break
+
     spans.sort()
     fusion = []                               # deux fenetres voient la meme reprise
     for a, b in spans:
@@ -440,7 +473,8 @@ def animations(segs, total):
             j, items = i, []
             while j < len(flat) and j - i < 8:
                 ww, ss = flat[j]
-                if base(ww) in PLACES and len(items) < 3:
+                if (base(ww) in PLACES and len(items) < 3
+                        and base(ww) not in [base({"w": t}) for t, _, _ in items]):
                     items.append((re.sub(r"[,.;:?!]", "", ww["w"]).upper(),
                                   ww["a"] + ss["off"], id(ww)))
                 j += 1
@@ -481,7 +515,7 @@ def animations(segs, total):
         b = base(w)
         if b in NUMWORDS and i + 1 < len(flat):
             nx = base(flat[i + 1][0])
-            if nx not in GLUE and len(nx) > 3:
+            if nx not in GLUE and len(nx) > 3 and nx.endswith("s"):
                 found.append({"kind": "callout", "t": t, "prio": 0,
                               "txt": re.sub(r"[,.;:?!]", "", w["w"] + " "
                                             + flat[i + 1][0]["w"]).upper()})
