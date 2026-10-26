@@ -38,8 +38,8 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["SI TU AS FERMÉ", "TA BOÎTE FRANÇAISE", "MAIS QUE TU VENDS",
-        "ENCORE À DES FRANÇAIS"]
+HOOK = ["TA PROCHAINE FACTURE", "SERA LUE PAR UNE IA", "AVANT MÊME",
+        "D'ÊTRE PAYÉE"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -64,7 +64,9 @@ GLUE = {"le", "la", "les", "un", "une", "des", "de", "du", "au", "aux", "en",
         "sous", "avec", "tout", "tous", "toute", "toutes", "quelque", "pas"}
 UNITS = {"milliards", "milliard", "millions", "million", "euros", "euro",
          "dollars", "dollar", "ans", "an", "mois", "jours", "pourcent",
-         "minutes", "minute", "heures", "heure", "semaines", "semaine"}
+         "minutes", "minute", "heures", "heure", "semaines", "semaine",
+         "janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet",
+         "aout", "septembre", "octobre", "novembre", "decembre"}
 LEADIN = {"directive", "loi", "article", "reglement", "règlement", "taux",
           "impot", "impôt", "amende", "seuil", "texte"}
 STRUCT = {"llc", "ltd", "holding", "sci", "sarl", "sas", "sasu", "trust",
@@ -77,7 +79,9 @@ PLACES = {"dubai", "dubaï", "singapour", "suisse", "monaco", "portugal",
           "miami", "italie", "grece", "israel", "mexique", "bresil"}
 KEY = {"expatriation", "immobilier", "statistiques", "fiscalite", "fiscal",
        "residence", "patrimoine", "imposition", "indivision", "loyer",
-       "revente", "transmettre", "donation", "succession", "impot", "tva",
+       "revente", "donation", "succession", "impot", "tva", "facturation",
+       "facture", "factures", "algorithme", "controle", "controles",
+       "declaration", "declarations",
        "oss", "expatrie", "expatries", "cotisations", "dividendes"}
 # un nombre ecrit en toutes lettres merite le meme traitement qu'un chiffre
 NUMWORDS = {"deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
@@ -232,6 +236,7 @@ def reprises_cachees(model, words):
             if fini:
                 break
 
+    spans = [[a, b] for a, b in spans if b - a >= 0.4]
     spans.sort()
     fusion = []                               # deux fenetres voient la meme reprise
     for a, b in spans:
