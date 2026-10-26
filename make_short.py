@@ -34,9 +34,10 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["IL Y A UN PAYS", "OÙ TA VIE COÛTE", "DEUX FOIS MOINS CHER"]
-HOOK_END = 4.0          # duree d'affichage, en secondes de sortie
-HOOK_MUTE = 3.2         # tant que l'accroche redit les mots, pas de sous-titre
+HOOK = ["LE PAYS OÙ TU VIS", "N'EST PAS FORCÉMENT", "LE PAYS OÙ TU AS",
+        "PAYÉ TES IMPÔTS"]
+HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
+HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
 HOOK_Y = 1080           # sous le visage, au-dessus des sous-titres
 
@@ -241,6 +242,8 @@ def load_words():
     out = []
     for w in words:
         t = w["w"].strip()
+        if t == "-":
+            continue                          # retire du texte seul, son intact
         if not t:
             DROPPED.append((w["a"], w["b"]))  # vide par corrections.json : a couper
             continue
@@ -555,7 +558,7 @@ def animations(segs, total):
                                    or b in PLACES):
             found.append({"kind": "callout", "t": t,
                           "prio": 1 if b in STRUCT else 2 if b in KEY else 4,
-                          "txt": re.sub(r"[,.;:?!]", "", b).upper()})
+                          "txt": re.sub(r"[,.;:?!]", "", w["w"]).strip().upper()})
         i += 1
 
     # comparaison explicite "A vs B"
