@@ -3,11 +3,13 @@
    dans une seule archive ZIP telechargeable.
 
    Usage : node src/pack.js            (tous les carrousels finis)
-           node src/pack.js holding    (un seul)
+           node src/pack.js societe    (un seul)
 
-   Produit export/fynovates-carrousels.zip :
+   Tous : export/fynovates-carrousels.zip
      instagram-1080x1350/<deck>/<deck>-01.png   -> a poster tel quel
      haute-def-2160x2700/<deck>/<deck>-01.png   -> print, slides, reprise
+   Un seul : export/carrousel-<deck>.zip, a plat, les PNG 1080x1350
+     prets a poster et rien d'autre (--2x pour la haute def a la place)
    ============================================================ */
 
 const fs = require('fs');
@@ -16,7 +18,7 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
 const EXPORT = path.join(ROOT, 'export');
-const STAGE = path.join(EXPORT, 'fynovates-carrousels');
+let STAGE;                               // defini une fois le ou les decks connus
 
 // Carrousels termines et valides. (vatican : encore en cours de validation,
 // fisc-b : variante de couverture non retenue — volontairement hors archive.)
@@ -30,16 +32,24 @@ const DECKS = [
   { key: 'societe',  name: 'societe',  titre: 'Je peux payer quoi avec ma societe ?' },
 ];
 
-const SCALES = [
+const TOUTES = [
   { scale: 1, dir: 'instagram-1080x1350', src: 'output' },
   { scale: 2, dir: 'haute-def-2160x2700', src: 'output-2x' },
 ];
 
 const pad2 = n => String(n).padStart(2, '0');
 
-const only = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const HD = argv.includes('--2x');                        // un seul carrousel, en 2160x2700
+const only = argv.filter(a => a !== '--2x');
 const decks = only.length ? DECKS.filter(d => only.includes(d.name)) : DECKS;
 if (!decks.length) { console.error(`Carrousel inconnu : ${only.join(', ')}`); process.exit(1); }
+
+// un seul carrousel demande : archive a plat, une seule resolution
+const SEUL = only.length === 1 ? decks[0] : null;
+const SCALES = SEUL ? [TOUTES[HD ? 1 : 0]] : TOUTES;
+const NOM = SEUL ? `carrousel-${SEUL.name}${HD ? '-2160x2700' : ''}` : 'fynovates-carrousels';
+STAGE = path.join(EXPORT, NOM);
 
 // 0. un carrousel dont une image source manque ne peut plus etre re-rendu :
 //    il sortirait avec un placeholder. On garde alors les PNG 1080x1350 deja
@@ -90,7 +100,7 @@ for (const d of retenus) {
   for (const s of SCALES) {
     if (d.fige && s.scale > 1) continue;                 // pas de haute def sans l'image source
     const from = path.join(ROOT, s.src, d.key || '');
-    const to = path.join(STAGE, s.dir, d.name);
+    const to = SEUL ? STAGE : path.join(STAGE, s.dir, d.name);
     fs.mkdirSync(to, { recursive: true });
     const pngs = fs.readdirSync(from).filter(f => /^slide-\d+\.png$/.test(f)).sort();
     pngs.forEach(f => {
@@ -102,6 +112,20 @@ for (const d of retenus) {
 }
 
 // 3. note de lecture dans l'archive
+if (SEUL) {
+  const n = fs.readdirSync(STAGE).filter(f => f.endsWith('.png')).length;
+  fs.writeFileSync(path.join(STAGE, 'LISEZ-MOI.txt'),
+`FYNOVATES — ${SEUL.titre}
+${new Date().toISOString().slice(0, 10)}
+
+${n} slides, PNG ${HD ? '2160x2700' : '1080x1350'}${HD ? '' : ' — la taille native du feed Instagram'}.
+Numerotees dans l'ordre de publication : une selection groupee dans
+Instagram les importe deja dans le bon ordre.
+
+PNG = compression sans perte. Le texte est vectoriel, rendu directement
+a cette taille : c'est la qualite maximale possible${HD ? '.' : ' pour un post.'}
+`, 'utf-8');
+} else {
 const lignes = retenus.map(d => {
   const n = fs.readdirSync(path.join(STAGE, SCALES[0].dir, d.name)).length;
   return `  ${d.name.padEnd(9)} ${String(n).padStart(2)} slides   ${d.titre}${d.fige ? '  (*)' : ''}`;
@@ -138,12 +162,13 @@ respecte cet ordre alphabetique.
 PNG = compression sans perte : ces fichiers sont la qualite maximale
 possible, le texte est du vrai texte vectoriel rendu a la taille finale.
 `, 'utf-8');
+}
 
 // 4. archive
 fs.mkdirSync(EXPORT, { recursive: true });
-const zip = path.join(EXPORT, 'fynovates-carrousels.zip');
+const zip = path.join(EXPORT, `${NOM}.zip`);
 fs.rmSync(zip, { force: true });
-execFileSync('zip', ['-r', '-q', '-9', zip, 'fynovates-carrousels'], { cwd: EXPORT });
+execFileSync('zip', ['-r', '-q', '-9', zip, NOM], { cwd: EXPORT });
 
 const mo = (fs.statSync(zip).size / 1048576).toFixed(1);
 console.log(`\n${total} PNG dans ${path.relative(ROOT, zip)}  (${mo} Mo)`);
