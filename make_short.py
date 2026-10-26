@@ -39,8 +39,7 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["TON IGNORANCE FISCALE", "ENRICHIT DEUX PERSONNES", "L'ÉTAT",
-        "ET LES GOUROUS"]
+HOOK = ["TON PAYS TRANSMET-IL", "TES INFOS", "À LA FRANCE ?"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
