@@ -34,8 +34,8 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["LE PAYS OÙ TU VIS", "N'EST PAS FORCÉMENT", "LE PAYS OÙ TU DOIS",
-        "PAYER TES IMPÔTS"]
+HOOK = ["SI JE DEVAIS APPRENDRE", "UNE SEULE COMPÉTENCE",
+        "FINANCIÈRE AVANT 2027"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -558,7 +558,9 @@ def animations(segs, total):
                                    or b in PLACES):
             found.append({"kind": "callout", "t": t,
                           "prio": 1 if b in STRUCT else 2 if b in KEY else 4,
-                          "txt": re.sub(r"[,.;:?!]", "", w["w"]).strip().upper()})
+                          "txt": re.sub(r"^[a-zA-Z]['\u2019]", "",
+                                        re.sub(r"[,.;:?!]", "",
+                                               w["w"]).strip()).upper()})
         i += 1
 
     # comparaison explicite "A vs B"
@@ -573,6 +575,7 @@ def animations(segs, total):
     keep, seen = [], set()
     for d in sorted(found, key=lambda d: (d.get("prio", 3), d["t"])):
         label = d.get("txt") or d["kind"]
+        label = norm(label)[:4] or label      # meme famille : un seul habillage
         debut = HOOK_END + 0.4 if HOOK else 1.0   # pas pendant l'accroche
         if d["t"] > total - 3.6 or d["t"] < debut or label in seen:
             continue                          # jamais deux fois le meme mot
