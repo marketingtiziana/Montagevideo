@@ -34,9 +34,9 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["C'EST QUOI", "UNE RÉSIDENCE", "FISCALE ?"]
-HOOK_END = 3.6          # duree d'affichage, en secondes de sortie
-HOOK_MUTE = 2.3         # tant que l'accroche redit les mots, pas de sous-titre
+HOOK = ["IL Y A UN PAYS", "OÙ TA VIE COÛTE", "DEUX FOIS MOINS CHER"]
+HOOK_END = 4.0          # duree d'affichage, en secondes de sortie
+HOOK_MUTE = 3.2         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
 HOOK_Y = 1080           # sous le visage, au-dessus des sous-titres
 
@@ -97,6 +97,23 @@ def cle(w):
     return ELIDE.get(n, n)
 
 
+def recaler(words, debut, c2a, c2b, retime):
+    """Pose les mots de la prise abandonnee sur les horodatages de la bonne.
+
+    Whisper n'ecrit la phrase qu'une fois : ses mots pointent sur la prise
+    qu'on retire. Sans ce recalage, couper l'audio ferait disparaitre le
+    sous-titre correspondant.
+    """
+    vise = [i for i, w in enumerate(words)
+            if w["b"] > debut and w["a"] < c2b]
+    if not vise or c2b <= c2a:
+        return
+    pas = (c2b - c2a) / len(vise)
+    for k, i in enumerate(vise):
+        retime[str(i)] = [round(c2a + k * pas, 3),
+                          round(c2a + (k + 1) * pas, 3)]
+
+
 def reprises_cachees(model, words):
     """Repetitions qu'un seul jeton a avalees.
 
@@ -107,7 +124,7 @@ def reprises_cachees(model, words):
     import difflib
     pareil = lambda x, y: (x == y or
                            difflib.SequenceMatcher(None, x, y).ratio() >= .75)
-    spans = []
+    spans, retime = [], {}
     for w in words:
         if w["b"] - w["a"] < 1.1:
             continue
@@ -163,6 +180,9 @@ def reprises_cachees(model, words):
                         j -= 1
                     spans.append([round(float(words[j]["a"]), 2),
                                   round(float(inner[saut].start), 2)])
+                    recaler(words, float(words[j]["a"]),
+                            float(inner[saut].start),
+                            float(inner[saut + k - 1].end), retime)
                     trouve = True
                     break
             if trouve:
@@ -175,6 +195,8 @@ def reprises_cachees(model, words):
             fusion[-1][1] = max(fusion[-1][1], b)
         else:
             fusion.append([a, b])
+    with open("retime.json", "w") as f:
+        json.dump(retime, f)
     return fusion
 
 
@@ -196,6 +218,10 @@ def load_words():
     """Transcript + corrections, puis recollage des elisions (l' + accès)."""
     with open("transcript.json") as f:
         words = json.load(f)
+    if os.path.exists("retime.json"):         # mots recales sur la bonne prise
+        with open("retime.json") as f:
+            for i, (a, b) in json.load(f).items():
+                words[int(i)]["a"], words[int(i)]["b"] = a, b
     if os.path.exists("corrections.json"):
         with open("corrections.json") as f:
             fix = json.load(f)
@@ -217,6 +243,10 @@ def load_words():
         t = w["w"].strip()
         if not t:
             DROPPED.append((w["a"], w["b"]))  # vide par corrections.json : a couper
+            continue
+        if out and re.match(r"^[.,]\d", t):
+            out[-1]["w"] += "," + t[1:]       # 2 + .5 -> 2,5
+            out[-1]["b"] = w["b"]
             continue
         if out and not re.search(r"\w", t):
             out[-1]["w"] += " " + t           # le "?" isole de whisper
@@ -242,7 +272,7 @@ def doublons(words):
     out, i, n = [], 0, len(words)
     while i < n:
         hit = 0
-        for size in range(8, 1, -1):
+        for size in range(14, 1, -1):
             j = i + size
             if j + size > n:
                 continue
@@ -500,7 +530,7 @@ def animations(segs, total):
                     parts.append(nx["w"])
                     j += 1
                 elif (j + 2 < len(flat) and re.search(r"\d", flat[j + 2][0]["w"])
-                      and len(nn) > 1):
+                      and (len(nn) > 1 or nn in ("a", "e", "o"))):
                     parts.append(nx["w"])     # "11 janvier 2027"
                     j += 1
                 else:
