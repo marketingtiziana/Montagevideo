@@ -181,8 +181,11 @@ def reprises_cachees(model, words):
                 if len(inner) < saut + k or idx + 1 < k:
                     continue
                 avant = words[idx + 1 - k:idx + 1]
-                if all(pareil(cle(x), cle({"w": y.word.strip()}))
-                       for x, y in zip(avant, inner[saut:saut + k])):
+                # la reprise commence APRES le jeton etire : sans cette borne,
+                # c'est la prise abandonnee elle-meme qui est reconnue
+                if (float(inner[saut].start) > w["a"] + 0.05
+                        and all(pareil(cle(x), cle({"w": y.word.strip()}))
+                                for x, y in zip(avant, inner[saut:saut + k]))):
                     j = idx + 1 - k
                     # le mot juste avant la coupe est parfois deja celui par
                     # lequel elle recommence : il part avec
@@ -286,15 +289,20 @@ def scories(model, words):
     lot = ilots(SRC)
     spans = []
     for i, (a, b) in enumerate(lot[:-1]):
-        dits = [w for w in words if a - 0.05 <= (w["a"] + w["b"]) / 2 <= b + 0.05]
-        if b - a < 0.25 or len(dits) > 1:
-            continue                          # ilot plein : rien a verifier
-        amorce = lire(a, b)
-        if not amorce:
+        if b - a < 0.25 or b - a > 2.6:
             continue
         c, d = lot[i + 1]
         if c - b > 1.6:
             continue                          # trop loin : ce n'est pas une reprise
+        amorce = lire(a, b)
+        if not amorce:
+            continue
+        # une prise abandonnee ne finit pas sa phrase : si l'ilot se termine
+        # sur un point, c'est une phrase entiere, et deux phrases qui
+        # commencent pareil sont une anaphore, pas un bafouillage
+        fin = amorce[-1]
+        if fin.endswith((".", "!", "?")) and not fin.endswith("..."):
+            continue
         suite = lire(c, c + 2.5)          # la reprise peut depasser l'ilot
         # l'amorce doit etre reprise EN ENTIER : "gratuitement, oui,
         # gratuitement" est une insistance voulue, pas un bafouillage
