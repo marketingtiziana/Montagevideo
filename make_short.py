@@ -249,6 +249,71 @@ def reprises_cachees(model, words):
     return fusion
 
 
+def ilots(path, seuil=0.18):
+    """Decoupe la bande son en ilots de parole separes par des silences."""
+    out, t = [], 0.0
+    r = subprocess.run([FF, "-hide_banner", "-nostats", "-i", path, "-af",
+                        "silencedetect=n=%ddB:d=%.2f" % (SIL_DB, seuil),
+                        "-f", "null", "-"], capture_output=True, text=True)
+    debut = None
+    for m in re.finditer(r"silence_(start|end): (-?\d+\.?\d*)", r.stderr):
+        if m.group(1) == "start":
+            debut = float(m.group(2))
+        elif debut is not None:
+            if debut > t:
+                out.append((t, debut))
+            t = float(m.group(2))
+            debut = None
+    out.append((t, duree(path)))
+    return [(a, b) for a, b in out if b - a > 0.05]
+
+
+def scories(model, words):
+    """Mots sur lesquels elle bute, et qu'elle reprend juste apres.
+
+    Whisper fond ces amorces dans le mot voisin : elles n'apparaissent nulle
+    part dans le transcript. On les retrouve en regardant la bande son — un
+    ilot de parole auquel ne correspond aucun mot ecrit — puis on le fait lire
+    seul, et on le compare a l'ilot suivant.
+    """
+    def lire(a, b):
+        segs, _ = model.transcribe(SRC, language="fr", word_timestamps=True,
+                                   vad_filter=False, clip_timestamps=[a, b])
+        return [x.word.strip() for s in segs for x in (s.words or [])
+                if x.word.strip()]
+
+    lot = ilots(SRC)
+    spans = []
+    for i, (a, b) in enumerate(lot[:-1]):
+        dits = [w for w in words if a - 0.05 <= (w["a"] + w["b"]) / 2 <= b + 0.05]
+        if b - a < 0.25 or len(dits) > 1:
+            continue                          # ilot plein : rien a verifier
+        amorce = lire(a, b)
+        if not amorce:
+            continue
+        c, d = lot[i + 1]
+        if c - b > 1.6:
+            continue                          # trop loin : ce n'est pas une reprise
+        suite = lire(c, c + 2.5)          # la reprise peut depasser l'ilot
+        n = min(len(amorce), len(suite))
+        if n and all(pareil_mot(amorce[k], suite[k]) for k in range(min(n, 3))):
+            # elle bute parfois deux fois de suite : on absorbe les miettes
+            j, fin = i + 1, c
+            while (j + 1 < len(lot) and lot[j][1] - lot[j][0] < 0.6
+                   and not [w for w in words
+                            if lot[j][0] <= (w["a"] + w["b"]) / 2 <= lot[j][1]]):
+                fin = lot[j + 1][0]
+                j += 1
+            spans.append([round(a - 0.05, 2), round(fin - 0.05, 2)])
+    return spans
+
+
+def pareil_mot(x, y):
+    import difflib
+    a, b = cle({"w": x}), cle({"w": y})
+    return a == b or difflib.SequenceMatcher(None, a, b).ratio() >= 0.75
+
+
 def transcribe():
     from faster_whisper import WhisperModel
     m = WhisperModel("medium", device="cpu", compute_type="int8", cpu_threads=4)
@@ -394,7 +459,9 @@ def segments(words):
             # on remonte au debut de la phrase abandonnee : sans ca il en
             # restait un fragment avant la coupe
             amont = [d for d in debuts if a - 1.0 <= d <= a]
-            a = min(amont) if amont else a
+            if amont and not any(min(amont) < (w["a"] + w["b"]) / 2 < a - 0.02
+                                 for w in words):
+                a = min(amont)                # rien d'ecrit avant : c'est l'amorce
             # la coupe s'arrete a la reprise de parole la plus proche, sinon
             # elle mord sur l'attaque du mot suivant
             proches = [e for e in reprises if b - 0.5 <= e <= b]
