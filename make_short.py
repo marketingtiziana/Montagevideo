@@ -34,8 +34,8 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["SI JE DEVAIS APPRENDRE", "UNE SEULE COMPÉTENCE",
-        "FINANCIÈRE AVANT 2027"]
+HOOK = ["SI TU AS FERMÉ", "TA BOÎTE FRANÇAISE", "MAIS QUE TU VENDS",
+        "ENCORE À DES FRANÇAIS"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -73,7 +73,8 @@ PLACES = {"dubai", "dubaï", "singapour", "suisse", "monaco", "portugal",
           "miami", "italie", "grece", "israel", "mexique", "bresil"}
 KEY = {"expatriation", "immobilier", "statistiques", "fiscalite", "fiscal",
        "residence", "patrimoine", "imposition", "indivision", "loyer",
-       "revente", "transmettre", "donation", "succession", "impot"}
+       "revente", "transmettre", "donation", "succession", "impot", "tva",
+       "oss", "expatrie", "expatries", "cotisations", "dividendes"}
 # un nombre ecrit en toutes lettres merite le meme traitement qu'un chiffre
 NUMWORDS = {"deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
             "dix"}
@@ -161,7 +162,7 @@ def reprises_cachees(model, words):
     for idx, w in enumerate(words):
         if w["b"] - w["a"] < 1.1 or idx < 4:
             continue
-        a, b = max(0.0, w["a"] - 0.1), w["b"] + 0.4
+        a, b = max(0.0, w["a"] - 1.2), w["b"] + 0.6
         segs, _ = model.transcribe(SRC, language="fr", word_timestamps=True,
                                    vad_filter=False, clip_timestamps=[a, b])
         inner = [x for s in segs for x in (s.words or []) if x.word.strip()]
@@ -187,6 +188,44 @@ def reprises_cachees(model, words):
                     trouve = True
                     break
             if trouve:
+                break
+
+    # troisieme cas : whisper saute la prise abandonnee et laisse un trou dans
+    # ses horodatages. S'il y a de la parole dans ce trou, on va la lire.
+    parole = []
+    t0 = 0.0
+    for a0, b0 in silences(SRC):
+        if a0 > t0:
+            parole.append((t0, a0))
+        t0 = b0
+    parole.append((t0, 1e9))
+    for idx in range(4, len(words)):
+        trou_a, trou_b = words[idx - 1]["b"], words[idx]["a"]
+        if trou_b - trou_a < 1.2:
+            continue
+        dit = sum(max(0.0, min(trou_b, y) - max(trou_a, x)) for x, y in parole)
+        if dit < 0.8:
+            continue                          # le trou n'est que du silence
+        a, b = max(0.0, trou_a - 0.3), trou_b + 0.3
+        segs, _ = model.transcribe(SRC, language="fr", word_timestamps=True,
+                                   vad_filter=False, clip_timestamps=[a, b])
+        inner = [x for s in segs for x in (s.words or []) if x.word.strip()]
+        fini = False
+        for saut in range(0, 4):
+            for k in range(12, 3, -1):
+                if len(inner) < saut + k or idx < k:
+                    continue
+                avant = words[idx - k:idx]
+                if all(pareil(cle(x), cle({"w": y.word.strip()}))
+                       for x, y in zip(avant, inner[saut:saut + k])):
+                    spans.append([round(float(avant[0]["a"]), 2),
+                                  round(float(inner[saut].start), 2)])
+                    recaler(words, float(avant[0]["a"]),
+                            float(inner[saut].start),
+                            float(inner[saut + k - 1].end), retime)
+                    fini = True
+                    break
+            if fini:
                 break
 
     spans.sort()
@@ -275,15 +314,22 @@ def doublons(words):
     out, i, n = [], 0, len(words)
     while i < n:
         hit = 0
-        for size in range(14, 1, -1):
-            j = i + size
-            if j + size > n:
-                continue
-            end = lambda x: re.sub(r"[\w'\u2019-]", "", x["w"]).strip()
-            if (keys[i:j] == keys[j:j + size]
-                    and end(words[j - 1]) == end(words[j + size - 1])
-                    and words[j]["a"] - words[j - 1]["b"] < 2.5):
-                hit = j
+        end = lambda x: re.sub(r"[\w'\u2019-]", "", x["w"]).strip()
+        for size in range(30, 1, -1):
+            # une longue repetition mot pour mot est toujours une reprise, meme
+            # si la prise abandonnee traine encore quelques mots avant qu'elle
+            # ne recommence ; sous huit mots on exige l'enchainement direct,
+            # sinon une anaphore voulue passerait pour un bafouillage
+            for extra in range(0, 9 if size >= 8 else 1):
+                j = i + size + extra
+                if j + size > n:
+                    continue
+                if (keys[i:i + size] == keys[j:j + size]
+                        and end(words[i + size - 1]) == end(words[j + size - 1])
+                        and words[j]["a"] - words[j - 1]["b"] < 2.5):
+                    hit = j
+                    break
+            if hit:
                 break
         if hit:
             DROPPED.append((words[i]["a"], words[hit]["a"]))
@@ -865,6 +911,38 @@ def render(segs, brolls, anims, total):
             "-movflags", "+faststart", OUT]
     subprocess.run(cmd, check=True)
     return has_music, dur_out
+
+
+def controle(model, segs):
+    """Cherche dans le RENDU ce que la detection aurait laisse passer.
+
+    C'est le filet de securite : on ecoute le montage fini, et toute phrase
+    qui s'y repete est renvoyee avec ses temps SOURCE, prets a coller dans
+    cuts.json.
+    """
+    r, _ = model.transcribe(OUT, language="fr", word_timestamps=True,
+                            vad_filter=False)
+    mots = [x for s in r for x in (s.words or []) if x.word.strip()]
+    k = [cle({"w": x.word.strip()}) for x in mots]
+
+    def source(t):                            # temps de sortie -> temps source
+        for s in segs:
+            if s["out"] <= t <= s["out"] + (s["b"] - s["a"]):
+                return t - s["off"]
+        return None
+
+    trouve = []
+    for i in range(len(mots)):
+        for size in range(10, 2, -1):
+            j = i + size
+            if j + size > len(mots):
+                continue
+            if all(k[i + t] == k[j + t] for t in range(size)):
+                a, b = source(float(mots[i].start)), source(float(mots[j].start))
+                if a is not None and b is not None:
+                    trouve.append([round(a, 2), round(b, 2)])
+                break
+    return trouve
 
 
 def dur(path):
