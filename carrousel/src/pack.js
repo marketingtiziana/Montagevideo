@@ -41,28 +41,35 @@ const only = process.argv.slice(2);
 const decks = only.length ? DECKS.filter(d => only.includes(d.name)) : DECKS;
 if (!decks.length) { console.error(`Carrousel inconnu : ${only.join(', ')}`); process.exit(1); }
 
-// 0. un carrousel dont une image source manque sortirait avec un placeholder :
-//    on l'ecarte de l'archive au lieu de livrer des slides degradees.
-const manquants = [];
-const retenus = decks.filter(d => {
+// 0. un carrousel dont une image source manque ne peut plus etre re-rendu :
+//    il sortirait avec un placeholder. On garde alors les PNG 1080x1350 deja
+//    rendus (ils contiennent l'image), et on renonce au 2x pour lui seul.
+for (const d of decks) {
   const src = fs.readFileSync(path.join(__dirname, d.key ? `slides-${d.key}.js` : 'slides.js'), 'utf-8');
   const refs = [...src.matchAll(/assets\/[A-Za-z0-9_\-./${}]+?\.(?:png|jpg|jpeg)/g)].map(m => m[0]);
-  const absents = [...new Set(refs)]
+  d.absents = [...new Set(refs)]
     .filter(r => !r.includes('$'))                       // chemins construits : verifies au rendu
     .filter(r => !fs.existsSync(path.join(ROOT, r)));
-  if (absents.length) manquants.push(`${d.name} : ${absents.join(', ')}`);
-  return absents.length === 0;
-});
-if (manquants.length) {
-  console.log('Carrousels ecartes, image source absente :');
-  manquants.forEach(m => console.log(`  ${m}`));
-  console.log('');
+  d.fige = d.absents.length > 0;
+  if (!d.fige) continue;
+  // les PNG figes doivent etre au complet, sinon le carrousel sort de l'archive
+  const attendu = require(d.key ? `./slides-${d.key}.js` : './slides.js').slides.length;
+  const dir = path.join(ROOT, 'output', d.key || '');
+  const dispo = fs.existsSync(dir)
+    ? fs.readdirSync(dir).filter(f => /^slide-\d+\.png$/.test(f)).length : 0;
+  d.utilisable = dispo === attendu;
+  console.log(`${d.name.padEnd(9)} image source absente : ${d.absents.join(', ')}`);
+  console.log(`          ${d.utilisable
+    ? `PNG 1080x1350 deja rendus conserves (${dispo}/${attendu}), pas de 2x`
+    : `PNG incomplets (${dispo}/${attendu}) : carrousel ecarte`}`);
 }
-if (!retenus.length) { console.error('Aucun carrousel complet : archive non produite.'); process.exit(1); }
+const retenus = decks.filter(d => !d.fige || d.utilisable);
+if (!retenus.length) { console.error('Aucun carrousel livrable : archive non produite.'); process.exit(1); }
 
 // 1. rendu de chaque carrousel dans chaque resolution
 let fail = 0;
 for (const d of retenus) {
+  if (d.fige) continue;                                  // surtout ne pas re-rendre : on perdrait l'image
   for (const s of SCALES) {
     const args = ['src/render.js'];
     if (d.key) args.push('--deck', d.key);
@@ -81,6 +88,7 @@ fs.rmSync(STAGE, { recursive: true, force: true });
 let total = 0;
 for (const d of retenus) {
   for (const s of SCALES) {
+    if (d.fige && s.scale > 1) continue;                 // pas de haute def sans l'image source
     const from = path.join(ROOT, s.src, d.key || '');
     const to = path.join(STAGE, s.dir, d.name);
     fs.mkdirSync(to, { recursive: true });
@@ -96,8 +104,14 @@ for (const d of retenus) {
 // 3. note de lecture dans l'archive
 const lignes = retenus.map(d => {
   const n = fs.readdirSync(path.join(STAGE, SCALES[0].dir, d.name)).length;
-  return `  ${d.name.padEnd(9)} ${String(n).padStart(2)} slides   ${d.titre}`;
+  return `  ${d.name.padEnd(9)} ${String(n).padStart(2)} slides   ${d.titre}${d.fige ? '  (*)' : ''}`;
 });
+const figes = retenus.filter(d => d.fige);
+const noteFiges = figes.length ? `
+(*) ${figes.map(d => d.name).join(' et ')} : l'image source de ces carrousels
+    n'est plus dans le depot. Les PNG 1080x1350 livres sont ceux rendus a
+    l'epoque, complets et intacts ; ils n'existent pas en 2160x2700.
+` : '';
 fs.writeFileSync(path.join(STAGE, 'LISEZ-MOI.txt'),
 `FYNOVATES — CARROUSELS INSTAGRAM
 ${new Date().toISOString().slice(0, 10)}
@@ -116,7 +130,7 @@ DEUX DOSSIERS, MEMES IMAGES
                         taille) ; quelques photos et l'avion du carrousel
                         "surcote" sont limites par leur fichier source et
                         n'y gagnent pas de detail.
-
+${noteFiges}
 Les fichiers sont nommes dans l'ordre de publication
 (<carrousel>-01.png, -02.png, ...) : un import groupe dans Instagram
 respecte cet ordre alphabetique.
