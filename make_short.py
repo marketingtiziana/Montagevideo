@@ -38,8 +38,8 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["TA PROCHAINE FACTURE", "SERA LUE PAR UNE IA", "AVANT MÊME",
-        "D'ÊTRE PAYÉE"]
+HOOK = ["TON IGNORANCE FISCALE", "ENRICHIT DEUX PERSONNES", "L'ÉTAT",
+        "ET LES GOUROUS"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -295,8 +295,11 @@ def scories(model, words):
         if c - b > 1.6:
             continue                          # trop loin : ce n'est pas une reprise
         suite = lire(c, c + 2.5)          # la reprise peut depasser l'ilot
-        n = min(len(amorce), len(suite))
-        if n and all(pareil_mot(amorce[k], suite[k]) for k in range(min(n, 3))):
+        # l'amorce doit etre reprise EN ENTIER : "gratuitement, oui,
+        # gratuitement" est une insistance voulue, pas un bafouillage
+        n = min(len(amorce), len(suite), 4)
+        if (len(amorce) >= 2 and n >= 2
+                and all(pareil_mot(amorce[k], suite[k]) for k in range(n))):
             # elle bute parfois deux fois de suite : on absorbe les miettes
             j, fin = i + 1, c
             while (j + 1 < len(lot) and lot[j][1] - lot[j][0] < 0.6
