@@ -27,6 +27,7 @@ const DECKS = [
   { key: 'fisc',     name: 'fisc',     titre: 'Les signaux qui font de toi une priorite du fisc' },
   { key: 'holding',  name: 'holding',  titre: 'La holding francaise' },
   { key: 'dm',       name: 'dm',       titre: 'Pose ta question a un tax advisor' },
+  { key: 'societe',  name: 'societe',  titre: 'Je peux payer quoi avec ma societe ?' },
 ];
 
 const SCALES = [
@@ -40,9 +41,28 @@ const only = process.argv.slice(2);
 const decks = only.length ? DECKS.filter(d => only.includes(d.name)) : DECKS;
 if (!decks.length) { console.error(`Carrousel inconnu : ${only.join(', ')}`); process.exit(1); }
 
+// 0. un carrousel dont une image source manque sortirait avec un placeholder :
+//    on l'ecarte de l'archive au lieu de livrer des slides degradees.
+const manquants = [];
+const retenus = decks.filter(d => {
+  const src = fs.readFileSync(path.join(__dirname, d.key ? `slides-${d.key}.js` : 'slides.js'), 'utf-8');
+  const refs = [...src.matchAll(/assets\/[A-Za-z0-9_\-./${}]+?\.(?:png|jpg|jpeg)/g)].map(m => m[0]);
+  const absents = [...new Set(refs)]
+    .filter(r => !r.includes('$'))                       // chemins construits : verifies au rendu
+    .filter(r => !fs.existsSync(path.join(ROOT, r)));
+  if (absents.length) manquants.push(`${d.name} : ${absents.join(', ')}`);
+  return absents.length === 0;
+});
+if (manquants.length) {
+  console.log('Carrousels ecartes, image source absente :');
+  manquants.forEach(m => console.log(`  ${m}`));
+  console.log('');
+}
+if (!retenus.length) { console.error('Aucun carrousel complet : archive non produite.'); process.exit(1); }
+
 // 1. rendu de chaque carrousel dans chaque resolution
 let fail = 0;
-for (const d of decks) {
+for (const d of retenus) {
   for (const s of SCALES) {
     const args = ['src/render.js'];
     if (d.key) args.push('--deck', d.key);
@@ -59,7 +79,7 @@ if (fail) { console.error(`\n${fail} rendu(s) non conforme(s) : archive non prod
 // 2. mise en forme de l'arborescence livree
 fs.rmSync(STAGE, { recursive: true, force: true });
 let total = 0;
-for (const d of decks) {
+for (const d of retenus) {
   for (const s of SCALES) {
     const from = path.join(ROOT, s.src, d.key || '');
     const to = path.join(STAGE, s.dir, d.name);
@@ -74,7 +94,7 @@ for (const d of decks) {
 }
 
 // 3. note de lecture dans l'archive
-const lignes = decks.map(d => {
+const lignes = retenus.map(d => {
   const n = fs.readdirSync(path.join(STAGE, SCALES[0].dir, d.name)).length;
   return `  ${d.name.padEnd(9)} ${String(n).padStart(2)} slides   ${d.titre}`;
 });

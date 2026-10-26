@@ -21,18 +21,17 @@ const slides = [
   /* ---------- 01 · COUVERTURE — echelle extreme + ombre ---------- */
   { main: `
     ${nav(1)}
-    <div class="kick" style="top:232px">LA QUESTION QUE TOUT LE MONDE SE POSE</div>
-    <div class="b" style="top:500px">
-      <div class="t" style="font-size:88px">Je peux payer</div>
-      <div class="giant" style="font-size:220px;margin:16px 0 46px">${ghost('QUOI')}</div>
-      <div class="t" style="font-size:88px">avec ma soci&eacute;t&eacute; ?</div>
+    <div class="b" style="top:397px;text-align:center">
+      <div class="t" style="font-size:112px">Je peux payer</div>
+      <div class="giant" style="font-size:280px;margin:20px 0 58px">${ghost('QUOI')}</div>
+      <div class="t" style="font-size:112px">avec ma soci&eacute;t&eacute; ?</div>
     </div>
     ${swipe()}${sign()}` },
 
   /* ---------- 02 · LA REGLE — surlignage inverse + filets ---------- */
   { main: `
     ${nav(2)}
-    <div class="vlabel" style="left:112px;top:1128px">R&Egrave;GLE N&deg;1</div>
+    <div class="vlabel" style="left:112px;top:772px">R&Egrave;GLE N&deg;1</div>
     <div class="b" style="left:236px;width:754px;top:228px">
       <div class="t" style="font-size:76px">Une seule r&egrave;gle<br>d&eacute;cide de tout.</div>
     </div>
@@ -41,7 +40,7 @@ const slides = [
       <p class="p" style="font-size:33px;line-height:1.95;padding:52px 0 56px">
         Une d&eacute;pense est d&eacute;ductible si elle est engag&eacute;e dans
         <span class="inv">l'int&eacute;r&ecirc;t</span> de ton entreprise, et
-        <span class="inv">justifi&eacute;e</span>.</p>
+        <span class="inv">justifi&eacute;e.</span></p>
       <div class="r1"></div>
     </div>
     <div class="b" style="left:236px;width:754px;top:972px">
@@ -82,15 +81,15 @@ const slides = [
     ${nav(4)}
     <div class="b" style="top:206px">
       <div class="t" style="font-size:60px">Ce qui passe&hellip;</div>
-      <div class="t out" style="font-size:112px;margin-top:10px">sous conditions.</div>
+      <div class="t out" style="font-size:112px;margin-top:34px">sous conditions.</div>
     </div>
     <div class="b" style="top:520px">
-      <div class="li" style="padding:0 0 34px"><b>Les repas :</b> en d&eacute;placement ou avec un client. Pas ton d&eacute;jeuner quotidien.</div>
-      <div class="li" style="padding:0 0 34px"><b>Le t&eacute;l&eacute;travail :</b> une quote-part de loyer, proportionn&eacute;e et document&eacute;e.</div>
-      <div class="li" style="padding:0 0 34px"><b>Le v&eacute;hicule :</b> possible, mais encadr&eacute; et plafonn&eacute;.</div>
+      <div class="li" style="padding:0 0 46px"><b>Les repas :</b> en d&eacute;placement ou avec un client. Pas ton d&eacute;jeuner quotidien.</div>
+      <div class="li" style="padding:0 0 46px"><b>Le t&eacute;l&eacute;travail :</b> une quote-part de loyer, proportionn&eacute;e et document&eacute;e.</div>
+      <div class="li" style="padding:0 0 46px"><b>Le v&eacute;hicule :</b> possible, mais encadr&eacute; et plafonn&eacute;.</div>
       <div class="li" style="padding:0"><b>Les cadeaux clients :</b> dans des limites raisonnables.</div>
     </div>
-    <div class="b" style="top:1046px">
+    <div class="b" style="top:992px">
       <p class="p" style="font-size:30px">La fronti&egrave;re ici : la <span class="mono">PROPORTION</span> et la <span class="mono">TRA&Ccedil;ABILIT&Eacute;</span>.</p>
     </div>
     ${sign()}` },
@@ -125,7 +124,7 @@ const slides = [
       <div style="margin-top:26px"><span class="pave" style="font-size:44px">acte anormal de gestion</span></div>
       <div style="margin-top:26px"><span class="pave" style="font-size:58px">abus de biens sociaux</span></div>
     </div>
-    <div class="b" style="left:236px;width:754px;top:1002px">
+    <div class="b" style="left:236px;width:700px;top:946px">
       <p class="p" style="font-size:31px">Le resto offert par ta soci&eacute;t&eacute; peut devenir le plus cher de ta vie.</p>
     </div>
     ${sign()}` },
@@ -153,28 +152,28 @@ const slides = [
   /* ---------- 08 · LA HIERARCHIE — escalier + filigrane 1 2 3 ---------- */
   { main: `
     ${nav(8)}
-    <div class="wm" style="left:96px;top:566px;font-size:420px;opacity:0.05;letter-spacing:0.06em">1 2 3</div>
+    <div class="wm" style="left:128px;top:604px;font-size:360px;opacity:0.05;letter-spacing:0.06em">1 2 3</div>
     <div class="b" style="top:200px">
       <div class="t" style="font-size:70px">La hi&eacute;rarchie &agrave; retenir.</div>
     </div>
     <div class="b" style="top:372px">
       <div class="p" style="font-size:32px;line-height:1.35">Niveau 1 &mdash; D&eacute;duire proprement ce qui est d&eacute;ductible.</div>
-      <div class="p" style="font-size:40px;line-height:1.3;margin:54px 0 0 70px;width:830px">Niveau 2 &mdash; Choisir la bonne structure pour ton CA.</div>
+      <div class="p" style="font-size:40px;line-height:1.3;margin:54px 0 0 70px;width:830px">Niveau 2 &mdash; Choisir la bonne structure<br>pour ton CA.</div>
       <div class="p" style="font-size:48px;line-height:1.25;font-weight:600;margin:54px 0 0 140px;width:760px">Niveau 3 &mdash; Architecturer : r&eacute;mun&eacute;ration, holding, patrimoine.</div>
     </div>
     <div class="b" style="top:1016px">
-      <div class="it" style="font-size:38px">La vraie question : est-ce que ta structure travaille pour toi ?</div>
+      <div class="it" style="font-size:38px">La vraie question : est-ce que ta structure<br>travaille pour toi ?</div>
     </div>
     ${sign()}` },
 
   /* ---------- 09 · CTA — echelle extreme + ombre, slide presque vide ---------- */
   { main: `
     ${nav(9)}
-    <div class="b" style="top:454px">
+    <div class="b" style="top:448px;text-align:center">
       <div class="giant" style="font-size:160px">Commente</div>
       <div class="giant" style="font-size:200px;margin-top:8px">${ghost('FRANCE')}</div>
     </div>
-    <div class="b" style="top:912px">
+    <div class="b" style="top:906px;text-align:center">
       <p class="p" style="font-size:34px">Je te donne mes conseils en DM.</p>
     </div>
     ${sign(28)}` },
