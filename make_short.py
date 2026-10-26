@@ -34,8 +34,8 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["LE PAYS OÙ TU VIS", "N'EST PAS FORCÉMENT", "LE PAYS OÙ TU AS",
-        "PAYÉ TES IMPÔTS"]
+HOOK = ["LE PAYS OÙ TU VIS", "N'EST PAS FORCÉMENT", "LE PAYS OÙ TU DOIS",
+        "PAYER TES IMPÔTS"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
