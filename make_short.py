@@ -21,7 +21,7 @@ SRC, MUSIC, OUT = "INPUT.mp4", "MUSIC.mp3", "short_final.mp4"
 W, H, FPS = 1080, 1920, 30
 
 SIL_DB = -34            # seuil au-dela duquel on considere qu'elle ne parle plus
-SIL_MIN = 0.45          # en-deca c'est une respiration : on la garde
+SIL_MIN = 0.35          # en-deca c'est une respiration : on la garde
 LEAD = 0.20             # on reprend AVANT l'attaque du mot, jamais dessus
 TAIL = 0.10             # on laisse la derniere syllabe finir
 HOLE = 0.12             # silence restant minimal : sous ce gain, pas de coupe
