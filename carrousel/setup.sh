@@ -20,4 +20,7 @@ mkdir -p fonts
 [ -f fonts/PlayfairDisplay.ttf ] || curl -sSL -o fonts/PlayfairDisplay.ttf \
   "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
 
+[ -f fonts/PlayfairDisplay-Italic.ttf ] || curl -sSL -o fonts/PlayfairDisplay-Italic.ttf \
+  "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf"
+
 echo ">> Prêt : node src/render.js [numéros de slides]"

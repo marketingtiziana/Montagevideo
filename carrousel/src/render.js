@@ -62,7 +62,20 @@ ${slide.main}
   });
 
   // Chromium pré-installé dans l'environnement (pas de téléchargement)
-  const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+  // Chromium pre-installe : la revision change d'un conteneur a l'autre, on la cherche
+  const findChrome = () => {
+    if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
+    const base = process.env.PLAYWRIGHT_BROWSERS_PATH || '/opt/pw-browsers';
+    if (!fs.existsSync(base)) return '';
+    for (const d of fs.readdirSync(base).filter(d => /^chromium-\d+$/.test(d)).sort().reverse()) {
+      for (const sub of ['chrome-linux', 'chrome-linux64']) {
+        const bin = path.join(base, d, sub, 'chrome');
+        if (fs.existsSync(bin)) return bin;
+      }
+    }
+    return '';
+  };
+  const CHROME = findChrome();
   const browser = await chromium.launch(fs.existsSync(CHROME) ? { executablePath: CHROME } : {});
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: SCALE });
 
