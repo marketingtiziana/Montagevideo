@@ -24,7 +24,8 @@ SIL_DB = -34            # seuil au-dela duquel on considere qu'elle ne parle plu
 SIL_MIN = 0.35          # en-deca c'est une respiration : on la garde
 LEAD = 0.20             # on reprend AVANT l'attaque du mot, jamais dessus
 TAIL = 0.10             # on laisse la derniere syllabe finir
-HOLE = 0.12             # silence restant minimal : sous ce gain, pas de coupe
+HOLE = 0.06             # silence restant minimal : sous ce gain, pas de coupe
+COURT = 0.60            # en-deca, l'hesitation est courte : marges reduites
 XF = 0.12               # pause breve : fondu invisible
 XF_JUMP = 0.05          # gros saut : presque un cut, le fondu fantomerait
 JUMP = 1.2              # au-dela de ce qui est retire, c'est un saut
@@ -452,7 +453,10 @@ def segments(words):
     total = duree(SRC)
     sil = silences(SRC)
     reprises = [e for _, e in sil]            # instants ou la parole repart
-    coupes = [(a + TAIL, b - LEAD) for a, b in sil]
+    # une hesitation courte se resserre davantage : l'attaque du mot suivant
+    # est nette, pas besoin d'y laisser autant de marge
+    coupes = [(a + (TAIL if b - a >= COURT else 0.06),
+               b - (LEAD if b - a >= COURT else 0.12)) for a, b in sil]
     coupes = [(a, b) for a, b in coupes if b - a > HOLE]
     # un passage retire s'arrete 80 ms avant le mot suivant : whisper horodate
     # parfois un mot sur une duree nulle, et la coupe avalait son attaque
