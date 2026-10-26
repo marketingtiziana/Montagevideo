@@ -39,7 +39,7 @@ BR_WIPES = ["fade", "smoothup", "circleopen", "dissolve"]
 BROLL_MIN, BROLL_MAX = 1.5, 2.5
 
 # Accroche du debut : texte noir sur bandeau blanc, visible des la premiere frame
-HOOK = ["TON PAYS TRANSMET-IL", "TES INFOS", "À LA FRANCE ?"]
+HOOK = ["TU ES SÛR", "D'ÊTRE EN RÈGLE ?"]
 HOOK_END = 4.4          # duree d'affichage, en secondes de sortie
 HOOK_MUTE = 3.6         # tant que l'accroche redit les mots, pas de sous-titre
 HOOK_FS = 74
@@ -81,7 +81,8 @@ KEY = {"expatriation", "immobilier", "statistiques", "fiscalite", "fiscal",
        "residence", "patrimoine", "imposition", "indivision", "loyer",
        "revente", "donation", "succession", "impot", "tva", "facturation",
        "facture", "factures", "algorithme", "controle", "controles",
-       "declaration", "declarations",
+       "declaration", "declarations", "audit", "redressement", "statut",
+       "comptable", "fisc", "amende", "sanction",
        "oss", "expatrie", "expatries", "cotisations", "dividendes"}
 # un nombre ecrit en toutes lettres merite le meme traitement qu'un chiffre
 NUMWORDS = {"deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
