@@ -25,7 +25,11 @@ SIL_MIN = 0.45          # en-deca c'est une respiration : on la garde
 LEAD = 0.20             # on reprend AVANT l'attaque du mot, jamais dessus
 TAIL = 0.10             # on laisse la derniere syllabe finir
 HOLE = 0.12             # silence restant minimal : sous ce gain, pas de coupe
-XF = 0.12               # chaque raccord est un fondu, jamais un cut sec
+XF = 0.12               # pause breve : fondu invisible
+XF_JUMP = 0.05          # gros saut : presque un cut, le fondu fantomerait
+JUMP = 1.2              # au-dela de ce qui est retire, c'est un saut
+PUNCH = 0.035           # leger appui avant sur un saut, pour l'assumer
+PUNCH_T = 0.30
 
 ZOOM = 0.05             # micro-zoom lent, avec ease-in/ease-out
 BR_XF = 0.30            # entree/sortie des B-roll et habillages
@@ -379,8 +383,13 @@ def segments(words):
     coupes = [(a, b) for a, b in coupes if b - a > HOLE]
     # un passage retire s'arrete 80 ms avant le mot suivant : whisper horodate
     # parfois un mot sur une duree nulle, et la coupe avalait son attaque
+    debuts = [0.0] + [e for _, e in sil]      # instants ou la parole commence
     for a, b in DROPPED:
         if b - a > 0.2:
+            # on remonte au debut de la phrase abandonnee : sans ca il en
+            # restait un fragment avant la coupe
+            amont = [d for d in debuts if a - 1.0 <= d <= a]
+            a = min(amont) if amont else a
             # la coupe s'arrete a la reprise de parole la plus proche, sinon
             # elle mord sur l'attaque du mot suivant
             proches = [e for e in reprises if b - 0.5 <= e <= b]
@@ -429,7 +438,9 @@ def timeline(segs):
         s["out"] = t
         t += s["b"] - s["a"]
         if i < len(segs) - 1:
-            t -= XF
+            enleve = segs[i + 1]["a"] - s["b"]
+            s["xf"] = XF if enleve < JUMP else XF_JUMP
+            t -= s["xf"]
     return t
 
 
@@ -816,7 +827,8 @@ def render(segs, brolls, anims, total):
     memoire tout ce que les branches suivantes n'avaient pas encore consomme,
     ce qui faisait tuer ffmpeg par le systeme sur une source longue en 1080p60.
     """
-    bw, bh = int(W * (1 + ZOOM)) // 2 * 2, int(H * (1 + ZOOM)) // 2 * 2
+    bw, bh = (int(W * (1 + ZOOM + PUNCH)) // 2 * 2,
+              int(H * (1 + ZOOM + PUNCH)) // 2 * 2)
     cmd = [FF, "-y", "-hide_banner", "-loglevel", "error"]
     for s in segs:
         cmd += ["-ss", "%.3f" % s["a"], "-t", "%.3f" % (s["b"] - s["a"]), "-i", SRC]
@@ -834,19 +846,29 @@ def render(segs, brolls, anims, total):
 
     # raccords en fondu : la coupe se fait pendant le silence et ne se voit pas
     vprev, aprev, acc = "v0", "a0", segs[0]["b"] - segs[0]["a"]
+    appuis = []                               # sauts a souligner d'un leger zoom
     for i in range(1, len(segs)):
         d = segs[i]["b"] - segs[i]["a"]
+        xf = segs[i - 1].get("xf", XF)
         chain.append("[%s][v%d]xfade=transition=fade:duration=%.2f:offset=%.3f"
-                     "[vx%d]" % (vprev, i, XF, acc - XF, i))
+                     "[vx%d]" % (vprev, i, xf, acc - xf, i))
         chain.append("[%s][a%d]acrossfade=d=%.2f:c1=tri:c2=tri[ax%d]"
-                     % (aprev, i, XF, i))
+                     % (aprev, i, xf, i))
         vprev, aprev = "vx%d" % i, "ax%d" % i
-        acc += d - XF
+        acc += d - xf
+        if xf == XF_JUMP:
+            appuis.append(acc - d + xf)       # debut du segment entrant
 
     # micro-zoom avec ease-in/ease-out : crop ne reevalue pas sa taille, donc
     # c'est scale=eval=frame qui porte le mouvement
     p = "(t/%.3f)" % max(0.1, acc)
     z = "(1+%.4f*(%s*%s*(3-2*%s)))" % (ZOOM, p, p, p)
+    for s0 in appuis:                         # l'image avance puis se repose
+        z += (r"+%.4f*if(between(t\,%.3f\,%.3f)\,1-(t-%.3f)/%.3f\,0)"
+              % (PUNCH, s0, s0 + PUNCH_T, s0, PUNCH_T))
+    if appuis:
+        z = "(" + z + ")"                     # sinon le /2 du gabarit ne porte
+                                              # que sur le dernier terme
     chain.append("[%s]scale=%d:%d:force_original_aspect_ratio=increase,"
                  "crop=%d:%d,setsar=1[base]" % (vprev, bw, bh, bw, bh))
     chain.append("[base]scale=w=trunc(%d*%s/2)*2:h=trunc(%d*%s/2)*2:eval=frame:"
