@@ -552,7 +552,7 @@ class Plated(Element):
         col = layer[:, PLATE_X0:PLATE_X1, 3]
         rows = np.where(col.max(axis=1) > 0.02)[0]
         if len(rows):
-            y0, y1 = max(0, PY - PLATE_PAD + 6), min(H, rows[-1] + PLATE_PAD - 6)
+            y0, y1 = max(0, rows[0] + 12 - PLATE_PAD), min(H, rows[-1] + PLATE_PAD - 6)   # anchor to content
             bottom = getattr(self.inner, 'bottom', None)
             if bottom is not None: y1 = min(H, int(bottom) + PLATE_PAD - 6)
             y1 = max(y1, y0 + 56)
