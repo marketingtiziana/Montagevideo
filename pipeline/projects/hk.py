@@ -11,10 +11,10 @@ SRC_END = 133.10                # last word ends at 132.78 s
 #  - "Et parmi tous ces clients," (6.4-7.4) restarted as "et parmi tous nos clients" -> keep the second
 #  - "Une saucisse dans une..." flub (42.2-44.4) + 14.7 s dead air; the whole passage from 35.3 is redone at 57.2
 CUTS = [
-    (6.00, 8.05), (9.35, 9.52), (12.64, 13.00), (15.36, 15.53), (16.37, 16.60), (22.33, 22.67),
-    (35.08, 57.14), (61.04, 61.22), (61.77, 61.98), (63.06, 63.32), (64.71, 65.05), (68.31, 68.82),
+    (5.95, 7.98), (9.35, 9.52), (12.64, 13.00), (15.36, 15.53), (16.37, 16.60), (22.33, 22.67),
+    (27.45, 28.24), (35.08, 57.14), (61.04, 61.22), (61.77, 61.98), (63.06, 63.32), (64.71, 65.05), (68.31, 68.82),
     (70.15, 73.10), (75.41, 76.94), (80.28, 80.48), (82.70, 85.71), (93.36, 93.56), (95.31, 95.51),
-    (101.13, 101.37), (102.82, 104.09), (107.94, 108.65), (110.59, 110.96), (114.12, 115.23),
+    (101.13, 101.37), (102.82, 104.09), (107.94, 108.65), (109.95, 115.27),   # pause + aborted first attempt of 'vous opérez depuis l'une'
     (121.59, 121.74), (122.68, 122.96), (123.68, 124.53), (129.76, 130.08),
 ]
 
@@ -46,7 +46,7 @@ SUBS = [
     (99.50, 102.80, "Hong Kong Companies Registry, registre officiel."),
     (104.18, 107.86, "Vous signez aujourd'hui, on pose la première pierre cette semaine."),
     (107.86, 109.78, "Dans quelques semaines,"),
-    (111.90, 119.62, "vous opérez depuis l'une des juridictions les plus solides au monde,"),
+    (115.30, 119.62, "vous opérez depuis l'une des juridictions les plus solides au monde,"),
     (120.10, 124.06, "avec une structure pensée pour **10 ans**, pas pour 6 mois."),
     (124.72, 126.12, "Votre devis est valable **14 jours**."),
     (126.28, 127.78, "Le bouton est juste **sous cette vidéo**."),
