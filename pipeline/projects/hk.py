@@ -67,7 +67,7 @@ def storyboard(g):
     E.append(g.Panel(T(8.3), T(12.6), "Ceux qui choisissent **Hong Kong** voient plus loin", eyebrow="Parmi tous nos clients", ico='pin', size=38))
     E.append(g.Panel(T(13.2), T(15.4), "Votre devis est devant vous", eyebrow="Vous en faites partie", ico='doc', size=40))
     # Numbers
-    E.append(g.NumberCard(T(16.8), T(22.4), "8,25 %", "d'imposition jusqu'à ≈ 240 000 € de bénéfices", eyebrow="Parlons chiffres", ico='euro', count=False))
+    E.append(g.NumberCard(T(16.8), T(22.4), "8,25 %", "jusqu'à 240 000 € de bénéfices", eyebrow="Imposition", ico='euro', count=False))
     E.append(g.NumberCard(T(22.8), T(24.8), "16,5 %", "au-delà", eyebrow="Taux supérieur", ico='euro', count=False))
     E.append(g.Panel(T(25.0), T(27.2), "Faites le calcul avec votre imposition actuelle", eyebrow="Comparez", ico='check_circle', size=36))
     E.append(g.Panel(T(28.0), T(31.7), "Sur une seule année, la différence paye ce devis **plusieurs fois**", eyebrow="Retour sur investissement", ico='euro', size=34))
@@ -85,7 +85,7 @@ def storyboard(g):
     # Projection
     E.append(g.LightLeak(T(104.1), 2.2, 'tr', 0.14))
     E.append(g.Timeline([(T(104.4), "Aujourd'hui", "Vous signez"), (T(105.5), "Cette semaine", "Première pierre posée"),
-                         (T(108.9), "Quelques semaines", "Vous opérez depuis Hong Kong"), (T(120.1), "Horizon", "Une structure pensée pour 10 ans")],
+                         (T(108.9), "Quelques semaines", "Société opérationnelle"), (T(120.1), "Horizon", "Pensée pour 10 ans")],
                         T(124.0), start=T(104.4)))
     # Urgency + CTA
     E.append(g.NumberCard(T(124.8), T(126.1), 14, "jours de validité du devis", eyebrow="Votre devis", ico='clock', count=False))
