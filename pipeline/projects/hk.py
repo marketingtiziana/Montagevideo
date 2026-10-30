@@ -14,7 +14,7 @@ CUTS = [
     (5.95, 7.98), (9.35, 9.52), (12.64, 13.00), (15.36, 15.53), (16.37, 16.60), (22.33, 22.67),
     (27.45, 28.24), (35.08, 57.14), (61.04, 61.22), (61.77, 61.98), (63.06, 63.32), (64.71, 65.05), (68.31, 68.82),
     (70.15, 73.10), (75.41, 76.94), (80.28, 80.48), (82.70, 85.71), (93.36, 93.56), (95.31, 95.51),
-    (101.13, 101.37), (102.82, 104.09), (107.94, 108.65), (109.95, 111.625), (113.95, 117.00),   # pause + lip noise, then the restarted 'dans quelques semaines...' (keep take 1)
+    (101.13, 101.37), (102.82, 104.09), (107.94, 115.25),   # three aborted attempts ('Dans quelques semaines… / Vot… / dans quelques s'maines / vous opérez depuis l'une des…'); keep the clean take at 115.25
     (121.59, 121.74), (122.68, 122.96), (123.68, 124.53), (129.76, 130.08),
 ]
 
@@ -45,8 +45,8 @@ SUBS = [
     (95.58, 99.14, "Vous avez une société **auditée et vérifiable**."),
     (99.50, 102.80, "Hong Kong Companies Registry, registre officiel."),
     (104.18, 107.86, "Vous signez aujourd'hui, on pose la première pierre cette semaine."),
-    (107.86, 109.78, "Dans quelques semaines,"),
-    (111.64, 119.62, "vous opérez depuis l'une des juridictions les plus solides au monde,"),
+    (115.25, 116.50, "Dans quelques semaines,"),
+    (116.50, 119.62, "vous opérez depuis l'une des juridictions les plus solides au monde,"),
     (120.10, 124.06, "avec une structure pensée pour **10 ans**, pas pour 6 mois."),
     (124.72, 126.12, "Votre devis est valable **14 jours**."),
     (126.28, 127.78, "Le bouton est juste **sous cette vidéo**."),
@@ -85,7 +85,7 @@ def storyboard(g):
     # Projection
     E.append(g.LightLeak(T(104.1), 2.2, 'tr', 0.14))
     E.append(g.Timeline([(T(104.4), "Aujourd'hui", "Vous signez"), (T(105.5), "Cette semaine", "Première pierre posée"),
-                         (T(108.9), "Quelques semaines", "Société opérationnelle"), (T(120.1), "Horizon", "Pensée pour 10 ans")],
+                         (T(115.4), "Quelques semaines", "Société opérationnelle"), (T(120.1), "Horizon", "Pensée pour 10 ans")],
                         T(124.0), start=T(104.4)))
     # Urgency + CTA
     E.append(g.NumberCard(T(124.8), T(126.1), 14, "jours de validité du devis", eyebrow="Votre devis", ico='clock', count=False))
