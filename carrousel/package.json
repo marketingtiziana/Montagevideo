@@ -7,7 +7,8 @@
     "render": "node src/render.js",
     "contrast": "node src/contrast.js",
     "render:2x": "node src/render.js --scale 2",
-    "pack": "node src/pack.js"
+    "pack": "node src/pack.js",
+    "pdf": "node src/pdf.js"
   },
   "keywords": [],
   "author": "",
