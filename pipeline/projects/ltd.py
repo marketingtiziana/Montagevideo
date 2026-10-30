@@ -50,8 +50,8 @@ def storyboard(g):
     # The choice: UK Ltd
     E.append(g.LightLeak(T(20.0), 2.2, 'tl', 0.12))
     E.append(g.Panel(T(20.5), T(24.8), "LTD anglaise : **le bon choix** pour votre profil", eyebrow="Votre choix", ico='check_circle', size=40))
-    E.append(g.CheckList([(T(28.2), "Dans un vrai pays"), (T(30.6), "Reconnue par vos clients"), (T(32.5), "Reconnue par vos prestataires")],
-                         T(34.0), eyebrow="Une vraie société", start=T(25.9)))
+    E.append(g.CheckList([(T(26.0), "Une vraie société"), (T(28.2), "Dans un vrai pays"), (T(30.6), "Reconnue par vos clients"),
+                          (T(32.5), "Reconnue par vos prestataires")], T(34.0), eyebrow="Votre LTD", start=T(25.9)))
     E.append(g.NumberCard(T(35.3), T(37.0), 0, "image offshore", eyebrow="Perception", ico='shield', count=False))
     E.append(g.Panel(T(37.6), T(39.5), "Une **crédibilité immédiate**", eyebrow="Résultat", ico='check_circle', size=42))
     # Social proof
