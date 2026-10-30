@@ -3,7 +3,7 @@
 
 NAME = "Tiziana"
 TITLE = "Fondatrice"
-MUSIC_GAIN_DB = -5.0
+MUSIC_GAIN_DB = -9.0
 MUSIC_PEAK_SRC = 46.48          # "Ce sont des entrepreneurs comme vous..." -> music swell on the closing
 SRC_END = 54.70                 # last word ends at 54.60 s (clip ends 54.70)
 
