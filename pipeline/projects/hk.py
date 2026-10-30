@@ -14,7 +14,7 @@ CUTS = [
     (5.95, 7.98), (9.35, 9.52), (12.64, 13.00), (15.36, 15.53), (16.37, 16.60), (22.33, 22.67),
     (27.45, 28.24), (35.08, 57.14), (61.04, 61.22), (61.77, 61.98), (63.06, 63.32), (64.71, 65.05), (68.31, 68.82),
     (70.15, 73.10), (75.41, 76.94), (80.28, 80.48), (82.70, 85.71), (93.36, 93.56), (95.31, 95.51),
-    (101.13, 101.37), (102.82, 104.09), (107.94, 108.65), (109.95, 115.27),   # pause + aborted first attempt of 'vous opérez depuis l'une'
+    (101.13, 101.37), (102.82, 104.09), (107.94, 108.65), (109.95, 111.55), (113.95, 117.08),   # pause + lip noise, then the restarted 'dans quelques semaines...' (keep take 1)
     (121.59, 121.74), (122.68, 122.96), (123.68, 124.53), (129.76, 130.08),
 ]
 
@@ -46,7 +46,7 @@ SUBS = [
     (99.50, 102.80, "Hong Kong Companies Registry, registre officiel."),
     (104.18, 107.86, "Vous signez aujourd'hui, on pose la première pierre cette semaine."),
     (107.86, 109.78, "Dans quelques semaines,"),
-    (115.30, 119.62, "vous opérez depuis l'une des juridictions les plus solides au monde,"),
+    (111.64, 119.62, "vous opérez depuis l'une des juridictions les plus solides au monde,"),
     (120.10, 124.06, "avec une structure pensée pour **10 ans**, pas pour 6 mois."),
     (124.72, 126.12, "Votre devis est valable **14 jours**."),
     (126.28, 127.78, "Le bouton est juste **sous cette vidéo**."),
