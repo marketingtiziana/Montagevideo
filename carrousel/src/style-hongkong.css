@@ -1,0 +1,32 @@
+/* ============================================================
+   FYNOVATES / Madame Caci — Deck « hongkong »
+   Meme direction artistique que le deck « societe » :
+   minimalisme spectaculaire, noir sur blanc, zero couleur.
+   Ce fichier ne fait qu'ajouter ce dont ce carrousel a besoin.
+   ============================================================ */
+
+@import 'style-societe.css';
+
+/* chiffre-vedette au milieu d'une phrase : la phrase reste entiere,
+   le chiffre prend la taille d'un titre */
+.fig {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  letter-spacing: -0.02em; line-height: 0.9;
+  margin: 0 14px;            /* le chiffre a besoin d'air dans la phrase */
+}
+.fig--nav { color: var(--nav); }
+
+/* ligne de devises : mono, separee par des filets verticaux */
+.devises { display: flex; align-items: center; gap: 30px; }
+.devises span { font-family: 'IBM Plex Mono', monospace; font-size: 34px;
+                letter-spacing: 0.10em; }
+.devises i    { width: 1px; height: 30px; background: #D8D8D8; display: block; }
+
+/* paragraphe dense : interlignage un cran plus aere que .p */
+.pp { font-family: 'Inter', sans-serif; font-weight: 300;
+      font-size: 30px; line-height: 1.72; }
+.pp + .pp { margin-top: 26px; }
+
+/* le contour a besoin d'une grande taille pour tenir a 300px dans le feed :
+   l'epaisseur du trait suit la taille du mot */
+.out--xl { -webkit-text-stroke: 2.5px var(--ink); }

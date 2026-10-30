@@ -30,6 +30,7 @@ const DECKS = [
   { key: 'holding',  name: 'holding',  titre: 'La holding francaise' },
   { key: 'dm',       name: 'dm',       titre: 'Pose ta question a un tax advisor' },
   { key: 'societe',  name: 'societe',  titre: 'Je peux payer quoi avec ma societe ?' },
+  { key: 'hongkong', name: 'hongkong', titre: 'Pourquoi Sami a monte sa societe a Hong Kong' },
 ];
 
 const TOUTES = [
