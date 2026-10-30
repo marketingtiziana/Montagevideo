@@ -28,4 +28,5 @@ r = subprocess.run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-i', 
 print('voice rc:', r.returncode, r.stderr[-800:] if r.returncode else '')
 s = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', out, '-af', 'ebur128=peak=true', '-f', 'null', '-'],
                    capture_output=True, text=True).stderr
+s = s[s.rfind('Summary'):]
 print(re.search(r'I:\s+(-?[\d.]+) LUFS', s).group(0), '|', re.search(r'Peak:\s+(-?[\d.]+) dBFS', s).group(0))

@@ -16,7 +16,7 @@ CUTS = [
 ]
 
 OUTRO = dict(h1="À très vite", h2="Venez avec vos vrais chiffres",
-             h3="Un empêchement ? Prévenez la personne avec qui vous avez rendez-vous",
+             h3="Un empêchement ? Prévenez-nous à l'avance",
              arrow=False, icon3='clock')
 
 SUBS = [
@@ -41,7 +41,8 @@ SUBS = [
     (50.16, 53.18, "plus le plan avec lequel vous repartez est **précis**."),
     (53.74, 58.48, "Cet appel peut vous faire économiser **des dizaines de milliers d'euros**."),
     (59.02, 63.40, "Trois : ce créneau est réservé pour vous, et **uniquement pour vous**."),
-    (63.84, 68.74, "Quelqu'un de l'équipe a bloqué ce temps pour préparer et étudier votre dossier."),
+    (63.84, 65.90, "Quelqu'un de l'équipe a bloqué ce temps"),
+    (65.90, 68.74, "pour préparer et étudier votre dossier."),
     (69.44, 72.32, "Si vous avez un empêchement, ce n'est pas un problème, ça arrive."),
     (72.58, 73.56, "Mais **prévenez** :"),
     (73.84, 76.96, "contactez directement la personne avec qui vous avez rendez-vous"),
