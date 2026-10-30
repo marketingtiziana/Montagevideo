@@ -12,6 +12,7 @@ video = os.path.join(WORK, 'video_gfx.mp4'); out = os.path.join(WORK, sys.argv[1
 import importlib
 PROJ = importlib.import_module(f"projects.{os.environ.get('MV_PROJECT', 'llc')}")
 CTA = INTRO_DUR + src_to_final(PROJ.MUSIC_PEAK_SRC)   # the music swell lands here (CTA)
+MUSIC_GAIN_DB = getattr(PROJ, "MUSIC_GAIN_DB", 0.0)   # per-project trim of the whole music bed
 BUILD0 = CTA - 9.0                             # music starts to swell ~9 s before the CTA
 END_BODY = INTRO_DUR + BODY
 # Music gain envelope (before ducking): intro alone / under voice / soft build to CTA / outro / fade
@@ -19,6 +20,11 @@ ENV = (f"if(lt(t,{INTRO_DUR}),0.80,"
        f"if(lt(t,{BUILD0}),0.70,"
        f"if(lt(t,{CTA}),0.70+0.50*(t-{BUILD0})/{CTA-BUILD0},"
        f"if(lt(t,{END_BODY}),1.20,0.90))))")
+
+# If the music is shorter than the programme, stretch it slightly (pitch-preserving) to cover the outro.
+_md = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', music],
+                           capture_output=True, text=True).stdout.strip() or 0)
+STRETCH = f"atempo={max(0.5, min(1.0, _md / (TOTAL + 3.0))):.4f}," if 0 < _md < TOTAL + 3.0 else ""   # keep the track's natural decay past the end
 
 def run(cmd):
     r = subprocess.run(cmd, capture_output=True, text=True)
@@ -29,9 +35,9 @@ def run(cmd):
 # 3) sidechain-duck music under the voice; 4) sum; 5) measure for 2-pass loudnorm
 pre = (
     f"[0:a]adelay={int(INTRO_DUR*1000)}|{int(INTRO_DUR*1000)},apad=whole_dur={TOTAL},aformat=sample_rates=48000:channel_layouts=stereo[v];"
-    f"[1:a]atrim=0:{TOTAL},asetpts=PTS-STARTPTS,aformat=sample_rates=48000:channel_layouts=stereo,"
+    f"[1:a]{STRETCH}atrim=0:{TOTAL},asetpts=PTS-STARTPTS,aformat=sample_rates=48000:channel_layouts=stereo,"
     f"loudnorm=I=-21:LRA=5:TP=-4,acompressor=threshold=-26dB:ratio=3:attack=60:release=700,"
-    f"volume='{ENV}':eval=frame,afade=t=in:d=1.2,afade=t=out:st={TOTAL-1.6}:d=1.6,apad=whole_dur={TOTAL}[m];"
+    f"volume='{ENV}':eval=frame,volume={MUSIC_GAIN_DB}dB,afade=t=in:d=1.2,afade=t=out:st={TOTAL-1.6}:d=1.6,apad=whole_dur={TOTAL}[m];"
     f"[v]asplit[v1][v2];"
     f"[m][v2]sidechaincompress=threshold=0.05:ratio=3:attack=15:release=450:makeup=1:level_sc=1.0[md];"
     f"[v1][md]amix=inputs=2:weights='1 1':normalize=0:duration=first[mix]"

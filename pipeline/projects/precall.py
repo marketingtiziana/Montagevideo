@@ -3,6 +3,7 @@
 
 NAME = "Tiziana"
 TITLE = "Fondatrice"
+MUSIC_GAIN_DB = -5.0            # quieter music bed (client request)
 MUSIC_PEAK_SRC = 91.72          # "Et honnêtement..." -> music swell lands on the closing
 SRC_END = 95.55                 # last word ends at 95.26 s
 
