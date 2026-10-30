@@ -149,6 +149,12 @@ def icon(kind, size=56, color=GOLD, stroke=3):
     elif kind == 'question':
         f = ImageFont.truetype(FONT_HEAD, int(S*0.9)); f.set_variation_by_name(b'SemiBold')
         d.text((S*0.5, S*0.52), '?', font=f, fill=c, anchor='mm')
+    elif kind == 'euro':
+        f = ImageFont.truetype(FONT_HEAD, int(S*0.9)); f.set_variation_by_name(b'SemiBold')
+        d.text((S*0.5, S*0.52), '€', font=f, fill=c, anchor='mm')
+    elif kind == 'cross':
+        d.ellipse([m, m, S-m, S-m], outline=c, width=st)
+        d.line([(S*0.36, S*0.36), (S*0.64, S*0.64)], fill=c, width=st); d.line([(S*0.64, S*0.36), (S*0.36, S*0.64)], fill=c, width=st)
     elif kind == 'star':
         pts = []
         for k in range(10):
@@ -270,53 +276,12 @@ class Caption(Element):
         blit(canvas, self.im, (W - self.im.width) / 2, self.y - self.im.height / 2 + dy, a)
 
 
-# Full subtitles (SOURCE seconds, corrected French). **word** = gold accent for key statements.
-SUBS = [
-    (0.00, 1.98, "800 entrepreneurs accompagnés,"),
-    (2.24, 3.48, "8 ans de métier,"),
-    (3.72, 6.20, "50 avis 5 étoiles sur Trustpilot."),
-    (6.44, 8.42, "La LLC que vous avez dans votre devis,"),
-    (8.62, 10.94, "c'est la structure qu'on monte le plus souvent,"),
-    (10.94, 12.34, "et je vais vous dire pourquoi."),
-    (12.86, 14.00, "Vous avez **bien choisi**."),
-    (15.12, 17.34, "La LLC est **transparente**."),
-    (17.40, 20.08, "La société ne paye pas d'impôts aux États-Unis."),
-    (20.36, 22.02, "Dans la majorité des cas,"),
-    (22.20, 25.70, "vous déclarez vos bénéfices **là où vous résidez**."),
-    (26.40, 29.50, "Et on vous la monte au Nouveau-Mexique."),
-    (29.66, 30.74, "Pas de rapport annuel,"),
-    (31.06, 32.02, "pas de taxes annuelles,"),
-    (32.20, 35.04, "quasiment zéro contrainte administrative."),
-    (36.10, 37.30, "Vous vous dites peut-être :"),
-    (37.54, 40.42, "une société américaine, ça doit être une usine à gaz."),
-    (41.42, 42.66, "C'est exactement **l'inverse**."),
-    (43.00, 46.42, "C'est la structure la plus simple de tout notre catalogue,"),
-    (46.74, 48.30, "et la plus accessible,"),
-    (48.40, 51.30, "avec adresse et agent inclus un an."),
-    (52.76, 53.74, "Et tout est **vérifiable**."),
-    (53.74, 56.94, "Votre société apparaîtra sur le registre officiel de l'État,"),
-    (57.18, 60.16, "comme celle de nos 800 clients avant vous."),
-    (62.16, 63.14, "**Projetez-vous.**"),
-    (63.34, 64.30, "Vous signez aujourd'hui,"),
-    (64.38, 65.54, "on lance la création demain,"),
-    (65.54, 66.72, "et dans quelques jours,"),
-    (66.86, 69.12, "vous facturez vos clients avec votre LLC."),
-    (69.62, 70.42, "Pendant ce temps,"),
-    (73.76, 75.34, "ne rien faire **est un coût**."),
-    (75.56, 77.08, "Chaque mois sans structure propre,"),
-    (77.44, 80.00, "c'est de la marge que vous **laissez partir**."),
-    (80.54, 82.14, "Votre devis est valable **14 jours**,"),
-    (82.60, 85.12, "et on ouvre un nombre limité de dossiers par semaine"),
-    (85.12, 87.24, "pour garder ce niveau de suivi."),
-    (87.48, 88.90, "Le bouton est **sous la vidéo**,"),
-    (89.42, 91.74, "deux clics, et mon équipe vous répond dans l'heure."),
-]
-
 class Subtitles(Element):
     """Continuous subtitles, bottom centre, quick cross-fade, max 2 lines."""
     def __init__(self):
         self.f = font('body', 40, 'SemiBold')
         cues = []
+        SUBS = PROJ.SUBS
         for i, (a, b, txt) in enumerate(SUBS):
             s, e = T(a), T(b)
             if i + 1 < len(SUBS):
@@ -524,10 +489,12 @@ class Outro(Element):
         super().__init__(s - 0.6, TOTAL + 1)
         self.bg = Intro().bg
         self.word = text_img(BRAND, font('head', 44, 'Bold'), WHITE, tracking=10)
-        self.h1 = text_img("Validez votre devis", font('head', 62, 'SemiBold'), WHITE)
-        self.h2 = text_img("Le bouton est sous la vidéo", font('body', 30, 'Medium'), OFFWHITE)
-        self.h3 = text_img("Votre équipe vous répond au plus vite", font('body', 26, 'Medium'), GOLD_LIGHT)
-        self.arrow = icon('arrow_down', 48, GOLD); self.clock = icon('clock', 30, GOLD_LIGHT)
+        O = PROJ.OUTRO
+        self.h1 = text_img(O['h1'], font('head', 62, 'SemiBold'), WHITE)
+        self.h2 = text_img(O['h2'], font('body', 30, 'Medium'), OFFWHITE)
+        self.h3 = text_img(O['h3'], font('body', 26, 'Medium'), GOLD_LIGHT)
+        self.show_arrow = O.get('arrow', True)
+        self.arrow = icon('arrow_down', 48, GOLD); self.clock = icon(O.get('icon3', 'clock'), 30, GOLD_LIGHT)
     def draw(self, canvas, t):
         s = INTRO_DUR + BODY
         fin = ease_io(clamp((t - (s - 0.6)) / 0.6))
@@ -543,8 +510,9 @@ class Outro(Element):
         blit(canvas, self.h1, (W - self.h1.width) / 2, 440 + (1 - a2) * 16, a2 * fin)
         a3 = ease_out(clamp((t - s - 0.6) / 0.6)) * k
         blit(canvas, self.h2, (W - self.h2.width) / 2, 540 + (1 - a3) * 14, a3 * fin)
-        bob = 5 * math.sin((t - s) * 2 * math.pi * 0.9)
-        blit(canvas, self.arrow, (W - 48) / 2, 600 + bob, a3 * fin)
+        if self.show_arrow:
+            bob = 5 * math.sin((t - s) * 2 * math.pi * 0.9)
+            blit(canvas, self.arrow, (W - 48) / 2, 600 + bob, a3 * fin)
         a4 = ease_out(clamp((t - s - 1.0) / 0.6)) * k
         tw = self.h3.width + 44
         blit(canvas, self.clock, (W - tw) / 2, 690, a4 * fin)
@@ -552,52 +520,11 @@ class Outro(Element):
         if blk > 0:
             blit(canvas, np.array([[[0, 0, 0, 1.0]]], np.float32).repeat(H, 0).repeat(W, 1), 0, 0, blk)
 
-# ---------------------------------------------------------------- the storyboard (SOURCE seconds)
-def storyboard():
-    E = []
-    E.append(Intro())
-    E.append(Outro())
-    E.append(Subtitles())
-    E.append(BrandMark(T(6.4), INTRO_DUR + BODY - 0.3))
-    E.append(LightLeak(T(0.0) - 0.2, 2.6, 'tr', 0.20))
-    # 1. Hook: credentials
-    E.append(StatList([(T(0.0), 800, '', 'entrepreneurs accompagnés', None),
-                       (T(2.24), 8, ' ans', 'de métier', None),
-                       (T(3.72), 50, ' avis', '5 étoiles sur Trustpilot', 'star')], T(6.1)))
-    E.append(LowerThird(T(0.9), T(6.0)))
-    # 2. The LLC in your quote
-    E.append(Panel(T(6.5), T(12.3), "La structure qu'on monte **le plus souvent**", eyebrow="Votre devis · LLC", ico='doc'))
-    E.append(Panel(T(12.86), T(13.9), "Vous avez **bien choisi**", ico='check_circle'))
-    # 3. How it works
-    E.append(NumberCard(T(17.5), T(20.0), 0, "impôt aux États-Unis", eyebrow="Fiscalité", ico='building', count=False))
-    E.append(Panel(T(20.5), T(25.7), "Vos bénéfices sont déclarés **là où vous résidez**", eyebrow="Dans la majorité des cas", ico='home'))
-    E.append(Panel(T(27.2), T(29.5), "Nouveau-Mexique", eyebrow="Création · États-Unis", ico='pin', size=48))
-    E.append(CheckList([(T(29.7), "Pas de rapport annuel"), (T(31.1), "Pas de taxes annuelles"),
-                        (T(32.3), "Quasiment zéro contrainte administrative")], T(34.7), eyebrow="Au quotidien", start=T(29.7)))
-    # 4. Objection -> reversal
-    E.append(Panel(T(37.6), T(40.4), "Une usine à gaz ?", eyebrow="Vous vous dites peut-être", ico='question', muted=True))
-    E.append(LightLeak(T(41.4), 2.0, 'tl', 0.12))
-    E.append(CheckList([(T(43.0), "La structure la plus simple de notre catalogue"), (T(47.2), "La plus accessible"),
-                        (T(49.1), "Adresse incluse"), (T(50.0), "Agent inclus"), (T(50.9), "Pendant 1 an")],
-                       T(51.3), eyebrow="Ce qui est inclus", start=T(43.0)))
-    # 5. Proof
-    E.append(Panel(T(52.9), T(57.0), "Tout est **vérifiable** : registre officiel de l'État", eyebrow="Transparence", ico='shield', size=38))
-    E.append(NumberCard(T(57.3), T(60.1), 800, "clients avant vous", eyebrow="Comme", ico='check'))
-    # 6. Projection timeline
-    E.append(LightLeak(T(62.1), 2.2, 'tr', 0.14))
-    E.append(Timeline([(T(63.4), "Aujourd'hui", "Vous signez"), (T(64.4), "Demain", "Création lancée"),
-                       (T(65.8), "Quelques jours", "Vous facturez avec votre LLC")], T(69.1), start=T(63.4)))
-    # 7. Cost of inaction
-    E.append(Panel(T(75.6), T(80.0), "Chaque mois sans structure, c'est de la **marge qui part**", eyebrow="Le vrai risque", ico='trend_down', size=38))
-    # 8. Urgency
-    E.append(NumberCard(T(80.6), T(82.1), 14, "jours de validité du devis", eyebrow="Votre devis", ico='clock', count=False))
-    E.append(Panel(T(82.8), T(87.2), "Nombre **limité** de dossiers par semaine", eyebrow="Pour garder ce niveau de suivi", ico='doc', size=38))
-    # 9. CTA
-    E.append(CTAArrow(T(88.0), T(89.3)))
-    E.append(NumberCard(T(89.4), INTRO_DUR + BODY - 0.1, 2, "clics", eyebrow="C'est simple", ico='cursor', count=False))
-    E.append(Panel(T(90.0), INTRO_DUR + BODY - 0.1, "Votre équipe vous répond **au plus vite**", ico='clock', size=36))
-    E.append(LightLeak(T(87.4), 2.4, 'tl', 0.14))
-    return E
+# ---------------------------------------------------------------- the storyboard lives in projects/<name>.py
+import importlib
+PROJECT = os.environ.get('MV_PROJECT', 'llc')
+PROJ = importlib.import_module(f'projects.{PROJECT}')
+NAME = getattr(PROJ, 'NAME', NAME); TITLE = getattr(PROJ, 'TITLE', TITLE)
 
 # Panels that share the right-hand column must not overlap in time: NumberCard at 89.4 and
 # Panel at 90.0 both live there, so the latter is placed lower via a y-offset shim.
@@ -633,8 +560,7 @@ class Plated(Element):
         reg = layer[:, PLATE_X0 - 40:PLATE_X1 + 40]
         blit(canvas, reg, PLATE_X0 - 40, 0, 1.0)
 def build():
-    E = storyboard()
-    E[-2] = Lower(E[-2], 330)        # "répond dans l'heure" panel below the "2 clics" card
+    E = PROJ.storyboard(sys.modules[__name__])
     return [Plated(e) if isinstance(e, (Panel, StatList, CheckList, Timeline, NumberCard, Lower)) else e for e in E]
 
 # ---------------------------------------------------------------- render

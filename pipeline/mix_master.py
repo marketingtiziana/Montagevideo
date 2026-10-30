@@ -9,7 +9,9 @@ BODY = body_duration(); TOTAL = INTRO_DUR + BODY + OUTRO_DUR
 voice = os.path.join(WORK, 'voice.wav'); music = os.path.join(WORK, 'music.wav')
 video = os.path.join(WORK, 'video_gfx.mp4'); out = os.path.join(WORK, sys.argv[1] if len(sys.argv) > 1 else 'FINAL_LLC_16x9.mp4')
 
-CTA = INTRO_DUR + src_to_final(87.48)          # "Le bouton est sous la vidéo"
+import importlib
+PROJ = importlib.import_module(f"projects.{os.environ.get('MV_PROJECT', 'llc')}")
+CTA = INTRO_DUR + src_to_final(PROJ.MUSIC_PEAK_SRC)   # the music swell lands here (CTA)
 BUILD0 = CTA - 9.0                             # music starts to swell ~9 s before the CTA
 END_BODY = INTRO_DUR + BODY
 # Music gain envelope (before ducking): intro alone / under voice / soft build to CTA / outro / fade

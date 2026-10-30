@@ -2,17 +2,11 @@
 """Edit Decision List: intervals REMOVED from the source (silences, dead air, retake),
 the resulting KEEP segments, the punch-in plan and the source->final time mapping."""
 
-SRC_END = 92.10   # last word ends at 91.74 s; keep a short tail
-
-# (start, end) in SOURCE seconds. Derived from silencedetect (-30 dB, >0.42 s): each
-# pause is shortened to ~0.3 s. Two manual cuts: the first (weaker) take of
-# "Projetez-vous" (60.9-62.0) and the 3.3 s dead air + noise after "Pendant ce temps".
-CUTS = [
-    (5.95, 6.28), (12.46, 12.69), (13.82, 15.13), (20.04, 20.26), (25.81, 26.32),
-    (26.80, 27.08), (30.79, 30.94), (34.75, 36.05), (37.15, 37.45), (40.65, 41.33),
-    (42.64, 42.98), (51.36, 52.72), (59.41, 62.08), (63.02, 63.27), (70.45, 73.62),
-    (77.09, 77.28), (80.09, 80.43), (82.20, 82.51),
-]
+import os, importlib
+PROJECT = os.environ.get('MV_PROJECT', 'llc')
+_proj = importlib.import_module(f'projects.{PROJECT}')
+SRC_END = _proj.SRC_END      # last source second to keep
+CUTS = _proj.CUTS            # (start, end) SOURCE intervals removed (silences, dead air, retakes)
 
 def keep_segments():
     keep, t = [], 0.0
