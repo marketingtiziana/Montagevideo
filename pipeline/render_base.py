@@ -36,6 +36,21 @@ for f in files:
     durs.append(int(o) / FPS)
 json.dump(durs, open(os.path.join(WORK, 'segdur.json'), 'w'))
 
+# Audio is rebuilt from the SOURCE with each piece exactly as long as its rendered video
+# segment (whole frames). Concatenating the per-segment audio instead would let a few ms
+# of mismatch per cut accumulate into a visible lip-sync drift.
+aparts, alabels = [], []
+for i, ((s, e), d) in enumerate(zip(KEEP, durs)):
+    aparts.append(f"[0:a]atrim=start={s}:duration={d:.6f},asetpts=PTS-STARTPTS,"
+                  f"aresample=48000,apad=whole_dur={d:.6f},atrim=duration={d:.6f},"
+                  f"afade=t=in:d=0.006,afade=t=out:st={max(0, d-0.006):.6f}:d=0.006[a{i}]")
+    alabels.append(f"[a{i}]")
+afc = ";".join(aparts) + ";" + "".join(alabels) + f"concat=n={len(KEEP)}:v=0:a=1[ao]"
+audio_out = os.path.join(WORK, 'base_audio.wav')
+r = subprocess.run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-vn', '-i', SRC, '-filter_complex', afc,
+                    '-map', '[ao]', '-c:a', 'pcm_s16le', audio_out], capture_output=True, text=True)
+if r.returncode: print('audio FAILED', r.stderr[-800:]); sys.exit(1)
+
 lst = os.path.join(SEGDIR, 'list.txt')
 open(lst, 'w').write("".join(f"file '{os.path.abspath(f)}'\n" for f in files))
 
@@ -47,8 +62,8 @@ GRADE = (
     "unsharp=5:5:0.4:5:5:0.0,format=yuv420p"
 )
 out = os.path.join(WORK, 'base.mp4')
-cmd = ['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lst,
-       '-vf', GRADE, '-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p',
-       '-c:a', 'pcm_s16le', '-video_track_timescale', '30000', out]
+cmd = ['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lst, '-i', audio_out,
+       '-map', '0:v', '-map', '1:a', '-vf', GRADE, '-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p',
+       '-c:a', 'pcm_s16le', '-video_track_timescale', '30000', '-shortest', out]
 r = subprocess.run(cmd, capture_output=True, text=True)
 print(f'{len(KEEP)} segments -> body {body_duration()} s | rc:', r.returncode, r.stderr[-1200:] if r.returncode else 'OK')
