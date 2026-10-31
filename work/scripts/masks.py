@@ -10,7 +10,7 @@ os.makedirs("cut/masks",exist_ok=True)
 so=ort.SessionOptions(); so.enable_cpu_mem_arena=False; so.intra_op_num_threads=4
 sess=[c for c in sessions_class if c.name()=="birefnet-portrait"][0]("birefnet-portrait", so, ["CPUExecutionProvider"])
 cap=cv2.VideoCapture("cut/base.mp4"); N=int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-order=[1,0,2]
+order=[i for i,b in enumerate(fx['behind']) if b.get('kind')=='broll']+[i for i,b in enumerate(fx['behind']) if b.get('kind')!='broll']
 todo=[]
 for r in order:
     a,b=ranges[r]; todo+=[f for f in range(max(a,0),min(b,N)) if f not in todo and ((f-a)%2==0 or f==b-1)]

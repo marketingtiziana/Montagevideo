@@ -6,6 +6,38 @@ FPS=30; OW,OH=1080,1920
 fx=json.load(open("cut/fx.json"))
 ranges=[(int(round(b["start"]*FPS)), int(round(b["end"]*FPS))) for b in fx["behind"]]
 def in_behind(f): return any(a<=f<b for a,b in ranges)
+# --- b-rolls derrière : lecture séquentielle du clip conformé, enveloppe pop/fade, léger zoom
+_br={}
+def broll_frame(f):
+    """retourne (rgb float32, alpha float) du b-roll actif à la frame f, ou None"""
+    for b in fx["behind"]:
+        if b.get("kind")!="broll": continue
+        a,e=int(round(b["start"]*FPS)),int(round(b["end"]*FPS))
+        if not (a<=f<e): continue
+        key=b["file"]
+        if key not in _br or _br[key][1]!=f-1 and _br[key][1]!=f:
+            cap=cv2.VideoCapture(f"../assets/brolls/{key}.mp4"); cap.set(cv2.CAP_PROP_POS_FRAMES,max(0,f-a)); _br[key]=[cap,f-1,None]
+        cap,last,img=_br[key]
+        if last!=f:
+            ok,img=cap.read()
+            if not ok: img=_br[key][2] if _br[key][2] is not None else np.zeros((OH,OW,3),np.uint8)
+            _br[key][1]=f; _br[key][2]=img
+        u=(f-a)/FPS; d=(e-a)/FPS
+        alpha=min(1.0,u/0.25)*min(1.0,(d-u)/0.3)          # pop in 0.25 s, fade out 0.3 s
+        z=1.06-0.06*min(1.0,u/0.25)+0.02*u/d               # léger zoom d'entrée + dérive
+        M=np.array([[z,0,OW/2*(1-z)],[0,z,OH/2*(1-z)]],np.float32)
+        img=cv2.warpAffine(img,M,(OW,OH),flags=cv2.INTER_LINEAR,borderMode=cv2.BORDER_REPLICATE)
+        return img.astype(np.float32), alpha
+    return None
+# --- flashs blancs (passe 3) : frames et intensité
+try:
+    sys.path.insert(0,"scripts"); from shots_v3 import FLASHES; from edl import quantize
+    _segs=quantize(); flash_frames={}
+    for fl in FLASHES:
+        s_=next(x for x in _segs if x["label"]==fl["at_label"]); fc=int(round(s_["dst_in"]*FPS))
+        for k in range(fl["frames"]): flash_frames[fc+k]=0.85*(1-k/fl["frames"])
+except Exception as ex:
+    flash_frames={}
 _mcache={}
 def mask_file(f):
     p=f"cut/masks/m{f:05d}.png"; m=cv2.imread(p,cv2.IMREAD_GRAYSCALE) if os.path.exists(p) else None
@@ -50,13 +82,18 @@ def read_png(p):
 def compose(f, base):
     out=base.astype(np.float32)
     if in_behind(f):
-        m=mask(f); b=read_png(f"cut/behind/f{f:05d}.png")
-        if m is not None and b is not None:
-            brgb,ba=b; comp=out*(1-ba)+brgb*ba          # élément derrière, sur le fond
-            out=comp*(1-m)+out*m                          # Tiziana (masque) repasse devant
+        m=mask(f); b=read_png(f"cut/behind/f{f:05d}.png"); br=broll_frame(f)
+        if m is not None and (b is not None or br is not None):
+            comp=out
+            if br is not None:
+                brgb,balpha=br; comp=comp*(1-balpha)+brgb*balpha   # b-roll sur le fond (voile déjà appliqué au clip)
+            if b is not None:
+                brgb,ba=b; comp=comp*(1-ba)+brgb*ba              # mot/montant géant derrière
+            out=comp*(1-m)+out*m                                  # Tiziana (masque) repasse devant
     fr=read_png(f"cut/front/f{f:05d}.png")
     if fr is not None:
         frgb,fa=fr; out=out*(1-fa)+frgb*fa
+    if f in flash_frames: out=out*(1-flash_frames[f])+255.0*flash_frames[f]   # flash blanc (transition)
     if f<8: out*= (f+1)/8.0                               # fondu d'ouverture 8 images
     return np.clip(out,0,255).astype(np.uint8)
 def grab(f):

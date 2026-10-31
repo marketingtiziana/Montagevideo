@@ -1,4 +1,4 @@
-# Rapport de dérushage — reel « LLC américaine : 25 000 $ de pénalité »
+# Rapport de dérushage — reel « LLC américaine : 25 000 $ de pénalité » (version v3 « créateur viral »)
 
 Source : `reel 15 M.mp4` (1920x1080, 59,94 fps, 120,6 s). Transcription Whisper large-v3 (fr, mot à mot), silences détectés à -35 dB.
 
@@ -58,25 +58,24 @@ Règles appliquées : coupes sur fins de mots + 2 images (0,07 s) de marge, resp
 5. **Texte** : Whisper entend « alors que tu *payes* zéro de chiffre d'affaires » (confiance 0,99) : sous-titré fidèlement, dis-moi si tu veux « tu fais ». À la fin, Whisper entend « *commande* simplement LLC » : j'ai sous-titré « commente simplement LLC » (sens du CTA), à confirmer.
 6. **Vérification des coupes** : chaque point de coupe a été contrôlé contre les silences détectés à -38 dB (aucun ne tombe dans un mot ; le seul hors silence est l'entrée du hook, placée dans l'inspiration avant « Tu »).
 
-## Effets motion design (timeline finale)
+## Effets motion design v3 (timeline finale)
+
+**B-rolls** : Higgsfield a refusé toute génération (compte en plan gratuit, 0 crédit : « Requires basic plan or higher »). J'ai utilisé à la place des clips **libres de droits (Pexels, via vidIQ)**, sans texte, désaturés à 35 % avec voile sombre, plus une animation « carte du monde » générée en canvas (aucune marque). Fichiers dans `assets/brolls/`. Crédits à mentionner en description : Laura Tancredi (tour de bureaux), Peggy Anke (billets), Karolina Grabowska / kaboompics (signature), Rozi Bizaoui (aile d'avion). Si tu ouvres un plan Higgsfield, les prompts sont prêts dans `work/scripts/plan_fx_v3.py` (même slots).
 
 | Temps | Type | Contenu |
 |---|---|---|
-| 03,0 → 06,2 s | DERRIÈRE | « 25 000 $ » monospace géant qui traverse derrière sa tête |
-| 05,0 → 07,4 s | devant | pill « 0 $ de chiffre d'affaires » |
-| 13,2 → 17,5 s | devant | card « États-Unis / Obligations déclaratives » |
-| 29,2 → 35,3 s | devant | liste à coches « Le parcours classique » (LLC, compte bancaire, activité) |
-| 37,8 → 38,9 s | devant | pill « Rien à déclarer ? » |
-| 38,9 → 41,0 s | DERRIÈRE | « ERREUR » outline géant qui traverse derrière elle |
-| 42,7 → 45,8 s | devant | card « Même sans revenu / Déclarations obligatoires » |
-| 46,2 → 50,7 s | devant | card montant « 25 000 $ de pénalité possible » |
-| 55,6 → 62,2 s | devant | liste numérotée « Ça dépend de » (type de LLC, associés, résidence fiscale, structure) |
-| 66,7 → 68,4 s | devant | pill « Vérifie tes obligations » |
-| 70,2 → 73,5 s | devant | pill « Vidéo complète en DM » |
-| 81,9 → 84,7 s | devant | pill « Commente LLC » |
-| 82,7 → 84,7 s | DERRIÈRE | « LLC » outline géant derrière elle (fin) |
+| 00,8 → 02,8 s | DERRIÈRE b-roll | tour de bureaux vue en contre-plongée (« LLC américaine ») |
+| 03,0 → 06,2 s | DERRIÈRE montant | « 25 000 $ » monospace jaune géant qui traverse |
+| 08,8 → 10,2 s | DERRIÈRE b-roll | billets de 50 € (« millions de dollars ») |
+| 13,1 → 15,7 s | DERRIÈRE b-roll | main qui signe un document (« obligations déclaratives ») |
+| 25,2 → 28,2 s | DERRIÈRE b-roll | carte du monde animée, arcs lumineux (« entrepreneurs francophones ») |
+| 38,9 → 41,0 s | DERRIÈRE mot géant | « ERREUR » outline corail |
+| 58,1 → 60,6 s | DERRIÈRE b-roll | aile d'avion au-dessus des nuages (« résidence fiscale ») |
+| 82,7 → 84,7 s | DERRIÈRE mot géant | « LLC » outline bleu (fin) |
 
-Plan des échelles (jamais deux cuts à la même échelle) : A 1,00→1,05 · B 1,12→1,15 · C 1,04→1,08 · D1 1,12 · D2 1,02→1,06 · E 1,14→1,18 · F1 1,00→1,04 · F2 1,10→1,13 · G1 1,18 · G2 1,02→1,06 · H1 1,10→1,12 · H2 1,00→1,04 · I 1,10→1,13 · J 1,18 · K 1,04→1,07 · L 1,00→1,04.
+Devant elle : 26 éléments (pills multicolores, cards titre/montant, 3 listes animées, 1 anneau pulsant autour du montant, 1 flèche), soit une apparition toutes les 2 à 4,5 s (contrôle automatique : aucun trou > 4,5 s). Sous-titres 1-2 mots, mots forts seuls en 118 px, couleur par sens (argent jaune/vert, dangers/négations corail, lieux violet, reste bleu). 3 shakes (« surprendre », « pénalité », « vérifie »), 2 whips + 2 flashs (avant « Erreur », avant « Le problème » / « J'ai justement préparé »).
+
+Plan des échelles (punch-in/out à chaque cut) : A 1,00→1,05 · B 1,15→1,18 · C 1,02→1,06 · D1 1,15 · D2 1,00→1,04 · E 1,14→1,18 · F1 1,00→1,04 · F2 1,15→1,17 · G1 1,18 · G2 1,00→1,05 · H1 1,15→1,17 · H2 1,00→1,04 · I 1,12→1,15 · J 1,18 · K 1,02→1,05 · L 1,00→1,04.
 
 ## Transcription corrigée (texte des sous-titres)
 

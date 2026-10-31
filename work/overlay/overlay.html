@@ -4,15 +4,16 @@
 @font-face{font-family:"Inter";src:url("../fonts/Inter-Variable.ttf") format("truetype");font-weight:100 900}
 @font-face{font-family:"IBM Plex Mono";src:url("../fonts/IBMPlexMono-Bold.ttf");font-weight:700}
 @font-face{font-family:"IBM Plex Mono";src:url("../fonts/IBMPlexMono-Medium.ttf");font-weight:500}
-:root{--blue:#4353FF;--ink:#12121F;--white:#FFFFFF}
+:root{--blue:#4353FF;--yellow:#FFD60A;--green:#30D158;--coral:#FF6B6B;--violet:#BF5AF2;--ink:#12121F;--white:#FFFFFF}
 html,body{margin:0;padding:0;background:transparent;width:1080px;height:1920px;overflow:hidden}
 #stage{position:relative;width:1080px;height:1920px;font-family:Inter,sans-serif}
 /* ---------- sous-titres ---------- */
-.group{position:absolute;left:60px;width:960px;top:1330px;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:36px;row-gap:0;opacity:0;transform-origin:50% 50%;will-change:transform}
-.w{font-family:Inter;font-weight:800;font-size:72px;line-height:1.14;color:#fff;letter-spacing:-0.012em;display:inline-block;transform-origin:50% 60%;
-   -webkit-text-stroke:7px #000;paint-order:stroke fill;text-shadow:0 10px 26px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.35)}
-.w.on{color:var(--blue)}
-.w.key{color:var(--blue)}
+.group{position:absolute;left:40px;width:1000px;top:1330px;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:36px;row-gap:0;opacity:0;transform-origin:50% 50%;will-change:transform}
+.group.solo{top:1290px}
+.w{font-family:Inter;font-weight:900;font-size:88px;line-height:1.12;color:#fff;letter-spacing:-0.015em;display:inline-block;transform-origin:50% 60%;
+   -webkit-text-stroke:10px #000;paint-order:stroke fill;text-shadow:0 12px 28px rgba(0,0,0,.6),0 3px 8px rgba(0,0,0,.4)}
+.group.solo .w{font-size:118px;-webkit-text-stroke:12px #000}
+.w.on.c-blue,.w.key.c-blue{color:var(--blue)} .w.on.c-yellow,.w.key.c-yellow{color:var(--yellow)} .w.on.c-green,.w.key.c-green{color:var(--green)} .w.on.c-coral,.w.key.c-coral{color:var(--coral)} .w.on.c-violet,.w.key.c-violet{color:var(--violet)}
 /* ---------- cards devant ---------- */
 .card{position:absolute;opacity:0;transform-origin:50% 50%;will-change:transform}
 .pill{background:var(--blue);color:#fff;font-weight:900;font-size:34px;line-height:1.08;padding:18px 26px;border-radius:28px;max-width:190px;text-align:center;
@@ -50,24 +51,26 @@ function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 // ----- sous-titres
 function buildSubs(groups){
   for(const g of groups){
-    const el=document.createElement('div'); el.className='group'; stage.appendChild(el);
-    const spans=g.words.map(w=>{const s=document.createElement('span'); s.className='w'+(w.key?' key':''); s.textContent=w.w; el.appendChild(s); return s;});
+    const el=document.createElement('div'); el.className='group'+(g.solo?' solo':''); stage.appendChild(el);
+    const spans=g.words.map(w=>{const s=document.createElement('span'); s.className='w c-'+(w.color||'blue')+(w.key?' key':''); s.textContent=w.w; el.appendChild(s); return s;});
     const gEnd=g.end;
     tl.fromTo(el,{opacity:0,scale:0.92},{opacity:1,scale:1,duration:0.08,ease:'power2.out'},g.start);
     tl.set(el,{opacity:0},gEnd);
     g.words.forEach((w,i)=>{
       const s=spans[i]; const next=(i+1<g.words.length)?g.words[i+1].s:gEnd;
-      tl.set(s,{className:'w'+(w.key?' key':'')+' on'},w.s);
-      if(!w.key) tl.set(s,{className:'w'},Math.max(w.s+0.02,next));
-      if(w.key){ tl.fromTo(s,{scale:1},{scale:1.12,duration:0.11,ease:'back.out(3)'},w.s); tl.to(s,{scale:1.05,duration:0.14,ease:'power2.inOut'},w.s+0.11); }
+      const base='w c-'+(w.color||'blue')+(w.key?' key':''); tl.set(s,{className:base+' on'},w.s);
+      if(!w.key) tl.set(s,{className:base},Math.max(w.s+0.02,next));
+      if(w.key){ const rot=(i%2?2:-2); tl.fromTo(s,{scale:1,rotation:0},{scale:1.2,rotation:rot,duration:0.12,ease:'back.out(3)'},w.s); tl.to(s,{scale:1.08,rotation:rot*0.6,duration:0.16,ease:'power2.inOut'},w.s+0.12); }
     });
   }
 }
 // ----- cards devant
 function buildCards(cards){
   for(const c of cards){
-    const el=document.createElement('div'); el.className='card'; stage.appendChild(el);
+    const el=document.createElement('div'); el.className='card col-'+(c.color||'blue'); stage.appendChild(el);
     let inner='';
+    if(c.type==='ring'){ el.innerHTML='<div class="ring" style="width:'+c.w+'px;height:'+c.h+'px;border-color:var(--'+(c.color||'coral')+')"></div>'; el.style.left=c.x+'px'; el.style.top=c.y+'px'; tl.fromTo(el,{opacity:0,scale:1.3},{opacity:1,scale:1,duration:0.35,ease:'back.out(2)'},c.start); tl.fromTo(el,{scale:1},{scale:1.06,duration:0.5,ease:'sine.inOut',repeat:3,yoyo:true},c.start+0.35); tl.to(el,{opacity:0,scale:1.25,duration:0.3},c.end-0.3); continue; }
+    if(c.type==='arrow'){ const flip=c.dir==='left'?-1:1; el.innerHTML='<div class="arrow"><svg viewBox="0 0 150 110" fill="none"><path d="M10 95 C 40 20, 100 20, 135 55" stroke="var(--'+(c.color||'yellow')+')" stroke-width="12" stroke-linecap="round"/><path d="M105 45 L135 55 L125 85" stroke="var(--'+(c.color||'yellow')+')" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'; el.style.left=(c.x-150)+'px'; el.style.top=c.y+'px'; el.style.transform='scaleX('+flip+')'; tl.fromTo(el,{opacity:0,x:-30*flip},{opacity:1,x:0,duration:0.35,ease:'back.out(2)'},c.start); tl.to(el,{x:12*flip,duration:0.45,ease:'sine.inOut',repeat:3,yoyo:true},c.start+0.35); tl.to(el,{opacity:0,duration:0.25},c.end-0.25); continue; }
     if(c.type==='pill') inner=`<div class="pill">${c.html||esc(c.text)}</div>`;
     else if(c.type==='amount') inner=`<div class="amount">${c.label?`<div class="lab">${esc(c.label)}</div>`:''}<div class="val">${esc(c.value)}</div>${c.sub?`<div class="sub">${esc(c.sub)}</div>`:''}</div>`;
     else if(c.type==='title') inner=`<div class="title">${c.label?`<div class="lab">${esc(c.label)}</div>`:''}<div class="txt">${c.html||esc(c.text)}</div><div class="bar"></div></div>`;
@@ -86,9 +89,10 @@ function buildCards(cards){
 // ----- derrière
 function buildBehind(items){
   for(const b of items){
+    if(b.kind==='broll') continue;
     const el=document.createElement('div'); stage.appendChild(el);
     if(b.kind==='grid'){ el.className='grid'; tl.fromTo(el,{opacity:0},{opacity:1,duration:0.4},b.start); tl.fromTo(el,{backgroundPositionX:'0px',backgroundPositionY:'0px'},{backgroundPositionX:'-240px',backgroundPositionY:'120px',duration:b.end-b.start,ease:'none'},b.start); tl.to(el,{opacity:0,duration:0.4},b.end-0.4); continue; }
-    el.className='giant '+b.kind; el.textContent=b.text; el.style.top=b.y+'px'; el.style.left='0px';
+    el.className='giant '+b.kind+' c-'+(b.color||'blue'); el.textContent=b.text; el.style.top=b.y+'px'; el.style.left='0px';
     if(b.size) el.style.fontSize=b.size+'px';
     tl.fromTo(el,{opacity:0},{opacity:b.opacity||1,duration:0.3,ease:'power2.out'},b.start);
     tl.fromTo(el,{x:b.x0},{x:b.x1,duration:b.end-b.start,ease:'none'},b.start);
@@ -115,3 +119,19 @@ window.render=function(t){
   return parts.join(';');
 };
 </script></body></html>
+<style>
+.card.col-yellow .pill{background:var(--yellow);color:var(--ink);box-shadow:0 24px 60px rgba(255,214,10,.35),0 6px 16px rgba(18,18,31,.25)}
+.card.col-green .pill{background:var(--green);color:var(--ink);box-shadow:0 24px 60px rgba(48,209,88,.35),0 6px 16px rgba(18,18,31,.25)}
+.card.col-coral .pill{background:var(--coral);color:#fff;box-shadow:0 24px 60px rgba(255,107,107,.38),0 6px 16px rgba(18,18,31,.25)}
+.card.col-violet .pill{background:var(--violet);color:#fff;box-shadow:0 24px 60px rgba(191,90,242,.38),0 6px 16px rgba(18,18,31,.25)}
+.card.col-yellow .lab,.card.col-yellow .num{color:#b48f00} .card.col-yellow .bar,.card.col-yellow .ck{background:var(--yellow)}
+.card.col-green .lab,.card.col-green .num{color:#1f9d44} .card.col-green .bar,.card.col-green .ck{background:var(--green)}
+.card.col-coral .lab,.card.col-coral .num{color:var(--coral)} .card.col-coral .bar,.card.col-coral .ck{background:var(--coral)}
+.card.col-violet .lab,.card.col-violet .num{color:var(--violet)} .card.col-violet .bar,.card.col-violet .ck{background:var(--violet)}
+.card.col-yellow .title,.card.col-yellow .amount,.card.col-yellow .list{box-shadow:0 30px 70px rgba(255,214,10,.3),0 8px 20px rgba(18,18,31,.18)}
+.card.col-green .title,.card.col-green .amount,.card.col-green .list{box-shadow:0 30px 70px rgba(48,209,88,.3),0 8px 20px rgba(18,18,31,.18)}
+.card.col-violet .title,.card.col-violet .amount,.card.col-violet .list{box-shadow:0 30px 70px rgba(191,90,242,.3),0 8px 20px rgba(18,18,31,.18)}
+.ring{position:absolute;border:8px solid var(--coral);border-radius:999px;box-shadow:0 0 30px rgba(255,107,107,.5)}
+.arrow svg{width:150px;height:110px;overflow:visible}
+.giant.mono.c-yellow{color:var(--yellow)} .giant.outline.c-coral{-webkit-text-stroke-color:var(--coral)} .giant.outline.c-blue{-webkit-text-stroke-color:var(--blue)}
+</style>

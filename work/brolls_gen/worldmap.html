@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#0b0b16;width:1080px;height:1920px;overflow:hidden}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+const W=1080,H=1920; const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+let geo=null; window.ready=false;
+window.setGeo=function(g){geo=g; build(); window.ready=true;};
+// projection équirectangulaire centrée sur l'Atlantique, zoom sur Europe/Amériques
+const SC=6.8, CX=W/2+40, CY=H/2-120, LON0=-30, LAT0=38;
+function proj(lon,lat){return [CX+(lon-LON0)*SC, CY-(lat-LAT0)*SC*1.25];}
+// test point-in-polygon sur une grille de points (carte en pastilles)
+function inPoly(pt,ring){let x=pt[0],y=pt[1],ins=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];const inter=((yi>y)!=(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi);if(inter)ins=!ins;}return ins;}
+let dots=[];
+function build(){
+  const polys=[];
+  for(const f of geo.features){const g=f.geometry; if(!g) continue; const cs=g.type==='Polygon'?[g.coordinates]:g.type==='MultiPolygon'?g.coordinates:[]; for(const p of cs) polys.push(p[0]);}
+  const step=1.6;
+  for(let lon=-170;lon<=60;lon+=step) for(let lat=-56;lat<=75;lat+=step){
+    const [x,y]=proj(lon,lat); if(x<-20||x>W+20||y<-20||y>H+20) continue;
+    for(const r of polys){ if(inPoly([lon,lat],r)){ dots.push({x,y,ph:Math.random()*6.28}); break; } }
+  }
+}
+const hubs=[[2.35,48.85],[-74,40.7],[-80.2,25.8],[4.35,50.85],[-73.6,45.5],[6.1,46.2],[-0.1,51.5],[-99.1,19.4],[55.3,25.3],[-9.1,38.7]];
+const arcs=[]; for(let i=0;i<hubs.length;i++) for(let j=i+1;j<hubs.length;j++) if(Math.random()<0.45) arcs.push([hubs[i],hubs[j],Math.random()*4]);
+function arcPath(a,b,t){const [x1,y1]=proj(...a),[x2,y2]=proj(...b); const mx=(x1+x2)/2, my=(y1+y2)/2-Math.hypot(x2-x1,y2-y1)*0.28; return {x1,y1,x2,y2,mx,my};}
+function qpt(p,u){const x=(1-u)*(1-u)*p.x1+2*(1-u)*u*p.mx+u*u*p.x2, y=(1-u)*(1-u)*p.y1+2*(1-u)*u*p.my+u*u*p.y2; return [x,y];}
+window.render=function(t){
+  ctx.fillStyle='#0b0b16'; ctx.fillRect(0,0,W,H);
+  // grille douce
+  ctx.strokeStyle='rgba(67,83,255,0.10)'; ctx.lineWidth=2; for(let x=(t*20)%120;x<W;x+=120){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();} for(let y=(t*12)%120;y<H;y+=120){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  // pastilles
+  for(const d of dots){const a=0.35+0.3*Math.sin(t*1.5+d.ph); ctx.fillStyle=`rgba(90,110,255,${a})`; ctx.beginPath(); ctx.arc(d.x,d.y,3.2,0,6.28); ctx.fill();}
+  // arcs lumineux
+  const cols=['#4353FF','#30D158','#FFD60A','#BF5AF2','#FF6B6B'];
+  arcs.forEach((a,i)=>{const p=arcPath(a[0],a[1]); const col=cols[i%cols.length]; ctx.strokeStyle=col; ctx.globalAlpha=0.55; ctx.lineWidth=3; ctx.shadowColor=col; ctx.shadowBlur=18;
+    ctx.beginPath(); ctx.moveTo(p.x1,p.y1); ctx.quadraticCurveTo(p.mx,p.my,p.x2,p.y2); ctx.stroke();
+    const u=((t*0.35+a[2])%1); const [px,py]=qpt(p,u); ctx.globalAlpha=1; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px,py,6,0,6.28); ctx.fill(); ctx.shadowBlur=0; ctx.globalAlpha=1;});
+  // hubs
+  for(const h of hubs){const [x,y]=proj(...h); const r=10+4*Math.sin(t*3+x); ctx.fillStyle='rgba(255,214,10,0.9)'; ctx.beginPath(); ctx.arc(x,y,6,0,6.28); ctx.fill(); ctx.strokeStyle='rgba(255,214,10,0.5)'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,r,0,6.28); ctx.stroke();}
+  return true;
+};
+</script></body></html>
