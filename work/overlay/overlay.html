@@ -8,14 +8,14 @@
 html,body{margin:0;padding:0;background:transparent;width:1080px;height:1920px;overflow:hidden}
 #stage{position:relative;width:1080px;height:1920px;font-family:Inter,sans-serif}
 /* ---------- sous-titres ---------- */
-.group{position:absolute;left:40px;width:1000px;top:1330px;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:36px;row-gap:0;opacity:0;transform-origin:50% 50%;will-change:transform}
+.group{position:absolute;left:40px;width:1000px;top:1330px;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:36px;row-gap:0;opacity:0;transform-origin:50% 50%}
 .group.solo{top:1290px}
 .w{font-family:Inter;font-weight:900;font-size:88px;line-height:1.12;color:#fff;letter-spacing:-0.015em;display:inline-block;transform-origin:50% 60%;
    -webkit-text-stroke:10px #000;paint-order:stroke fill;text-shadow:0 12px 28px rgba(0,0,0,.6),0 3px 8px rgba(0,0,0,.4)}
 .group.solo .w{font-size:118px;-webkit-text-stroke:12px #000}
 .w.on,.w.key{color:#fff}
 /* ---------- cards devant ---------- */
-.card{position:absolute;opacity:0;transform-origin:50% 50%;will-change:transform}
+.card{position:absolute;opacity:0;transform-origin:50% 50%}
 .pill{background:var(--blue);color:#fff;font-weight:900;font-size:34px;line-height:1.08;padding:18px 26px;border-radius:28px;max-width:190px;text-align:center;
       box-shadow:0 24px 60px rgba(67,83,255,.38),0 6px 16px rgba(18,18,31,.25);letter-spacing:-0.01em;white-space:normal}
 .pill .mono{font-family:"IBM Plex Mono";font-weight:700}
@@ -34,7 +34,7 @@ html,body{margin:0;padding:0;background:transparent;width:1080px;height:1920px;o
 .row .ck svg{width:22px;height:22px}
 .row .num{font-family:"IBM Plex Mono";font-weight:700;color:var(--blue);font-size:24px;width:38px}
 /* ---------- derrière ---------- */
-.giant{position:absolute;white-space:nowrap;opacity:0;will-change:transform;line-height:1}
+.giant{position:absolute;white-space:nowrap;opacity:0;line-height:1}
 .giant.mono{font-family:"IBM Plex Mono";font-weight:700;font-size:300px;color:var(--blue);letter-spacing:-0.04em}
 .giant.outline{font-family:Inter;font-weight:900;font-size:380px;color:transparent;-webkit-text-stroke:9px var(--blue);letter-spacing:-0.02em}
 .giant.solid{font-family:Inter;font-weight:900;font-size:380px;color:var(--blue);letter-spacing:-0.02em}
