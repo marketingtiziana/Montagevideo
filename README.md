@@ -1,50 +1,58 @@
-# Montagevideo — pipeline de montage de réels (vertical 9:16)
+# Montagevideo — pipeline de montage « talking-head » corporate (16:9, 1080p, 30 fps)
 
-Pipeline semi-automatique pour transformer une vidéo brute (talking-head) en **réel prêt à publier** :
-coupe des hésitations, **sous-titres animés** (blanc gras compact, mots-clés en jaune, changements de
-police, sans boîte), **zooms/dézooms**, **incrustations animées**, **transitions + bruitages**.
+Pipeline reproductible qui transforme une vidéo brute face caméra (français) en **spot publicitaire
+premium** : coupe des silences / hésitations / doublons, punch-ins pour masquer les jump cuts,
+motion design sobre (lower-third, mots-clés, chiffres, listes animées, timeline, captions),
+étalonnage, nettoyage audio, musique duckée, intro/outro de marque. La voix n'est jamais modifiée.
 
-Conçu pour tourner dans un environnement verrouillé où **seuls PyPI et le CDN GitHub** sont accessibles
-(pas de Google Drive, pas de HuggingFace) :
-- `ffmpeg` complet via le wheel PyPI `imageio-ffmpeg` (libass, freetype, x264) ;
-- modèle **Whisper base multilingue** récupéré depuis un miroir GitHub (`aethersdr/AetherSDR`) ;
-- polices depuis le miroir GitHub `google/fonts` ;
-- bruitages générés synthétiquement avec ffmpeg.
+Tout est généré par code (ffmpeg + Python/Pillow/NumPy) : aucun logiciel de montage requis.
 
-## Récupérer la vidéo source
-Google Drive étant bloqué par la politique réseau, la source transite par une **GitHub Release** du dépôt
-(fichiers jusqu'à 2 Go). Téléchargement de l'asset via l'API authentifiée puis `source.mp4` à la racine.
+## Prérequis
+- `ffmpeg` ≥ 6 (libx264, libass, loudnorm, sidechaincompress)
+- Python 3.11+ : `pip install faster-whisper pillow numpy`
+- Polices variables **Montserrat** et **Inter** (fichiers `MontserratVar.ttf`, `InterVar.ttf`) dans `fonts/`
+  (miroir GitHub `google/fonts` : `ofl/montserrat/Montserrat[wght].ttf`, `ofl/inter/Inter[opsz,wght].ttf`)
+- Une musique instrumentale `music.wav` (générée ici avec vidIQ *generate_music*, ~95 s)
+
+## Projets
+Chaque vidéo est un module dans `pipeline/projects/` (`llc.py` : vidéo devis LLC ; `precall.py` : briefing
+avant appel) qui contient les coupes (`CUTS`), les sous-titres corrigés (`SUBS`), le storyboard des
+incrustations (`storyboard(g)`), les textes de l'outro et le prénom/titre du lower-third.
+Le projet actif est choisi par `MV_PROJECT` (défaut `llc`).
 
 ## Étapes
-
 ```bash
-bash pipeline/setup.sh                 # deps + modèle + polices + bruitages
-# place la vidéo brute sous ./source.mp4
-
-python3 pipeline/transcribe.py         # -> words.json (+ transcript.txt) : transcription mot à mot FR
-# 1) définir les segments à garder dans pipeline/segments.py (coupe hésitations/blancs/prises ratées)
-python3 pipeline/build_base.py         # -> base.mp4 (coupes + zooms + audio synchro)
-# 2) re-transcrire base.mp4 pour caler les sous-titres sur la timeline finale
-# 3) écrire les cartes de sous-titres dans pipeline/gen_ass.py (texte corrigé + accents ~jaune~ + police)
-python3 pipeline/gen_ass.py            # -> subs.ass
-python3 pipeline/make_assets.py        # -> assets/*.png (drapeaux, pastilles de taux, badges)
-python3 pipeline/build_final_video.py  # -> finalv.mp4 (sous-titres + incrustations + flashs)
-bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier final
+export MV_WORK=/chemin/vers/dossier_de_travail   # contient source.mp4, fonts/, music.wav
+export MV_PROJECT=precall                          # ou llc
+cd pipeline
+python3 transcribe.py $MV_WORK/source.mp4         # -> words.json (mots horodatés, FR) + liste des silences
+python3 edl.py                                     # affiche les segments conservés / durée finale
+python3 render_base.py                             # -> base.mp4 (coupes + punch-ins + étalonnage, voix brute)
+python3 process_voice.py                           # -> voice.wav (débruitage, de-esser, compression, -16 LUFS)
+python3 gfx.py --preview 3,20,45                   # PNG de contrôle (timeline finale) dans preview/
+python3 gfx.py --parts 3                           # -> video_gfx.mp4 (intro + overlays + outro), 3 processus
+python3 mix_master.py FINAL_LLC_16x9.mp4           # musique duckée + master -14 LUFS + mux
 ```
 
 ## Fichiers
 | Fichier | Rôle |
 |---|---|
-| `segments.py` | Segments source à conserver + mapping timeline source→finale + ken-burns par segment |
-| `transcribe.py` | Transcription mot à mot (français) via `pywhispercpp` + modèle ggml base |
-| `build_base.py` | Trim + zoom (zoompan) + concat + audio synchro → `base.mp4` |
-| `gen_ass.py` | Génère les sous-titres ASS animés (pop, accents jaunes `~mot~`, polices A/H/B, sans boîte) |
-| `make_assets.py` | Dessine les incrustations (drapeaux, pastilles de taux, badges ×3 / OSS) en PNG transparents |
-| `build_final_video.py` | Compose `base.mp4` + sous-titres + incrustations animées (fondu/glissé) + flashs de transition |
-| `mix_audio.sh` | Mixe les bruitages (whoosh/pop) et scelle le fichier final |
+| `config.py` | Chemins, format, marque (nom, titre), palette navy/or, typographies, durées intro/outro |
+| `transcribe.py` | Transcription mot à mot (faster-whisper *medium*, FR) + détection des silences |
+| `projects/*.py` | **Par vidéo** : coupes, sous-titres, storyboard, outro, lower-third |
+| `edl.py` | Segments conservés, plan de punch-ins, mapping source→final (à l'image près) |
+| `render_base.py` | Rendu segment par segment (scale lanczos animé + crop = punch-in), concat, étalonnage |
+| `process_voice.py` | Chaîne voix : highpass, afftdn, deesser, EQ, compresseur, loudnorm 2 passes |
+| `gfx.py` | Compositeur motion design image par image (Pillow/NumPy → ffmpeg) : storyboard en secondes **source** |
+| `mix_master.py` | Lit de musique (enveloppe + montée vers le CTA), ducking sidechain, master -14 LUFS / TP -1.5, mux |
+
+## Adapter à une autre vidéo
+1. Transcrire, puis créer `projects/<nom>.py` (copier `precall.py`) et éditer `CUTS` (silences > 0.4 s raccourcis à ~0.3 s, faux départs, doublons).
+2. Écrire `SUBS` et le storyboard dans ce module → `storyboard(g)` : chaque élément est placé en secondes **source**
+   (la fonction `T()` convertit vers la timeline finale, cadrée à l'image près grâce à `segdur.json`).
+3. Renseigner `NAME` / `TITLE` / `OUTRO` dans le module projet.
 
 ## Notes
-- Le modèle `base` fait des fautes (chiffres, noms propres) : **toujours relire/corriger** le texte des
-  sous-titres, surtout pour du contenu fiscal.
-- Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
-  réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+- La colonne de droite (x ≥ 1316) est la zone libre à côté de la présentatrice ; les captions sont en bas,
+  jamais sur le visage. Une plaque navy translucide assure la lisibilité sur les stores blancs.
+- Source 1080p : la sortie est en 1080p (un upscale 4K n'apporterait aucune information).
