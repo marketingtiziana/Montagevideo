@@ -56,6 +56,8 @@ cues=[
 for i in range(14):
     u=i/13; t=53.4+2.3*(1-(1-u)**0.5)
     cues.append((t,'tick',0.35+0.4*u))
+import sys; sys.path.insert(0,'work'); from remap import R
+cues=[(R(t),n,g) for t,n,g in cues]
 sfx=np.zeros(N)
 for t,n,g in cues:
     x=S[n]*g*(10**(-19/20)); i=int(t*SR); j=min(N,i+len(x)); 

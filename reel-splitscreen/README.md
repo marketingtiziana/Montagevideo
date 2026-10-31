@@ -48,6 +48,7 @@ ffmpeg -i top.mp4 -i base.mov -i mix_final.wav \
 | `scene/render.js` | Rendu Playwright déterministe (`window.__seek(t)`) |
 | `gen_sfx.py` / `mix_audio.py` / `cues.json` | SFX synthétiques, boucle musicale, mix -14 LUFS |
 | `segments.json` | Dérushage effectif (source → finale) |
+| `remap.py` / `remap.json` / `scene/remap.js` | Remap temporel v1 → v2 (la scène est écrite sur la timeline v1, rejouée sur la v2 via `R(t)`) |
 | `output/derush-report.md`, `output/chapitres.md`, `output/preview-frames/` | Livrables de validation |
 
 Le MP4 final n'est pas versionné (`*.mp4` ignoré) : il est produit dans `/output/reel-final.mp4`.

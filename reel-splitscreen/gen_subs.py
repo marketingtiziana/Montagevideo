@@ -1,15 +1,14 @@
 import json, re
 d=json.load(open('work/words_final.json'))
 W=[dict(w) for w in d['words']]
-# --- manual fixes (hallucinated restart zone 57.68-58.06 ; 'avouer' -> 'avoir')
+# --- manual fixes (v2 timeline): Whisper dropped "dans son ensemble" (58.4-60.0) and hallucinated a low-prob "Et" there
 fixed=[]
-skip=False
 for w in W:
-    if 57.6 <= w['s'] <= 58.0 and w['w'] in ('la','situation.','Il','faut','regarder'): continue
-    if w['w']=='regarder' and abs(w['s']-57.38)<0.05: w['e']=57.90
-    if w['w']=='ta' and abs(w['s']-57.96)<0.05: w['s']=57.90
+    if w['w']=='Et' and abs(w['s']-59.54)<0.1 and w['p']<0.3: continue
     if w['w']=='avouer.': w['w']='avoir.'
     fixed.append(w)
+    if w['w']=='business.' and abs(w['s']-57.94)<0.1:
+        fixed += [dict(w='dans',s=58.40,e=59.17,p=1.0),dict(w='son',s=59.17,e=59.49,p=1.0),dict(w='ensemble.',s=59.49,e=59.97,p=1.0),dict(w='Et',s=60.13,e=60.31,p=1.0)]
 W=fixed
 # --- merge apostrophe / hyphen continuations
 M=[]
