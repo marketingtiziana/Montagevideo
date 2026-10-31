@@ -24,10 +24,13 @@ for b in fx["behind"]:
     else: put(impact,b["start"],0.35); put(whoosh,b["start"]-0.1,0.18)
 # whips / flashs (transitions) : whoosh plus marqué
 try:
-    import sys; sys.path.insert(0,"scripts"); from shots_v3 import WHIPS, FLASHES; from edl import quantize
+    import sys; sys.path.insert(0,"scripts"); from shots_v3 import TRANSITIONS, FLASHES; from edl import quantize
     segs=quantize()
-    for w in WHIPS: put(whoosh, next(x["dst_in"] for x in segs if x["label"]==w["at_label"])-0.18, 0.4)
-    for fl in FLASHES: put(impact, next(x["dst_in"] for x in segs if x["label"]==fl["at_label"]), 0.3)
+    for t in TRANSITIONS:
+        tc=next(x["dst_in"] for x in segs if x["label"]==t["at_label"])
+        if t["kind"]=="whip": put(whoosh, tc-0.18, 0.4)
+        else: put(impact, tc, 0.28); put(pop, tc+0.03, 0.18)
+    for fl in FLASHES: put(impact, next(x["dst_in"] for x in segs if x["label"]==fl["at_label"]), 0.22)
 except Exception as ex: print("whip sfx skipped", ex)
 sf.write("cut/sfx_track.wav",sfx,sr)
 # 3) musique : boucle coupée à la durée, fade out final 1.2 s
