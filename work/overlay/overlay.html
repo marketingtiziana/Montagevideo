@@ -58,8 +58,7 @@ function buildSubs(groups){
     tl.set(el,{opacity:0},gEnd);
     g.words.forEach((w,i)=>{
       const s=spans[i]; const next=(i+1<g.words.length)?g.words[i+1].s:gEnd;
-      const base='w c-'+(w.color||'blue')+(w.key?' key':''); tl.set(s,{className:base+' on'},w.s);
-      if(!w.key) tl.set(s,{className:base},Math.max(w.s+0.02,next));
+      // mot courant : sous-titres blancs, pas de changement de classe (le tween className de GSAP dédouble le texte ombré)
       if(w.key){ const rot=(i%2?3:-3); tl.fromTo(s,{scale:1,rotation:0},{scale:1.22,rotation:rot,duration:0.12,ease:'back.out(3)'},w.s); tl.to(s,{scale:1.1,rotation:rot*0.6,duration:0.16,ease:'power2.inOut'},w.s+0.12); }
     });
   }
