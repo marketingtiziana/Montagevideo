@@ -66,8 +66,8 @@ from PIL import ImageFont
 _font=ImageFont.truetype("fonts/Inter-Variable.ttf",72)
 try: _font.set_variation_by_axes([800])
 except Exception: pass
-GAP=28; MAXW=960
-def wwidth(t): return _font.getlength(t["w"])*(1.06 if t["key"] else 1.0)+14  # +stroke
+GAP=36; MAXW=960
+def wwidth(t): return _font.getlength(t["w"])*(1.12 if t["key"] else 1.0)+14  # +stroke
 def nlines(ws):
     lines=1; cur=0
     for t in ws:

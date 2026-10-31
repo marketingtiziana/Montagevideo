@@ -8,7 +8,7 @@
 html,body{margin:0;padding:0;background:transparent;width:1080px;height:1920px;overflow:hidden}
 #stage{position:relative;width:1080px;height:1920px;font-family:Inter,sans-serif}
 /* ---------- sous-titres ---------- */
-.group{position:absolute;left:60px;width:960px;top:1330px;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:28px;row-gap:0;opacity:0;transform-origin:50% 50%;will-change:transform}
+.group{position:absolute;left:60px;width:960px;top:1330px;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:36px;row-gap:0;opacity:0;transform-origin:50% 50%;will-change:transform}
 .w{font-family:Inter;font-weight:800;font-size:72px;line-height:1.14;color:#fff;letter-spacing:-0.012em;display:inline-block;transform-origin:50% 60%;
    -webkit-text-stroke:7px #000;paint-order:stroke fill;text-shadow:0 10px 26px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.35)}
 .w.on{color:var(--blue)}
@@ -59,7 +59,7 @@ function buildSubs(groups){
       const s=spans[i]; const next=(i+1<g.words.length)?g.words[i+1].s:gEnd;
       tl.set(s,{className:'w'+(w.key?' key':'')+' on'},w.s);
       if(!w.key) tl.set(s,{className:'w'},Math.max(w.s+0.02,next));
-      if(w.key){ tl.fromTo(s,{scale:1},{scale:1.15,duration:0.11,ease:'back.out(3)'},w.s); tl.to(s,{scale:1.06,duration:0.14,ease:'power2.inOut'},w.s+0.11); }
+      if(w.key){ tl.fromTo(s,{scale:1},{scale:1.12,duration:0.11,ease:'back.out(3)'},w.s); tl.to(s,{scale:1.05,duration:0.14,ease:'power2.inOut'},w.s+0.11); }
     });
   }
 }

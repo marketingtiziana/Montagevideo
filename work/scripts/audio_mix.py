@@ -28,10 +28,10 @@ import re
 def lufs(f):
     r=subprocess.run(["ffmpeg","-i",f,"-af","loudnorm=print_format=json","-f","null","-"],capture_output=True,text=True).stderr
     return float(re.search(r'"input_i"\s*:\s*"([-\d.]+)"',r).group(1))
-gv=-14-lufs("cut/voice.wav"); gm=-38-lufs("cut/music_cut.wav"); gs=-30-lufs("cut/sfx_track.wav")
+gv=-14-lufs("cut/voice.wav"); gm=-36-lufs("cut/music_cut.wav"); gs=-30-lufs("cut/sfx_track.wav")
 print("gains dB voix/musique/sfx",round(gv,2),round(gm,2),round(gs,2))
 subprocess.run(["ffmpeg","-v","error","-y","-i","cut/voice.wav","-i","cut/music_cut.wav","-i","cut/sfx_track.wav","-filter_complex",
-  f"[0]volume={gv}dB,asplit[v1][v2];[1]volume={gm}dB[m];[m][v2]sidechaincompress=threshold=0.03:ratio=5:attack=25:release=600:makeup=1[md];"
+  f"[0]volume={gv}dB,asplit[v1][v2];[1]volume={gm}dB[m];[m][v2]sidechaincompress=threshold=0.05:ratio=2.5:attack=30:release=700:makeup=1[md];"
   f"[2]volume={gs}dB[s];[v1][md][s]amix=inputs=3:normalize=0:dropout_transition=0,alimiter=limit=-1dB:attack=5:release=50:level=0[out]",
   "-map","[out]","-ar",str(sr),"-ac","2","cut/mix.wav"],check=True)
 for f in ["cut/voice.wav","cut/music_cut.wav","cut/sfx_track.wav","cut/mix.wav"]:

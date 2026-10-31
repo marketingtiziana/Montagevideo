@@ -11,12 +11,12 @@ CARDS=[  # start/end en temps source
  dict(type="list", label="Ça dépend de", numbered=True, rows=[dict(text="Type de LLC",t=80.7),dict(text="Associés",t=82.1),dict(text="Résidence fiscale",t=83.3),dict(text="Structure",t=85.5)], anchor="left", x=30, y=1035, start=80.5, end=87.15),
  dict(type="pill", text="Vérifie tes obligations", anchor="left", x=24, y=250, start=94.6, end=96.25),
  dict(type="pill", text="Vidéo complète en DM", anchor="right", x=1056, y=250, start=99.9, end=103.2),
- dict(type="pill", text="Commente « LLC »", html='Commente <span class="mono">LLC</span>', anchor="left", x=24, y=250, start=117.7, end=120.5),
+ dict(type="pill", text="Commente « LLC »", html='Commente <span class="mono">LLC</span>', anchor="left", x=30, y=1080, start=117.7, end=120.5),
 ]
 BEHIND=[
  dict(kind="mono", text=f"25{NBSP}000{NBSP}$", y=190, size=330, x0=160, x1=-520, start=9.55, end=12.75, sfx="impact"),
  dict(kind="outline", text="ERREUR", y=150, size=400, x0=120, x1=-1320, start=57.35, end=59.45, sfx="impact"),
- dict(kind="outline", text="LLC", y=200, size=520, x0=90, x1=-110, scale=[0.9,1.08], start=118.45, end=120.5, sfx="impact"),
+ dict(kind="outline", text="LLC", y=60, size=560, x0=60, x1=-100, scale=[0.9,1.08], start=118.45, end=120.5, sfx="impact"),
 ]
 def conv(items):
     out=[]
