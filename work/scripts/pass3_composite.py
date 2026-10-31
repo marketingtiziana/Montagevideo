@@ -79,9 +79,20 @@ def read_png(p):
     im=cv2.imread(p,cv2.IMREAD_UNCHANGED)
     if im is None or im.shape[2]<4: return None
     a=im[...,3:4].astype(np.float32)/255.0; return im[...,:3].astype(np.float32), a
+import time
+def wait_masks(f):
+    """attend que les masques calculés (grille 1 image/2 à partir du début de plage) encadrant f existent"""
+    for a,b in [(int(round(x["start"]*FPS))-2, int(round(x["end"]*FPS))+2) for x in fx["behind"]]:
+        if a<=f<b:
+            lo=a+((f-a)//2)*2; hi=min(lo+2,b-1)
+            for g in (lo,hi):
+                while not os.path.exists(f"cut/masks/m{g:05d}.png"):
+                    if "masks done" in open("masks.log").read(): return
+                    time.sleep(5)
 def compose(f, base):
     out=base.astype(np.float32)
     if in_behind(f):
+        wait_masks(f)
         m=mask(f); b=read_png(f"cut/behind/f{f:05d}.png"); br=broll_frame(f)
         if m is not None and (b is not None or br is not None):
             comp=out
