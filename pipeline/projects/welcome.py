@@ -24,8 +24,8 @@ SUBS = [
     (0.00, 0.86, "Félicitations !"),
     (1.38, 3.14, "Vous venez de faire quelque chose"),
     (3.14, 8.36, "que **95 %** des entrepreneurs ne font jamais :"),
-    (9.20, 11.64, "arrêtez de subir leur fiscalité"),
-    (11.64, 14.74, "et **décidez de la structurer**."),
+    (9.20, 11.64, "arrêter de subir leur fiscalité"),
+    (11.64, 14.74, "et **décider de la structurer**."),
     (15.48, 16.60, "Bienvenue chez **Fynovates**."),
     (20.06, 24.56, "Jusqu'ici, vous étiez un entrepreneur qui gagne de l'argent"),
     (24.56, 27.86, "et qui en reverse une partie"),
@@ -54,7 +54,7 @@ def storyboard(g):
     E.append(g.LightLeak(T(0.0) - 0.2, 2.6, 'tr', 0.20))
     E.append(g.LowerThird(T(1.4), T(6.6)))
     E.append(g.NumberCard(T(4.6), T(8.4), "95 %", "des entrepreneurs ne le font jamais", eyebrow="Vous venez de faire ce que", count=False))
-    E.append(g.Panel(T(9.3), T(14.7), "Arrêtez de subir, **décidez de structurer**", eyebrow="Votre fiscalité", ico='check_circle', size=38))
+    E.append(g.Panel(T(9.3), T(14.7), "Arrêter de subir, **décider de structurer**", eyebrow="Votre fiscalité", ico='check_circle', size=38))
     E.append(g.LightLeak(T(15.3), 2.4, 'tl', 0.16))
     E.append(g.Panel(T(15.5), T(19.95), "Bienvenue chez **FYNOVATES**", ico='star', size=44))
     # Before / after
