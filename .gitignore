@@ -14,3 +14,17 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Pipeline v2 (reel LLC) : artefacts lourds du dossier work/
+work/src/
+work/cut/
+work/rtest/
+work/look/
+work/test/
+work/models/
+work/sfx/
+work/fonts/
+work/lib/
+work/*.log
+work/nohup.out
+output/*.mp4
