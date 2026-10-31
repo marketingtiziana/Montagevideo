@@ -57,7 +57,7 @@ def storyboard(g):
     E.append(g.Panel(T(16.6), T(21.0), "Réservez votre **appel d'onboarding**", eyebrow="2 · Vous avez reçu un lien", ico='clock', size=38))
     E.append(g.Panel(T(22.0), T(24.4), "**Maintenant**, pas demain", eyebrow="Prenez-le", ico='clock', size=42))
     E.append(g.CheckList([(T(27.5), "La création de votre compte bancaire"), (T(31.6), "La synchronisation bancaire pour la comptabilité")],
-                         T(35.5), eyebrow="Sur cet appel, on lance", start=T(26.1)))
+                         T(35.5), eyebrow="Sur cet appel, on lance", start=T(27.4)))
     E.append(g.Panel(T(36.6), T(40.5), "Sans cet appel, votre structure existe mais **ne peut pas encaisser**", eyebrow="Important", ico='cross', size=32))
     # 3 — call with Tiziana
     E.append(g.Panel(T(42.5), T(49.4), "Un appel avec moi : **le point** sur votre situation et la suite", eyebrow="3 · Avec Tiziana", ico='check_circle', size=34))
