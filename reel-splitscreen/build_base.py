@@ -18,10 +18,9 @@ def snap_end(word_end, thr_db=-45, max_ext=0.6):
 raw=[
  (0.60, 4.93, "Hook prise 1 (a) : Tu savais qu'une société étrangère ne suffit pas à déplacer ta fiscalité ?", None),
  (5.45, 8.30, "Hook prise 1 (b) : Et c'est précisément là que beaucoup se font avoir.", None),
- (20.56, 22.50, "ce n'est pas simplement parce", 20.51),
+ (21.02, 22.50, "ce n'est pas simplement parce", 20.95),
  (24.20, 31.48, "que tu crées une société à Dubaï... payer tes impôts dans ce pays.", None),
- (39.50, 39.66, "Ce", None, 39.73),
- (40.17, 51.20, "qui compte, c'est notamment où tu es résident fiscal... ça devient intéressant.", 40.14),
+ (40.21, 51.20, "ce qui compte, c'est notamment où tu es résident fiscal... ça devient intéressant.", 40.12),
  (52.66, 63.92, "Parce que oui, dans certaines situations... plus adaptée à ton business.", None),
  (67.10, 76.80, "Mais dans d'autres situations... obligations fiscales dans ton pays de résidence.", None),
  (79.60, 84.60, "Donc, avant de choisir un pays juste parce qu'on t'a promis du 0%,", None),

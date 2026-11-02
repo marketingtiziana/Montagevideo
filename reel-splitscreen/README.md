@@ -46,7 +46,7 @@ ffmpeg -i top.mp4 -i base.mov -i mix_final.wav \
 | `gen_subs.py` | Sous-titres ASS karaoké (1–2 mots, blanc uniquement) |
 | `scene/scene.html` | Scène motion design : 9 chapitres, transitions morph/parallaxe/zoom, fond toujours animé |
 | `scene/render.js` | Rendu Playwright déterministe (`window.__seek(t)`) |
-| `gen_sfx.py` / `mix_audio.py` / `cues.json` | SFX synthétiques, boucle musicale, mix -14 LUFS |
+| `gen_sfx.py` / `gen_music.py` / `mix_audio.py` / `cues.json` | SFX synthétiques, fond musical suspense (ré mineur, 112 BPM), mix -14 LUFS |
 | `segments.json` | Dérushage effectif (source → finale) |
 | `remap.py` / `remap.json` / `scene/remap.js` | Remap temporel v1 → v2 (la scène est écrite sur la timeline v1, rejouée sur la v2 via `R(t)`) |
 | `output/derush-report.md`, `output/chapitres.md`, `output/preview-frames/` | Livrables de validation |
