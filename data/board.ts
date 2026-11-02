@@ -14,7 +14,7 @@ export const board: BoardData = {
     recenter: "Recentrer",
     zoomGroup: "Groupe",
     export: "Exporter",
-    exportScene: "Fichier .excalidraw",
+    exportScene: ".excalidraw",
     exportPng: "PNG 2x",
     exportSvg: "SVG",
     hint: "H : masquer la barre",

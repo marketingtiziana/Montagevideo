@@ -51,41 +51,40 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 
 ---
 
-# Tableau 16:9 « Comment fonctionne une LLC »
+# Canvas Excalidraw « Comment fonctionne une LLC »
 
-Route `/board-llc` : un seul cadre 1920x1080, style mindmap « en désordre » sur papier quadrillé,
-projeté plein écran pendant une présentation en direct (le présentateur annote par-dessus).
-Next.js 14 (App Router), TypeScript, Tailwind, roughjs pour les liens, html-to-image et Playwright
-pour les exports. Tout statique, aucun scroll.
+Route `/board-llc` : un canvas infini et interactif façon Excalidraw (pan, zoom, outils de dessin actifs
+pour annoter en direct) qui explique le fonctionnement d'une LLC américaine. Nœud central « LLC »,
+six groupes éparpillés autour (acteurs, documents, argent, fiscalité, chaque année, pièges), cinq
+schémas dessinés, flèches courbes, images de banque d'images et éléments détourés.
 
 ```bash
 pnpm install
 pnpm dev            # http://localhost:3000/board-llc
-pnpm build          # build de production
+pnpm build
 ```
 
-## Présentation
-- Le cadre se met à l'échelle pour remplir la fenêtre en gardant le 16:9 (letterbox navy si besoin).
-- Touche `F` : plein écran. Touche `H` : masque toute l'interface (boutons compris). `?ui=0` démarre sans interface.
-- Texte minimum 20 px dans le cadre, lisible à 50 % de zoom.
+## Scène
+- Tout le contenu est dans `data/board.ts` (groupes, images, éléments, liens). Les positions sont tirées
+  d'un aléatoire à seed fixe (`lib/rng.ts`, `lib/scene.ts`) : rendu identique à chaque génération.
+- `pnpm build-scene` (serveur lancé, ou `BOARD_URL`) régénère `public/board/scene.excalidraw` :
+  le skeleton est converti avec `convertToExcalidrawElements` dans Chromium (polices réelles),
+  puis chaque image est embarquée en dataURL dans `files`. Sans image, un rectangle hachuré porte son nom.
+- Style : roughness 2, strokeWidth 2, flèches courbes, fonds hachurés clairs, navy et indigo.
 
-## Exports
-- **Export PNG** : 3840x2160 via html-to-image.
-- **Export PDF** : une page 16:9 via Playwright (route `/api/export-pdf`, fonctionne en local ou sur un serveur
-  avec Chromium). Sans Playwright côté serveur, le bouton ouvre l'impression du navigateur, cadrée en 16:9 par la
-  feuille de style print. En ligne de commande (serveur lancé) : `pnpm export-pdf [url] [sortie.pdf]`.
-- Capture de contrôle : `pnpm screenshot [url] [sortie.png]` (cadre 16:9 en 2x).
+## Images
+- `PEXELS_API_KEY=... pnpm fetch-images` : une image Pexels par entrée de `board.images` dans
+  `public/board/raw/<id>.jpg`, plus `credits.json`.
+- `pnpm cutout` : détoure celles marquées `cutout: true` vers `public/board/cutouts/<id>.png`
+  (`@imgly/background-removal-node`, repli `rembg`), puis `pnpm build-scene` pour les embarquer.
 
-## Contenu et images
-- Tout le contenu est typé dans `data/board.ts` (groupes, éléments, liens, positions dans le cadre).
-  Les composants ne contiennent aucun texte en dur. Jitter et rotations sont déterministes (seed dans `lib/rng.ts`).
-- `PEXELS_API_KEY=... pnpm fetch-images` télécharge une image par élément `photo` ou `cutout` dans
-  `public/board/raw/<id>.jpg` et écrit `credits.json`.
-- `pnpm cutout` détoure les images des éléments `cutout` vers `public/board/cutouts/<id>.png`
-  (moteur `@imgly/background-removal-node`, modèle téléchargé au premier lancement ; repli sur la commande `rembg`)
-  et écrit `manifest.json`. Les requêtes Pexels des cutouts demandent des objets sur fond uni.
-- Sans clé ni détourage : bloc couleur + icône, le build ne casse pas. Aucun appel réseau au runtime.
+## Interaction
+- Barre flottante : Recentrer, zoom sur les groupes 1 à 6, exports `.excalidraw`, PNG 2x et SVG.
+- Touche `H` : masque la barre. `?ui=0` démarre sans barre.
+- Capture de contrôle : `pnpm screenshot [url] [sortie.png]`.
 
-## Variante verticale
-Le board vertical précédent (visual essay à scroller, export PNG très long) reste disponible sur
-`/board-llc-vertical`, avec `pnpm fetch-images --vertical` pour ses photos.
+## Variantes précédentes
+- `/board-llc-16x9` : tableau unique 16:9 projeté plein écran (touches F et H, exports PNG et PDF,
+  `pnpm fetch-images --16x9`, `pnpm cutout --16x9`, `pnpm export-pdf`).
+- `/board-llc-vertical` : visual essay vertical à scroller (scroll auto, export PNG très long,
+  `pnpm fetch-images --vertical`).
