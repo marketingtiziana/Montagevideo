@@ -1,0 +1,122 @@
+[
+ {
+  "idx": 0,
+  "src_in": 9.65,
+  "src_out": 18.267,
+  "onset": 9.95,
+  "dur": 8.6333,
+  "out_in": 0.0,
+  "zoom": 1.0,
+  "label": "Hook prise 2 : Tu savais qu'une société étrangère... se font avoir.",
+  "frames": 259,
+  "out_out": 8.6333
+ },
+ {
+  "idx": 1,
+  "src_in": 20.13,
+  "src_out": 22.567,
+  "onset": 20.31,
+  "dur": 2.4333,
+  "out_in": 8.6333,
+  "zoom": 1.12,
+  "label": "Parce que ce n'est pas simplement parce",
+  "frames": 73,
+  "out_out": 11.0667
+ },
+ {
+  "idx": 2,
+  "src_in": 24.02,
+  "src_out": 31.547,
+  "onset": 24.2,
+  "dur": 7.5333,
+  "out_in": 11.0667,
+  "zoom": 1.0,
+  "label": "que tu crées une société à Dubaï... payer tes impôts dans ce pays.",
+  "frames": 226,
+  "out_out": 18.6
+ },
+ {
+  "idx": 3,
+  "src_in": 39.38,
+  "src_out": 51.267,
+  "onset": 39.56,
+  "dur": 11.9,
+  "out_in": 18.6,
+  "zoom": 1.12,
+  "label": "Ce qui compte... résident fiscal, dirigée, exercée... ça devient intéressant.",
+  "frames": 357,
+  "out_out": 30.5
+ },
+ {
+  "idx": 4,
+  "src_in": 52.48,
+  "src_out": 63.987,
+  "onset": 52.66,
+  "dur": 11.5333,
+  "out_in": 30.5,
+  "zoom": 1.0,
+  "label": "Parce que oui, dans certaines situations... plus adaptée à ton business.",
+  "frames": 346,
+  "out_out": 42.0333
+ },
+ {
+  "idx": 5,
+  "src_in": 67.13,
+  "src_out": 76.867,
+  "onset": 67.31,
+  "dur": 9.7333,
+  "out_in": 42.0333,
+  "zoom": 1.12,
+  "label": "Mais dans d'autres situations... obligations fiscales dans ton pays de résidence.",
+  "frames": 292,
+  "out_out": 51.7667
+ },
+ {
+  "idx": 6,
+  "src_in": 79.66,
+  "src_out": 84.727,
+  "onset": 79.84,
+  "dur": 5.0667,
+  "out_in": 51.7667,
+  "zoom": 1.0,
+  "label": "Donc, avant de choisir un pays juste parce qu'on t'a promis du 0%,",
+  "frames": 152,
+  "out_out": 56.8333
+ },
+ {
+  "idx": 7,
+  "src_in": 86.65,
+  "src_out": 91.307,
+  "onset": 86.83,
+  "dur": 4.6667,
+  "out_in": 56.8333,
+  "zoom": 1.12,
+  "label": "il faut d'abord regarder ta situation personnelle et ton business dans son ensemble.",
+  "frames": 140,
+  "out_out": 61.5
+ },
+ {
+  "idx": 8,
+  "src_in": 92.5,
+  "src_out": 113.867,
+  "onset": 92.68,
+  "dur": 21.3667,
+  "out_in": 61.5,
+  "zoom": 1.0,
+  "label": "Et c'est exactement ce que je fais... commente urgence sous cette vidéo.",
+  "frames": 641,
+  "out_out": 82.8667
+ },
+ {
+  "idx": 9,
+  "src_in": 115.61,
+  "src_out": 118.35,
+  "onset": 115.79,
+  "dur": 2.7667,
+  "out_in": 82.8667,
+  "zoom": 1.12,
+  "label": "Je t'enverrai les renseignements en DM.",
+  "frames": 83,
+  "out_out": 85.6333
+ }
+]
