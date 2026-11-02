@@ -169,7 +169,7 @@ export type ChartSpec =
       irs: string;
       edges: { owns: string; manages: string; registers: string; ein: string };
     }
-  | { kind: "money"; steps: { label: string; sub?: string }[] }
+  | { kind: "money"; steps: { label: string; sub?: string }[]; arrows: string[] }
   | { kind: "timeline"; steps: string[] }
   | { kind: "calendar"; items: { when: string; label: string }[] }
   | {

@@ -29,7 +29,7 @@ export function ElementView({
     case "metric":
       return <Metric el={el} />;
     case "chart":
-      return <Chart el={el} />;
+      return <Chart el={el} color={color} />;
     case "photo":
       return <Photo el={el} assets={assets} creditLabel={ui.photoCredit} />;
     case "meme":
