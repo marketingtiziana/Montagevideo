@@ -25,3 +25,6 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# Photos Pexels téléchargées par `pnpm fetch-images` (servies en local, régénérables)
+# Retirer ces deux lignes pour versionner les photos et leurs crédits.
