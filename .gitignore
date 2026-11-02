@@ -1,16 +1,28 @@
-# Ressources lourdes / dérivées — ne pas versionner
+# Ressources lourdes / dérivées du pipeline vidéo : ne pas versionner
 *.mp4
 *.wav
 *.log
 ffmpeg2pass-*
-models/
-fonts/
-sfx/
-assets/
-frames/
+/models/
+/fonts/
+/sfx/
+/assets/
+/frames/
 *.ass
 words.json
 final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Next.js
+/node_modules/
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env.local
+
+# Captures de contrôle (Playwright)
+/captures/
