@@ -3,7 +3,7 @@
 
 NAME = "Tiziana"
 TITLE = "Fondatrice"
-MUSIC_GAIN_DB = -9.0
+MUSIC_GAIN_DB = -13.0
 MUSIC_PEAK_SRC = 126.28         # "Le bouton est juste sous cette vidéo" -> music swell lands here
 SRC_END = 133.10                # last word ends at 132.78 s
 

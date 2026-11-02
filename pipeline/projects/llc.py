@@ -3,6 +3,7 @@
 
 TITLE = "Conseil en structuration & expatriation"
 NAME = ""
+MUSIC_GAIN_DB = -13.0
 MUSIC_PEAK_SRC = 87.48          # "Le bouton est sous la vidéo" -> music swell lands here
 SRC_END = 92.10                 # last word ends at 91.74 s; keep a short tail
 

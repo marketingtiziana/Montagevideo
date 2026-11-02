@@ -3,7 +3,7 @@
 
 NAME = "Tiziana"
 TITLE = "Fondatrice"
-MUSIC_GAIN_DB = -9.0
+MUSIC_GAIN_DB = -13.0
 MUSIC_PEAK_SRC = 70.10          # "Réservez, s'il vous plaît…" -> music swell on the closing
 SRC_END = 76.30                 # "À tout de suite." ends ~76.1
 
