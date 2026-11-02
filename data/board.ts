@@ -58,6 +58,61 @@ export const board: BoardData = {
     { type: "block", id: "sos", group: "acteurs", title: "Secretary of State", line: "Enregistre la LLC, reçoit l'annual report.", image: "batiment" },
     { type: "block", id: "irs", group: "acteurs", title: "IRS", line: "Délivre l'EIN.", image: "guichet" },
     { type: "image", id: "img-passeport", group: "acteurs", image: "passeport" },
+    {
+      type: "schema",
+      id: "schema-org",
+      group: "acteurs",
+      title: "Qui est où",
+      schema: {
+        kind: "org",
+        members: "Membre(s)",
+        llc: "LLC",
+        manager: "Manager (optionnel)",
+        agent: "Registered Agent",
+        sos: "Secretary of State",
+        irs: "IRS",
+        edges: { owns: "possède", manages: "dirige", registers: "enregistre", ein: "délivre l'EIN", agent: "adresse dans l'État" },
+      },
+    },
+    // Groupe 2 : les documents
+    {
+      type: "schema",
+      id: "schema-timeline",
+      group: "documents",
+      title: "Création, dans l'ordre",
+      schema: { kind: "timeline", steps: ["Choix de l'État", "Articles of Organization", "EIN", "Operating Agreement", "Compte bancaire", "Outils de paiement"] },
+    },
+    // Groupe 3 : l'argent
+    {
+      type: "schema",
+      id: "schema-money",
+      group: "argent",
+      title: "Le trajet de l'argent",
+      schema: { kind: "money", steps: ["Client", "LLC, compte US", "Membre", "Impôt, pays de résidence"], arrows: ["facture", "distribution", "déclaré"] },
+    },
+    // Groupe 4 : la fiscalité
+    {
+      type: "schema",
+      id: "schema-transparency",
+      group: "fiscalite",
+      title: "Transparente par défaut",
+      schema: { kind: "transparency", llc: "LLC", llcLine: "ne paie pas l'impôt elle-même", member: "Membre", memberLine: "imposé dans son pays de résidence", through: "le résultat traverse" },
+    },
+    // Groupe 5 : chaque année
+    {
+      type: "schema",
+      id: "schema-calendar",
+      group: "annee",
+      title: "L'année d'une LLC",
+      schema: {
+        kind: "calendar",
+        items: [
+          { when: "Selon l'État", label: "Annual report ou taxe annuelle" },
+          { when: "Au printemps", label: "Form 5472 + 1120 pro forma" },
+          { when: "À l'échéance", label: "Registered agent renouvelé" },
+        ],
+      },
+    },
   ],
   links: [
     { from: "membre", to: "llc", label: "possède", group: "acteurs" },
@@ -67,5 +122,9 @@ export const board: BoardData = {
     { from: "sos", to: "llc", label: "enregistre", group: "acteurs" },
     { from: "irs", to: "llc", label: "délivre l'EIN", group: "acteurs" },
     { from: "img-passeport", to: "membre", group: "acteurs" },
+    { from: "schema-timeline", to: "llc", label: "crée", group: "documents" },
+    { from: "schema-money", to: "llc", label: "verse", group: "argent" },
+    { from: "schema-transparency", to: "llc", label: "déclare", group: "fiscalite" },
+    { from: "schema-calendar", to: "llc", label: "chaque année", group: "annee" },
   ],
 };

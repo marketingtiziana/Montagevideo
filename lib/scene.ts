@@ -333,11 +333,14 @@ export function buildSkeleton(data: BoardData, assets: SceneAssets): Skeleton[] 
   for (const g of data.groups) {
     const zone = zoneOf(g);
     const r = rngFor(`title/${g.id}`);
+    const tx = zone.x + r.range(0, 80);
+    const ty = zone.y - 90;
+    ctx.placed.push({ x: tx - 40, y: ty - 30, w: g.title.length * 26 + 80, h: 120 });
     ctx.out.push({
       type: "text",
       id: `title-${g.id}`,
-      x: zone.x + r.range(0, 80),
-      y: zone.y - 90,
+      x: tx,
+      y: ty,
       text: g.title,
       fontSize: 44,
       fontFamily: FONT,

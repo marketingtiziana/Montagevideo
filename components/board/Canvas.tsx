@@ -27,14 +27,33 @@ export function Canvas({ data }: { data: BoardData }) {
     api.scrollToContent(undefined, { fitToContent: true, animate: true, duration: 400 });
   }, [api]);
 
+  const zoomGroup = useCallback(
+    (group: string) => {
+      if (!api) return;
+      // Les flèches vers le nœud central sont exclues : on cadre le contenu du groupe.
+      const all = api.getSceneElements();
+      const arrowIds = new Set(all.filter((el) => el.type === "arrow").map((el) => el.id));
+      const els = all.filter(
+        (el) =>
+          (el.customData as { group?: string } | undefined)?.group === group &&
+          el.type !== "arrow" &&
+          !(el.type === "text" && el.containerId && arrowIds.has(el.containerId)),
+      );
+      if (els.length === 0) return;
+      api.scrollToContent(els, { fitToViewport: true, viewportZoomFactor: 0.85, animate: true, duration: 500 });
+    },
+    [api],
+  );
+
   useEffect(() => {
     if (!api || !scene) return;
+    (window as unknown as { __boardZoom?: (g: string) => void }).__boardZoom = zoomGroup;
     const t = window.setTimeout(() => {
       api.scrollToContent(undefined, { fitToContent: true });
       setReady(true);
     }, 300);
     return () => window.clearTimeout(t);
-  }, [api, scene]);
+  }, [api, scene, zoomGroup]);
 
   return (
     <div className="fixed inset-0" data-scene-ready={ready ? "true" : "false"}>
