@@ -1,9 +1,9 @@
 /**
- * Détoure les images des éléments `cutout` : public/board/raw/<id>.jpg
+ * Détoure les images marquées `cutout: true` : public/board/raw/<id>.jpg
  * -> public/board/cutouts/<id>.png (fond transparent, marges rognées),
  * et écrit manifest.json (dimensions de chaque PNG).
  *
- *   pnpm cutout [--force] [--only <id>]
+ *   pnpm cutout [--force] [--only <id>] [--16x9]
  *
  * Moteur : @imgly/background-removal-node (modèle téléchargé au premier lancement).
  * Repli : la commande `rembg` si elle est installée. Sans image source, l'élément est
@@ -12,7 +12,8 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { board } from "../data/board169";
+import { board } from "../data/board";
+import { board as board169 } from "../data/board169";
 
 const ROOT = path.resolve(__dirname, "..");
 const RAW = path.join(ROOT, "public", "board", "raw");
@@ -59,7 +60,8 @@ async function main() {
     ? JSON.parse(fs.readFileSync(MANIFEST, "utf8"))
     : {};
 
-  const cutouts = board.elements.filter((el) => el.type === "cutout" && (!only || el.id === only));
+  const list: { id: string }[] = args.includes("--16x9") ? board169.elements.filter((el) => el.type === "cutout") : board.images.filter((img) => img.cutout);
+  const cutouts = list.filter((el) => !only || el.id === only);
   let done = 0;
   for (const el of cutouts) {
     const input = path.join(RAW, `${el.id}.jpg`);
