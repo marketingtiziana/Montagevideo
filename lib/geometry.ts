@@ -226,9 +226,15 @@ export function computeGeometry(root: HTMLElement, sections: Section[]): Geometr
           `branch/${el.id}`,
         ),
       );
+      // Petit point sur le trait central, là où part la branche.
+      back.push(
+        ...toItems(
+          gen.circle(start.x, start.y, 12, { stroke: color, strokeWidth: 2, fill: color, fillStyle: "solid", roughness: 0.8, seed: seedOf(`dot/${el.id}`) }),
+          `dot/${el.id}`,
+        ),
+      );
       if (el.branch?.label) {
-        // Largeur estimée de l'étiquette pour qu'elle ne recouvre pas la carte.
-        // Toujours du côté de sa carte : au pire l'étiquette mord sur le bord de la carte.
+        // Largeur estimée de l'étiquette. Toujours du côté de sa carte : au pire l'étiquette mord sur le bord de la carte.
         const estW = el.branch.label.length * 13.5 + 36;
         const dir = el.side === "left" ? -1 : 1;
         const lx = start.x + dir * (estW / 2 + 6);
