@@ -21,12 +21,12 @@ export const board: BoardData = {
     loading: "Chargement du tableau",
   },
   groups: [
-    { id: "acteurs", title: "Les acteurs", color: "#3FA9F5", fill: "#E6F3FD", angle: 180, radius: 2000, zone: { w: 2000, h: 1700 } },
-    { id: "documents", title: "Les documents", color: "#64748B", fill: "#E8EDF5", angle: 272, radius: 1500, zone: { w: 1500, h: 900 } },
-    { id: "argent", title: "L'argent", color: "#2BB39A", fill: "#DFF5EE", angle: 10, radius: 1900, zone: { w: 1500, h: 1300 } },
-    { id: "fiscalite", title: "La fiscalité", color: "#7C8CF8", fill: "#E8ECFF", angle: 62, radius: 1900, zone: { w: 1200, h: 1000 } },
-    { id: "annee", title: "Chaque année", color: "#1E3A8A", fill: "#E2E8F0", angle: 108, radius: 1700, zone: { w: 1300, h: 1000 } },
-    { id: "pieges", title: "Les pièges", color: "#4F6BFF", fill: "#E8ECFF", angle: 140, radius: 1500, zone: { w: 900, h: 700 } },
+    { id: "acteurs", title: "Les acteurs", color: "#3FA9F5", fill: "#E6F3FD", angle: 180, radius: 2200, zone: { w: 2000, h: 1700 } },
+    { id: "documents", title: "Les documents", color: "#64748B", fill: "#E8EDF5", angle: 272, radius: 1700, zone: { w: 1700, h: 1000 } },
+    { id: "argent", title: "L'argent", color: "#2BB39A", fill: "#DFF5EE", angle: 5, radius: 2000, zone: { w: 1500, h: 1400 } },
+    { id: "fiscalite", title: "La fiscalité", color: "#7C8CF8", fill: "#E8ECFF", angle: 58, radius: 2100, zone: { w: 1200, h: 1000 } },
+    { id: "annee", title: "Chaque année", color: "#1E3A8A", fill: "#E2E8F0", angle: 100, radius: 1800, zone: { w: 1300, h: 1000 } },
+    { id: "pieges", title: "Les pièges", color: "#4F6BFF", fill: "#E8ECFF", angle: 140, radius: 2100, zone: { w: 900, h: 700 } },
   ],
   images: [
     { id: "personne", imageQuery: "person standing front view holding phone isolated on white background", cutout: true, label: "Personne (membre)", width: 300, aspect: 0.7 },
@@ -74,6 +74,7 @@ export const board: BoardData = {
         edges: { owns: "possède", manages: "dirige", registers: "enregistre", ein: "délivre l'EIN", agent: "adresse dans l'État" },
       },
     },
+    { type: "image", id: "img-capitole", group: "acteurs", image: "capitole" },
     // Groupe 2 : les documents
     {
       type: "schema",
@@ -82,6 +83,12 @@ export const board: BoardData = {
       title: "Création, dans l'ordre",
       schema: { kind: "timeline", steps: ["Choix de l'État", "Articles of Organization", "EIN", "Operating Agreement", "Compte bancaire", "Outils de paiement"] },
     },
+    { type: "block", id: "articles", group: "documents", title: "Articles of Organization", line: "L'acte de naissance de la LLC.", image: "documents-pile" },
+    { type: "block", id: "oa", group: "documents", title: "Operating Agreement", line: "Les règles internes.", image: "tampon" },
+    { type: "block", id: "ein", group: "documents", title: "Lettre EIN", line: "Le numéro fiscal fédéral.", image: "enveloppe" },
+    { type: "block", id: "good-standing", group: "documents", title: "Certificate of Good Standing", line: "La LLC existe et est à jour." },
+    { type: "image", id: "img-skyline", group: "documents", image: "skyline" },
+    { type: "image", id: "img-drapeau", group: "documents", image: "drapeau" },
     // Groupe 3 : l'argent
     {
       type: "schema",
@@ -90,6 +97,11 @@ export const board: BoardData = {
       title: "Le trajet de l'argent",
       schema: { kind: "money", steps: ["Client", "LLC, compte US", "Membre", "Impôt, pays de résidence"], arrows: ["facture", "distribution", "déclaré"] },
     },
+    { type: "image", id: "img-carte", group: "argent", image: "carte" },
+    { type: "image", id: "img-laptop", group: "argent", image: "laptop" },
+    { type: "image", id: "img-telephone", group: "argent", image: "telephone" },
+    { type: "image", id: "img-banque-ecran", group: "argent", image: "banque-ecran" },
+    { type: "image", id: "img-coworking", group: "argent", image: "coworking" },
     // Groupe 4 : la fiscalité
     {
       type: "schema",
@@ -98,6 +110,8 @@ export const board: BoardData = {
       title: "Transparente par défaut",
       schema: { kind: "transparency", llc: "LLC", llcLine: "ne paie pas l'impôt elle-même", member: "Membre", memberLine: "imposé dans son pays de résidence", through: "le résultat traverse" },
     },
+    { type: "note", id: "note-residence", group: "fiscalite", title: "Imposé chez soi", line: "Le membre est imposé selon son pays de résidence fiscale." },
+    { type: "note", id: "note-classification", group: "fiscalite", title: "Vu par l'IRS", line: "Single-member : disregarded entity. Multi-member : partnership." },
     // Groupe 5 : chaque année
     {
       type: "schema",
@@ -113,6 +127,12 @@ export const board: BoardData = {
         ],
       },
     },
+    { type: "image", id: "img-calendrier", group: "annee", image: "calendrier" },
+    { type: "image", id: "img-enveloppe-2", group: "annee", image: "enveloppe" },
+    // Groupe 6 : les pièges
+    { type: "note", id: "piege-1", group: "pieges", title: "LLC ≠ zéro impôt" },
+    { type: "note", id: "piege-2", group: "pieges", title: "Pas d'Operating Agreement" },
+    { type: "note", id: "piege-3", group: "pieges", title: "5472 oublié" },
   ],
   links: [
     { from: "membre", to: "llc", label: "possède", group: "acteurs" },
@@ -122,9 +142,22 @@ export const board: BoardData = {
     { from: "sos", to: "llc", label: "enregistre", group: "acteurs" },
     { from: "irs", to: "llc", label: "délivre l'EIN", group: "acteurs" },
     { from: "img-passeport", to: "membre", group: "acteurs" },
-    { from: "schema-timeline", to: "llc", label: "crée", group: "documents" },
+    { from: "img-capitole", to: "sos", group: "acteurs" },
+    { from: "schema-timeline", to: "llc", label: "étapes", group: "documents" },
+    { from: "articles", to: "llc", label: "crée", group: "documents" },
+    { from: "oa", to: "articles", group: "documents" },
+    { from: "ein", to: "oa", group: "documents" },
+    { from: "good-standing", to: "ein", group: "documents" },
     { from: "schema-money", to: "llc", label: "verse", group: "argent" },
+    { from: "img-laptop", to: "schema-money", label: "facture", group: "argent" },
+    { from: "img-carte", to: "schema-money", group: "argent" },
+    { from: "img-telephone", to: "img-laptop", group: "argent" },
     { from: "schema-transparency", to: "llc", label: "déclare", group: "fiscalite" },
+    { from: "note-residence", to: "schema-transparency", group: "fiscalite" },
+    { from: "note-classification", to: "schema-transparency", group: "fiscalite" },
     { from: "schema-calendar", to: "llc", label: "chaque année", group: "annee" },
+    { from: "img-calendrier", to: "schema-calendar", group: "annee" },
+    { from: "img-enveloppe-2", to: "schema-calendar", group: "annee" },
+    { from: "piege-1", to: "llc", label: "piège", group: "pieges" },
   ],
 };

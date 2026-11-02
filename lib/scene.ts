@@ -56,7 +56,28 @@ interface Ctx {
   out: Skeleton[];
   /** Élément à viser pour une flèche vers un id logique. */
   anchor: Record<string, string>;
+  /** Pour un schéma : ses sous-blocs, la flèche part du plus proche de la cible. */
+  anchorCandidates: Record<string, string[]>;
   boxOf: Record<string, Box>;
+}
+
+function resolveAnchor(ctx: Ctx, id: string, towards: string): string | undefined {
+  const candidates = ctx.anchorCandidates[id];
+  const target = ctx.boxOf[ctx.anchor[towards] ?? towards];
+  if (!candidates || !target) return ctx.anchor[id];
+  const tc = { x: target.x + target.w / 2, y: target.y + target.h / 2 };
+  let best = candidates[0];
+  let bestD = Infinity;
+  for (const c of candidates) {
+    const b = ctx.boxOf[c];
+    if (!b) continue;
+    const d = Math.hypot(b.x + b.w / 2 - tc.x, b.y + b.h / 2 - tc.y);
+    if (d < bestD) {
+      bestD = d;
+      best = c;
+    }
+  }
+  return best;
 }
 
 interface Pt {
@@ -272,12 +293,14 @@ function schema(ctx: Ctx, el: Extract<BoardElement, { type: "schema" }>, group: 
       schemaArrow(ctx, `${p}-a4`, `${p}-manager`, `${p}-llc`, group, s.edges.manages);
       schemaArrow(ctx, `${p}-a5`, `${p}-agent`, `${p}-llc`, group, s.edges.agent);
       ctx.anchor[el.id] = `${p}-llc`;
+      ctx.anchorCandidates[el.id] = [`${p}-sos`, `${p}-irs`, `${p}-agent`, `${p}-llc`, `${p}-manager`, `${p}-members`];
       break;
     }
     case "money": {
       s.steps.forEach((step, i) => schemaBox(ctx, `${p}-s${i}`, ox + 20, oy + i * 150, 400, 90, step, group));
       s.arrows.forEach((a, i) => schemaArrow(ctx, `${p}-a${i}`, `${p}-s${i}`, `${p}-s${i + 1}`, group, a));
       ctx.anchor[el.id] = `${p}-s1`;
+      ctx.anchorCandidates[el.id] = s.steps.map((_, i) => `${p}-s${i}`);
       break;
     }
     case "transparency": {
@@ -285,12 +308,14 @@ function schema(ctx: Ctx, el: Extract<BoardElement, { type: "schema" }>, group: 
       schemaBox(ctx, `${p}-member`, ox + 60, oy + 360, 360, 110, `${s.member}\n${s.memberLine}`, group);
       schemaArrow(ctx, `${p}-a1`, `${p}-llc`, `${p}-member`, group, s.through);
       ctx.anchor[el.id] = `${p}-llc`;
+      ctx.anchorCandidates[el.id] = [`${p}-llc`, `${p}-member`];
       break;
     }
     case "timeline": {
       s.steps.forEach((step, i) => schemaBox(ctx, `${p}-s${i}`, ox + (i % 2) * 120, oy + i * 96, 400, 70, `${i + 1}. ${step}`, group));
       s.steps.slice(1).forEach((_, i) => schemaArrow(ctx, `${p}-a${i}`, `${p}-s${i}`, `${p}-s${i + 1}`, group));
       ctx.anchor[el.id] = `${p}-s0`;
+      ctx.anchorCandidates[el.id] = s.steps.map((_, i) => `${p}-s${i}`);
       break;
     }
     case "calendar": {
@@ -300,13 +325,14 @@ function schema(ctx: Ctx, el: Extract<BoardElement, { type: "schema" }>, group: 
         schemaArrow(ctx, `${p}-a${i}`, `${p}-w${i}`, `${p}-l${i}`, group);
       });
       ctx.anchor[el.id] = `${p}-l0`;
+      ctx.anchorCandidates[el.id] = s.items.flatMap((_, i) => [`${p}-w${i}`, `${p}-l${i}`]);
       break;
     }
   }
 }
 
 export function buildSkeleton(data: BoardData, assets: SceneAssets): Skeleton[] {
-  const ctx: Ctx = { data, assets, placed: [], out: [], anchor: {}, boxOf: {} };
+  const ctx: Ctx = { data, assets, placed: [], out: [], anchor: {}, anchorCandidates: {}, boxOf: {} };
   const S = data.center.size;
 
   // Nœud central
@@ -332,22 +358,7 @@ export function buildSkeleton(data: BoardData, assets: SceneAssets): Skeleton[] 
   // Groupes
   for (const g of data.groups) {
     const zone = zoneOf(g);
-    const r = rngFor(`title/${g.id}`);
-    const tx = zone.x + r.range(0, 80);
-    const ty = zone.y - 90;
-    ctx.placed.push({ x: tx - 40, y: ty - 30, w: g.title.length * 26 + 80, h: 120 });
-    ctx.out.push({
-      type: "text",
-      id: `title-${g.id}`,
-      x: tx,
-      y: ty,
-      text: g.title,
-      fontSize: 44,
-      fontFamily: FONT,
-      strokeColor: g.color,
-      angle: r.range(-0.03, 0.03),
-      customData: { group: g.id },
-    });
+    const before = ctx.placed.length;
     const els = data.elements.filter((e) => e.group === g.id);
     for (const el of els) {
       if (el.type === "block" || el.type === "note") {
@@ -380,12 +391,31 @@ export function buildSkeleton(data: BoardData, assets: SceneAssets): Skeleton[] 
         schema(ctx, el, g, { ...box, y: box.y + 60 });
       }
     }
+    // Intitulé du groupe : au-dessus du contenu réellement placé.
+    const mine = ctx.placed.slice(before);
+    const minX = Math.min(...mine.map((b) => b.x));
+    const minY = Math.min(...mine.map((b) => b.y));
+    const r = rngFor(`title/${g.id}`);
+    const title = { x: minX + r.range(0, 60), y: minY - 130, w: g.title.length * 26 + 40, h: 70 };
+    ctx.placed.push(title);
+    ctx.out.push({
+      type: "text",
+      id: `title-${g.id}`,
+      x: title.x,
+      y: title.y,
+      text: g.title,
+      fontSize: 44,
+      fontFamily: FONT,
+      strokeColor: g.color,
+      angle: r.range(-0.03, 0.03),
+      customData: { group: g.id },
+    });
   }
 
   // Flèches entre éléments
   data.links.forEach((l, i) => {
-    const from = ctx.anchor[l.from];
-    const to = ctx.anchor[l.to];
+    const from = resolveAnchor(ctx, l.from, l.to);
+    const to = resolveAnchor(ctx, l.to, l.from);
     if (!from || !to) return;
     const g = groupOf(data, l.group);
     const arrow = arrowBetween(ctx, `link-${i}`, from, to, g.color, g.id, l.label);
