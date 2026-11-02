@@ -169,8 +169,8 @@ function Org({ c, id }: { c: Extract<ChartSpec, { kind: "org" }>; id: string }) 
 }
 
 function Money({ c, id }: { c: Extract<ChartSpec, { kind: "money" }>; id: string }) {
-  const step = 118;
-  const H = c.steps.length * step - 20;
+  const step = 150;
+  const H = c.steps.length * step - 48;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
       {c.steps.map((s, i) => {
@@ -178,8 +178,8 @@ function Money({ c, id }: { c: Extract<ChartSpec, { kind: "money" }>; id: string
         const last = i === c.steps.length - 1;
         return (
           <g key={i}>
-            <Box k={`${id}/b${i}`} x={60} y={y} w={320} h={84} label={s.label} sub={s.sub} fill={last ? "#D9F5EE" : i === 0 ? "#fff" : TINT} />
-            {i < c.steps.length - 1 && <Arrow k={`${id}/a${i}`} from={[220, y + 88]} to={[220, y + step - 4]} label={c.arrows[i]} color={i === c.steps.length - 2 ? "#2BB39A" : INDIGO} />}
+            <Box k={`${id}/b${i}`} x={50} y={y} w={340} h={96} label={s.label} sub={s.sub} fill={last ? "#D9F5EE" : i === 0 ? "#fff" : TINT} />
+            {i < c.steps.length - 1 && <Arrow k={`${id}/a${i}`} from={[220, y + 100]} to={[220, y + step - 4]} label={c.arrows[i]} color={i === c.steps.length - 2 ? "#2BB39A" : INDIGO} />}
           </g>
         );
       })}
@@ -210,7 +210,7 @@ function Timeline({ c, id, color }: { c: Extract<ChartSpec, { kind: "timeline" }
 }
 
 function CalendarChart({ c, id, color }: { c: Extract<ChartSpec, { kind: "calendar" }>; id: string; color: string }) {
-  const step = 96;
+  const step = 100;
   const H = c.items.length * step + 8;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
@@ -221,7 +221,7 @@ function CalendarChart({ c, id, color }: { c: Extract<ChartSpec, { kind: "calend
             <Rough k={`${id}/r${i}`} drawable={gen.rectangle(4, y, W - 8, step - 14, { stroke: NAVY, strokeWidth: 2, fill: "#fff", fillStyle: "solid", roughness: 1.2, seed: seed(`${id}/r${i}`) })} />
             <Rough k={`${id}/p${i}`} drawable={gen.rectangle(14, y + 12, 132, step - 38, { stroke: color, strokeWidth: 2, fill: color, fillStyle: "solid", roughness: 0.8, seed: seed(`${id}/p${i}`) })} />
             <Text x={80} y={y + (step - 14) / 2} lines={wrap(it.when, 11)} size={22} color="#fff" />
-            <Text x={162} y={y + (step - 14) / 2} lines={wrap(it.label, 24)} size={22} anchor="start" />
+            <Text x={162} y={y + (step - 14) / 2} lines={wrap(it.label, 21)} size={22} anchor="start" />
           </g>
         );
       })}
@@ -234,7 +234,9 @@ function Transparency({ c, id }: { c: Extract<ChartSpec, { kind: "transparency" 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
       <Box k={`${id}/llc`} x={70} y={20} w={300} h={120} label={c.llc} sub={c.llcTax} dashed fill="#fff" />
-      <Rough k={`${id}/flow`} drawable={gen.line(220, 0, 220, 300, { stroke: INDIGO, strokeWidth: 10, roughness: 2, bowing: 2, seed: seed(`${id}/flow`) })} />
+      <g opacity={0.28}>
+        <Rough k={`${id}/flow`} drawable={gen.line(220, 0, 220, 300, { stroke: INDIGO, strokeWidth: 12, roughness: 2, bowing: 2, seed: seed(`${id}/flow`) })} />
+      </g>
       <Arrow k={`${id}/a`} from={[220, 150]} to={[220, 300]} color={INDIGO} />
       <rect x={236} y={190} width={190} height={40} rx={20} fill="#fff" stroke={INDIGO} strokeWidth={2} />
       <Text x={331} y={211} lines={[c.arrow]} size={22} color={INDIGO} />
@@ -244,22 +246,26 @@ function Transparency({ c, id }: { c: Extract<ChartSpec, { kind: "transparency" 
 }
 
 function Funnel({ c, id, color }: { c: Extract<ChartSpec, { kind: "funnel" }>; id: string; color: string }) {
-  const step = 74;
-  const H = c.bars.length * step + 56;
   const max = Math.max(...c.bars.map((b) => b.weight));
+  const rows = c.bars.map((b) => ({ ...b, lines: wrap(b.label, 32) }));
+  const heights = rows.map((r) => r.lines.length * 25 + 46);
+  const H = heights.reduce((a, b) => a + b, 0) + 70;
+  let y = 0;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
-      {c.bars.map((b, i) => {
-        const y = i * step;
+      {rows.map((b, i) => {
+        const top = y;
+        y += heights[i];
         const w = Math.max(36, ((W - 8) * b.weight) / max);
+        const textH = b.lines.length * 25;
         return (
           <g key={i}>
-            <Text x={4} y={y + 14} lines={[b.label]} size={22} anchor="start" weight={700} />
-            <Rough k={`${id}/bar${i}`} drawable={gen.rectangle(4, y + 32, w, 28, { stroke: NAVY, strokeWidth: 2, fill: color, fillStyle: "hachure", hachureGap: 7, fillWeight: 2, roughness: 1.2, seed: seed(`${id}/bar${i}`) })} />
+            <Text x={4} y={top + textH / 2 + 2} lines={b.lines} size={22} anchor="start" weight={700} />
+            <Rough k={`${id}/bar${i}`} drawable={gen.rectangle(4, top + textH + 10, w, 26, { stroke: NAVY, strokeWidth: 2, fill: color, fillStyle: "hachure", hachureGap: 7, fillWeight: 2, roughness: 1.2, seed: seed(`${id}/bar${i}`) })} />
           </g>
         );
       })}
-      <Text x={4} y={H - 22} lines={wrap(c.note, 36)} size={22} weight={600} color="#64748B" anchor="start" />
+      <Text x={4} y={H - 30} lines={wrap(c.note, 36)} size={22} weight={600} color="#64748B" anchor="start" />
     </svg>
   );
 }

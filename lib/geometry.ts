@@ -235,9 +235,11 @@ export function computeGeometry(root: HTMLElement, sections: Section[]): Geometr
       );
       if (el.branch?.label) {
         // Largeur estimée de l'étiquette. Toujours du côté de sa carte : au pire l'étiquette mord sur le bord de la carte.
+        // Entre le trait et la carte s'il y a la place, sinon à cheval sur le trait.
         const estW = el.branch.label.length * 13.5 + 36;
         const dir = el.side === "left" ? -1 : 1;
-        const lx = start.x + dir * (estW / 2 + 6);
+        const room = Math.abs(end.x - start.x) - 10;
+        const lx = estW + 12 <= room ? start.x + dir * (estW / 2 + 6) : start.x;
         const ly = start.y - 26;
         labels.push({ key: `label/${el.id}`, x: lx, y: ly, text: el.branch.label, color, rotate: r.range(-4, 4) });
       }

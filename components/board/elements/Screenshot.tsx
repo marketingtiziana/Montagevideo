@@ -1,10 +1,6 @@
 import type { Screen, ScreenshotElement } from "@/data/types";
 import { Bell, FileText, Paperclip, Search } from "lucide-react";
 
-function Masked() {
-  return <span className="masked" aria-hidden />;
-}
-
 function Field({ label, value, anchor }: { label: string; value: string; anchor?: string }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-[#E3E6EE] py-2 last:border-b-0">
@@ -132,10 +128,10 @@ function Body({ screen }: { screen: Screen }) {
                   {r.positive ? "+" : "−"}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[22px] font-bold text-navy">{r.name}</div>
-                  <div className="truncate text-[22px] text-slate">{r.note}</div>
+                  <div className="text-[22px] font-bold leading-tight text-navy">{r.name}</div>
+                  <div className="text-[22px] leading-tight text-slate">{r.note}</div>
                 </div>
-                <Masked />
+                <span className="masked !w-[3.2em]" aria-hidden />
               </div>
             ))}
           </div>

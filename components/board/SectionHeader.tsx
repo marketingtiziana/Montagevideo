@@ -7,7 +7,7 @@ export function SectionHeader({ section }: { section: Section }) {
   const offset = Math.round(r.range(0, 40));
   const left = section.side === "left";
   return (
-    <div className="relative grid" style={{ gridTemplateColumns: "540px 540px", minHeight: 170 }}>
+    <div className="relative grid" style={{ gridTemplateColumns: "540px 540px", minHeight: 150 }}>
       <div
         data-node={section.id}
         className="absolute flex h-[66px] w-[66px] items-center justify-center text-[30px] font-black text-white"

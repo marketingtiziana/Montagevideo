@@ -43,12 +43,12 @@ export function placeElement(el: BoardElement, sectionId: string, staggered: boo
   const [wMin, wMax] = WIDTH_BY_TYPE[el.type];
   const width = clamp(el.width ?? Math.round(r.range(wMin, wMax)), MIN_WIDTH, MAX_WIDTH);
   const rotate = el.rotate ?? Math.round(r.range(-3, 3) * 10) / 10;
-  // Écart au trait central : le plus souvent net (place pour la branche et son étiquette),
-  // parfois un léger chevauchement du trait. Toujours contenu dans le board.
+  // Écart au trait central : toujours net (place pour la branche et son étiquette),
+  // et toujours contenu dans le board.
   const maxGap = SPINE_X - width - 12;
-  const rawGap = r.next() < 0.08 ? r.range(-24, 12) : r.range(64, 150);
+  const rawGap = r.range(64, 150);
   const gap = Math.round(Math.min(rawGap, maxGap));
-  const stagger = staggered ? Math.round(r.range(30, 130)) : Math.round(r.range(0, 24));
+  const stagger = staggered ? Math.round(r.range(24, 110)) : Math.round(r.range(0, 20));
   return { el, side: el.side, width, rotate, gap, stagger };
 }
 
@@ -65,7 +65,7 @@ export function layoutSection(section: Section): Row[] {
     const a = els[i];
     const b = els[i + 1];
     const r = rngFor(`${section.id}/row/${rowIndex}`);
-    const marginTop = rowIndex === 0 ? 16 : Math.round(r.range(-40, 28));
+    const marginTop = rowIndex === 0 ? 12 : Math.round(r.range(-44, 8));
     const canPair = b && a.side !== b.side && !a.solo && !b.solo;
     if (canPair) {
       const staggerSide: Side = r.next() < 0.5 ? "left" : "right";

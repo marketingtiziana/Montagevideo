@@ -59,7 +59,7 @@ function SectionView({
   const colorFor = (side: "left" | "right") =>
     section.columns ? (side === "left" ? section.columns.left.color : section.columns.right.color) : section.color;
   return (
-    <section data-section={section.id} className="relative pb-10">
+    <section data-section={section.id} className="relative pb-6">
       <SectionHeader section={section} />
       {section.columns && (
         <div className="grid" style={{ gridTemplateColumns: "540px 540px" }}>
