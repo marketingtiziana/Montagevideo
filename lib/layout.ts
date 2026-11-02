@@ -46,9 +46,9 @@ export function placeElement(el: BoardElement, sectionId: string, staggered: boo
   // Écart au trait central : le plus souvent net (place pour la branche et son étiquette),
   // parfois un léger chevauchement du trait. Toujours contenu dans le board.
   const maxGap = SPINE_X - width - 12;
-  const rawGap = r.next() < 0.15 ? r.range(-24, 12) : r.range(56, 150);
+  const rawGap = r.next() < 0.08 ? r.range(-24, 12) : r.range(64, 150);
   const gap = Math.round(Math.min(rawGap, maxGap));
-  const stagger = staggered ? Math.round(r.range(40, 170)) : Math.round(r.range(0, 30));
+  const stagger = staggered ? Math.round(r.range(30, 130)) : Math.round(r.range(0, 24));
   return { el, side: el.side, width, rotate, gap, stagger };
 }
 
@@ -65,7 +65,7 @@ export function layoutSection(section: Section): Row[] {
     const a = els[i];
     const b = els[i + 1];
     const r = rngFor(`${section.id}/row/${rowIndex}`);
-    const marginTop = rowIndex === 0 ? 24 : Math.round(r.range(-36, 44));
+    const marginTop = rowIndex === 0 ? 16 : Math.round(r.range(-40, 28));
     const canPair = b && a.side !== b.side && !a.solo && !b.solo;
     if (canPair) {
       const staggerSide: Side = r.next() < 0.5 ? "left" : "right";
