@@ -1,6 +1,10 @@
 import type { ComponentType } from 'react';
 import type { SchemaKind } from '@/data/types';
-import Placeholder from './Placeholder';
+import Orgchart from './Orgchart';
+import Moneyflow from './Moneyflow';
+import Timeline from './Timeline';
+import Calendar from './Calendar';
+import Passthrough from './Passthrough';
 
 export interface SchemaProps {
   /** Couleur d'accent du cluster. */
@@ -12,9 +16,9 @@ export interface SchemaProps {
 }
 
 export const SCHEMAS: Record<SchemaKind, ComponentType<SchemaProps>> = {
-  orgchart: Placeholder,
-  moneyflow: Placeholder,
-  timeline: Placeholder,
-  calendar: Placeholder,
-  passthrough: Placeholder,
+  orgchart: Orgchart,
+  moneyflow: Moneyflow,
+  timeline: Timeline,
+  calendar: Calendar,
+  passthrough: Passthrough,
 };

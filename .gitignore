@@ -26,5 +26,5 @@ out/
 next-env.d.ts
 .vercel
 
-# Photos Pexels téléchargées par `pnpm fetch-images` (servies en local, régénérables)
-# Retirer ces deux lignes pour versionner les photos et leurs crédits.
+# Les photos Pexels (public/mindmap/*.jpg + credits.json) générées par `pnpm fetch-images`
+# sont versionnées volontairement : elles sont servies en local, sans appel API au runtime.
