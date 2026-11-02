@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "fetch-images": "tsx scripts/fetch-images.ts",
-    "screenshot": "node scripts/screenshot.mjs"
+    "screenshot": "node scripts/screenshot.mjs",
+    "cutout": "tsx scripts/cutout.ts",
+    "export-pdf": "node scripts/export-pdf.mjs"
   },
   "dependencies": {
     "html-to-image": "1.11.11",
@@ -19,6 +21,7 @@
     "roughjs": "4.6.6"
   },
   "devDependencies": {
+    "@imgly/background-removal-node": "1.4.5",
     "@types/node": "20.17.6",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
@@ -27,8 +30,16 @@
     "eslint-config-next": "14.2.18",
     "playwright": "1.63.0",
     "postcss": "8.4.49",
+    "sharp": "0.32.6",
     "tailwindcss": "3.4.14",
     "tsx": "4.19.2",
     "typescript": "5.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "onnxruntime-node",
+      "sharp"
+    ]
   }
 }

@@ -1,31 +1,26 @@
 /**
- * Télécharge une photo Pexels par élément `photo` du board.
+ * Télécharge une image Pexels par élément `photo` ou `cutout` du tableau.
  *
- *   PEXELS_API_KEY=... pnpm fetch-images [--force] [--size medium|large|large2x]
+ *   PEXELS_API_KEY=... pnpm fetch-images [--force] [--vertical]
  *
- * Les fichiers vont dans public/board/photos/<id>.jpg et credits.json garde
- * le nom du photographe et l'URL. Sans clé, le script s'arrête sans erreur :
- * le board affiche alors un bloc couleur avec une icône. Aucun appel au runtime.
- *
- * Taille par défaut : `large` (environ 940 px de large) pour que l'export PNG en 2x
- * reste net. Passer `--size medium` pour la taille medium de l'API.
+ * Tableau 16:9 (par défaut) : public/board/raw/<id>.jpg (taille large) + credits.json.
+ * Board vertical (--vertical) : public/board/photos/<id>.jpg + credits.json.
+ * Sans clé, le script s'arrête sans erreur : le tableau affiche un bloc couleur
+ * avec une icône. Aucun appel réseau au runtime.
  */
 import fs from "node:fs";
 import path from "node:path";
-import { board } from "../data/vertical";
+import { board } from "../data/board";
+import { board as vertical } from "../data/vertical";
 
 interface PexelsPhoto {
   id: number;
   url: string;
   photographer: string;
-  photographer_url: string;
-  alt: string;
   src: Record<string, string>;
 }
 
 const ROOT = path.resolve(__dirname, "..");
-const OUT_DIR = path.join(ROOT, "public", "board", "photos");
-const CREDITS = path.join(OUT_DIR, "credits.json");
 
 function loadDotEnv() {
   for (const name of [".env.local", ".env"]) {
@@ -42,57 +37,61 @@ async function main() {
   loadDotEnv();
   const args = process.argv.slice(2);
   const force = args.includes("--force");
-  const sizeIdx = args.indexOf("--size");
-  const size = sizeIdx >= 0 ? args[sizeIdx + 1] : process.env.PEXELS_SIZE ?? "large";
+  const isVertical = args.includes("--vertical");
   const key = process.env.PEXELS_API_KEY;
 
-  fs.mkdirSync(OUT_DIR, { recursive: true });
-  const credits: Record<string, { photographer: string; url: string }> = fs.existsSync(CREDITS)
-    ? JSON.parse(fs.readFileSync(CREDITS, "utf8"))
+  const outDir = path.join(ROOT, "public", "board", isVertical ? "photos" : "raw");
+  const creditsFile = path.join(outDir, "credits.json");
+  fs.mkdirSync(outDir, { recursive: true });
+  const credits: Record<string, { photographer: string; url: string }> = fs.existsSync(creditsFile)
+    ? JSON.parse(fs.readFileSync(creditsFile, "utf8"))
     : {};
 
-  const photos = board.sections.flatMap((s) => s.elements).filter((el) => el.type === "photo");
+  const targets: { id: string; imageQuery: string; orientation: string }[] = isVertical
+    ? vertical.sections.flatMap((s) => s.elements).flatMap((el) => (el.type === "photo" ? [{ id: el.id, imageQuery: el.imageQuery, orientation: "landscape" }] : []))
+    : board.elements.flatMap((el) =>
+        el.type === "photo" || el.type === "cutout" ? [{ id: el.id, imageQuery: el.imageQuery, orientation: el.type === "photo" ? "landscape" : "square" }] : [],
+      );
+
   if (!key) {
-    console.log(`PEXELS_API_KEY absente : ${photos.length} photo(s) non téléchargée(s), le board utilisera les blocs couleur.`);
+    console.log(`PEXELS_API_KEY absente : ${targets.length} image(s) non téléchargée(s), le tableau utilisera les blocs couleur.`);
     return;
   }
 
   const used = new Set<number>();
-  for (const el of photos) {
-    if (el.type !== "photo") continue;
-    const file = path.join(OUT_DIR, `${el.id}.jpg`);
-    if (!force && fs.existsSync(file) && credits[el.id]) {
-      console.log(`= ${el.id} déjà présent`);
+  for (const t of targets) {
+    const file = path.join(outDir, `${t.id}.jpg`);
+    if (!force && fs.existsSync(file) && credits[t.id]) {
+      console.log(`= ${t.id} déjà présent`);
       continue;
     }
     const url = new URL("https://api.pexels.com/v1/search");
-    url.searchParams.set("query", el.imageQuery);
+    url.searchParams.set("query", t.imageQuery);
     url.searchParams.set("per_page", "6");
-    url.searchParams.set("orientation", "landscape");
+    url.searchParams.set("orientation", t.orientation);
     const res = await fetch(url, { headers: { Authorization: key } });
     if (!res.ok) {
-      console.error(`! ${el.id} : Pexels a répondu ${res.status}`);
+      console.error(`! ${t.id} : Pexels a répondu ${res.status}`);
       continue;
     }
     const data = (await res.json()) as { photos: PexelsPhoto[] };
     const photo = data.photos.find((p) => !used.has(p.id)) ?? data.photos[0];
     if (!photo) {
-      console.error(`! ${el.id} : aucun résultat pour « ${el.imageQuery} »`);
+      console.error(`! ${t.id} : aucun résultat pour « ${t.imageQuery} »`);
       continue;
     }
     used.add(photo.id);
-    const src = photo.src[size] ?? photo.src.large;
-    const img = await fetch(src);
+    const img = await fetch(photo.src.large2x ?? photo.src.large);
     if (!img.ok) {
-      console.error(`! ${el.id} : téléchargement impossible (${img.status})`);
+      console.error(`! ${t.id} : téléchargement impossible (${img.status})`);
       continue;
     }
     fs.writeFileSync(file, Buffer.from(await img.arrayBuffer()));
-    credits[el.id] = { photographer: photo.photographer, url: photo.url };
-    console.log(`+ ${el.id} <- ${photo.photographer} (${photo.url})`);
+    credits[t.id] = { photographer: photo.photographer, url: photo.url };
+    console.log(`+ ${t.id} <- ${photo.photographer} (${photo.url})`);
   }
 
-  fs.writeFileSync(CREDITS, `${JSON.stringify(credits, null, 2)}\n`);
+  fs.writeFileSync(creditsFile, `${JSON.stringify(credits, null, 2)}\n`);
   console.log(`credits.json : ${Object.keys(credits).length} entrée(s)`);
 }
 
