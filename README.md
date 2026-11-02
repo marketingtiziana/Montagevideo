@@ -51,33 +51,41 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 
 ---
 
-# Board vertical « Comment fonctionne une LLC »
+# Tableau 16:9 « Comment fonctionne une LLC »
 
-Long board façon visual essay (mindmap en désordre sur papier quadrillé), 1080 px de large,
-pour enregistrer un reel en scrollant ou exporter un PNG très long. Next.js 14 (App Router),
-TypeScript, Tailwind, roughjs, html-to-image. Tout statique, aucun backend.
+Route `/board-llc` : un seul cadre 1920x1080, style mindmap « en désordre » sur papier quadrillé,
+projeté plein écran pendant une présentation en direct (le présentateur annote par-dessus).
+Next.js 14 (App Router), TypeScript, Tailwind, roughjs pour les liens, html-to-image et Playwright
+pour les exports. Tout statique, aucun scroll.
 
 ```bash
 pnpm install
 pnpm dev            # http://localhost:3000/board-llc
-pnpm build          # build de production (déployable sur Vercel)
+pnpm build          # build de production
 ```
 
-## Capture
-- **Scroll auto** : bouton en bas à droite, durée réglable de 20 à 60 s, easing linéaire. Le panneau
-  disparaît pendant le défilement, `Échap` arrête.
-- **Export PNG** : image complète du board en 2x (le board est rastérisé par tranches, sans limite de hauteur).
-- `?ui=0` masque le panneau, `?autoscroll=30` lance le défilement au chargement (durée en secondes).
-- `?section=3` affiche uniquement la section 3 cadrée en 1080x1350 (réduite si elle dépasse) ;
-  `?section=3&fit=0` la garde en taille réelle pour la découper en plusieurs slides.
-- Capture de contrôle Playwright (serveur lancé) : `pnpm screenshot [url] [sortie.png]`.
-  Avec `?section=N` dans l'URL, seul le cadre 1080x1350 est capturé.
+## Présentation
+- Le cadre se met à l'échelle pour remplir la fenêtre en gardant le 16:9 (letterbox navy si besoin).
+- Touche `F` : plein écran. Touche `H` : masque toute l'interface (boutons compris). `?ui=0` démarre sans interface.
+- Texte minimum 20 px dans le cadre, lisible à 50 % de zoom.
 
-## Contenu et ressources
-- Tout le contenu est typé dans `data/board.ts` (sections, éléments, branches, annotations).
-  Les composants ne contiennent aucun texte en dur.
-- Photos : `PEXELS_API_KEY=... pnpm fetch-images` télécharge une image par élément `photo`
-  dans `public/board/photos/<id>.jpg` et écrit `credits.json`. Sans clé, bloc couleur + icône.
-- Mèmes : déposer des GIF ou images dans `public/board/memes/`, attribués dans l'ordre aux
-  éléments `meme`. Dossier vide : les emplacements restent vides.
-- Placement aléatoire mais déterministe (seed fixe dans `lib/rng.ts`) : même rendu à chaque chargement.
+## Exports
+- **Export PNG** : 3840x2160 via html-to-image.
+- **Export PDF** : une page 16:9 via Playwright (route `/api/export-pdf`, fonctionne en local ou sur un serveur
+  avec Chromium). Sans Playwright côté serveur, le bouton ouvre l'impression du navigateur, cadrée en 16:9 par la
+  feuille de style print. En ligne de commande (serveur lancé) : `pnpm export-pdf [url] [sortie.pdf]`.
+- Capture de contrôle : `pnpm screenshot [url] [sortie.png]` (cadre 16:9 en 2x).
+
+## Contenu et images
+- Tout le contenu est typé dans `data/board.ts` (groupes, éléments, liens, positions dans le cadre).
+  Les composants ne contiennent aucun texte en dur. Jitter et rotations sont déterministes (seed dans `lib/rng.ts`).
+- `PEXELS_API_KEY=... pnpm fetch-images` télécharge une image par élément `photo` ou `cutout` dans
+  `public/board/raw/<id>.jpg` et écrit `credits.json`.
+- `pnpm cutout` détoure les images des éléments `cutout` vers `public/board/cutouts/<id>.png`
+  (moteur `@imgly/background-removal-node`, modèle téléchargé au premier lancement ; repli sur la commande `rembg`)
+  et écrit `manifest.json`. Les requêtes Pexels des cutouts demandent des objets sur fond uni.
+- Sans clé ni détourage : bloc couleur + icône, le build ne casse pas. Aucun appel réseau au runtime.
+
+## Variante verticale
+Le board vertical précédent (visual essay à scroller, export PNG très long) reste disponible sur
+`/board-llc-vertical`, avec `pnpm fetch-images --vertical` pour ses photos.

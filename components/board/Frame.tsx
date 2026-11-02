@@ -7,8 +7,10 @@ import { rngFor } from "@/lib/rng";
 import { ElementView } from "./ElementView";
 
 export interface FrameHandle {
-  /** Le cadre 1920x1080 non mis à l'échelle (cible des exports). */
+  /** Le cadre 1920x1080 (cible des exports). */
   frame: HTMLDivElement | null;
+  /** La scène plein écran (letterbox). */
+  stage: HTMLDivElement | null;
 }
 
 /**
@@ -19,9 +21,10 @@ export const Frame = forwardRef<FrameHandle, { data: BoardData; assets: BoardAss
   ref,
 ) {
   const frameRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [links, setLinks] = useState<LinkGeometry | null>(null);
-  useImperativeHandle(ref, () => ({ frame: frameRef.current }), []);
+  useImperativeHandle(ref, () => ({ frame: frameRef.current, stage: stageRef.current }), []);
 
   useLayoutEffect(() => {
     const fit = () => setScale(Math.min(window.innerWidth / FRAME_W, window.innerHeight / FRAME_H));
@@ -65,12 +68,12 @@ export const Frame = forwardRef<FrameHandle, { data: BoardData; assets: BoardAss
 
   const c = data.center;
   return (
-    <div className="fixed inset-0 overflow-hidden bg-navy" data-stage>
+    <div ref={stageRef} className="fixed inset-0 overflow-hidden bg-navy print:static print:h-[1080px] print:w-[1920px] print:bg-paper" data-stage>
       <div
         ref={frameRef}
         data-frame
         data-frame-ready={links ? "true" : "false"}
-        className="paper-grid absolute left-1/2 top-1/2 overflow-hidden"
+        className="paper-grid absolute left-1/2 top-1/2 overflow-hidden print:!left-0 print:!top-0 print:!transform-none"
         style={{ width: FRAME_W, height: FRAME_H, transform: `translate(-50%, -50%) scale(${scale})`, transformOrigin: "center" }}
       >
         {/* Liens roughjs, sous les éléments */}

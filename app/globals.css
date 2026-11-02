@@ -37,3 +37,16 @@ body {
   background: repeating-linear-gradient(90deg, #cfd6e6 0 10px, #e6eaf3 10px 16px);
   vertical-align: middle;
 }
+
+/* Export PDF via l'impression navigateur : une page 16:9, sans marge. */
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+@media print {
+  html,
+  body {
+    margin: 0;
+    background: var(--paper);
+  }
+}
