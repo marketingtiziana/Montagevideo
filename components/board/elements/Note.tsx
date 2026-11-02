@@ -14,9 +14,9 @@ export function Note({ el }: { el: NoteElement }) {
       <div className="text-[24px] font-black leading-tight text-navy">{el.title}</div>
       {el.line && <p className="mt-1.5 text-[20px] leading-snug text-navy/80">{el.line}</p>}
       {el.chips && (
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-2.5 flex flex-wrap gap-1.5">
           {el.chips.map((c) => (
-            <span key={c} className="rounded-full bg-white px-3 py-1 text-[20px] font-bold leading-tight" style={{ color: t.fg }}>
+            <span key={c} className="rounded-full bg-white px-3 py-0.5 text-[20px] font-bold leading-tight" style={{ color: t.fg }}>
               {c}
             </span>
           ))}

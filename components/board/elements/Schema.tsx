@@ -129,8 +129,8 @@ function Org({ c, id }: { c: Extract<SchemaSpec, { kind: "org" }>; id: string })
 }
 
 function Money({ c, id }: { c: Extract<SchemaSpec, { kind: "money" }>; id: string }) {
-  const step = 104;
-  const H = c.steps.length * step - 34;
+  const step = 90;
+  const H = c.steps.length * step - 30;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
       {c.steps.map((s, i) => {
@@ -138,8 +138,8 @@ function Money({ c, id }: { c: Extract<SchemaSpec, { kind: "money" }>; id: strin
         const last = i === c.steps.length - 1;
         return (
           <g key={i}>
-            <Box k={`${id}/b${i}`} x={70} y={y} w={260} h={66} label={s} fill={last ? MINT : i === 0 ? "#fff" : TINT} />
-            {i < c.steps.length - 1 && <Arrow k={`${id}/a${i}`} from={[200, y + 70]} to={[200, y + step - 4]} label={c.arrows[i]} color={last ? "#2BB39A" : INDIGO} />}
+            <Box k={`${id}/b${i}`} x={70} y={y} w={260} h={58} label={s} fill={last ? MINT : i === 0 ? "#fff" : TINT} />
+            {i < c.steps.length - 1 && <Arrow k={`${id}/a${i}`} from={[200, y + 62]} to={[200, y + step - 4]} label={c.arrows[i]} color={i === c.steps.length - 2 ? "#2BB39A" : INDIGO} />}
           </g>
         );
       })}
@@ -148,17 +148,18 @@ function Money({ c, id }: { c: Extract<SchemaSpec, { kind: "money" }>; id: strin
 }
 
 function Transparency({ c, id }: { c: Extract<SchemaSpec, { kind: "transparency" }>; id: string }) {
-  const H = 300;
+  const H = 262;
+  const lw = c.through.length * 11.5 + 18;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
       <g opacity={0.3}>
-        <Rough k={`${id}/flow`} drawable={gen.line(200, 0, 200, 215, { stroke: INDIGO, strokeWidth: 10, roughness: 1.8, bowing: 1.5, seed: seed(`${id}/flow`) })} />
+        <Rough k={`${id}/flow`} drawable={gen.line(200, 0, 200, 190, { stroke: INDIGO, strokeWidth: 10, roughness: 1.8, bowing: 1.5, seed: seed(`${id}/flow`) })} />
       </g>
-      <Box k={`${id}/llc`} x={70} y={16} w={260} h={92} label={c.llc} sub={c.llcLine} dashed fill="#fff" />
-      <Arrow k={`${id}/a`} from={[200, 112]} to={[200, 212]} />
-      <rect x={214} y={146} width={c.through.length * 11.5 + 18} height={30} rx={15} fill="#fff" stroke={INDIGO} strokeWidth={1.5} />
-      <Text x={214 + (c.through.length * 11.5 + 18) / 2} y={162} lines={[c.through]} size={20} color={INDIGO} />
-      <Box k={`${id}/member`} x={70} y={216} w={260} h={78} label={c.member} sub={c.memberLine} fill={MINT} />
+      <Box k={`${id}/llc`} x={70} y={10} w={260} h={84} label={c.llc} sub={c.llcLine} dashed fill="#fff" />
+      <Arrow k={`${id}/a`} from={[200, 98]} to={[200, 184]} />
+      <rect x={200 - lw / 2} y={126} width={lw} height={30} rx={15} fill="#fff" stroke={INDIGO} strokeWidth={1.5} />
+      <Text x={200} y={142} lines={[c.through]} size={20} color={INDIGO} />
+      <Box k={`${id}/member`} x={70} y={188} w={260} h={70} label={c.member} sub={c.memberLine} fill={MINT} />
     </svg>
   );
 }

@@ -4,7 +4,7 @@ import type { DocElement } from "@/data/types";
 export function Doc({ el }: { el: DocElement }) {
   const lines = el.lines ?? 5;
   return (
-    <div className="relative rounded-xl border border-[#E3E6EE] bg-white px-5 pb-5 pt-4 shadow-card">
+    <div className="relative rounded-xl border border-[#E3E6EE] bg-white px-5 pb-4 pt-3.5 shadow-card">
       <div className="border-b-2 border-navy pb-2">
         <div className="text-[24px] font-black leading-tight text-navy">{el.title}</div>
         <div className="text-[20px] leading-snug text-slate">{el.subtitle}</div>
