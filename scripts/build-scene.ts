@@ -4,15 +4,15 @@
  *   pnpm build-scene            (serveur Next lancé sur http://localhost:3000, ou BOARD_URL)
  *
  * 1. Inventorie les images disponibles (cutouts PNG, photos JPG) -> public/board/assets.json.
- * 2. Ouvre /board-llc/build dans Chromium (Playwright) : le skeleton est converti en éléments
+ * 2. Ouvre /board-llc-excalidraw/build dans Chromium (Playwright) : le skeleton est converti en éléments
  *    Excalidraw avec les vraies polices (convertToExcalidrawElements).
  * 3. Embarque chaque image en dataURL dans `files` et écrit la scène (elements + files + appState).
  * Sans image, l'élément est un rectangle hachuré avec son nom : rien ne casse.
  */
 import fs from "node:fs";
 import path from "node:path";
-import { board } from "../data/board";
-import type { SceneAssets } from "../data/types";
+import { board } from "../data/excalidraw";
+import type { SceneAssets } from "../data/excalidraw-types";
 
 const ROOT = path.resolve(__dirname, "..");
 const PUB = path.join(ROOT, "public", "board");
@@ -54,7 +54,7 @@ async function main() {
   try {
     const page = await browser.newPage();
     page.on("pageerror", (e) => console.error("page :", e.message));
-    await page.goto(`${BASE}/board-llc/build`, { waitUntil: "networkidle" });
+    await page.goto(`${BASE}/board-llc-excalidraw/build`, { waitUntil: "networkidle" });
     await page.waitForFunction(() => Boolean((window as unknown as { __scene?: unknown }).__scene), null, { timeout: 60000 });
     elements = await page.evaluate(() => (window as unknown as { __scene: { elements: never[] } }).__scene.elements);
   } finally {

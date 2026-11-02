@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import type { BoardData } from "@/data/types";
+import type { BoardData } from "@/data/excalidraw-types";
 import "@excalidraw/excalidraw/index.css";
 
 const Excalidraw = dynamic(async () => (await import("@excalidraw/excalidraw")).Excalidraw, { ssr: false });

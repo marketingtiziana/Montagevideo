@@ -3,7 +3,7 @@
  * -> public/board/cutouts/<id>.png (fond transparent, marges rognées),
  * et écrit manifest.json (dimensions de chaque PNG).
  *
- *   pnpm cutout [--force] [--only <id>] [--16x9]
+ *   pnpm cutout [--force] [--only <id>] [--excalidraw] [--16x9]
  *
  * Moteur : @imgly/background-removal-node (modèle téléchargé au premier lancement).
  * Repli : la commande `rembg` si elle est installée. Sans image source, l'élément est
@@ -13,6 +13,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { board } from "../data/board";
+import { board as excalidraw } from "../data/excalidraw";
 import { board as board169 } from "../data/board169";
 
 const ROOT = path.resolve(__dirname, "..");
@@ -60,7 +61,11 @@ async function main() {
     ? JSON.parse(fs.readFileSync(MANIFEST, "utf8"))
     : {};
 
-  const list: { id: string }[] = args.includes("--16x9") ? board169.elements.filter((el) => el.type === "cutout") : board.images.filter((img) => img.cutout);
+  const list: { id: string }[] = args.includes("--16x9")
+    ? board169.elements.filter((el) => el.type === "cutout")
+    : args.includes("--excalidraw")
+      ? excalidraw.images.filter((img) => img.cutout)
+      : board.elements.filter((el) => el.type === "cutout");
   const cutouts = list.filter((el) => !only || el.id === only);
   let done = 0;
   for (const el of cutouts) {

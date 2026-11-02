@@ -1,7 +1,8 @@
 /**
  * Capture de contrôle avec Playwright.
  *   node scripts/screenshot.mjs [url] [sortie.png]
- * Canvas Excalidraw (/board-llc) : capture de la fenêtre 1920x1080 en 2x.
+ * Board deux colonnes (/board-llc) : capture de la fenêtre 1920x1080 en 2x (vue initiale, échelle 1).
+ * Canvas Excalidraw (/board-llc-excalidraw) : capture de la fenêtre 1920x1080 en 2x.
  * Tableau 16:9 (/board-llc-16x9) : capture du cadre 1920x1080 en 2x.
  * Board vertical (/board-llc-vertical) : capture full-page 2x.
  * Le serveur Next doit tourner (pnpm dev ou pnpm start).
@@ -24,6 +25,7 @@ const target = new URL(url);
 if (!target.searchParams.has("ui")) target.searchParams.set("ui", "0");
 const vertical = target.pathname.includes("vertical");
 const sixteen = target.pathname.includes("16x9");
+const excalidraw = target.pathname.includes("excalidraw");
 
 const browser = await chromium.launch(launch);
 const page = await browser.newPage({ viewport: vertical ? { width: 1080, height: 1350 } : { width: 1920, height: 1080 }, deviceScaleFactor: 2 });
@@ -46,10 +48,15 @@ if (vertical) {
   await page.waitForTimeout(400);
   await page.screenshot({ path: out });
   console.log(`${out} (cadre 16:9, 3840x2160)`);
-} else {
+} else if (excalidraw) {
   await page.waitForSelector('[data-scene-ready="true"]', { timeout: 60000 });
   await page.waitForTimeout(1500);
   await page.screenshot({ path: out });
   console.log(`${out} (canvas Excalidraw, 3840x2160)`);
+} else {
+  await page.waitForSelector('[data-board-ready="true"]', { timeout: 60000 });
+  await page.waitForTimeout(600);
+  await page.screenshot({ path: out });
+  console.log(`${out} (board, fenêtre 1920x1080 en 2x)`);
 }
 await browser.close();

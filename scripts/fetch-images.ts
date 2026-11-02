@@ -1,9 +1,10 @@
 /**
- * Télécharge une image Pexels par entrée de `board.images` (photos et sources de cutouts).
+ * Télécharge une image Pexels par élément `photo` ou `cutout` de data/board.ts.
  *
- *   PEXELS_API_KEY=... pnpm fetch-images [--force] [--16x9] [--vertical]
+ *   PEXELS_API_KEY=... pnpm fetch-images [--force] [--excalidraw] [--16x9] [--vertical]
  *
- * Canvas Excalidraw (par défaut) et tableau 16:9 (--16x9) : public/board/raw/<id>.jpg (taille large) + credits.json.
+ * Board deux colonnes (par défaut), canvas Excalidraw (--excalidraw) et tableau 16:9 (--16x9) :
+ * public/board/raw/<id>.jpg (taille large) + credits.json.
  * Board vertical (--vertical) : public/board/photos/<id>.jpg + credits.json.
  * Sans clé, le script s'arrête sans erreur : la scène affiche un rectangle hachuré
  * avec le nom de l'image. Aucun appel réseau au runtime.
@@ -11,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { board } from "../data/board";
+import { board as excalidraw } from "../data/excalidraw";
 import { board as board169 } from "../data/board169";
 import { board as vertical } from "../data/vertical";
 
@@ -40,6 +42,7 @@ async function main() {
   const force = args.includes("--force");
   const isVertical = args.includes("--vertical");
   const is169 = args.includes("--16x9");
+  const isExcalidraw = args.includes("--excalidraw");
   const key = process.env.PEXELS_API_KEY;
 
   const outDir = path.join(ROOT, "public", "board", isVertical ? "photos" : "raw");
@@ -55,7 +58,11 @@ async function main() {
       ? board169.elements.flatMap((el) =>
           el.type === "photo" || el.type === "cutout" ? [{ id: el.id, imageQuery: el.imageQuery, orientation: el.type === "photo" ? "landscape" : "square" }] : [],
         )
-      : board.images.map((img) => ({ id: img.id, imageQuery: img.imageQuery, orientation: img.cutout ? "square" : "landscape" }));
+      : isExcalidraw
+        ? excalidraw.images.map((img) => ({ id: img.id, imageQuery: img.imageQuery, orientation: img.cutout ? "square" : "landscape" }))
+        : board.elements.flatMap((el) =>
+            el.type === "photo" || el.type === "cutout" ? [{ id: el.id, imageQuery: el.imageQuery, orientation: el.type === "cutout" ? "square" : "landscape" }] : [],
+          );
 
   if (!key) {
     console.log(`PEXELS_API_KEY absente : ${targets.length} image(s) non téléchargée(s), le tableau utilisera les blocs couleur.`);

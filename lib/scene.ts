@@ -1,4 +1,4 @@
-import type { BoardData, BoardElement, Group, GroupId, SceneAssets, SchemaSpec } from "@/data/types";
+import type { BoardData, BoardElement, Group, GroupId, SceneAssets, SchemaSpec } from "@/data/excalidraw-types";
 import { rngFor } from "./rng";
 
 /**

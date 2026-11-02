@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { board } from "@/data/board";
-import type { SceneAssets } from "@/data/types";
+import { board } from "@/data/excalidraw";
+import type { SceneAssets } from "@/data/excalidraw-types";
 import { buildSkeleton, curveArrows } from "@/lib/scene";
 import "@excalidraw/excalidraw/index.css";
 

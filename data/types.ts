@@ -1,104 +1,148 @@
 /**
- * Modèle de données du canvas Excalidraw « Comment fonctionne une LLC ».
- * Tout le contenu vient de data/board.ts ; la scène est générée par scripts/build-scene.ts.
+ * Modèle de données du board « LLC » à deux colonnes (rouge : montée à l'arrache,
+ * verte : bien structurée). Tout le contenu vient de data/board.ts.
  */
-export type GroupId = "acteurs" | "documents" | "argent" | "fiscalite" | "annee" | "pieges";
+export type Column = "left" | "right";
 
-export interface Group {
-  id: GroupId;
+export type IconName = "mail" | "bell" | "alert" | "file" | "wallet" | "calendar" | "user" | "building" | "check" | "x" | "landmark" | "receipt" | "laptop" | "credit-card" | "image" | "sparkles";
+
+export interface ColumnSpec {
+  id: Column;
   title: string;
-  /** Couleur des flèches du groupe. */
   color: string;
-  /** Fond très clair des blocs du groupe. */
-  fill: string;
-  /** Direction du groupe autour du nœud central (degrés, 0 = droite, 90 = bas). */
-  angle: number;
-  /** Distance du centre du groupe au nœud central. */
-  radius: number;
-  /** Taille de la zone d'éparpillement du groupe. */
-  zone: { w: number; h: number };
+  /** Abscisse de la ligne verticale. */
+  x: number;
 }
 
-export interface ImageSpec {
+export interface SectionLabel {
   id: string;
-  /** Requête Pexels. Les cutouts demandent un objet sur fond uni. */
-  imageQuery: string;
-  cutout: boolean;
-  /** Nom affiché sur le rectangle de repli sans image. */
-  label: string;
-  /** Largeur dans la scène. */
-  width: number;
-  /** Ratio largeur / hauteur du repli (remplacé par celui de l'image réelle). */
-  aspect: number;
+  text: string;
+  x: number;
+  y: number;
 }
 
 interface Base {
   id: string;
-  group: GroupId;
+  column: Column;
+  x: number;
+  y: number;
+  w: number;
+  /** Ordre d'empilement en cas de chevauchement. */
+  z?: number;
+  /** Petit trait horizontal entre la ligne et l'élément. */
+  tick?: boolean;
 }
 
-export interface BlockElement extends Base {
-  type: "block";
+export interface MetricElement extends Base {
+  type: "metric";
+  value: string;
+  label: string;
+  trend: "up" | "down" | "flat";
+  tone: "good" | "bad";
+}
+
+export interface FlowElement extends Base {
+  type: "flow";
   title: string;
-  line?: string;
-  /** Image (cutout ou photo) posée à côté du bloc. */
-  image?: string;
+  tag: string;
+  nodes: { label: string; sub?: string; color: string }[];
 }
 
-export interface NoteElement extends Base {
-  type: "note";
+export interface ChatElement extends Base {
+  type: "chat";
+  contact: string;
+  messages: { from: "me" | "them"; text: string; time: string }[];
+}
+
+export interface ChipElement extends Base {
+  type: "chip";
+  text: string;
+  stat?: string;
+  icons: IconName[];
+}
+
+export interface ChartElement extends Base {
+  type: "chart";
   title: string;
-  line?: string;
+  /** Hauteurs relatives, de 0 à 1, sans valeurs affichées. */
+  bars: number[];
+  word: string;
 }
 
-export interface ImageElement extends Base {
-  type: "image";
-  image: string;
-}
-
-export type SchemaSpec =
-  | { kind: "org"; members: string; llc: string; manager: string; agent: string; sos: string; irs: string; edges: { owns: string; manages: string; registers: string; ein: string; agent: string } }
-  | { kind: "money"; steps: string[]; arrows: string[] }
-  | { kind: "transparency"; llc: string; llcLine: string; member: string; memberLine: string; through: string }
-  | { kind: "timeline"; steps: string[] }
-  | { kind: "calendar"; items: { when: string; label: string }[] };
-
-export interface SchemaElement extends Base {
-  type: "schema";
+export interface DocElement extends Base {
+  type: "doc";
+  header: string;
   title: string;
-  schema: SchemaSpec;
+  lines: string[];
+  stamp?: string;
 }
 
-export type BoardElement = BlockElement | NoteElement | ImageElement | SchemaElement;
+export interface PhotoElement extends Base {
+  type: "photo";
+  imageQuery: string;
+  caption?: string;
+  aspect: number;
+}
 
-export interface Link {
-  /** Identifiant d'élément, ou "llc" pour le nœud central. */
+export interface CutoutElement extends Base {
+  type: "cutout";
+  imageQuery: string;
+  cutout: true;
+  alt: string;
+  aspect: number;
+}
+
+export interface MemeElement extends Base {
+  type: "meme";
+  caption?: string;
+}
+
+export interface ScribbleElement extends Base {
+  type: "scribble";
+  kind: "circle" | "arrow" | "squiggle";
+  color: string;
+  h: number;
+}
+
+export type BoardElement =
+  | MetricElement
+  | FlowElement
+  | ChatElement
+  | ChipElement
+  | ChartElement
+  | DocElement
+  | PhotoElement
+  | CutoutElement
+  | MemeElement
+  | ScribbleElement;
+
+export interface Arrow {
   from: string;
   to: string;
   label?: string;
-  group: GroupId;
 }
 
 export interface BoardData {
   title: string;
-  center: { label: string; sub: string; size: number };
-  groups: Group[];
-  images: ImageSpec[];
+  size: { w: number; h: number };
+  columns: ColumnSpec[];
+  sections: SectionLabel[];
   elements: BoardElement[];
-  links: Link[];
+  arrows: Arrow[];
+  showAnnotations: boolean;
   ui: {
-    recenter: string;
-    zoomGroup: string;
-    export: string;
-    exportScene: string;
+    fit: string;
+    reset: string;
     exportPng: string;
-    exportSvg: string;
+    exporting: string;
     hint: string;
-    loading: string;
+    photoCredit: string;
+    chatStatus: string;
   };
 }
 
-/** Images réellement disponibles (écrit par scripts/build-scene.ts dans public/board/assets.json). */
-export interface SceneAssets {
-  images: Record<string, { file: string; width: number; height: number; mimeType: string }>;
+export interface BoardAssets {
+  raw: Record<string, { photographer: string; url: string }>;
+  cutouts: Record<string, { width: number; height: number }>;
+  memes: string[];
 }
