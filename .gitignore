@@ -14,3 +14,14 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Next.js / Node
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.vercel
