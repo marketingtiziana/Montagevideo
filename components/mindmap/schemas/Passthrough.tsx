@@ -2,7 +2,7 @@ import type { SchemaProps } from './index';
 import { INK, MUTED, NAVY, RoughArrow, SchemaBox, SchemaSvg, StraightArrow } from './primitives';
 
 /** Transparence fiscale : la LLC ne paie pas l'impôt elle-même, le résultat « traverse » jusqu'au membre. */
-export default function Passthrough({ accent, soft, seed }: SchemaProps) {
+export default function Passthrough({ accent, soft, ink, seed }: SchemaProps) {
   return (
     <SchemaSvg label="La transparence fiscale d’une LLC" height={200}>
       <SchemaBox x={14} y={70} w={78} h={44} lines={['Résultat de', 'l’activité']} fill={soft} stroke={soft} color={INK} size={9.5} />
@@ -28,9 +28,10 @@ export default function Passthrough({ accent, soft, seed }: SchemaProps) {
         width={2.4}
         label="traverse"
         labelAt={{ x: 170, y: 92 }}
+        labelColor={ink}
       />
 
-      <SchemaBox x={250} y={70} w={76} h={44} lines={['Membre']} fill="#ffffff" stroke={accent} color={accent} size={12} />
+      <SchemaBox x={250} y={70} w={76} h={44} lines={['Membre']} fill="#ffffff" stroke={accent} color={ink} size={12} />
 
       {/* Impôt dans le pays de résidence */}
       <StraightArrow from={[288, 114]} to={[288, 150]} stroke={accent} seed={`${seed}-tax`} />

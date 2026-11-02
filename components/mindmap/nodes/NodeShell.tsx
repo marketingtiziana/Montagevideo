@@ -10,7 +10,6 @@ interface NodeShellProps {
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
-  label: string;
 }
 
 const handleStyle: CSSProperties = {
@@ -30,13 +29,11 @@ const handleStyle: CSSProperties = {
  * Enveloppe commune : rotation légère (le « désordre »), poignées invisibles au centre
  * pour que les liens partent du centre du nœud, et anneau de sélection.
  */
-export default function NodeShell({ rotation, selected, accent, className, style, children, label }: NodeShellProps) {
+export default function NodeShell({ rotation, selected, accent, className, style, children }: NodeShellProps) {
   return (
     <div
       className="mindmap-rotor relative"
       style={{ transform: `rotate(${rotation}deg)`, transformOrigin: '50% 50%', ...style }}
-      role="button"
-      aria-label={label}
     >
       <div
         className={`relative rounded-2xl transition-shadow duration-200 ${

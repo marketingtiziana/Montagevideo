@@ -69,9 +69,9 @@ body {
 }
 
 /* Panneau latéral : rendu markdown */
-.mindmap-prose h1,
 .mindmap-prose h2,
-.mindmap-prose h3 {
+.mindmap-prose h3,
+.mindmap-prose h4 {
   font-weight: 900;
   color: #0f1535;
   letter-spacing: -0.01em;
@@ -79,9 +79,9 @@ body {
   margin-bottom: 0.5em;
   line-height: 1.2;
 }
-.mindmap-prose h1 { font-size: 1.5rem; margin-top: 0; }
-.mindmap-prose h2 { font-size: 1.15rem; }
-.mindmap-prose h3 { font-size: 1rem; }
+.mindmap-prose h2 { font-size: 1.5rem; margin-top: 0; }
+.mindmap-prose h3 { font-size: 1.15rem; }
+.mindmap-prose h4 { font-size: 1rem; }
 .mindmap-prose p { margin: 0.6em 0; line-height: 1.6; color: #2b3352; }
 .mindmap-prose ul, .mindmap-prose ol { padding-left: 1.2em; margin: 0.6em 0; color: #2b3352; }
 .mindmap-prose li { margin: 0.3em 0; line-height: 1.55; }

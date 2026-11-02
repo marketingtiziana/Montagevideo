@@ -13,6 +13,8 @@ export interface Cluster {
   color: string;
   /** Teinte claire (fonds, badges). */
   soft: string;
+  /** Couleur de texte foncée, lisible sur `soft` et sur blanc (contraste AA). */
+  ink: string;
 }
 
 export type NodeKind = 'sticky' | 'photo' | 'schema' | 'card' | 'callout';

@@ -11,6 +11,8 @@ export interface SchemaProps {
   accent: string;
   /** Teinte claire du cluster. */
   soft: string;
+  /** Couleur de texte foncée du cluster (contraste AA). */
+  ink: string;
   /** Graine pour les tracés roughjs. */
   seed: string;
 }

@@ -2,7 +2,7 @@ import type { SchemaProps } from './index';
 import { INK, MUTED, NAVY, RoughArrow, SchemaBox, SchemaSvg, StraightArrow } from './primitives';
 
 /** Organigramme : Membre(s) → LLC → Manager (optionnel) ; Registered Agent à côté ; Secretary of State et IRS au-dessus. */
-export default function Orgchart({ accent, soft, seed }: SchemaProps) {
+export default function Orgchart({ accent, soft, ink, seed }: SchemaProps) {
   return (
     <SchemaSvg label="Organigramme d’une LLC" height={236}>
       {/* Administrations, au-dessus */}
@@ -22,10 +22,10 @@ export default function Orgchart({ accent, soft, seed }: SchemaProps) {
       </text>
 
       {/* Membre(s) → LLC → Manager */}
-      <SchemaBox x={14} y={178} w={104} h={40} lines={['Membre(s)']} fill="#ffffff" stroke={accent} color={accent} size={11.5} tag="propriétaires" tagColor={accent} />
-      <StraightArrow from={[118, 198]} to={[170, 140]} stroke={accent} seed={`${seed}-member`} label="possède" />
-      <SchemaBox x={218} y={178} w={108} h={40} lines={['Manager']} fill="#ffffff" stroke={accent} color={accent} size={11.5} dashed tag="optionnel" tagColor={accent} />
-      <StraightArrow from={[232, 180]} to={[176, 140]} stroke={accent} seed={`${seed}-manager`} label="dirige" />
+      <SchemaBox x={14} y={178} w={104} h={40} lines={['Membre(s)']} fill="#ffffff" stroke={accent} color={ink} size={11.5} tag="propriétaires" tagColor={ink} />
+      <StraightArrow from={[118, 198]} to={[170, 140]} stroke={accent} seed={`${seed}-member`} label="possède" labelColor={ink} />
+      <SchemaBox x={218} y={178} w={108} h={40} lines={['Manager']} fill="#ffffff" stroke={accent} color={ink} size={11.5} dashed tag="optionnel" tagColor={ink} />
+      <StraightArrow from={[232, 180]} to={[176, 140]} stroke={accent} seed={`${seed}-manager`} label="dirige" labelColor={ink} />
     </SchemaSvg>
   );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import Image from 'next/image';
 import type { NodeProps } from '@xyflow/react';
 import type { FlowNode } from '@/components/mindmap/graph';
@@ -11,7 +12,7 @@ import ClusterTag from './ClusterTag';
 
 const WIDTHS = { sm: 220, md: 256, lg: 296 } as const;
 
-export default function PhotoNode({ data, selected }: NodeProps<FlowNode>) {
+function PhotoNode({ data, selected }: NodeProps<FlowNode>) {
   const node = data.node as PhotoNodeData;
   const credit = getImageCredit(node.id);
   const Icon = ICONS[node.icon];
@@ -20,7 +21,7 @@ export default function PhotoNode({ data, selected }: NodeProps<FlowNode>) {
   const innerTilt = data.rotation * -0.35;
 
   return (
-    <NodeShell rotation={data.rotation} selected={selected} accent={data.cluster.color} label={node.title}>
+    <NodeShell rotation={data.rotation} selected={selected} accent={data.cluster.color}>
       <div className="rounded-2xl bg-white p-2.5" style={{ width }}>
         <div
           className="relative overflow-hidden rounded-xl"
@@ -40,21 +41,21 @@ export default function PhotoNode({ data, selected }: NodeProps<FlowNode>) {
               className="flex h-full w-full flex-col items-center justify-center gap-2"
               style={{
                 background: `linear-gradient(135deg, ${data.cluster.soft} 0%, #ffffff 60%, ${data.cluster.soft} 100%)`,
-                color: data.cluster.color,
+                color: data.cluster.ink,
               }}
               aria-label={node.caption}
               role="img"
             >
               <Icon size={34} strokeWidth={1.8} aria-hidden />
-              <span className="text-[10px] font-semibold uppercase tracking-wide opacity-70">{data.cluster.label}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wide">{data.cluster.label}</span>
             </div>
           )}
         </div>
         <div className="px-1 pb-1 pt-2.5">
-          <ClusterTag label={data.cluster.label} color={data.cluster.color} soft={data.cluster.soft} />
+          <ClusterTag label={data.cluster.label} color={data.cluster.color} ink={data.cluster.ink} soft={data.cluster.soft} />
           <p className="mt-1.5 text-[12.5px] font-medium leading-snug text-navy">{node.caption}</p>
           {credit && (
-            <p className="mt-1 text-[10px] text-slate-500">
+            <p className="mt-1 text-[10px] text-slate-600">
               Photo : {credit.photographer} (Pexels)
             </p>
           )}
@@ -63,3 +64,5 @@ export default function PhotoNode({ data, selected }: NodeProps<FlowNode>) {
     </NodeShell>
   );
 }
+
+export default memo(PhotoNode);

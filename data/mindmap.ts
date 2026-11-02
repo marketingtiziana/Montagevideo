@@ -9,12 +9,12 @@ export const mindmap: Mindmap = {
   seed: 20241107,
   rootId: 'llc',
   clusters: [
-    { id: 'core', label: 'La LLC', color: '#0F1535', soft: '#E7EAF0' },
-    { id: 'roles', label: 'Les acteurs', color: '#4F6BFF', soft: '#E8ECFF' },
-    { id: 'documents', label: 'Les documents', color: '#2E9BE0', soft: '#E3F1FD' },
-    { id: 'operations', label: 'Au quotidien', color: '#1FA389', soft: '#E1F5EF' },
-    { id: 'obligations', label: 'Chaque année', color: '#5B6B8C', soft: '#E7EAF0' },
-    { id: 'pitfalls', label: 'Les pièges', color: '#6E5BE8', soft: '#ECE8FF' },
+    { id: 'core', label: 'La LLC', color: '#0F1535', soft: '#E7EAF0', ink: '#0F1535' },
+    { id: 'roles', label: 'Les acteurs', color: '#4F6BFF', soft: '#E8ECFF', ink: '#2B41BF' },
+    { id: 'documents', label: 'Les documents', color: '#2E9BE0', soft: '#E3F1FD', ink: '#176A9E' },
+    { id: 'operations', label: 'Au quotidien', color: '#1FA389', soft: '#E1F5EF', ink: '#126B5A' },
+    { id: 'obligations', label: 'Chaque année', color: '#5B6B8C', soft: '#E7EAF0', ink: '#3E4B68' },
+    { id: 'pitfalls', label: 'Les pièges', color: '#6E5BE8', soft: '#ECE8FF', ink: '#4C3DB8' },
   ],
   nodes: [
     /* ───────────────────────── A. C’est quoi une LLC ───────────────────────── */
@@ -40,7 +40,7 @@ La LLC emprunte à deux mondes :
 - Elle est **très flexible** : peu de formalisme, règles internes librement définies.
 - **Aucune obligation de résider aux États-Unis** pour en créer une ou en être propriétaire.
 
-> Explorez les branches du board : les acteurs, les documents, le fonctionnement au quotidien, les obligations annuelles et les pièges à éviter.`,
+> Explorez les branches de la carte : les acteurs, les documents, le fonctionnement au quotidien, les obligations annuelles et les pièges à éviter.`,
     },
     {
       id: 'hybrid',
@@ -67,7 +67,7 @@ C’est cette combinaison qui en fait la structure préférée des entrepreneurs
       tint: 'mint',
       details: `# La responsabilité limitée
 
-C’est le « L » de LLC. En principe, un créancier de la LLC ne peut se payer que sur les biens **de la LLC**, pas sur ceux du membre.
+C’est le sens de « Limited Liability ». En principe, un créancier de la LLC ne peut se payer que sur les biens **de la LLC**, pas sur ceux du membre.
 
 ## Concrètement
 - Le patrimoine **personnel** (épargne, logement, véhicule) reste à l’abri des dettes de l’activité.
@@ -484,7 +484,7 @@ Dans certains cas, la LLC peut **choisir** d’être imposée comme une corporat
       ring: 1,
       details: `# Où le membre est-il imposé ?
 
-Parce que la LLC est transparente, le résultat « traverse » jusqu’au **membre**. Celui-ci est alors imposé **selon les règles de son pays de résidence fiscale** : France, Belgique, Suisse, Émirats, Portugal, etc.
+Parce que la LLC est transparente, le résultat « traverse » jusqu’au **membre**. Celui-ci est alors imposé **selon les règles de son pays de résidence fiscale** : France, Belgique, Suisse, Émirats arabes unis, Portugal, etc.
 
 > La LLC ne fait pas disparaître l’impôt : **elle le déplace** vers le pays où vit le membre. C’est ce pays, et sa convention fiscale éventuelle avec les États-Unis, qui détermine ce qui est dû.
 
@@ -582,7 +582,7 @@ Chaque année, la LLC doit se manifester auprès de son **État de création** p
 Une LLC à **membre unique étranger** (non-résident américain) doit déposer chaque année auprès de l’IRS :
 
 - le **Form 5472**, qui déclare les transactions entre la LLC et son propriétaire étranger (apports, distributions, prêts, etc.) ;
-- accompagné d’un **Form 1120 pro forma**, une page de couverture qui identifie la LLC.
+- le **Form 1120 pro forma**, une page de couverture qui identifie la LLC et accompagne le Form 5472.
 
 Ce n’est pas une déclaration d’impôt à payer : c’est une **déclaration d’information**. Mais l’oubli est lourdement pénalisé.`,
     },
@@ -669,7 +669,7 @@ C’est le malentendu le plus fréquent. La LLC est **fiscalement transparente**
 
 Le membre est ensuite **imposé selon les règles de son pays de résidence fiscale**. La LLC ne fait donc pas disparaître l’impôt : **elle le déplace**.
 
-> Créer une LLC sans réfléchir à sa propre résidence fiscale, c’est résoudre la moitié du problème.`,
+> Créer une LLC sans réfléchir à sa propre résidence fiscale, c’est ne résoudre que la moitié du problème.`,
     },
     {
       id: 'pitfall-no-oa',
@@ -710,7 +710,7 @@ C’est l’obligation la plus souvent négligée par les entrepreneurs non-rés
       cluster: 'pitfalls',
       title: 'Mélanger les comptes',
       variant: 'warning',
-      body: 'Argent perso et argent de la LLC ne doivent jamais se mélanger.',
+      body: 'Argent personnel et argent de la LLC ne doivent jamais se mélanger.',
       ring: 1,
       details: `# Mélanger argent personnel et argent de la LLC
 

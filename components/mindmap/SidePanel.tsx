@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
+import dynamic from 'next/dynamic';
+import type { Components } from 'react-markdown';
 import { X } from 'lucide-react';
 import type { Cluster, MindmapNode } from '@/data/types';
 
@@ -10,6 +11,16 @@ interface SidePanelProps {
   cluster: Cluster | null;
   onClose: () => void;
 }
+
+// Chargé à la demande : le rendu markdown n'est nécessaire qu'à l'ouverture du panneau.
+const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: false });
+
+/** Les titres du markdown sont décalés d'un niveau : la page a déjà son h1 (barre d'outils). */
+const MARKDOWN_COMPONENTS: Components = {
+  h1: ({ children }) => <h2>{children}</h2>,
+  h2: ({ children }) => <h3>{children}</h3>,
+  h3: ({ children }) => <h4>{children}</h4>,
+};
 
 const KIND_LABEL: Record<MindmapNode['kind'], string> = {
   sticky: 'Note',
@@ -45,7 +56,7 @@ export default function SidePanel({ node, cluster, onClose }: SidePanelProps) {
           {cluster && node && (
             <span
               className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-              style={{ background: cluster.soft, color: cluster.color }}
+              style={{ background: cluster.soft, color: cluster.ink }}
             >
               <span className="h-1.5 w-1.5 rounded-full" style={{ background: cluster.color }} />
               {cluster.label} · {KIND_LABEL[node.kind]}
@@ -62,7 +73,7 @@ export default function SidePanel({ node, cluster, onClose }: SidePanelProps) {
         </button>
       </div>
       <div className="mindmap-prose overflow-y-auto px-5 pb-8 pt-2 text-[14px]">
-        {node && <ReactMarkdown>{node.details}</ReactMarkdown>}
+        {node && <ReactMarkdown components={MARKDOWN_COMPONENTS}>{node.details}</ReactMarkdown>}
       </div>
     </aside>
   );

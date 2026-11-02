@@ -15,6 +15,8 @@ export type FlowNode = Node<FlowNodeData, MindmapNode['kind']>;
 export interface FlowEdgeData extends Record<string, unknown> {
   label?: string;
   color: string;
+  /** Couleur de texte de l'étiquette (contraste AA sur blanc). */
+  ink: string;
   seed: number;
 }
 
@@ -49,7 +51,7 @@ export function buildFlowEdges(map: Mindmap): FlowEdge[] {
     source: edge.source,
     target: edge.target,
     type: 'rough',
-    data: { label: edge.label, color: clusters[edge.cluster].color, seed: hashSeed(edge.id) },
+    data: { label: edge.label, color: clusters[edge.cluster].color, ink: clusters[edge.cluster].ink, seed: hashSeed(edge.id) },
   }));
 }
 

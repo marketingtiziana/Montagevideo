@@ -19,7 +19,6 @@ import {
   type EdgeTypes,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { toPng } from 'html-to-image';
 import { mindmap } from '@/data/mindmap';
 import { applyLayout, buildFlowEdges, buildFlowNodes, clusterById, type FlowEdge, type FlowNode } from '@/components/mindmap/graph';
 import { scatterLayout, tidyLayout, type LayoutMode, type MeasuredSizes } from '@/lib/layout';
@@ -53,9 +52,12 @@ const MIN_ZOOM = 0.12;
 const MAX_ZOOM = 2.5;
 /** Hauteur (px) réservée à l'en-tête, pour que le cadrage automatique ne masque aucun nœud. */
 const HEADER_DESKTOP = 104;
-const HEADER_MOBILE = 72;
+const HEADER_MOBILE = 80;
 /** Hauteur (px) réservée à la légende en bas (desktop uniquement). */
 const FOOTER_DESKTOP = 48;
+/** Mobile : rayon (px board) autour du nœud central cadré au chargement, et zoom minimal lisible. */
+const MOBILE_FOCUS_RADIUS = 560;
+const MOBILE_MIN_ZOOM = 0.42;
 const initialNodes = buildFlowNodes(mindmap, scatterLayout(mindmap));
 const initialEdges = buildFlowEdges(mindmap);
 
@@ -110,8 +112,24 @@ function Board() {
       const desktop = width >= 640;
       const header = desktop ? HEADER_DESKTOP : HEADER_MOBILE;
       const footer = desktop ? FOOTER_DESKTOP : 0;
-      const bounds = getNodesBounds(getNodes());
-      const vp = getViewportForBounds(bounds, width, height - header - footer, MIN_ZOOM, MAX_ZOOM, FIT_PADDING);
+      const nodes = getNodes();
+      if (desktop) {
+        const bounds = getNodesBounds(nodes);
+        const vp = getViewportForBounds(bounds, width, height - header - footer, MIN_ZOOM, MAX_ZOOM, FIT_PADDING);
+        await setViewport({ x: vp.x, y: vp.y + header, zoom: vp.zoom }, { duration });
+        return;
+      }
+      // Mobile : un cadrage sur tout le board rendrait les nœuds illisibles. On cadre le cœur
+      // (nœud central et ses voisins immédiats) à un zoom lisible ; l'utilisateur explore ensuite au doigt.
+      const root = nodes.find((n) => n.id === mindmap.rootId);
+      const centerOf = (n: { position: { x: number; y: number }; measured?: { width?: number; height?: number } }) => ({
+        x: n.position.x + (n.measured?.width ?? 0) / 2,
+        y: n.position.y + (n.measured?.height ?? 0) / 2,
+      });
+      const origin = root ? centerOf(root) : { x: 0, y: 0 };
+      const near = nodes.filter((n) => Math.hypot(centerOf(n).x - origin.x, centerOf(n).y - origin.y) < MOBILE_FOCUS_RADIUS);
+      const bounds = getNodesBounds(near.length ? near : nodes);
+      const vp = getViewportForBounds(bounds, width, height - header, MOBILE_MIN_ZOOM, 1, 0.04);
       await setViewport({ x: vp.x, y: vp.y + header, zoom: vp.zoom }, { duration });
     },
     [getNodes, setViewport],
@@ -145,6 +163,8 @@ function Board() {
       const tx = -bounds.x + EXPORT_PADDING;
       const ty = -bounds.y + EXPORT_PADDING;
       const scale = 2;
+      // Chargé à la demande : la librairie n'est utile qu'au moment de l'export.
+      const { toPng } = await import('html-to-image');
       const snapshot = await toPng(viewport, {
         width,
         height,

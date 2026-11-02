@@ -4,7 +4,7 @@ import { hashSeed } from '@/lib/random';
 
 export const NAVY = '#0F1535';
 export const INK = '#2B3352';
-export const MUTED = '#6B7590';
+export const MUTED = '#5F6A86';
 export const LINE = '#D6DCE8';
 
 interface BoxProps {
@@ -81,10 +81,12 @@ interface ArrowProps {
   width?: number;
   label?: string;
   labelAt?: { x: number; y: number };
+  /** Couleur du texte de l'étiquette (par défaut : `stroke`). */
+  labelColor?: string;
 }
 
 /** Lien « dessiné à la main » (roughjs), avec pointe et étiquette optionnelles. */
-export function RoughArrow({ d, end, stroke, seed, width = 1.8, label, labelAt }: ArrowProps) {
+export function RoughArrow({ d, end, stroke, seed, width = 1.8, label, labelAt, labelColor }: ArrowProps) {
   const s = hashSeed(seed);
   const curve = roughCurvePaths(d, { seed: s, stroke, strokeWidth: width, roughness: 0.9 });
   const head = end ? roughArrowPaths(end.x, end.y, end.angle, { seed: s + 3, stroke, strokeWidth: width, size: 6 }) : [];
@@ -108,7 +110,7 @@ export function RoughArrow({ d, end, stroke, seed, width = 1.8, label, labelAt }
             stroke={stroke}
             strokeWidth={1}
           />
-          <text x={labelAt.x} y={labelAt.y + 0.5} textAnchor="middle" dominantBaseline="middle" fontSize={9} fontWeight={600} fill={stroke}>
+          <text x={labelAt.x} y={labelAt.y + 0.5} textAnchor="middle" dominantBaseline="middle" fontSize={9} fontWeight={600} fill={labelColor ?? stroke}>
             {label}
           </text>
         </g>
@@ -125,6 +127,7 @@ export function StraightArrow({
   seed,
   label,
   width,
+  labelColor,
 }: {
   from: [number, number];
   to: [number, number];
@@ -132,6 +135,7 @@ export function StraightArrow({
   seed: string;
   label?: string;
   width?: number;
+  labelColor?: string;
 }) {
   const angle = Math.atan2(to[1] - from[1], to[0] - from[0]);
   return (
@@ -143,6 +147,7 @@ export function StraightArrow({
       width={width}
       label={label}
       labelAt={label ? { x: (from[0] + to[0]) / 2, y: (from[1] + to[1]) / 2 } : undefined}
+      labelColor={labelColor}
     />
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import type { NodeProps } from '@xyflow/react';
 import type { FlowNode } from '@/components/mindmap/graph';
 import type { CalloutNodeData } from '@/data/types';
@@ -10,11 +10,11 @@ import { hashSeed } from '@/lib/random';
 import NodeShell from './NodeShell';
 
 const VARIANTS = {
-  warning: { label: 'Piège', icon: 'alert-triangle', bg: '#ECE8FF', color: '#6E5BE8' },
-  remember: { label: 'À retenir', icon: 'lightbulb', bg: '#E8ECFF', color: '#4F6BFF' },
+  warning: { label: 'Piège', icon: 'alert-triangle', bg: '#ECE8FF', color: '#6E5BE8', ink: '#4C3DB8' },
+  remember: { label: 'À retenir', icon: 'lightbulb', bg: '#E8ECFF', color: '#4F6BFF', ink: '#2B41BF' },
 } as const;
 
-export default function CalloutNode({ data, selected }: NodeProps<FlowNode>) {
+function CalloutNode({ data, selected }: NodeProps<FlowNode>) {
   const node = data.node as CalloutNodeData;
   const variant = VARIANTS[node.variant];
   const Icon = ICONS[variant.icon];
@@ -35,7 +35,7 @@ export default function CalloutNode({ data, selected }: NodeProps<FlowNode>) {
   const paths = box.w > 0 ? roughRectPaths(box.w, box.h, { seed: hashSeed(node.id), stroke: variant.color, radius: 16 }) : [];
 
   return (
-    <NodeShell rotation={data.rotation} selected={selected} accent={variant.color} label={node.title}>
+    <NodeShell rotation={data.rotation} selected={selected} accent={variant.color}>
       <div
         ref={ref}
         className="relative rounded-2xl px-4 py-3.5"
@@ -59,13 +59,15 @@ export default function CalloutNode({ data, selected }: NodeProps<FlowNode>) {
           >
             <Icon size={16} strokeWidth={2.4} aria-hidden />
           </span>
-          <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: variant.color }}>
+          <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: variant.ink }}>
             {variant.label}
           </span>
         </div>
-        <h3 className="relative mt-2 text-[15px] font-black leading-tight tracking-tight text-navy">{node.title}</h3>
+        <p className="relative mt-2 text-[15px] font-black leading-tight tracking-tight text-navy">{node.title}</p>
         <p className="relative mt-1.5 text-[12.5px] leading-snug text-slate-700">{node.body}</p>
       </div>
     </NodeShell>
   );
 }
+
+export default memo(CalloutNode);

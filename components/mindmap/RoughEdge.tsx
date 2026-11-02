@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { EdgeLabelRenderer, useInternalNode, type EdgeProps, type InternalNode } from '@xyflow/react';
 import type { FlowEdge } from '@/components/mindmap/graph';
 import { roughArrowPaths, roughCurvePaths } from '@/lib/rough';
@@ -28,7 +28,7 @@ function boundary(node: ReturnType<typeof center>, toward: Point, inset = 6): Po
   return { x: node.x + dx * scale, y: node.y + dy * scale };
 }
 
-export default function RoughEdge({ id, source, target, data }: EdgeProps<FlowEdge>) {
+function RoughEdge({ id, source, target, data }: EdgeProps<FlowEdge>) {
   const sourceNode = useInternalNode(source);
   const targetNode = useInternalNode(target);
 
@@ -76,7 +76,7 @@ export default function RoughEdge({ id, source, target, data }: EdgeProps<FlowEd
             style={{
               transform: `translate(-50%, -50%) translate(${geometry.labelX}px, ${geometry.labelY}px)`,
               borderColor: data.color,
-              color: data.color,
+              color: data.ink,
             }}
           >
             {data.label}
@@ -86,3 +86,5 @@ export default function RoughEdge({ id, source, target, data }: EdgeProps<FlowEd
     </>
   );
 }
+
+export default memo(RoughEdge);
