@@ -1,8 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { motion, useMotionValue } from "framer-motion";
 import { TransformComponent, TransformWrapper, type ReactZoomPanPinchRef } from "react-zoom-pan-pinch";
+import { Download, Maximize2, RotateCcw } from "lucide-react";
 import rough from "roughjs/bin/rough";
+import { exportNodeToPng } from "@/lib/exportPng";
 import type { Arrow, BoardAssets, BoardData, BoardElement } from "@/data/types";
 import { rngFor } from "@/lib/rng";
 import { ElementView } from "./ElementView";
@@ -73,7 +77,78 @@ function ArrowsLayer({ arrows, boxes, color, size }: { arrows: Arrow[]; boxes: R
   );
 }
 
+type Offset = { dx: number; dy: number };
+const STORAGE_KEY = "board-llc-positions-v1";
+
+/**
+ * Élément déplaçable : motion values framer-motion pilotées par les pointer events,
+ * deltas divisés par l'échelle du canvas pour suivre exactement le curseur à tout zoom.
+ */
+function DraggableItem({
+  el,
+  offset,
+  getScale,
+  onMove,
+  onEnd,
+  children,
+}: {
+  el: BoardElement;
+  offset: Offset;
+  getScale: () => number;
+  onMove: (id: string, o: Offset) => void;
+  onEnd: (id: string, o: Offset) => void;
+  children: React.ReactNode;
+}) {
+  const x = useMotionValue(offset.dx);
+  const y = useMotionValue(offset.dy);
+  const drag = useRef<{ pointerId: number; startX: number; startY: number; originX: number; originY: number; moved: boolean } | null>(null);
+  useEffect(() => {
+    if (!drag.current) {
+      x.set(offset.dx);
+      y.set(offset.dy);
+    }
+  }, [offset.dx, offset.dy, x, y]);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    drag.current = { pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, originX: x.get(), originY: y.get(), moved: false };
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = drag.current;
+    if (!d || d.pointerId !== e.pointerId) return;
+    const s = getScale();
+    d.moved = true;
+    x.set(d.originX + (e.clientX - d.startX) / s);
+    y.set(d.originY + (e.clientY - d.startY) / s);
+    onMove(el.id, { dx: x.get(), dy: y.get() });
+  };
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = drag.current;
+    if (!d || d.pointerId !== e.pointerId) return;
+    drag.current = null;
+    if (d.moved) onEnd(el.id, { dx: x.get(), dy: y.get() });
+  };
+  return (
+    <motion.div
+      data-el={el.id}
+      className="draggable absolute cursor-grab touch-none active:cursor-grabbing"
+      style={{ left: el.x, top: el.y, width: el.w, zIndex: 10 + (el.z ?? 0), x, y }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }) {
+  const params = useSearchParams();
+  const hideUi = params.get("ui") === "0";
+  const [offsets, setOffsets] = useState<Record<string, Offset>>({});
+  const [busy, setBusy] = useState(false);
   const wrapperRef = useRef<ReactZoomPanPinchRef>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [boxes, setBoxes] = useState<Record<string, Box>>({});
@@ -101,16 +176,78 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
     const next: Record<string, Box> = {};
     root.querySelectorAll<HTMLElement>("[data-el]").forEach((node) => {
       const id = node.dataset.el as string;
-      next[id] = { x: node.offsetLeft, y: node.offsetTop, w: node.offsetWidth, h: node.offsetHeight };
+      const o = offsets[id] ?? { dx: 0, dy: 0 };
+      next[id] = { x: node.offsetLeft + o.dx, y: node.offsetTop + o.dy, w: node.offsetWidth, h: node.offsetHeight };
     });
     setBoxes(next);
     setReady(true);
+  }, [offsets]);
+
+  // Positions déplacées, mémorisées dans le navigateur.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) setOffsets(JSON.parse(raw) as Record<string, Offset>);
+    } catch {
+      /* stockage indisponible : positions par défaut */
+    }
   }, []);
+  const persist = useCallback((next: Record<string, Offset>) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      /* ignoré */
+    }
+  }, []);
+  const onMove = useCallback((id: string, o: Offset) => setOffsets((prev) => ({ ...prev, [id]: o })), []);
+  const onEnd = useCallback(
+    (id: string, o: Offset) =>
+      setOffsets((prev) => {
+        const next = { ...prev, [id]: o };
+        persist(next);
+        return next;
+      }),
+    [persist],
+  );
+  const reset = useCallback(() => {
+    setOffsets({});
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignoré */
+    }
+  }, []);
+  const getScale = useCallback(() => wrapperRef.current?.instance.transformState.scale ?? 1, []);
+
+  const fit = useCallback(() => {
+    const w = wrapperRef.current;
+    if (!w) return;
+    const all = Object.values(boxes);
+    const minX = Math.min(0, ...all.map((b) => b.x)) - 40;
+    const minY = Math.min(0, ...all.map((b) => b.y)) - 40;
+    const maxX = Math.max(data.size.w, ...all.map((b) => b.x + b.w)) + 40;
+    const maxY = Math.max(data.size.h, ...all.map((b) => b.y + b.h)) + 40;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scale = Math.min(vw / (maxX - minX), vh / (maxY - minY), 1);
+    w.setTransform(-minX * scale + (vw - (maxX - minX) * scale) / 2, -minY * scale + (vh - (maxY - minY) * scale) / 2, scale, 300);
+  }, [boxes, data.size]);
+
+  const exportPng = useCallback(async () => {
+    const node = contentRef.current;
+    if (!node || busy) return;
+    setBusy(true);
+    try {
+      await exportNodeToPng(node, "board-llc.png", 2, "#F3F3F1");
+    } finally {
+      setBusy(false);
+    }
+  }, [busy]);
 
   useLayoutEffect(() => {
     const fonts = typeof document !== "undefined" && "fonts" in document ? document.fonts.ready : Promise.resolve();
     fonts.then(measure, measure);
-  }, [measure, elements]);
+  }, [measure, elements, offsets]);
 
   useEffect(() => {
     const root = contentRef.current;
@@ -124,8 +261,9 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
 
   // Outil de capture : positionne la vue (x, y, échelle).
   useEffect(() => {
-    (window as unknown as { __boardView?: (x: number, y: number, s: number) => void }).__boardView = (x, y, s) =>
-      wrapperRef.current?.setTransform(x, y, s, 0);
+    const w = window as unknown as { __boardView?: (x: number, y: number, s: number) => void; __boardScale?: () => unknown };
+    w.__boardView = (x, y, s) => wrapperRef.current?.setTransform(x, y, s, 0);
+    w.__boardScale = () => ({ state: wrapperRef.current?.state?.scale, instance: wrapperRef.current?.instance?.transformState?.scale });
   }, []);
 
   return (
@@ -179,9 +317,9 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
             </svg>
             {/* Éléments */}
             {elements.map((el) => (
-              <div key={el.id} data-el={el.id} className="draggable absolute" style={{ left: el.x, top: el.y, width: el.w, zIndex: 10 + (el.z ?? 0) }}>
+              <DraggableItem key={el.id} el={el} offset={offsets[el.id] ?? { dx: 0, dy: 0 }} getScale={getScale} onMove={onMove} onEnd={onEnd}>
                 <ElementView el={el} assets={assets} ui={data.ui} memeFile={memeFiles[el.id] ?? null} />
-              </div>
+              </DraggableItem>
             ))}
             <ArrowsLayer arrows={data.arrows} boxes={boxes} color="#2F6FE4" size={data.size} />
           </div>
@@ -189,6 +327,20 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
       </TransformWrapper>
       {/* Vignettage très léger sur les bords de l'écran */}
       <div className="pointer-events-none fixed inset-0 z-30" style={{ boxShadow: "inset 0 0 120px rgba(0,0,0,0.06)" }} />
+      {!hideUi && (
+        <div data-hud className="fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-lg border border-[#e4e4e2] bg-white/95 p-1.5 shadow-soft backdrop-blur">
+          <button type="button" onClick={fit} disabled={!ready} className="inline-flex items-center gap-1.5 rounded-md bg-[#1d1d1f] px-3 py-1.5 text-[13px] font-semibold text-white disabled:opacity-40">
+            <Maximize2 size={14} /> {data.ui.fit}
+          </button>
+          <button type="button" onClick={reset} className="inline-flex items-center gap-1.5 rounded-md bg-[#f1f1ef] px-3 py-1.5 text-[13px] font-semibold text-[#1d1d1f]">
+            <RotateCcw size={14} /> {data.ui.reset}
+          </button>
+          <button type="button" onClick={exportPng} disabled={!ready || busy} className="inline-flex items-center gap-1.5 rounded-md bg-[#2F6FE4] px-3 py-1.5 text-[13px] font-semibold text-white disabled:opacity-40">
+            <Download size={14} /> {busy ? data.ui.exporting : data.ui.exportPng}
+          </button>
+          <span className="hidden px-2 text-[12px] text-[#8a8a8f] lg:inline">{data.ui.hint}</span>
+        </div>
+      )}
     </div>
   );
 }

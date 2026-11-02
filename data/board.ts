@@ -189,7 +189,7 @@ export const board: BoardData = {
       w: 340,
       contact: "Conseiller",
       messages: [
-        { from: "me", text: "Le 5472 c'est quoi ? J'ai reçu un courrier de l'IRS.", time: "08:51" },
+        { from: "me", text: "Le 5472, c'est quoi ? J'ai reçu un courrier de l'IRS.", time: "08:51" },
         { from: "them", text: "Le formulaire annuel d'une LLC à membre unique étranger, déposé avec un 1120 pro forma.", time: "08:55" },
         { from: "me", text: "Je ne l'ai jamais fait.", time: "08:55" },
         { from: "them", text: "On régularise, puis on cale un calendrier pour chaque année.", time: "08:58" },

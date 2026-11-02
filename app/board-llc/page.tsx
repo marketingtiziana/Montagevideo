@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { Suspense } from "react";
 import path from "node:path";
 import { Board } from "@/components/board/Board";
 import { board } from "@/data/board";
@@ -28,5 +29,9 @@ function loadAssets(): BoardAssets {
 }
 
 export default function Page() {
-  return <Board data={board} assets={loadAssets()} />;
+  return (
+    <Suspense fallback={null}>
+      <Board data={board} assets={loadAssets()} />
+    </Suspense>
+  );
 }

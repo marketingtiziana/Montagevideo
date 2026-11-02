@@ -51,12 +51,13 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 
 ---
 
-# Canvas Excalidraw « Comment fonctionne une LLC »
+# Board « LLC » deux colonnes (style Figma / Miro)
 
-Route `/board-llc` : un canvas infini et interactif façon Excalidraw (pan, zoom, outils de dessin actifs
-pour annoter en direct) qui explique le fonctionnement d'une LLC américaine. Nœud central « LLC »,
-six groupes éparpillés autour (acteurs, documents, argent, fiscalité, chaque année, pièges), cinq
-schémas dessinés, flèches courbes, images de banque d'images et éléments détourés.
+Route `/board-llc` : un tableau de travail sur papier quadrillé clair, avec deux lignes verticales
+(rouge à gauche : « LLC montée à l'arrache », verte à droite : « LLC bien structurée »). Le long des
+lignes, des éléments collés un peu n'importe comment : faux écrans d'applis, cartes de métriques,
+conversations WhatsApp, graphiques, photos, mèmes, éléments détourés. Chaque étape de la vie d'une
+LLC apparaît des deux côtés, en face à face. Tout en français.
 
 ```bash
 pnpm install
@@ -64,27 +65,23 @@ pnpm dev            # http://localhost:3000/board-llc
 pnpm build
 ```
 
-## Scène
-- Tout le contenu est dans `data/board.ts` (groupes, images, éléments, liens). Les positions sont tirées
-  d'un aléatoire à seed fixe (`lib/rng.ts`, `lib/scene.ts`) : rendu identique à chaque génération.
-- `pnpm build-scene` (serveur lancé, ou `BOARD_URL`) régénère `public/board/scene.excalidraw` :
-  le skeleton est converti avec `convertToExcalidrawElements` dans Chromium (polices réelles),
-  puis chaque image est embarquée en dataURL dans `files`. Sans image, un rectangle hachuré porte son nom.
-- Style : roughness 2, strokeWidth 2, flèches courbes, fonds hachurés clairs, navy et indigo.
+## Canvas et interaction
+- Canvas infini (`react-zoom-pan-pinch`) : pan dans tous les sens, zoom molette et pincement.
+- Éléments déplaçables à la souris (motion values framer-motion, deltas corrigés par le zoom),
+  positions mémorisées dans `localStorage`, bouton « Réinitialiser ».
+- Boutons « Tout voir » (fit) et « Export PNG » (html-to-image, 2x). `?ui=0` masque les boutons.
+- Les flèches bleues et les petits traits vers les lignes suivent les éléments déplacés.
 
-## Images
-- `PEXELS_API_KEY=... pnpm fetch-images` : une image Pexels par entrée de `board.images` dans
-  `public/board/raw/<id>.jpg`, plus `credits.json`.
-- `pnpm cutout` : détoure celles marquées `cutout: true` vers `public/board/cutouts/<id>.png`
-  (`@imgly/background-removal-node`, repli `rembg`), puis `pnpm build-scene` pour les embarquer.
-
-## Interaction
-- Barre flottante : Recentrer, zoom sur les groupes 1 à 6, exports `.excalidraw`, PNG 2x et SVG.
-- Touche `H` : masque la barre. `?ui=0` démarre sans barre.
+## Contenu et images
+- Tout est dans `data/board.ts` (colonnes, sections, éléments, flèches) ; aucun texte en dur.
+- `PEXELS_API_KEY=... pnpm fetch-images` télécharge les photos et sources de cutouts dans
+  `public/board/raw/`, `pnpm cutout` détoure les éléments `cutout` vers `public/board/cutouts/`.
+  Sans clé : rectangle gris avec le nom, le build ne casse pas.
+- Mèmes : déposer des images dans `public/board/memes/` (emplacement vide sinon).
+- Annotations à la main (`scribble`) : composant présent, désactivé par `showAnnotations: false`.
 - Capture de contrôle : `pnpm screenshot [url] [sortie.png]`.
 
 ## Variantes précédentes
-- `/board-llc-16x9` : tableau unique 16:9 projeté plein écran (touches F et H, exports PNG et PDF,
-  `pnpm fetch-images --16x9`, `pnpm cutout --16x9`, `pnpm export-pdf`).
-- `/board-llc-vertical` : visual essay vertical à scroller (scroll auto, export PNG très long,
-  `pnpm fetch-images --vertical`).
+- `/board-llc-excalidraw` : canvas Excalidraw (`pnpm build-scene`, `pnpm fetch-images --excalidraw`, `pnpm cutout --excalidraw`).
+- `/board-llc-16x9` : tableau unique 16:9 (`pnpm fetch-images --16x9`, `pnpm cutout --16x9`, `pnpm export-pdf`).
+- `/board-llc-vertical` : visual essay vertical (`pnpm fetch-images --vertical`).
