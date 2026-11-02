@@ -1,4 +1,4 @@
-# Montagevideo — pipeline de montage de réels (vertical 9:16)
+# Montagevideo : pipeline de montage de réels (vertical 9:16) et board LLC
 
 Pipeline semi-automatique pour transformer une vidéo brute (talking-head) en **réel prêt à publier** :
 coupe des hésitations, **sous-titres animés** (blanc gras compact, mots-clés en jaune, changements de
@@ -48,3 +48,36 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
   sous-titres, surtout pour du contenu fiscal.
 - Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
   réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+
+---
+
+# Board vertical « Comment fonctionne une LLC »
+
+Long board façon visual essay (mindmap en désordre sur papier quadrillé), 1080 px de large,
+pour enregistrer un reel en scrollant ou exporter un PNG très long. Next.js 14 (App Router),
+TypeScript, Tailwind, roughjs, html-to-image. Tout statique, aucun backend.
+
+```bash
+pnpm install
+pnpm dev            # http://localhost:3000/board-llc
+pnpm build          # build de production (déployable sur Vercel)
+```
+
+## Capture
+- **Scroll auto** : bouton en bas à droite, durée réglable de 20 à 60 s, easing linéaire. Le panneau
+  disparaît pendant le défilement, `Échap` arrête.
+- **Export PNG** : image complète du board en 2x (le board est rastérisé par tranches, sans limite de hauteur).
+- `?ui=0` masque le panneau, `?autoscroll=30` lance le défilement au chargement (durée en secondes).
+- `?section=3` affiche uniquement la section 3 cadrée en 1080x1350 (réduite si elle dépasse) ;
+  `?section=3&fit=0` la garde en taille réelle pour la découper en plusieurs slides.
+- Capture de contrôle Playwright (serveur lancé) : `pnpm screenshot [url] [sortie.png]`.
+  Avec `?section=N` dans l'URL, seul le cadre 1080x1350 est capturé.
+
+## Contenu et ressources
+- Tout le contenu est typé dans `data/board.ts` (sections, éléments, branches, annotations).
+  Les composants ne contiennent aucun texte en dur.
+- Photos : `PEXELS_API_KEY=... pnpm fetch-images` télécharge une image par élément `photo`
+  dans `public/board/photos/<id>.jpg` et écrit `credits.json`. Sans clé, bloc couleur + icône.
+- Mèmes : déposer des GIF ou images dans `public/board/memes/`, attribués dans l'ordre aux
+  éléments `meme`. Dossier vide : les emplacements restent vides.
+- Placement aléatoire mais déterministe (seed fixe dans `lib/rng.ts`) : même rendu à chaque chargement.

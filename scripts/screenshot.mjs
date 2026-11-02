@@ -19,11 +19,21 @@ if (process.env.CHROMIUM_PATH) launch.executablePath = process.env.CHROMIUM_PATH
 
 const browser = await chromium.launch(launch);
 const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 2 });
-await page.goto(url, { waitUntil: "networkidle" });
+const sectionMode = /[?&]section=\d/.test(url);
+const target = new URL(url);
+if (!target.searchParams.has("ui")) target.searchParams.set("ui", "0");
+await page.goto(target.toString(), { waitUntil: "networkidle" });
 await page.waitForSelector('[data-board][data-board-ready="true"]', { timeout: 30000 });
 await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(500);
-const height = await page.evaluate(() => document.documentElement.scrollHeight);
-await page.screenshot({ path: out, fullPage: true });
-console.log(`${out} (hauteur de page : ${height}px)`);
+if (sectionMode) {
+  // Cadre 1080x1350 pour un carrousel : capture du cadre seul.
+  await page.waitForSelector('[data-frame][data-frame-ready="true"]');
+  await page.locator("[data-frame]").screenshot({ path: out });
+  console.log(`${out} (section, 1080x1350 en 2x)`);
+} else {
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  await page.screenshot({ path: out, fullPage: true });
+  console.log(`${out} (hauteur de page : ${height}px)`);
+}
 await browser.close();

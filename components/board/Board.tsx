@@ -95,10 +95,10 @@ export interface BoardHandle {
   root: HTMLDivElement | null;
 }
 
-export const Board = forwardRef<BoardHandle, { data: BoardData; assets: BoardAssets; sectionOnly?: number }>(function Board(
-  { data, assets, sectionOnly },
-  ref,
-) {
+export const Board = forwardRef<
+  BoardHandle,
+  { data: BoardData; assets: BoardAssets; sectionOnly?: number; onReady?: (height: number) => void }
+>(function Board({ data, assets, sectionOnly, onReady }, ref) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [geom, setGeom] = useState<Geometry | null>(null);
   const [noteArrows, setNoteArrows] = useState<PathItem[]>([]);
@@ -142,7 +142,8 @@ export const Board = forwardRef<BoardHandle, { data: BoardData; assets: BoardAss
   useEffect(() => {
     if (!geom || !rootRef.current) return;
     setNoteArrows(computeNoteArrows(rootRef.current, geom.notes));
-  }, [geom]);
+    onReady?.(geom.height);
+  }, [geom, onReady]);
 
   const last = sections[sections.length - 1];
   return (
@@ -154,7 +155,7 @@ export const Board = forwardRef<BoardHandle, { data: BoardData; assets: BoardAss
       style={{ width: 1080 }}
     >
       <DecorBack geom={geom} />
-      <div className="relative z-10 pb-16 pt-14">
+      <div className={`relative z-10 ${sectionOnly ? "pb-8 pt-6" : "pb-16 pt-14"}`}>
         {sections.map((s) => (
           <SectionView key={s.id} section={s} assets={assets} ui={data.ui} memeFiles={memeFiles} />
         ))}

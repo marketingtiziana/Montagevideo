@@ -31,6 +31,8 @@ export const board: BoardData = {
     cardWho: "Qui :",
     cardDoes: "Rôle :",
     end: "Fin du board",
+    seconds: "s",
+    hint: "Échap : stop · ?ui=0 : sans panneau · ?autoscroll=30 · ?section=3 (et fit=0 pour la taille réelle)",
   },
   sections: [
     {
@@ -112,10 +114,10 @@ export const board: BoardData = {
           contact: "Fynovates",
           status: "en ligne",
           messages: [
-            { from: "me", text: "Concrètement, une LLC c'est une société ou pas ?", time: "09:12" },
+            { from: "me", text: "Concrètement, une LLC, c'est une société ou pas ?", time: "09:12" },
             {
               from: "them",
-              text: "Les deux à la fois. Juridiquement c'est une entité à part, avec une responsabilité limitée. Fiscalement, elle est transparente par défaut.",
+              text: "Les deux à la fois. Juridiquement, c'est une entité à part, avec une responsabilité limitée. Fiscalement, elle est transparente par défaut.",
               time: "09:14",
             },
             { from: "me", text: "Et il faut vivre aux US ?", time: "09:15" },

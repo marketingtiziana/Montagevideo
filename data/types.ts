@@ -267,6 +267,8 @@ export interface BoardData {
     cardWho: string;
     cardDoes: string;
     end: string;
+    seconds: string;
+    hint: string;
   };
 }
 
