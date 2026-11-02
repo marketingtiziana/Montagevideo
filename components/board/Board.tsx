@@ -122,6 +122,12 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
 
   const columnOf = (c: BoardElement["column"]) => data.columns.find((x) => x.id === c)!;
 
+  // Outil de capture : positionne la vue (x, y, échelle).
+  useEffect(() => {
+    (window as unknown as { __boardView?: (x: number, y: number, s: number) => void }).__boardView = (x, y, s) =>
+      wrapperRef.current?.setTransform(x, y, s, 0);
+  }, []);
+
   return (
     <div className="fixed inset-0 overflow-hidden bg-[#F3F3F1]" data-board-ready={ready ? "true" : "false"}>
       <TransformWrapper
