@@ -31,12 +31,12 @@ fade=int(1.5*SR); mus[:fade]*=np.linspace(0,1,fade); mus[-int(2.5*SR):]*=np.lins
 # voice envelope for ducking
 win=int(0.02*SR); venv=np.sqrt(np.convolve(voice**2,np.ones(win)/win,mode='same'))
 venv_db=20*np.log10(venv+1e-9)
-duck=np.where(venv_db>-40, 10**(-6/20), 1.0)  # -6 dB extra duck while speaking
+duck=np.where(venv_db>-40, 10**(-4/20), 1.0)  # -4 dB extra duck while speaking
 d=np.empty_like(duck); cur=1.0; a=np.exp(-1/(0.03*SR)); r=np.exp(-1/(0.5*SR))
 for i in range(len(duck)):
     tgt=duck[i]; cur=tgt+(cur-tgt)*(a if tgt<cur else r); d[i]=cur
 # music level: -24 dB under voice (voice ~ -14 LUFS => music around -38 LUFS when speaking). Set music RMS ~ -36 dBFS before duck
-mus_rms=np.sqrt(np.mean(mus**2)); mus*= (10**(-27/20))/mus_rms
+mus_rms=np.sqrt(np.mean(mus**2)); mus*= (10**(-21/20))/mus_rms
 mus*=d
 # ---- 3. SFX cues (final timeline seconds)
 def load(n): x,_=sf.read(f'sfx/{n}.wav',dtype='float32'); return x if x.ndim==1 else x.mean(1)

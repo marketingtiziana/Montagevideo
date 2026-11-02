@@ -18,7 +18,7 @@ for b in range(BARS):
         st=int((b*4+e8*0.5)*beat*SR); n=int(0.22*SR); tt=np.arange(n)/SR
         acc = 1.0 if e8 in (0,3,6) else 0.72
         s=(np.sin(2*np.pi*f*tt)+0.35*np.sin(2*np.pi*f*2*tt)+0.12*np.sign(np.sin(2*np.pi*f*tt)))*env(n,0.004,0.16,3)*acc
-        mix[st:st+n]+=lp(s,260)*0.55
+        mix[st:st+n]+=lp(s,260)*0.62
 # 2. dark drone pad (detuned saws, slow filter LFO)
 def saw(f,tt): return (2*((f*tt)%1)-1)
 drone=np.zeros(N)
@@ -31,20 +31,20 @@ lfo=0.5+0.5*np.sin(2*np.pi*t/(8*beat))
 out=np.zeros(N); chunk=2048
 for i in range(0,N,chunk):
     fc=350+900*lfo[i]; out[i:i+chunk]=lp(drone[i:i+chunk],fc,2)
-mix+=out*0.11
+mix+=out*0.09
 # 3. ticking hats (16ths, accent on 8ths) + shaker-like noise
 for s16 in range(BARS*16):
     st=int(s16*beat/4*SR); n=int(0.045*SR)
     acc=0.9 if s16%4==0 else (0.55 if s16%2==0 else 0.3)
-    h=bp(rng.standard_normal(n),6000,13000,2)*env(n,0.001,0.02,4)*acc*0.09
+    h=bp(rng.standard_normal(n),6000,13000,2)*env(n,0.001,0.02,4)*acc*0.17
     mix[st:st+n]+=h
 # 4. heartbeat kick (two hits per bar: beat 1 and the 'and' of 1) + soft snare-rim on beat 3
 for b in range(BARS):
     for off,g in ((0,1.0),(0.5,0.6)):
         st=int((b*4+off)*beat*SR); n=int(0.35*SR); tt=np.arange(n)/SR; f=np.linspace(110,42,n); ph=np.cumsum(2*np.pi*f/SR)
-        mix[st:st+n]+=np.sin(ph)*env(n,0.002,0.18,3)*0.5*g
+        mix[st:st+n]+=np.sin(ph)*env(n,0.002,0.18,3)*0.7*g
     st=int((b*4+2)*beat*SR); n=int(0.12*SR)
-    mix[st:st+n]+=bp(rng.standard_normal(n),1500,5000,2)*env(n,0.001,0.05,4)*0.12
+    mix[st:st+n]+=bp(rng.standard_normal(n),1500,5000,2)*env(n,0.001,0.05,4)*0.2
 # 5. risers every 4 bars (noise sweep up) ending on a muted impact; tension stabs
 for b in range(0,BARS,4):
     st=int(b*4*beat*SR); n=int(3.6*beat*SR); x=rng.standard_normal(n); sw=np.zeros(n)
