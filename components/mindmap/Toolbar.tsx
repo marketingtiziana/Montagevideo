@@ -10,12 +10,18 @@ interface ToolbarProps {
   onExport: () => void;
   exporting: boolean;
   clusters: Cluster[];
+  /** Panneau latéral ouvert : on libère la place à droite pour garder les boutons accessibles. */
+  panelOpen?: boolean;
 }
 
-export default function Toolbar({ mode, onToggleMode, onExport, exporting, clusters }: ToolbarProps) {
+export default function Toolbar({ mode, onToggleMode, onExport, exporting, clusters, panelOpen }: ToolbarProps) {
   const tidy = mode === 'tidy';
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col gap-2 p-3 sm:p-4">
+    <div
+      className={`pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col gap-2 p-3 transition-[padding] duration-300 sm:p-4 ${
+        panelOpen ? 'sm:pr-[420px]' : ''
+      }`}
+    >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="pointer-events-auto rounded-2xl bg-white/90 px-4 py-3 shadow-soft backdrop-blur">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-indigo">Fynovates</p>
@@ -44,7 +50,15 @@ export default function Toolbar({ mode, onToggleMode, onExport, exporting, clust
           </button>
         </div>
       </div>
-      <div className="pointer-events-auto hidden w-fit flex-wrap items-center gap-x-3 gap-y-1 rounded-full bg-white/90 px-3 py-1.5 shadow-soft backdrop-blur sm:flex">
+    </div>
+  );
+}
+
+/** Légende des clusters, affichée en bas du board (masquée sur mobile). */
+export function Legend({ clusters }: { clusters: Cluster[] }) {
+  return (
+    <div className="pointer-events-none absolute inset-x-0 bottom-4 z-20 hidden justify-center sm:flex">
+      <div className="pointer-events-auto flex flex-wrap items-center gap-x-3 gap-y-1 rounded-full bg-white/90 px-3.5 py-1.5 shadow-soft backdrop-blur">
         {clusters.map((c) => (
           <span key={c.id} className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-700">
             <span className="h-2 w-2 rounded-full" style={{ background: c.color }} />

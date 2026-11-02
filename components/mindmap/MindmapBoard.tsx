@@ -9,6 +9,7 @@ import {
   ReactFlow,
   ReactFlowProvider,
   getNodesBounds,
+  getViewportForBounds,
   useEdgesState,
   useNodesInitialized,
   useNodesState,
@@ -28,7 +29,7 @@ import PhotoNode from '@/components/mindmap/nodes/PhotoNode';
 import SchemaNode from '@/components/mindmap/nodes/SchemaNode';
 import CardNode from '@/components/mindmap/nodes/CardNode';
 import CalloutNode from '@/components/mindmap/nodes/CalloutNode';
-import Toolbar from '@/components/mindmap/Toolbar';
+import Toolbar, { Legend } from '@/components/mindmap/Toolbar';
 import SidePanel from '@/components/mindmap/SidePanel';
 
 const nodeTypes: NodeTypes = {
@@ -45,7 +46,16 @@ const edgeTypes: EdgeTypes = {
 
 const BOARD_BG = '#F5F7FB';
 const GRID_COLOR = '#C9D0E0';
+const GRID_GAP = 26;
 const EXPORT_PADDING = 120;
+const FIT_PADDING = 0.05;
+const MIN_ZOOM = 0.12;
+const MAX_ZOOM = 2.5;
+/** Hauteur (px) réservée à l'en-tête, pour que le cadrage automatique ne masque aucun nœud. */
+const HEADER_DESKTOP = 104;
+const HEADER_MOBILE = 72;
+/** Hauteur (px) réservée à la légende en bas (desktop uniquement). */
+const FOOTER_DESKTOP = 48;
 const initialNodes = buildFlowNodes(mindmap, scatterLayout(mindmap));
 const initialEdges = buildFlowEdges(mindmap);
 
@@ -62,7 +72,8 @@ function Board() {
   const [animating, setAnimating] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const { fitView, getNodes } = useReactFlow();
+  const { getNodes, setViewport } = useReactFlow();
+  const containerRef = useRef<HTMLDivElement>(null);
   const animTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nodesInitialized = useNodesInitialized();
   const [ready, setReady] = useState(false);
@@ -82,7 +93,7 @@ function Board() {
     if (!measured) return;
     setNodes((current) => applyLayout(current, layouts.scatter));
     const raf = requestAnimationFrame(() => {
-      fitView({ padding: 0.08 });
+      void fitBoard(0);
       setReady(true);
     });
     return () => cancelAnimationFrame(raf);
@@ -90,15 +101,31 @@ function Board() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [measured]);
 
+  /** Cadre le board dans la zone située sous l'en-tête (barre d'outils), pour ne rien masquer. */
+  const fitBoard = useCallback(
+    async (duration: number) => {
+      const el = containerRef.current;
+      if (!el) return;
+      const { width, height } = el.getBoundingClientRect();
+      const desktop = width >= 640;
+      const header = desktop ? HEADER_DESKTOP : HEADER_MOBILE;
+      const footer = desktop ? FOOTER_DESKTOP : 0;
+      const bounds = getNodesBounds(getNodes());
+      const vp = getViewportForBounds(bounds, width, height - header - footer, MIN_ZOOM, MAX_ZOOM, FIT_PADDING);
+      await setViewport({ x: vp.x, y: vp.y + header, zoom: vp.zoom }, { duration });
+    },
+    [getNodes, setViewport],
+  );
+
   const toggleMode = useCallback(() => {
     const next: LayoutMode = mode === 'scatter' ? 'tidy' : 'scatter';
     setMode(next);
     setAnimating(true);
     setNodes((current) => applyLayout(current, layouts[next]));
     if (animTimer.current) clearTimeout(animTimer.current);
-    window.setTimeout(() => fitView({ duration: 700, padding: 0.08 }), 30);
+    window.setTimeout(() => void fitBoard(700), 30);
     animTimer.current = setTimeout(() => setAnimating(false), 800);
-  }, [mode, layouts, setNodes, fitView]);
+  }, [mode, layouts, setNodes, fitBoard]);
 
   const onNodeClick = useCallback<NodeMouseHandler<FlowNode>>((_, node) => {
     setSelectedId(node.id);
@@ -117,22 +144,43 @@ function Board() {
       const height = Math.ceil(bounds.height + EXPORT_PADDING * 2);
       const tx = -bounds.x + EXPORT_PADDING;
       const ty = -bounds.y + EXPORT_PADDING;
-      const dataUrl = await toPng(viewport, {
-        backgroundColor: BOARD_BG,
+      const scale = 2;
+      const snapshot = await toPng(viewport, {
         width,
         height,
-        pixelRatio: 2,
+        pixelRatio: scale,
         cacheBust: true,
         style: {
           width: `${width}px`,
           height: `${height}px`,
           transform: `translate(${tx}px, ${ty}px) scale(1)`,
-          backgroundColor: BOARD_BG,
-          backgroundImage: `radial-gradient(${GRID_COLOR} 1.3px, transparent 1.3px)`,
-          backgroundSize: '26px 26px',
-          backgroundPosition: `${tx % 26}px ${ty % 26}px`,
         },
       });
+      // Composition finale : fond du board + grille pointillée + capture des nœuds et liens.
+      const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = snapshot;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Canvas indisponible');
+      ctx.fillStyle = BOARD_BG;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = GRID_COLOR;
+      const gap = GRID_GAP * scale;
+      for (let gx = gap / 2; gx < canvas.width; gx += gap) {
+        for (let gy = gap / 2; gy < canvas.height; gy += gap) {
+          ctx.beginPath();
+          ctx.arc(gx, gy, 1.4 * scale, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.download = `fynovates-mindmap-llc-${mode === 'tidy' ? 'range' : 'desordre'}.png`;
       link.href = dataUrl;
@@ -147,6 +195,7 @@ function Board() {
 
   return (
     <div
+      ref={containerRef}
       className={`relative h-full w-full transition-opacity duration-500 ${animating ? 'mindmap-animating' : ''} ${
         ready ? 'opacity-100' : 'opacity-0'
       }`}
@@ -161,16 +210,16 @@ function Board() {
         onNodeClick={onNodeClick}
         onPaneClick={onPaneClick}
         fitView
-        fitViewOptions={{ padding: 0.08 }}
-        minZoom={0.12}
-        maxZoom={2.5}
+        fitViewOptions={{ padding: FIT_PADDING }}
+        minZoom={MIN_ZOOM}
+        maxZoom={MAX_ZOOM}
         nodesConnectable={false}
         elementsSelectable
         zoomOnDoubleClick={false}
         proOptions={{ hideAttribution: true }}
         style={{ background: BOARD_BG }}
       >
-        <Background variant={BackgroundVariant.Dots} gap={26} size={1.6} color={GRID_COLOR} />
+        <Background variant={BackgroundVariant.Dots} gap={GRID_GAP} size={1.6} color={GRID_COLOR} />
         <MiniMap
           className="!hidden sm:!block"
           pannable
@@ -182,7 +231,15 @@ function Board() {
         />
         <Controls showInteractive={false} position="bottom-left" />
       </ReactFlow>
-      <Toolbar mode={mode} onToggleMode={toggleMode} onExport={exportPng} exporting={exporting} clusters={mindmap.clusters} />
+      <Toolbar
+        mode={mode}
+        onToggleMode={toggleMode}
+        onExport={exportPng}
+        exporting={exporting}
+        clusters={mindmap.clusters}
+        panelOpen={Boolean(selectedNode)}
+      />
+      <Legend clusters={mindmap.clusters} />
       <SidePanel node={selectedNode} cluster={selectedCluster} onClose={closePanel} />
     </div>
   );
