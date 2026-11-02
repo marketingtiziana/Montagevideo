@@ -1,5 +1,5 @@
 import rough from "roughjs/bin/rough";
-import type { BoardData, Link } from "@/data/types";
+import type { BoardData, Link } from "@/data/board169-types";
 import { rngFor } from "./rng";
 
 export const FRAME_W = 1920;

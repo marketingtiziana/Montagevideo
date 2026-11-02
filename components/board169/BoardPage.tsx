@@ -2,7 +2,7 @@
 
 import { Suspense, useCallback, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import type { BoardAssets, BoardData } from "@/data/types";
+import type { BoardAssets, BoardData } from "@/data/board169-types";
 import { Frame, type FrameHandle } from "./Frame";
 import { Hud } from "./Hud";
 

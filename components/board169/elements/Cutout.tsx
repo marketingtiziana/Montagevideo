@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { BoardAssets, CutoutElement } from "@/data/types";
+import type { BoardAssets, CutoutElement } from "@/data/board169-types";
 import { Icon } from "../icons";
 
 /** Image détourée posée sur le papier, avec ombre portée douce. */

@@ -10,9 +10,11 @@
     "fetch-images": "tsx scripts/fetch-images.ts",
     "screenshot": "node scripts/screenshot.mjs",
     "cutout": "tsx scripts/cutout.ts",
-    "export-pdf": "node scripts/export-pdf.mjs"
+    "export-pdf": "node scripts/export-pdf.mjs",
+    "build-scene": "tsx scripts/build-scene.ts"
   },
   "dependencies": {
+    "@excalidraw/excalidraw": "0.18.0",
     "html-to-image": "1.11.11",
     "lucide-react": "0.453.0",
     "next": "14.2.18",

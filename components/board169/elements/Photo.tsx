@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { BoardAssets, PhotoElement } from "@/data/types";
+import type { BoardAssets, PhotoElement } from "@/data/board169-types";
 import { Icon } from "../icons";
 
 export function Photo({ el, assets, creditLabel }: { el: PhotoElement; assets: BoardAssets; creditLabel: string }) {

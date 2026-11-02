@@ -1,4 +1,4 @@
-import type { DocElement } from "@/data/types";
+import type { DocElement } from "@/data/board169-types";
 
 /** Faux document : en-tête, lignes grises, tampon. Aucun logo réel. */
 export function Doc({ el }: { el: DocElement }) {

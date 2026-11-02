@@ -18,7 +18,7 @@ import {
   Wallet,
   type LucideProps,
 } from "lucide-react";
-import type { IconName } from "@/data/types";
+import type { IconName } from "@/data/board169-types";
 
 const ICONS: Record<IconName, React.ComponentType<LucideProps>> = {
   users: Users,

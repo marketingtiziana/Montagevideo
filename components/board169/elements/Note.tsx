@@ -1,4 +1,4 @@
-import type { NoteElement, NoteTone } from "@/data/types";
+import type { NoteElement, NoteTone } from "@/data/board169-types";
 
 const TONES: Record<NoteTone, { bg: string; fg: string }> = {
   indigo: { bg: "#E8ECFF", fg: "#4F6BFF" },

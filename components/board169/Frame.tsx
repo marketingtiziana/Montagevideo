@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { BoardAssets, BoardData } from "@/data/types";
+import type { BoardAssets, BoardData } from "@/data/board169-types";
 import { computeLinks, FRAME_H, FRAME_W, type LinkGeometry } from "@/lib/links";
 import { rngFor } from "@/lib/rng";
 import { ElementView } from "./ElementView";

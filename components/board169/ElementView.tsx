@@ -1,4 +1,4 @@
-import type { BoardAssets, BoardData, BoardElement } from "@/data/types";
+import type { BoardAssets, BoardData, BoardElement } from "@/data/board169-types";
 import { Cutout } from "./elements/Cutout";
 import { Doc } from "./elements/Doc";
 import { Note } from "./elements/Note";

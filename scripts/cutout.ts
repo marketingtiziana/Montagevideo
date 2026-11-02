@@ -12,7 +12,7 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { board } from "../data/board";
+import { board } from "../data/board169";
 
 const ROOT = path.resolve(__dirname, "..");
 const RAW = path.join(ROOT, "public", "board", "raw");

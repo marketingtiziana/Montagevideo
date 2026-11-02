@@ -1,4 +1,4 @@
-import type { RoleElement } from "@/data/types";
+import type { RoleElement } from "@/data/board169-types";
 import { Icon } from "../icons";
 
 export function Role({ el, color }: { el: RoleElement; color: string }) {

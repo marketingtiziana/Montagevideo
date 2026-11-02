@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
     try {
       const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2 });
-      await page.goto(`${origin}/board-llc?ui=0`, { waitUntil: "networkidle" });
+      await page.goto(`${origin}/board-llc-16x9?ui=0`, { waitUntil: "networkidle" });
       await page.waitForSelector('[data-frame][data-frame-ready="true"]', { timeout: 30000 });
       await page.evaluate(() => document.fonts.ready);
       await page.emulateMedia({ media: "print" });

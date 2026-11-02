@@ -1,6 +1,6 @@
 import rough from "roughjs/bin/rough";
 import type { Options } from "roughjs/bin/core";
-import type { SchemaElement, SchemaSpec } from "@/data/types";
+import type { SchemaElement, SchemaSpec } from "@/data/board169-types";
 import { rngFor } from "@/lib/rng";
 
 /**
