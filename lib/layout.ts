@@ -1,4 +1,4 @@
-import type { BoardElement, Section, Side } from "@/data/types";
+import type { BoardElement, Section, Side } from "@/data/vertical-types";
 import { rngFor } from "./rng";
 
 export const BOARD_WIDTH = 1080;

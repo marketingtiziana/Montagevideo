@@ -1,7 +1,8 @@
 /**
- * Modèle de données du board. Tout le contenu affiché vient de data/board.ts.
+ * Modèle de données du tableau 16:9 « Comment fonctionne une LLC ».
+ * Tout le contenu affiché vient de data/board.ts.
  */
-export type Side = "left" | "right";
+export type GroupId = "acteurs" | "documents" | "argent" | "fiscalite" | "annee" | "pieges";
 
 export type NoteTone = "indigo" | "sky" | "slate" | "mint";
 
@@ -12,269 +13,133 @@ export type IconName =
   | "file-signature"
   | "landmark"
   | "building"
-  | "shield-check"
   | "globe"
   | "scroll"
-  | "badge-check"
   | "receipt"
   | "calendar"
   | "wallet"
-  | "briefcase"
-  | "scale"
-  | "lightbulb"
-  | "alert-triangle"
-  | "check-circle"
-  | "x-circle"
-  | "sparkles"
-  | "pin"
-  | "image";
+  | "laptop"
+  | "credit-card"
+  | "mail"
+  | "user"
+  | "image"
+  | "file-text";
 
-export interface Branch {
-  /** Petite étiquette sur la branche, ex. « crée », « verse ». */
-  label?: string;
-  /** Couleur de la branche si différente de celle de la section. */
-  color?: string;
+export interface Group {
+  id: GroupId;
+  title: string;
+  /** Couleur des liens du groupe. */
+  color: string;
+  /** Position de l'intitulé du groupe sur le cadre (optionnel). */
+  labelAt?: { x: number; y: number; rotate?: number };
 }
 
-export type Annotation =
-  | { kind: "circle"; anchor: string; color?: string; padding?: number }
-  | { kind: "underline"; anchor: string; color?: string }
-  | { kind: "arrow"; anchor: string; from: { dx: number; dy: number }; color?: string }
-  | {
-      kind: "note";
-      text: string;
-      /** Coin de l'élément où accrocher la note. */
-      placement: "top-left" | "top-right" | "bottom-left" | "bottom-right";
-      dx?: number;
-      dy?: number;
-      rotate?: number;
-      tone?: NoteTone;
-      /** Flèche de la note vers un détail de l'élément. */
-      arrowTo?: string;
-      width?: number;
-    };
-
-interface ElementBase {
+interface Base {
   id: string;
-  side: Side;
-  /** Largeur en px (260 à 480). Sinon tirée au sort selon le type. */
-  width?: number;
-  /** Rotation en degrés. Sinon tirée au sort entre -3 et 3. */
+  group: GroupId;
+  /** Position et largeur dans le cadre 1920x1080 (un léger jitter déterministe s'ajoute). */
+  x: number;
+  y: number;
+  w: number;
+  /** Rotation imposée en degrés, sinon tirée entre -3 et 3. */
   rotate?: number;
-  /** Empêche le regroupement avec l'élément voisin sur la même ligne. */
-  solo?: boolean;
-  branch?: Branch;
-  annotations?: Annotation[];
 }
 
-export interface ScreenField {
-  label: string;
-  value: string;
-  anchor?: string;
+export interface CutoutElement extends Base {
+  type: "cutout";
+  /** Requête Pexels : objet sur fond uni pour un détourage propre. */
+  imageQuery: string;
+  alt: string;
+  /** Ratio largeur / hauteur du bloc de repli (sans image). */
+  aspect?: number;
+  icon: IconName;
 }
 
-export type Screen =
-  | {
-      kind: "letter";
-      agency: string;
-      dept: string;
-      date: string;
-      ref: string;
-      subject: string;
-      greeting: string;
-      paragraphs: string[];
-      highlight: { label: string; value: string; anchor?: string };
-    }
-  | {
-      kind: "email";
-      from: string;
-      to: string;
-      subject: string;
-      time: string;
-      body: string[];
-      attachment?: { name: string; anchor?: string };
-    }
-  | {
-      kind: "document";
-      state?: string;
-      title: string;
-      subtitle?: string;
-      fields: ScreenField[];
-      stamp?: string;
-    }
-  | {
-      kind: "dashboard";
-      app: string;
-      account: string;
-      balanceLabel: string;
-      rows: { name: string; note: string; positive: boolean; anchor?: string }[];
-    }
-  | {
-      kind: "notice";
-      sender: string;
-      badge: string;
-      title: string;
-      lines: string[];
-      cta: string;
-      deadline?: ScreenField;
-    }
-  | {
-      kind: "form";
-      formLabel: string;
-      formNumber: string;
-      title: string;
-      subtitle: string;
-      fields: ScreenField[];
-      deadline: ScreenField;
-    };
-
-export interface ScreenshotElement extends ElementBase {
-  type: "screenshot";
-  /** Titre de fenêtre affiché dans la barre du faux écran. */
-  window: string;
-  screen: Screen;
+export interface PhotoElement extends Base {
+  type: "photo";
+  imageQuery: string;
+  caption: string;
+  aspect?: number;
+  icon?: IconName;
 }
 
-export interface ChatMessage {
-  from: "me" | "them";
-  text: string;
-  time: string;
+export interface RoleElement extends Base {
+  type: "role";
+  icon: IconName;
+  name: string;
+  line: string;
 }
 
-export interface ChatElement extends ElementBase {
-  type: "chat";
-  contact: string;
-  status: string;
-  messages: ChatMessage[];
+export interface DocElement extends Base {
+  type: "doc";
+  title: string;
+  subtitle: string;
+  stamp?: string;
+  /** Nombre de lignes grises simulant le texte. */
+  lines?: number;
 }
 
-export interface MetricElement extends ElementBase {
-  type: "metric";
-  value: string;
-  label: string;
-  caption?: string;
-  trend?: "up" | "down" | "flat";
-}
-
-export type ChartSpec =
+export type SchemaSpec =
   | {
       kind: "org";
       members: string;
       llc: string;
       manager: string;
-      managerNote: string;
       agent: string;
-      agentNote: string;
       sos: string;
       irs: string;
-      edges: { owns: string; manages: string; registers: string; ein: string };
     }
-  | { kind: "money"; steps: { label: string; sub?: string }[]; arrows: string[] }
-  | { kind: "timeline"; steps: string[] }
-  | { kind: "calendar"; items: { when: string; label: string }[] }
-  | {
-      kind: "transparency";
-      llc: string;
-      llcTax: string;
-      member: string;
-      memberTax: string;
-      arrow: string;
-    }
-  | { kind: "funnel"; bars: { label: string; weight: number }[]; note: string };
+  | { kind: "money"; steps: string[]; arrows: string[] }
+  | { kind: "transparency"; llc: string; llcLine: string; member: string; memberLine: string; through: string };
 
-export interface ChartElement extends ElementBase {
-  type: "chart";
+export interface SchemaElement extends Base {
+  type: "mini-schema";
   title: string;
-  chart: ChartSpec;
+  schema: SchemaSpec;
 }
 
-export interface PhotoElement extends ElementBase {
-  type: "photo";
-  /** Requête envoyée à Pexels par scripts/fetch-images.ts. */
-  imageQuery: string;
-  caption: string;
-  /** Ratio largeur / hauteur. */
-  aspect?: number;
-  icon?: IconName;
-}
-
-export interface MemeElement extends ElementBase {
-  type: "meme";
-  caption?: string;
-}
-
-export interface CardElement extends ElementBase {
-  type: "card";
-  icon: IconName;
-  name: string;
-  who: string;
-  does: string;
-  required: string;
-  requiredTone?: "yes" | "optional";
-}
-
-export interface CalloutElement extends ElementBase {
-  type: "callout";
-  tone: "trap" | "remember" | "bad" | "good";
-  label: string;
+export interface NoteElement extends Base {
+  type: "note";
+  tone: NoteTone;
   title: string;
-  body?: string;
-  points?: string[];
+  line?: string;
+  /** Petites puces (titres seuls), pour regrouper plusieurs points courts. */
+  chips?: string[];
 }
 
-export type BoardElement =
-  | ScreenshotElement
-  | ChatElement
-  | MetricElement
-  | ChartElement
-  | PhotoElement
-  | MemeElement
-  | CardElement
-  | CalloutElement;
+export type BoardElement = CutoutElement | PhotoElement | RoleElement | DocElement | SchemaElement | NoteElement;
 
-export interface ColumnHeader {
-  title: string;
-  color: string;
-}
-
-export interface Section {
-  id: string;
-  number: number;
-  title: string;
-  kicker?: string;
-  /** Couleur des branches de la section. */
-  color: string;
-  /** Côté du titre par rapport au trait central. */
-  side: Side;
-  /** Section en deux colonnes (pièges) : les éléments sont appariés par ordre. */
-  columns?: { left: ColumnHeader; right: ColumnHeader };
-  elements: BoardElement[];
+export interface Link {
+  /** Identifiant d'élément, ou "llc" pour le nœud central. */
+  from: string;
+  to: string;
+  label?: string;
+  group: GroupId;
+  /** Courbure du lien, de -1 à 1 (0 : presque droit). */
+  bend?: number;
 }
 
 export interface BoardData {
   title: string;
   brand: string;
-  sections: Section[];
+  center: { x: number; y: number; size: number; label: string; sub: string };
+  groups: Group[];
+  elements: BoardElement[];
+  links: Link[];
   ui: {
-    autoScroll: string;
-    autoScrollStop: string;
-    duration: string;
     exportPng: string;
+    exportPdf: string;
     exporting: string;
-    sectionMode: string;
-    all: string;
-    photoCredit: string;
-    cardWho: string;
-    cardDoes: string;
-    end: string;
-    seconds: string;
+    fullscreen: string;
+    hide: string;
     hint: string;
+    photoCredit: string;
   };
 }
 
 export interface BoardAssets {
-  /** Fichiers présents dans public/board/memes, dans l'ordre. */
-  memes: string[];
-  /** Photos téléchargées : id -> crédit. */
-  photos: Record<string, { photographer: string; url: string }>;
+  /** Photos et sources de cutouts téléchargées (public/board/raw) : id -> crédit. */
+  raw: Record<string, { photographer: string; url: string }>;
+  /** Cutouts détourés (public/board/cutouts) : id -> dimensions du PNG. */
+  cutouts: Record<string, { width: number; height: number }>;
 }

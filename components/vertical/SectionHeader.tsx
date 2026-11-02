@@ -1,4 +1,4 @@
-import type { Section } from "@/data/types";
+import type { Section } from "@/data/vertical-types";
 import { rngFor } from "@/lib/rng";
 
 export function SectionHeader({ section }: { section: Section }) {

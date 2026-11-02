@@ -1,4 +1,4 @@
-import type { Screen, ScreenshotElement } from "@/data/types";
+import type { Screen, ScreenshotElement } from "@/data/vertical-types";
 import { Bell, FileText, Paperclip, Search } from "lucide-react";
 
 function Field({ label, value, anchor }: { label: string; value: string; anchor?: string }) {

@@ -1,6 +1,6 @@
 import rough from "roughjs/bin/rough";
 import type { Options } from "roughjs/bin/core";
-import type { ChartElement, ChartSpec } from "@/data/types";
+import type { ChartElement, ChartSpec } from "@/data/vertical-types";
 import { rngFor } from "@/lib/rng";
 
 /**

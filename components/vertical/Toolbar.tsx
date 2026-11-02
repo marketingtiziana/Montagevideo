@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { exportNodeToPng } from "@/lib/exportPng";
 import { Download, Play, Square } from "lucide-react";
-import type { BoardData } from "@/data/types";
+import type { BoardData } from "@/data/vertical-types";
 
 interface Props {
   ui: BoardData["ui"];

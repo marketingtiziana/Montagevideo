@@ -1,6 +1,6 @@
 import rough from "roughjs/bin/rough";
 import type { Options } from "roughjs/bin/core";
-import type { Annotation, BoardElement, NoteTone, Section } from "@/data/types";
+import type { Annotation, BoardElement, NoteTone, Section } from "@/data/vertical-types";
 import { BOARD_WIDTH, SPINE_X } from "./layout";
 import { rngFor } from "./rng";
 

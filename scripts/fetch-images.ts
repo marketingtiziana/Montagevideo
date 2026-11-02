@@ -12,7 +12,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { board } from "../data/board";
+import { board } from "../data/vertical";
 
 interface PexelsPhoto {
   id: number;

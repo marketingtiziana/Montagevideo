@@ -1,4 +1,4 @@
-import type { MetricElement } from "@/data/types";
+import type { MetricElement } from "@/data/vertical-types";
 import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
 
 export function Metric({ el }: { el: MetricElement }) {

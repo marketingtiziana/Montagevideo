@@ -1,4 +1,4 @@
-import type { CardElement } from "@/data/types";
+import type { CardElement } from "@/data/vertical-types";
 import { Icon } from "../icons";
 
 export function RoleCard({ el, color, labels }: { el: CardElement; color: string; labels: { who: string; does: string } }) {

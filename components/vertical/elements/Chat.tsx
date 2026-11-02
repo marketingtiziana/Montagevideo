@@ -1,4 +1,4 @@
-import type { ChatElement } from "@/data/types";
+import type { ChatElement } from "@/data/vertical-types";
 import { Check, CheckCheck, Phone, Video } from "lucide-react";
 
 export function Chat({ el }: { el: ChatElement }) {

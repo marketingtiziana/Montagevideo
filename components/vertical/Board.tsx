@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { BoardAssets, BoardData, Section } from "@/data/types";
+import type { BoardAssets, BoardData, Section } from "@/data/vertical-types";
 import { computeGeometry, computeNoteArrows, type Geometry, type PathItem } from "@/lib/geometry";
 import { layoutSection, type Placed } from "@/lib/layout";
 import { DecorBack, DecorFront } from "./Decor";

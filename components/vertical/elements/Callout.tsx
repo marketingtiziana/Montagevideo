@@ -1,4 +1,4 @@
-import type { CalloutElement, IconName } from "@/data/types";
+import type { CalloutElement, IconName } from "@/data/vertical-types";
 import { Icon } from "../icons";
 
 const TONES: Record<CalloutElement["tone"], { bg: string; fg: string; icon: IconName; chip: string }> = {

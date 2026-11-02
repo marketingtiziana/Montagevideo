@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { MemeElement } from "@/data/types";
+import type { MemeElement } from "@/data/vertical-types";
 
 export function Meme({ el, file }: { el: MemeElement; file: string | null }) {
   if (!file) return null;
