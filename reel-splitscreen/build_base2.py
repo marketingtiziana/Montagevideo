@@ -3,12 +3,12 @@ from concurrent.futures import ThreadPoolExecutor
 segs=json.load(open('work/segments.json')); FPS=30
 os.makedirs('work/segs',exist_ok=True)
 def crop_for(z):
-    w=1000/z; h=796/z; x=980-w/2; y=300-0.33*h
+    w=1000/z; h=796/z; x=980-w/2; y=0  # top-aligned: headroom above the head for the subtitles
     return f"crop={w:.0f}:{h:.0f}:{x:.0f}:{y:.0f}"
 def enc(s):
     out=f"work/segs/v{s['idx']:02d}.mov"
     vf=f"{crop_for(s['zoom'])},scale=1080:860:flags=lanczos,setsar=1,fps={FPS},eq=contrast=1.05:saturation=1.03,format=yuv420p"
-    cmd=f"ffmpeg -y -v error -ss {s['src_in']} -to {s['src_out']} -i /input/Reel_16M.mp4 -ss {s['src_in']} -to {s['src_out']} -i work/audio_full.wav -map 0:v -map 1:a -vf {vf} -c:v libx264 -preset fast -crf 14 -c:a pcm_s24le -threads 2 {out}"
+    cmd=f"ffmpeg -y -v error -ss {s['src_in']} -to {s['src_out']} -i /input/Reel_16M.mp4 -ss {s['src_in']} -to {s['src_out']} -i work/audio_full.wav -map 0:v -map 1:a -vf {vf} -af afade=t=in:st=0:d=0.015 -c:v libx264 -preset fast -crf 14 -c:a pcm_s24le -threads 2 {out}"
     subprocess.run(shlex.split(cmd),check=True); return out
 with ThreadPoolExecutor(2) as ex: outs=list(ex.map(enc,segs))
 open('work/segs/list.txt','w').write("".join(f"file '{os.path.abspath(o)}'\n" for o in outs))

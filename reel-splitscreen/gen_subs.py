@@ -1,14 +1,17 @@
 import json, re
 d=json.load(open('work/words_final.json'))
 W=[dict(w) for w in d['words']]
-# --- manual fixes (v2 timeline): Whisper dropped "dans son ensemble" (58.4-60.0) and hallucinated a low-prob "Et" there
+# --- manual fixes: Whisper may drop "dans son ensemble" after "business." (restart zone) and hallucinate a low-prob "Et"
 fixed=[]
-for w in W:
-    if w['w']=='Et' and abs(w['s']-59.54)<0.1 and w['p']<0.3: continue
+for i,w in enumerate(W):
     if w['w']=='avouer.': w['w']='avoir.'
+    if w['w'].lower()=='que' and 7.6<w['s']<7.9 and i+1<len(W) and W[i+1]['w']=='ce': continue  # hallucinated 'que' at the cut, audio starts on 'ce'
+    nxt=W[i+1] if i+1<len(W) else None
+    if w['w']=='Et' and w['p']<0.3 and i>0 and W[i-1]['w'] in ('business.','ensemble.'): continue
     fixed.append(w)
-    if w['w']=='business.' and abs(w['s']-57.94)<0.1:
-        fixed += [dict(w='dans',s=58.40,e=59.17,p=1.0),dict(w='son',s=59.17,e=59.49,p=1.0),dict(w='ensemble.',s=59.49,e=59.97,p=1.0),dict(w='Et',s=60.13,e=60.31,p=1.0)]
+    if w['w']=='business.' and nxt is not None and nxt['w'] in ('Et',) and nxt['p']<0.3:
+        b=w['e']
+        fixed += [dict(w='dans',s=b+0.02,e=b+0.78,p=1.0),dict(w='son',s=b+0.78,e=b+1.10,p=1.0),dict(w='ensemble.',s=b+1.10,e=b+1.58,p=1.0),dict(w='Et',s=b+1.74,e=b+1.92,p=1.0)]
 W=fixed
 # --- merge apostrophe / hyphen continuations
 M=[]
@@ -56,7 +59,7 @@ json.dump([dict(t=w['t'],s=w['s'],e=w['e']) for w in W], open('work/words_clean.
 def ts(t):
     h=int(t//3600); m=int(t%3600//60); s=t%60
     return f"{h}:{m:02d}:{s:05.2f}"
-Y=1735
+Y=1128  # just under the junction, above the head (crop is top-aligned)
 hdr=f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080

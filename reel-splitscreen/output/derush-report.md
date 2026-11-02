@@ -1,51 +1,52 @@
-# Dérushage — Reel « société étrangère ≠ fiscalité déplacée » (v2)
+# Dérushage — Reel « société étrangère ≠ fiscalité déplacée » (v3)
 
-**Rush** : `Reel 16M.mp4` (1920×1080, 59,94 fps, 118,4 s) — transcription Whisper large-v3 (fr, word-level) + audit énergétique (bursts de parole / silences à 50 ms).
-**Timeline finale** : **84,3 s** (2528 frames @ 30 fps) — sous les 90 s, pas de coupe narrative nécessaire.
-**Règles appliquées** : cuts sur fin de mot + 2 frames ; reprises calées sur l'attaque de la voix (seuil −38 dBFS) avec 0,1–0,25 s de respiration ; hésitations > 0,8 s supprimées ; faux départs supprimés (meilleure prise conservée).
+**Rush** : `Reel 16M.mp4` (1920×1080, 59,94 fps, 118,4 s) — transcription Whisper large-v3 (fr, word-level) + audit énergétique (bursts de parole / silences à 10–50 ms).
+**Timeline finale** : **85,5 s** (2566 frames @ 30 fps).
+**Règles appliquées** : reprises calées sur l'attaque de la voix ; **fins de segment calées sur la fin réelle de la voix** (seuil −45 dBFS) + 2 frames ; fondu audio de 15 ms à chaque entrée de segment ; hésitations > 0,8 s et faux départs supprimés.
 
-## Changements v2 (retour « elle bugue un peu au début »)
-- **Hook : prise 1 conservée** (source 0,3 → 8,4 s) à la place de la prise 2 : débit plus continu (« là que beaucoup » enchaîné, pas de « Et… » étiré), même regard caméra.
-- **Pause après « fiscalité ? » resserrée** (0,55 s → ~0,2 s) avec changement de punch-in pour masquer le raccord.
-- **« Parce que » doublé supprimé** : la phrase démarre directement sur « ce n'est pas simplement parce que tu crées… ».
-- L'hésitation « parce… [1,5 s] …que » reste resserrée à ~0,2 s.
+## Changements v3 (retours à l'écoute)
+- **0:08 — attaque de « ce n'est pas »** : l'entrée tombait 30 ms après le début de la fricative de « ce » (ça sonnait comme un « que » coupé). Entrée déplacée dans le creux entre « que » et « ce » (source 20,51 s) + fondu 15 ms.
+- **0:17 — « Ce qui… qui compte »** : reprise supprimée. On garde « Ce » (source 39,37 → 39,73) et on raccorde directement sur le second « qui compte » (source 40,14) ; le punch-in change au raccord.
+- **0:29 — « intéressant » coupé** : la fin de mot Whisper était 0,35 s trop tôt. Toutes les fins de segment sont maintenant calées sur l'extinction réelle de la voix (« pays. » +0,2 s, « intéressant. » +0,35 s, « business. » +0,17 s, etc.).
+- **Sous-titres** remontés entre le bas de l'écran du haut et le haut de la tête (centre à y = 1128) ; recadrage facecam aligné en haut (plus d'air au-dessus de la tête), punch-in ramené à 1,00 ↔ 1,08×.
 
 ## Segments conservés (source → finale)
 
 | # | Source (s) | Finale (s) | Durée | Texte | Punch |
 |---|-----------|-----------|-------|-------|-------|
-| 1 | 0,31 → 5,00 | 0,00 → 4,70 | 4,70 | Tu savais qu'une société étrangère ne suffit pas à déplacer ta fiscalité ? | 1,00× |
-| 2 | 5,38 → 8,37 | 4,70 → 7,70 | 3,00 | Et c'est précisément là que beaucoup se font avoir. | 1,12× |
-| 3 | 20,57 → 22,57 | 7,70 → 9,70 | 2,00 | ce n'est pas simplement parce | 1,00× |
-| 4 | 24,02 → 31,55 | 9,70 → 17,23 | 7,53 | que tu crées une société à Dubaï ou en Estonie ou dans un autre pays que tu vas automatiquement payer tes impôts dans ce pays. | 1,12× |
-| 5 | 39,38 → 51,27 | 17,23 → 29,13 | 11,90 | Ce qui compte, c'est notamment où tu es résident fiscal, où ton entreprise est réellement dirigée, où l'activité est exercée et comment elle fonctionne concrètement. Et c'est là que ça devient intéressant. | 1,00× |
-| 6 | 52,48 → 63,99 | 29,13 → 40,67 | 11,53 | Parce que oui, dans certaines situations, une structure internationale peut permettre d'avoir une fiscalité différente, et potentiellement plus adaptée à ton business. | 1,12× |
-| 7 | 67,13 → 76,87 | 40,67 → 50,40 | 9,73 | Mais dans d'autres situations, tu peux créer une société à l'étranger et continuer à avoir des obligations fiscales dans ton pays de résidence. | 1,00× |
-| 8 | 79,66 → 84,73 | 50,40 → 55,47 | 5,07 | Donc, avant de choisir un pays juste parce qu'on t'a promis du 0 %, | 1,12× |
-| 9 | 86,65 → 91,31 | 55,47 → 60,13 | 4,67 | il faut d'abord regarder ta situation personnelle et ton business dans son ensemble. | 1,00× |
-| 10 | 92,50 → 113,87 | 60,13 → 81,50 | 21,37 | Et c'est exactement ce que je fais avec les entrepreneurs qui se posent cette question. Est-ce qu'une structure à l'étranger peut réellement avoir du sens dans leur cas et comment la mettre en place correctement ? Si tu veux avoir les informations et savoir ce qu'il faut vérifier dans ta situation, commente urgence sous cette vidéo. | 1,12× |
-| 11 | 115,61 → 118,35 | 81,50 → 84,27 | 2,77 | Je t'enverrai les renseignements en DM. | 1,00× |
+| 1 | 0,31 → 5,00 | 0,00 → 4,70 | 4,70 | Hook prise 1 (a) : Tu savais qu'une société étrangère ne suffit pas à déplacer ta fiscalité ? | 1,00× |
+| 2 | 5,29 → 8,37 | 4,70 → 7,80 | 3,10 | Hook prise 1 (b) : Et c'est précisément là que beaucoup se font avoir, | 1,08× |
+| 3 | 20,51 → 22,70 | 7,80 → 10,00 | 2,20 | ce n'est pas simplement parce | 1,00× |
+| 4 | 24,02 → 31,74 | 10,00 → 17,73 | 7,73 | que tu crées une société à Dubaï,,, payer tes impôts dans ce pays, | 1,08× |
+| 5 | 39,37 → 39,73 | 17,73 → 18,10 | 0,37 | Ce | 1,00× |
+| 6 | 40,14 → 51,60 | 18,10 → 29,57 | 11,47 | qui compte, c'est notamment où tu es résident fiscal,,, ça devient intéressant, | 1,08× |
+| 7 | 52,48 → 64,16 | 29,57 → 41,27 | 11,70 | Parce que oui, dans certaines situations,,, plus adaptée à ton business, | 1,00× |
+| 8 | 67,12 → 76,89 | 41,27 → 51,07 | 9,80 | Mais dans d'autres situations,,, obligations fiscales dans ton pays de résidence, | 1,08× |
+| 9 | 79,65 → 84,86 | 51,07 → 56,30 | 5,23 | Donc, avant de choisir un pays juste parce qu'on t'a promis du 0%, | 1,00× |
+| 10 | 86,64 → 91,56 | 56,30 → 61,23 | 4,93 | il faut d'abord regarder ta situation personnelle et ton business dans son ensemble, | 1,08× |
+| 11 | 92,49 → 113,99 | 61,23 → 82,73 | 21,50 | Et c'est exactement ce que je fais,,, commente urgence sous cette vidéo, | 1,00× |
+| 12 | 115,61 → 118,40 | 82,73 → 85,53 | 2,80 | Je t'enverrai les renseignements en DM, | 1,08× |
 
 ## Coupes (source) et raisons
 
-| Source (s) | Durée | Contenu | Raison |
-|-----------|-------|---------|--------|
-| 0,00 → 0,31 | 0,31 | Silence avant la 1re prise | Amorce. |
-| 5,00 → 5,38 | 0,38 | Pause entre « fiscalité ? » et « Et c'est… » | Pause 0,55 s resserrée (raccord masqué par le punch-in). |
-| 8,37 → 20,57 | 12,20 | Silence + **prise 2 du hook** (9,4–18,2 s) + souffle, regard hors champ + « Parce que » | Doublon du hook (prise 1 plus fluide) ; connecteur « Parce que » redondant avec le « parce que » de la phrase. |
-| 22,57 → 24,02 | 1,45 | Silence au milieu de « parce… que tu crées » | **Hésitation 1,6 s** resserrée à ~0,2 s. |
-| 31,55 → 39,38 | 7,83 | Silence (2,1 s) + « Ce qui compte, c'est notamment où tu en es. » + silence | **Faux départ / phrase abandonnée**, reprise complète à 39,4 s conservée. |
-| 51,27 → 52,48 | 1,21 | Silence | Respiration > 0,8 s resserrée. |
-| 63,99 → 67,13 | 3,14 | Silence | Blanc 3,1 s resserré. |
-| 76,87 → 79,66 | 2,79 | Silence total | Blanc 2,6 s resserré. |
-| 84,73 → 86,65 | 1,92 | « Il faut d'abord que… » | **Faux départ**, reprise « Il faut d'abord regarder ta situation personnelle… » conservée. |
-| 91,31 → 92,50 | 1,19 | Silence | Respiration > 0,8 s resserrée. |
-| 113,87 → 115,61 | 1,74 | Silence | Blanc 1,4 s resserré avant la dernière phrase. |
-| 118,35 → 118,44 | 0,09 | Fin de fichier | Queue. |
+| Source (s) | Contenu | Raison |
+|-----------|---------|--------|
+| 0,00 → 0,31 | Silence | Amorce. |
+| 5,00 → 5,29 | Pause entre « fiscalité ? » et « Et c'est… » | Pause 0,55 s resserrée. |
+| 8,37 → 20,51 | Silence + **prise 2 du hook** + « Parce que » | Doublon du hook (prise 1 plus fluide) ; connecteur redondant. |
+| 22,70 → 24,02 | Silence au milieu de « parce… que tu crées » | **Hésitation 1,6 s** resserrée. |
+| 31,74 → 39,37 | Silence + « Ce qui compte, c'est notamment où tu en es. » | **Faux départ / phrase abandonnée**. |
+| 39,73 → 40,14 | Souffle + premier « qui » avorté | **Reprise** (« Ce qui… qui compte »). |
+| 51,60 → 52,48 | Silence | Respiration resserrée. |
+| 64,16 → 67,12 | Silence | Blanc 3 s resserré. |
+| 76,89 → 79,65 | Silence | Blanc 2,8 s resserré. |
+| 84,86 → 86,64 | « Il faut d'abord que… » | **Faux départ**. |
+| 91,56 → 92,49 | Silence | Respiration resserrée. |
+| 113,99 → 115,61 | Silence | Blanc resserré avant la dernière phrase. |
 
-**Total coupé : 34,2 s** (118,4 → 84,3 s).
+**Total coupé : 32.9 s** (118,4 → 85.5 s).
 
 ## Points d'attention
-- Whisper lisse les bégaiements et hallucine des répétitions sur les faux départs ; chaque zone douteuse a été vérifiée par profil d'énergie + re-transcription locale.
-- Sur la timeline finale, Whisper a sauté « dans son ensemble » (58,4–60,0 s) : mots réinsérés manuellement dans les sous-titres à partir du calage source.
-- Orthographe des sous-titres fixée manuellement : « 0 % », « DM », « avoir » (Whisper : « avouer »).
+- Whisper lisse les bégaiements et hallucine des mots aux raccords (« que » entendu à 7,8 s alors que l'audio démarre sur « ce ») : les sous-titres sont corrigés à la main à ces endroits.
+- « dans son ensemble » (sauté par Whisper sur la timeline finale) réinséré à partir du calage source.
+- Orthographe fixée : « 0 % », « DM », « avoir ».
