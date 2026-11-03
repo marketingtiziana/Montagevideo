@@ -15,6 +15,9 @@ import BankCard from './elements/BankCard';
 import MemeCard from './elements/MemeCard';
 import FlowCard from './elements/FlowCard';
 import ChartCard from './elements/ChartCard';
+import EmailCard from './elements/EmailCard';
+import CallCard from './elements/CallCard';
+import CalendarCard from './elements/CalendarCard';
 
 const handleStyle: CSSProperties = {
   opacity: 0,
@@ -62,6 +65,15 @@ function ElementNode({ data, selected }: NodeProps<ElementNodeType>) {
       break;
     case 'chart':
       content = <ChartCard el={el} />;
+      break;
+    case 'email':
+      content = <EmailCard el={el} />;
+      break;
+    case 'call':
+      content = <CallCard el={el} />;
+      break;
+    case 'calendar':
+      content = <CalendarCard el={el} />;
       break;
   }
   return (

@@ -1,11 +1,13 @@
 import { board as boardLlc } from '@/data/board';
 import { boardPeur } from '@/data/board-peur';
+import { boardAccompagnement } from '@/data/board-accompagnement';
 import type { Board, BoardImage } from '@/data/board';
 
 /** Registre des boards (une route et un fichier de données par board). */
 export const BOARDS = {
   llc: boardLlc,
   peur: boardPeur,
+  accompagnement: boardAccompagnement,
 } as const satisfies Record<string, Board>;
 
 export type BoardId = keyof typeof BOARDS;

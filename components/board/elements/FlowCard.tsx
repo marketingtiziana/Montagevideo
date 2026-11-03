@@ -8,7 +8,9 @@ import Shell from './Shell';
 export default function FlowCard({ el }: { el: FlowElement }) {
   const board = useBoard();
   const accent = board.lines.right.color;
-  const rows = [el.steps.slice(0, 3), el.steps.slice(3)];
+  const perRow = el.steps.length <= 4 ? 2 : 3;
+  const rows: string[][] = [];
+  for (let i = 0; i < el.steps.length; i += perRow) rows.push(el.steps.slice(i, i + perRow));
   return (
     <Shell width={el.width} overlays={el.overlays} style={{ background: '#1E2235' }}>
       <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">

@@ -46,10 +46,42 @@ export interface MetricElement extends Base {
   tone: 'red' | 'green';
 }
 
+/** Message d’une discussion : texte seul (sortant) ou détaillé (expéditeur, sens, horodatage en toutes lettres). */
+export type ChatMessage = string | { text: string; dir?: 'in' | 'out'; from?: string; time?: string };
+
 export interface ChatElement extends Base {
   type: 'chat';
   title: string;
-  messages: string[];
+  /** Sous-titre (ex. membres d’un groupe). */
+  subtitle?: string;
+  messages: ChatMessage[];
+}
+
+export interface EmailElement extends Base {
+  type: 'email';
+  title: string;
+  /** Lignes envoyées : objet, horodatage en toutes lettres. */
+  items: { subject: string; time: string }[];
+  /** Mention affichée sous le fil (ex. « Aucune réponse »). */
+  note: string;
+}
+
+export interface CallElement extends Base {
+  type: 'call';
+  name: string;
+  status: string;
+  detail: string;
+  /** Libellé du bouton grisé. */
+  action: string;
+}
+
+export interface CalendarElement extends Base {
+  type: 'calendar';
+  title: string;
+  months: string[];
+  /** Index (0 à 11) des mois avec un point de suivi. */
+  marks: number[];
+  legend: string;
 }
 
 export interface PhotoElement extends Base {
@@ -125,7 +157,10 @@ export type BoardElement =
   | PostitElement
   | DocElement
   | FlowElement
-  | ChartElement;
+  | ChartElement
+  | EmailElement
+  | CallElement
+  | CalendarElement;
 
 export interface BoardArrow {
   id: string;
