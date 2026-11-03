@@ -1,0 +1,49 @@
+{
+  "name": "montagevideo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "fetch-images": "tsx scripts/fetch-images.ts",
+    "screenshot": "node scripts/screenshot.mjs",
+    "cutout": "tsx scripts/cutout.ts",
+    "export-pdf": "node scripts/export-pdf.mjs",
+    "build-scene": "tsx scripts/build-scene.ts"
+  },
+  "dependencies": {
+    "@excalidraw/excalidraw": "0.18.0",
+    "framer-motion": "11.11.17",
+    "html-to-image": "1.11.11",
+    "lucide-react": "0.453.0",
+    "next": "14.2.18",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-zoom-pan-pinch": "3.6.1",
+    "roughjs": "4.6.6"
+  },
+  "devDependencies": {
+    "@imgly/background-removal-node": "1.4.5",
+    "@types/node": "20.17.6",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.18",
+    "playwright": "1.63.0",
+    "postcss": "8.4.49",
+    "sharp": "0.32.6",
+    "tailwindcss": "3.4.14",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "onnxruntime-node",
+      "sharp"
+    ]
+  }
+}

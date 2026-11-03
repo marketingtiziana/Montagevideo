@@ -1,4 +1,4 @@
-# Montagevideo — pipeline de montage de réels (vertical 9:16)
+# Montagevideo : pipeline de montage de réels (vertical 9:16) et board LLC
 
 Pipeline semi-automatique pour transformer une vidéo brute (talking-head) en **réel prêt à publier** :
 coupe des hésitations, **sous-titres animés** (blanc gras compact, mots-clés en jaune, changements de
@@ -48,3 +48,50 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
   sous-titres, surtout pour du contenu fiscal.
 - Les temps des beats (transitions/bruitages) et les cartes de sous-titres sont **spécifiques à chaque
   réel** — à adapter dans `gen_ass.py` et `mix_audio.sh`.
+
+---
+
+# Board « LLC » deux colonnes (style Figma / Miro)
+
+Route `/board-llc` : un tableau de travail sur papier quadrillé clair, avec deux lignes verticales
+(rouge à gauche : « LLC montée à l'arrache », verte à droite : « LLC bien structurée »). Le long des
+lignes, dix éléments collés un peu n'importe comment : cartes de métriques, chat WhatsApp,
+faux écrans d'automatisation, tableau des rôles, faux document, graphique, étiquette, et trois
+flèches bleues dessinées à la main de la gauche vers la droite. Sans images. Tout en français.
+
+```bash
+pnpm install
+pnpm dev            # http://localhost:3000/board-llc
+pnpm build
+```
+
+## Canvas et interaction
+- Canvas infini (`react-zoom-pan-pinch`) : pan dans tous les sens, zoom molette et pincement.
+- Éléments déplaçables à la souris (motion values framer-motion, deltas corrigés par le zoom),
+  positions mémorisées dans `localStorage`. Aucune barre d'outils à l'écran.
+- Les flèches bleues et les petits traits vers les lignes suivent les éléments déplacés.
+
+## Contenu et images
+- Tout est dans `data/board.ts` (colonnes, sections, éléments, flèches) ; aucun texte en dur.
+- Images : en priorité le MCP Higgsfield (`generate_image` pour les photos, `remove_background`
+  pour les détourés), fichiers à déposer dans `public/board/raw/<id>.jpg` (+ `credits.json`) et
+  `public/board/cutouts/<id>.png` (+ `manifest.json`). Sinon `PEXELS_API_KEY=... pnpm fetch-images`
+  puis `pnpm cutout`. Sans image : rectangle gris avec le nom, le build ne casse pas.
+- Mèmes : déposer des images dans `public/board/memes/` (emplacement vide sinon).
+- Annotations à la main (`scribble`) : composant présent, désactivé par `showAnnotations: false`.
+- Capture de contrôle : `pnpm screenshot [url] [sortie.png]`.
+
+## Board « Accompagné dans la durée »
+Route `/board-accompagnement` : même style, quinze éléments sans aucune image (gauche : seul après la
+signature, droite : accompagné dans la durée), données dans `data/board-accompagnement.ts`.
+Boutons « Tout voir », « Masquer l'interface » (touche `H`) et « Export PNG ».
+
+## Board « La boîte ne bouge pas, toi oui »
+Route `/board-structure` : même style, quinze éléments sans aucune image (gauche : tout empilé dans un
+seul pays, droite : dissocié), cartes du monde SVG simplifiées à pins, faux écrans bancaires sans montant.
+Données dans `data/board-structure.ts`.
+
+## Variantes précédentes
+- `/board-llc-excalidraw` : canvas Excalidraw (`pnpm build-scene`, `pnpm fetch-images --excalidraw`, `pnpm cutout --excalidraw`).
+- `/board-llc-16x9` : tableau unique 16:9 (`pnpm fetch-images --16x9`, `pnpm cutout --16x9`, `pnpm export-pdf`).
+- `/board-llc-vertical` : visual essay vertical (`pnpm fetch-images --vertical`).
