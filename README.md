@@ -55,9 +55,9 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 
 Route `/board-llc` : un tableau de travail sur papier quadrillé clair, avec deux lignes verticales
 (rouge à gauche : « LLC montée à l'arrache », verte à droite : « LLC bien structurée »). Le long des
-lignes, des éléments collés un peu n'importe comment : faux écrans d'applis, cartes de métriques,
-conversations WhatsApp, graphiques, photos, mèmes, éléments détourés. Chaque étape de la vie d'une
-LLC apparaît des deux côtés, en face à face. Tout en français.
+lignes, quatorze éléments collés un peu n'importe comment : cartes de métriques, chat WhatsApp,
+faux écrans d'automatisation, tableau des rôles, faux document, graphique, photos, mème, éléments
+détourés, et trois flèches bleues dessinées à la main de la gauche vers la droite. Tout en français.
 
 ```bash
 pnpm install
@@ -74,9 +74,10 @@ pnpm build
 
 ## Contenu et images
 - Tout est dans `data/board.ts` (colonnes, sections, éléments, flèches) ; aucun texte en dur.
-- `PEXELS_API_KEY=... pnpm fetch-images` télécharge les photos et sources de cutouts dans
-  `public/board/raw/`, `pnpm cutout` détoure les éléments `cutout` vers `public/board/cutouts/`.
-  Sans clé : rectangle gris avec le nom, le build ne casse pas.
+- Images : en priorité le MCP Higgsfield (`generate_image` pour les photos, `remove_background`
+  pour les détourés), fichiers à déposer dans `public/board/raw/<id>.jpg` (+ `credits.json`) et
+  `public/board/cutouts/<id>.png` (+ `manifest.json`). Sinon `PEXELS_API_KEY=... pnpm fetch-images`
+  puis `pnpm cutout`. Sans image : rectangle gris avec le nom, le build ne casse pas.
 - Mèmes : déposer des images dans `public/board/memes/` (emplacement vide sinon).
 - Annotations à la main (`scribble`) : composant présent, désactivé par `showAnnotations: false`.
 - Capture de contrôle : `pnpm screenshot [url] [sortie.png]`.
