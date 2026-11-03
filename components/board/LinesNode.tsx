@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { useNodes } from '@xyflow/react';
-import { board } from '@/data/board';
+import { useBoard } from './BoardContext';
 import type { BoardNode } from './graph';
 import { roughCurvePaths } from '@/lib/rough';
 import { hashSeed } from '@/lib/random';
@@ -12,6 +12,7 @@ import { hashSeed } from '@/lib/random';
  * qui relient les éléments à leur ligne. Suit les éléments quand on les déplace.
  */
 function LinesNode() {
+  const board = useBoard();
   const nodes = useNodes<BoardNode>();
   const { left, right } = board.lines;
   const minX = Math.min(left.x, right.x) - 400;

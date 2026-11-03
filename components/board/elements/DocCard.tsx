@@ -1,11 +1,12 @@
 'use client';
 
 import type { DocElement } from '@/data/board';
-import { board } from '@/data/board';
+import { useBoard } from '@/components/board/BoardContext';
 import Shell from './Shell';
 
 /** Faux document : en-tête, lignes, tampon. */
 export default function DocCard({ el }: { el: DocElement }) {
+  const board = useBoard();
   const stampColor = board.lines.right.color;
   return (
     <Shell width={el.width} overlays={el.overlays} style={{ background: '#FFFFFF' }}>

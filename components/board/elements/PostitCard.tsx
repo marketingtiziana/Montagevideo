@@ -3,7 +3,7 @@
 import type { PostitElement } from '@/data/board';
 import Shell from './Shell';
 
-const TINTS = { yellow: '#FFF3A6', orange: '#FFD8A8' } as const;
+const TINTS = { yellow: '#FFF3A6', orange: '#FFD8A8', green: '#D9F4DF' } as const;
 
 export default function PostitCard({ el }: { el: PostitElement }) {
   return (

@@ -62,14 +62,14 @@ Les photos téléchargées et `credits.json` sont à versionner pour qu'elles so
 
 ---
 
-## Board « C’est quoi une LLC » (route `/board-llc`)
+## Boards « C’est quoi une LLC » (`/board-llc`) et « Peur qu’on me tombe dessus » (`/board-peur`)
 
 Canvas libre façon papier quadrillé : deux lignes verticales (rouge à gauche, verte à droite), une quinzaine
 d’éléments posés le long des lignes, trois flèches bleues dessinées à la main. Gauche = en nom propre, sans structure.
 Droite = avec une LLC. Pan, zoom, éléments déplaçables ; boutons « Tout voir », « Masquer l’interface » (touche H),
 « Export PNG ».
 
-- Données dans `data/board.ts` (éléments, positions, images, flèches). Zéro texte en dur dans les composants.
+- Données : `data/board.ts` (LLC) et `data/board-peur.ts` (peur), registre dans `lib/boards.ts`. Éléments, positions, images, flèches : zéro texte en dur dans les composants.
 - Composants dans `components/board/` (canvas, couche des lignes, un composant par type d’élément).
 - Images servies en local depuis `public/board/` ; sans fichier, rectangle gris avec le nom.
 

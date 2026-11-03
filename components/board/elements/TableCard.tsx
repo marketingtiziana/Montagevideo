@@ -1,11 +1,12 @@
 'use client';
 
 import type { TableElement } from '@/data/board';
-import { board } from '@/data/board';
+import { useBoard } from '@/components/board/BoardContext';
 import Shell from './Shell';
 
 /** Petit tableau : une ou deux colonnes, lignes alternées. */
 export default function TableCard({ el }: { el: TableElement }) {
+  const board = useBoard();
   const accent = el.side === 'left' ? board.lines.left.color : board.lines.right.color;
   return (
     <Shell width={el.width} overlays={el.overlays}>

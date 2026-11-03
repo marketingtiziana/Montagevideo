@@ -1,11 +1,12 @@
 'use client';
 
 import type { FlowElement } from '@/data/board';
-import { board } from '@/data/board';
+import { useBoard } from '@/components/board/BoardContext';
 import Shell from './Shell';
 
 /** Faux écran d’automatisation : six nœuds reliés, en deux rangées. */
 export default function FlowCard({ el }: { el: FlowElement }) {
+  const board = useBoard();
   const accent = board.lines.right.color;
   const rows = [el.steps.slice(0, 3), el.steps.slice(3)];
   return (

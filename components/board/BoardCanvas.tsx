@@ -15,7 +15,8 @@ import {
   type NodeTypes,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { board } from '@/data/board';
+import type { Board } from '@/data/board';
+import { BoardProvider } from './BoardContext';
 import { buildEdges, buildNodes, LINES_NODE_ID, type BoardNode } from './graph';
 import ElementNode from './ElementNode';
 import LinesNode from './LinesNode';
@@ -26,10 +27,9 @@ import { exportCanvasPng } from '@/lib/export-png';
 const nodeTypes: NodeTypes = { element: ElementNode, lines: LinesNode };
 const edgeTypes: EdgeTypes = { rough: RoughEdge };
 
-const initialNodes = buildNodes(board.elements);
-const initialEdges = buildEdges();
-
-function Canvas() {
+function Canvas({ board }: { board: Board }) {
+  const initialNodes = useMemo(() => buildNodes(board.elements), [board]);
+  const initialEdges = useMemo(() => buildEdges(board), [board]);
   const [nodes, , onNodesChange] = useNodesState<BoardNode>(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
   const [hidden, setHidden] = useState(false);
@@ -64,14 +64,14 @@ function Canvas() {
         scale: 2,
         background: board.background.paper,
         grid: { kind: 'lines', gap: board.background.gridGap, color: board.background.grid },
-        fileName: 'board-llc.png',
+        fileName: `${board.slug}.png`,
       });
     } finally {
       setExporting(false);
     }
-  }, [elementNodes]);
+  }, [elementNodes, board]);
 
-  const fitOptions = useMemo(() => ({ padding: 0.08, nodes: initialNodes.filter((n) => n.id !== LINES_NODE_ID) }), []);
+  const fitOptions = useMemo(() => ({ padding: 0.08, nodes: initialNodes.filter((n) => n.id !== LINES_NODE_ID) }), [initialNodes]);
 
   return (
     <div className="relative h-full w-full" style={{ background: board.background.paper }}>
@@ -99,10 +99,12 @@ function Canvas() {
   );
 }
 
-export default function BoardCanvas() {
+export default function BoardCanvas({ board }: { board: Board }) {
   return (
-    <ReactFlowProvider>
-      <Canvas />
-    </ReactFlowProvider>
+    <BoardProvider board={board}>
+      <ReactFlowProvider>
+        <Canvas board={board} />
+      </ReactFlowProvider>
+    </BoardProvider>
   );
 }

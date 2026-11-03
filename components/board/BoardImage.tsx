@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { board } from '@/data/board';
 import { getBoardCredit } from '@/lib/board-credits';
+import { useBoard } from '@/components/board/BoardContext';
 
 interface BoardImageProps {
   id: string;
@@ -18,6 +18,7 @@ interface BoardImageProps {
  * Sans fichier téléchargé : rectangle gris avec le nom de l’image.
  */
 export default function BoardImage({ id, width, ratio, className, sizes }: BoardImageProps) {
+  const board = useBoard();
   const meta = board.images.find((i) => i.id === id);
   const credit = getBoardCredit(id);
   const alt = meta?.alt ?? id;

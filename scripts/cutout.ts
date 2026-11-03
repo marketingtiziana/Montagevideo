@@ -1,5 +1,5 @@
 /**
- * Détoure en local les images du board marquées `cutout: true` (data/board.ts) :
+ * Détoure en local les images des boards marquées `cutout: true` (data/board*.ts) :
  *
  *   pnpm cutout [--force]
  *
@@ -14,7 +14,7 @@
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
-import { board } from '../data/board';
+import { allBoardImages } from '../lib/boards';
 
 interface Credit {
   file?: string;
@@ -71,7 +71,7 @@ async function pickRemover(): Promise<Remover> {
 }
 
 async function main() {
-  const items = board.images.filter((i) => i.cutout);
+  const items = allBoardImages().filter((i) => i.cutout);
   const credits = JSON.parse(await readFile(CREDITS, 'utf8')) as CreditsFile;
   const todo = [];
   for (const item of items) {

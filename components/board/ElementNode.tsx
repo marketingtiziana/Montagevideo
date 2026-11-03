@@ -14,6 +14,7 @@ import TableCard from './elements/TableCard';
 import BankCard from './elements/BankCard';
 import MemeCard from './elements/MemeCard';
 import FlowCard from './elements/FlowCard';
+import ChartCard from './elements/ChartCard';
 
 const handleStyle: CSSProperties = {
   opacity: 0,
@@ -58,6 +59,9 @@ function ElementNode({ data, selected }: NodeProps<ElementNodeType>) {
       break;
     case 'flow':
       content = <FlowCard el={el} />;
+      break;
+    case 'chart':
+      content = <ChartCard el={el} />;
       break;
   }
   return (

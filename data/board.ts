@@ -72,6 +72,19 @@ export interface BankElement extends Base {
   accountLabel: string;
   /** Libellés des opérations (montants masqués). */
   lines: { label: string; kind: 'in' | 'out' }[];
+  /** Petite courbe de tendance du solde, sans valeur. */
+  trend?: 'up' | 'flat';
+  /** Dernière ligne mise en avant (ex. « Impôts : ? »). */
+  footer?: { label: string; value: string };
+}
+
+export interface ChartElement extends Base {
+  type: 'chart';
+  title?: string;
+  /** Deux séries de barres, hauteurs relatives entre 0 et 1 (aucune valeur affichée). */
+  series: { label: string; values: number[]; tone: 'red' | 'green' }[];
+  /** Mot écrit le long de la flèche bleue courbe. */
+  arrowWord?: string;
 }
 
 export interface MemeElement extends Base {
@@ -85,7 +98,7 @@ export interface PostitElement extends Base {
   type: 'postit';
   text: string;
   size: 'md' | 'lg';
-  tint: 'yellow' | 'orange';
+  tint: 'yellow' | 'orange' | 'green';
 }
 
 export interface DocElement extends Base {
@@ -111,7 +124,8 @@ export type BoardElement =
   | MemeElement
   | PostitElement
   | DocElement
-  | FlowElement;
+  | FlowElement
+  | ChartElement;
 
 export interface BoardArrow {
   id: string;
@@ -129,6 +143,9 @@ export interface BoardLine {
 }
 
 export interface Board {
+  /** Identifiant de route et nom du fichier d’export. */
+  slug: string;
+  title: string;
   background: { paper: string; grid: string; gridGap: number };
   arrowColor: string;
   lines: Record<Side, BoardLine>;
@@ -138,6 +155,8 @@ export interface Board {
 }
 
 export const board: Board = {
+  slug: 'board-llc',
+  title: 'C’est quoi une LLC',
   background: { paper: '#FBFBF8', grid: '#E3E6EC', gridGap: 28 },
   arrowColor: '#2563EB',
   lines: {

@@ -1,10 +1,11 @@
 'use client';
 
 import type { MetricElement } from '@/data/board';
-import { board } from '@/data/board';
+import { useBoard } from '@/components/board/BoardContext';
 import Shell from './Shell';
 
 export default function MetricCard({ el }: { el: MetricElement }) {
+  const board = useBoard();
   const color = el.tone === 'red' ? board.lines.left.color : board.lines.right.color;
   return (
     <Shell width={el.width} overlays={el.overlays} style={{ border: `2px solid ${color}` }}>

@@ -1,5 +1,5 @@
 import type { Edge, Node } from '@xyflow/react';
-import { board, type BoardElement } from '@/data/board';
+import type { Board, BoardElement } from '@/data/board';
 import { hashSeed } from '@/lib/random';
 
 export interface ElementNodeData extends Record<string, unknown> {
@@ -36,7 +36,7 @@ export function buildNodes(elements: BoardElement[]): BoardNode[] {
   return [lines, ...nodes];
 }
 
-export function buildEdges(): Edge[] {
+export function buildEdges(board: Board): Edge[] {
   return board.arrows.map((a) => ({
     id: a.id,
     source: a.from,

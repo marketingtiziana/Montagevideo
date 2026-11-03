@@ -4,7 +4,7 @@
  *   PEXELS_API_KEY=... pnpm fetch-images [mindmap|board|all] [--force]
  *
  * - mindmap : nœuds `photo` de `data/mindmap.ts` → public/mindmap/<id>.jpg (taille medium) + credits.json
- * - board   : photos et détourés de `data/board.ts` → public/board/raw/<id>.jpg (taille large) + credits.json
+ * - board   : photos et détourés de tous les boards (`data/board*.ts`) → public/board/raw/<id>.jpg (taille large) + credits.json
  *   (les images `cutout: true` sont ensuite détourées par `scripts/cutout.ts`)
  *
  * Les images sont servies en local : aucun appel à l’API au runtime.
@@ -13,7 +13,7 @@
 import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import { mindmap } from '../data/mindmap';
-import { board } from '../data/board';
+import { allBoardImages } from '../lib/boards';
 import type { PhotoNodeData } from '../data/types';
 
 interface PexelsPhoto {
@@ -81,7 +81,7 @@ function collections(): Collection[] {
     name: 'board',
     dir: path.join(process.cwd(), 'public', 'board'),
     trackFile: true,
-    items: board.images.map((i) => ({ id: i.id, query: i.imageQuery, alt: i.alt, size: 'large', file: `raw/${i.id}.jpg` })),
+    items: allBoardImages().map((i) => ({ id: i.id, query: i.imageQuery, alt: i.alt, size: 'large', file: `raw/${i.id}.jpg` })),
   };
   if (WHICH === 'mindmap') return [mm];
   if (WHICH === 'board') return [bd];

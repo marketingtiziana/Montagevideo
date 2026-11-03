@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function BoardLlcPage() {
-  return <BoardApp />;
+  return <BoardApp boardId="llc" />;
 }
