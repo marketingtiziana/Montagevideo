@@ -249,8 +249,8 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
               <div key={c.id}>
                 <div className="absolute top-0 z-0" style={{ left: c.x - 1, width: 2, height: data.size.h, background: c.color }} />
                 <div
-                  className="absolute z-10 whitespace-nowrap rounded-md px-3 py-1 text-[14px] font-bold text-white shadow-soft"
-                  style={{ left: c.x - 100, top: 18, background: c.color, width: 200, textAlign: "center" }}
+                  className="absolute z-10 -translate-x-1/2 whitespace-nowrap rounded-md px-3 py-1 text-[14px] font-bold text-white shadow-soft"
+                  style={{ left: c.x, top: 18, background: c.color }}
                 >
                   {c.title}
                 </div>

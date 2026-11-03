@@ -11,7 +11,9 @@ export function Metric({ el }: { el: MetricElement }) {
         <span className="mt-1 inline-flex h-7 w-7 items-center justify-center rounded-full" style={{ background: `${color}1a`, color }}>
           <Trend size={16} strokeWidth={2.5} />
         </span>
-        <div className="text-right text-[34px] font-bold leading-none tracking-tight text-[#1d1d1f]">{el.value}</div>
+        <div className="text-right font-bold leading-none tracking-tight text-[#1d1d1f]" style={{ fontSize: el.value.length > 12 ? 24 : 34 }}>
+          {el.value}
+        </div>
       </div>
       <div className="mt-2 text-[13px] leading-snug text-[#6b6b70]">{el.label}</div>
     </div>
