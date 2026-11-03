@@ -81,6 +81,11 @@ pnpm build
 - Annotations à la main (`scribble`) : composant présent, désactivé par `showAnnotations: false`.
 - Capture de contrôle : `pnpm screenshot [url] [sortie.png]`.
 
+## Board « Accompagné dans la durée »
+Route `/board-accompagnement` : même style, quinze éléments sans aucune image (gauche : seul après la
+signature, droite : accompagné dans la durée), données dans `data/board-accompagnement.ts`.
+Boutons « Tout voir », « Masquer l'interface » (touche `H`) et « Export PNG ».
+
 ## Variantes précédentes
 - `/board-llc-excalidraw` : canvas Excalidraw (`pnpm build-scene`, `pnpm fetch-images --excalidraw`, `pnpm cutout --excalidraw`).
 - `/board-llc-16x9` : tableau unique 16:9 (`pnpm fetch-images --16x9`, `pnpm cutout --16x9`, `pnpm export-pdf`).
