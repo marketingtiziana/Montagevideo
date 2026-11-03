@@ -30,6 +30,7 @@ export function Chart({ el }: { el: ChartElement }) {
           <textPath href={`#curve-${el.id}`} startOffset="22%">{el.word}</textPath>
         </text>
       </svg>
+      {el.legend && <div className="px-1 pt-1 text-[11.5px] leading-snug text-[#6b6b70]">{el.legend}</div>}
     </div>
   );
 }

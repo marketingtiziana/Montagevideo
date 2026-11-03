@@ -1,9 +1,15 @@
 import Image from "next/image";
 import type { MemeElement } from "@/data/types";
 
-/** Mème fourni dans public/board/memes. Dossier vide : emplacement laissé vide. */
-export function Meme({ el, file }: { el: MemeElement; file: string | null }) {
-  if (!file) return null;
+/** Mème fourni dans public/board/memes. Dossier vide : emplacement réservé, discret. */
+export function Meme({ el, file, placeholder }: { el: MemeElement; file: string | null; placeholder: string }) {
+  if (!file) {
+    return (
+      <div className="flex w-full items-center justify-center rounded-lg border border-dashed border-[#c9c9c5] text-[11px] text-[#a0a0a5]" style={{ aspectRatio: "1.2" }}>
+        {placeholder}
+      </div>
+    );
+  }
   return (
     <figure className="overflow-hidden rounded-lg border border-[#e4e4e2] bg-white shadow-soft">
       <div className="relative w-full bg-[#e9e9e6]" style={{ aspectRatio: "1" }}>

@@ -9,6 +9,7 @@ import { Meme } from "./elements/Meme";
 import { Metric } from "./elements/Metric";
 import { Photo } from "./elements/Photo";
 import { Scribble } from "./elements/Scribble";
+import { Table } from "./elements/Table";
 
 export function ElementView({ el, assets, ui, memeFile }: { el: BoardElement; assets: BoardAssets; ui: BoardData["ui"]; memeFile: string | null }) {
   switch (el.type) {
@@ -29,8 +30,10 @@ export function ElementView({ el, assets, ui, memeFile }: { el: BoardElement; as
     case "cutout":
       return <Cutout el={el} assets={assets} />;
     case "meme":
-      return <Meme el={el} file={memeFile} />;
+      return <Meme el={el} file={memeFile} placeholder={ui.memePlaceholder} />;
     case "scribble":
       return <Scribble el={el} />;
+    case "table":
+      return <Table el={el} />;
   }
 }

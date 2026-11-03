@@ -67,6 +67,13 @@ export interface ChartElement extends Base {
   /** Hauteurs relatives, de 0 à 1, sans valeurs affichées. */
   bars: number[];
   word: string;
+  legend?: string;
+}
+
+export interface TableElement extends Base {
+  type: "table";
+  title?: string;
+  rows: { label: string; text: string }[];
 }
 
 export interface DocElement extends Base {
@@ -105,6 +112,7 @@ export interface ScribbleElement extends Base {
 }
 
 export type BoardElement =
+  | TableElement
   | MetricElement
   | FlowElement
   | ChatElement
@@ -138,6 +146,7 @@ export interface BoardData {
     hint: string;
     photoCredit: string;
     chatStatus: string;
+    memePlaceholder: string;
   };
 }
 
