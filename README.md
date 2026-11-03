@@ -68,8 +68,7 @@ pnpm build
 ## Canvas et interaction
 - Canvas infini (`react-zoom-pan-pinch`) : pan dans tous les sens, zoom molette et pincement.
 - Éléments déplaçables à la souris (motion values framer-motion, deltas corrigés par le zoom),
-  positions mémorisées dans `localStorage`, bouton « Réinitialiser ».
-- Boutons « Tout voir » (fit) et « Export PNG » (html-to-image, 2x). `?ui=0` masque les boutons.
+  positions mémorisées dans `localStorage`. Aucune barre d'outils à l'écran.
 - Les flèches bleues et les petits traits vers les lignes suivent les éléments déplacés.
 
 ## Contenu et images

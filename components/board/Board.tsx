@@ -1,12 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { motion, useMotionValue } from "framer-motion";
 import { TransformComponent, TransformWrapper, type ReactZoomPanPinchRef } from "react-zoom-pan-pinch";
-import { Download, Maximize2, RotateCcw } from "lucide-react";
 import rough from "roughjs/bin/rough";
-import { exportNodeToPng } from "@/lib/exportPng";
 import type { Arrow, BoardAssets, BoardData, BoardElement } from "@/data/types";
 import { rngFor } from "@/lib/rng";
 import { ElementView } from "./ElementView";
@@ -145,10 +142,7 @@ function DraggableItem({
 }
 
 export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }) {
-  const params = useSearchParams();
-  const hideUi = params.get("ui") === "0";
   const [offsets, setOffsets] = useState<Record<string, Offset>>({});
-  const [busy, setBusy] = useState(false);
   const wrapperRef = useRef<ReactZoomPanPinchRef>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [boxes, setBoxes] = useState<Record<string, Box>>({});
@@ -209,40 +203,7 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
       }),
     [persist],
   );
-  const reset = useCallback(() => {
-    setOffsets({});
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      /* ignoré */
-    }
-  }, []);
   const getScale = useCallback(() => wrapperRef.current?.instance.transformState.scale ?? 1, []);
-
-  const fit = useCallback(() => {
-    const w = wrapperRef.current;
-    if (!w) return;
-    const all = Object.values(boxes);
-    const minX = Math.min(0, ...all.map((b) => b.x)) - 40;
-    const minY = Math.min(0, ...all.map((b) => b.y)) - 40;
-    const maxX = Math.max(data.size.w, ...all.map((b) => b.x + b.w)) + 40;
-    const maxY = Math.max(data.size.h, ...all.map((b) => b.y + b.h)) + 40;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const scale = Math.min(vw / (maxX - minX), vh / (maxY - minY), 1);
-    w.setTransform(-minX * scale + (vw - (maxX - minX) * scale) / 2, -minY * scale + (vh - (maxY - minY) * scale) / 2, scale, 300);
-  }, [boxes, data.size]);
-
-  const exportPng = useCallback(async () => {
-    const node = contentRef.current;
-    if (!node || busy) return;
-    setBusy(true);
-    try {
-      await exportNodeToPng(node, "board-llc.png", 2, "#F3F3F1");
-    } finally {
-      setBusy(false);
-    }
-  }, [busy]);
 
   useLayoutEffect(() => {
     const fonts = typeof document !== "undefined" && "fonts" in document ? document.fonts.ready : Promise.resolve();
@@ -327,20 +288,6 @@ export function Board({ data, assets }: { data: BoardData; assets: BoardAssets }
       </TransformWrapper>
       {/* Vignettage très léger sur les bords de l'écran */}
       <div className="pointer-events-none fixed inset-0 z-30" style={{ boxShadow: "inset 0 0 120px rgba(0,0,0,0.06)" }} />
-      {!hideUi && (
-        <div data-hud className="fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-lg border border-[#e4e4e2] bg-white/95 p-1.5 shadow-soft backdrop-blur">
-          <button type="button" onClick={fit} disabled={!ready} className="inline-flex items-center gap-1.5 rounded-md bg-[#1d1d1f] px-3 py-1.5 text-[13px] font-semibold text-white disabled:opacity-40">
-            <Maximize2 size={14} /> {data.ui.fit}
-          </button>
-          <button type="button" onClick={reset} className="inline-flex items-center gap-1.5 rounded-md bg-[#f1f1ef] px-3 py-1.5 text-[13px] font-semibold text-[#1d1d1f]">
-            <RotateCcw size={14} /> {data.ui.reset}
-          </button>
-          <button type="button" onClick={exportPng} disabled={!ready || busy} className="inline-flex items-center gap-1.5 rounded-md bg-[#2F6FE4] px-3 py-1.5 text-[13px] font-semibold text-white disabled:opacity-40">
-            <Download size={14} /> {busy ? data.ui.exporting : data.ui.exportPng}
-          </button>
-          <span className="hidden px-2 text-[12px] text-[#8a8a8f] lg:inline">{data.ui.hint}</span>
-        </div>
-      )}
     </div>
   );
 }
