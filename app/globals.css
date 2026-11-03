@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0f1535;
+  --indigo: #4f6bff;
+  --board: #f5f7fb;
+}
+
+html,
+body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* React Flow : transition douce des positions lors du passage Ranger / Désordre */
+.mindmap-animating .react-flow__node {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mindmap-animating .mindmap-rotor {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.react-flow__node {
+  cursor: pointer;
+}
+
+.react-flow__node:focus-visible {
+  outline: none;
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+.react-flow__minimap {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -8px rgba(15, 21, 53, 0.18);
+}
+
+.react-flow__controls {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -8px rgba(15, 21, 53, 0.18);
+}
+
+.react-flow__controls button {
+  background: #ffffff;
+  border-bottom: 1px solid #e7eaf0;
+  color: #0f1535;
+  width: 34px;
+  height: 34px;
+}
+
+.react-flow__controls button:hover {
+  background: #eef1ff;
+}
+
+.react-flow__controls button svg {
+  fill: #0f1535;
+}
+
+/* Panneau latéral : rendu markdown */
+.mindmap-prose h2,
+.mindmap-prose h3,
+.mindmap-prose h4 {
+  font-weight: 900;
+  color: #0f1535;
+  letter-spacing: -0.01em;
+  margin-top: 1.4em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+.mindmap-prose h2 { font-size: 1.5rem; margin-top: 0; }
+.mindmap-prose h3 { font-size: 1.15rem; }
+.mindmap-prose h4 { font-size: 1rem; }
+.mindmap-prose p { margin: 0.6em 0; line-height: 1.6; color: #2b3352; }
+.mindmap-prose ul, .mindmap-prose ol { padding-left: 1.2em; margin: 0.6em 0; color: #2b3352; }
+.mindmap-prose li { margin: 0.3em 0; line-height: 1.55; }
+.mindmap-prose ul li { list-style: disc; }
+.mindmap-prose ol li { list-style: decimal; }
+.mindmap-prose strong { font-weight: 700; color: #0f1535; }
+.mindmap-prose code {
+  font-family: inherit;
+  font-weight: 600;
+  background: #eef1ff;
+  color: #2b41bf;
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+  font-size: 0.92em;
+}
+.mindmap-prose blockquote {
+  border-left: 3px solid #4f6bff;
+  background: #eef1ff;
+  padding: 0.6em 0.9em;
+  border-radius: 10px;
+  margin: 0.8em 0;
+  color: #2b3352;
+}
+.mindmap-prose blockquote p { margin: 0.2em 0; }
+.mindmap-prose hr { border: 0; border-top: 1px solid #e7eaf0; margin: 1.2em 0; }
+.mindmap-prose a { color: #4f6bff; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }

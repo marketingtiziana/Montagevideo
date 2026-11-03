@@ -1,4 +1,90 @@
-# Montagevideo — pipeline de montage de réels (vertical 9:16)
+# Montagevideo
+
+Deux outils dans ce dépôt :
+
+1. **Mindmap interactive « Comment fonctionne une LLC »** (Next.js 14, route `/mindmap-llc`) : voir ci-dessous.
+2. **Pipeline de montage de réels** (Python, dossier `pipeline/`) : voir la seconde partie.
+
+---
+
+## Mindmap « Comment fonctionne une LLC »
+
+Board visuel façon moodboard « en désordre » qui explique le fonctionnement d'une LLC américaine et le
+rôle de chaque acteur, pour un entrepreneur francophone non-résident US. Tout le texte est en français,
+aucun chiffre ni montant.
+
+### Stack
+- Next.js 14 (App Router), TypeScript, Tailwind. Police Inter uniquement.
+- `@xyflow/react` (React Flow) : pan, zoom, minimap, fitView.
+- `roughjs` : liens et cadres « dessinés à la main ».
+- `html-to-image` : export PNG (2x, fond et grille inclus).
+- Aucun backend, aucune base de données : tout est statique et déployable tel quel sur Vercel.
+
+### Lancer
+```bash
+pnpm install
+pnpm dev          # http://localhost:3000/mindmap-llc
+pnpm build        # build de production (sans warning)
+pnpm validate     # cohérence du contenu (ids, liens, orphelins, typographie)
+pnpm lint
+pnpm typecheck
+```
+
+### Photos (Pexels)
+Les nœuds `photo` sont illustrés par des images de banque d'images, servies **en local** (aucun appel API au runtime).
+```bash
+PEXELS_API_KEY=... pnpm fetch-images mindmap  # --force pour retélécharger
+```
+Le script `scripts/fetch-images.ts` recherche `imageQuery` pour chaque nœud `photo`, prend la première image
+paysage (taille medium), l'enregistre dans `public/mindmap/<id>.jpg` et écrit `public/mindmap/credits.json`
+(photographe + URL). Sans clé, le board affiche un bloc couleur + icône et le build ne casse pas.
+Les photos téléchargées et `credits.json` sont à versionner pour qu'elles soient déployées.
+
+### Structure
+| Chemin | Rôle |
+|---|---|
+| `data/types.ts` | Modèle typé : `Cluster`, `MindmapNode` (sticky, photo, schema, card, callout), `MindmapEdge` |
+| `data/mindmap.ts` | **Source de vérité du contenu** : clusters, nœuds, liens, explications markdown. Zéro contenu dans les composants |
+| `lib/layout.ts` | Layouts déterministes (seed fixe) : « désordre » éparpillé avec rotations, « rangé » radial en pétales |
+| `lib/random.ts`, `lib/rough.ts` | PRNG déterministe, helpers roughjs |
+| `components/mindmap/MindmapBoard.tsx` | Board React Flow, bascule Ranger / Désordre, export PNG, cadrage |
+| `components/mindmap/nodes/` | Les 5 composants de nœuds |
+| `components/mindmap/schemas/` | Les 5 schémas SVG (organigramme, flux d'argent, timeline, calendrier, transparence) |
+| `components/mindmap/SidePanel.tsx` | Panneau latéral (explication complète en markdown) |
+| `scripts/fetch-images.ts`, `scripts/validate-data.ts` | Photos Pexels, validation du contenu |
+| `docs/screenshots/` | Captures d'écran de chaque étape |
+
+### Interactions
+- Clic sur un nœud : panneau latéral avec l'explication complète.
+- « Ranger / Désordre » : bascule animée entre le layout éparpillé et le layout radial.
+- « Exporter PNG » : image 2x du board complet, fond et grille compris.
+- Mobile : cadrage lisible sur le cœur de la carte, zoom tactile, panneau en feuille basse.
+
+---
+
+## Boards « C’est quoi une LLC » (`/board-llc`), « Peur qu’on me tombe dessus » (`/board-peur`) et « Accompagné dans la durée » (`/board-accompagnement`)
+
+Canvas libre façon papier quadrillé : deux lignes verticales (rouge à gauche, verte à droite), une quinzaine
+d’éléments posés le long des lignes, trois flèches bleues dessinées à la main. Gauche = en nom propre, sans structure.
+Droite = avec une LLC. Pan, zoom, éléments déplaçables ; boutons « Tout voir », « Masquer l’interface » (touche H),
+« Export PNG ».
+
+- Données : `data/board.ts` (LLC), `data/board-peur.ts` (peur) et `data/board-accompagnement.ts` (accompagnement, sans aucune image), registre dans `lib/boards.ts`. Éléments, positions, images, flèches : zéro texte en dur dans les composants.
+- Composants dans `components/board/` (canvas, couche des lignes, un composant par type d’élément).
+- Images servies en local depuis `public/board/` ; sans fichier, rectangle gris avec le nom.
+
+```bash
+PEXELS_API_KEY=... pnpm fetch-images board   # photos et détourés bruts → public/board/raw/, credits.json
+pnpm cutout                                  # détourage local → public/board/cutouts/*.png
+```
+
+`pnpm cutout` utilise la commande `rembg` si elle est installée (`pip install "rembg[cli]"`), sinon le paquet
+`@imgly/background-removal-node` (`pnpm add -D @imgly/background-removal-node`). Les mèmes se déposent à la main dans
+`public/board/memes/` et se référencent par `src` dans `data/board.ts` : rien n’est cherché en ligne.
+
+---
+
+## Pipeline de montage de réels (vertical 9:16)
 
 Pipeline semi-automatique pour transformer une vidéo brute (talking-head) en **réel prêt à publier** :
 coupe des hésitations, **sous-titres animés** (blanc gras compact, mots-clés en jaune, changements de
