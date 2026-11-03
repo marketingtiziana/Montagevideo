@@ -55,9 +55,9 @@ bash   pipeline/mix_audio.sh finalv.mp4 REEL_final.mp4   # bruitages + fichier f
 
 Route `/board-llc` : un tableau de travail sur papier quadrillé clair, avec deux lignes verticales
 (rouge à gauche : « LLC montée à l'arrache », verte à droite : « LLC bien structurée »). Le long des
-lignes, quatorze éléments collés un peu n'importe comment : cartes de métriques, chat WhatsApp,
-faux écrans d'automatisation, tableau des rôles, faux document, graphique, photos, mème, éléments
-détourés, et trois flèches bleues dessinées à la main de la gauche vers la droite. Tout en français.
+lignes, dix éléments collés un peu n'importe comment : cartes de métriques, chat WhatsApp,
+faux écrans d'automatisation, tableau des rôles, faux document, graphique, étiquette, et trois
+flèches bleues dessinées à la main de la gauche vers la droite. Sans images. Tout en français.
 
 ```bash
 pnpm install

@@ -10,7 +10,7 @@ export const BLUE = "#2F6FE4";
 
 export const board: BoardData = {
   title: "Comment fonctionne une LLC",
-  size: { w: 1600, h: 3200 },
+  size: { w: 1600, h: 2250 },
   showAnnotations: false,
   ui: {
     fit: "Tout voir",
@@ -46,10 +46,8 @@ export const board: BoardData = {
       ],
       tick: true,
     },
-    { id: "l3-photo", type: "photo", column: "left", x: 150, y: 900, w: 360, z: 1, imageQuery: "stressed person laptop desk covered with mail envelopes", caption: "Personne stressée, courrier partout", aspect: 1.4, tick: true },
     { id: "l4-chip", type: "chip", column: "left", x: 300, y: 1230, w: 390, z: 2, text: "Courrier du registered agent : non lu", icons: ["mail", "bell", "alert"] },
     { id: "l5-metric", type: "metric", column: "left", x: 260, y: 1560, w: 320, z: 2, value: "0 impôt ?", label: "Croyait que LLC = zéro impôt", trend: "down", tone: "bad", tick: true },
-    { id: "l6-meme", type: "meme", column: "left", x: 150, y: 1900, w: 320, z: 1, caption: "Mème" },
     // Droite (verte)
     {
       id: "r7-flow",
@@ -88,13 +86,12 @@ export const board: BoardData = {
       tick: true,
     },
     { id: "r9-doc", type: "doc", column: "right", x: 990, y: 920, w: 330, z: 1, header: "Document interne", title: "Operating Agreement", lines: ["Les règles internes : parts, décisions, distributions.", "Signé par tous les membres."], stamp: "Signé", tick: true },
-    { id: "r9-cutout-passeport", type: "cutout", column: "right", x: 1220, y: 1030, w: 210, z: 3, imageQuery: "passport isolated on white background", cutout: true, alt: "Passeport", aspect: 1.3 },
     {
       id: "r10-flow",
       type: "flow",
       column: "right",
       x: 970,
-      y: 1260,
+      y: 1190,
       w: 400,
       title: "Trajet de l'argent",
       tag: "Auto-send",
@@ -106,13 +103,12 @@ export const board: BoardData = {
       ],
       tick: true,
     },
-    { id: "r10-cutout-carte", type: "cutout", column: "right", x: 1330, y: 1500, w: 230, z: 3, imageQuery: "credit card isolated on white background", cutout: true, alt: "Carte bancaire", aspect: 1.6 },
     {
       id: "r11-chart",
       type: "chart",
       column: "right",
       x: 1000,
-      y: 1640,
+      y: 1540,
       w: 380,
       z: 2,
       title: "Transparente par défaut",
@@ -126,7 +122,7 @@ export const board: BoardData = {
       type: "flow",
       column: "right",
       x: 970,
-      y: 1980,
+      y: 1870,
       w: 420,
       title: "Chaque année",
       tag: "Auto-send",
@@ -137,13 +133,10 @@ export const board: BoardData = {
       ],
       tick: true,
     },
-    { id: "r12-cutout-calendrier", type: "cutout", column: "right", x: 1340, y: 2220, w: 230, z: 3, imageQuery: "desk calendar isolated on white background", cutout: true, alt: "Calendrier", aspect: 1.1 },
-    { id: "r13-photo", type: "photo", column: "right", x: 1000, y: 2400, w: 380, z: 1, imageQuery: "calm entrepreneur laptop clean office natural light", caption: "Entrepreneur serein", aspect: 1.4, tick: true },
-    { id: "r14-photo-skyline", type: "photo", column: "right", x: 1180, y: 2720, w: 340, z: 2, imageQuery: "new york skyline blue dusk", caption: "Skyline US", aspect: 1.5 },
   ],
   arrows: [
     { from: "l2-chat", to: "r8-table" },
     { from: "l5-metric", to: "r11-chart" },
-    { from: "l6-meme", to: "r12-flow" },
+    { from: "l4-chip", to: "r12-flow" },
   ],
 };
