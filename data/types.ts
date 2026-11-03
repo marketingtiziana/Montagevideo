@@ -156,7 +156,37 @@ export interface Chart2Element extends Base {
   word: string;
 }
 
+export interface MapPin {
+  lat: number;
+  lon: number;
+  color: string;
+  label?: string;
+  /** Étiquettes empilées sur le pin. */
+  stack?: string[];
+}
+
+export interface WorldmapElement extends Base {
+  type: "worldmap";
+  title?: string;
+  pins: MapPin[];
+  legend?: string;
+}
+
+export interface BankElement extends Base {
+  type: "bank";
+  app: string;
+  title: string;
+  status: string;
+  tone: "good" | "bad";
+  banner?: string;
+  note?: string;
+  label?: string;
+  button?: { text: string; disabled: boolean };
+}
+
 export type BoardElement =
+  | WorldmapElement
+  | BankElement
   | PostitElement
   | EmailsElement
   | GroupElement

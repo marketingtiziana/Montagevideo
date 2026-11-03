@@ -16,6 +16,8 @@ import { Group } from "./elements/Group";
 import { Call } from "./elements/Call";
 import { Calendar } from "./elements/Calendar";
 import { Chart2 } from "./elements/Chart2";
+import { Worldmap } from "./elements/Worldmap";
+import { Bank } from "./elements/Bank";
 
 export function ElementView({ el, assets, ui, memeFile }: { el: BoardElement; assets: BoardAssets; ui: BoardData["ui"]; memeFile: string | null }) {
   switch (el.type) {
@@ -53,5 +55,9 @@ export function ElementView({ el, assets, ui, memeFile }: { el: BoardElement; as
       return <Calendar el={el} />;
     case "chart2":
       return <Chart2 el={el} />;
+    case "worldmap":
+      return <Worldmap el={el} />;
+    case "bank":
+      return <Bank el={el} />;
   }
 }
