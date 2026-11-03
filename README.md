@@ -33,7 +33,7 @@ pnpm typecheck
 ### Photos (Pexels)
 Les nœuds `photo` sont illustrés par des images de banque d'images, servies **en local** (aucun appel API au runtime).
 ```bash
-PEXELS_API_KEY=... pnpm fetch-images          # --force pour retélécharger
+PEXELS_API_KEY=... pnpm fetch-images mindmap  # --force pour retélécharger
 ```
 Le script `scripts/fetch-images.ts` recherche `imageQuery` pour chaque nœud `photo`, prend la première image
 paysage (taille medium), l'enregistre dans `public/mindmap/<id>.jpg` et écrit `public/mindmap/credits.json`
@@ -59,6 +59,28 @@ Les photos téléchargées et `credits.json` sont à versionner pour qu'elles so
 - « Ranger / Désordre » : bascule animée entre le layout éparpillé et le layout radial.
 - « Exporter PNG » : image 2x du board complet, fond et grille compris.
 - Mobile : cadrage lisible sur le cœur de la carte, zoom tactile, panneau en feuille basse.
+
+---
+
+## Board « C’est quoi une LLC » (route `/board-llc`)
+
+Canvas libre façon papier quadrillé : deux lignes verticales (rouge à gauche, verte à droite), une quinzaine
+d’éléments posés le long des lignes, trois flèches bleues dessinées à la main. Gauche = en nom propre, sans structure.
+Droite = avec une LLC. Pan, zoom, éléments déplaçables ; boutons « Tout voir », « Masquer l’interface » (touche H),
+« Export PNG ».
+
+- Données dans `data/board.ts` (éléments, positions, images, flèches). Zéro texte en dur dans les composants.
+- Composants dans `components/board/` (canvas, couche des lignes, un composant par type d’élément).
+- Images servies en local depuis `public/board/` ; sans fichier, rectangle gris avec le nom.
+
+```bash
+PEXELS_API_KEY=... pnpm fetch-images board   # photos et détourés bruts → public/board/raw/, credits.json
+pnpm cutout                                  # détourage local → public/board/cutouts/*.png
+```
+
+`pnpm cutout` utilise la commande `rembg` si elle est installée (`pip install "rembg[cli]"`), sinon le paquet
+`@imgly/background-removal-node` (`pnpm add -D @imgly/background-removal-node`). Les mèmes se déposent à la main dans
+`public/board/memes/` et se référencent par `src` dans `data/board.ts` : rien n’est cherché en ligne.
 
 ---
 

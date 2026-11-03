@@ -9,6 +9,11 @@ import MetricCard from './elements/MetricCard';
 import ChatCard from './elements/ChatCard';
 import PostitCard from './elements/PostitCard';
 import DocCard from './elements/DocCard';
+import PhotoCard from './elements/PhotoCard';
+import TableCard from './elements/TableCard';
+import BankCard from './elements/BankCard';
+import MemeCard from './elements/MemeCard';
+import FlowCard from './elements/FlowCard';
 
 const handleStyle: CSSProperties = {
   opacity: 0,
@@ -39,8 +44,21 @@ function ElementNode({ data, selected }: NodeProps<ElementNodeType>) {
     case 'doc':
       content = <DocCard el={el} />;
       break;
-    default:
-      content = null;
+    case 'photo':
+      content = <PhotoCard el={el} />;
+      break;
+    case 'table':
+      content = <TableCard el={el} />;
+      break;
+    case 'bank':
+      content = <BankCard el={el} />;
+      break;
+    case 'meme':
+      content = <MemeCard el={el} />;
+      break;
+    case 'flow':
+      content = <FlowCard el={el} />;
+      break;
   }
   return (
     <div className={`relative transition-transform ${selected ? 'scale-[1.01]' : ''}`}>

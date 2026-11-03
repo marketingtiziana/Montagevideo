@@ -60,7 +60,7 @@ function Canvas() {
       await exportCanvasPng({
         viewport,
         bounds: getNodesBounds(elementNodes()),
-        padding: 140,
+        padding: 190,
         scale: 2,
         background: board.background.paper,
         grid: { kind: 'lines', gap: board.background.gridGap, color: board.background.grid },
