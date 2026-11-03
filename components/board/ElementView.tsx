@@ -10,6 +10,12 @@ import { Metric } from "./elements/Metric";
 import { Photo } from "./elements/Photo";
 import { Scribble } from "./elements/Scribble";
 import { Table } from "./elements/Table";
+import { Postit } from "./elements/Postit";
+import { Emails } from "./elements/Emails";
+import { Group } from "./elements/Group";
+import { Call } from "./elements/Call";
+import { Calendar } from "./elements/Calendar";
+import { Chart2 } from "./elements/Chart2";
 
 export function ElementView({ el, assets, ui, memeFile }: { el: BoardElement; assets: BoardAssets; ui: BoardData["ui"]; memeFile: string | null }) {
   switch (el.type) {
@@ -35,5 +41,17 @@ export function ElementView({ el, assets, ui, memeFile }: { el: BoardElement; as
       return <Scribble el={el} />;
     case "table":
       return <Table el={el} />;
+    case "postit":
+      return <Postit el={el} />;
+    case "emails":
+      return <Emails el={el} />;
+    case "group":
+      return <Group el={el} />;
+    case "call":
+      return <Call el={el} />;
+    case "calendar":
+      return <Calendar el={el} />;
+    case "chart2":
+      return <Chart2 el={el} />;
   }
 }

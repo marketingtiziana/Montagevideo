@@ -111,7 +111,58 @@ export interface ScribbleElement extends Base {
   h: number;
 }
 
+export interface PostitElement extends Base {
+  type: "postit";
+  text: string;
+  color: string;
+  /** Taille du texte en px. */
+  size?: number;
+}
+
+export interface EmailsElement extends Base {
+  type: "emails";
+  folder: string;
+  items: { subject: string; preview: string; date: string; status: string }[];
+}
+
+export interface GroupElement extends Base {
+  type: "group";
+  name: string;
+  members: string;
+  messages: { from: string; color: string; text: string; time: string }[];
+}
+
+export interface CallElement extends Base {
+  type: "call";
+  title: string;
+  subtitle: string;
+  time: string;
+  button: string;
+}
+
+export interface CalendarElement extends Base {
+  type: "calendar";
+  title: string;
+  months: string[];
+  /** Points de suivi : mois (0 à 11) et jour (1 à 31). */
+  marks: { month: number; day: number }[];
+  legend: string;
+}
+
+export interface Chart2Element extends Base {
+  type: "chart2";
+  title: string;
+  series: { label: string; color: string; values: number[] }[];
+  word: string;
+}
+
 export type BoardElement =
+  | PostitElement
+  | EmailsElement
+  | GroupElement
+  | CallElement
+  | CalendarElement
+  | Chart2Element
   | TableElement
   | MetricElement
   | FlowElement
@@ -147,7 +198,10 @@ export interface BoardData {
     photoCredit: string;
     chatStatus: string;
     memePlaceholder: string;
+    hide: string;
   };
+  /** Affiche la barre d'outils (Tout voir, Masquer l'interface, Export PNG). */
+  tools: boolean;
 }
 
 export interface BoardAssets {

@@ -21,7 +21,9 @@ export const board: BoardData = {
     photoCredit: "Photo",
     chatStatus: "en ligne",
     memePlaceholder: "Mème (public/board/memes)",
+    hide: "Masquer l'interface",
   },
+  tools: false,
   columns: [
     { id: "left", title: "LLC montée à l'arrache", color: RED, x: 330 },
     { id: "right", title: "LLC bien structurée", color: GREEN, x: 1130 },
