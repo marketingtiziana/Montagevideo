@@ -1,17 +1,62 @@
 [
- {"t": 0.0,   "titre": "Qui est Tiziana ?"},
- {"t": 42.0,  "titre": "Un cabinet fiscal pour les digital nomades"},
- {"t": 101.4, "titre": "Dubaï, la grande destination ?"},
- {"t": 156.8, "titre": "Résident à Dubaï, clients français : où payer ses impôts ?"},
- {"t": 211.1, "titre": "Tout le monde n'est pas prêt à s'expatrier"},
- {"t": 281.5, "titre": "Tester un pays : au-delà des 3 mois"},
- {"t": 324.6, "titre": "Choisir un pays : fiscalité ou cadre de vie ?"},
- {"t": 389.6, "titre": "Zéro impôt, vraiment ? Les coûts cachés de Dubaï"},
- {"t": 432.3, "titre": "L'audit : la réponse, c'est toi"},
- {"t": 506.1, "titre": "Une équipe et des partenaires dans le monde"},
- {"t": 563.5, "titre": "À partir de quand s'expatrier ?"},
- {"t": 612.3, "titre": "Bali, la destination n°1"},
- {"t": 652.3, "titre": "Femme entrepreneuse, burn-out et charge mentale"},
- {"t": 772.2, "titre": "Partir pour se reconstruire"},
- {"t": 807.8, "titre": "Dans un an : transmettre"}
+ {
+  "titre": "Qui est Tiziana ?",
+  "ancre": "Bonjour à tous"
+ },
+ {
+  "titre": "Un cabinet fiscal pour les digital nomades",
+  "ancre": "cabinet fiscal d'expatriation est sur"
+ },
+ {
+  "titre": "Dubaï, la grande destination ?",
+  "ancre": "d'ailleurs là j'ai cru comprendre"
+ },
+ {
+  "titre": "Résident à Dubaï, clients français : où payer ses impôts ?",
+  "ancre": "et si je suis en France"
+ },
+ {
+  "titre": "Tout le monde n'est pas prêt à s'expatrier",
+  "ancre": "Après, pour moi, j'essaie"
+ },
+ {
+  "titre": "Tester un pays : au-delà des 3 mois",
+  "ancre": "Oui, donc tu penses qu'il"
+ },
+ {
+  "titre": "Choisir un pays : fiscalité ou cadre de vie ?",
+  "ancre": "Eh bien, écoute"
+ },
+ {
+  "titre": "Zéro impôt, vraiment ? Les coûts cachés de Dubaï",
+  "ancre": "En fait, ça va dépendre si"
+ },
+ {
+  "titre": "L'audit : la réponse, c'est toi",
+  "ancre": "Est-ce que tu as déjà eu un client"
+ },
+ {
+  "titre": "Une équipe et des partenaires dans le monde",
+  "ancre": "Et tu as des collaborateurs"
+ },
+ {
+  "titre": "À partir de quand s'expatrier ?",
+  "ancre": "une autre question pour toi"
+ },
+ {
+  "titre": "Bali, la destination n°1",
+  "ancre": "Quelle est la destination"
+ },
+ {
+  "titre": "Femme entrepreneuse, burn-out et charge mentale",
+  "ancre": "Et on a eu l'occasion"
+ },
+ {
+  "titre": "Partir pour se reconstruire",
+  "ancre": "Et comment tu t'es remis"
+ },
+ {
+  "titre": "Dans un an : transmettre",
+  "ancre": "je vais te poser une dernière"
+ }
 ]
