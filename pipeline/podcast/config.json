@@ -1,0 +1,22 @@
+{
+ "rushs": {
+  "cam_large": "source.mp4",
+  "cam_hote": "source.mp4",
+  "cam_invite": "source.mp4"
+ },
+ "audio_hote": "intégré",
+ "audio_invite": "intégré",
+ "sponsor_rush": "aucun",
+ "nom_podcast": "À DÉFINIR",
+ "hote": "À DÉFINIR",
+ "invite": "À DÉFINIR",
+ "invite_fonction": "À DÉFINIR",
+ "invite_linkedin": "",
+ "invite_instagram": "",
+ "couleur_primaire": "#1E5BFF",
+ "couleur_accent": "#FFCC00",
+ "couleur_texte": "#FFFFFF",
+ "fps_sortie": "30000/1001",
+ "sync_ref": "cam_large",
+ "cote_hote": "droite"
+}
