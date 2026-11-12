@@ -21,7 +21,10 @@ G=https://raw.githubusercontent.com/google/fonts/main/ofl
 mkdir -p work
 [ -f work/audio16.wav ] || ffmpeg -v error -y -i source.mp4 -vn -ac 1 -ar 16000 work/audio16.wav
 [ -f work/audio48.wav ] || ffmpeg -v error -y -i source.mp4 -vn -c:a pcm_s16le -ar 48000 work/audio48.wav
-echo OK
 # Instance statique Montserrat ExtraBold Italic (wght 800) pour libass
 pip3 install --quiet fonttools
 [ -f fonts/Montserrat-ExtraBoldItalic.ttf ] || python3 pipeline/podcast/make_font.py
+# Détecteur de visages YuNet (opencv_zoo, CDN GitHub)
+mkdir -p models/yunet
+[ -s models/yunet/yunet.onnx ] || curl -sSL -o models/yunet/yunet.onnx "https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx"
+echo OK
