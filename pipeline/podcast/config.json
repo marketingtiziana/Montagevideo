@@ -36,5 +36,14 @@
  "invite_youtube": "@Tiziana_Caci",
  "jingle": false,
  "end_slate": false,
- "cta_disponible_sur": false
+ "cta_disponible_sur": false,
+ "cta_commentaire": false,
+ "bips": [
+  "couillon",
+  "fric"
+ ],
+ "musique_teaser_style": "calme",
+ "musique_teaser_lufs": -24,
+ "ducking_ratio": 2.5,
+ "musique_teaser_gain_db": 0
 }

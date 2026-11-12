@@ -27,17 +27,23 @@ def nframes(p):
 ENC_I = ['-c:v', 'libx264', '-preset', 'ultrafast' if a.preview else 'veryfast', '-crf', '18' if a.preview else '12', '-pix_fmt', 'yuv420p']
 
 # ---------- habillage de l'épisode (temps épisode, s)
-lt_shot = next(s for s in SHOTS if s['cam'] == 'I' and s['kind'] == 'rapproché' and s['t0'] >= 80 and s['dur'] >= 6)
-T_LT = lt_shot['t0'] + 0.5; T_SOC = T_LT + 5.0
+EPW = json.load(open('work/ep_words.json'))
+# lower third + réseaux : quand l'hôte présente l'invitée (1re fois que l'hôte prononce son prénom)
+prenom = (cfg.get('invite') or 'Tiziana').lower()
+w_intro = next((w for w in EPW if w['spk'] == 'hote' and prenom in w['w'].lower()), None)
+T_LT = w_intro['t0'] if w_intro else 12.0
+T_SOC = T_LT + 5.0
 T_CTA1 = 2.0; T_CTA2 = EP_N / FPS - 20.0
 OVER = [('cta', T_CTA1), ('lower_third', T_LT), ('reseaux', T_SOC), ('cta', T_CTA2)]
-SFX = [(T_CTA1 + (TIM['pop_entree_1'] or 0), 'pop'), (T_CTA1 + TIM['pop_entree_2'], 'pop'), (T_CTA1 + TIM['clic'], 'clic'),
-       (T_CTA1 + TIM['pop_commentaire'], 'pop'), (T_LT, 'pop'), (T_SOC, 'pop'),
-       (T_CTA2 + (TIM['pop_entree_1'] or 0), 'pop'), (T_CTA2 + TIM['pop_entree_2'], 'pop'), (T_CTA2 + TIM['clic'], 'clic'),
-       (T_CTA2 + TIM['pop_commentaire'], 'pop')]
-if TIM['pop_entree_1'] is None: SFX = [x for x in SFX if not (x[1] == 'pop' and any(abs(x[0] - (t + 0)) < 1e-6 for t in (T_CTA1, T_CTA2)))] + \
-    [(T_CTA1 + TIM['pop_entree_2'], 'pop'), (T_CTA2 + TIM['pop_entree_2'], 'pop')]
+SFX = [(T_LT, 'pop'), (T_SOC, 'pop')]
+for t in (T_CTA1, T_CTA2):
+    for k, kind in (('pop_entree_1', 'pop'), ('pop_entree_2', 'pop'), ('clic', 'clic'), ('pop_commentaire', 'pop')):
+        if TIM.get(k) is not None: SFX.append((t + TIM[k], kind))
 SFX = sorted(set(SFX))
+# bips de censure : mots listés dans config « bips » (sous-chaînes, minuscules)
+BIPS = [(w['t0'] - 0.03, w['t1'] + 0.03, w['w']) for w in EPW
+        if any(b in w['w'].lower() for b in cfg.get('bips', []))]
+print('bips :', [(round(a, 2), m) for a, _, m in BIPS])
 
 def dress(src, out, t_from, subs=None):
     """watermark (+ sous-titres) (+ overlays épisode décalés de t_from)"""
@@ -79,6 +85,13 @@ def body_audio(t0, t1):
     for t, kind in SFX:
         j = int((t - fr(t0) / FPS) * SR); s = SFXW[kind] * (0.5 if kind == 'pop' else 0.6)
         if 0 <= j < n: x[j:j + len(s)] += s[:n - j]
+    for a_, b_, _ in BIPS:            # bip 1 kHz à la place du mot (voix coupée, fondus 5 ms)
+        j0, j1 = int((a_ - fr(t0) / FPS) * SR), int((b_ - fr(t0) / FPS) * SR)
+        if j1 <= 0 or j0 >= n: continue
+        j0, j1 = max(j0, 0), min(j1, n); L = j1 - j0; f5 = int(0.005 * SR)
+        env = np.ones(L); env[:f5] = np.linspace(0, 1, f5); env[-f5:] = np.linspace(1, 0, f5)
+        tone = (0.18 * np.sin(2 * np.pi * 1000 * np.arange(L) / SR) * env)[:, None]
+        x[j0:j1] = x[j0:j1] * (1 - env[:, None]) + tone
     return x
 tn = nframes('work/teaser_v.mp4')
 dress('work/teaser_v.mp4', 'work/teaser_c.mp4', 0, subs='work/teaser.ass')

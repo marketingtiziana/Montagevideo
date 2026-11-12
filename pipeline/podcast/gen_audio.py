@@ -82,6 +82,32 @@ def music_teaser(dur=36.0, bpm=120):
     fade = np.minimum(1, np.arange(n) / (0.05 * SR))
     save('assets/podcast/musique_teaser.wav', np.stack([L * fade, R * fade], 1))
 
+# ------------------------------------------------------------------ musique teaser calme (lo-fi 84 bpm)
+def music_teaser_calme(dur=36.0, bpm=84):
+    beat = 60 / bpm; n = int(dur * SR); L = np.zeros(n); R = np.zeros(n)
+    def add(sig, at, pan=0.0, g=1.0):
+        i = int(at * SR)
+        if i >= n: return
+        j = min(n, i + len(sig)); L[i:j] += sig[:j - i] * g * (1 - pan); R[i:j] += sig[:j - i] * g * (1 + pan)
+    tk = t_(0.3); kick = lp_fast(np.sin(2 * np.pi * (50 + 60 * np.exp(-tk * 25)) * tk) * np.exp(-tk * 10), 300)
+    th = t_(0.05); hat = lp_fast(hp_fast(rng.standard_normal(len(th)), 5000), 9000) * np.exp(-th * 80)
+    tr = t_(0.2); rim = hp_fast(rng.standard_normal(len(tr)), 1500) * np.exp(-tr * 30)
+    chords = [[57, 60, 64, 67], [53, 57, 60, 64], [48, 52, 55, 59], [55, 59, 62, 65]]   # Am7 Fmaj7 Cmaj7 G7
+    for b in range(int(dur / (4 * beat)) + 1):
+        ch = chords[b % 4]; t0 = b * 4 * beat
+        add(kick, t0, g=0.55); add(kick, t0 + 2.5 * beat, g=0.4)
+        add(rim, t0 + beat, g=0.12); add(rim, t0 + 3 * beat, g=0.12)
+        for k in range(8): add(hat, t0 + k * beat / 2 + (0.03 if k % 2 else 0), pan=0.25, g=0.05 if k % 2 else 0.08)
+        tp = t_(4 * beat + 0.6)                       # piano électrique doux (sinus + harmonique, trémolo)
+        ep = sum(np.sin(2 * np.pi * note(m) * tp) + 0.25 * np.sin(4 * np.pi * note(m) * tp) for m in ch)
+        ep *= np.exp(-tp * 0.9) * (1 + 0.15 * np.sin(2 * np.pi * 4.5 * tp)) * np.minimum(1, tp / 0.01)
+        add(ep, t0, pan=-0.1, g=0.09); add(ep, t0 + 2 * beat, pan=0.1, g=0.05)
+        tb = t_(2 * beat); bass = lp_fast(np.sin(2 * np.pi * note(ch[0] - 24) * tb), 400) * np.exp(-tb * 1.5)
+        add(bass, t0, g=0.35); add(bass, t0 + 2 * beat, g=0.3)
+    noise = lp_fast(rng.standard_normal(n), 2500) * 0.004      # souffle vinyle léger
+    fade = np.minimum(1, np.arange(n) / (0.4 * SR))
+    save('assets/podcast/musique_teaser.wav', np.stack([(L + noise) * fade, (R + noise) * fade], 1))
+
 # ------------------------------------------------------------------ musique douce (end slate)
 def music_end(dur=8.5):
     n = int(dur * SR); x = np.zeros((n, 2)); beat = 60 / 84
@@ -111,6 +137,8 @@ def jingle(dur=1.5):
 
 if __name__ == '__main__':
     sfx()
-    for name, fn in (('musique_teaser.wav', music_teaser), ('musique_end.wav', music_end), ('jingle.wav', jingle)):
+    import json
+    style = json.load(open('pipeline/podcast/config.json')).get('musique_teaser_style', 'energique')
+    for name, fn in (('musique_teaser.wav', music_teaser_calme if style == 'calme' else music_teaser), ('musique_end.wav', music_end), ('jingle.wav', jingle)):
         if os.path.exists(f'assets/{name}'): shutil.copy(f'assets/{name}', f'assets/podcast/{name}'); print(name, ': fourni')
         else: fn()

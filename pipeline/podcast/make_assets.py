@@ -183,7 +183,8 @@ def cursor_img(s=54):
 def make_cta():
     DISPO = cfg.get('cta_disponible_sur', True)        # pilule « Podcast disponible sur » (désactivable)
     A0 = 4.7 if DISPO else 0.0
-    n = int(round((A0 + 5.3) * FPS)); f = font(F_UI, 36)
+    COM = cfg.get('cta_commentaire', True)             # dernière étape « Laisse un commentaire » (désactivable)
+    n = int(round((A0 + (5.3 if COM else 3.6)) * FPS)); f = font(F_UI, 36)
     p1 = pill('Podcast disponible sur', f, PRI, icons=('apple', 'spotify'))
     p_sub = pill("S'abonner", f, (230, 33, 23, 255), icons=('bell',), icon_s=44)
     p_ok = pill('Abonné', f, (110, 110, 118, 255), icons=('bell',), icon_s=44)
@@ -203,12 +204,12 @@ def make_cta():
         if a <= i < end:
             if i < click: pimg = p_sub
             elif i < ok_end: pimg = p_ok
-            else: pimg = p_com
+            else: pimg = p_com if COM else p_ok
             x = slide_x(i, a, end, pimg.width)
             if x is None: return
             sc = 0.95 if click <= i < click + 4 else 1.0
             pi = pimg if sc == 1 else pimg.resize((int(pimg.width * sc), int(pimg.height * sc)), Image.LANCZOS)
-            if click <= i < ok_end:    # cloche qui oscille
+            if click <= i < (ok_end if COM else n):    # cloche qui oscille
                 ang = 22 * math.sin((i - click) * 0.9) * math.exp(-(i - click) / 30)
                 pi = pi.copy(); bell = icon('bell', 44).rotate(ang, resample=Image.BICUBIC)
                 ImageDraw.Draw(pi).rectangle([pi.width - 34 - 44 - 6, 14, pi.width - 30, 14 + 50], fill=(110, 110, 118, 255))
@@ -221,7 +222,7 @@ def make_cta():
                 im.alpha_composite(c, (cx, cy))
     seq('cta', n, draw)
     return {'clic': (S(A0) + S(1.2)) / FPS, 'pop_entree_1': 0.0 if DISPO else None, 'pop_entree_2': S(A0) / FPS,
-            'pop_commentaire': (S(A0) + S(3.0)) / FPS}
+            'pop_commentaire': (S(A0) + S(3.0)) / FPS if COM else None}
 
 # ---------------------------------------------------------------- lower third invité (5 s)
 def make_lower_third():

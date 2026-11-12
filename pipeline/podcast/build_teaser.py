@@ -99,10 +99,10 @@ for ct in cut_times[:-1]:
 i = n - len(ri); fx[i:] += ri[:n - i] * 0.45
 wr('work/_t_fx.wav', fx)
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', 'assets/podcast/musique_teaser.wav', '-t', f'{DUR:.4f}',
-                '-af', 'loudnorm=I=-14:TP=-1.5:LRA=7', '-ar', '48000', '-ac', '2', 'work/_t_music.wav'], check=True)
+                '-af', f"loudnorm=I={cfg.get('musique_teaser_lufs', -14)}:TP=-1.5:LRA=7", '-ar', '48000', '-ac', '2', 'work/_t_music.wav'], check=True)
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', 'work/_t_music.wav', '-i', 'work/_t_voice.wav', '-i', 'work/_t_fx.wav', '-filter_complex',
-                '[1:a]asplit=2[v][sc];[0:a][sc]sidechaincompress=threshold=0.03:ratio=4:attack=20:release=300:makeup=1[m];'
-                '[m]volume=-5dB[m2];[v][m2][2:a]amix=inputs=3:normalize=0:duration=first[o]',
+                '[1:a]asplit=2[v][sc];[0:a][sc]sidechaincompress=threshold=0.03:ratio=' + str(cfg.get('ducking_ratio', 4)) + ':attack=30:release=400:makeup=1[m];'
+                '[m]volume=' + str(cfg.get('musique_teaser_gain_db', -5)) + 'dB[m2];[v][m2][2:a]amix=inputs=3:normalize=0:duration=first[o]',
                 '-map', '[o]', '-ar', '48000', '-c:a', 'pcm_s16le', 'work/teaser_audio.wav'], check=True)
 
 # ---------- 4. sous-titres ASS
@@ -115,7 +115,7 @@ for ci, c in enumerate(clips):
         s = w['w']
         if toks and (s.startswith("'") or s.startswith('-') or s in ('%', '?', '!', ',', '.')):
             toks[-1]['w'] += s if s not in ('%', '?', '!') else (' ' + s if s != '%' else ' %'); toks[-1]['t1'] = t1; continue
-        toks.append({'w': s, 't0': t0, 't1': t1, 'clip': ci})
+        toks.append({'w': s, 't0': t0, 't1': t1, 'clip': ci, 'spk': w['spk']})
 for t in toks:
     core = re.sub(r"^[a-z]'", '', norm(t['w'])).strip(" ,.?!…")
     for k, v in FIX.items():
@@ -143,14 +143,32 @@ L = ['[Script Info]', 'ScriptType: v4.00+', 'PlayResX: 1920', 'PlayResY: 1080', 
      'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding',
      'Style: Sub,Montserrat ExtraBold,78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H66000000,0,-1,0,0,100,100,0,0,1,3,4,2,80,80,120,1', '',
      '[Events]', 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text']
+# plans du teaser sur sa propre timeline -> caméra à l'instant de chaque carte
+TSH = []
+for ci, c in enumerate(clips):
+    off = sum(x['f1'] - x['f0'] for x in clips[:ci]) - c['f0']
+    TSH += [((p_['f0'] + off) / FPS, (p_['f1'] + off) / FPS, p_['cam']) for p_ in plan if p_['clip'] == c['id']]
+# position horizontale : sous la personne qui parle (gauche = invitée, droite = hôte, cf. cadrages)
+XPOS = {(c_, 'invite'): 0.32 for c_ in 'LIH'} | {(c_, 'hote'): 0.68 for c_ in 'LIH'}
+if cfg.get('cote_hote', 'droite') == 'gauche': XPOS = {(c_, s_): 1 - x_ for (c_, s_), x_ in XPOS.items()}
 for k, cd in enumerate(cards):
     t0 = cd[0]['t0']; t1 = cards[k + 1][0]['t0'] if k + 1 < len(cards) and cards[k + 1][0]['clip'] == cd[0]['clip'] else cd[-1]['t1'] + 0.15
+    spk = max(('hote', 'invite'), key=lambda s_: sum(x['t1'] - x['t0'] for x in cd if x['spk'] == s_))
+    cam = next((c_ for a_, b_, c_ in TSH if a_ <= t0 + 0.02 < b_), 'L')
+    X = int(XPOS.get((cam, spk), 0.5) * 1920)
     words = []
-    for x in cd:
+    for x in cd:                       # mots révélés au rythme de la parole, mots-clés jaunes avec rebond
         core = norm(x['w']).strip(" ,.?!…")
         w = x['w'].replace('{', '').replace('}', '')
-        words.append('{\\c&H00CCFF&}' + w + '{\\c&HFFFFFF&}' if KEY.search(re.sub(r"^[a-z]'", '', core)) else w)
-    txt = '{\\fscx80\\fscy80\\t(0,60,\\fscx108\\fscy108)\\t(60,120,\\fscx100\\fscy100)}' + ' '.join(words)
+        dt = max(0, int((x['t0'] - t0) * 1000))
+        rev = f'{{\\alpha&HFF&\\t({dt},{dt + 50},\\alpha&H00&)}}' if dt > 30 else ''
+        if KEY.search(re.sub(r"^[a-z]'", '', core)):
+            words.append(rev + f'{{\\c&H00CCFF&\\fscx135\\fscy135\\t({dt},{dt + 140},\\fscx100\\fscy100)}}' + w + '{\\c&HFFFFFF&\\fscx100\\fscy100}')
+        else:
+            words.append(rev + w)
+    anim = (f'{{\\an2\\pos({X},960)\\fscx45\\fscy45\\frz-7\\t(0,90,\\fscx116\\fscy116\\frz2)'
+            f'\\t(90,170,\\fscx100\\fscy100\\frz0)\\fad(0,60)}}')
+    txt = anim + ' '.join(words)
     if not (k + 1 < len(cards) and cards[k + 1][0]['clip'] == cd[0]['clip']): t1 = max(t1, t0 + 0.25)
     L.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Sub,,0,0,0,,{txt}")
 open('work/teaser.ass', 'w').write('\n'.join(L) + '\n')

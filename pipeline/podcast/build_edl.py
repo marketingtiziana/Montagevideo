@@ -93,7 +93,7 @@ def boundary(prev_end, next_start):
 bounds = [(0, 'début')]
 for a, b in zip(items, items[1:]):
     f, why = boundary(a['t1'], b['t0'])
-    near = [j for j in jumps if abs(j['f'] - f) <= 8]
+    near = [j for j in jumps if abs(j['f'] - f) <= (20 if j['edito'] else 8)]
     if near:
         j = min(near, key=lambda j: (not j['edito'], abs(j['f'] - f))); f, why = j['f'], why + ' sur raccord'
     bounds.append((f, why))
