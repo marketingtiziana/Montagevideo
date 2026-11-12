@@ -38,13 +38,16 @@ SFX = [(T_CTA1 + TIM['pop_entree_1'], 'pop'), (T_CTA1 + TIM['pop_entree_2'], 'po
 
 def dress(src, out, t_from, subs=None):
     """watermark (+ sous-titres) (+ overlays épisode décalés de t_from)"""
-    ins = ['-i', src, '-loop', '1', '-i', f'{A}/logo.png']; fc = []
+    WM = cfg.get('watermark', True) and os.path.exists(f'{A}/logo.png')
+    ins = ['-i', src] + (['-loop', '1', '-i', f'{A}/logo.png'] if WM else []); fc = []
     S = int(subprocess.check_output(['ffprobe', '-v', 'error', '-select_streams', 'v', '-show_entries', 'stream=width',
                                      '-of', 'csv=p=0', src]).strip()) / 1920
-    lh = round(70 * S); fc.append(f'[1:v]scale=-2:{lh},format=rgba,colorchannelmixer=aa=0.85[wm]')
+    if WM: fc.append(f'[1:v]scale=-2:{round(70 * S)},format=rgba,colorchannelmixer=aa=0.85[wm]')
     base = '[0:v]'
     if subs: fc.append(f"{base}subtitles={subs}:fontsdir=fonts[s0]"); base = '[s0]'
-    fc.append(f'{base}[wm]overlay={round(40 * S)}:{round(40 * S)}:shortest=1[v0]'); cur = '[v0]'; k = 2
+    if WM: fc.append(f'{base}[wm]overlay={round(40 * S)}:{round(40 * S)}:shortest=1[v0]')
+    else: fc.append(f'{base}null[v0]')
+    cur = '[v0]'; k = 2 if WM else 1
     if subs is None:
         dur = nframes(src) / FPS
         for i, (name, t) in enumerate(OVER):

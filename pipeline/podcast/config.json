@@ -7,12 +7,12 @@
  "audio_hote": "intégré",
  "audio_invite": "intégré",
  "sponsor_rush": "aucun",
- "nom_podcast": "MINDSET",
+ "nom_podcast": "",
  "hote": "Joana",
  "invite": "Tiziana",
  "invite_fonction": "Fondatrice · Finovate, cabinet fiscal & expatriation",
- "invite_linkedin": "Tiziana · Finovate",
- "invite_instagram": "@a_confirmer",
+ "invite_linkedin": "",
+ "invite_instagram": "@madamecaci",
  "couleur_primaire": "#1E5BFF",
  "couleur_accent": "#FFCC00",
  "couleur_texte": "#FFFFFF",
@@ -30,5 +30,8 @@
   "P9": {
    "t0": 780.68
   }
- }
+ },
+ "logo": false,
+ "watermark": false,
+ "invite_youtube": "@Tiziana_Caci"
 }

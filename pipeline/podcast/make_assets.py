@@ -13,8 +13,21 @@ PRI, ACC, TXT = hexc(cfg['couleur_primaire']), hexc(cfg['couleur_accent']), hexc
 INK = (12, 14, 30, 255)
 F_RETRO = 'fonts/Bungee-Regular.ttf'; F_UI = 'fonts/Archivo-Black.ttf'; F_TXT = 'fonts/Montserrat-ExtraBoldItalic.ttf'
 font = lambda p, s: ImageFont.truetype(p, s)
-NAME = cfg['nom_podcast'] if cfg['nom_podcast'] != 'À DÉFINIR' else 'MINDSET'
-SIGLE = NAME[0]
+NAME = (cfg.get('nom_podcast') or '').strip()        # vide : aucun nom ni logo -> pictogramme micro
+SIGLE = NAME[:1]
+
+def mic(size, color=INK, bg=None):
+    """Pictogramme micro de podcast (générique, sans nom ni marque)."""
+    s = size; im = Image.new('RGBA', (s, s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); w = max(4, s // 14)
+    d.rounded_rectangle([s * .36, s * .08, s * .64, s * .58], s // 6, fill=color)
+    d.arc([s * .24, s * .26, s * .76, s * .70], 0, 180, fill=color, width=w)
+    d.line([(s * .5, s * .70), (s * .5, s * .86)], fill=color, width=w)
+    d.line([(s * .34, s * .88), (s * .66, s * .88)], fill=color, width=w)
+    for k in (1, 2):                                    # ondes sonores
+        r = s * (0.30 + 0.12 * k)
+        d.arc([s * .5 - r, s * .33 - r, s * .5 + r, s * .33 + r], -40, 40, fill=color, width=w)
+        d.arc([s * .5 - r, s * .33 - r, s * .5 + r, s * .33 + r], 140, 220, fill=color, width=w)
+    return im
 W, H = 1920, 1080
 ease_out = lambda x: 1 - (1 - min(max(x, 0), 1)) ** 3
 
@@ -67,6 +80,9 @@ def bubble(size, text, fnt, fill=(255, 255, 255, 255), txt=INK, shadow=ACC):
 def make_logo():
     if os.path.exists('assets/logo.png'):
         shutil.copy('assets/logo.png', f'{OUT}/logo.png'); print('logo : fourni'); return
+    if not cfg.get('logo', True) or not NAME:
+        if os.path.exists(f'{OUT}/logo.png'): os.remove(f'{OUT}/logo.png')
+        print('logo : aucun (demandé)'); return
     f = font(F_RETRO, 150); tw = int(f.getlength(NAME))
     im = Image.new('RGBA', (tw + 140, 300), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     for off, col in ((12, INK), (6, ACC), (0, TXT)):
@@ -79,7 +95,7 @@ def make_logo():
 # ---------------------------------------------------------------- jingle (1,5 s)
 def make_jingle():
     n = int(round(1.5 * FPS)); f = font(F_RETRO, 170)
-    tw = f.getlength(NAME); bub = bubble((int(tw + 260), 420), NAME, f)
+    tw = f.getlength(NAME) if NAME else 520; bub = bubble((int(tw + 260), 420), NAME, f)
     stars = [(300, 230, 46, 0), (1640, 210, 60, 5), (1580, 820, 40, 9), (380, 840, 54, 3), (960, 120, 30, 7), (1760, 520, 28, 12)]
     def pop(i, start):     # 0 -> 110 -> 100 % sur 8 images
         k = i - start
@@ -101,8 +117,11 @@ def make_jingle():
             im.alpha_composite(b, (int(W / 2 - b.width / 2 + 20 * s), int(H / 2 - b.height / 2 + 20 * s)))
         st = pop(i, 2)
         if st > 0:
-            t = Image.new('RGBA', (int(tw + 60), 260), (0, 0, 0, 0)); dt = ImageDraw.Draw(t)
-            dt.text((30, 20), NAME, font=f, fill=PRI, stroke_width=6, stroke_fill=INK)
+            if NAME:
+                t = Image.new('RGBA', (int(tw + 60), 260), (0, 0, 0, 0)); dt = ImageDraw.Draw(t)
+                dt.text((30, 20), NAME, font=f, fill=PRI, stroke_width=6, stroke_fill=INK)
+            else:
+                t = mic(260, PRI)
             t = t.resize((max(1, int(t.width * st)), max(1, int(t.height * st))), Image.LANCZOS)
             im.alpha_composite(t, (int(W / 2 - t.width / 2 + 10), int(H / 2 - t.height / 2 - 20)))
     seq('jingle', n, draw, alpha=False)
@@ -133,6 +152,9 @@ def icon(kind, s=72):
         d.rounded_rectangle([s * .2, s * .2, s * .8, s * .8], s // 6, outline='white', width=max(3, s // 14))
         d.ellipse([s * .36, s * .36, s * .64, s * .64], outline='white', width=max(3, s // 14))
         d.ellipse([s * .66, s * .26, s * .74, s * .34], fill='white')
+    elif kind == 'youtube':
+        d.rounded_rectangle([0, s * .14, s - 1, s * .86], s // 5, fill=(255, 0, 0, 255))
+        d.polygon([(s * .40, s * .32), (s * .40, s * .68), (s * .70, s * .50)], fill='white')
     elif kind == 'bell':
         d.pieslice([s * .18, s * .12, s * .82, s * .8], 180, 360, fill='white')
         d.rectangle([s * .18, s * .46, s * .82, s * .7], fill='white')
@@ -216,7 +238,10 @@ def make_lower_third():
     st = Image.new('RGBA', (130, 130), (0, 0, 0, 0)); stripes(st, (0, 0, 130, 130), ACC[:3] + (150,), gap=22, width=8)
     st.putalpha(Image.composite(st.split()[3], Image.new('L', (130, 130), 0), m)); b.alpha_composite(st)
     bd = ImageDraw.Draw(b); bd.ellipse([2, 2, 127, 127], outline=INK, width=5)
-    fs = font(F_RETRO, 70); bd.text((65 - fs.getlength(SIGLE) / 2, 18), SIGLE, font=fs, fill=TXT, stroke_width=4, stroke_fill=INK)
+    if SIGLE:
+        fs = font(F_RETRO, 70); bd.text((65 - fs.getlength(SIGLE) / 2, 18), SIGLE, font=fs, fill=TXT, stroke_width=4, stroke_fill=INK)
+    else:
+        b.alpha_composite(mic(86, TXT), (22, 20))
     card.alpha_composite(b, (22, 18))
     d.text((180, 20), nom.upper(), font=fN, fill=INK); d.text((182, 96), fonc, font=fF, fill=(60, 64, 90, 255))
     X, Y = 90, H - 120 - h; IN, OUTF = 9, 8
@@ -231,9 +256,9 @@ def make_lower_third():
 # ---------------------------------------------------------------- réseaux de l'invité (4 s)
 def make_socials():
     n = int(round(4.0 * FPS)); f = font(F_UI, 38)
-    li = cfg.get('invite_linkedin') or 'Tiziana · Finovate'; ig = cfg.get('invite_instagram') or '@a_confirmer'
-    parts = [pill(li, f, (255, 255, 255, 250), txtc=INK, icons=()), pill(ig, f, (255, 255, 255, 250), txtc=INK, icons=())]
-    ics = [icon('linkedin', 70), icon('instagram', 70)]
+    nets = [(k, cfg.get(f'invite_{k}')) for k in ('instagram', 'youtube', 'linkedin') if cfg.get(f'invite_{k}')]
+    parts = [pill(v, f, (255, 255, 255, 250), txtc=INK, icons=()) for _, v in nets]
+    ics = [icon(k, 70) for k, _ in nets]
     tot = sum(p.width + 86 for p in parts) + 40
     def draw(im, i):
         a = min(1, i / 9, (n - i) / 8); y = H - 120 - 80 + int(30 * (1 - ease_out(min(1, i / 9))))
@@ -246,16 +271,20 @@ def make_socials():
 
 # ---------------------------------------------------------------- end slate (7 s) — zone droite libre (écran de fin YouTube)
 def make_endslate():
-    n = int(round(7.0 * FPS)); logo = Image.open(f'{OUT}/logo.png').convert('RGBA')
-    lw = 760; logo = logo.resize((lw, int(logo.height * lw / logo.width)), Image.LANCZOS)
-    tag = 'Le podcast qui inspire.'; ft = font(F_TXT, 54)
+    n = int(round(7.0 * FPS))
+    if os.path.exists(f'{OUT}/logo.png'):
+        logo = Image.open(f'{OUT}/logo.png').convert('RGBA'); lw = 760
+        logo = logo.resize((lw, int(logo.height * lw / logo.width)), Image.LANCZOS)
+    else:
+        lw = 300; logo = mic(lw, TXT)
+    tag = cfg.get('end_slate_texte', "Merci d'avoir regardé !"); ft = font(F_TXT, 64)
     pf = font(F_UI, 27); p = pill('PODCAST DISPONIBLE SUR :  Apple Podcasts · Spotify', pf, PRI, icons=('apple', 'spotify'), icon_s=44, pad=(26, 14))
     CX = 560                                   # centre de la zone gauche ; à droite (x > 1100) : 2 vignettes YouTube
     def draw(im, i):
         d = ImageDraw.Draw(im); d.rectangle([0, 0, W, H], fill=(0, 0, 0, 255))
-        im.alpha_composite(logo, (CX - lw // 2, 300))
+        im.alpha_composite(logo, (CX - lw // 2, 300 if lw > 400 else 250))
         k = max(0, min(len(tag), int((i - 12) / 2.2))); txt = tag[:k]
-        x0 = CX - ft.getlength(tag) / 2; y0 = 300 + logo.height + 60
+        x0 = CX - ft.getlength(tag) / 2; y0 = (300 if lw > 400 else 250) + logo.height + 60
         d.text((x0, y0), txt, font=ft, fill=TXT)
         if (i // 15) % 2 == 0:                  # curseur qui clignote
             cx = x0 + ft.getlength(txt) + 8; d.rectangle([cx, y0 + 6, cx + 26, y0 + 62], fill=ACC)

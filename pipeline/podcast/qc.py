@@ -37,6 +37,10 @@ o = subprocess.run(['ffmpeg', '-nostats', '-i', f, '-af', 'ebur128=peak=true', '
 I = float(o.split('I:')[-1].split('LUFS')[0]); TP = float(o.split('Peak:')[-1].split('dBFS')[0])
 res['4_loudness'] = {'integre_LUFS': I, 'true_peak_dBTP': TP, 'ok': abs(I + 16) <= 1 and TP <= -0.9}
 # 5. watermark
+import os
+if not os.path.exists('assets/podcast/logo.png'):
+    res['5_watermark'] = {'ok': True, 'note': 'aucun logo / watermark (demandé)'}
+    print(json.dumps(res, ensure_ascii=False, indent=1)); json.dump(res, open(f.replace('.mp4', '_qc.json'), 'w'), ensure_ascii=False, indent=1); raise SystemExit
 logo = Image.open('assets/podcast/logo.png').convert('RGBA'); LH = round(70 * H / 1080); LW = round(logo.width * LH / logo.height / 2) * 2
 lw, lh = LW // 2 * 2, LH // 2 * 2; x0 = y0 = round(40 * H / 1080)
 ref_full = logo.resize((LW, LH), Image.LANCZOS).crop((0, 0, lw, lh)); mask = np.asarray(ref_full)[..., 3] > 200
