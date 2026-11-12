@@ -235,6 +235,37 @@ for r in react:
     shots += [r, tail]
 shots.sort(key=lambda s: s['f0'])
 
+# ---------- 4b. plan forcé sur l'invitée pendant son lower third (présentation par l'hôte)
+cfg_lt = json.load(open('pipeline/podcast/config.json'))
+if cfg_lt.get('lower_third_sur_invite', False):
+    prenom = (cfg_lt.get('invite') or 'Tiziana').lower()
+    w_intro = next((w for w in W if w['spk'] == 'hote' and prenom in w['w'].lower()), None)
+    if w_intro:
+        a0 = fr(w_intro['t0']) - J_CUT; a1 = a0 + fr(5.2)
+        nxt = sorted(s['f0'] for s in shots if s['f0'] > a1)
+        # si le reste du plan en cours serait trop court, on prolonge jusqu'à la coupe suivante
+        cur_end = next((s['f1'] for s in shots if s['f0'] <= a1 < s['f1']), a1)
+        if cur_end - a1 < fr(2.5): a1 = cur_end
+        new = []
+        for s in shots:
+            if s['f1'] <= a0 or s['f0'] >= a1: new.append(s); continue
+            if s['f0'] < a0: new.append(dict(s, f1=a0))
+            if s['f1'] > a1: new.append(dict(s, f0=a1, why='après lower third'))
+        new.append({'f0': a0, 'f1': a1, 'cam': 'I', 'kind': 'rapproché', 'spk': 'invite', 'why': 'lower third invitée'})
+        new.sort(key=lambda s: s['f0']); shots = []
+        for s in new:                                   # fusion même caméra + absorption d'un bout < 2,5 s
+            if shots and shots[-1]['cam'] == s['cam']: shots[-1]['f1'] = s['f1']; continue
+            shots.append(s)
+        for i in range(len(shots) - 1, 0, -1):
+            s = shots[i]
+            if s['kind'] != 'réaction' and (s['f1'] - s['f0']) < fr(2.5) and shots[i - 1]['why'] == 'lower third invitée':
+                shots[i - 1]['f1'] = s['f1']; shots.pop(i)
+        merged = []
+        for s in shots:
+            if merged and merged[-1]['cam'] == s['cam']: merged[-1]['f1'] = s['f1']
+            else: merged.append(s)
+        shots = merged
+
 # ---------- 5. contrôle + export
 for i, s in enumerate(shots):
     s.update(i=i, t0=round(sec(s['f0']), 3), t1=round(sec(s['f1']), 3), dur=round(sec(s['f1'] - s['f0']), 2))
