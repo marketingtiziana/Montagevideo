@@ -7,16 +7,28 @@
  "audio_hote": "intégré",
  "audio_invite": "intégré",
  "sponsor_rush": "aucun",
- "nom_podcast": "À DÉFINIR",
- "hote": "À DÉFINIR",
- "invite": "À DÉFINIR",
- "invite_fonction": "À DÉFINIR",
- "invite_linkedin": "",
- "invite_instagram": "",
+ "nom_podcast": "MINDSET",
+ "hote": "Joana",
+ "invite": "Tiziana",
+ "invite_fonction": "Fondatrice · Finovate, cabinet fiscal & expatriation",
+ "invite_linkedin": "Tiziana · Finovate",
+ "invite_instagram": "@a_confirmer",
  "couleur_primaire": "#1E5BFF",
  "couleur_accent": "#FFCC00",
  "couleur_texte": "#FFFFFF",
  "fps_sortie": "30000/1001",
  "sync_ref": "cam_large",
- "cote_hote": "droite"
+ "cote_hote": "droite",
+ "etalonnage": "eq=contrast=1.06:saturation=0.98:gamma=1.02,colorbalance=rs=0.03:bs=-0.03:rm=0.02:bm=-0.02:rh=0.01:bh=-0.01,curves=all='0/0.035 0.25/0.235 0.5/0.5 0.75/0.765 1/0.965',huesaturation=colors=g+y:saturation=-0.12:strength=0.6",
+ "teaser": [
+  "P2",
+  "P3",
+  "P1",
+  "P9"
+ ],
+ "teaser_plages": {
+  "P9": {
+   "t0": 780.68
+  }
+ }
 }
