@@ -16,3 +16,5 @@ transcript.txt
 __pycache__/
 work/
 source.mp4
+PODCAST_final_*.json
+PODCAST_final_envoi.mp4
