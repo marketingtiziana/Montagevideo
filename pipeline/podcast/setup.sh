@@ -3,7 +3,11 @@
 set -e
 cd "$(dirname "$0")/../.."
 bash pipeline/setup.sh
-pip3 install --quiet faster-whisper librosa scikit-learn scipy "opencv-python-headless<5" huggingface_hub
+pip3 install --quiet faster-whisper librosa scikit-learn scipy "opencv-python-headless<5" huggingface_hub onnxruntime kaldi-native-fbank
+# Empreintes vocales WeSpeaker ResNet34 (ONNX) pour la diarisation
+[ -f models/wespeaker/voxceleb_resnet34_LM.onnx ] || python3 -c "
+from huggingface_hub import hf_hub_download as d
+d('Wespeaker/wespeaker-voxceleb-resnet34-LM', 'voxceleb_resnet34_LM.onnx', local_dir='models/wespeaker')"
 # Modèle Whisper large-v3-turbo (CTranslate2) ; repli automatique sur ggml-base si indisponible
 [ -f models/fw-large-v3-turbo/model.bin ] || python3 -c "
 from huggingface_hub import snapshot_download
