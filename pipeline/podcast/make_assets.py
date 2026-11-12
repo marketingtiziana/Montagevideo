@@ -224,7 +224,7 @@ def make_cta():
 def make_lower_third():
     n = int(round(5.0 * FPS))
     nom = cfg['invite'] if cfg['invite'] != 'À DÉFINIR' else 'Tiziana'
-    fonc = cfg['invite_fonction'] if cfg['invite_fonction'] != 'À DÉFINIR' else 'Fondatrice · Finovate, cabinet fiscal & expatriation'
+    fonc = cfg['invite_fonction'] if cfg['invite_fonction'] != 'À DÉFINIR' else 'Fondatrice · FYNOVATES, cabinet fiscal & expatriation'
     fN = font(F_UI, 58); fF = font(F_TXT, 32)
     TX = 180 if SIGLE else 44
     w = int(max(fN.getlength(nom.upper()), fF.getlength(fonc))) + TX + 50; h = 170
