@@ -31,10 +31,13 @@ lt_shot = next(s for s in SHOTS if s['cam'] == 'I' and s['kind'] == 'rapproché'
 T_LT = lt_shot['t0'] + 0.5; T_SOC = T_LT + 5.0
 T_CTA1 = 2.0; T_CTA2 = EP_N / FPS - 20.0
 OVER = [('cta', T_CTA1), ('lower_third', T_LT), ('reseaux', T_SOC), ('cta', T_CTA2)]
-SFX = [(T_CTA1 + TIM['pop_entree_1'], 'pop'), (T_CTA1 + TIM['pop_entree_2'], 'pop'), (T_CTA1 + TIM['clic'], 'clic'),
+SFX = [(T_CTA1 + (TIM['pop_entree_1'] or 0), 'pop'), (T_CTA1 + TIM['pop_entree_2'], 'pop'), (T_CTA1 + TIM['clic'], 'clic'),
        (T_CTA1 + TIM['pop_commentaire'], 'pop'), (T_LT, 'pop'), (T_SOC, 'pop'),
-       (T_CTA2 + TIM['pop_entree_1'], 'pop'), (T_CTA2 + TIM['pop_entree_2'], 'pop'), (T_CTA2 + TIM['clic'], 'clic'),
+       (T_CTA2 + (TIM['pop_entree_1'] or 0), 'pop'), (T_CTA2 + TIM['pop_entree_2'], 'pop'), (T_CTA2 + TIM['clic'], 'clic'),
        (T_CTA2 + TIM['pop_commentaire'], 'pop')]
+if TIM['pop_entree_1'] is None: SFX = [x for x in SFX if not (x[1] == 'pop' and any(abs(x[0] - (t + 0)) < 1e-6 for t in (T_CTA1, T_CTA2)))] + \
+    [(T_CTA1 + TIM['pop_entree_2'], 'pop'), (T_CTA2 + TIM['pop_entree_2'], 'pop')]
+SFX = sorted(set(SFX))
 
 def dress(src, out, t_from, subs=None):
     """watermark (+ sous-titres) (+ overlays épisode décalés de t_from)"""

@@ -181,7 +181,9 @@ def cursor_img(s=54):
 
 # ---------------------------------------------------------------- badges CTA (10 s, en haut à droite)
 def make_cta():
-    n = int(round(10.0 * FPS)); f = font(F_UI, 36)
+    DISPO = cfg.get('cta_disponible_sur', True)        # pilule « Podcast disponible sur » (désactivable)
+    A0 = 4.7 if DISPO else 0.0
+    n = int(round((A0 + 5.3) * FPS)); f = font(F_UI, 36)
     p1 = pill('Podcast disponible sur', f, PRI, icons=('apple', 'spotify'))
     p_sub = pill("S'abonner", f, (230, 33, 23, 255), icons=('bell',), icon_s=44)
     p_ok = pill('Abonné', f, (110, 110, 118, 255), icons=('bell',), icon_s=44)
@@ -195,9 +197,9 @@ def make_cta():
         if i >= b - SL: return int(xin + (W - xin) * ((i - (b - SL)) / SL) ** 2)
         return xin
     def draw(im, i):
-        x = slide_x(i, 0, S(4.5), p1.width)
+        x = slide_x(i, 0, S(4.5), p1.width) if DISPO else None
         if x is not None: im.alpha_composite(p1, (x, Y))
-        a = S(4.7); click = a + S(1.2); ok_end = click + S(1.8); end = S(10.0)
+        a = S(A0); click = a + S(1.2); ok_end = click + S(1.8); end = n
         if a <= i < end:
             if i < click: pimg = p_sub
             elif i < ok_end: pimg = p_ok
@@ -218,7 +220,8 @@ def make_cta():
                 c = cur if not (click <= i < click + 4) else cur.resize((46, 46))
                 im.alpha_composite(c, (cx, cy))
     seq('cta', n, draw)
-    return {'clic': (S(4.7) + S(1.2)) / FPS, 'pop_entree_1': 0.0, 'pop_entree_2': S(4.7) / FPS, 'pop_commentaire': (S(4.7) + S(3.0)) / FPS}
+    return {'clic': (S(A0) + S(1.2)) / FPS, 'pop_entree_1': 0.0 if DISPO else None, 'pop_entree_2': S(A0) / FPS,
+            'pop_commentaire': (S(A0) + S(3.0)) / FPS}
 
 # ---------------------------------------------------------------- lower third invité (5 s)
 def make_lower_third():
