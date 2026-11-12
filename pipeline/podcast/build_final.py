@@ -81,7 +81,8 @@ tn = nframes('work/teaser_v.mp4')
 dress('work/teaser_v.mp4', 'work/teaser_c.mp4', 0, subs='work/teaser.ass')
 parts.append(('work/teaser_c.mp4', fit(rd('work/teaser_audio.wav'), int(round(tn / FPS * SR))), 'teaser'))
 jn = nframes(f'{A}/jingle.mov'); JA = fit(rd(f'{A}/jingle.wav'), int(round(jn / FPS * SR)))
-parts.append((f'{A}/jingle.mov', JA, 'jingle'))
+if cfg.get('jingle', True): parts.append((f'{A}/jingle.mov', JA, 'jingle'))
+else: jn = 0
 if cfg.get('sponsor_rush', 'aucun') not in ('', 'aucun'):
     raise SystemExit('sponsor : rush fourni -> étape 6 à brancher (build_sponsor.py)')
 ranges = [(0.0, 180.0 - (tn + jn) / FPS), (420.0, 540.0)] if a.preview else [(0.0, EP_N / FPS)]
@@ -93,7 +94,7 @@ for k, (t0, t1) in enumerate(ranges):
     dressed = raw.replace('.mp4', '_c.mp4'); dress(raw, dressed, t0)
     bn = nframes(dressed); t0s = fr(t0) / FPS
     parts.append((dressed, body_audio(t0s, t0s + bn / FPS), f'épisode {t0:.0f}-{t1:.0f} s'))
-if True:
+if cfg.get('end_slate', True):
     en = nframes(f'{A}/endslate.mov'); n = int(round(en / FPS * SR))
     m = fit(rd(f'{A}/musique_end.wav'), n) * 0.5
     m *= np.minimum(1, np.arange(n) / (0.5 * SR))[:, None] * np.minimum(1, (n - np.arange(n)) / (2.0 * SR))[:, None]

@@ -60,7 +60,16 @@ def render_units(units, out, preview=False, labels=False, jobs=2, tag='u'):
         if labels and u.get('label'):
             vf.append(f"drawtext=fontfile=fonts/Archivo-Black.ttf:text='{u['label']}':x=24:y=h-60:fontsize=30:fontcolor=white:borderw=3")
         vf.append('format=yuv420p')
-        o = f"work/units/{tag}{k:04d}{'p' if preview else ''}.mp4"
+        import hashlib
+        key = hashlib.md5(json.dumps([u['src0'], u['nfr'], u['rect'], u.get('blur'), GRADE, preview,
+                                      u.get('label') if labels else None]).encode()).hexdigest()[:12]
+        o = f"work/units/{tag}{k:04d}_{key}.mp4"
+        if os.path.exists(o):
+            try:
+                n = int(subprocess.check_output(['ffprobe', '-v', 'error', '-count_packets', '-select_streams', 'v', '-show_entries',
+                                                 'stream=nb_read_packets', '-of', 'csv=p=0', o]).strip())
+                if n == u['nfr']: return o
+            except Exception: pass
         enc = ['-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '20'] if preview else \
               ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '12', '-x264-params', 'keyint=60']
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f"{u['src0']:.4f}", '-i', 'source.mp4', '-an', '-vf', ','.join(vf),

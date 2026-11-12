@@ -226,7 +226,8 @@ def make_lower_third():
     nom = cfg['invite'] if cfg['invite'] != 'À DÉFINIR' else 'Tiziana'
     fonc = cfg['invite_fonction'] if cfg['invite_fonction'] != 'À DÉFINIR' else 'Fondatrice · Finovate, cabinet fiscal & expatriation'
     fN = font(F_UI, 58); fF = font(F_TXT, 32)
-    w = int(max(fN.getlength(nom.upper()), fF.getlength(fonc))) + 230; h = 170
+    TX = 180 if SIGLE else 44
+    w = int(max(fN.getlength(nom.upper()), fF.getlength(fonc))) + TX + 50; h = 170
     card = Image.new('RGBA', (w + 14, h + 14), (0, 0, 0, 0)); d = ImageDraw.Draw(card)
     d.rounded_rectangle([10, 10, w + 10, h + 10], 26, fill=INK)
     d.rounded_rectangle([0, 0, w, h], 26, fill=(255, 255, 255, 245), outline=INK, width=4)
@@ -240,10 +241,8 @@ def make_lower_third():
     bd = ImageDraw.Draw(b); bd.ellipse([2, 2, 127, 127], outline=INK, width=5)
     if SIGLE:
         fs = font(F_RETRO, 70); bd.text((65 - fs.getlength(SIGLE) / 2, 18), SIGLE, font=fs, fill=TXT, stroke_width=4, stroke_fill=INK)
-    else:
-        b.alpha_composite(mic(86, TXT), (22, 20))
-    card.alpha_composite(b, (22, 18))
-    d.text((180, 20), nom.upper(), font=fN, fill=INK); d.text((182, 96), fonc, font=fF, fill=(60, 64, 90, 255))
+        card.alpha_composite(b, (22, 18))
+    d.text((TX, 20), nom.upper(), font=fN, fill=INK); d.text((TX + 2, 96), fonc, font=fF, fill=(60, 64, 90, 255))
     X, Y = 90, H - 120 - h; IN, OUTF = 9, 8
     def draw(im, i):
         if i < IN: k = ease_out(i / IN); dx, a = -60 * (1 - k), k

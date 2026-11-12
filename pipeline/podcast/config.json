@@ -33,5 +33,7 @@
  },
  "logo": false,
  "watermark": false,
- "invite_youtube": "@Tiziana_Caci"
+ "invite_youtube": "@Tiziana_Caci",
+ "jingle": false,
+ "end_slate": false
 }
