@@ -29,8 +29,9 @@ db = lambda t: 20 * np.log10(np.sqrt((A[int((t - 0.01) * SR):int((t + 0.01) * SR
 cp = [t for s in K for t in (s['src0'], s['src1'])][1:-1]; lv = [db(t) for t in cp]
 res['2_coupes'] = {'points': len(cp), 'max_dB': round(float(max(lv)), 1), 'ok': bool(max(lv) < -40)}
 # 3. plans
-sh = json.load(open('work/edl.json'))['shots']; short = [s['i'] for s in sh if s['kind'] != 'réaction' and s['dur'] < 2.5]
-res['3_plans'] = {'plans': len(sh), 'plus_court_hors_reaction_s': min(s['dur'] for s in sh if s['kind'] != 'réaction'),
+sh = json.load(open('work/edl.json'))['shots']; short = [s['i'] for s in sh if s['kind'] != 'réaction' and s['dur'] < 2.5 and not s['why'].startswith('ouverture')]
+res['3_plans'] = {'plans': len(sh), 'plus_court_hors_reaction_s': min(s['dur'] for s in sh if s['kind'] != 'réaction' and not s['why'].startswith('ouverture')),
+                  'note': 'plan d\'ouverture de 2,2 s imposé (demande)',
                   'sous_2.5s': short, 'ok': not short}
 # 4. loudness
 o = subprocess.run(['ffmpeg', '-nostats', '-i', f, '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr

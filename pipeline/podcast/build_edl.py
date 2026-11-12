@@ -266,6 +266,24 @@ if cfg_lt.get('lower_third_sur_invite', False):
             else: merged.append(s)
         shots = merged
 
+# ---------- 4c. ouverture imposée : rapproché de l'hôte, puis plan large à partir d'un mot (config « ouverture »)
+op = cfg_lt.get('ouverture')
+if op:
+    wl = next((w for w in W if op['large_au_mot'] in w['w'].lower()), None)
+    if wl:
+        a = fr(wl['t0']) - J_CUT
+        nx = [(x, y) for x, y in zip(W, W[1:]) if x['t0'] >= wl['t0'] + 2.5 and y['t0'] - x['t1'] >= 0.12]
+        b = fr(nx[0][1]['t0']) - J_CUT if nx else a + fr(3.0)
+        new = [{'f0': 0, 'f1': a, 'cam': op.get('cam_debut', 'H'), 'kind': 'rapproché', 'spk': 'hote', 'why': 'ouverture (bonjour)'},
+               {'f0': a, 'f1': b, 'cam': 'L', 'kind': 'large', 'spk': 'hote', 'why': f"ouverture (« {wl['w']} »)"}]
+        for s_ in shots:
+            if s_['f1'] <= b: continue
+            new.append(dict(s_, f0=max(s_['f0'], b)))
+        shots = []
+        for s_ in new:
+            if shots and shots[-1]['cam'] == s_['cam'] and shots[-1]['f0'] >= b: shots[-1]['f1'] = s_['f1']; continue
+            shots.append(s_)
+
 # ---------- 5. contrôle + export
 for i, s in enumerate(shots):
     s.update(i=i, t0=round(sec(s['f0']), 3), t1=round(sec(s['f1']), 3), dur=round(sec(s['f1'] - s['f0']), 2))

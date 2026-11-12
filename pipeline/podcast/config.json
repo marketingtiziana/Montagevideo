@@ -46,5 +46,9 @@
  "musique_teaser_lufs": -24,
  "ducking_ratio": 2.5,
  "musique_teaser_gain_db": 0,
- "lower_third_sur_invite": true
+ "lower_third_sur_invite": true,
+ "ouverture": {
+  "cam_debut": "H",
+  "large_au_mot": "bienvenue"
+ }
 }

@@ -63,7 +63,7 @@ def render_units(units, out, preview=False, labels=False, jobs=2, tag='u'):
         import hashlib
         key = hashlib.md5(json.dumps([u['src0'], u['nfr'], u['rect'], u.get('blur'), GRADE, preview,
                                       u.get('label') if labels else None]).encode()).hexdigest()[:12]
-        o = f"work/units/{tag}{k:04d}_{key}.mp4"
+        o = f"work/units/{tag}_{key}.mp4"
         if os.path.exists(o):
             try:
                 n = int(subprocess.check_output(['ffprobe', '-v', 'error', '-count_packets', '-select_streams', 'v', '-show_entries',

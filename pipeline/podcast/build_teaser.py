@@ -30,12 +30,25 @@ def src2ep(t):
     # point dans une coupe : on prend le début du segment suivant
     nxt = [g for g in SEG if g['src0'] > t]; return nxt[0]['ep0'] / FPS if nxt else None
 
+# début d'extrait : creux d'énergie juste avant le 1er mot (jamais la fin du mot précédent)
+import wave as _wave
+_w = _wave.open('work/audio48.wav'); _SR = _w.getframerate()
+_A = np.frombuffer(_w.readframes(_w.getnframes()), np.int16).reshape(-1, 2)[:, 0].astype(np.float32) / 32768
+def start_frame(w0):
+    best, bf = 1e9, fr(w0['t0'])
+    for k in range(-4, 2):                       # de 4 images avant à 1 image après l'attaque estimée
+        f = fr(w0['t0']) + k; src = w0['src0'] + (f / FPS - w0['t0'])
+        i = int(src * _SR); e = float(np.sqrt((_A[i:i + int(0.02 * _SR)] ** 2).mean()) + 1e-9)
+        e *= 1.0 + 0.15 * abs(k + 1)                 # léger biais vers 1 image avant le mot
+        if e < best: best, bf = e, f
+    return bf
+
 # ---------- 1. extraits -> plans
 plan, clips = [], []
 for pid in ORDER:
     p = dict(P[pid], **cfg.get('teaser_plages', {}).get(pid, {})); e0, e1 = src2ep(p['t0']), src2ep(p['t1'])
     ws = [w for w in W if e0 - 0.05 <= w['t0'] and w['t1'] <= e1 + 0.1]
-    f0 = fr(ws[0]['t0']) - 3; f1 = fr(ws[-1]['t1']) + 6
+    f0 = start_frame(ws[0]); f1 = fr(ws[-1]['t1']) + 6
     spk = max(('hote', 'invite'), key=lambda s: sum(w['t1'] - w['t0'] for w in ws if w['spk'] == s))
     # points de coupe : entre deux mots, plans de 1,5 à 2,5 s
     bounds = [f0]; gaps = [fr((x['t1'] + y['t0']) / 2) for x, y in zip(ws, ws[1:])]
