@@ -116,7 +116,7 @@ def main():
     subs = os.path.join(HERE, 'build', 'subs.ass')
     vf = f"ass='{subs}'" + (",scale=1280:720:flags=lanczos" if PREVIEW else "")
     enc_v = (['-c:v', 'libx264', '-preset', 'faster', '-crf', '24', '-maxrate', '2.2M', '-bufsize', '4M'] if PREVIEW
-             else ['-c:v', 'libx264', '-preset', 'slow', '-crf', '17', '-profile:v', 'high', '-tune', 'film'])
+             else ['-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-maxrate', '12M', '-bufsize', '24M', '-profile:v', 'high', '-tune', 'film', '-g', '50'])
     enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'bgr24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
                             '-ss', f'{T0:.3f}', '-t', f'{T1 - T0:.3f}', '-i', os.path.join(MED, 'mix.wav'),
                             '-vf', f"setpts=PTS+{T0}/TB,{vf},setpts=PTS-STARTPTS", '-map', '0:v', '-map', '1:a'] + enc_v +
