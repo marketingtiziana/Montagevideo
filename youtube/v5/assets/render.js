@@ -16,7 +16,8 @@ const path = require('path'); const fs = require('fs');
   const spans = await p.evaluate(() => document.getAnimations().map(a => {
     const t = a.effect.getComputedTiming(); return [t.delay || 0, (t.delay || 0) + (t.duration || 0)];
   }));
-  const active = t => spans.some(([s, e]) => t >= s - 1 && t <= e + 1);   // ms, marge 1 ms
+  const hasT = await p.evaluate(() => !!window.onT);
+  const active = t => hasT || spans.some(([s, e]) => t >= s - 1 && t <= e + 1);   // ms, marge 1 ms
   let prevFile = null, prevStatic = false;
   const frames = only !== undefined ? [+only] : [...Array(n).keys()];
   for (const i of frames) {
@@ -24,7 +25,7 @@ const path = require('path'); const fs = require('fs');
     const file = `${out}/f${String(i).padStart(4, '0')}.png`;
     const isStatic = !active(t);
     if (isStatic && prevStatic && prevFile) { try { fs.unlinkSync(file); } catch (e) {} fs.linkSync(prevFile, file); continue; }
-    await p.evaluate((t) => { document.getAnimations().forEach(a => { a.pause(); a.currentTime = t; }); }, t);
+    await p.evaluate((t) => { document.getAnimations().forEach(a => { a.pause(); a.currentTime = t; }); if (window.onT) window.onT(t / 1000); }, t);
     await p.screenshot({ path: file, omitBackground: true });
     prevFile = file; prevStatic = isStatic;
   }

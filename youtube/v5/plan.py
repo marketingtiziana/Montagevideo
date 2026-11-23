@@ -33,7 +33,7 @@ def assign_framing(clips):
         elif any(_overlaps(s, e, *r) and (r[1]-r[0]) >= 0.6*(e-s) or (s <= r[0] and r[1] <= e) for r in CLOSE):
             c['framing'] = 'C'
         else:
-            c['framing'] = 'WM'[alt % 2]; alt += 1
+            c['framing'] = 'WC'[alt % 2]; alt += 1
     # éviter deux plans identiques consécutifs (saut visible) quand c'est possible
     prev = None
     for c in clips:

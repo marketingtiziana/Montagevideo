@@ -16,6 +16,42 @@ T0, T1 = float(opt('--from', 0)), opt('--to')
 OUTF = opt('--out', os.path.join(MED, 'preview_720p.mp4' if PREVIEW else 'final_1080p.mp4'))
 
 man = json.load(open(os.path.join(HERE, 'build', 'gfx_manifest.json')))
+from plan import build_clips, src2out
+from timeline import PUNCH, G as TL
+CLIPS, _ = build_clips()
+SRC = [(c['o_f'] / FPS, (c['o_f'] + c['e_f'] - c['s_f']) / FPS, k) for k, c in enumerate(CLIPS) if c['kind'] == 'src']
+LOCK = [(g['start'], g['end']) for g in man if g['kind'] in ('CARD', 'LT')]
+PUNCH_OUT = [o for o in (src2out(t, CLIPS) for t in PUNCH) if o is not None and not any(a <= o < b for a, b in LOCK)]
+# repère d'étape : entre la fin d'un carton de chapitre et le début du suivant
+CH = sorted([g for g in man if g['tpl'] == 'chapter'], key=lambda g: g['start'])
+REC = [g for g in man if g['id'] == 'recap'][0]
+HUD = [(c['end'], (CH[i + 1]['start'] if i + 1 < len(CH) else REC['start']), i + 1) for i, c in enumerate(CH)]
+HIDE = [(g['start'], g['end']) for g in man if g['kind'] in ('FULL', 'SPLIT')]
+
+def camera(frame, t):
+    """Poussée lente continue (sens alterné d'un plan à l'autre) + zoom d'emphase sur les phrases fortes."""
+    seg = next(((a, b, k) for a, b, k in SRC if a <= t < b), None)
+    if seg is None: return frame
+    a, b, k = seg
+    u = (t - a) / max(0.5, b - a)
+    z = 1.0 + 0.045 * (u if k % 2 == 0 else 1 - u)
+    for p in PUNCH_OUT:
+        if a <= p <= t < b:
+            z += 0.09 * ease((t - p) / 0.22)
+    if any(a2 <= t < b2 for a2, b2 in LOCK): z = min(z, 1.03)
+    if z <= 1.0005: return frame
+    cx, cy = 930, 380
+    M = np.float32([[z, 0, cx * (1 - z)], [0, z, cy * (1 - z)]])
+    return cv2.warpAffine(frame, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+
+def hud_alpha(t):
+    for a, b, n in HUD:
+        if a <= t < b:
+            al = min(1, (t - a) / 0.3, (b - t) / 0.3)
+            for h0, h1 in HIDE:
+                if h0 - 0.3 <= t < h1 + 0.3: al = min(al, max(0, (h0 - t) / 0.3, (t - h1) / 0.3))
+            return n, max(0, al)
+    return None, 0
 total = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0',
                               os.path.join(MED, 'base.mp4')], capture_output=True, text=True).stdout)
 T1 = float(T1) if T1 else total
@@ -92,6 +128,7 @@ def main():
         if len(buf) < W * H * 3: break
         frame = np.frombuffer(buf, np.uint8).reshape(H, W, 3).copy()
         t = f / FPS
+        frame = camera(frame, t)
         act = [g for g in man if g['start'] <= t < g['end']]
         for g in sorted(act, key=lambda g: {'SPLIT': 0, 'FULL': 1, 'CARD': 2, 'LT': 2}[g['kind']]):
             i = int(round((t - g['start']) * FPS))
@@ -108,6 +145,11 @@ def main():
                     frame = blend(frame, im, bboxes[g['id']])
                 else:
                     frame = blend(frame, im, (0, H, 0, W))
+        n, al = hud_alpha(t)
+        if n and al > 0.01:
+            hud = png(f'hud_{n}', 0)
+            if al < 0.999: hud = hud.copy(); hud[:, :, 3] = (hud[:, :, 3].astype(np.float32) * al).astype(np.uint8)
+            frame = blend(frame, hud, (0, 220, 0, 900))
         enc.stdin.write(frame.tobytes())
         if f % 500 == 0: print(f'{t:7.1f}s / {T1:.1f}s', flush=True)
     enc.stdin.close(); enc.wait(); dec.wait()

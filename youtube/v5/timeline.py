@@ -15,7 +15,9 @@ TITLE_DUR = 3.2                # carton titre (musique seule)
 END_DUR = 8.0                  # écran de fin (zones pour les éléments d'écran de fin YouTube)
 
 # Passages à cadrer serré (plan rapproché) : phrases à fort impact
-CLOSE = [(138.0, 139.3), (416.7, 421.2), (681.5, 684.9), (825.3, 834.4), (881.5, 884.7)]
+CLOSE = [(681.5, 684.9), (881.5, 884.7)]
+# zooms d'emphase (« punch-in ») : temps source du mot accentué
+PUNCH = [138.1, 286.2, 420.4, 557.9, 584.4, 744.2, 776.1, 881.6]
 
 # ------------------------------------------------------------------------------------------
 # Graphismes. kind :
@@ -30,7 +32,7 @@ G = [
       kicker="La méthode en 5 étapes", title="Comment t'expatrier pour enfin quitter la France"),
 
  dict(id="lt_name", kind="LT", tpl="lowerthird", src=(60.0, 66.2),
-      name="Tiziana", role="Expatriation & fiscalité internationale", verify="intitulé du synthé à valider"),
+      name="Tiziana", role="Fondatrice du cabinet Fynovates"),
 
  dict(id="roadmap", kind="SPLIT", tpl="roadmap", src=(85.2, 111.0),
       title="La méthode complète", sub="5 étapes, dans l'ordre",
@@ -179,6 +181,36 @@ G = [
  dict(id="cta", kind="CARD", tpl="cta", src=(850.5, 881.4), kicker="Réserve un appel avec mon équipe",
       title="Lien dans la description", items=[("Les destinations compatibles avec ton profil", 870.0),
              ("La structure adaptée", 873.3), ("La feuille de route de ta sortie de France", 874.4)]),
+
+
+ # ---------------------------------------------------------------- V2 : mots-clés cinétiques (plans face caméra)
+ dict(id="k_boucle", kind="CARD", tpl="lines", src=(66.2, 71.1), kicker="La même boucle",
+      lines=[("Regarder des vidéos", 66.4), ("Comparer des pays", 67.8), ("Rêver un peu…", 68.9), ("… et ne rien faire", 70.0, "accent")]),
+ dict(id="k_gouffre", kind="CARD", tpl="lines", src=(71.2, 79.5), kicker="Entre l'envie et le départ",
+      lines=[("Un gouffre", 75.9, "accent")], size=96),
+ dict(id="k_legal", kind="CARD", tpl="lines", src=(112.3, 120.6), kicker="On peut quitter la France",
+      lines=[("Légalement", 114.1), ("Sereinement", 116.0), ("Intelligemment", 117.3), ("Pas n'importe comment", 118.2, "small accent")]),
+ dict(id="k_quelpays", kind="CARD", tpl="lines", src=(134.3, 143.6), kicker="L'erreur classique",
+      lines=[("« Quel pays ? »", 136.1, "strike", 138.1), ("C'est l'inverse.", 138.3, "accent"), ("Ta phase de vie d'abord", 140.0, "small")]),
+ dict(id="k_piege", kind="CARD", tpl="lines", src=(268.0, 273.0), kicker="Attention", lines=[("Un piège énorme", 269.7, "warn")]),
+ dict(id="k_insta", kind="CARD", tpl="lines", src=(393.6, 398.7), kicker="Retiens le principe",
+      lines=[("Destinations Instagram", 394.0), ("≠ destinations patrimoniales", 395.7, "accent small")]),
+ dict(id="k_serieux", kind="CARD", tpl="lines", src=(408.3, 422.9), kicker="La validation terrain",
+      lines=[("Projets sérieux", 412.2), ("vs fantasmes", 413.1, "accent"), ("Jamais sur une théorie fiscale.", 418.3, "small")]),
+ dict(id="k_importante", kind="CARD", tpl="lines", src=(539.0, 553.5), kicker="Étape 4",
+      lines=[("La plus importante", 540.3), ("Expatriation de rêve", 548.5, "small"), ("→ cauchemar fiscal", 549.8, "warn")]),
+ dict(id="k_regles", kind="CARD", tpl="lines", src=(649.5, 658.6), kicker="Y compris les miennes",
+      lines=[("Règles générales", 650.3), ("≠ analyse de ton cas", 656.2, "accent small")]),
+ dict(id="k_2traitements", kind="CARD", tpl="lines", src=(659.4, 675.0), kicker="Même pays",
+      lines=[("2 entrepreneurs", 659.5), ("2 traitements fiscaux", 665.1, "accent"), ("Selon la nature de leurs revenus", 668.2, "small")]),
+ dict(id="k_horizon", kind="CARD", tpl="lines", src=(692.8, 698.1), kicker="Une fois installé",
+      lines=[("Un nouvel horizon", 695.7), ("patrimonial", 696.2, "accent")]),
+ dict(id="k_comment", kind="CARD", tpl="lines", src=(728.8, 737.5), kicker="Dis-le-moi en commentaire",
+      lines=[("Une vidéo dédiée ?", 731.8)]),
+ dict(id="k_fuir", kind="CARD", tpl="lines", src=(825.3, 834.4), kicker="Quitter la France",
+      lines=[("Pas une fuite", 826.4, "strike", 827.4), ("Une construction", 828.6, "accent")]),
+ dict(id="k_envie", kind="CARD", tpl="lines", src=(847.9, 850.4), kicker="Si tu es prêt",
+      lines=[("De l'envie", 849.0), ("au projet", 849.6, "accent")]),
 
  dict(id="endcard", kind="FULL", tpl="endcard", out_only=True, line="La France, tu peux la quitter. Mais quitte-la bien."),
 ]

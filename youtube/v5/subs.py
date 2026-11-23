@@ -75,6 +75,7 @@ FIX = [
     (r"Deux, choisis", "Deux : choisis"), (r"Trois, valide", "Trois : valide"), (r"Quatre, sors", "Quatre : sors"),
     (r"Cinq, reconstruis", "Cinq : reconstruis"),
     (r"tu fais rien", "tu ne fais rien"),
+    (r"accumulent un passif fiscal", "accumulent en réalité un passif fiscal"),
     (r"^quitter la France physiquement", "Quitter la France physiquement"),
     (r"tu compars", "tu compares"),
     (r"Tu y penses peut-être depuis des mois, peut-être depuis des années, quitter la France, et",

@@ -2,273 +2,669 @@
  {
   "id": "title",
   "kind": "FULL",
+  "tpl": "title",
   "start": 5.24,
   "end": 8.44,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.35,
+   0.45,
+   0.55,
+   0.62,
+   0.69,
+   0.76,
+   0.83,
+   0.9,
+   0.97
+  ]
  },
  {
   "id": "lt_name",
   "kind": "LT",
+  "tpl": "lowerthird",
   "start": 10.24,
-  "end": 16.2,
+  "end": 16.44,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   0.55
+  ]
  },
  {
   "id": "roadmap",
   "kind": "SPLIT",
-  "start": 35.2,
-  "end": 60.88,
+  "tpl": "roadmap",
+  "start": 35.44,
+  "end": 61.24,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   5.5,
+   7.7,
+   12.3,
+   22.9,
+   24.4
+  ]
  },
  {
   "id": "ch1",
   "kind": "FULL",
-  "start": 70.04,
-  "end": 74.84,
+  "tpl": "chapter",
+  "start": 71.48,
+  "end": 77.0,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.4
+  ]
  },
  {
   "id": "phases",
   "kind": "SPLIT",
-  "start": 90.84,
-  "end": 131.12,
+  "tpl": "twocol",
+  "start": 93.6,
+  "end": 134.08,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   2.6,
+   5.0,
+   15.42,
+   18.82,
+   21.52,
+   27.88,
+   32.18,
+   36.38
+  ]
  },
  {
   "id": "suisse",
   "kind": "SPLIT",
-  "start": 131.52,
-  "end": 160.96,
+  "tpl": "verdict",
+  "start": 134.48,
+  "end": 165.36,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   1.9,
+   4.5,
+   5.58,
+   9.28,
+   11.98,
+   16.28,
+   18.68,
+   23.38,
+   27.88
+  ]
  },
  {
   "id": "q_peur",
   "kind": "CARD",
-  "start": 165.72,
-  "end": 173.04,
+  "tpl": "quote",
+  "start": 170.36,
+  "end": 177.68,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.3
+  ]
  },
  {
   "id": "ch2",
   "kind": "FULL",
-  "start": 179.04,
-  "end": 182.72,
+  "tpl": "chapter",
+  "start": 183.96,
+  "end": 187.68,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.4
+  ]
  },
  {
   "id": "map1",
   "kind": "FULL",
-  "start": 186.48,
-  "end": 197.08,
+  "tpl": "map",
+  "start": 192.0,
+  "end": 202.6,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": []
  },
  {
   "id": "bali_thai",
   "kind": "SPLIT",
-  "start": 202.2,
-  "end": 256.56,
+  "tpl": "compare",
+  "start": 207.72,
+  "end": 263.28,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   9.56,
+   11.76,
+   15.96,
+   28.06,
+   36.76,
+   38.56,
+   42.46,
+   50.06,
+   55.76
+  ]
  },
  {
   "id": "map2",
   "kind": "FULL",
-  "start": 262.16,
-  "end": 267.16,
+  "tpl": "map",
+  "start": 268.88,
+  "end": 273.88,
   "prev_split": false,
-  "next_split": true
+  "next_split": true,
+  "beats": []
  },
  {
   "id": "dubai_sg",
   "kind": "SPLIT",
-  "start": 267.16,
-  "end": 303.16,
+  "tpl": "compare",
+  "start": 273.88,
+  "end": 310.48,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   1.2,
+   3.4,
+   5.9,
+   11.6,
+   12.9,
+   19.7,
+   26.9
+  ]
  },
  {
   "id": "map3",
   "kind": "FULL",
-  "start": 303.16,
-  "end": 308.72,
+  "tpl": "map",
+  "start": 310.48,
+  "end": 316.28,
   "prev_split": true,
-  "next_split": false
+  "next_split": false,
+  "beats": []
  },
  {
   "id": "q_coffre",
   "kind": "CARD",
-  "start": 310.92,
-  "end": 314.52,
+  "tpl": "quote",
+  "start": 318.48,
+  "end": 322.08,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.3
+  ]
  },
  {
   "id": "q_calc",
   "kind": "CARD",
-  "start": 320.12,
-  "end": 323.6,
+  "tpl": "quote",
+  "start": 327.68,
+  "end": 331.2,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.3
+  ]
  },
  {
   "id": "ch3",
   "kind": "FULL",
-  "start": 323.84,
-  "end": 328.56,
+  "tpl": "chapter",
+  "start": 331.36,
+  "end": 336.56,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.4
+  ]
  },
  {
   "id": "r1035",
   "kind": "SPLIT",
-  "start": 343.84,
-  "end": 382.16,
+  "tpl": "rule",
+  "start": 351.88,
+  "end": 391.08,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   2.7,
+   10.8,
+   24.6
+  ]
  },
  {
   "id": "invis",
   "kind": "CARD",
-  "start": 383.24,
-  "end": 418.0,
+  "tpl": "checklist",
+  "start": 392.24,
+  "end": 427.2,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   4.1,
+   21.26,
+   24.06,
+   28.16
+  ]
  },
  {
   "id": "valise",
   "kind": "CARD",
-  "start": 418.64,
-  "end": 445.04,
+  "tpl": "stat",
+  "start": 428.2,
+  "end": 454.88,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.4,
+   21.0
+  ]
  },
  {
   "id": "ch4",
   "kind": "FULL",
-  "start": 445.76,
-  "end": 448.76,
+  "tpl": "chapter",
+  "start": 455.64,
+  "end": 458.68,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.4
+  ]
  },
  {
   "id": "residence",
   "kind": "SPLIT",
-  "start": 463.92,
-  "end": 471.16,
+  "tpl": "statement",
+  "start": 474.28,
+  "end": 481.88,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   1.9,
+   3.6
+  ]
  },
  {
   "id": "broll_domicile",
   "kind": "FULL",
-  "start": 471.16,
-  "end": 480.56,
+  "tpl": "broll",
+  "start": 481.88,
+  "end": 491.28,
   "prev_split": true,
-  "next_split": true
+  "next_split": true,
+  "beats": []
  },
  {
   "id": "residence2",
   "kind": "SPLIT",
-  "start": 480.56,
-  "end": 503.52,
+  "tpl": "steps",
+  "start": 491.28,
+  "end": 514.48,
   "prev_split": false,
-  "next_split": true
+  "next_split": true,
+  "beats": [
+   0.45,
+   2.6,
+   6.8,
+   10.3,
+   16.98
+  ]
  },
  {
   "id": "sortie",
   "kind": "SPLIT",
-  "start": 503.52,
-  "end": 535.44,
+  "tpl": "steps",
+  "start": 514.48,
+  "end": 546.36,
   "prev_split": true,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   4.38,
+   7.58,
+   10.68,
+   13.48,
+   18.88,
+   24.38
+  ]
  },
  {
   "id": "validloc",
   "kind": "CARD",
-  "start": 535.92,
-  "end": 557.52,
+  "tpl": "chips",
+  "start": 547.16,
+  "end": 568.76,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   13.7,
+   15.0,
+   16.2,
+   18.6
+  ]
  },
  {
   "id": "coin",
   "kind": "FULL",
-  "start": 582.36,
-  "end": 590.32,
+  "tpl": "coin",
+  "start": 594.16,
+  "end": 602.6,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.3,
+   5.12
+  ]
  },
  {
   "id": "ch5",
   "kind": "FULL",
-  "start": 591.04,
-  "end": 596.08,
+  "tpl": "chapter",
+  "start": 603.28,
+  "end": 608.56,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.4
+  ]
  },
  {
   "id": "horsue",
   "kind": "SPLIT",
-  "start": 602.0,
-  "end": 632.08,
+  "tpl": "steps",
+  "start": 614.64,
+  "end": 644.72,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   2.3,
+   9.3,
+   17.7,
+   20.2
+  ]
  },
  {
   "id": "regledor",
   "kind": "SPLIT",
-  "start": 641.4,
-  "end": 673.68,
+  "tpl": "steps",
+  "start": 654.04,
+  "end": 686.32,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.45,
+   6.1,
+   21.3,
+   23.9
+  ]
  },
  {
   "id": "warn",
   "kind": "CARD",
-  "start": 674.0,
-  "end": 696.12,
+  "tpl": "warn",
+  "start": 686.64,
+  "end": 709.16,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   17.82
+  ]
  },
  {
   "id": "recap",
   "kind": "FULL",
-  "start": 697.76,
-  "end": 723.72,
+  "tpl": "recap",
+  "start": 711.2,
+  "end": 737.16,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   2.06,
+   4.56,
+   9.76,
+   13.96,
+   20.66
+  ]
  },
  {
   "id": "q_constr",
   "kind": "CARD",
-  "start": 732.8,
-  "end": 740.72,
+  "tpl": "quote",
+  "start": 746.48,
+  "end": 754.4,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.3
+  ]
  },
  {
   "id": "cta",
   "kind": "CARD",
-  "start": 743.28,
-  "end": 773.24,
+  "tpl": "cta",
+  "start": 756.96,
+  "end": 787.84,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.8,
+   19.48,
+   22.78,
+   23.88
+  ]
+ },
+ {
+  "id": "k_boucle",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 16.44,
+  "end": 21.32,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   1.6,
+   2.7,
+   3.8
+  ]
+ },
+ {
+  "id": "k_gouffre",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 21.44,
+  "end": 29.76,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   4.7
+  ]
+ },
+ {
+  "id": "k_legal",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 62.56,
+  "end": 69.92,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   1.78,
+   3.68,
+   4.98,
+   5.88
+  ]
+ },
+ {
+  "id": "k_quelpays",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 83.56,
+  "end": 92.84,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   1.78,
+   3.98,
+   5.68
+  ]
+ },
+ {
+  "id": "k_piege",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 202.6,
+  "end": 207.6,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   1.7
+  ]
+ },
+ {
+  "id": "k_insta",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 322.48,
+  "end": 327.6,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   0.4,
+   2.1
+  ]
+ },
+ {
+  "id": "k_serieux",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 337.2,
+  "end": 351.76,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   3.88,
+   4.78,
+   9.98
+  ]
+ },
+ {
+  "id": "k_importante",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 459.68,
+  "end": 474.16,
+  "prev_split": false,
+  "next_split": true,
+  "beats": [
+   1.3,
+   9.5,
+   10.8
+  ]
+ },
+ {
+  "id": "k_regles",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 569.44,
+  "end": 578.12,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   0.82,
+   6.72
+  ]
+ },
+ {
+  "id": "k_2traitements",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 578.8,
+  "end": 593.88,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   5.7,
+   8.8
+  ]
+ },
+ {
+  "id": "k_horizon",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 609.24,
+  "end": 614.56,
+  "prev_split": false,
+  "next_split": true,
+  "beats": [
+   2.9,
+   3.4
+  ]
+ },
+ {
+  "id": "k_comment",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 645.24,
+  "end": 653.96,
+  "prev_split": false,
+  "next_split": true,
+  "beats": [
+   3.0
+  ]
+ },
+ {
+  "id": "k_fuir",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 737.28,
+  "end": 746.36,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   1.08,
+   3.28
+  ]
+ },
+ {
+  "id": "k_envie",
+  "kind": "CARD",
+  "tpl": "lines",
+  "start": 754.44,
+  "end": 756.84,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   1.0,
+   1.6
+  ]
  },
  {
   "id": "endcard",
   "kind": "FULL",
-  "start": 777.0,
-  "end": 787.2,
+  "tpl": "endcard",
+  "start": 792.0,
+  "end": 802.2,
   "prev_split": false,
-  "next_split": false
+  "next_split": false,
+  "beats": [
+   0.6
+  ]
  }
 ]
