@@ -1,3 +1,4 @@
 output/**/*.mp4
 output/**/*.png
 build/
+output/**/*.jpg
