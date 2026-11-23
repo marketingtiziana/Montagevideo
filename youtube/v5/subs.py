@@ -76,6 +76,7 @@ FIX = [
     (r"Cinq, reconstruis", "Cinq : reconstruis"),
     (r"tu fais rien", "tu ne fais rien"),
     (r"accumulent un passif fiscal", "accumulent en réalité un passif fiscal"),
+    (r"accumulent accumule en réalité", "accumulent en réalité"),
     (r"^quitter la France physiquement", "Quitter la France physiquement"),
     (r"tu compars", "tu compares"),
     (r"Tu y penses peut-être depuis des mois, peut-être depuis des années, quitter la France, et",
@@ -96,14 +97,13 @@ def stream(words, t0, t1, mapper):
         if not (t0 <= mid < t1): continue
         # point gardé le plus proche du milieu du mot (un mot « étiré » peut chevaucher une coupe de silence)
         o = None
-        for k in range(0, 41):
-            for sg in (1, -1):
-                tt = mid + sg * k * (w['e'] - w['s']) / 80
-                if w['s'] <= tt <= w['e'] and mapper(tt) is not None: o = mapper(tt); mid = tt; break
-            if o is not None: break
+        if True:
+            for k in range(0, 41):           # premier point gardé en partant du début du mot
+                tt = w['s'] + k * (w['e'] - w['s']) / 40
+                if mapper(tt) is not None: o = mapper(tt); mid = tt; break
         if o is None: continue
         ds = o - mid
-        ts, te = w['s'] + ds, w['e'] + ds
+        ts = w['s'] + ds; te = ts + min(w['e'] - w['s'], 0.8)   # mot « étiré » : durée plafonnée
         raw = w['w'] if (w['w'].startswith(' ') or w['w'][:1] in "'-,.?!") else ' ' + w['w']
         if not out: raw = raw.lstrip()
         n = len(raw)
@@ -185,7 +185,10 @@ def build():
     ch = apply_fixes(stream(words, *COLD_OPEN, cmap))
     body = apply_fixes(stream(words, 58.0, 900, lambda t: src2out(t, CLIPS)))
     cues = make_cues(words_of(ch)) + make_cues(words_of(body))
-    for c in cues: c['text'] = nbsp(c['text'])
+    for i, c in enumerate(cues):
+        c['text'] = nbsp(c['text'])
+        if i == 0 or cues[i-1]['text'].rstrip()[-1:] in '.?!':
+            c['text'] = c['text'][:1].upper() + c['text'][1:]
     return cues
 
 def ts_srt(t):

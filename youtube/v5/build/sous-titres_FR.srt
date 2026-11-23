@@ -1,886 +1,897 @@
 1
-00:00:00,100 --> 00:00:05,530
-quitter la France physiquement ne suffit
+00:00:00,100 --> 00:00:05,390
+Quitter la France physiquement ne suffit
 pas à quitter la France fiscalement.
 
 2
-00:00:08,680 --> 00:00:14,389
+00:00:08,680 --> 00:00:14,624
 Tu y penses peut-être depuis des mois,
 peut-être depuis des années : quitter la France.
 
 3
-00:00:14,429 --> 00:00:17,850
+00:00:14,664 --> 00:00:18,090
 Et à chaque fois la même boucle,
 tu regardes des vidéos,
 
 4
-00:00:17,900 --> 00:00:21,070
-tu compars des pays, tu rêves un peu,
+00:00:18,140 --> 00:00:21,310
+tu compares des pays, tu rêves un peu,
 en fait tu ne fais rien,
 
 5
-00:00:21,267 --> 00:00:26,683
+00:00:21,507 --> 00:00:26,923
 parce qu'entre l'envie de partir et un départ réussi,
 il y a un gouffre.
 
 6
-00:00:26,723 --> 00:00:31,240
+00:00:26,963 --> 00:00:31,460
 Et ce gouffre,
 personne ne t'explique comment le traverser.
 
 7
-00:00:31,280 --> 00:00:34,910
+00:00:31,500 --> 00:00:35,110
 Aujourd'hui, on le traverse ensemble.
 
 8
-00:00:35,300 --> 00:00:40,430
+00:00:35,540 --> 00:00:40,670
 Je vais te donner la méthode complète
 en cinq étapes dans l'ordre.
 
 9
-00:00:40,730 --> 00:00:42,865
+00:00:40,970 --> 00:00:43,105
 Comment clarifier ton projet ?
 
 10
-00:00:42,905 --> 00:00:47,470
+00:00:43,145 --> 00:00:47,710
 Comment choisir ta destination
 selon ta situation ?
 
 11
-00:00:47,510 --> 00:00:52,270
+00:00:47,750 --> 00:00:52,510
 Comment valider sur le terrain
 avec des techniques concrètes et surtout
 
 12
-00:00:52,310 --> 00:00:58,186
+00:00:52,550 --> 00:00:58,426
 l'étape que 90 % des gens ratent
 et qui peut ruiner tout le reste,
 
 13
-00:00:58,226 --> 00:01:00,887
+00:00:58,466 --> 00:01:00,750
 sortir de France proprement.
 
 14
-00:01:00,927 --> 00:01:04,890
+00:01:01,287 --> 00:01:02,287
 Parce que oui,
-on peut quitter la France légalement,
 
 15
-00:01:05,469 --> 00:01:08,830
+00:01:02,660 --> 00:01:08,410
+on peut quitter la France légalement,
 sereinement, intelligemment,
-mais pas n'importe comment.
 
 16
-00:01:09,060 --> 00:01:11,898
-C'est parti, étape 1.
+00:01:08,524 --> 00:01:10,030
+mais pas n'importe comment.
 
 17
-00:01:11,938 --> 00:01:15,230
+00:01:10,500 --> 00:01:12,970
+C'est parti, étape 1.
+
+18
+00:01:13,938 --> 00:01:17,230
 Clarifie ton profil avant
 de choisir un pays.
 
-18
-00:01:15,424 --> 00:01:18,691
+19
+00:01:17,704 --> 00:01:20,971
 Première étape,
 et c'est celle que tout le monde saute.
 
-19
-00:01:18,731 --> 00:01:20,790
+20
+00:01:21,011 --> 00:01:23,070
 Savoir qui tu es dans ce projet.
 
-20
-00:01:21,327 --> 00:01:24,959
+21
+00:01:23,607 --> 00:01:27,220
 La plupart des gens commencent
 par la question « quel pays ?
 
-21
-00:01:24,999 --> 00:01:30,350
+22
+00:01:27,260 --> 00:01:32,630
 » C'est l'inverse, le bon pays dépend
 entièrement de ta phase de vie patrimoniale.
 
-22
-00:01:31,033 --> 00:01:33,090
+23
+00:01:33,793 --> 00:01:35,850
 Et il y en a grosso modo deux.
 
-23
-00:01:33,480 --> 00:01:35,650
+24
+00:01:36,240 --> 00:01:38,410
 Phase 1 : la croissance,
 
-24
-00:01:35,887 --> 00:01:40,090
+25
+00:01:38,647 --> 00:01:42,850
 tu construis, ton activité monte,
 tu réinvestis tout.
 
-25
-00:01:40,131 --> 00:01:44,810
+26
+00:01:42,891 --> 00:01:47,570
 Chaque euro de charge en moins
 est un euro de carburant en plus.
 
-26
-00:01:44,904 --> 00:01:46,110
+27
+00:01:47,664 --> 00:01:48,870
 Dans cette phase,
 
-27
-00:01:46,220 --> 00:01:50,570
+28
+00:01:48,980 --> 00:01:53,330
 tu cherches des juridictions à faible
 coût de structure et à fiscalité douce
 
-28
-00:01:50,610 --> 00:01:52,360
+29
+00:01:53,370 --> 00:01:54,790
 sur l'exploitation.
 
-29
-00:01:52,400 --> 00:01:56,950
+30
+00:01:55,160 --> 00:01:59,350
 Phase 2 : la préservation.
 
-30
-00:01:57,207 --> 00:02:00,590
+31
+00:02:00,167 --> 00:02:03,550
 Tu as construit,
 tu prépares peut-être une revente,
 
-31
-00:02:00,640 --> 00:02:06,380
+32
+00:02:03,600 --> 00:02:09,294
 tu as des actifs à protéger et ta priorité
 n'est plus la vitesse mais la sécurité.
 
-32
-00:02:06,420 --> 00:02:11,230
+33
+00:02:09,334 --> 00:02:13,890
 Là, tu cherches la stabilité juridique,
 monétaire, institutionnelle.
 
-33
-00:02:11,540 --> 00:02:13,230
+34
+00:02:14,500 --> 00:02:16,190
 Un exemple parlant, la Suisse.
 
-34
-00:02:13,408 --> 00:02:15,360
+35
+00:02:16,368 --> 00:02:18,320
 Pour un trentenaire
 en pleine croissance,
 
-35
-00:02:15,400 --> 00:02:22,270
+36
+00:02:18,360 --> 00:02:25,110
 c'est souvent un mauvais calcul, le coût de la vie,
 pour un bénéfice limité à ce stade.
 
-36
-00:02:22,488 --> 00:02:26,370
+37
+00:02:25,328 --> 00:02:29,210
 Mais pour un entrepreneur qui prépare
 la revente de sa société,
 
-37
-00:02:26,850 --> 00:02:28,990
+38
+00:02:29,690 --> 00:02:31,830
 c'est l'une des meilleures au monde.
 
-38
-00:02:29,220 --> 00:02:33,182
+39
+00:02:32,060 --> 00:02:36,022
 Les plus-values sur titres peuvent
 y être totalement exonérées sous
 
-39
-00:02:33,222 --> 00:02:37,510
+40
+00:02:36,062 --> 00:02:40,350
 conditions et c'est accessible
 à un Européen sans aucun visa.
 
-40
-00:02:38,012 --> 00:02:41,070
+41
+00:02:41,252 --> 00:02:44,310
 Même pays,
 deux verdicts opposés selon ta phase.
 
-41
-00:02:41,733 --> 00:02:45,630
+42
+00:02:45,213 --> 00:02:49,110
 Il y a un dernier point dans cette étape,
 le frein psychologique.
 
-42
-00:02:45,933 --> 00:02:52,670
+43
+00:02:49,413 --> 00:02:56,150
 La peur de l'inconnu est normale mais se traite
 avec de la méthode, pas avec du courage.
 
-43
-00:02:53,136 --> 00:02:58,770
+44
+00:02:56,616 --> 00:03:02,250
 Tout ce qui suit dans cette vidéo,
 c'est précisément ça, remplacer la peur par un process.
 
-44
-00:02:59,190 --> 00:03:02,490
+45
+00:03:02,950 --> 00:03:06,250
 Étape 2,
 choisir ta famille de destination.
 
-45
-00:03:02,849 --> 00:03:06,560
+46
+00:03:06,609 --> 00:03:10,850
 Deuxième étape,
 maintenant que tu sais qui tu es,
 
-46
-00:03:06,600 --> 00:03:11,211
+47
+00:03:10,960 --> 00:03:15,571
 tu peux regarder la carte et je vais te
 donner les grandes familles avec les
 
-47
-00:03:11,251 --> 00:03:12,410
+48
+00:03:15,611 --> 00:03:16,770
 pièges de chacune.
 
-48
-00:03:12,487 --> 00:03:17,010
+49
+00:03:16,847 --> 00:03:21,370
 Première famille, l'Asie du Sud,
 le choix des entrepreneurs du digital.
 
-49
-00:03:17,188 --> 00:03:21,790
+50
+00:03:21,548 --> 00:03:26,150
 Mais attention, il y a un piège énorme
 que je vois passer chaque semaine.
 
-50
-00:03:22,353 --> 00:03:25,570
+51
+00:03:26,713 --> 00:03:29,930
 La confusion entre Bali et la Thaïlande.
 
-51
-00:03:25,610 --> 00:03:28,550
+52
+00:03:29,970 --> 00:03:32,910
 Sur Instagram,
 c'est le même mode de vie.
 
-52
-00:03:28,640 --> 00:03:31,570
+53
+00:03:33,000 --> 00:03:35,930
 Mais fiscalement,
 c'est le jour et la nuit.
 
-53
-00:03:31,690 --> 00:03:35,670
+54
+00:03:36,250 --> 00:03:40,230
 L'Indonésie, donc Bali,
 applique une taxation mondiale.
 
-54
-00:03:35,947 --> 00:03:44,910
+55
+00:03:40,507 --> 00:03:49,710
 Si tu es résident fiscal, tu es imposable
 sur tous tes revenus, rapatriés ou pas.
 
-55
-00:03:45,315 --> 00:03:47,303
+56
+00:03:50,115 --> 00:03:52,103
 Des milliers d'expatriés l'ignorent,
 
-56
-00:03:47,343 --> 00:03:51,170
-vivent à Bali en pensant être
-tranquille et accumulent en réalité
-
 57
-00:03:52,140 --> 00:03:58,350
-un passif fiscal qui leur
-explosera à la figure un jour.
+00:03:52,143 --> 00:03:56,474
+vivent à Bali en pensant être tranquille
+et accumulent en réalité un passif
 
 58
-00:03:58,627 --> 00:04:04,213
+00:03:56,514 --> 00:03:59,750
+fiscal qui leur explosera
+à la figure un jour.
+
+59
+00:04:00,027 --> 00:04:05,410
 La Thaïlande, elle, fonctionne sur un régime
 territorial basé sur le rapatriement.
 
-59
-00:04:04,253 --> 00:04:05,640
+60
+00:04:05,653 --> 00:04:07,040
 Ce que tu gagnes à l'étranger,
 
-60
-00:04:05,680 --> 00:04:08,590
+61
+00:04:07,080 --> 00:04:09,990
 ce que tu ne fais pas entrer en Thaïlande,
 n'y est pas imposé.
 
-61
-00:04:09,324 --> 00:04:11,540
+62
+00:04:11,044 --> 00:04:13,260
 Structure complètement différente.
 
-62
-00:04:11,580 --> 00:04:16,630
+63
+00:04:13,300 --> 00:04:18,630
 Côté budget, compte environ 3 000 euros
 par mois pour bien vivre à Bangkok.
 
-63
-00:04:16,840 --> 00:04:22,210
+64
+00:04:19,000 --> 00:04:24,370
 Phuket est devenu nettement plus cher
 avec l'explosion de l'immobilier haut de gamme.
 
-64
-00:04:22,296 --> 00:04:27,310
+65
+00:04:24,456 --> 00:04:29,470
 Deuxième famille, les hubs d'excellence,
 Dubaï et Singapour.
 
-65
-00:04:27,391 --> 00:04:30,590
+66
+00:04:29,551 --> 00:04:32,750
 Dubaï, tu connais :
 0 impôt sur le revenu,
 
-66
-00:04:30,730 --> 00:04:35,847
+67
+00:04:32,890 --> 00:04:38,007
 9 % sur les sociétés et un golden
 visa de 10 ans accessible via un
 
-67
-00:04:35,887 --> 00:04:37,810
+68
+00:04:38,047 --> 00:04:39,970
 investissement d'environ 500 000 euros.
 
-68
-00:04:38,864 --> 00:04:42,410
+69
+00:04:41,024 --> 00:04:44,570
 Singapour est plus exigeante à l'entrée,
 
-69
-00:04:42,500 --> 00:04:45,630
+70
+00:04:44,660 --> 00:04:47,950
 mais il existe des chemins structurés,
 
-70
-00:04:45,670 --> 00:04:49,707
+71
+00:04:47,990 --> 00:04:51,913
 notamment via un permis de travail
 porté par une société locale pour
 
-71
-00:04:49,747 --> 00:04:52,890
-construire son installation
-progressivement.
-
 72
-00:04:53,560 --> 00:04:58,290
+00:04:51,953 --> 00:04:52,953
+construire
+
+73
+00:04:53,995 --> 00:04:55,450
+son installation progressivement.
+
+74
+00:04:56,320 --> 00:05:01,050
 Et Singapour surclasse Dubaï,
 sur trois points dont on ne parle jamais.
 
-73
-00:04:58,427 --> 00:05:03,268
+75
+00:05:01,187 --> 00:05:06,028
 La sécurité,
 la mixité culturelle et la qualité de l'air.
 
-74
-00:05:03,308 --> 00:05:10,950
-Troisième famille, les juridictions de préservation,
+76
+00:05:06,068 --> 00:05:10,690
+Troisième famille,
+les juridictions de préservation,
+
+77
+00:05:11,783 --> 00:05:13,950
 comme la Suisse dont on a parlé.
 
-75
-00:05:11,087 --> 00:05:14,670
+78
+00:05:14,087 --> 00:05:17,670
 Le coffre-fort, pas le tremplin,
 retiens le principe.
 
-76
-00:05:15,115 --> 00:05:20,130
+79
+00:05:18,115 --> 00:05:23,130
 Les destinations Instagram et les destinations
 patrimoniales ne sont pas les mêmes.
 
-77
-00:05:20,302 --> 00:05:24,050
+80
+00:05:23,302 --> 00:05:27,033
 Choisis avec ta calculatrice,
 pas avec ton fil d'actualité.
 
-78
-00:05:24,090 --> 00:05:28,710
+81
+00:05:27,073 --> 00:05:32,190
 Étape 3,
 valide sur le terrain avant de t'engager.
 
-79
-00:05:29,296 --> 00:05:35,410
+82
+00:05:32,776 --> 00:05:38,850
 Troisième étape, et c'est là qu'on sépare
 les projets sérieux des fantasmes.
 
-80
-00:05:35,700 --> 00:05:37,330
+83
+00:05:39,180 --> 00:05:40,810
 La validation terrain.
 
-81
-00:05:37,655 --> 00:05:41,331
+84
+00:05:41,135 --> 00:05:44,811
 Une expatriation ne se décide
 jamais sur une théorie fiscale.
 
-82
-00:05:41,371 --> 00:05:43,810
+85
+00:05:44,851 --> 00:05:47,290
 Jamais ! Je te donne une méthode simple.
 
-83
-00:05:44,027 --> 00:05:46,192
+86
+00:05:47,507 --> 00:05:49,672
 La règle 10-3-5.
 
-84
-00:05:46,232 --> 00:05:49,650
+87
+00:05:49,712 --> 00:05:53,130
 Dix : tu passes au minimum
 10 jours sur place.
 
-85
-00:05:49,870 --> 00:05:52,530
+88
+00:05:53,350 --> 00:05:55,651
 Pas un week-end prolongé
 en mode touriste.
 
-86
-00:05:54,131 --> 00:05:58,067
+89
+00:05:55,691 --> 00:05:59,627
 Trois : tu testes trois quartiers
 différents en changeant d'hôtel,
 
-87
-00:05:58,107 --> 00:06:02,593
+90
+00:05:59,667 --> 00:06:04,153
 parce que la ville que tu vis depuis
 le quartier des expats et la ville que
 
-88
-00:06:02,633 --> 00:06:07,430
+91
+00:06:04,193 --> 00:06:08,990
 tu vis depuis un quartier résidentiel normal,
 ce sont deux villes différentes.
 
-89
-00:06:07,687 --> 00:06:12,750
+92
+00:06:09,487 --> 00:06:14,550
 Et cinq : tu fais cinq visites immobilières réelles,
 pas pour acheter,
 
-90
-00:06:12,868 --> 00:06:16,886
+93
+00:06:14,668 --> 00:06:18,686
 pour confronter les prix
 d'Internet à la réalité du marché.
 
-91
-00:06:16,926 --> 00:06:22,510
+94
+00:06:18,726 --> 00:06:24,310
 C'est le test de vérité le plus rapide
 qui existe sur le vrai coût de la vie locale.
 
-92
-00:06:23,282 --> 00:06:27,230
+95
+00:06:25,162 --> 00:06:29,070
 Pendant ce séjour,
 vérifie aussi les critères invisibles.
 
-93
-00:06:27,400 --> 00:06:29,680
+96
+00:06:29,280 --> 00:06:31,560
 La qualité de l'air,
 par exemple à Bangkok,
 
-94
-00:06:29,720 --> 00:06:34,930
+97
+00:06:31,600 --> 00:06:36,810
 la pollution est saisonnière,
 liée aux brûlis agricoles en début d'année.
 
-95
-00:06:34,984 --> 00:06:36,440
+98
+00:06:36,864 --> 00:06:38,460
 Donc gérable, on s'organise.
 
-96
-00:06:36,480 --> 00:06:40,936
+99
+00:06:38,500 --> 00:06:43,016
 Dans d'autres hubs,
 elle est structurelle, permanente, et là,
 
-97
-00:06:40,976 --> 00:06:44,110
+100
+00:06:43,056 --> 00:06:46,190
 ça devient un vrai sujet
 de santé pour toi et ta famille.
 
-98
-00:06:44,332 --> 00:06:48,730
+101
+00:06:46,412 --> 00:06:50,810
 Regarde aussi les écoles,
 si tu as des enfants et le niveau des soins.
 
-99
-00:06:49,448 --> 00:06:53,708
+102
+00:06:51,528 --> 00:06:55,788
 Certaines destinations paradisiaques
 ont un déficit d'infrastructure qui
 
-100
-00:06:53,748 --> 00:06:58,410
+103
+00:06:55,828 --> 00:07:00,490
 rend une installation familiale
 intenable au-delà de quelques mois.
 
-101
-00:06:58,813 --> 00:07:04,560
+104
+00:07:01,253 --> 00:07:07,165
 Et dernier exercice qui va te paraître étrange
 mais qui est redoutable, la valise unique.
 
-102
-00:07:04,600 --> 00:07:11,973
+105
+00:07:07,205 --> 00:07:09,630
 Pendant une semaine chez toi,
-ne vis qu'avec ce qui tient dans une seule valise.
 
-103
-00:07:12,013 --> 00:07:13,770
+106
+00:07:10,220 --> 00:07:14,693
+ne vis qu'avec ce qui tient
+dans une seule valise.
+
+107
+00:07:14,733 --> 00:07:16,490
 Tu vas découvrir deux choses.
 
-104
-00:07:14,147 --> 00:07:19,290
+108
+00:07:16,867 --> 00:07:22,010
 Ce dont tu as réellement besoin
 et à quel point le reste te retient.
 
-105
-00:07:19,487 --> 00:07:25,310
+109
+00:07:22,207 --> 00:07:28,030
 Le détachement matériel,
 c'est la moitié invisible d'une expatriation réussie.
 
-106
-00:07:25,880 --> 00:07:28,950
+110
+00:07:28,640 --> 00:07:31,710
 Étape 4, sors de France proprement.
 
-107
-00:07:29,438 --> 00:07:32,910
+111
+00:07:32,678 --> 00:07:36,150
 Quatrième étape,
 la plus importante de cette vidéo,
 
-108
-00:07:32,950 --> 00:07:38,113
+112
+00:07:36,190 --> 00:07:41,353
 c'est celle que presque tout le monde
 néglige et qui transforme les
 
-109
-00:07:38,153 --> 00:07:41,710
+113
+00:07:41,393 --> 00:07:44,930
 expatriations de rêves
 en cauchemars fiscaux.
 
-110
-00:07:41,900 --> 00:07:43,970
+114
+00:07:45,140 --> 00:07:47,210
 La sortie de France.
 
-111
-00:07:44,066 --> 00:07:45,710
+115
+00:07:47,306 --> 00:07:48,950
 Comprends une chose,
 
-112
-00:07:45,812 --> 00:07:51,090
+116
+00:07:49,052 --> 00:07:54,310
 quitter la France physiquement ne suffit
 pas à quitter la France fiscalement.
 
-113
-00:07:51,340 --> 00:07:55,610
+117
+00:07:54,940 --> 00:07:59,210
 La résidence fiscale française
 repose sur plusieurs critères.
 
-114
-00:07:56,135 --> 00:08:00,890
+118
+00:07:59,735 --> 00:08:04,467
 Ton foyer, ton activité,
 le centre des intérêts économiques.
 
-115
-00:08:00,973 --> 00:08:03,210
+119
+00:08:04,507 --> 00:08:06,810
 Si ta famille reste en France,
 
-116
-00:08:03,260 --> 00:08:07,190
+120
+00:08:06,860 --> 00:08:10,790
 si ton activité principale
 reste pilotée depuis la France,
 
-117
-00:08:07,380 --> 00:08:10,880
+121
+00:08:10,980 --> 00:08:14,250
 si l'essentiel
 de ton patrimoine y demeure,
 
-118
-00:08:10,920 --> 00:08:17,230
+122
+00:08:14,520 --> 00:08:20,830
 tu peux vivre à 10 000 km et rester
 imposable comme résident français.
 
-119
-00:08:17,396 --> 00:08:23,647
+123
+00:08:21,196 --> 00:08:27,430
 Avec à la clé des années de redressement
 quand l'administration s'en aperçoit.
 
-120
-00:08:23,687 --> 00:08:24,810
+124
+00:08:27,477 --> 00:08:28,477
 Concrètement,
 
-121
-00:08:25,560 --> 00:08:26,890
+125
+00:08:29,360 --> 00:08:30,690
 une sortie propre,
 
-122
-00:08:26,980 --> 00:08:30,870
+126
+00:08:30,780 --> 00:08:34,670
 ça veut dire transférer
 réellement ton centre de vie,
 
-123
-00:08:31,189 --> 00:08:34,130
+127
+00:08:34,989 --> 00:08:37,930
 documenter ta nouvelle
 résidence fiscale,
 
-124
-00:08:34,263 --> 00:08:36,570
+128
+00:08:38,063 --> 00:08:40,370
 gérer le sort de ta structure française,
 
-125
-00:08:37,086 --> 00:08:44,685
+129
+00:08:40,886 --> 00:08:48,485
 anticiper l'exit tax si tu détiens
 des participations importantes et faire
 
-126
-00:08:44,725 --> 00:08:47,530
+130
+00:08:48,525 --> 00:08:51,330
 les bonnes déclarations la bonne année.
 
-127
-00:08:48,020 --> 00:08:49,670
+131
+00:08:51,820 --> 00:08:53,470
 Chaque élément a un timing.
 
-128
-00:08:49,876 --> 00:08:52,656
+132
+00:08:53,676 --> 00:08:56,440
 Dans le mauvais ordre,
 tu crées des frictions.
 
-129
-00:08:52,696 --> 00:08:56,033
+133
+00:08:56,480 --> 00:09:00,010
 Dans le bon ordre, tout s'emboîte.
 
-130
-00:08:56,073 --> 00:09:01,570
+134
+00:09:00,193 --> 00:09:05,690
 Et j'ajoute le réflexe indispensable
 une fois sur place, la validation locale.
 
-131
-00:09:02,097 --> 00:09:05,004
+135
+00:09:06,217 --> 00:09:08,490
 Avant de t'installer définitivement,
 
-132
-00:09:05,044 --> 00:09:10,912
+136
+00:09:09,164 --> 00:09:14,790
 fais valider le traitement fiscal
 de tes revenus spécifiques : dividendes,
 
-133
-00:09:10,952 --> 00:09:13,470
+137
+00:09:15,072 --> 00:09:17,590
 plus-values,
 revenus de source étrangère,
 
-134
-00:09:14,515 --> 00:09:17,650
+138
+00:09:18,635 --> 00:09:21,770
 par un professionnel du pays d'accueil.
 
-135
-00:09:18,270 --> 00:09:23,127
+139
+00:09:22,550 --> 00:09:27,407
 Les règles générales que tu vois dans les vidéos,
 y compris les miennes,
 
-136
-00:09:23,167 --> 00:09:27,030
+140
+00:09:27,447 --> 00:09:31,310
 ne remplaceront jamais
 une analyse de ton cas.
 
-137
-00:09:27,340 --> 00:09:28,870
-Deux entrepreneurs dans
+141
+00:09:31,464 --> 00:09:36,082
+Deux entrepreneurs dans le même pays
+peuvent avoir deux traitements fiscaux
 
-138
-00:09:29,593 --> 00:09:36,040
-le même pays peuvent avoir deux traitements
-fiscaux complètement différents
+142
+00:09:36,122 --> 00:09:40,550
+complètement différents selon
+la nature de leurs revenus,
 
-139
-00:09:36,080 --> 00:09:38,630
-selon la nature de leurs revenus,
-
-140
-00:09:38,787 --> 00:09:42,370
+143
+00:09:40,707 --> 00:09:44,290
 la sortie de la France et l'entrée
 dans ton nouveau pays.
 
-141
-00:09:42,687 --> 00:09:46,970
+144
+00:09:44,807 --> 00:09:49,330
 Ce sont les deux faces de la même pièce.
 
-142
-00:09:47,180 --> 00:09:50,910
+145
+00:09:49,733 --> 00:09:53,470
 Rater l'une, c'est invalider l'autre.
 
-143
-00:09:51,140 --> 00:09:56,470
+146
+00:09:53,700 --> 00:09:58,750
 Étape 5. Reconstruis ton patrimoine
 en mode international.
 
-144
-00:09:56,776 --> 00:09:58,515
+147
+00:09:59,736 --> 00:10:01,475
 Cinquième et dernière étape.
 
-145
-00:09:58,555 --> 00:10:01,830
+148
+00:10:01,515 --> 00:10:04,790
 Une fois installé,
 ton horizon patrimonial change complètement.
 
-146
-00:10:02,153 --> 00:10:04,130
+149
+00:10:05,113 --> 00:10:07,090
 En quittant l'Union européenne,
 
-147
-00:10:04,347 --> 00:10:09,440
+150
+00:10:07,307 --> 00:10:12,400
 tu t'affranchis par exemple de certaines
 restrictions réglementaires sur les
 
-148
-00:10:09,480 --> 00:10:18,194
+151
+00:10:12,440 --> 00:10:18,594
 produits d'investissement et tu accèdes
 à des supports jusque-là fermés aux
 
-149
-00:10:18,234 --> 00:10:22,150
+152
+00:10:18,634 --> 00:10:22,550
 résidents européens,
 souvent avec des frais plus faibles.
 
-150
-00:10:22,225 --> 00:10:26,180
+153
+00:10:22,625 --> 00:10:26,580
 Ton nouveau cadre fiscal peut aussi
 rendre certaines stratégies de
 
-151
-00:10:26,220 --> 00:10:32,150
+154
+00:10:26,620 --> 00:10:30,990
 dividendes ou de plus de valeurs
 beaucoup plus efficaces qu'en France.
 
-152
-00:10:32,740 --> 00:10:37,570
+155
+00:10:31,580 --> 00:10:36,410
 C'est tout un champ qui s'ouvre
 et il mérite sa propre vidéo.
 
-153
-00:10:37,780 --> 00:10:39,616
+156
+00:10:36,620 --> 00:10:38,456
 Dis-moi en commentaire
 si ça t'intéresse.
 
-154
-00:10:39,656 --> 00:10:42,990
+157
+00:10:38,496 --> 00:10:41,830
 Mais je te donne tout
 de suite la règle d'or,
 
-155
-00:10:43,100 --> 00:10:47,480
+158
+00:10:41,940 --> 00:10:46,150
 parce qu'elle évite l'erreur
 classique du nouvel expatrié.
 
-156
-00:10:47,520 --> 00:10:51,990
+159
+00:10:46,360 --> 00:10:50,830
 N'achète pas d'immobilier local en arrivant,
 jamais la première année,
 
-157
-00:10:52,393 --> 00:10:54,967
+160
+00:10:51,233 --> 00:10:53,807
 tu ne connais pas les micro-marchés,
 
-158
-00:10:55,007 --> 00:10:59,890
+161
+00:10:53,847 --> 00:10:58,650
 tu ne sais pas encore quel quartier monte,
 lesquels stagnent,
 
-159
-00:11:00,040 --> 00:11:02,800
+162
+00:10:58,880 --> 00:11:01,640
 où sont les pièges à étrangers ?
 
-160
-00:11:02,840 --> 00:11:05,090
+163
+00:11:01,680 --> 00:11:03,930
 Loue, observe, apprends.
 
-161
-00:11:05,433 --> 00:11:13,850
+164
+00:11:04,273 --> 00:11:12,690
 La pierre locale, c'est l'année 2 ou 3 quand
 tu ne seras plus en touriste avec un budget.
 
-162
-00:11:14,193 --> 00:11:19,650
+165
+00:11:13,033 --> 00:11:18,150
 Et méfie-toi comme la peste
 des placements « spécial expatriés ».
 
-163
-00:11:19,773 --> 00:11:24,287
+166
+00:11:18,613 --> 00:11:23,127
 Un rendement mirobolant qu'on
 te propose dès ton arrivée.
 
-164
-00:11:24,327 --> 00:11:28,150
+167
+00:11:23,167 --> 00:11:26,990
 Un nouvel expatrié avec du capital
 fraîchement libéré,
 
-165
-00:11:28,430 --> 00:11:31,620
+168
+00:11:27,270 --> 00:11:30,650
 c'est la cible préférée
 des vendeurs de rêve.
 
-166
-00:11:31,660 --> 00:11:36,670
+169
+00:11:30,700 --> 00:11:35,910
 Ton nouveau cadre fiscal est un avantage,
 il ne rend aucun placement magique.
 
-167
-00:11:37,949 --> 00:11:39,820
+170
+00:11:37,589 --> 00:11:39,460
 Récapitulons la méthode.
 
-168
-00:11:39,860 --> 00:11:42,010
+171
+00:11:39,500 --> 00:11:41,650
 Un : clarifie ta phase patrimoniale.
 
-169
-00:11:42,367 --> 00:11:47,430
+172
+00:11:42,007 --> 00:11:47,070
 Deux : choisis ta famille
 de destination avec ta calculatrice.
 
-170
-00:11:47,580 --> 00:11:51,650
+173
+00:11:47,220 --> 00:11:51,290
 Trois : valide sur le terrain
 avec la règle 10-3-5.
 
-171
-00:11:51,760 --> 00:11:54,290
+174
+00:11:51,400 --> 00:11:53,770
 Quatre : sors de France proprement.
 
-172
-00:11:54,350 --> 00:11:58,115
+175
+00:11:53,990 --> 00:11:57,755
 C'est le cœur du réacteur.
 
-173
-00:11:58,155 --> 00:12:03,910
+176
+00:11:57,795 --> 00:12:03,450
 Cinq : reconstruis ton patrimoine dans ton nouveau cadre,
 sans précipitation.
 
-174
-00:12:03,970 --> 00:12:05,950
+177
+00:12:03,610 --> 00:12:05,590
 Quitter la France ce n'est pas fuir,
 
-175
-00:12:06,060 --> 00:12:11,332
+178
+00:12:05,700 --> 00:12:10,972
 c'est un projet de construction qui se
 mène avec la même rigueur que tu mets
 
-176
-00:12:11,372 --> 00:12:15,870
+179
+00:12:11,012 --> 00:12:15,750
 dans ton entreprise,
 Ceux qui improvisent le paient pendant des années,
 
-177
-00:12:16,033 --> 00:12:20,820
+180
+00:12:15,913 --> 00:12:20,700
 ceux qui structurent en récoltent
 les fruits pendant des décennies.
 
-178
-00:12:20,860 --> 00:12:23,210
-si tu es prêt à passer
+181
+00:12:20,740 --> 00:12:23,090
+Si tu es prêt à passer
 de l'envie au projet,
 
-179
-00:12:23,382 --> 00:12:27,450
+182
+00:12:23,262 --> 00:12:27,330
 réserve un appel avec mon équipe,
 le lien est dans la description.
 
-180
-00:12:27,707 --> 00:12:28,707
-On fait le point
+183
+00:12:27,470 --> 00:12:30,923
+On fait le point de ta situation,
+de ton activité, tes revenus,
 
-181
-00:12:29,940 --> 00:12:36,290
-de ta situation, de ton activité,
-de ton revenu, ta famille,
+184
+00:12:30,963 --> 00:12:32,700
+ta famille, ton calendrier.
 
-182
-00:12:36,405 --> 00:12:42,090
-ton calendrier et à la fin de cet appel,
+185
+00:12:32,970 --> 00:12:37,490
+À la fin de cet appel,
 tu repars avec un plan précis pour ton projet.
 
-183
-00:12:42,365 --> 00:12:44,930
+186
+00:12:37,765 --> 00:12:40,330
 Les destinations compatibles
 avec ton profil,
 
-184
-00:12:45,080 --> 00:12:49,968
+187
+00:12:40,480 --> 00:12:45,368
 la structure adaptée et surtout la feuille
 de route complète de ta sortie de
 
-185
-00:12:50,007 --> 00:12:53,507
+188
+00:12:45,408 --> 00:12:49,210
 France, étape par étape,
 dans le bon ordre.
 
-186
-00:12:53,547 --> 00:12:56,610
+189
+00:12:49,387 --> 00:12:52,450
 La France, tu peux la quitter,
 mais quitte-la bien.
 
-187
-00:12:56,813 --> 00:12:58,070
+190
+00:12:53,053 --> 00:12:54,310
 Je te dis à très vite.
 
-188
-00:12:58,350 --> 00:12:59,350
+191
+00:12:54,590 --> 00:12:55,590
 Ciao !
 

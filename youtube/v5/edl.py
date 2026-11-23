@@ -16,6 +16,7 @@ DROPS = [
     (725.40, 726.98, "reprise après « efficaces » (à réécouter)"),
     (798.36, 801.18, "lapsus « Un, clarifie ta phrase »"),
     (842.50, 847.98, "1re prise « Si tu es prêt à passer de l'envie au projet »"),
+    (854.75, 859.72, "1re prise « On fait le point de ta situation… »"),
 ]
 # V2 : on ne raccourcit que les vrais silences, et différemment selon qu'on est entre deux phrases ou au milieu
 GAP_SENT, KEEP_SENT = 0.70, 0.40      # entre deux phrases : > 0,70 s -> 0,40 s
