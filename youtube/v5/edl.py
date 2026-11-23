@@ -11,6 +11,9 @@ DROPS = [
     (307.38, 310.78, "reprise « accumulent en un passif fiscal et accumule… »"),
     (431.20, 434.18, "faux départ « Trois, tu restes… »"),
     (477.38, 482.78, "« Donc en général, on s'organise » ×2"),
+    (661.05, 663.62, "hésitation « dans le… même pays » (à réécouter)"),
+    (709.05, 711.62, "hésitation « des… des supports » (à réécouter)"),
+    (725.40, 726.98, "reprise après « efficaces » (à réécouter)"),
     (798.36, 801.18, "lapsus « Un, clarifie ta phrase »"),
     (842.50, 847.98, "1re prise « Si tu es prêt à passer de l'envie au projet »"),
 ]
