@@ -6,3 +6,4 @@ build/test/
 build/*.log
 __pycache__/
 build/qc*/
+build/test*/
