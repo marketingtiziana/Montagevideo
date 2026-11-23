@@ -624,7 +624,7 @@ function camAt(t){{ let i=0; while(i<CAM.length-1 && t>=CAM[i+1][0]) i++;
   if(i===0) return CAM[0];
   const a=CAM[i-1], b=CAM[i], k=Math.min(1,Math.max(0,(t-b[0])/1.6)), e=ez(k);   // vol vers le point b dès qu'on en parle
   return [t, a[1]+(b[1]-a[1])*e, a[2]+(b[2]-a[2])*e, a[3]*Math.pow(b[3]/a[3],e)]; }}
-window.onT=function(t){{ const c=camAt(t); proj.scale(c[3]).center([c[1],c[2]]).translate([1020,560]);
+window.onT=function(t){{ const c=camAt(t); proj.scale(c[3]).center([c[1],c[2]]).translate([880,560]);
   let s='';
   for(const f of land.features){{ const id=f.id; const hot=HL.includes(id);
     s+=`<path d="${{path(f)}}" class="${{hot?'hl':(id==='250'?'fr':'c')}}"/>`; }}
@@ -644,6 +644,22 @@ window.READY=true; window.onT(0);"""
 .vign{position:absolute;inset:0;background:radial-gradient(70% 70% at 55% 50%,transparent 40%,rgba(7,4,26,.85) 100%)}"""
     body = (f'<svg id="m" viewBox="0 0 1920 1080"></svg><div class="vign"></div>'
             f'<div class="hd"><div class="kicker">{esc(g["kicker"])}</div><div class="t">{esc(g["title"])}</div></div>' + cards_html(g, g['cards']))
+    for w in g.get('windows', []):
+        x0, y0, x1, y1 = w['crop']; WW = 800; sc = WW / (x1 - x0); HH = (y1 - y0) * sc
+        ti, to = rel(g, w['t_in']), rel(g, w['t_out'])
+        mk = "".join(f'<div class="wmk" style="left:{(bx0-x0)*sc-6:.0f}px;top:{(by0-y0)*sc-4:.0f}px;width:{(bx1-bx0)*sc+12:.0f}px;height:{(by1-by0)*sc+8:.0f}px;{A("wipeIn", rel(g, t), .45)}"></div>' for (bx0, by0, bx1, by1), t in w['marks'])
+        body += (f'<div class="sw" style="animation:winIn .6s var(--spring) {ti:.2f}s both, winOut .35s var(--easeIn) {to:.2f}s forwards">'
+                 f'<div class="swbar"><i></i><i></i><i></i><span>{esc(w["url"])}</span></div>'
+                 f'<div class="swshot" style="height:{HH:.0f}px;background-image:url(\'{ASSETS}/{w["img"]}\');background-size:{2880*sc:.0f}px auto;background-position:{-x0*sc:.0f}px {-y0*sc:.0f}px">{mk}</div></div>')
+    css += """
+.sw{position:absolute;left:1060px;top:420px;width:800px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 40px 90px -20px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.1)}
+@keyframes winIn{from{opacity:0;transform:translateY(60px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes winOut{to{opacity:0;transform:translateY(30px) scale(.96)}}
+.swbar{height:40px;background:#ECEBF0;display:flex;align-items:center;gap:8px;padding:0 14px}
+.swbar i{width:11px;height:11px;border-radius:50%;display:block;background:#FF5F57} .swbar i:nth-child(2){background:#FEBC2E} .swbar i:nth-child(3){background:#28C840}
+.swbar span{margin:0 auto;background:#fff;border-radius:6px;padding:5px 16px;font:500 14px var(--sans);color:#3c3a44}
+.swshot{position:relative;background-repeat:no-repeat}
+.wmk{position:absolute;border:3px solid #5B4BFF;background:rgba(91,75,255,.10);border-radius:5px}"""
     return pip_frame(g, LIBS + body, css, js)
 
 def t_phones(g):
@@ -683,36 +699,53 @@ def t_phones(g):
     return page(body, css, dur)
 
 def t_macbook(g):
-    """B-roll : MacBook avec Safari affichant une page officielle (capture réelle), surlignages synchronisés."""
+    """B-roll : MacBook avec Safari (captures réelles de sites officiels), plusieurs onglets possibles, surlignages synchronisés."""
     a, b = span(g); dur = b - a
-    img, (x0, y0, x1, y1), marks = g['img'], g['crop'], g['marks']
-    W = 1180; sc = W / (x1 - x0); H = (y1 - y0) * sc
-    mk = ""
-    for (bx0, by0, bx1, by1), t in marks:
-        mk += f'<div class="mk" style="left:{(bx0-x0)*sc-10:.0f}px;top:{(by0-y0)*sc-6:.0f}px;width:{(bx1-bx0)*sc+20:.0f}px;height:{(by1-by0)*sc+12:.0f}px;{A("wipeIn", max(.5, rel(g, t)), .5)}"></div>'
+    pages = g.get('pages') or [dict(img=g['img'], crop=g['crop'], marks=g['marks'], tab=g['tab'], url=g.get('url', 'service-public.gouv.fr'), t=g['src'][0], source=g.get('source', ''))]
+    W = 1180
+    layers, tabs, srcs, urls = "", "", "", ""
+    for i, pg in enumerate(pages):
+        img, (x0, y0, x1, y1) = pg['img'], pg['crop']
+        sc = W / (x1 - x0); H = (y1 - y0) * sc
+        t_in = rel(g, pg['t']) if i else 0
+        t_out = rel(g, pages[i + 1]['t']) if i + 1 < len(pages) else dur + 1
+        mk = "".join(f'<div class="mk" style="left:{(bx0-x0)*sc-10:.0f}px;top:{(by0-y0)*sc-6:.0f}px;width:{(bx1-bx0)*sc+20:.0f}px;height:{(by1-by0)*sc+12:.0f}px;{A("wipeIn", max(.5, rel(g, t)), .5)}"></div>'
+                     for (bx0, by0, bx1, by1), t in pg['marks'])
+        enter = A("pageIn", t_in, .55, "var(--spring)") if i else ""
+        layers += (f'<div class="pg" style="z-index:{i+1};{enter}"><div class="shot" style="height:{H:.0f}px;background-image:url(\'{ASSETS}/{img}\');background-size:{2880*sc:.0f}px auto;'
+                   f'background-position:{-x0*sc:.0f}px {-y0*sc:.0f}px">{mk}</div></div>')
+        tabs += (f'<div class="tab"><span class="on" style="animation:tabOn .2s linear {t_in:.2f}s both, tabOff .2s linear {t_out:.2f}s forwards"></span>{esc(pg["tab"])}</div>')
+        urls += f'<span class="u" style="animation:tabOn .15s linear {t_in:.2f}s both, tabOff .15s linear {t_out:.2f}s forwards">{esc(pg.get("url", "service-public.gouv.fr"))}</span>'
+        srcs += f'<span class="sr" style="animation:tabOn .2s linear {t_in:.2f}s both, tabOff .2s linear {t_out:.2f}s forwards">{esc(pg.get("source", ""))}</span>'
     css = PAPER_CSS + f"""
 .all{{position:absolute;inset:0;{A("fade", 0, .3)}}} .o{{{out_anim(dur, .35)}}}
 .mac{{position:absolute;left:{(1920-1320)/2:.0f}px;top:96px;width:1320px;transform-origin:50% 70%;animation:macIn .9s var(--spring) .05s both, push {dur:.2f}s linear both}}
-@keyframes macIn{{from{{opacity:0;transform:translateY(80px) scale(.92) rotateX(12deg)}}to{{opacity:1;transform:none}}}}
+@keyframes macIn{{from{{opacity:0;transform:translateY(80px) scale(.92)}}to{{opacity:1;transform:none}}}}
 @keyframes push{{from{{scale:1}}to{{scale:1.05}}}}
+@keyframes pageIn{{from{{opacity:0;transform:translateX(90px)}}to{{opacity:1;transform:none}}}}
+@keyframes tabOn{{from{{opacity:0}}to{{opacity:1}}}} @keyframes tabOff{{to{{opacity:0}}}}
 .lid{{background:#16131c;border-radius:30px 30px 10px 10px;padding:22px 22px 26px;box-shadow:0 0 0 2px #3a3546}}
 .notch{{width:150px;height:22px;background:#16131c;border-radius:0 0 12px 12px;margin:-22px auto 0;position:relative;z-index:2}}
-.win{{border-radius:12px;overflow:hidden;background:#fff;height:{min(H + 92, 760):.0f}px}}
+.win{{border-radius:12px;overflow:hidden;background:#fff;height:700px;position:relative}}
 .bar{{height:52px;background:#ECEBF0;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid #d9d7df}}
 .bar i{{width:13px;height:13px;border-radius:50%;display:block}} .bar i:nth-child(1){{background:#FF5F57}} .bar i:nth-child(2){{background:#FEBC2E}} .bar i:nth-child(3){{background:#28C840}}
-.url{{margin:0 auto;width:560px;height:32px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font:500 16px var(--sans);color:#3c3a44}}
-.url:before{{content:"🔒";font-size:12px}}
+.url{{margin:0 auto;width:600px;height:32px;border-radius:8px;background:#fff;position:relative;font:500 16px var(--sans);color:#3c3a44}}
+.url .u{{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}}
 .tabs{{height:40px;background:#F5F4F8;display:flex;align-items:flex-end;padding:0 16px;gap:6px}}
-.tab{{background:#fff;border-radius:8px 8px 0 0;padding:9px 16px;font:500 14px var(--sans);color:#333;max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
-.shot{{position:relative;width:{W}px;margin:0 auto;height:{H:.0f}px;background:url('{ASSETS}/{img}') no-repeat;background-size:{2880*sc:.0f}px auto;background-position:{-x0*sc:.0f}px {-y0*sc:.0f}px;animation:scroll {dur:.2f}s cubic-bezier(.4,0,.2,1) both}}
-@keyframes scroll{{from{{transform:translateY(40px)}}to{{transform:translateY(-10px)}}}}
+.tab{{position:relative;background:#E6E4EC;border-radius:8px 8px 0 0;padding:9px 16px;font:500 14px var(--sans);color:#555;max-width:440px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.tab .on{{position:absolute;inset:0;background:#fff;z-index:-0;border-top:3px solid var(--gold)}}
+.tab{{isolation:isolate}} .tab .on{{z-index:-1}}
+.pg{{position:absolute;left:0;right:0;top:92px;bottom:0;background:#fff;overflow:hidden}}
+.shot{{position:relative;width:{W}px;margin:0 auto;background-repeat:no-repeat;animation:scroll {dur:.2f}s cubic-bezier(.4,0,.2,1) both}}
+@keyframes scroll{{from{{transform:translateY(30px)}}to{{transform:translateY(-10px)}}}}
 .mk{{position:absolute;border:4px solid var(--gold);background:rgba(91,75,255,.10);border-radius:6px;box-shadow:0 0 0 6px rgba(91,75,255,.12)}}
 .base{{width:1500px;height:28px;margin:0 -90px;background:linear-gradient(180deg,#cfcdd6,#8f8c99);border-radius:0 0 26px 26px;position:relative}}
 .base:before{{content:"";position:absolute;left:50%;top:0;width:220px;height:10px;margin-left:-110px;background:#a9a6b3;border-radius:0 0 10px 10px}}
-.src{{position:absolute;left:0;right:0;bottom:26px;text-align:center;font:500 17px var(--sans);color:rgba(255,255,255,.65);{A("fade", .6, .5)}}}"""
+.src{{position:absolute;left:0;right:0;bottom:22px;height:24px;text-align:center;font:500 17px var(--sans);color:rgba(255,255,255,.65)}}
+.src .sr{{position:absolute;left:0;right:0}}"""
     body = (f'<div class="all o"><div class="all"><div class="ink"></div><div class="mac"><div class="lid"><div class="notch"></div><div class="win">'
-            f'<div class="bar"><i></i><i></i><i></i><div class="url">service-public.gouv.fr</div></div><div class="tabs"><div class="tab">{esc(g["tab"])}</div></div>'
-            f'<div class="shot">{mk}</div></div></div><div class="base"></div></div><div class="src">{esc(g["source"])}</div></div></div>')
+            f'<div class="bar"><i></i><i></i><i></i><div class="url">{urls}</div></div><div class="tabs">{tabs}</div>{layers}</div></div><div class="base"></div></div>'
+            f'<div class="src">{srcs}</div></div></div>')
     return page(body, css, dur)
 
 def t_globe(g):
