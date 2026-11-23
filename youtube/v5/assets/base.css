@@ -1,0 +1,22 @@
+@import url("fonts/local.css");
+:root{
+  --ink:#0E1A2B; --ink2:#1C2B40; --ivory:#F5F0E8; --paper:#FBF8F3;
+  --gold:#B8955A; --gold2:#D9BF8C; --slate:#6A7789; --rule:rgba(14,26,43,.14);
+  --warn:#A9543E; --ok:#4F7A61;
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter Tight","Inter",sans-serif;
+  --ease:cubic-bezier(.22,.8,.24,1); --easeIn:cubic-bezier(.6,0,.8,.2);
+}
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;
+  -webkit-font-smoothing:antialiased;font-family:var(--sans);color:var(--ink)}
+*{box-sizing:border-box}
+.num{font-family:var(--serif);font-variation-settings:"opsz" 144;font-feature-settings:"lnum","tnum"}
+.kicker{font:600 22px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fadeOut{to{opacity:0;transform:translateY(-8px)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes wipeIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes slideL{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes slideR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes cardOut{to{opacity:0;transform:translateY(10px)}}
