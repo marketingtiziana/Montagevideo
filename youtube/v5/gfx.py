@@ -621,8 +621,8 @@ const land=topojson.feature(window.TOPO, window.TOPO.objects.countries);
 const svg=document.getElementById('m'); const proj=d3.geoMercator(); const path=d3.geoPath(proj);
 const ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function camAt(t){{ let i=0; while(i<CAM.length-1 && t>=CAM[i+1][0]) i++;
-  if(i>=CAM.length-1) return CAM[CAM.length-1];
-  const a=CAM[i], b=CAM[i+1], k=Math.min(1,Math.max(0,(t-a[0])/Math.max(.01,Math.min(1.6,b[0]-a[0])))), e=ez(k);
+  if(i===0) return CAM[0];
+  const a=CAM[i-1], b=CAM[i], k=Math.min(1,Math.max(0,(t-b[0])/1.6)), e=ez(k);   // vol vers le point b dès qu'on en parle
   return [t, a[1]+(b[1]-a[1])*e, a[2]+(b[2]-a[2])*e, a[3]*Math.pow(b[3]/a[3],e)]; }}
 window.onT=function(t){{ const c=camAt(t); proj.scale(c[3]).center([c[1],c[2]]).translate([1020,560]);
   let s='';
