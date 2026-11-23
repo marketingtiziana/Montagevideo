@@ -97,7 +97,7 @@ def split_frame(base, g, t):
     p_in = 1.0 if g['prev_split'] else ease((t - g['start']) / 0.55)
     p_out = 1.0 if g['next_split'] else ease((g['end'] - t) / 0.55)
     p = min(p_in, p_out)
-    bx, by, bw, bh = VIDEO_BOX
+    bx, by, bw, bh = g.get('box', VIDEO_BOX)
     x = int(round(bx * p)); y = int(round(by * p)); w = int(round(W + (bw - W) * p)); h = int(round(w * 9 / 16))
     if p <= 0.001: return base
     small = cv2.resize(base, (w, h), interpolation=cv2.INTER_AREA)
@@ -138,10 +138,14 @@ def main():
                 im = png(g['id'], i)
                 if g['kind'] in ('CARD', 'LT'):
                     if g['id'] not in bboxes:
-                        mid = png(g['id'], int((g['end'] - g['start']) * FPS * 0.5))
-                        a = mid[:, :, 3] if mid.ndim == 3 and mid.shape[2] == 4 else np.full(mid.shape[:2], 255, np.uint8)
-                        ys, xs = np.nonzero(a > 0)
-                        bboxes[g['id']] = (max(0, ys.min() - 60), min(H, ys.max() + 60), max(0, xs.min() - 80), min(W, xs.max() + 80))
+                        # zone = union des zones visibles sur toute la durée (les lignes apparaissent une à une)
+                        nfr = int((g['end'] - g['start']) * FPS); ys0, ys1, xs0, xs1 = H, 0, W, 0
+                        for k in range(1, 12):
+                            mid = png(g['id'], int(nfr * k / 12))
+                            if mid is None or mid.ndim < 3 or mid.shape[2] < 4: ys0, ys1, xs0, xs1 = 0, H, 0, W; break
+                            yy, xx = np.nonzero(mid[:, :, 3] > 0)
+                            if len(yy): ys0, ys1, xs0, xs1 = min(ys0, yy.min()), max(ys1, yy.max()), min(xs0, xx.min()), max(xs1, xx.max())
+                        bboxes[g['id']] = (max(0, ys0 - 80), min(H, ys1 + 80), max(0, xs0 - 120), min(W, xs1 + 120)) if ys1 > ys0 else (0, H, 0, W)
                     frame = blend(frame, im, bboxes[g['id']])
                 else:
                     frame = blend(frame, im, (0, H, 0, W))

@@ -27,7 +27,7 @@ def span(g):
         c = [c for c in CLIPS if c['kind'] == 'title'][0]; return c['o_f'] / FPS, (c['o_f'] + c['n_f']) / FPS
     if g['id'] == 'endcard':
         c = [c for c in CLIPS if c['kind'] == 'end'][0]
-        return c['o_f'] / FPS - 2.2, (c['o_f'] + c['n_f']) / FPS
+        return c['o_f'] / FPS - 0.2, (c['o_f'] + c['n_f']) / FPS
     a = src2out_near(g['src'][0], CLIPS, True); b = src2out_near(g['src'][1], CLIPS, False)
     return round(a * FPS) / FPS, round(b * FPS) / FPS
 
@@ -578,6 +578,223 @@ def t_lines(g):
     body += '</div>'
     return page(body, css, dur)
 
+# ============================================================================= V3 : motion design poussé
+PIP_BOX = (1288, 72, 560, 315)          # incrustation vidéo en haut à droite (cartes, frises)
+LIBS = "".join(f'<script src="{ASSETS}/lib/{f}"></script>' for f in ["d3-array.min.js", "d3-geo.min.js", "d3-geo-projection.min.js", "topojson-client.min.js", "countries-50m.js"])
+
+def pip_frame(g, body_html, css_extra="", js="", bg='ink'):
+    """Fond plein écran (carte, frise…) + emplacement de la vidéo en incrustation (rendue par le compositeur)."""
+    a, b = span(g); dur = b - a
+    prev, nxt = adjacent_split(g)
+    x, y, w, h = PIP_BOX
+    css = PAPER_CSS + f"""
+.pipbox{{position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:14px;box-shadow:0 30px 70px -20px rgba(0,0,0,.7),0 0 0 3px rgba(169,159,255,.55)}}
+.hd{{position:absolute;left:96px;top:84px;width:1100px}}
+.hd .t{{font:600 54px/1.05 var(--serif);color:#fff;letter-spacing:-.02em;margin-top:16px;{A("fadeUp", .3, .6, "var(--spring)")}}}
+.hd .kicker{{color:var(--gold2);{A("slideL", .2, .5)}}}
+.cards{{position:absolute;left:96px;top:300px;width:560px;display:flex;flex-direction:column;gap:14px}}
+.cd{{background:rgba(255,255,255,.97);border-radius:12px;padding:20px 24px;box-shadow:0 24px 50px -24px rgba(0,0,0,.6);border-left:7px solid var(--gold)}}
+.cd.warn{{border-left-color:#E5484D}} .cd.ok{{border-left-color:#2F9E6B}}
+.cd .h{{font:600 15px/1 var(--wide);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}}
+.cd.warn .h{{color:#E5484D}} .cd.ok .h{{color:#2F9E6B}}
+.cd .v{{font:600 30px/1.15 var(--serif);color:var(--ink);margin-top:8px;letter-spacing:-.01em}}
+.cd .s{{font:500 21px/1.3 var(--sans);color:var(--slate);margin-top:6px}}
+.all{{position:absolute;inset:0;{'' if nxt else out_anim(dur, .4)}}}
+{css_extra}"""
+    bgdiv = '<div class="ink"></div>' if bg == 'ink' else '<div class="paper"></div>'
+    return page(f'<div class="all">{bgdiv}{body_html}<div class="pipbox"></div></div>', css, dur, js)
+
+def cards_html(g, cards):
+    out = '<div class="cards">'
+    for c in cards:
+        out += (f'<div class="cd {c.get("tone", "")}" style="{A("slideL", max(.4, rel(g, c["t"])), .55, "var(--spring)")}">'
+                f'<div class="h">{esc(c["h"])}</div><div class="v">{esc(c["v"])}</div>' + (f'<div class="s">{esc(c["s"])}</div>' if c.get("s") else '') + '</div>')
+    return out + '</div>'
+
+def t_mapfly(g):
+    """Carte « interactive » : la caméra vole d'un point à l'autre, épingles et fiches synchronisées sur la parole."""
+    cam = [(rel(g, t) if t is not None else 0, lon, lat, sc) for t, lon, lat, sc in g['cam']]
+    pins = [dict(n=n, lon=lon, lat=lat, t=max(.3, rel(g, t)), hot=h) for n, lon, lat, t, h in g['pins']]
+    js = f"""
+const CAM={json.dumps(cam)}, PINS={json.dumps(pins, ensure_ascii=False)}, HL={json.dumps(g.get('hl', []))};
+const land=topojson.feature(window.TOPO, window.TOPO.objects.countries);
+const svg=document.getElementById('m'); const proj=d3.geoMercator(); const path=d3.geoPath(proj);
+const ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function camAt(t){{ let i=0; while(i<CAM.length-1 && t>=CAM[i+1][0]) i++;
+  if(i>=CAM.length-1) return CAM[CAM.length-1];
+  const a=CAM[i], b=CAM[i+1], k=Math.min(1,Math.max(0,(t-a[0])/Math.max(.01,Math.min(1.6,b[0]-a[0])))), e=ez(k);
+  return [t, a[1]+(b[1]-a[1])*e, a[2]+(b[2]-a[2])*e, a[3]*Math.pow(b[3]/a[3],e)]; }}
+window.onT=function(t){{ const c=camAt(t); proj.scale(c[3]).center([c[1],c[2]]).translate([1020,560]);
+  let s='';
+  for(const f of land.features){{ const id=f.id; const hot=HL.includes(id);
+    s+=`<path d="${{path(f)}}" class="${{hot?'hl':(id==='250'?'fr':'c')}}"/>`; }}
+  for(const p of PINS){{ const [x,y]=proj([p.lon,p.lat]); const k=Math.min(1,Math.max(0,(t-p.t)/.45)); if(k<=0) continue;
+    const r=10*(k<1?1+.6*Math.sin(k*Math.PI):1);
+    const pulse=((t-p.t)%1.6)/1.6;
+    s+=`<circle cx="${{x}}" cy="${{y}}" r="${{14+pulse*46}}" fill="none" stroke="#A99FFF" stroke-width="3" opacity="${{(1-pulse)*.8*k}}"/>`;
+    s+=`<circle cx="${{x}}" cy="${{y}}" r="${{r}}" class="pin${{p.hot?' hot':''}}" opacity="${{k}}"/>`;
+    s+=`<g opacity="${{k}}" transform="translate(${{x+22}},${{y-16}})"><rect x="-6" y="-26" rx="6" width="${{p.n.length*17+26}}" height="44" fill="#0D082E" stroke="rgba(169,159,255,.6)"/><text x="7" y="5" class="lab">${{p.n}}</text></g>`; }}
+  svg.innerHTML=s; }};
+window.READY=true; window.onT(0);"""
+    css = """svg{position:absolute;inset:0}
+.c{fill:rgba(255,255,255,.075);stroke:rgba(169,159,255,.28);stroke-width:.8}
+.fr{fill:rgba(91,75,255,.35);stroke:rgba(169,159,255,.6)} .hl{fill:rgba(91,75,255,.75);stroke:#A99FFF;stroke-width:1.5}
+.pin{fill:#A99FFF;stroke:#fff;stroke-width:3} .pin.hot{fill:#5B4BFF}
+.lab{font:600 24px var(--sans);fill:#fff}
+.vign{position:absolute;inset:0;background:radial-gradient(70% 70% at 55% 50%,transparent 40%,rgba(7,4,26,.85) 100%)}"""
+    body = (f'<svg id="m" viewBox="0 0 1920 1080"></svg><div class="vign"></div>'
+            f'<div class="hd"><div class="kicker">{esc(g["kicker"])}</div><div class="t">{esc(g["title"])}</div></div>' + cards_html(g, g['cards']))
+    return pip_frame(g, LIBS + body, css, js)
+
+def t_phones(g):
+    """Deux smartphones façon réseau social : même carte postale… fiscalité opposée."""
+    a, b = span(g); dur = b - a
+    d = lambda t: max(.2, rel(g, t))
+    def phone(x, tag, rot, night_t, label, tone):
+        return f"""<div class="ph" style="left:{x}px;--r:{rot}deg;{A("phoneIn", .1 if x < 900 else .3, .8, "var(--spring)")}">
+ <div class="scr"><div class="top"><div class="av"></div><b>{tag}</b></div>
+  <div class="pic"><div class="sun"></div><svg viewBox="0 0 300 300" class="palm"><path d="M150 300 C150 220 160 160 175 110" stroke="#1d1238" stroke-width="10" fill="none"/>
+   <path d="M175 110 C140 90 100 95 70 120 M175 110 C150 70 120 55 90 55 M175 110 C200 70 235 60 260 75 M175 110 C215 100 245 115 265 140" stroke="#1d1238" stroke-width="9" fill="none" stroke-linecap="round"/></svg>
+   <div class="sea"></div><div class="night" style="{A("fade", d(night_t), .5)}"></div>
+   <div class="verdict {tone}" style="{A("popIn", d(night_t) + .1, .5, "var(--spring)")}">{esc(label)}</div></div>
+  <div class="acts"><span class="hrt" style="{A("popIn", 1.2 if x < 900 else 1.5, .5, "var(--spring)")}">♥</span>&nbsp;&nbsp;💬&nbsp;&nbsp;↗</div>
+  <div class="cap"><b>{tag}</b> Le rêve d'expat 🌴 #freedom #digitalnomad</div></div></div>"""
+    css = PAPER_CSS + f"""
+.all{{position:absolute;inset:0;{out_anim(dur, .35)}}}
+.ph{{position:absolute;top:150px;width:380px;height:780px;border-radius:56px;background:#0F0A13;padding:16px;box-shadow:0 50px 100px -30px rgba(0,0,0,.8),inset 0 0 0 3px #2b2440;transform:rotate(var(--r))}}
+@keyframes phoneIn{{from{{opacity:0;transform:translateY(120px) rotate(var(--r)) scale(.9)}}to{{opacity:1;transform:rotate(var(--r))}}}}
+.scr{{width:100%;height:100%;border-radius:42px;background:#fff;overflow:hidden;font-family:var(--sans)}}
+.top{{display:flex;align-items:center;gap:10px;padding:56px 18px 12px;font-size:17px;color:#111}} .top span{{color:#999}}
+.av{{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FFB86C,#FF5E8A)}}
+.pic{{position:relative;height:440px;background:linear-gradient(180deg,#FFB46B 0%,#FF7A8A 45%,#7A5CFF 100%);overflow:hidden}}
+.sun{{position:absolute;left:50%;top:150px;width:150px;height:150px;margin-left:-75px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 80px #FFD27A}}
+.palm{{position:absolute;right:-10px;bottom:40px;width:300px}}
+.sea{{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,#3b2a8f,#1b1550)}}
+.night{{position:absolute;inset:0;background:rgba(13,8,46,.55)}}
+.verdict{{position:absolute;left:20px;right:20px;bottom:24px;padding:16px;border-radius:12px;font:700 26px/1.1 var(--serif);color:#fff;text-align:center}}
+.verdict.warn{{background:#E5484D}} .verdict.ok{{background:#2F9E6B}}
+.acts{{padding:16px 18px 6px;font:600 19px var(--sans);color:#111}} .hrt{{color:#FF3B5C;font-size:26px;display:inline-block}}
+.cap{{padding:4px 18px;font:400 17px/1.35 var(--sans);color:#333}}
+.mid{{position:absolute;left:0;right:0;top:420px;text-align:center;font:700 64px/1 var(--serif);color:#fff;letter-spacing:-.02em;{A("popIn", d(g['vs_t']), .5, "var(--spring)")}}}
+.hd{{position:absolute;left:0;right:0;top:60px;text-align:center}} .hd .kicker{{color:var(--gold2)}}"""
+    body = (f'<div class="all"><div class="ink"></div><div class="hd"><div class="kicker" style="{A("fade", .1, .4)}">{esc(g["kicker"])}</div></div>'
+            + phone(420, '#bali', -6, g['night_t'][0], g['verdicts'][0], 'warn') + phone(1120, '#thailande', 6, g['night_t'][1], g['verdicts'][1], 'ok')
+            + f'<div class="mid">≠</div></div>')
+    return page(body, css, dur)
+
+def t_macbook(g):
+    """B-roll : MacBook avec Safari affichant une page officielle (capture réelle), surlignages synchronisés."""
+    a, b = span(g); dur = b - a
+    img, (x0, y0, x1, y1), marks = g['img'], g['crop'], g['marks']
+    W = 1180; sc = W / (x1 - x0); H = (y1 - y0) * sc
+    mk = ""
+    for (bx0, by0, bx1, by1), t in marks:
+        mk += f'<div class="mk" style="left:{(bx0-x0)*sc-10:.0f}px;top:{(by0-y0)*sc-6:.0f}px;width:{(bx1-bx0)*sc+20:.0f}px;height:{(by1-by0)*sc+12:.0f}px;{A("wipeIn", max(.5, rel(g, t)), .5)}"></div>'
+    css = PAPER_CSS + f"""
+.all{{position:absolute;inset:0;{A("fade", 0, .3)}}} .o{{{out_anim(dur, .35)}}}
+.mac{{position:absolute;left:{(1920-1320)/2:.0f}px;top:96px;width:1320px;transform-origin:50% 70%;animation:macIn .9s var(--spring) .05s both, push {dur:.2f}s linear both}}
+@keyframes macIn{{from{{opacity:0;transform:translateY(80px) scale(.92) rotateX(12deg)}}to{{opacity:1;transform:none}}}}
+@keyframes push{{from{{scale:1}}to{{scale:1.05}}}}
+.lid{{background:#16131c;border-radius:30px 30px 10px 10px;padding:22px 22px 26px;box-shadow:0 0 0 2px #3a3546}}
+.notch{{width:150px;height:22px;background:#16131c;border-radius:0 0 12px 12px;margin:-22px auto 0;position:relative;z-index:2}}
+.win{{border-radius:12px;overflow:hidden;background:#fff;height:{min(H + 92, 760):.0f}px}}
+.bar{{height:52px;background:#ECEBF0;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid #d9d7df}}
+.bar i{{width:13px;height:13px;border-radius:50%;display:block}} .bar i:nth-child(1){{background:#FF5F57}} .bar i:nth-child(2){{background:#FEBC2E}} .bar i:nth-child(3){{background:#28C840}}
+.url{{margin:0 auto;width:560px;height:32px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font:500 16px var(--sans);color:#3c3a44}}
+.url:before{{content:"🔒";font-size:12px}}
+.tabs{{height:40px;background:#F5F4F8;display:flex;align-items:flex-end;padding:0 16px;gap:6px}}
+.tab{{background:#fff;border-radius:8px 8px 0 0;padding:9px 16px;font:500 14px var(--sans);color:#333;max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.shot{{position:relative;width:{W}px;margin:0 auto;height:{H:.0f}px;background:url('{ASSETS}/{img}') no-repeat;background-size:{2880*sc:.0f}px auto;background-position:{-x0*sc:.0f}px {-y0*sc:.0f}px;animation:scroll {dur:.2f}s cubic-bezier(.4,0,.2,1) both}}
+@keyframes scroll{{from{{transform:translateY(40px)}}to{{transform:translateY(-10px)}}}}
+.mk{{position:absolute;border:4px solid var(--gold);background:rgba(91,75,255,.10);border-radius:6px;box-shadow:0 0 0 6px rgba(91,75,255,.12)}}
+.base{{width:1500px;height:28px;margin:0 -90px;background:linear-gradient(180deg,#cfcdd6,#8f8c99);border-radius:0 0 26px 26px;position:relative}}
+.base:before{{content:"";position:absolute;left:50%;top:0;width:220px;height:10px;margin-left:-110px;background:#a9a6b3;border-radius:0 0 10px 10px}}
+.src{{position:absolute;left:0;right:0;bottom:26px;text-align:center;font:500 17px var(--sans);color:rgba(255,255,255,.65);{A("fade", .6, .5)}}}"""
+    body = (f'<div class="all o"><div class="all"><div class="ink"></div><div class="mac"><div class="lid"><div class="notch"></div><div class="win">'
+            f'<div class="bar"><i></i><i></i><i></i><div class="url">service-public.gouv.fr</div></div><div class="tabs"><div class="tab">{esc(g["tab"])}</div></div>'
+            f'<div class="shot">{mk}</div></div></div><div class="base"></div></div><div class="src">{esc(g["source"])}</div></div></div>')
+    return page(body, css, dur)
+
+def t_globe(g):
+    """Globe : Paris au centre, un cercle de 10 000 km se déploie."""
+    a, b = span(g); dur = b - a
+    js = f"""
+const land=topojson.feature(window.TOPO, window.TOPO.objects.countries);
+const svg=document.getElementById('m'); const T0={rel(g, g['ring_t']):.2f};
+const ez=x=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
+window.onT=function(t){{
+  const rot=-2.35+ -18*ez((t)/{dur:.2f}); const proj=d3.geoOrthographic().rotate([rot,-38]).scale(430).translate([1010,600]).clipAngle(90);
+  const path=d3.geoPath(proj); let s=`<circle cx="1010" cy="600" r="430" fill="#120C3A" stroke="rgba(169,159,255,.35)" stroke-width="2"/>`;
+  s+=`<path d="${{path(d3.geoGraticule10())}}" fill="none" stroke="rgba(169,159,255,.12)"/>`;
+  for(const f of land.features) s+=`<path d="${{path(f)}}" class="${{f.id==='250'?'fr':'c'}}"/>`;
+  const k=ez((t-T0)/1.6); if(k>0){{ const circ=d3.geoCircle().center([2.35,48.86]).radius(89.9*k)();
+    s+=`<path d="${{path(circ)}}" fill="rgba(91,75,255,.10)" stroke="#A99FFF" stroke-width="4" stroke-dasharray="14 10"/>`; }}
+  const [px,py]=proj([2.35,48.86]); s+=`<circle cx="${{px}}" cy="${{py}}" r="11" fill="#fff" stroke="#5B4BFF" stroke-width="5"/>`;
+  svg.innerHTML=s; }};
+window.READY=true; window.onT(0);"""
+    d = lambda t: max(.3, rel(g, t))
+    css = PAPER_CSS + f"""
+.all{{position:absolute;inset:0;{A("fade", 0, .35)}}} .o{{{out_anim(dur, .4)}}}
+svg{{position:absolute;inset:0}} .c{{fill:rgba(255,255,255,.12);stroke:rgba(169,159,255,.3);stroke-width:.6}} .fr{{fill:#5B4BFF}}
+.big{{position:absolute;left:96px;top:300px;font:700 150px/0.9 var(--serif);color:#fff;letter-spacing:-.04em;{A("popIn", d(g['ring_t']) + .3, .6, "var(--spring)")}}}
+.l1{{position:absolute;left:100px;top:470px;width:520px;font:600 34px/1.2 var(--serif);color:var(--gold2);{A("fadeUp", d(g['l1_t']), .5, "var(--spring)")}}}
+.l2{{position:absolute;left:100px;top:620px;padding:16px 20px;background:#E5484D;color:#fff;font:700 28px/1.2 var(--serif);border-radius:8px;{A("popIn", d(g['l2_t']), .5, "var(--spring)")}}}
+.k{{position:absolute;left:100px;top:230px;color:var(--gold2);{A("slideL", .2, .5)}}}"""
+    body = (f'<div class="all o"><div class="all"><div class="ink"></div><svg id="m" viewBox="0 0 1920 1080"></svg><div class="kicker k">Résidence fiscale</div>'
+            f'<div class="big">10 000 km</div><div class="l1">… et toujours imposable comme résident français</div><div class="l2">À la clé : des années de redressement</div></div></div>')
+    return page(body + LIBS, css, dur, js)
+
+def t_yeartrack(g):
+    """Frise : arrivée → année 1 (louer, observer, apprendre) → années 2-3 (la pierre locale)."""
+    d = lambda t: max(.4, rel(g, t))
+    css = f"""
+.trk{{position:absolute;left:120px;right:120px;top:560px;height:8px;background:rgba(255,255,255,.12);border-radius:4px}}
+.fill{{position:absolute;left:0;top:0;bottom:0;width:100%;background:linear-gradient(90deg,#5B4BFF,#A99FFF);border-radius:4px;transform-origin:left;animation:grow 6s cubic-bezier(.3,0,.2,1) {d(g['t_arrive']):.2f}s both}}
+.st{{position:absolute;top:500px;margin-left:-210px;text-align:center;width:420px}}
+.dot{{width:40px;height:40px;border-radius:50%;background:#0D082E;border:6px solid #A99FFF;margin:42px auto 0}}
+.yl{{font:600 18px/1 var(--wide);letter-spacing:.14em;text-transform:uppercase;color:var(--gold2)}}
+.box{{margin-top:26px;background:#fff;border-radius:12px;padding:20px 22px;box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}}
+.box .v{{font:600 28px/1.2 var(--serif);color:var(--ink)}} .box .s{{font:500 20px/1.3 var(--sans);color:var(--slate);margin-top:6px}}
+.no{{display:inline-block;margin-top:10px;background:#E5484D;color:#fff;font:700 18px/1 var(--sans);padding:9px 12px;border-radius:6px}}
+.yes{{display:inline-block;margin-top:10px;background:#2F9E6B;color:#fff;font:700 18px/1 var(--sans);padding:9px 12px;border-radius:6px}}"""
+    st = lambda x, t, yl, v, s, tag='': (f'<div class="st" style="left:{x}px;{A("fadeUp", d(t), .55, "var(--spring)")}"><div class="yl">{esc(yl)}</div><div class="dot"></div>'
+                                       f'<div class="box"><div class="v">{esc(v)}</div><div class="s">{esc(s)}</div>{tag}</div></div>')
+    body = (f'<div class="hd"><div class="kicker">La règle d\'or</div><div class="t">{esc(g["title"])}</div></div>'
+            f'<div class="trk"><div class="fill"></div></div>'
+            + st(330, g['t_arrive'], "Arrivée", "Tu poses tes valises", "Capital fraîchement libéré", f'<span class="no" style="{A("popIn", d(g["t_no"]), .5, "var(--spring)")}">✕ Pas d\'achat immobilier</span>')
+            + st(960, g['t_y1'], "Année 1", "Loue · observe · apprends", "Micro-marchés, quartiers qui montent, pièges à étrangers")
+            + st(1590, g['t_y23'], "Années 2 ou 3", "La pierre locale", "Quand tu n'es plus en touriste avec un budget", f'<span class="yes" style="{A("popIn", d(g["t_y23"]) + .5, .5, "var(--spring)")}">✓ Le bon moment</span>'))
+    return pip_frame(g, body, css)
+
+def t_outro(g):
+    """Outro : le logo Fynovates se construit, le nom apparaît, puis l'écran de fin."""
+    a, b = span(g); dur = b - a
+    css = PAPER_CSS + f"""
+.all{{position:absolute;inset:0;{A("fade", 0, .5)}}}
+.bg{{position:absolute;inset:0;background:var(--ink)}}
+.grid{{position:absolute;inset:0;opacity:.12;background-image:linear-gradient(rgba(169,159,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(169,159,255,.6) 1px,transparent 1px);background-size:80px 80px;animation:gridmove {dur:.1f}s linear both}}
+@keyframes gridmove{{from{{background-position:0 0}}to{{background-position:0 160px}}}}
+.grp{{position:absolute;left:0;right:0;top:300px;height:420px;transform-origin:50% 0;animation:grpUp .9s cubic-bezier(.7,0,.2,1) 2.8s both}}
+@keyframes grpUp{{to{{transform:translateY(-230px) scale(.55)}}}}
+.logo{{position:absolute;left:50%;top:0;width:220px;height:220px;margin-left:-110px}}
+.sq{{position:absolute;inset:0;background:#fff;{A("popIn", .2, .6, "var(--spring)")}}}
+.b1,.b2,.b3,.dt{{position:absolute;background:var(--ink)}}
+.b1{{left:28%;top:16%;width:17%;height:68%;transform-origin:top;{A("growY", .7, .45)}}}
+.b2{{left:28%;top:16%;width:56%;height:16%;transform-origin:left;{A("grow", .95, .4)}}}
+.b3{{left:28%;top:45%;width:44%;height:16%;transform-origin:left;{A("grow", 1.15, .4)}}}
+.dt{{left:66%;top:66%;width:18%;height:18%;{A("popIn", 1.45, .45, "var(--spring)")}}}
+.wmw{{position:absolute;left:50%;top:290px;width:820px;margin-left:-410px;text-align:center;{A("wipeIn", 1.7, .8, "cubic-bezier(.7,0,.2,1)")}}}
+.wmw img{{height:50px}}
+.tag{{position:absolute;left:0;right:0;top:380px;text-align:center;font:500 22px/1 var(--wide);letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);animation:fade .6s ease 2.1s both, tagOut .4s ease 2.7s forwards}}
+@keyframes tagOut{{to{{opacity:0}}}}
+.l{{position:absolute;left:0;right:0;top:420px;text-align:center;font:500 46px/1.1 var(--serif);color:#fff;{A("fadeUp", 3.4, .7, "var(--spring)")}}}
+.box{{position:absolute;top:520px;width:600px;height:338px;border:1px solid rgba(255,255,255,.18);border-radius:12px;{A("fadeUp", 3.7, .7, "var(--spring)")}}}
+.circ{{position:absolute;left:885px;top:880px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,.18);{A("popIn", 4.0, .6, "var(--spring)")}}}"""
+    body = (f'<div class="all"><div class="bg"></div><div class="grid"></div><div class="grp"><div class="logo"><div class="sq"></div><div class="b1"></div><div class="b2"></div><div class="b3"></div><div class="dt"></div></div>'
+            f'<div class="wmw"><img src="{BRAND}/wordmark_white.png"></div><div class="tag">Réserve ton appel · lien en description</div></div>'
+            f'<div class="l">{esc(g["line"])}</div><div class="box" style="left:300px"></div><div class="box" style="left:1020px"></div><div class="circ"></div></div>')
+    return page(body, css, dur)
+
 TPL = {k[2:]: v for k, v in globals().items() if k.startswith('t_')}
 
 def build(ids=None):
@@ -587,7 +804,7 @@ def build(ids=None):
         a, b = span(g)
         import re as _re
         beats = sorted({round(float(x), 2) for x in _re.findall(r'(?:slideR|popIn|fadeUp|slideL) [.0-9]+s [^;,]*? ([0-9.]+)s both', TPL[g['tpl']](g)) if float(x) >= 0.3})
-        manifest.append(dict(id=g['id'], kind=g['kind'], tpl=g['tpl'], start=a, end=b, prev_split=adjacent_split(g)[0], next_split=adjacent_split(g)[1], beats=beats))
+        manifest.append(dict(id=g['id'], kind=g['kind'], tpl=g['tpl'], box=(list(PIP_BOX) if g['tpl'] in ('mapfly', 'yeartrack') else list(VIDEO_BOX)), start=a, end=b, prev_split=adjacent_split(g)[0], next_split=adjacent_split(g)[1], beats=beats))
         if ids and g['id'] not in ids: continue
         d = os.path.join(OUT, g['id']); os.makedirs(d, exist_ok=True)   # n'efface jamais les images déjà rendues
         html_ = TPL[g['tpl']](g)

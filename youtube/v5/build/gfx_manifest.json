@@ -3,6 +3,12 @@
   "id": "title",
   "kind": "FULL",
   "tpl": "title",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
   "start": 5.24,
   "end": 8.44,
   "prev_split": false,
@@ -23,8 +29,14 @@
   "id": "lt_name",
   "kind": "LT",
   "tpl": "lowerthird",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
   "start": 10.24,
-  "end": 16.44,
+  "end": 16.16,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -36,8 +48,14 @@
   "id": "roadmap",
   "kind": "SPLIT",
   "tpl": "roadmap",
-  "start": 35.44,
-  "end": 61.24,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 35.16,
+  "end": 60.96,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -53,8 +71,14 @@
   "id": "ch1",
   "kind": "FULL",
   "tpl": "chapter",
-  "start": 71.48,
-  "end": 77.0,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 70.2,
+  "end": 74.92,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -65,49 +89,62 @@
   "id": "phases",
   "kind": "SPLIT",
   "tpl": "twocol",
-  "start": 93.6,
-  "end": 134.08,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 90.88,
+  "end": 129.24,
   "prev_split": false,
   "next_split": false,
   "beats": [
    0.45,
    2.6,
    5.0,
-   15.42,
-   18.82,
-   21.52,
-   27.88,
-   32.18,
-   36.38
+   14.62,
+   18.02,
+   20.72,
+   25.76,
+   30.06,
+   34.26
   ]
  },
  {
   "id": "suisse",
   "kind": "SPLIT",
-  "tpl": "verdict",
-  "start": 134.48,
-  "end": 164.2,
+  "tpl": "mapfly",
+  "box": [
+   1288,
+   72,
+   560,
+   315
+  ],
+  "start": 129.64,
+  "end": 157.32,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   0.45,
-   1.9,
+   0.3,
    4.5,
-   5.58,
-   8.12,
-   10.82,
-   15.12,
-   17.52,
-   22.22,
-   26.72
+   13.52,
+   20.62,
+   24.72
   ]
  },
  {
   "id": "q_peur",
   "kind": "CARD",
   "tpl": "quote",
-  "start": 169.2,
-  "end": 176.48,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 162.04,
+  "end": 169.36,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -118,8 +155,14 @@
   "id": "ch2",
   "kind": "FULL",
   "tpl": "chapter",
-  "start": 182.8,
-  "end": 186.48,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 175.28,
+  "end": 178.96,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -130,39 +173,74 @@
   "id": "map1",
   "kind": "FULL",
   "tpl": "map",
-  "start": 190.84,
-  "end": 201.44,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 182.72,
+  "end": 193.32,
   "prev_split": false,
   "next_split": false,
   "beats": []
  },
  {
+  "id": "phones",
+  "kind": "FULL",
+  "tpl": "phones",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 198.44,
+  "end": 207.6,
+  "prev_split": false,
+  "next_split": true,
+  "beats": [
+   1.2,
+   1.5,
+   6.42,
+   8.22,
+   8.72
+  ]
+ },
+ {
   "id": "bali_thai",
   "kind": "SPLIT",
-  "tpl": "compare",
-  "start": 206.56,
-  "end": 258.72,
+  "tpl": "mapfly",
+  "box": [
+   1288,
+   72,
+   560,
+   315
+  ],
+  "start": 207.6,
+  "end": 249.4,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   0.45,
-   9.56,
-   11.76,
-   15.96,
-   28.06,
-   33.36,
-   35.16,
-   39.06,
-   46.66,
-   52.36
+   0.3,
+   2.36,
+   18.38,
+   25.48,
+   36.62
   ]
  },
  {
   "id": "map2",
   "kind": "FULL",
   "tpl": "map",
-  "start": 264.32,
-  "end": 269.32,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 255.0,
+  "end": 260.0,
   "prev_split": false,
   "next_split": true,
   "beats": []
@@ -170,28 +248,37 @@
  {
   "id": "dubai_sg",
   "kind": "SPLIT",
-  "tpl": "compare",
-  "start": 269.32,
-  "end": 305.92,
+  "tpl": "mapfly",
+  "box": [
+   1288,
+   72,
+   560,
+   315
+  ],
+  "start": 260.0,
+  "end": 294.48,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   0.45,
+   0.3,
    1.2,
-   3.4,
    5.9,
-   11.6,
    12.9,
-   19.7,
-   26.9
+   24.78
   ]
  },
  {
   "id": "map3",
   "kind": "FULL",
   "tpl": "map",
-  "start": 305.92,
-  "end": 311.72,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 294.48,
+  "end": 300.0,
   "prev_split": true,
   "next_split": false,
   "beats": []
@@ -200,8 +287,14 @@
   "id": "q_coffre",
   "kind": "CARD",
   "tpl": "quote",
-  "start": 313.92,
-  "end": 317.52,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 302.2,
+  "end": 305.8,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -212,8 +305,14 @@
   "id": "q_calc",
   "kind": "CARD",
   "tpl": "quote",
-  "start": 323.12,
-  "end": 326.64,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 311.4,
+  "end": 314.88,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -224,8 +323,14 @@
   "id": "ch3",
   "kind": "FULL",
   "tpl": "chapter",
-  "start": 326.8,
-  "end": 332.0,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 315.12,
+  "end": 319.84,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -236,51 +341,75 @@
   "id": "r1035",
   "kind": "SPLIT",
   "tpl": "rule",
-  "start": 347.32,
-  "end": 383.96,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 335.12,
+  "end": 371.36,
   "prev_split": false,
   "next_split": false,
   "beats": [
    0.45,
    2.7,
-   8.24,
-   22.04
+   8.16,
+   21.64
   ]
  },
  {
   "id": "invis",
   "kind": "CARD",
   "tpl": "checklist",
-  "start": 385.12,
-  "end": 420.08,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 372.36,
+  "end": 407.08,
   "prev_split": false,
   "next_split": false,
   "beats": [
    4.1,
-   21.26,
-   24.06,
-   28.16
+   21.02,
+   23.82,
+   27.92
   ]
  },
  {
   "id": "valise",
   "kind": "CARD",
   "tpl": "stat",
-  "start": 421.08,
-  "end": 447.76,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 407.68,
+  "end": 434.08,
   "prev_split": false,
   "next_split": false,
   "beats": [
    0.4,
-   21.0
+   20.68
   ]
  },
  {
   "id": "ch4",
   "kind": "FULL",
   "tpl": "chapter",
-  "start": 448.52,
-  "end": 451.56,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 434.68,
+  "end": 437.6,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -291,8 +420,14 @@
   "id": "residence",
   "kind": "SPLIT",
   "tpl": "statement",
-  "start": 467.16,
-  "end": 474.76,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 452.76,
+  "end": 460.08,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -303,9 +438,15 @@
  {
   "id": "broll_domicile",
   "kind": "FULL",
-  "tpl": "broll",
-  "start": 474.76,
-  "end": 484.16,
+  "tpl": "macbook",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 460.08,
+  "end": 469.48,
   "prev_split": true,
   "next_split": true,
   "beats": []
@@ -314,42 +455,112 @@
   "id": "residence2",
   "kind": "SPLIT",
   "tpl": "steps",
-  "start": 484.16,
-  "end": 507.36,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 469.48,
+  "end": 479.68,
   "prev_split": false,
-  "next_split": true,
+  "next_split": false,
   "beats": [
    0.45,
    2.6,
-   6.8,
-   10.3,
-   16.98
+   6.8
+  ]
+ },
+ {
+  "id": "globe",
+  "kind": "FULL",
+  "tpl": "globe",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 479.68,
+  "end": 492.4,
+  "prev_split": true,
+  "next_split": true,
+  "beats": [
+   1.2,
+   2.9,
+   6.54
   ]
  },
  {
   "id": "sortie",
   "kind": "SPLIT",
   "tpl": "steps",
-  "start": 507.36,
-  "end": 539.24,
-  "prev_split": true,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 492.4,
+  "end": 511.12,
+  "prev_split": false,
   "next_split": false,
   "beats": [
    0.45,
-   4.38,
-   7.58,
-   10.68,
-   13.48,
-   18.88,
-   24.38
+   4.42,
+   7.62,
+   10.72,
+   13.52
+  ]
+ },
+ {
+  "id": "broll_depart",
+  "kind": "FULL",
+  "tpl": "macbook",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 511.12,
+  "end": 516.52,
+  "prev_split": true,
+  "next_split": true,
+  "beats": []
+ },
+ {
+  "id": "sortie_b",
+  "kind": "SPLIT",
+  "tpl": "steps",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 516.52,
+  "end": 524.12,
+  "prev_split": false,
+  "next_split": false,
+  "beats": [
+   0.45,
+   2.0,
+   4.7
   ]
  },
  {
   "id": "validloc",
   "kind": "CARD",
   "tpl": "chips",
-  "start": 540.04,
-  "end": 561.64,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 524.56,
+  "end": 546.16,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -363,21 +574,33 @@
   "id": "coin",
   "kind": "FULL",
   "tpl": "coin",
-  "start": 584.48,
-  "end": 592.88,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 568.36,
+  "end": 576.24,
   "prev_split": false,
   "next_split": false,
   "beats": [
    0.3,
-   5.12
+   4.6
   ]
  },
  {
   "id": "ch5",
   "kind": "FULL",
   "tpl": "chapter",
-  "start": 593.6,
-  "end": 598.88,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 576.96,
+  "end": 581.88,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -388,8 +611,14 @@
   "id": "horsue",
   "kind": "SPLIT",
   "tpl": "steps",
-  "start": 604.96,
-  "end": 630.96,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 587.8,
+  "end": 613.76,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -403,36 +632,56 @@
  {
   "id": "regledor",
   "kind": "SPLIT",
-  "tpl": "steps",
-  "start": 640.24,
-  "end": 672.56,
+  "tpl": "yeartrack",
+  "box": [
+   1288,
+   72,
+   560,
+   315
+  ],
+  "start": 623.08,
+  "end": 655.36,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   0.45,
+   0.3,
    6.1,
+   6.6,
    21.3,
-   23.9
+   23.9,
+   24.4
   ]
  },
  {
   "id": "warn",
   "kind": "CARD",
   "tpl": "warn",
-  "start": 672.84,
-  "end": 695.36,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 655.68,
+  "end": 677.68,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   17.82
+   17.54
   ]
  },
  {
   "id": "recap",
   "kind": "FULL",
   "tpl": "recap",
-  "start": 697.4,
-  "end": 723.36,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 679.44,
+  "end": 703.16,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -440,15 +689,21 @@
    4.56,
    9.76,
    13.96,
-   20.66
+   18.42
   ]
  },
  {
   "id": "q_constr",
   "kind": "CARD",
   "tpl": "quote",
-  "start": 732.64,
-  "end": 740.6,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 712.24,
+  "end": 720.16,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -459,23 +714,35 @@
   "id": "cta",
   "kind": "CARD",
   "tpl": "cta",
-  "start": 743.12,
-  "end": 769.08,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 722.44,
+  "end": 747.12,
   "prev_split": false,
   "next_split": false,
   "beats": [
    0.8,
-   14.56,
-   17.86,
-   18.96
+   13.76,
+   17.06,
+   18.16
   ]
  },
  {
   "id": "k_boucle",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 16.44,
-  "end": 21.32,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 16.16,
+  "end": 21.04,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -488,8 +755,14 @@
   "id": "k_gouffre",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 21.44,
-  "end": 29.76,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 21.16,
+  "end": 29.44,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -500,37 +773,55 @@
   "id": "k_legal",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 62.56,
-  "end": 69.92,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 62.24,
+  "end": 68.8,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   1.78,
-   3.68,
-   4.98,
-   5.88
+   1.5,
+   3.4,
+   4.5,
+   5.2
   ]
  },
  {
   "id": "k_quelpays",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 83.56,
-  "end": 92.84,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 81.4,
+  "end": 90.28,
   "prev_split": false,
   "next_split": false,
   "beats": [
    1.78,
-   3.98,
-   5.68
+   3.58,
+   5.28
   ]
  },
  {
   "id": "k_piege",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 201.44,
-  "end": 206.44,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 193.32,
+  "end": 198.32,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -541,8 +832,14 @@
   "id": "k_insta",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 317.92,
-  "end": 323.04,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 306.2,
+  "end": 311.28,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -554,22 +851,34 @@
   "id": "k_serieux",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 332.64,
-  "end": 347.2,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 320.4,
+  "end": 335.04,
   "prev_split": false,
-  "next_split": false,
+  "next_split": true,
   "beats": [
-   3.88,
-   4.78,
-   9.98
+   3.92,
+   4.82,
+   10.02
   ]
  },
  {
   "id": "k_importante",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 452.56,
-  "end": 467.04,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 438.16,
+  "end": 452.64,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -582,8 +891,14 @@
   "id": "k_regles",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 562.32,
-  "end": 571.0,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 546.64,
+  "end": 555.24,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -595,8 +910,14 @@
   "id": "k_2traitements",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 571.68,
-  "end": 584.2,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 555.8,
+  "end": 568.24,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -608,8 +929,14 @@
   "id": "k_horizon",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 599.56,
-  "end": 604.88,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 582.4,
+  "end": 587.72,
   "prev_split": false,
   "next_split": true,
   "beats": [
@@ -621,10 +948,16 @@
   "id": "k_comment",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 631.44,
-  "end": 640.16,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 614.28,
+  "end": 622.96,
   "prev_split": false,
-  "next_split": true,
+  "next_split": false,
   "beats": [
    3.0
   ]
@@ -633,21 +966,33 @@
   "id": "k_fuir",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 723.44,
-  "end": 732.56,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 703.28,
+  "end": 712.12,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   1.12,
-   3.32
+   1.08,
+   3.28
   ]
  },
  {
   "id": "k_envie",
   "kind": "CARD",
   "tpl": "lines",
-  "start": 740.64,
-  "end": 743.04,
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 720.2,
+  "end": 722.44,
   "prev_split": false,
   "next_split": false,
   "beats": [
@@ -658,13 +1003,22 @@
  {
   "id": "endcard",
   "kind": "FULL",
-  "tpl": "endcard",
-  "start": 773.24,
-  "end": 783.44,
+  "tpl": "outro",
+  "box": [
+   72,
+   150,
+   1152,
+   648
+  ],
+  "start": 752.88,
+  "end": 762.08,
   "prev_split": false,
   "next_split": false,
   "beats": [
-   0.6
+   1.45,
+   3.4,
+   3.7,
+   4.0
   ]
  }
 ]

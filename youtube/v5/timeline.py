@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FPS = 25
 COLD_OPEN = (555.36, 560.58)   # « quitter la France physiquement ne suffit pas à quitter la France fiscalement. »
 TITLE_DUR = 3.2                # carton titre (musique seule)
-END_DUR = 8.0                  # écran de fin (zones pour les éléments d'écran de fin YouTube)
+END_DUR = 9.0                  # écran de fin (zones pour les éléments d'écran de fin YouTube)
 
 # Passages à cadrer serré (plan rapproché) : phrases à fort impact
 CLOSE = [(681.5, 684.9), (881.5, 884.7)]
@@ -53,16 +53,14 @@ G = [
                         ("Priorité : la sécurité, plus la vitesse", 183.3),
                         ("Tu cherches : stabilité juridique, monétaire, institutionnelle", 187.5)])]),
 
- dict(id="suisse", kind="SPLIT", tpl="verdict", src=(192.0, 228.2),
-      title="Exemple : la Suisse", foot_at=225.2, foot="Même pays, deux verdicts opposés selon ta phase.",
-      left=dict(h="Trentenaire en pleine croissance", at=193.9, verdict="Souvent un mauvais calcul", vat=196.5,
-                items=[("Coût de la vie élevé", 202.9), ("Bénéfice limité à ce stade", 206.6)], tone="warn"),
-      right=dict(h="Entrepreneur qui prépare une revente", at=209.3, verdict="L'une des meilleures au monde", vat=213.6,
-                 items=[("Plus-values sur titres : exonération possible, sous conditions*", 216.0),
-                        ("Accessible à un Européen sans visa", 220.7)], tone="ok"),
-      note="* Selon la situation (gains en capital privés). À vérifier au cas par cas.",
+ dict(id="suisse", kind="SPLIT", tpl="mapfly", src=(192.0, 228.2), kicker="Exemple parlant", title="La Suisse",
+      cam=[(None, 12.0, 46.0, 1100), (193.1, 8.2, 46.8, 5200), (209.3, 8.2, 46.6, 6200)],
+      pins=[("Suisse", 8.23, 46.82, 193.1, True)], hl=["756"],
+      cards=[dict(h="Trentenaire en pleine croissance", v="Souvent un mauvais calcul", s="Coût de la vie élevé, bénéfice limité à ce stade", t=196.5, tone="warn"),
+             dict(h="Entrepreneur qui prépare une revente", v="L'une des meilleures au monde", s="Plus-values sur titres : exonération possible, sous conditions*", t=213.6, tone="ok"),
+             dict(h="Pour un Européen", v="Accessible sans aucun visa", t=220.7),
+             dict(h="Même pays", v="Deux verdicts opposés selon ta phase", t=225.2)],
       verify="exonération des plus-values privées en Suisse : conditions ; « sans visa » = libre circulation UE/AELE, permis de séjour requis"),
-
  dict(id="q_peur", kind="CARD", tpl="quote", src=(233.2, 240.5),
       text="La peur de l'inconnu se traite avec de la méthode, pas avec du courage."),
 
@@ -72,30 +70,29 @@ G = [
       families=[("Asie du Sud", ["Bali", "Bangkok"], 264.4), ("Hubs d'excellence", ["Dubaï", "Singapour"], None),
                 ("Préservation", ["Suisse"], None)], intro_at=259.4),
 
- dict(id="bali_thai", kind="SPLIT", tpl="compare", src=(273.1, 334.4),
-      title="Bali ou Thaïlande : même mode de vie, fiscalité opposée", tat=284.6,
-      left=dict(h="Indonésie (Bali)", at=288.4, rows=[("Taxation mondiale", 290.6),
-                ("Résident fiscal : imposable sur tous tes revenus, rapatriés ou non", 294.8),
-                ("Risque : un passif fiscal qui s'accumule", 306.9)], tone="warn"),
-      right=dict(h="Thaïlande", at=315.6, rows=[("Régime territorial, basé sur le rapatriement", 317.4),
-                 ("Revenus étrangers non rapatriés : non imposés", 321.3)], tone="ok"),
-      foot=[("Budget : ≈ 3 000 €/mois pour bien vivre à Bangkok", 328.9), ("Phuket : nettement plus cher", 334.6)],
-      verify="Indonésie : imposition mondiale des résidents (exceptions possibles depuis 2022) ; Thaïlande : règles sur les revenus étrangers rapatriés modifiées au 1er janvier 2024 ; budget = estimation de l'intervenante"),
+ dict(id="phones", kind="FULL", tpl="phones", src=(273.1, 287.5), kicker="Sur Instagram, c'est le même mode de vie",
+      vs_t=284.7, night_t=(286.4, 286.9), verdicts=("Taxation mondiale", "Régime territorial")),
 
+ dict(id="bali_thai", kind="SPLIT", tpl="mapfly", src=(287.5, 334.4), kicker="Fiscalement, le jour et la nuit", title="Bali ou Thaïlande",
+      cam=[(None, 106.0, 3.0, 1500), (288.4, 115.2, -8.4, 4200), (315.6, 100.5, 13.7, 3600), (328.9, 101.5, 10.5, 2600)],
+      hl=["360", "764"], pins=[("Bali", 115.19, -8.41, 288.4, True), ("Bangkok", 100.50, 13.75, 315.6, True), ("Phuket", 98.39, 7.88, 333.8, False)],
+      cards=[dict(h="Indonésie (Bali)", v="Taxation mondiale", s="Résident : imposable sur tous tes revenus, rapatriés ou non", t=290.6, tone="warn"),
+             dict(h="Le risque", v="Un passif fiscal qui s'accumule", t=306.9, tone="warn"),
+             dict(h="Thaïlande", v="Régime territorial", s="Revenus étrangers non rapatriés : non imposés", t=317.4, tone="ok"),
+             dict(h="Budget (estimation)", v="≈ 3 000 €/mois à Bangkok", s="Phuket : nettement plus cher", t=328.9)],
+      verify="Indonésie : imposition mondiale des résidents (exceptions possibles depuis 2022) ; Thaïlande : règles modifiées au 1er janvier 2024 ; budget = estimation de l'intervenante"),
  dict(id="map2", kind="FULL", tpl="map", src=(340.0, 345.0), focus=1,
       families=[("Asie du Sud", ["Bali", "Bangkok"], None), ("Hubs d'excellence", ["Dubaï", "Singapour"], 340.1),
                 ("Préservation", ["Suisse"], None)]),
 
- dict(id="dubai_sg", kind="SPLIT", tpl="compare", src=(345.0, 381.6),
-      title="Les hubs d'excellence", tat=345.0,
-      left=dict(h="Dubaï", at=345.1, rows=[("0 % d'impôt sur le revenu", 346.2), ("9 % d'impôt sur les sociétés*", 348.4),
-                ("Golden visa 10 ans : investissement d'environ 500 000 €", 350.9)], tone="gold"),
-      right=dict(h="Singapour", at=356.6, rows=[("Plus exigeante à l'entrée", 357.9),
-                 ("Permis de travail porté par une société locale", 364.7)], tone="gold"),
-      foot=[("Singapour surclasse Dubaï sur : sécurité · mixité culturelle · qualité de l'air", 371.9)],
-      note="* Au-delà d'un seuil de bénéfice. Montants indicatifs, à vérifier.",
-      verify="IS 9 % aux EAU au-delà de 375 000 AED de bénéfice ; golden visa immobilier : seuil 2 M AED (~500 k€) ; Singapour : Employment Pass / EntrePass"),
-
+ dict(id="dubai_sg", kind="SPLIT", tpl="mapfly", src=(345.0, 381.6), kicker="Famille 2", title="Les hubs d'excellence",
+      cam=[(None, 75.0, 16.0, 1300), (345.1, 55.27, 25.2, 4200), (356.6, 103.82, 1.35, 4200), (371.9, 80.0, 14.0, 1350)],
+      hl=["784", "702"], pins=[("Dubaï", 55.27, 25.20, 345.1, True), ("Singapour", 103.82, 1.35, 356.6, True)],
+      cards=[dict(h="Dubaï", v="0 % d'impôt sur le revenu · 9 % d'IS*", s="* au-delà d'un seuil de bénéfice", t=346.2),
+             dict(h="Dubaï", v="Golden visa 10 ans", s="Investissement d'environ 500 000 €", t=350.9),
+             dict(h="Singapour", v="Plus exigeante à l'entrée", s="Permis de travail porté par une société locale", t=357.9),
+             dict(h="Singapour surclasse Dubaï", v="Sécurité · mixité · qualité de l'air", t=371.9, tone="ok")],
+      verify="IS 9 % aux EAU au-delà de 375 000 AED ; golden visa immobilier : 2 M AED (~500 k€) ; Singapour : Employment Pass / EntrePass"),
  dict(id="map3", kind="FULL", tpl="map", src=(381.6, 387.4), focus=2,
       families=[("Asie du Sud", ["Bali", "Bangkok"], None), ("Hubs d'excellence", ["Dubaï", "Singapour"], None),
                 ("Préservation", ["Suisse"], 381.7)]),
@@ -123,27 +120,31 @@ G = [
       kicker="Étape 4 · Sors de France proprement", title="Quitter la France physiquement",
       title2="ne suffit pas à la quitter fiscalement.", tat=555.5, t2at=557.2),
 
- dict(id="broll_domicile", kind="FULL", tpl="broll", src=(561.2, 570.6), shot="domicile",
-      marks=[("intro", 561.3), ("foyer", 566.1), ("travail", 567.5), ("centre", 568.8)],
+ dict(id="broll_domicile", kind="FULL", tpl="macbook", src=(561.2, 570.6), img="dom_full.png", crop=(420, 640, 2460, 1910),
+      tab="Comment déterminer son domicile fiscal ? | Service Public",
+      marks=[((639, 1060, 2238, 1170), 561.3), ((639, 1221, 2238, 1353), 566.1), ((639, 1557, 2238, 1689), 567.5), ((639, 1725, 2238, 1857), 568.8)],
       source="Source : service-public.gouv.fr · « Comment déterminer son domicile fiscal ? » (vérifié le 1er janvier 2026)",
       verify="capture d'écran d'un site officiel : usage éditorial à valider"),
-
- dict(id="residence2", kind="SPLIT", tpl="steps", src=(570.6, 594.5), title="Tu restes résident fiscal français si…",
+ dict(id="residence2", kind="SPLIT", tpl="steps", src=(570.6, 580.8), title="Tu restes résident fiscal français si…",
       items=[("Ta famille reste en France", 570.7), ("Ton activité principale reste pilotée depuis la France", 573.2),
-             ("L'essentiel de ton patrimoine y demeure", 577.4)], numbered=False,
-      punch=("Tu peux vivre à 10 000 km et rester imposable comme résident français", 580.9),
-      foot=("À la clé : des années de redressement", 588.3), ref="Art. 4 B du CGI",
+             ("L'essentiel de ton patrimoine y demeure", 577.4)], numbered=False, ref="Art. 4 B du CGI",
       verify="référence art. 4 B du CGI ajoutée au montage (non citée à l'oral)"),
 
- dict(id="sortie", kind="SPLIT", tpl="steps", src=(594.5, 626.4), title="Une sortie de France propre",
+ dict(id="globe", kind="FULL", tpl="globe", src=(580.8, 594.5), ring_t=581.7, l1_t=583.7, l2_t=588.3),
+ dict(id="sortie", kind="SPLIT", tpl="steps", src=(594.5, 613.2), title="Une sortie de France propre",
       items=[("Transférer réellement ton centre de vie", 598.9), ("Documenter ta nouvelle résidence fiscale", 602.1),
              ("Gérer le sort de ta structure française", 605.2),
-             ("Anticiper l'exit tax si tu détiens des participations importantes*", 608.0),
-             ("Faire les bonnes déclarations, la bonne année", 613.4)],
-      foot=("Chaque élément a un timing.", 618.9),
+             ("Anticiper l'exit tax si tu détiens des participations importantes*", 608.0)],
       note="* Exit tax : article 167 bis du CGI. Seuils et conditions à vérifier.",
       verify="exit tax : participations ≥ 50 % des bénéfices sociaux ou valeur > 800 000 €, résidence fiscale française 6 des 10 dernières années"),
 
+ dict(id="broll_depart", kind="FULL", tpl="macbook", src=(613.2, 618.8), img="depart_full.png", crop=(600, 2900, 2280, 3800),
+      tab="Impôt sur le revenu d'un Français qui part vivre ou travailler à l'étranger",
+      marks=[((840, 3079, 1745, 3151), 613.4), ((728, 3207, 2152, 3303), 615.9)],
+      source="Source : service-public.gouv.fr · fiche « Départ et résidence à l'étranger »"),
+
+ dict(id="sortie_b", kind="SPLIT", tpl="steps", src=(618.8, 626.4), title="Chaque élément a un timing",
+      items=[("Dans le mauvais ordre : des frictions", 620.8), ("Dans le bon ordre : tout s'emboîte", 623.5)], numbered=False),
  dict(id="validloc", kind="CARD", tpl="chips", src=(627.2, 648.8), kicker="Le réflexe indispensable", title="La validation locale",
       chips=[("Dividendes", 640.9), ("Plus-values", 642.2), ("Revenus de source étrangère", 643.4)],
       foot=("… par un professionnel du pays d'accueil", 645.8)),
@@ -161,10 +162,8 @@ G = [
       note="Selon le pays d'accueil et ta situation.", numbered=False,
       verify="formulation générale : vérifier selon le pays d'accueil"),
 
- dict(id="regledor", kind="SPLIT", tpl="steps", src=(737.6, 769.9), title="La règle d'or du nouvel expatrié",
-      items=[("Pas d'immobilier local en arrivant, jamais la première année", 743.7),
-             ("Loue, observe, apprends", 758.9), ("La pierre locale : l'année 2 ou 3", 761.5)], numbered=False),
-
+ dict(id="regledor", kind="SPLIT", tpl="yeartrack", src=(737.6, 769.9), title="Pas d'immobilier local la première année",
+      t_arrive=743.7, t_no=744.2, t_y1=758.9, t_y23=761.5),
  dict(id="warn", kind="CARD", tpl="warn", src=(770.2, 793.2), kicker="Attention",
       title="Les placements « spécial expatriés »", sub="Un rendement mirobolant proposé dès ton arrivée",
       at2=788.5, line2="Ton cadre fiscal est un avantage. Il ne rend aucun placement magique."),
@@ -212,7 +211,7 @@ G = [
  dict(id="k_envie", kind="CARD", tpl="lines", src=(847.9, 850.4), kicker="Si tu es prêt",
       lines=[("De l'envie", 849.0), ("au projet", 849.6, "accent")]),
 
- dict(id="endcard", kind="FULL", tpl="endcard", out_only=True, line="La France, tu peux la quitter. Mais quitte-la bien."),
+ dict(id="endcard", kind="FULL", tpl="outro", out_only=True, line="La France, tu peux la quitter. Mais quitte-la bien."),
 ]
 
 def load_edl():

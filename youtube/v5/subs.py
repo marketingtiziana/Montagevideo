@@ -218,13 +218,13 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Main,Inter SemiBold,50,&H00F5F5F5,&H00FFFFFF,&H50101820,&H78000000,0,0,0,0,100,100,0.3,0,1,2.4,1.2,2,200,200,62,1
-Style: Paper,Inter SemiBold,50,&H002B1A0E,&H00FFFFFF,&H00E8EEF5,&H00000000,0,0,0,0,100,100,0.3,0,1,0,0,2,200,200,62,1
+Style: Main,Inter SemiBold,46,&H00FFFFFF,&H00FFFFFF,&H332E080D,&H00000000,0,0,0,0,100,100,0.3,0,3,9,0,2,200,200,58,1
+Style: Paper,Inter SemiBold,46,&H00FFFFFF,&H00FFFFFF,&H332E080D,&H00000000,0,0,0,0,100,100,0.3,0,3,9,0,2,200,200,58,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
-    gold = {'Main': r'{\c&H8CBFD9&}', 'Paper': r'{\c&H5A95B8&}'}
+    gold = {'Main': r'{\c&HFF9FA9&}', 'Paper': r'{\c&HFF9FA9&}'}
     with open(os.path.join(HERE, 'build', 'subs.ass'), 'w') as f:
         f.write(head)
         for c in cues:

@@ -4,9 +4,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 START, END = 58.20, 887.75
 # retakes / false starts removed (each: (from, to), reason)
 DROPS = [
+    (153.62, 154.42, "faux départ « ton act… » (V3)"),
     (156.92, 158.78, "faux départ « Chaque euro de »"),
-    (197.40, 202.74, "1re prise « la coût de la vie », hésitante"),
-    (205.40, 206.56, "faux départ « pour… pour un bénéfice »"),
+    (172.30, 175.08, "« la… la préservation » (V3)"),
+    (197.40, 203.95, "prises hésitantes « la coût de la vie » + silence (V3)"),
+    (205.05, 206.56, "faux départ « pour… pour un bénéfice »"),
+    (360.05, 361.65, "« Mais il existe » ×2 (V3)"),
     (279.36, 284.52, "répétition « Sur Instagram, c'est le même mode de vie »"),
     (307.38, 310.78, "reprise « accumulent en un passif fiscal et accumule… »"),
     (431.20, 434.18, "faux départ « Trois, tu restes… »"),
@@ -15,13 +18,15 @@ DROPS = [
     (709.05, 711.62, "hésitation « des… des supports » (à réécouter)"),
     (725.40, 726.98, "reprise après « efficaces » (à réécouter)"),
     (798.36, 801.18, "lapsus « Un, clarifie ta phrase »"),
+    (815.60, 817.85, "« C'est le cœur du » ×2 (V3)"),
     (842.50, 847.98, "1re prise « Si tu es prêt à passer de l'envie au projet »"),
+    (850.25, 851.28, "« réserve un » ×2 (V3)"),
     (854.75, 859.72, "1re prise « On fait le point de ta situation… »"),
 ]
 # V2 : on ne raccourcit que les vrais silences, et différemment selon qu'on est entre deux phrases ou au milieu
-GAP_SENT, KEEP_SENT = 0.70, 0.40      # entre deux phrases : > 0,70 s -> 0,40 s
-GAP_MID, KEEP_MID = 1.00, 0.55        # au milieu d'une phrase : > 1,0 s -> 0,55 s
-MIN_SEG = 1.5                          # pas de plan plus court que 1,5 s
+GAP_SENT, KEEP_SENT = 0.45, 0.28      # entre deux phrases : > 0,70 s -> 0,40 s
+GAP_MID, KEEP_MID = 0.50, 0.30        # au milieu d'une phrase : > 1,0 s -> 0,55 s
+MIN_SEG = 0.7                          # pas de plan plus court que 1,5 s
 def silences():
     out=[]
     for l in open(os.path.join(HERE,'silences.txt')):
