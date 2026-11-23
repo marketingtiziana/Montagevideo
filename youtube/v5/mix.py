@@ -151,10 +151,10 @@ def main():
     m = music_v2(n)
     # musique : plus présente sur le titre et l'écran de fin, très basse sous la voix (ducking)
     title = [c for c in clips if c['kind'] == 'title'][0]; end = [c for c in clips if c['kind'] == 'end'][0]
-    gain = np.full(n, 0.55, np.float32)
+    gain = np.full(n, 0.40, np.float32)
     for c, g in ((title, 1.0), (end, 1.0)):
         a = int(c['o_f'] / FPS * SR); b = int((c['o_f'] + c['n_f']) / FPS * SR)
-        gain[max(0, a - SR):a] = np.linspace(0.55, g, min(SR, a)); gain[a:b] = g
+        gain[max(0, a - SR):a] = np.linspace(0.40, g, min(SR, a)); gain[a:b] = g
     fin = int(1.5 * SR); gain[-fin:] *= np.linspace(1, 0, fin)
     gain[:int(0.5*SR)] *= np.linspace(0, 1, int(0.5*SR))
     write_wav(os.path.join(MED, 'music.wav'), m * gain)
