@@ -589,7 +589,7 @@ def build(ids=None):
         beats = sorted({round(float(x), 2) for x in _re.findall(r'(?:slideR|popIn|fadeUp|slideL) [.0-9]+s [^;,]*? ([0-9.]+)s both', TPL[g['tpl']](g)) if float(x) >= 0.3})
         manifest.append(dict(id=g['id'], kind=g['kind'], tpl=g['tpl'], start=a, end=b, prev_split=adjacent_split(g)[0], next_split=adjacent_split(g)[1], beats=beats))
         if ids and g['id'] not in ids: continue
-        d = os.path.join(OUT, g['id']); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
+        d = os.path.join(OUT, g['id']); os.makedirs(d, exist_ok=True)   # n'efface jamais les images déjà rendues
         html_ = TPL[g['tpl']](g)
         open(os.path.join(d, 'index.html'), 'w').write(html_)
     json.dump(manifest, open(os.path.join(HERE, 'build', 'gfx_manifest.json'), 'w'), indent=1)
