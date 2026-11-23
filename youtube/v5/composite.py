@@ -33,6 +33,10 @@ def png(gid, i):
 
 def blend(dst, rgba, bbox=None):
     if rgba is None: return dst
+    if rgba.ndim == 2: rgba = cv2.cvtColor(rgba, cv2.COLOR_GRAY2BGR)
+    if rgba.shape[2] == 3:                      # image opaque (sans canal alpha)
+        if bbox is None: return rgba.copy()
+        y0, y1, x0, x1 = bbox; dst[y0:y1, x0:x1] = rgba[y0:y1, x0:x1]; return dst
     if bbox is None:
         a = rgba[:, :, 3]
         ys, xs = np.nonzero(a > 0)
@@ -52,7 +56,8 @@ def rounded_mask(w, h, r):
 
 def split_frame(base, g, t):
     i = int(round((t - g['start']) * FPS))
-    bg = png(g['id'], i)[:, :, :3].copy()
+    bg = png(g['id'], i)
+    bg = (cv2.cvtColor(bg, cv2.COLOR_GRAY2BGR) if bg.ndim == 2 else bg[:, :, :3]).copy()
     p_in = 1.0 if g['prev_split'] else ease((t - g['start']) / 0.55)
     p_out = 1.0 if g['next_split'] else ease((g['end'] - t) / 0.55)
     p = min(p_in, p_out)
@@ -96,7 +101,8 @@ def main():
                 im = png(g['id'], i)
                 if g['kind'] in ('CARD', 'LT'):
                     if g['id'] not in bboxes:
-                        a = png(g['id'], int((g['end'] - g['start']) * FPS * 0.5))[:, :, 3]
+                        mid = png(g['id'], int((g['end'] - g['start']) * FPS * 0.5))
+                        a = mid[:, :, 3] if mid.ndim == 3 and mid.shape[2] == 4 else np.full(mid.shape[:2], 255, np.uint8)
                         ys, xs = np.nonzero(a > 0)
                         bboxes[g['id']] = (max(0, ys.min() - 60), min(H, ys.max() + 60), max(0, xs.min() - 80), min(W, xs.max() + 80))
                     frame = blend(frame, im, bboxes[g['id']])
