@@ -558,24 +558,22 @@ def t_hud(g):
     return page(body, css, 1.0)
 
 def t_lines(g):
-    """Mots-clés cinétiques empilés, chacun synchronisé sur la parole (zone libre à droite du plan large)."""
+    """Mots-clés cinétiques empilés en étiquettes navy, synchronisés sur la parole (alignés à droite du cadre)."""
     a, b = span(g); dur = b - a
     d = lambda t: max(0.08, rel(g, t))
-    side = g.get('side', 'R'); x = 1290 if side == 'R' else 90
-    size = g.get('size', 66)
+    size = g.get('size', 52)
     css = PAPER_CSS + f"""
-.p{{position:absolute;left:{x}px;top:{g.get('y', 250)}px;width:600px;{out_anim(dur, .3)}}}
-.k{{color:#fff;background:var(--gold);display:inline-block;padding:9px 14px;font-size:17px;margin-bottom:18px;{A("wipeIn", .03, .35, "cubic-bezier(.7,0,.2,1)")}}}
-.ln{{font:700 {size}px/1.02 var(--serif);color:#fff;letter-spacing:-.025em;white-space:nowrap;text-shadow:0 6px 30px rgba(13,8,46,.6);margin:6px 0;position:relative;display:block;width:max-content}}
-.ln.accent{{color:var(--gold2)}} .ln.warn{{color:#FF8A8E}} .ln.small{{font-size:{int(size*.55)}px;font-weight:600}}
-.ln .st{{position:absolute;left:-6px;right:-6px;top:52%;height:7px;background:#FF8A8E;transform-origin:left}}"""
+.p{{position:absolute;right:84px;top:{g.get('y', 230)}px;width:900px;display:flex;flex-direction:column;align-items:flex-end;{out_anim(dur, .3)}}}
+.k{{color:#fff;background:var(--gold);display:inline-block;padding:10px 15px;font-size:17px;margin-bottom:10px;{A("wipeIn", .03, .35, "cubic-bezier(.7,0,.2,1)")}}}
+.ln{{font:700 {size}px/1 var(--serif);color:#fff;letter-spacing:-.02em;white-space:nowrap;background:rgba(13,8,46,.92);
+  padding:14px 22px 16px;margin:5px 0;position:relative;transform-origin:right center;box-shadow:0 16px 40px -18px rgba(0,0,0,.6)}}
+.ln.accent{{background:var(--gold);color:#fff}} .ln.warn{{background:#E5484D;color:#fff}} .ln.small{{font-size:{int(size*.62)}px;font-weight:600;padding:11px 18px 12px}}
+.ln .st{{position:absolute;left:12px;right:12px;top:50%;height:6px;background:#FF8A8E;transform-origin:left}}"""
     body = '<div class="p">'
     if g.get('kicker'): body += f'<div class="kicker k">{esc(g["kicker"])}</div>'
     for ln in g['lines']:
         txt, t = ln[0], ln[1]; st = ln[2] if len(ln) > 2 else ''
-        strike = ''
-        if 'strike' in st:
-            strike = f'<span class="st" style="{A("grow", d(ln[3]), .3)}"></span>'
+        strike = f'<span class="st" style="{A("grow", d(ln[3]), .3)}"></span>' if 'strike' in st else ''
         body += f'<div class="ln {st}" style="{A("popIn", d(t), .5, "var(--spring)")}">{esc(txt)}{strike}</div>'
     body += '</div>'
     return page(body, css, dur)
