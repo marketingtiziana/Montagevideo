@@ -7,7 +7,7 @@ const path = require('path'); const fs = require('fs');
   const fps = +(fpsArg || 25); const n = Math.round(+dur * fps);
   fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch();
-  const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
+  const p = await b.newPage({ viewport: { width: +(process.env.VW || 1920), height: +(process.env.VH || 1080) } });
   await p.goto('file://' + path.resolve(page_));
   await p.evaluate(() => document.fonts.ready);
   await p.waitForFunction(() => !document.querySelector('#m') || window.READY === true, null, { timeout: 30000 });
