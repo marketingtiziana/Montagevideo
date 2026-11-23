@@ -103,7 +103,7 @@ def main():
     gain[:int(0.5*SR)] *= np.linspace(0, 1, int(0.5*SR))
     write_wav(os.path.join(MED, 'music.wav'), m * gain)
     # mix : musique duckée par la voix, puis normalisation YouTube (-14 LUFS, -1 dBTP)
-    fc = ("[1:a]volume=0.55[m];[0:a]asplit=2[v][vk];[m][vk]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=600[md];"
+    fc = ("[1:a]volume=1.0[m];[0:a]asplit=2[v][vk];[m][vk]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=600[md];"
           "[2:a]volume=0.8[s];[v][md][s]amix=inputs=3:normalize=0:duration=first,"
           "loudnorm=I=-14:TP=-1.0:LRA=9")
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', os.path.join(MED, 'voice_edit.wav'), '-i', os.path.join(MED, 'music.wav'),
