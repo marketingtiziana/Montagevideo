@@ -1,0 +1,274 @@
+[
+ {
+  "id": "title",
+  "kind": "FULL",
+  "start": 5.24,
+  "end": 8.44,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "lt_name",
+  "kind": "LT",
+  "start": 10.24,
+  "end": 16.2,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "roadmap",
+  "kind": "SPLIT",
+  "start": 35.2,
+  "end": 60.88,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "ch1",
+  "kind": "FULL",
+  "start": 70.04,
+  "end": 74.84,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "phases",
+  "kind": "SPLIT",
+  "start": 90.84,
+  "end": 131.12,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "suisse",
+  "kind": "SPLIT",
+  "start": 131.52,
+  "end": 160.96,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "q_peur",
+  "kind": "CARD",
+  "start": 165.72,
+  "end": 173.04,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "ch2",
+  "kind": "FULL",
+  "start": 179.04,
+  "end": 182.72,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "map1",
+  "kind": "FULL",
+  "start": 186.48,
+  "end": 197.08,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "bali_thai",
+  "kind": "SPLIT",
+  "start": 202.2,
+  "end": 256.56,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "map2",
+  "kind": "FULL",
+  "start": 262.16,
+  "end": 267.16,
+  "prev_split": false,
+  "next_split": true
+ },
+ {
+  "id": "dubai_sg",
+  "kind": "SPLIT",
+  "start": 267.16,
+  "end": 303.16,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "map3",
+  "kind": "FULL",
+  "start": 303.16,
+  "end": 308.72,
+  "prev_split": true,
+  "next_split": false
+ },
+ {
+  "id": "q_coffre",
+  "kind": "CARD",
+  "start": 310.92,
+  "end": 314.52,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "q_calc",
+  "kind": "CARD",
+  "start": 320.12,
+  "end": 323.6,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "ch3",
+  "kind": "FULL",
+  "start": 323.84,
+  "end": 328.56,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "r1035",
+  "kind": "SPLIT",
+  "start": 343.84,
+  "end": 382.16,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "invis",
+  "kind": "CARD",
+  "start": 383.24,
+  "end": 418.0,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "valise",
+  "kind": "CARD",
+  "start": 418.64,
+  "end": 445.04,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "ch4",
+  "kind": "FULL",
+  "start": 445.76,
+  "end": 448.76,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "residence",
+  "kind": "SPLIT",
+  "start": 463.92,
+  "end": 471.16,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "broll_domicile",
+  "kind": "FULL",
+  "start": 471.16,
+  "end": 480.56,
+  "prev_split": true,
+  "next_split": true
+ },
+ {
+  "id": "residence2",
+  "kind": "SPLIT",
+  "start": 480.56,
+  "end": 503.52,
+  "prev_split": false,
+  "next_split": true
+ },
+ {
+  "id": "sortie",
+  "kind": "SPLIT",
+  "start": 503.52,
+  "end": 535.44,
+  "prev_split": true,
+  "next_split": false
+ },
+ {
+  "id": "validloc",
+  "kind": "CARD",
+  "start": 535.92,
+  "end": 557.52,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "coin",
+  "kind": "FULL",
+  "start": 582.36,
+  "end": 590.32,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "ch5",
+  "kind": "FULL",
+  "start": 591.04,
+  "end": 596.08,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "horsue",
+  "kind": "SPLIT",
+  "start": 602.0,
+  "end": 632.08,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "regledor",
+  "kind": "SPLIT",
+  "start": 641.4,
+  "end": 673.68,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "warn",
+  "kind": "CARD",
+  "start": 674.0,
+  "end": 696.12,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "recap",
+  "kind": "FULL",
+  "start": 697.76,
+  "end": 723.72,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "q_constr",
+  "kind": "CARD",
+  "start": 732.8,
+  "end": 740.72,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "cta",
+  "kind": "CARD",
+  "start": 743.28,
+  "end": 773.24,
+  "prev_split": false,
+  "next_split": false
+ },
+ {
+  "id": "endcard",
+  "kind": "FULL",
+  "start": 777.0,
+  "end": 787.2,
+  "prev_split": false,
+  "next_split": false
+ }
+]

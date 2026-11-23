@@ -1,0 +1,7 @@
+build/media/
+build/gfx/
+*.mp4
+*.wav
+build/test/
+build/*.log
+__pycache__/
