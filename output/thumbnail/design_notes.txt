@@ -1,0 +1,135 @@
+FYNOVATES — MINIATURE YOUTUBE « COMMENT QUITTER LA FRANCE ? »
+Notes de direction artistique · 1280 x 720 px · 16:9 · PNG
+=====================================================================
+
+LIVRABLES
+  fynovates_concept_A.png        Concept A — Institutionnel premium
+  fynovates_concept_B.png        Concept B — Stratégie fiscale internationale
+  fynovates_concept_C.png        Concept C — Éditorial fort impact
+  fynovates_thumbnail_final.png  Version recommandée (C affiné)
+  editable_source/               Sources modifiables (HTML/CSS + assets + scripts)
+  editable_source/previews/      Aperçus 320 x 180 (contrôle mobile)
+
+---------------------------------------------------------------------
+1. IDENTITÉ — CE QUI A ÉTÉ RESPECTÉ
+---------------------------------------------------------------------
+Logos : jamais redessinés. Les pixels viennent des fichiers fournis.
+  - Symbole : recadrage serré du carré blanc / F navy, tiré tel quel du fichier
+    des variations (aucune retouche, proportions 1:1 d'origine, 216 x 216 px).
+  - Logotype FYNOVATES : lettres blanches extraites du fichier fond navy par
+    détourage en luminance (le fond navy devient transparent, les lettres restent
+    les originales). Mise à l'échelle proportionnelle uniquement.
+  - Placement : haut-gauche (A, B) ou bas-gauche (C, final), zone de protection
+    respectée, toujours subordonné au titre.
+
+Couleurs : #0D082E (navy), #0F0A13 (quasi-noir), #FFFFFF.
+  Seules variations tonales du navy pour la lumière/ombre : #1C1554, #080520 et
+  des dégradés radiaux du navy. Aucun rouge, vert, orange, jaune ou or.
+
+Typographie : Inter Display (grotesque géométrique moderne, licence OFL), graisses
+  300 à 900. Titre en capitales, kerning natif, lignes calées au pixel sur une même
+  justification (script fitLines). Espace fine insécable avant « ? » (typographie
+  française) : « LA FRANCE ? ». Aucun contour, biseau, ombre portée ou effet 3D.
+
+---------------------------------------------------------------------
+2. PORTRAIT — TRAITEMENT
+---------------------------------------------------------------------
+  - Photo originale fournie, non générée, non reconstruite, traits intacts.
+  - Détourage : modèle BiRefNet-portrait (masque de cheveux fin), légère
+    contraction du masque pour supprimer le liseré gris du studio, puis
+    décontamination couleur des bords (pymatting) → plus de halo clair sur fond navy.
+  - Correction : micro-courbe de contraste (+6 %) et équilibre chaud/froid de 1 %.
+    Pas de lissage de peau, pas de filtre beauté : texture de peau conservée.
+  - Mise à l'échelle strictement proportionnelle (hauteur seule, ratio verrouillé).
+  - Séparation : halo navy éclairci derrière la tête + ombre portée douce côté
+    texte + très léger liseré lumineux (0,8 px) pour détacher les cheveux sombres.
+  - Visage jamais recouvert ; placé à droite ; cadrage poitrine/épaules.
+
+---------------------------------------------------------------------
+3. LES TROIS DIRECTIONS
+---------------------------------------------------------------------
+A — INSTITUTIONNEL PREMIUM
+  Champ navy calme, grille cartographique à 7 %, contour de la France en filigrane
+  derrière le portrait. Titre en contraste de graisses : « QUITTER » Light /
+  « LA FRANCE ? » Black, justifiés. Sur-titre « Fiscalité internationale », filet,
+  sous-titre « Résidence fiscale · Banque · Patrimoine ».
+  + Très « banque privée », élégant, crédible.
+  – Le « QUITTER » en Light perd de la présence en 320 x 180 ; moins de tension.
+
+B — STRATÉGIE FISCALE INTERNATIONALE
+  Europe occidentale en relief discret, France éclairée (contour blanc + halo navy),
+  point « PARIS 48°51′N · 2°21′E » et route en pointillés vers un nœud carré
+  (écho du point carré du logo) : la nouvelle résidence, volontairement non nommée
+  (aucun pays suggéré, aucune promesse).
+  + Le sujet se comprend sans lire : départ, trajectoire, destination.
+  – Plus d'éléments en concurrence ; visage plus petit ; la carte attire l'œil
+    autant que le titre en petit format.
+
+C — ÉDITORIAL FORT IMPACT
+  Fond quasi-noir, lumière navy derrière un portrait très grand et serré.
+  « QUITTER » en Black très gros, « LA FRANCE ? » en navy dans un bloc blanc
+  (écho direct du carré blanc du symbole FYNOVATES). Sous-titre « Ce qu'il faut
+  savoir avant de partir ». Logo bas-gauche.
+  + Meilleur contraste, visage le plus lisible, hiérarchie en 2 temps immédiate.
+
+---------------------------------------------------------------------
+4. RECOMMANDATION — VERSION FINALE (C AFFINÉ)
+---------------------------------------------------------------------
+Choix : C, affiné en fynovates_thumbnail_final.png (sous-titre agrandi 26 → 30 px
+pour le mobile, logo légèrement agrandi, contour de France en filigrane à 10 %
+derrière le titre pour ancrer le sujet géographique sans charger l'image).
+
+Pourquoi c'est la plus forte :
+  1. Hiérarchie en 3 secondes : visage (connexion humaine) → « QUITTER » → bloc
+     blanc « LA FRANCE ? » → sous-titre. Un seul point d'entrée, pas de concurrence.
+  2. Lisibilité 320 x 180 : le titre reste net, le bloc blanc est l'élément le plus
+     contrasté de l'image, le regard de la présentatrice reste lisible.
+  3. Clic : la question ouverte + un regard direct et assuré = curiosité + confiance.
+     Le sous-titre promet un contenu concret sans affirmation fiscale ni chiffre.
+  4. Marque : le bloc blanc reprend la géométrie du symbole FYNOVATES ; palette
+     strictement navy / quasi-noir / blanc ; rendu éditorial « média financier ».
+
+---------------------------------------------------------------------
+5. CONTRÔLE QUALITÉ EFFECTUÉ
+---------------------------------------------------------------------
+  [x] Orthographe : « QUITTER LA FRANCE ? » — exacte, espace fine avant « ? ».
+      Sous-titres : « Fiscalité internationale », « Stratégie fiscale
+      internationale », « Résidence fiscale · Banque · Patrimoine »,
+      « Ce qu'il faut savoir avant de partir » (accents vérifiés).
+  [x] Logos authentiques (pixels d'origine, proportions verrouillées).
+  [x] Palette conforme.
+  [x] Portrait naturel, sans déformation (ratio verrouillé, aucune retouche faciale).
+  [x] 1280 x 720 vérifié sur les 4 PNG ; rendu supersamplé x2 puis Lanczos.
+  [x] Aperçus 320 x 180 générés et relus (editable_source/previews).
+  [x] Contraste : titre blanc sur #0F0A13 / navy > 15:1 ; navy sur blanc > 17:1.
+  [x] Aucun élément coupé ; coin bas-droit (durée YouTube) laissé sans info clé.
+
+Sous-titre — à valider : aucune vidéo ni transcription n'a été fournie. Les
+sous-titres choisis sont génériques et fidèles au sujet (« Comment quitter la
+France ? ») sans revendiquer d'avantage fiscal, de conséquence légale ou de chiffre.
+Si le contenu de la vidéo met l'accent sur un angle précis (ex. exit tax,
+résidence fiscale, banque), remplacer le texte dans concept_final.html (.sub).
+
+---------------------------------------------------------------------
+6. MODIFIER LES SOURCES (editable_source/)
+---------------------------------------------------------------------
+  concept_A.html / concept_B.html / concept_C.html / concept_final.html
+      Chaque miniature est un document HTML/CSS 1280 x 720 ouvrable dans un
+      navigateur. Titre, sous-titre = texte HTML ; la taille des lignes de titre se
+      recalcule automatiquement (attribut data-fit = largeur cible en px).
+      Portrait : <img class="portrait"> — position et taille via left/top/height.
+      Fond : classe .bg (dégradés), .france / .europe (cartographie), .grain.
+  common.css / common.js   tokens de marque, polices, fonctions d'ajustement.
+  assets/                  portrait détouré, logos extraits, géographie (geo.js).
+  src_inputs/              fichiers originaux fournis + masque de détourage.
+  fonts/                   Inter Display (OFL).
+  prep_assets.py           régénère assets/ depuis src_inputs/
+                           (pip install rembg pymatting ; node world-atlas).
+  render.py + render.js    exporte les PNG finaux et les aperçus :
+                           python3 render.py A B C final   (Node + Playwright)
+
+  Changer de portrait : remplacer src_inputs/portrait_original.jpg, générer le
+  masque (rembg -m birefnet-portrait) dans src_inputs/portrait_mask_birefnet.png,
+  lancer prep_assets.py portrait, puis ajuster left/top/height de .portrait.
+
+Données cartographiques : Natural Earth (domaine public) via world-atlas.
