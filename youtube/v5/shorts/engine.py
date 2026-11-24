@@ -145,7 +145,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         for c in cues:
             lines = SB.two_lines(c['text'], 30)
             txt = r'\N'.join(lines)   # même style que la vidéo YouTube : sans bandeau ni surlignage
-            f.write(f"Dialogue: 0,{SB.ts_ass(c['s'])},{SB.ts_ass(c['e'])},S,,0,0,0,,{{\\pos(540,736)\\fad(80,80)}}{txt}\n")
+            f.write(f"Dialogue: 0,{SB.ts_ass(c['s'])},{SB.ts_ass(min(c['e'], total / FPS - 0.04))},S,,0,0,0,,{{\\pos(540,736)\\fad(80,80)}}{txt}\n")
+
+CTA_DIR = os.path.join(BUILD, 'cta_full')   # carton CTA 1080x1920 (logo YouTube), rendu une fois
 
 def stage_compose(sh, segs, total, preview=False):
     d = os.path.join(BUILD, sh['id'])
@@ -179,6 +181,12 @@ def stage_compose(sh, segs, total, preview=False):
         frame = np.vstack([top, pan])
         cv2.line(frame, (0, TOP_H), (1080, TOP_H), (255, 75, 91), 4)                       # filet d'accent entre les deux moitiés
         cv2.rectangle(frame, (0, 0), (int(1080 * min(1, (f + 1) / total)), 8), (255, 75, 91), -1)  # barre de progression
+        if f >= total:                                             # appel à l'action plein écran : recouvre la présentatrice
+            cta = cv2.imread(os.path.join(CTA_DIR, f'f{min(f - total, CTA_F - 1):04d}.png'), cv2.IMREAD_UNCHANGED)
+            if cta.shape[2] == 3: frame = cta                      # image entièrement opaque
+            else:
+                a = cta[:, :, 3:4].astype(np.float32) / 255.0
+                frame = (cta[:, :, :3].astype(np.float32) * a + frame.astype(np.float32) * (1 - a)).astype(np.uint8)
         enc.stdin.write(frame.tobytes())
     enc.stdin.close(); enc.wait(); dec.wait()
     return outf
