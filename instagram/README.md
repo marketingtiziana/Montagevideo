@@ -1,6 +1,6 @@
-# FYNOVATES — kit Instagram (version 2, minimaliste corporate)
+# FYNOVATES — kit Instagram (version 3, corporate, couvertures business)
 
-- `output/fynovates-instagram-post-NN-*.png` : 12 publications 1080 × 1350 (photo, texte, plein, carrousel).
+- `output/fynovates-instagram-post-NN-*.png` : 12 publications 1080 × 1350 (couverture, photo et titre, carrousel).
 - `output/fynovates-instagram-carrousel-slide-02.png` : diapositive intérieure.
 - `output/fynovates-instagram-reel-NN.png` : couvertures de Reels 1080 × 1920.
 - `output/fynovates-instagram-une-*.png` : couvertures de stories à la une (sans icône).

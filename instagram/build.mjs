@@ -26,75 +26,77 @@ body{background:${bg};position:relative;-webkit-font-smoothing:antialiased;font-
 ${extra}</style></head><body>${body}</body></html>`;
 
 // ---------------- feed formats (1080x1350) ----------------
+const OV = 'rgba(10,7,34,.66)';
 const F = {
-  // A: photo on top, white band with category, title and wordmark
-  photo: (img, cat, title, pos = 'center') => base(1080, 1350, WHITE, `
-    <div class="a" style="left:0;top:0;width:1080px;height:880px;background:url(${photo(img)}) ${pos}/cover"></div>
-    <div class="a cat" style="left:96px;top:960px;color:${MUTE}">${cat}</div>
-    <div class="a ttl" style="left:96px;width:888px;top:1010px;color:${NAVY};font-size:54px">${fix(title)}</div>
-    <div class="a" style="right:96px;top:1238px">${word(220, NAVY)}</div>`),
-  // B: text only, generous white space
-  texte: (bg, cat, title) => { const fg = bg === NAVY ? WHITE : NAVY, mu = bg === NAVY ? 'rgba(255,255,255,.6)' : MUTE, ru = bg === NAVY ? 'rgba(255,255,255,.22)' : 'rgba(13,8,46,.14)';
-    return base(1080, 1350, bg, `
-    <div class="a cat" style="left:96px;top:120px;color:${mu}">${cat}</div>
-    <div class="a ttl" style="left:96px;width:840px;top:190px;color:${fg}">${fix(title)}</div>
-    <div class="a" style="left:96px;right:96px;top:1180px;height:1px;background:${ru}"></div>
-    <div class="a" style="left:96px;top:1226px">${word(240, fg)}</div>`); },
-  // C: full-bleed photo, wordmark only
-  plein: (img, cat, pos = 'center') => base(1080, 1350, NAVY, `
+  // A: full business cover photo, navy veil, large white title
+  couverture: (img, cat, title, pos = 'center') => base(1080, 1350, NAVY, `
     <div class="a" style="inset:0;background:url(${photo(img)}) ${pos}/cover"></div>
-    <div class="a" style="left:0;right:0;bottom:0;height:260px;background:linear-gradient(180deg,rgba(10,7,34,0),rgba(10,7,34,.72))"></div>
-    <div class="a cat" style="left:96px;top:1196px;color:rgba(255,255,255,.8)">${cat}</div>
-    <div class="a" style="right:96px;top:1196px">${word(240, WHITE)}</div>`),
-  // D: carousel cover
-  carrousel: (bg, cat, title, n) => { const fg = bg === NAVY ? WHITE : NAVY, mu = bg === NAVY ? 'rgba(255,255,255,.6)' : MUTE, ru = bg === NAVY ? 'rgba(255,255,255,.22)' : 'rgba(13,8,46,.14)';
-    return base(1080, 1350, bg, `
-    <div class="a cat" style="left:96px;top:120px;color:${mu}">GUIDE · ${cat}</div>
-    <div class="a" style="right:96px;top:114px;font:500 24px Inter;color:${mu};font-variant-numeric:tabular-nums">1 / ${n}</div>
-    <div class="a ttl" style="left:96px;width:840px;top:190px;color:${fg}">${fix(title)}</div>
-    <div class="a" style="left:96px;right:96px;top:1180px;height:1px;background:${ru}"></div>
-    <div class="a" style="left:96px;top:1226px">${word(240, fg)}</div>
-    <div class="a" style="right:96px;top:1216px;font:500 26px Inter;color:${fg}">Faire défiler →</div>`); },
+    <div class="a" style="inset:0;background:linear-gradient(180deg,rgba(10,7,34,.78) 0%,${OV} 45%,rgba(10,7,34,.86) 100%)"></div>
+    <div class="a" style="left:96px;top:110px">${word(260, WHITE)}</div>
+    <div class="a cat" style="left:96px;top:250px;color:rgba(255,255,255,.85);font-size:26px">${cat}</div>
+    <div class="a" style="left:96px;width:888px;top:310px;font:600 88px/1.1 Inter;letter-spacing:-.025em;color:${WHITE};text-wrap:balance">${fix(title)}</div>
+    <div class="a" style="left:96px;right:96px;top:1180px;height:2px;background:rgba(255,255,255,.35)"></div>
+    <div class="a" style="left:96px;top:1214px;font:500 28px Inter;color:rgba(255,255,255,.8)">Conseil fiscal &amp; structuration internationale</div>`),
+  // B: photo on top, white band with a large title
+  photo: (img, cat, title, pos = 'center') => base(1080, 1350, WHITE, `
+    <div class="a" style="left:0;top:0;width:1080px;height:640px;background:url(${photo(img)}) ${pos}/cover"></div>
+    <div class="a" style="left:0;top:0;width:1080px;height:260px;background:linear-gradient(180deg,rgba(10,7,34,.7),rgba(10,7,34,0))"></div>
+    <div class="a" style="left:96px;top:96px">${word(240, WHITE)}</div>
+    <div class="a cat" style="left:96px;top:716px;color:${MUTE};font-size:26px">${cat}</div>
+    <div class="a" style="left:96px;width:888px;top:770px;font:600 74px/1.12 Inter;letter-spacing:-.022em;color:${NAVY};text-wrap:balance">${fix(title)}</div>
+    <div class="a" style="right:96px;top:1238px">${word(220, NAVY)}</div>`),
+  // C: carousel cover (photo + veil)
+  carrousel: (img, cat, title, n, pos = 'center') => base(1080, 1350, NAVY, `
+    <div class="a" style="inset:0;background:url(${photo(img)}) ${pos}/cover"></div>
+    <div class="a" style="inset:0;background:linear-gradient(180deg,rgba(10,7,34,.8) 0%,${OV} 45%,rgba(10,7,34,.88) 100%)"></div>
+    <div class="a" style="left:96px;top:110px">${word(260, WHITE)}</div>
+    <div class="a" style="right:96px;top:104px;font:600 28px Inter;color:rgba(255,255,255,.85);font-variant-numeric:tabular-nums">1 / ${n}</div>
+    <div class="a cat" style="left:96px;top:250px;color:rgba(255,255,255,.85);font-size:26px">GUIDE · ${cat}</div>
+    <div class="a" style="left:96px;width:888px;top:310px;font:600 88px/1.1 Inter;letter-spacing:-.025em;color:${WHITE};text-wrap:balance">${fix(title)}</div>
+    <div class="a" style="left:96px;right:96px;top:1180px;height:2px;background:rgba(255,255,255,.35)"></div>
+    <div class="a" style="right:96px;top:1210px;font:600 32px Inter;color:${WHITE}">Faire défiler →</div>`),
 };
 const slide = (k, n, title, text) => base(1080, 1350, WHITE, `
-  <div class="a cat" style="left:96px;top:120px;color:${MUTE}">ÉTAPE ${k - 1}</div>
-  <div class="a" style="right:96px;top:114px;font:500 24px Inter;color:${MUTE}">${k} / ${n}</div>
-  <div class="a ttl" style="left:96px;width:840px;top:190px;color:${NAVY};font-size:56px">${fix(title)}</div>
-  <div class="a" style="left:96px;width:800px;top:420px;font:400 36px/1.55 Inter;color:#3B3953">${fix(text)}</div>
-  <div class="a" style="left:96px;right:96px;top:1180px;height:1px;background:rgba(13,8,46,.14)"></div>
-  <div class="a" style="left:96px;top:1226px">${word(240, NAVY)}</div>`);
+  <div class="a" style="left:96px;top:110px">${word(240, NAVY)}</div>
+  <div class="a" style="right:96px;top:104px;font:600 28px Inter;color:${MUTE}">${k} / ${n}</div>
+  <div class="a cat" style="left:96px;top:250px;color:${MUTE};font-size:26px">ÉTAPE ${k - 1}</div>
+  <div class="a" style="left:96px;width:888px;top:310px;font:600 72px/1.12 Inter;letter-spacing:-.022em;color:${NAVY}">${fix(title)}</div>
+  <div class="a" style="left:96px;width:860px;top:560px;font:400 42px/1.5 Inter;color:#2E2C45">${fix(text)}</div>
+  <div class="a" style="left:96px;right:96px;top:1180px;height:2px;background:rgba(13,8,46,.14)"></div>`);
 
-// chronological order: 01 = oldest. Alternates photo / text so the grid forms a quiet checkerboard.
+// chronological order: 01 = oldest. Veiled covers and white-band posts alternate (checkerboard).
 export const FEED = [
-  ['photo', 'poignee-main', 'STRUCTURATION', 'Holding : quand devient-elle vraiment rentable ?'],
-  ['texte', PAPER, 'BANQUE', 'Ouvrir un compte professionnel à l’étranger : ce que la banque vérifie.'],
-  ['plein', 'femme-fenetre', 'RÉSIDENCE FISCALE', 'center 30%'],
-  ['carrousel', WHITE, 'FISCALITÉ', 'Facturer depuis l’étranger en cinq étapes.', 6],
-  ['photo', 'documents-fiscaux', 'COMPTABILITÉ', 'Les obligations comptables que les freelances oublient.'],
-  ['texte', NAVY, 'EXPATRIATION', 'Avant de partir : résidence, couverture sociale, banque et structure.'],
-  ['plein', 'homme-lunettes', 'CONSEIL', 'center 25%'],
-  ['texte', PAPER, 'STRUCTURATION', 'LLC américaine : le coût réel, au-delà des frais de création.'],
-  ['photo', 'signature', 'JURIDIQUE', 'Statuts, pactes, conventions : ce qu’il faut signer, et quand.'],
-  ['carrousel', NAVY, 'RÉSIDENCE', 'Les trois critères de la résidence fiscale française.', 5],
-  ['photo', 'entretien', 'ACCOMPAGNEMENT', 'Un premier rendez-vous pour faire le point sur votre structure.'],
-  ['texte', WHITE, 'COMPTABILITÉ', 'TVA e-commerce : ce qui a changé pour les ventes en ligne.'],
+  ['couverture', 'tours-verre', 'STRUCTURATION', 'Holding : quand devient-elle vraiment rentable ?'],
+  ['photo', 'paiement-carte', 'BANQUE', 'Ouvrir un compte pro à l’étranger'],
+  ['couverture', 'banque-facade', 'BANQUE', 'Ce que votre banque vérifie avant d’ouvrir un compte', 'center 35%'],
+  ['photo', 'femme-fenetre', 'RÉSIDENCE FISCALE', 'Les 3 critères de la résidence fiscale', 'center 25%'],
+  ['carrousel', 'formulaire-fiscal', 'FISCALITÉ', 'Facturer depuis l’étranger en 5 étapes', 6],
+  ['photo', 'signature', 'JURIDIQUE', 'Statuts, pactes : ce qu’il faut signer'],
+  ['couverture', 'londres', 'EXPATRIATION', 'Avant de partir : 4 vérifications'],
+  ['photo', 'bureau-terminal', 'COMPTABILITÉ', 'TVA e-commerce : ce qui change'],
+  ['couverture', 'new-york', 'STRUCTURATION', 'LLC américaine : le vrai coût'],
+  ['photo', 'homme-lunettes', 'CONSEIL', 'Un premier rendez-vous pour faire le point', 'center 22%'],
+  ['carrousel', 'bureaux', 'COMPTABILITÉ', 'Les obligations que les freelances oublient', 5],
+  ['photo', 'poignee-main', 'ACCOMPAGNEMENT', 'Structurer avant de facturer'],
 ];
 const REELS = [
-  ['homme-costume', 'FISCALITÉ', 'Trois erreurs des freelances à l’étranger', 'center 20%'],
+  ['costume', 'FISCALITÉ', 'Les 3 erreurs des freelances à l’étranger', 'center'],
   ['femme-blazer', 'BANQUE', 'Pourquoi une banque bloque un virement', 'center 25%'],
-  ['reunion-docs', 'RÉSIDENCE', 'Portugal, Espagne ou Émirats : bien comparer', '60% center'],
+  ['tours-jumelles', 'RÉSIDENCE', 'Portugal, Espagne ou Émirats : bien comparer', 'center'],
 ];
-const HIGHLIGHTS = ['Fiscalité', 'Banque', 'Résidence', 'Structure', 'Avis', 'Cabinet'];
+const HIGHLIGHTS = [['Fiscalité', 'formulaire-fiscal'], ['Banque', 'banque-facade'], ['Résidence', 'londres'], ['Structure', 'tours-verre'], ['Avis', 'poignee-main'], ['Cabinet', 'bureaux']];
 
 const reel = (img, cat, title, pos) => base(1080, 1920, NAVY, `
   <div class="a" style="inset:0;background:url(${photo(img)}) ${pos}/cover"></div>
-  <div class="a" style="left:0;right:0;top:0;height:1000px;background:linear-gradient(180deg,rgba(10,7,34,.82),rgba(10,7,34,.55) 60%,rgba(10,7,34,0))"></div>
-  <div class="a" style="left:96px;top:330px">${word(300, WHITE)}</div>
-  <div class="a cat" style="left:96px;top:420px;color:rgba(255,255,255,.75);font-size:26px">${cat}</div>
-  <div class="a ttl" style="left:96px;width:860px;top:480px;color:${WHITE};font-size:76px">${fix(title)}</div>`);
-const highlight = (label) => base(1080, 1920, NAVY, `
+  <div class="a" style="inset:0;background:linear-gradient(180deg,rgba(10,7,34,.85) 0%,rgba(10,7,34,.62) 45%,rgba(10,7,34,.5) 70%,rgba(10,7,34,.85) 100%)"></div>
+  <div class="a" style="left:96px;top:330px">${word(320, WHITE)}</div>
+  <div class="a cat" style="left:96px;top:450px;color:rgba(255,255,255,.85);font-size:30px">${cat}</div>
+  <div class="a" style="left:96px;width:888px;top:520px;font:600 100px/1.08 Inter;letter-spacing:-.025em;color:${WHITE};text-wrap:balance">${fix(title)}</div>`);
+const highlight = (label, img) => base(1080, 1920, NAVY, `
+  <div class="a" style="inset:0;background:url(${photo(img)}) center/cover"></div>
+  <div class="a" style="inset:0;background:rgba(10,7,34,.62)"></div>
   <div class="a" style="left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center">
-    <div style="font:600 ${label.length > 8 ? 58 : 68}px Mont;letter-spacing:.2em;color:${WHITE};padding-left:.18em">${label.toUpperCase()}</div></div>`);
+    <div style="font:700 ${label.length > 8 ? 70 : 82}px Mont;letter-spacing:.14em;color:${WHITE};padding-left:.14em">${label.toUpperCase()}</div></div>`);
 
 function profile(posts, hl) {
   const img = (f) => 'data:image/png;base64,' + fs.readFileSync(f).toString('base64');
@@ -122,10 +124,10 @@ async function shot(html, name, w, h, scale = 1) {
 }
 const posts = [];
 for (let i = 0; i < FEED.length; i++) { const [kind, ...args] = FEED[i]; posts.push(await shot(F[kind](...args), `post-${String(i + 1).padStart(2, '0')}-${kind}`, 1080, 1350)); }
-await shot(slide(2, 6, 'Vérifier où votre société est établie.', 'La banque se fonde d’abord sur le pays de votre société, son activité réelle et votre propre résidence. Alignez ces trois éléments avant de déposer un dossier.'), 'carrousel-slide-02', 1080, 1350);
+await shot(slide(2, 6, 'Vérifier le pays de votre société', 'La banque regarde d’abord où votre société est établie, son activité réelle et votre propre résidence. Alignez ces trois éléments avant de déposer un dossier.'), 'carrousel-slide-02', 1080, 1350);
 for (let i = 0; i < REELS.length; i++) await shot(reel(...REELS[i]), `reel-${String(i + 1).padStart(2, '0')}`, 1080, 1920);
 const hl = [];
-for (const l of HIGHLIGHTS) hl.push([await shot(highlight(l), `une-${l.normalize('NFD').replace(/[^\w]/g, '').toLowerCase()}`, 1080, 1920), l]);
+for (const [l, img] of HIGHLIGHTS) hl.push([await shot(highlight(l, img), `une-${l.normalize('NFD').replace(/[^\w]/g, '').toLowerCase()}`, 1080, 1920), l]);
 await shot(profile([...posts].reverse(), hl), 'profil-mockup', 430, 400, 3);
 await browser.close();
 console.log('ok');
