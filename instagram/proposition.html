@@ -1,0 +1,100 @@
+<title>FYNOVATES Instagram</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600&display=swap">
+<style>
+/* Layout: brand review board — masthead, 2×2 comparative wall of YouTube mockups, then one plate per direction (banner, safe zone, mockups, rationale). Single deliberate light look. */
+:root{
+  --bg:#F5F5F7; --paper:#FFFFFF; --ink:#0D082E; --muted:#5B587A; --line:rgba(13,8,46,.12); --chip:#E9E8F0;
+  --sans:"Inter",system-ui,sans-serif; --display:"Montserrat",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:56px 36px;border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(28px,4vw,44px)/1.1 var(--display);letter-spacing:.03em;margin:14px 0 12px;text-wrap:balance}
+.lead{color:var(--muted);max-width:66ch;margin:0}
+.specs{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:20px;font-size:13px;color:var(--muted)}
+.specs b{color:var(--ink);font-weight:600}
+.strip4{display:grid;gap:14px;padding-block:28px 8px}.strip4 img{width:100%;display:block}.wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding-block:40px}
+.wall a{color:inherit;text-decoration:none;display:flex;flex-direction:column;gap:12px}
+.wall img{width:100%;display:block;border-radius:6px;box-shadow:0 1px 0 var(--line)}
+.wall a:hover img,.wall a:focus-visible img{outline:2px solid var(--ink);outline-offset:3px}
+.cap{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.cap strong{font:600 15px var(--display);letter-spacing:.06em;text-transform:uppercase}
+.cap span{font-size:13px;color:var(--muted)}
+section.plate{padding-block:56px;border-top:1px solid var(--line)}
+.phead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:22px}
+.phead h2{font:600 clamp(22px,3vw,30px)/1.15 var(--display);letter-spacing:.04em;margin:8px 0 0;text-transform:uppercase}
+.sig{font:500 18px var(--sans);color:var(--muted);margin-top:6px}
+.toggle{display:inline-flex;border:1px solid var(--ink)}
+.toggle button{font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ink);border:0;padding:10px 14px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.toggle button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.banner{width:100%;display:block}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px}
+.mocks{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure img{width:100%;display:block;border-radius:4px}
+figcaption{font-size:13px;color:var(--muted)}
+.text{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:32px}
+.text h3{font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;margin:0 0 10px}
+.text p{margin:0;font-size:15px;color:#2a2747}
+.credit{margin-top:18px;font-size:12px;color:var(--muted)}
+footer{padding-block:28px 56px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media (max-width:820px){.wall,.row,.mocks,.text{grid-template-columns:minmax(0,1fr)}}
+.hl{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;padding-block:24px}.hl img{border-radius:50%;aspect-ratio:1;object-fit:cover;width:100%}.hl figcaption{text-align:center}</style><style>
+.tpl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-block:28px}
+.tpl figure img,.gal img{border-radius:6px;box-shadow:0 1px 0 var(--line)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-block:40px;border-top:1px solid var(--line)}
+.split img{width:100%;display:block;border-radius:10px;border:1px solid var(--line)}
+.rules{display:grid;gap:22px}
+.rules h3{font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;margin:0 0 6px}
+.rules p{margin:0;font-size:15px;color:#2a2747}
+.sw{display:flex;gap:10px;margin-top:8px}.sw span{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}.sw i{width:22px;height:22px;border-radius:4px;border:1px solid var(--line);display:inline-block}
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-block:24px 48px}
+@media (max-width:820px){.tpl,.split{grid-template-columns:minmax(0,1fr)}.gal{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+
+
+
+
+
+
+<header class="wrap">
+  <div class="eyebrow">Proposition · Compte Instagram FYNOVATES</div>
+  <h1>Feed, Reels et stories à la une</h1>
+  <p class="lead">Le même système que pour TikTok (le nom FYNOVATES seul, navy, pierre et blanc), enrichi pour Instagram : des posts avec Tiziana pour incarner le cabinet, des carrousels pédagogiques, des citations et des checklists. Environ un post sur quatre montre Tiziana, pour donner un visage au cabinet sans transformer le compte en compte personnel.</p>
+  <div class="specs"><span>Posts <b>1080 × 1350 (4:5)</b></span><span>Reels et stories <b>1080 × 1920</b></span><span>Grille du profil <b>recadrage 3:4</b></span></div>
+</header>
+<div class="wrap">
+  <div class="split" style="border-top:0">
+    <figure><img src="previews/profil-mockup.jpg" alt="Maquette du profil Instagram"><figcaption>Maquette du profil : bio, stories à la une et douze publications</figcaption></figure>
+    <div class="rules">
+      <div class="eyebrow">Règles du feed</div>
+      <div><h3>Six formats</h3><p><b>Sujet</b> (une question, un mot clé), <b>Portrait</b> (Tiziana détourée et une phrase en première personne), <b>Photo</b> (le portrait en grand, pour les posts de présentation), <b>Citation</b> (en serif), <b>Carrousel</b> (une couverture puis des diapositives numérotées) et <b>Checklist</b> (quatre points numérotés).</p></div>
+      <div><h3>Présence humaine</h3><p>Trois posts sur douze montrent Tiziana, et deux Reels sur trois. Dans la grille, elle apparaît au moins une fois toutes les deux lignes, jamais deux fois côte à côte.</p></div>
+      <div><h3>Rythme des couleurs</h3><p>Navy, pierre et blanc alternent : sur chaque ligne de la grille, les trois couleurs sont présentes.</p></div>
+      <div><h3>Structure fixe</h3><p>FYNOVATES en haut à gauche, la rubrique, le titre, puis la signature en bas. Les carrousels indiquent « 1 / 6 » en haut à droite.</p></div>
+      <div><h3>Typographie et couleurs</h3><p>Titres en Montserrat Bold, citations et signature en Source Serif, mot clé en violet, en bandeau navy ou en italique selon le fond.</p><div class="sw"><span><i style="background:#0D082E"></i>Navy</span><span><i style="background:#E7E4DD"></i>Pierre</span><span><i style="background:#FFFFFF"></i>Blanc</span><span><i style="background:#A49CFF"></i>Violet</span></div></div>
+    </div>
+  </div>
+  <div class="eyebrow" style="padding-top:36px;border-top:1px solid var(--line)">Stories à la une</div>
+  <div class="hl"><figure><img src="previews/une-fiscalite.jpg" alt="Story à la une Fiscalité"><figcaption>Fiscalité</figcaption></figure><figure><img src="previews/une-banque.jpg" alt="Story à la une Banque"><figcaption>Banque</figcaption></figure><figure><img src="previews/une-residence.jpg" alt="Story à la une Résidence"><figcaption>Résidence</figcaption></figure><figure><img src="previews/une-structure.jpg" alt="Story à la une Structure"><figcaption>Structure</figcaption></figure><figure><img src="previews/une-avis.jpg" alt="Story à la une Avis"><figcaption>Avis</figcaption></figure><figure><img src="previews/une-apropos.jpg" alt="Story à la une À propos"><figcaption>À propos</figcaption></figure></div>
+  <p class="lead" style="font-size:15px">Pas d’icône : un mot en serif italique dans un cercle fin, sur navy. Ce format reste lisible dans le petit rond et ne crée pas de second symbole à côté du nom. Les images sont en 1080 × 1920, à importer comme couvertures de stories à la une.</p>
+  <div class="eyebrow" style="padding-top:36px">Couvertures de Reels</div>
+  <div class="tpl">
+    <figure><img src="previews/reel-01.jpg" alt="Couverture de Reel avec Tiziana, navy"><figcaption>Avec Tiziana · navy</figcaption></figure>
+    <figure><img src="previews/reel-02.jpg" alt="Couverture de Reel typographique, pierre"><figcaption>Typographique · pierre</figcaption></figure>
+    <figure><img src="previews/reel-03.jpg" alt="Couverture de Reel avec Tiziana, blanc"><figcaption>Avec Tiziana · blanc</figcaption></figure>
+  </div>
+  <div class="eyebrow" style="padding-top:24px">Carrousel : couverture et diapositive</div>
+  <div class="tpl" style="grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px">
+    <figure><img src="previews/post-03-carrousel.jpg" alt="Couverture de carrousel"><figcaption>Diapositive 1 : la couverture</figcaption></figure>
+    <figure><img src="previews/carrousel-slide-02.jpg" alt="Diapositive intérieure"><figcaption>Diapositive 2 : une étape, un paragraphe</figcaption></figure>
+  </div>
+  <div class="eyebrow" style="padding-top:36px;border-top:1px solid var(--line)">Les douze publications</div>
+  <div class="gal"><figure><img src="previews/post-01-sujet.jpg" alt="Post 01-sujet" loading="lazy"><figcaption>Sujet · navy</figcaption></figure><figure><img src="previews/post-02-portrait.jpg" alt="Post 02-portrait" loading="lazy"><figcaption>Portrait · pierre</figcaption></figure><figure><img src="previews/post-03-carrousel.jpg" alt="Post 03-carrousel" loading="lazy"><figcaption>Carrousel · blanc</figcaption></figure><figure><img src="previews/post-04-citation.jpg" alt="Post 04-citation" loading="lazy"><figcaption>Citation · pierre</figcaption></figure><figure><img src="previews/post-05-sujet.jpg" alt="Post 05-sujet" loading="lazy"><figcaption>Sujet · blanc</figcaption></figure><figure><img src="previews/post-06-checklist.jpg" alt="Post 06-checklist" loading="lazy"><figcaption>Checklist · navy</figcaption></figure><figure><img src="previews/post-07-photo.jpg" alt="Post 07-photo" loading="lazy"><figcaption>Photo · rencontre</figcaption></figure><figure><img src="previews/post-08-sujet.jpg" alt="Post 08-sujet" loading="lazy"><figcaption>Sujet · pierre</figcaption></figure><figure><img src="previews/post-09-sujet.jpg" alt="Post 09-sujet" loading="lazy"><figcaption>Sujet · navy</figcaption></figure><figure><img src="previews/post-10-carrousel.jpg" alt="Post 10-carrousel" loading="lazy"><figcaption>Carrousel · navy</figcaption></figure><figure><img src="previews/post-11-portrait.jpg" alt="Post 11-portrait" loading="lazy"><figcaption>Portrait · blanc</figcaption></figure><figure><img src="previews/post-12-sujet.jpg" alt="Post 12-sujet" loading="lazy"><figcaption>Sujet · pierre</figcaption></figure></div>
+</div>
+<footer class="wrap">Fichiers : dépôt Montagevideo, dossier instagram/ (output/ pour les PNG, build.mjs pour modifier les textes et régénérer).</footer>
