@@ -7,12 +7,12 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Main,Inter SemiBold,46,&H00FFFFFF,&H00FFFFFF,&H332E080D,&H00000000,0,0,0,0,100,100,0.3,0,3,9,0,2,200,200,58,1
-Style: Paper,Inter SemiBold,46,&H00FFFFFF,&H00FFFFFF,&H332E080D,&H00000000,0,0,0,0,100,100,0.3,0,3,9,0,2,200,200,58,1
+Style: Main,Inter SemiBold,48,&H00FFFFFF,&H00FFFFFF,&H50100820,&H96000000,0,0,0,0,100,100,0.3,0,1,2.6,1.6,2,200,200,60,1
+Style: Paper,Inter SemiBold,48,&H002E080D,&H00FFFFFF,&H00F8F3F4,&H00000000,0,0,0,0,100,100,0.3,0,1,0,0,2,200,200,60,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.10,0:00:05.39,Main,,0,0,0,,{\fad(90,90)}Quitter la France physiquement ne suffit\Npas à quitter la France {\c&HFF9FA9&}fiscalement{\r}.
+Dialogue: 0,0:00:00.10,0:00:05.39,Main,,0,0,0,,{\fad(90,90)}Quitter la France physiquement ne suffit\Npas à quitter la France fiscalement.
 Dialogue: 0,0:00:08.68,0:00:14.35,Main,,0,0,0,,{\fad(90,90)}Tu y penses peut-être depuis des mois,\Npeut-être depuis des années : quitter la France.
 Dialogue: 0,0:00:14.39,0:00:17.81,Main,,0,0,0,,{\fad(90,90)}Et à chaque fois la même boucle,\Ntu regardes des vidéos,
 Dialogue: 0,0:00:17.86,0:00:21.03,Main,,0,0,0,,{\fad(90,90)}tu compares des pays, tu rêves un peu,\Nen fait tu ne fais rien,
@@ -23,39 +23,39 @@ Dialogue: 0,0:00:35.26,0:00:40.39,Paper,,0,0,0,,{\fad(90,90)}Je vais te donner l
 Dialogue: 0,0:00:40.69,0:00:42.82,Paper,,0,0,0,,{\fad(90,90)}Comment clarifier ton projet ?
 Dialogue: 0,0:00:42.86,0:00:47.43,Paper,,0,0,0,,{\fad(90,90)}Comment choisir ta destination\Nselon ta situation ?
 Dialogue: 0,0:00:47.47,0:00:52.23,Paper,,0,0,0,,{\fad(90,90)}Comment valider sur le terrain\Navec des techniques concrètes et surtout
-Dialogue: 0,0:00:52.27,0:00:58.15,Paper,,0,0,0,,{\fad(90,90)}l'étape que {\c&HFF9FA9&}90 %{\r} des gens ratent\Net qui peut ruiner tout le reste,
+Dialogue: 0,0:00:52.27,0:00:58.15,Paper,,0,0,0,,{\fad(90,90)}l'étape que 90 % des gens ratent\Net qui peut ruiner tout le reste,
 Dialogue: 0,0:00:58.19,0:01:00.47,Paper,,0,0,0,,{\fad(90,90)}sortir de France proprement.
 Dialogue: 0,0:01:01.01,0:01:02.01,Main,,0,0,0,,{\fad(90,90)}Parce que oui,
 Dialogue: 0,0:01:02.38,0:01:07.48,Main,,0,0,0,,{\fad(90,90)}on peut quitter la France légalement,\Nsereinement, intelligemment,
 Dialogue: 0,0:01:07.52,0:01:09.03,Main,,0,0,0,,{\fad(90,90)}mais pas n'importe comment.
-Dialogue: 0,0:01:09.22,0:01:11.69,Paper,,0,0,0,,{\fad(90,90)}C'est parti, étape {\c&HFF9FA9&}1{\r}.
-Dialogue: 0,0:01:12.06,0:01:15.35,Paper,,0,0,0,,{\fad(90,90)}Clarifie ton profil avant\Nde choisir un pays.
+Dialogue: 0,0:01:09.22,0:01:11.69,Main,,0,0,0,,{\fad(90,90)}C'est parti, étape 1.
+Dialogue: 0,0:01:12.06,0:01:15.35,Main,,0,0,0,,{\fad(90,90)}Clarifie ton profil avant\Nde choisir un pays.
 Dialogue: 0,0:01:15.54,0:01:18.81,Main,,0,0,0,,{\fad(90,90)}Première étape,\Net c'est celle que tout le monde saute.
 Dialogue: 0,0:01:18.85,0:01:20.91,Main,,0,0,0,,{\fad(90,90)}Savoir qui tu es dans ce projet.
 Dialogue: 0,0:01:21.45,0:01:25.06,Main,,0,0,0,,{\fad(90,90)}La plupart des gens commencent\Npar la question « quel pays ?
 Dialogue: 0,0:01:25.10,0:01:30.07,Main,,0,0,0,,{\fad(90,90)}» C'est l'inverse, le bon pays dépend\Nentièrement de ta phase de vie patrimoniale.
 Dialogue: 0,0:01:31.07,0:01:33.13,Paper,,0,0,0,,{\fad(90,90)}Et il y en a grosso modo deux.
-Dialogue: 0,0:01:33.52,0:01:39.33,Paper,,0,0,0,,{\fad(90,90)}Phase {\c&HFF9FA9&}1 {\r}: la croissance, tu construis,\Nton activité monte, tu réinvestis tout.
+Dialogue: 0,0:01:33.52,0:01:39.33,Paper,,0,0,0,,{\fad(90,90)}Phase 1 : la croissance, tu construis,\Nton activité monte, tu réinvestis tout.
 Dialogue: 0,0:01:39.37,0:01:44.05,Paper,,0,0,0,,{\fad(90,90)}Chaque euro de charge en moins\Nest un euro de carburant en plus.
 Dialogue: 0,0:01:44.14,0:01:45.35,Paper,,0,0,0,,{\fad(90,90)}Dans cette phase,
 Dialogue: 0,0:01:45.46,0:01:49.81,Paper,,0,0,0,,{\fad(90,90)}tu cherches des juridictions à faible\Ncoût de structure et à fiscalité douce
 Dialogue: 0,0:01:49.85,0:01:51.27,Paper,,0,0,0,,{\fad(90,90)}sur l'exploitation.
-Dialogue: 0,0:01:51.64,0:01:54.51,Paper,,0,0,0,,{\fad(90,90)}Phase {\c&HFF9FA9&}2 {\r}: la préservation.
+Dialogue: 0,0:01:51.64,0:01:54.51,Paper,,0,0,0,,{\fad(90,90)}Phase 2 : la préservation.
 Dialogue: 0,0:01:55.33,0:01:58.71,Paper,,0,0,0,,{\fad(90,90)}Tu as construit,\Ntu prépares peut-être une revente,
 Dialogue: 0,0:01:58.76,0:02:04.45,Paper,,0,0,0,,{\fad(90,90)}tu as des actifs à protéger et ta priorité\Nn'est plus la vitesse mais la sécurité.
 Dialogue: 0,0:02:04.49,0:02:09.05,Paper,,0,0,0,,{\fad(90,90)}Là, tu cherches la stabilité juridique,\Nmonétaire, institutionnelle.
-Dialogue: 0,0:02:09.66,0:02:11.35,Paper,,0,0,0,,{\fad(90,90)}Un exemple parlant, la Suisse.
-Dialogue: 0,0:02:11.53,0:02:13.48,Paper,,0,0,0,,{\fad(90,90)}Pour un trentenaire\Nen pleine croissance,
-Dialogue: 0,0:02:13.52,0:02:18.67,Paper,,0,0,0,,{\fad(90,90)}c'est souvent un mauvais calcul, le coût de la vie,\Npour un bénéfice limité à ce stade.
-Dialogue: 0,0:02:18.89,0:02:22.77,Paper,,0,0,0,,{\fad(90,90)}Mais pour un entrepreneur qui prépare\Nla revente de sa société,
-Dialogue: 0,0:02:23.25,0:02:25.39,Paper,,0,0,0,,{\fad(90,90)}c'est l'une des meilleures au monde.
-Dialogue: 0,0:02:25.62,0:02:29.58,Paper,,0,0,0,,{\fad(90,90)}Les plus-values sur titres peuvent\Ny être totalement exonérées sous
-Dialogue: 0,0:02:29.62,0:02:33.91,Paper,,0,0,0,,{\fad(90,90)}conditions et c'est accessible\Nà un Européen sans aucun visa.
-Dialogue: 0,0:02:34.41,0:02:37.47,Paper,,0,0,0,,{\fad(90,90)}Même pays,\Ndeux verdicts opposés selon ta phase.
+Dialogue: 0,0:02:09.66,0:02:11.35,Main,,0,0,0,,{\fad(90,90)}Un exemple parlant, la Suisse.
+Dialogue: 0,0:02:11.53,0:02:13.48,Main,,0,0,0,,{\fad(90,90)}Pour un trentenaire\Nen pleine croissance,
+Dialogue: 0,0:02:13.52,0:02:18.67,Main,,0,0,0,,{\fad(90,90)}c'est souvent un mauvais calcul, le coût de la vie,\Npour un bénéfice limité à ce stade.
+Dialogue: 0,0:02:18.89,0:02:22.77,Main,,0,0,0,,{\fad(90,90)}Mais pour un entrepreneur qui prépare\Nla revente de sa société,
+Dialogue: 0,0:02:23.25,0:02:25.39,Main,,0,0,0,,{\fad(90,90)}c'est l'une des meilleures au monde.
+Dialogue: 0,0:02:25.62,0:02:29.58,Main,,0,0,0,,{\fad(90,90)}Les plus-values sur titres peuvent\Ny être totalement exonérées sous
+Dialogue: 0,0:02:29.62,0:02:33.91,Main,,0,0,0,,{\fad(90,90)}conditions et c'est accessible\Nà un Européen sans aucun visa.
+Dialogue: 0,0:02:34.41,0:02:37.47,Main,,0,0,0,,{\fad(90,90)}Même pays,\Ndeux verdicts opposés selon ta phase.
 Dialogue: 0,0:02:38.05,0:02:41.95,Main,,0,0,0,,{\fad(90,90)}Il y a un dernier point dans cette étape,\Nle frein psychologique.
 Dialogue: 0,0:02:42.25,0:02:48.99,Main,,0,0,0,,{\fad(90,90)}La peur de l'inconnu est normale mais se traite\Navec de la méthode, pas avec du courage.
 Dialogue: 0,0:02:49.46,0:02:55.09,Main,,0,0,0,,{\fad(90,90)}Tout ce qui suit dans cette vidéo,\Nc'est précisément ça, remplacer la peur par un process.
-Dialogue: 0,0:02:55.43,0:02:58.73,Paper,,0,0,0,,{\fad(90,90)}Étape {\c&HFF9FA9&}2{\r},\Nchoisir ta famille de destination.
+Dialogue: 0,0:02:55.43,0:02:58.73,Main,,0,0,0,,{\fad(90,90)}Étape 2,\Nchoisir ta famille de destination.
 Dialogue: 0,0:02:59.09,0:03:02.80,Main,,0,0,0,,{\fad(90,90)}Deuxième étape,\Nmaintenant que tu sais qui tu es,
 Dialogue: 0,0:03:02.84,0:03:07.45,Main,,0,0,0,,{\fad(90,90)}tu peux regarder la carte et je vais te\Ndonner les grandes familles avec les
 Dialogue: 0,0:03:07.49,0:03:08.65,Main,,0,0,0,,{\fad(90,90)}pièges de chacune.
@@ -63,40 +63,40 @@ Dialogue: 0,0:03:08.73,0:03:13.25,Main,,0,0,0,,{\fad(90,90)}Première famille, l
 Dialogue: 0,0:03:13.43,0:03:18.03,Main,,0,0,0,,{\fad(90,90)}Mais attention, il y a un piège énorme\Nque je vois passer chaque semaine.
 Dialogue: 0,0:03:18.59,0:03:21.81,Main,,0,0,0,,{\fad(90,90)}La confusion entre Bali et la Thaïlande.
 Dialogue: 0,0:03:21.85,0:03:24.79,Main,,0,0,0,,{\fad(90,90)}Sur Instagram,\Nc'est le même mode de vie.
-Dialogue: 0,0:03:24.88,0:03:27.81,Main,,0,0,0,,{\fad(90,90)}Mais {\c&HFF9FA9&}fiscalement{\r},\Nc'est le jour et la nuit.
-Dialogue: 0,0:03:27.89,0:03:31.87,Paper,,0,0,0,,{\fad(90,90)}L'Indonésie, donc Bali,\Napplique une taxation mondiale.
-Dialogue: 0,0:03:32.15,0:03:41.07,Paper,,0,0,0,,{\fad(90,90)}Si tu es résident fiscal, tu es imposable\Nsur tous tes revenus, rapatriés ou pas.
-Dialogue: 0,0:03:41.48,0:03:43.46,Paper,,0,0,0,,{\fad(90,90)}Des milliers d'expatriés l'ignorent,
-Dialogue: 0,0:03:43.50,0:03:47.83,Paper,,0,0,0,,{\fad(90,90)}vivent à Bali en pensant être tranquille\Net accumulent en réalité un passif
-Dialogue: 0,0:03:47.87,0:03:51.11,Paper,,0,0,0,,{\fad(90,90)}fiscal qui leur explosera\Nà la figure un jour.
-Dialogue: 0,0:03:51.39,0:03:56.77,Paper,,0,0,0,,{\fad(90,90)}La Thaïlande, elle, fonctionne sur un régime\Nterritorial basé sur le rapatriement.
-Dialogue: 0,0:03:57.01,0:03:58.40,Paper,,0,0,0,,{\fad(90,90)}Ce que tu gagnes à l'étranger,
-Dialogue: 0,0:03:58.44,0:04:01.35,Paper,,0,0,0,,{\fad(90,90)}ce que tu ne fais pas entrer en Thaïlande,\Nn'y est pas imposé.
-Dialogue: 0,0:04:02.04,0:04:04.26,Paper,,0,0,0,,{\fad(90,90)}Structure complètement différente.
-Dialogue: 0,0:04:04.30,0:04:09.31,Paper,,0,0,0,,{\fad(90,90)}Côté budget, compte environ {\c&HFF9FA9&}3 000 {\r}euros\Npar mois pour bien vivre à Bangkok.
+Dialogue: 0,0:03:24.88,0:03:27.81,Main,,0,0,0,,{\fad(90,90)}Mais fiscalement,\Nc'est le jour et la nuit.
+Dialogue: 0,0:03:27.89,0:03:31.87,Main,,0,0,0,,{\fad(90,90)}L'Indonésie, donc Bali,\Napplique une taxation mondiale.
+Dialogue: 0,0:03:32.15,0:03:41.07,Main,,0,0,0,,{\fad(90,90)}Si tu es résident fiscal, tu es imposable\Nsur tous tes revenus, rapatriés ou pas.
+Dialogue: 0,0:03:41.48,0:03:43.46,Main,,0,0,0,,{\fad(90,90)}Des milliers d'expatriés l'ignorent,
+Dialogue: 0,0:03:43.50,0:03:47.83,Main,,0,0,0,,{\fad(90,90)}vivent à Bali en pensant être tranquille\Net accumulent en réalité un passif
+Dialogue: 0,0:03:47.87,0:03:51.11,Main,,0,0,0,,{\fad(90,90)}fiscal qui leur explosera\Nà la figure un jour.
+Dialogue: 0,0:03:51.39,0:03:56.77,Main,,0,0,0,,{\fad(90,90)}La Thaïlande, elle, fonctionne sur un régime\Nterritorial basé sur le rapatriement.
+Dialogue: 0,0:03:57.01,0:03:58.40,Main,,0,0,0,,{\fad(90,90)}Ce que tu gagnes à l'étranger,
+Dialogue: 0,0:03:58.44,0:04:01.35,Main,,0,0,0,,{\fad(90,90)}ce que tu ne fais pas entrer en Thaïlande,\Nn'y est pas imposé.
+Dialogue: 0,0:04:02.04,0:04:04.26,Main,,0,0,0,,{\fad(90,90)}Structure complètement différente.
+Dialogue: 0,0:04:04.30,0:04:09.31,Main,,0,0,0,,{\fad(90,90)}Côté budget, compte environ 3 000 euros\Npar mois pour bien vivre à Bangkok.
 Dialogue: 0,0:04:09.68,0:04:15.05,Main,,0,0,0,,{\fad(90,90)}Phuket est devenu nettement plus cher\Navec l'explosion de l'immobilier haut de gamme.
 Dialogue: 0,0:04:15.14,0:04:20.15,Main,,0,0,0,,{\fad(90,90)}Deuxième famille, les hubs d'excellence,\NDubaï et Singapour.
-Dialogue: 0,0:04:20.23,0:04:23.43,Paper,,0,0,0,,{\fad(90,90)}Dubaï, tu connais :\N{\c&HFF9FA9&}0 {\r}impôt sur le revenu,
-Dialogue: 0,0:04:23.57,0:04:28.69,Paper,,0,0,0,,{\fad(90,90)}{\c&HFF9FA9&}9 %{\r} sur les sociétés et un golden\Nvisa de {\c&HFF9FA9&}10 {\r}ans accessible via un
-Dialogue: 0,0:04:28.73,0:04:30.65,Paper,,0,0,0,,{\fad(90,90)}investissement d'environ {\c&HFF9FA9&}500 000 {\r}euros.
-Dialogue: 0,0:04:31.70,0:04:35.10,Paper,,0,0,0,,{\fad(90,90)}Singapour est plus exigeante à l'entrée,
-Dialogue: 0,0:04:35.14,0:04:37.03,Paper,,0,0,0,,{\fad(90,90)}Mais il existe des chemins structurés,
-Dialogue: 0,0:04:37.07,0:04:40.99,Paper,,0,0,0,,{\fad(90,90)}notamment via un permis de travail\Nporté par une société locale pour
-Dialogue: 0,0:04:41.03,0:04:43.37,Paper,,0,0,0,,{\fad(90,90)}construire son installation\Nprogressivement.
-Dialogue: 0,0:04:43.96,0:04:48.69,Paper,,0,0,0,,{\fad(90,90)}Et Singapour surclasse Dubaï,\Nsur trois points dont on ne parle jamais.
-Dialogue: 0,0:04:48.83,0:04:53.67,Paper,,0,0,0,,{\fad(90,90)}La sécurité,\Nla mixité culturelle et la qualité de l'air.
+Dialogue: 0,0:04:20.23,0:04:23.43,Main,,0,0,0,,{\fad(90,90)}Dubaï, tu connais :\N0 impôt sur le revenu,
+Dialogue: 0,0:04:23.57,0:04:28.69,Main,,0,0,0,,{\fad(90,90)}9 % sur les sociétés et un golden\Nvisa de 10 ans accessible via un
+Dialogue: 0,0:04:28.73,0:04:30.65,Main,,0,0,0,,{\fad(90,90)}investissement d'environ 500 000 euros.
+Dialogue: 0,0:04:31.70,0:04:35.10,Main,,0,0,0,,{\fad(90,90)}Singapour est plus exigeante à l'entrée,
+Dialogue: 0,0:04:35.14,0:04:37.03,Main,,0,0,0,,{\fad(90,90)}Mais il existe des chemins structurés,
+Dialogue: 0,0:04:37.07,0:04:40.99,Main,,0,0,0,,{\fad(90,90)}notamment via un permis de travail\Nporté par une société locale pour
+Dialogue: 0,0:04:41.03,0:04:43.37,Main,,0,0,0,,{\fad(90,90)}construire son installation\Nprogressivement.
+Dialogue: 0,0:04:43.96,0:04:48.69,Main,,0,0,0,,{\fad(90,90)}Et Singapour surclasse Dubaï,\Nsur trois points dont on ne parle jamais.
+Dialogue: 0,0:04:48.83,0:04:53.67,Main,,0,0,0,,{\fad(90,90)}La sécurité,\Nla mixité culturelle et la qualité de l'air.
 Dialogue: 0,0:04:53.71,0:04:58.05,Main,,0,0,0,,{\fad(90,90)}Troisième famille,\Nles juridictions de préservation,
 Dialogue: 0,0:04:59.14,0:05:01.31,Main,,0,0,0,,{\fad(90,90)}comme la Suisse dont on a parlé.
 Dialogue: 0,0:05:01.45,0:05:05.03,Main,,0,0,0,,{\fad(90,90)}Le coffre-fort, pas le tremplin,\Nretiens le principe.
 Dialogue: 0,0:05:05.48,0:05:10.49,Main,,0,0,0,,{\fad(90,90)}Les destinations Instagram et les destinations\Npatrimoniales ne sont pas les mêmes.
 Dialogue: 0,0:05:10.66,0:05:14.39,Main,,0,0,0,,{\fad(90,90)}Choisis avec ta calculatrice,\Npas avec ton fil d'actualité.
-Dialogue: 0,0:05:14.43,0:05:19.07,Paper,,0,0,0,,{\fad(90,90)}Étape {\c&HFF9FA9&}3{\r},\Nvalide sur le terrain avant de t'engager.
+Dialogue: 0,0:05:14.43,0:05:19.07,Main,,0,0,0,,{\fad(90,90)}Étape 3,\Nvalide sur le terrain avant de t'engager.
 Dialogue: 0,0:05:19.66,0:05:25.73,Main,,0,0,0,,{\fad(90,90)}Troisième étape, et c'est là qu'on sépare\Nles projets sérieux des fantasmes.
 Dialogue: 0,0:05:26.06,0:05:27.69,Main,,0,0,0,,{\fad(90,90)}La validation terrain.
 Dialogue: 0,0:05:28.02,0:05:31.69,Main,,0,0,0,,{\fad(90,90)}Une expatriation ne se décide\Njamais sur une théorie fiscale.
 Dialogue: 0,0:05:31.73,0:05:34.17,Main,,0,0,0,,{\fad(90,90)}Jamais ! Je te donne une méthode simple.
-Dialogue: 0,0:05:34.39,0:05:36.55,Paper,,0,0,0,,{\fad(90,90)}La règle {\c&HFF9FA9&}10{\r}-{\c&HFF9FA9&}3{\r}-{\c&HFF9FA9&}5{\r}.
-Dialogue: 0,0:05:36.59,0:05:40.01,Paper,,0,0,0,,{\fad(90,90)}Dix : tu passes au minimum\N{\c&HFF9FA9&}10 {\r}jours sur place.
+Dialogue: 0,0:05:34.39,0:05:36.55,Paper,,0,0,0,,{\fad(90,90)}La règle 10-3-5.
+Dialogue: 0,0:05:36.59,0:05:40.01,Paper,,0,0,0,,{\fad(90,90)}Dix : tu passes au minimum\N10 jours sur place.
 Dialogue: 0,0:05:40.23,0:05:42.41,Paper,,0,0,0,,{\fad(90,90)}Pas un week-end prolongé\Nen mode touriste.
 Dialogue: 0,0:05:42.45,0:05:46.39,Paper,,0,0,0,,{\fad(90,90)}Trois : tu testes trois quartiers\Ndifférents en changeant d'hôtel,
 Dialogue: 0,0:05:46.43,0:05:50.91,Paper,,0,0,0,,{\fad(90,90)}parce que la ville que tu vis depuis\Nle quartier des expats et la ville que
@@ -118,26 +118,26 @@ Dialogue: 0,0:06:52.56,0:06:58.37,Main,,0,0,0,,{\fad(90,90)}Pendant une semaine 
 Dialogue: 0,0:06:58.41,0:07:00.17,Main,,0,0,0,,{\fad(90,90)}Tu vas découvrir deux choses.
 Dialogue: 0,0:07:00.55,0:07:05.69,Main,,0,0,0,,{\fad(90,90)}Ce dont tu as réellement besoin\Net à quel point le reste te retient.
 Dialogue: 0,0:07:05.89,0:07:11.71,Main,,0,0,0,,{\fad(90,90)}Le détachement matériel,\Nc'est la moitié invisible d'une expatriation réussie.
-Dialogue: 0,0:07:12.20,0:07:15.27,Paper,,0,0,0,,{\fad(90,90)}Étape {\c&HFF9FA9&}4{\r}, sors de France proprement.
+Dialogue: 0,0:07:12.20,0:07:15.27,Main,,0,0,0,,{\fad(90,90)}Étape 4, sors de France proprement.
 Dialogue: 0,0:07:15.68,0:07:19.15,Main,,0,0,0,,{\fad(90,90)}Quatrième étape,\Nla plus importante de cette vidéo,
 Dialogue: 0,0:07:19.19,0:07:24.35,Main,,0,0,0,,{\fad(90,90)}c'est celle que presque tout le monde\Nnéglige et qui transforme les
 Dialogue: 0,0:07:24.39,0:07:27.93,Main,,0,0,0,,{\fad(90,90)}expatriations de rêves\Nen cauchemars fiscaux.
 Dialogue: 0,0:07:28.14,0:07:30.21,Main,,0,0,0,,{\fad(90,90)}La sortie de France.
 Dialogue: 0,0:07:30.31,0:07:31.95,Paper,,0,0,0,,{\fad(90,90)}Comprends une chose,
-Dialogue: 0,0:07:32.05,0:07:37.31,Paper,,0,0,0,,{\fad(90,90)}quitter la France physiquement ne suffit\Npas à quitter la France {\c&HFF9FA9&}fiscalement{\r}.
-Dialogue: 0,0:07:37.66,0:07:41.93,Main,,0,0,0,,{\fad(90,90)}La {\c&HFF9FA9&}résidence fiscale{\r} française\Nrepose sur plusieurs critères.
+Dialogue: 0,0:07:32.05,0:07:37.31,Paper,,0,0,0,,{\fad(90,90)}quitter la France physiquement ne suffit\Npas à quitter la France fiscalement.
+Dialogue: 0,0:07:37.66,0:07:41.93,Main,,0,0,0,,{\fad(90,90)}La résidence fiscale française\Nrepose sur plusieurs critères.
 Dialogue: 0,0:07:42.46,0:07:47.19,Main,,0,0,0,,{\fad(90,90)}Ton foyer, ton activité,\Nle centre des intérêts économiques.
 Dialogue: 0,0:07:47.23,0:07:49.53,Paper,,0,0,0,,{\fad(90,90)}Si ta famille reste en France,
 Dialogue: 0,0:07:49.58,0:07:53.51,Paper,,0,0,0,,{\fad(90,90)}si ton activité principale\Nreste pilotée depuis la France,
 Dialogue: 0,0:07:53.70,0:07:56.97,Paper,,0,0,0,,{\fad(90,90)}si l'essentiel\Nde ton patrimoine y demeure,
-Dialogue: 0,0:07:57.24,0:08:03.55,Main,,0,0,0,,{\fad(90,90)}tu peux vivre à {\c&HFF9FA9&}10 000 {\r}km et rester\Nimposable comme résident français.
+Dialogue: 0,0:07:57.24,0:08:03.55,Main,,0,0,0,,{\fad(90,90)}tu peux vivre à 10 000 km et rester\Nimposable comme résident français.
 Dialogue: 0,0:08:03.68,0:08:09.91,Main,,0,0,0,,{\fad(90,90)}Avec à la clé des années de redressement\Nquand l'administration s'en aperçoit.
 Dialogue: 0,0:08:09.96,0:08:10.96,Paper,,0,0,0,,{\fad(90,90)}Concrètement,
 Dialogue: 0,0:08:11.84,0:08:13.17,Paper,,0,0,0,,{\fad(90,90)}une sortie propre,
-Dialogue: 0,0:08:13.26,0:08:17.15,Paper,,0,0,0,,{\fad(90,90)}ça veut dire transférer\Nréellement ton {\c&HFF9FA9&}centre de vie{\r},
-Dialogue: 0,0:08:17.47,0:08:20.41,Paper,,0,0,0,,{\fad(90,90)}documenter ta nouvelle\N{\c&HFF9FA9&}résidence fiscale{\r},
+Dialogue: 0,0:08:13.26,0:08:17.15,Paper,,0,0,0,,{\fad(90,90)}ça veut dire transférer\Nréellement ton centre de vie,
+Dialogue: 0,0:08:17.47,0:08:20.41,Paper,,0,0,0,,{\fad(90,90)}documenter ta nouvelle\Nrésidence fiscale,
 Dialogue: 0,0:08:20.54,0:08:22.85,Paper,,0,0,0,,{\fad(90,90)}gérer le sort de ta structure française,
-Dialogue: 0,0:08:23.37,0:08:30.96,Main,,0,0,0,,{\fad(90,90)}anticiper l'{\c&HFF9FA9&}exit tax{\r} si tu détiens\Ndes participations importantes et faire
+Dialogue: 0,0:08:23.37,0:08:30.96,Main,,0,0,0,,{\fad(90,90)}anticiper l'exit tax si tu détiens\Ndes participations importantes et faire
 Dialogue: 0,0:08:31.00,0:08:33.81,Main,,0,0,0,,{\fad(90,90)}les bonnes déclarations la bonne année.
 Dialogue: 0,0:08:34.10,0:08:35.75,Paper,,0,0,0,,{\fad(90,90)}Chaque élément a un timing.
 Dialogue: 0,0:08:35.96,0:08:38.72,Paper,,0,0,0,,{\fad(90,90)}Dans le mauvais ordre,\Ntu crées des frictions.
@@ -154,7 +154,7 @@ Dialogue: 0,0:09:17.64,0:09:22.07,Main,,0,0,0,,{\fad(90,90)}complètement diffé
 Dialogue: 0,0:09:22.23,0:09:25.81,Main,,0,0,0,,{\fad(90,90)}la sortie de la France et l'entrée\Ndans ton nouveau pays.
 Dialogue: 0,0:09:26.09,0:09:30.37,Main,,0,0,0,,{\fad(90,90)}Ce sont les deux faces de la même pièce.
 Dialogue: 0,0:09:30.49,0:09:34.23,Main,,0,0,0,,{\fad(90,90)}Rater l'une, c'est invalider l'autre.
-Dialogue: 0,0:09:34.46,0:09:39.27,Paper,,0,0,0,,{\fad(90,90)}Étape {\c&HFF9FA9&}5{\r}. Reconstruis ton patrimoine\Nen mode international.
+Dialogue: 0,0:09:34.46,0:09:39.27,Main,,0,0,0,,{\fad(90,90)}Étape 5. Reconstruis ton patrimoine\Nen mode international.
 Dialogue: 0,0:09:39.98,0:09:41.72,Main,,0,0,0,,{\fad(90,90)}Cinquième et dernière étape.
 Dialogue: 0,0:09:41.76,0:09:45.03,Main,,0,0,0,,{\fad(90,90)}Une fois installé,\Nton horizon patrimonial change complètement.
 Dialogue: 0,0:09:45.35,0:09:47.33,Paper,,0,0,0,,{\fad(90,90)}En quittant l'Union européenne,
@@ -166,13 +166,13 @@ Dialogue: 0,0:10:06.86,0:10:11.23,Paper,,0,0,0,,{\fad(90,90)}dividendes ou de pl
 Dialogue: 0,0:10:11.82,0:10:16.65,Main,,0,0,0,,{\fad(90,90)}C'est tout un champ qui s'ouvre\Net il mérite sa propre vidéo.
 Dialogue: 0,0:10:16.86,0:10:18.70,Main,,0,0,0,,{\fad(90,90)}Dis-moi en commentaire\Nsi ça t'intéresse.
 Dialogue: 0,0:10:18.74,0:10:22.07,Main,,0,0,0,,{\fad(90,90)}Mais je te donne tout\Nde suite la règle d'or,
-Dialogue: 0,0:10:22.18,0:10:26.39,Paper,,0,0,0,,{\fad(90,90)}parce qu'elle évite l'erreur\Nclassique du nouvel expatrié.
-Dialogue: 0,0:10:26.60,0:10:31.07,Paper,,0,0,0,,{\fad(90,90)}N'achète pas d'immobilier local en arrivant,\Njamais la première année,
-Dialogue: 0,0:10:31.47,0:10:34.05,Paper,,0,0,0,,{\fad(90,90)}tu ne connais pas les micro-marchés,
-Dialogue: 0,0:10:34.09,0:10:38.89,Paper,,0,0,0,,{\fad(90,90)}tu ne sais pas encore quel quartier monte,\Nlesquels stagnent,
-Dialogue: 0,0:10:39.12,0:10:41.88,Paper,,0,0,0,,{\fad(90,90)}où sont les pièges à étrangers ?
-Dialogue: 0,0:10:41.92,0:10:44.17,Paper,,0,0,0,,{\fad(90,90)}Loue, observe, apprends.
-Dialogue: 0,0:10:44.51,0:10:52.93,Paper,,0,0,0,,{\fad(90,90)}La pierre locale, c'est l'année {\c&HFF9FA9&}2 {\r}ou {\c&HFF9FA9&}3 {\r}quand\Ntu ne seras plus en touriste avec un budget.
+Dialogue: 0,0:10:22.18,0:10:26.39,Main,,0,0,0,,{\fad(90,90)}parce qu'elle évite l'erreur\Nclassique du nouvel expatrié.
+Dialogue: 0,0:10:26.60,0:10:31.07,Main,,0,0,0,,{\fad(90,90)}N'achète pas d'immobilier local en arrivant,\Njamais la première année,
+Dialogue: 0,0:10:31.47,0:10:34.05,Main,,0,0,0,,{\fad(90,90)}tu ne connais pas les micro-marchés,
+Dialogue: 0,0:10:34.09,0:10:38.89,Main,,0,0,0,,{\fad(90,90)}tu ne sais pas encore quel quartier monte,\Nlesquels stagnent,
+Dialogue: 0,0:10:39.12,0:10:41.88,Main,,0,0,0,,{\fad(90,90)}où sont les pièges à étrangers ?
+Dialogue: 0,0:10:41.92,0:10:44.17,Main,,0,0,0,,{\fad(90,90)}Loue, observe, apprends.
+Dialogue: 0,0:10:44.51,0:10:52.93,Main,,0,0,0,,{\fad(90,90)}La pierre locale, c'est l'année 2 ou 3 quand\Ntu ne seras plus en touriste avec un budget.
 Dialogue: 0,0:10:53.27,0:10:58.39,Main,,0,0,0,,{\fad(90,90)}Et méfie-toi comme la peste\Ndes placements « spécial expatriés ».
 Dialogue: 0,0:10:58.85,0:11:03.37,Main,,0,0,0,,{\fad(90,90)}Un rendement mirobolant qu'on\Nte propose dès ton arrivée.
 Dialogue: 0,0:11:03.41,0:11:07.23,Main,,0,0,0,,{\fad(90,90)}Un nouvel expatrié avec du capital\Nfraîchement libéré,
@@ -181,7 +181,7 @@ Dialogue: 0,0:11:10.66,0:11:15.63,Main,,0,0,0,,{\fad(90,90)}Ton nouveau cadre fi
 Dialogue: 0,0:11:17.03,0:11:18.90,Paper,,0,0,0,,{\fad(90,90)}Récapitulons la méthode.
 Dialogue: 0,0:11:18.94,0:11:21.09,Paper,,0,0,0,,{\fad(90,90)}Un : clarifie ta phase patrimoniale.
 Dialogue: 0,0:11:21.45,0:11:26.51,Paper,,0,0,0,,{\fad(90,90)}Deux : choisis ta famille\Nde destination avec ta calculatrice.
-Dialogue: 0,0:11:26.66,0:11:30.73,Paper,,0,0,0,,{\fad(90,90)}Trois : valide sur le terrain\Navec la règle {\c&HFF9FA9&}10{\r}-{\c&HFF9FA9&}3{\r}-{\c&HFF9FA9&}5{\r}.
+Dialogue: 0,0:11:26.66,0:11:30.73,Paper,,0,0,0,,{\fad(90,90)}Trois : valide sur le terrain\Navec la règle 10-3-5.
 Dialogue: 0,0:11:30.84,0:11:33.21,Paper,,0,0,0,,{\fad(90,90)}Quatre : sors de France proprement.
 Dialogue: 0,0:11:33.28,0:11:35.28,Paper,,0,0,0,,{\fad(90,90)}C'est le cœur du réacteur.
 Dialogue: 0,0:11:35.32,0:11:40.65,Paper,,0,0,0,,{\fad(90,90)}Cinq : reconstruis ton patrimoine dans ton nouveau cadre,\Nsans précipitation.

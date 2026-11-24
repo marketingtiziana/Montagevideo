@@ -129,6 +129,47 @@ def boom(dur=1.2):
     f = 42 + 30 * np.exp(-t * 6)
     return (.35 * np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 3.2)).astype(np.float32)
 
+# ---------------------------------------------------------------- V5 : ambiance calme et professionnelle (originale, générée)
+def music_calm(n, seed=11):
+    """Nappe douce + notes de piano feutré espacées, sans percussions. Accords lents (10 s) : Dmaj9, Bm11, Gmaj9, Aadd9."""
+    rng = np.random.default_rng(seed); out = np.zeros(n + 4 * SR, np.float32)
+    hz = lambda m: 440 * 2 ** ((m - 69) / 12)
+    prog = [[50, 57, 61, 64, 66], [47, 54, 57, 61, 64], [43, 50, 54, 57, 62], [45, 52, 57, 59, 64]]
+    L = 10.0
+    def pad(chord, dur):
+        k = int(dur * SR); t = np.arange(k) / SR
+        env = np.minimum(1, t / 2.5) * np.minimum(1, (dur - t) / 2.5)
+        y = np.zeros(k, np.float32)
+        for j, m in enumerate(chord):
+            f = hz(m); a = .016 / (1 + .4 * j)
+            y += (a * (np.sin(2 * np.pi * f * t) + .35 * np.sin(2 * np.pi * f * 1.0025 * t + 1.3) + .12 * np.sin(4 * np.pi * f * t))).astype(np.float32)
+        y += (.018 * np.sin(2 * np.pi * hz(chord[0] - 12) * t)).astype(np.float32)
+        return y * env
+    def keys(f, dur=3.2, g=.05):            # piano feutré : attaque douce, harmoniques faibles, longue décroissance
+        k = int(dur * SR); t = np.arange(k) / SR
+        env = (1 - np.exp(-t * 60)) * np.exp(-t * 1.4)
+        y = (np.sin(2 * np.pi * f * t) + .25 * np.sin(4 * np.pi * f * t) * np.exp(-t * 3) + .08 * np.sin(6 * np.pi * f * t) * np.exp(-t * 5))
+        return (g * y * env).astype(np.float32)
+    def add(x, t):
+        i = int(t * SR); out[i:i + len(x)] += x[:max(0, len(out) - i)]
+    t, b = 0.0, 0
+    while t < n / SR:
+        ch = prog[b % 4]; add(pad(ch, L + 3), t)
+        for q, off in enumerate([0.6, 3.1, 5.4, 7.9]):          # 4 notes par accord, espacées et un peu aléatoires
+            m = ch[rng.integers(2, len(ch))] + 12
+            add(keys(hz(m), g=.035 + .01 * rng.random()), t + off + .2 * rng.random())
+        t += L; b += 1
+    out = out[:n]
+    # réverbe douce
+    ir_n = int(3.0 * SR); ir = rng.standard_normal(ir_n).astype(np.float32) * np.exp(-np.linspace(0, 5, ir_n)).astype(np.float32)
+    ir /= np.abs(ir).sum() / 5
+    N2 = 2 ** int(np.ceil(np.log2(n + ir_n)))
+    wet = np.fft.irfft(np.fft.rfft(out, N2) * np.fft.rfft(ir, N2))[:n]
+    y = .6 * out + .4 * wet
+    # passe-bas doux (moyenne mobile) pour un son feutré
+    k = np.ones(6, np.float32) / 6
+    return (3.5 * np.convolve(y, k, 'same')).astype(np.float32)
+
 def main():
     clips, total_f = build_clips()
     n = int(total_f / FPS * SR)
@@ -148,13 +189,13 @@ def main():
         for j, bt in enumerate(g.get('beats', [])):
             put(blip(1500 + 220 * (j % 3)), g['start'] + bt + .02, .55)
     write_wav(os.path.join(MED, 'sfx.wav'), sfx[:n])
-    m = music_v2(n)
+    m = music_calm(n)
     # musique : plus présente sur le titre et l'écran de fin, très basse sous la voix (ducking)
     title = [c for c in clips if c['kind'] == 'title'][0]; end = [c for c in clips if c['kind'] == 'end'][0]
-    gain = np.full(n, 0.40, np.float32)
-    for c, g in ((title, 1.0), (end, 1.0)):
+    gain = np.full(n, 0.30, np.float32)
+    for c, g in ((title, 0.75), (end, 0.75)):
         a = int(c['o_f'] / FPS * SR); b = int((c['o_f'] + c['n_f']) / FPS * SR)
-        gain[max(0, a - SR):a] = np.linspace(0.40, g, min(SR, a)); gain[a:b] = g
+        gain[max(0, a - SR):a] = np.linspace(0.30, g, min(SR, a)); gain[a:b] = g
     fin = int(1.5 * SR); gain[-fin:] *= np.linspace(1, 0, fin)
     gain[:int(0.5*SR)] *= np.linspace(0, 1, int(0.5*SR))
     write_wav(os.path.join(MED, 'music.wav'), m * gain)

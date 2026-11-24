@@ -200,7 +200,8 @@ def bg_at(t, man):
     for g in man:
         if g['start'] <= t < g['end']:
             tpl = next(x['tpl'] for x in G if x['id'] == g['id'])
-            if g['kind'] == 'SPLIT' or tpl in PAPER: return 'Paper'
+            # fonds clairs uniquement : panneaux ivoire (SPLIT classiques) et récapitulatif ; cartes, frise et chapitres sont navy
+            if (g['kind'] == 'SPLIT' and tpl not in ('mapfly', 'yeartrack')) or tpl == 'recap': return 'Paper'
     return 'Main'
 
 def write(cues):
@@ -218,8 +219,8 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Main,Inter SemiBold,46,&H00FFFFFF,&H00FFFFFF,&H332E080D,&H00000000,0,0,0,0,100,100,0.3,0,3,9,0,2,200,200,58,1
-Style: Paper,Inter SemiBold,46,&H00FFFFFF,&H00FFFFFF,&H332E080D,&H00000000,0,0,0,0,100,100,0.3,0,3,9,0,2,200,200,58,1
+Style: Main,Inter SemiBold,48,&H00FFFFFF,&H00FFFFFF,&H50100820,&H96000000,0,0,0,0,100,100,0.3,0,1,2.6,1.6,2,200,200,60,1
+Style: Paper,Inter SemiBold,48,&H002E080D,&H00FFFFFF,&H00F8F3F4,&H00000000,0,0,0,0,100,100,0.3,0,1,0,0,2,200,200,60,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -230,7 +231,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         for c in cues:
             st = bg_at((c['s'] + c['e']) / 2, man)
             lines = two_lines(c['text'])
-            txt = r'\N'.join(hl.sub(lambda m: gold[st] + m.group(0) + r'{\r}', l) if m_ok(l) else l for l in lines)
+            txt = r'\N'.join(lines)   # V5 : sans surlignage de mots
             f.write(f"Dialogue: 0,{ts_ass(c['s'])},{ts_ass(c['e'])},{st},,0,0,0,,{{\\fad(90,90)}}{txt}\n")
     return len(cues)
 
