@@ -1,11 +1,11 @@
-# FYNOVATES — kit Instagram
+# FYNOVATES — kit Instagram (version 2, minimaliste corporate)
 
-- `output/fynovates-instagram-post-NN-*.png` : 12 publications 1080 × 1350 (sujet, portrait, photo, citation, carrousel, checklist).
-- `output/fynovates-instagram-carrousel-slide-02.png` : exemple de diapositive intérieure.
+- `output/fynovates-instagram-post-NN-*.png` : 12 publications 1080 × 1350 (photo, texte, plein, carrousel).
+- `output/fynovates-instagram-carrousel-slide-02.png` : diapositive intérieure.
 - `output/fynovates-instagram-reel-NN.png` : couvertures de Reels 1080 × 1920.
-- `output/fynovates-instagram-une-*.png` : couvertures de stories à la une (1080 × 1920, sans icône).
+- `output/fynovates-instagram-une-*.png` : couvertures de stories à la une (sans icône).
 - `output/fynovates-instagram-profil-mockup.png` : maquette du profil.
-- `proposition.html` : planche de proposition.
-- `assets/` : portrait de Tiziana (original et détouré, repris de la branche des miniatures YouTube) et wordmark.
+- `assets/photos/` : photos Unsplash d'origine et versions duotone navy (`*-duo.jpg`), crédits dans `CREDITS.md`.
 
-Modifier les textes dans `FEED`, `REELS` et `HIGHLIGHTS` de `build.mjs`, puis lancer `node instagram/build.mjs`.
+Modifier `FEED`, `REELS` et `HIGHLIGHTS` dans `build.mjs`, puis `node instagram/build.mjs`.
+Pour ajouter une photo : la déposer dans `assets/photos/`, créer sa version `-duo.jpg` (même traitement) et l'appeler par son nom.
