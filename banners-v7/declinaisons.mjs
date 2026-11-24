@@ -41,40 +41,40 @@ const SIG = 'Votre partenaire en structuration internationale.';
 const SIGC = 'VOTRE PARTENAIRE EN STRUCTURATION INTERNATIONALE';
 const capsStyle = (c) => `font:500 26px Mont;letter-spacing:.42em;color:${c};padding-left:.42em`;
 
-// centred stack in any colourway
-function stack(bg, fg, markSq, markF, sigColor, serif = false) {
+// centred stack in any colourway (wordmark only, no monogram)
+function stack(bg, fg, sigColor, serif = false) {
   return (sig) => {
-    const ms = 132, ww = SZ.w - 120, wh = ww * RATIO;
-    const my = sig ? 532 : 560, wy = my + ms + 44;
+    const ww = SZ.w - 120, wh = ww * RATIO;
+    const gapS = 46, sh = serif ? 50 : 32;
+    const wy = sig ? 720 - (wh + gapS + sh) / 2 : 720 - wh / 2;
     return page(bg, `
-    ${row(my, markSVG(ms, markSq, markF))}
     ${row(wy, word(ww, fg))}
-    ${sig ? row(wy + wh + 40, serif ? SIG : SIGC, serif ? `font:400 40px SrcSerif;color:${sigColor}` : capsStyle(sigColor)) : ''}`);
+    ${sig ? row(wy + wh + gapS, serif ? SIG : SIGC, serif ? `font:400 40px SrcSerif;color:${sigColor}` : capsStyle(sigColor)) : ''}`);
   };
 }
-// horizontal lockup, signature centred under a hairline
+// framed by two hairlines, signature centred below
 function horizontal(sig) {
-  const ms = 150, gap = 56, ww = SZ.w - 160 - ms - gap, wh = ww * RATIO;
-  const lw = ms + gap + ww, lx = (W - lw) / 2;
-  const ly = sig ? 560 : 645;
+  const ww = SZ.w - 200, wh = ww * RATIO, lx = (W - ww) / 2;
+  const wy = sig ? 640 : 720 - wh / 2;
   return page(NAVY, `
-  ${at(lx, ly, `<div style="display:flex;align-items:center;gap:${gap}px">${markSVG(ms, WHITE, NAVY)}${word(ww)}</div>`)}
-  ${sig ? hr(lx, ly + ms + 44, lw, '#FFFFFF', .3) + row(ly + ms + 72, SIGC, capsStyle('rgba(255,255,255,.86)')) : ''}`);
+  ${hr(lx, wy - 48, ww, '#FFFFFF', .3)}
+  ${row(wy, word(ww))}
+  ${hr(lx, wy + wh + 48, ww, '#FFFFFF', .3)}
+  ${sig ? row(wy + wh + 82, SIGC, capsStyle('rgba(255,255,255,.86)')) : ''}`);
 }
-// left aligned, signature set right on the same baseline
+// left aligned, rule across the measure, serif signature
 function aligned(sig) {
-  const ms = 120, ww = 1180, wh = ww * RATIO;
-  const my = sig ? 560 : 590, wy = my + ms + 44;
+  const ww = 1180, wh = ww * RATIO;
+  const wy = sig ? 640 : 720 - wh / 2;
   return page(INK, `
-  ${at(SZ.x, my, markSVG(ms, WHITE, INK))}
   ${at(SZ.x, wy, word(ww))}
   ${sig ? hr(SZ.x, wy + wh + 40, SZ.w, '#FFFFFF', .28) + txt(SZ.x, wy + wh + 62, SIG, 'font:400 36px SrcSerif;color:rgba(255,255,255,.88)') : ''}`);
 }
 
 export const CONCEPTS = [
-  ['6a-navy-centre', stack(NAVY, WHITE, WHITE, NAVY, 'rgba(255,255,255,.86)')],
-  ['6b-noir-encre', stack(INK, WHITE, WHITE, INK, 'rgba(255,255,255,.82)')],
-  ['6c-blanc', stack('#FFFFFF', NAVY, NAVY, WHITE, NAVY)],
-  ['6d-pierre-serif', stack('#E9E7E2', NAVY, NAVY, '#E9E7E2', NAVY, true)],
+  ['6a-navy-centre', stack(NAVY, WHITE, 'rgba(255,255,255,.86)')],
+  ['6b-noir-encre', stack(INK, WHITE, 'rgba(255,255,255,.82)')],
+  ['6c-blanc', stack('#FFFFFF', NAVY, NAVY)],
+  ['6d-pierre-serif', stack('#E9E7E2', NAVY, NAVY, true)],
   ['6e-navy-horizontal', horizontal],
   ['6f-encre-aligne-gauche', aligned]];
