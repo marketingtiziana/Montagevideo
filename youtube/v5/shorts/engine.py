@@ -9,6 +9,7 @@ sys.path.insert(0, ROOT)
 from manifest import SHORTS
 import devices
 TOP_H, PAN_H = 760, 1160
+CTA_F = int(round(devices.CTA_DUR * 25))      # images ajoutées après la dernière phrase pour l'appel à l'action
 FPS = 25
 MEZZ = os.environ.get('V5_MEZZ')                     # rush extrait (t=0 <=> 1:00:10)
 VOICE = os.path.join(ROOT, 'build', 'media', 'voice_proc.wav')
@@ -90,7 +91,7 @@ def write_wav(p, x, sr=48000):
 def stage_audio(sh, segs, o, total):
     import mix as M
     SR = 48000; d = os.path.join(BUILD, sh['id'])
-    v = read_wav(VOICE); n = int(total / FPS * SR); out = np.zeros(n + SR, np.float32)
+    v = read_wav(VOICE); n = int((total + CTA_F) / FPS * SR); out = np.zeros(n + SR, np.float32)
     fade = int(.008 * SR); ramp = np.linspace(0, 1, fade, dtype=np.float32); pos = 0
     for s, e in segs:      # même découpe image/son : synchronisation conservée à l'échantillon près
         seg = v[int(s / FPS * SR):int(e / FPS * SR)].copy(); seg[:fade] *= ramp; seg[-fade:] *= ramp[::-1]
@@ -157,21 +158,27 @@ def stage_compose(sh, segs, total, preview=False):
                             '-c:v', 'libx264', '-preset', 'faster' if preview else 'medium', '-crf', '23' if preview else '18', '-pix_fmt', 'yuv420p',
                             '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', outf], stdin=subprocess.PIPE)
     pdir = os.path.join(d, 'panel')
-    for f in range(total):
-        buf = dec.stdout.read(1080 * TOP_H * 3)
-        if len(buf) < 1080 * TOP_H * 3: break
-        top = np.frombuffer(buf, np.uint8).reshape(TOP_H, 1080, 3)
-        t = f / FPS
+    total_ext = total + CTA_F
+    last = None
+    for f in range(total_ext):
+        if f < total:
+            buf = dec.stdout.read(1080 * TOP_H * 3)
+            if len(buf) < 1080 * TOP_H * 3: buf = None
+        else: buf = None
+        if buf is None and last is None: break
+        top = np.frombuffer(buf, np.uint8).reshape(TOP_H, 1080, 3) if buf is not None else last   # fin : dernière image figée sous l'appel à l'action
+        last = top
+        t = min(f, total - 1) / FPS
         k = max(i for i, st in enumerate(starts) if st <= t + 1e-6)
         seg_end = (starts[k + 1] if k + 1 < len(starts) else total / FPS)
         u = (t - starts[k]) / max(.5, seg_end - starts[k])
         z = 1.0 + 0.04 * (u if k % 2 == 0 else 1 - u)            # poussée lente, sens alterné
         M = np.float32([[z, 0, 540 * (1 - z)], [0, z, 300 * (1 - z)]])
         top = cv2.warpAffine(top, M, (1080, TOP_H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
-        pan = cv2.imread(os.path.join(pdir, f'f{min(f, total - 1):04d}.png'), cv2.IMREAD_COLOR)
+        pan = cv2.imread(os.path.join(pdir, f'f{min(f, total_ext - 1):04d}.png'), cv2.IMREAD_COLOR)
         frame = np.vstack([top, pan])
         cv2.line(frame, (0, TOP_H), (1080, TOP_H), (255, 75, 91), 4)                       # filet d'accent entre les deux moitiés
-        cv2.rectangle(frame, (0, 0), (int(1080 * (f + 1) / total), 8), (255, 75, 91), -1)  # barre de progression
+        cv2.rectangle(frame, (0, 0), (int(1080 * min(1, (f + 1) / total)), 8), (255, 75, 91), -1)  # barre de progression
         enc.stdin.write(frame.tobytes())
     enc.stdin.close(); enc.wait(); dec.wait()
     return outf
@@ -182,7 +189,7 @@ def run(sid, stages, preview):
     print(sid, f'{total / FPS:.1f}s', len(segs), 'plans', flush=True)
     psegs = picture_segments(segs)
     if 'presenter' in stages: stage_presenter(sh, psegs)
-    if 'panel' in stages: stage_panel(sh, o, total)
+    if 'panel' in stages: stage_panel(sh, o, total + CTA_F)
     if 'audio' in stages: stage_audio(sh, segs, o, total)
     if 'subs' in stages: stage_subs(sh, segs, o, total)
     if 'compose' in stages: print('OK', stage_compose(sh, psegs, total, preview))

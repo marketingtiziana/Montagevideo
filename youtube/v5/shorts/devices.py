@@ -320,6 +320,20 @@ def scene(s, o):
         return h, js
     raise ValueError(T)
 
+CTA_DUR = 4.2
+def cta(t):
+    """Appel à l'action final, identique sur tous les Shorts : « Commente VIDÉO pour recevoir la vidéo en entier »."""
+    bubble = (f'<svg viewBox="0 0 64 64" width="120" height="120" fill="none" stroke="#fff" stroke-width="3.6" stroke-linejoin="round">'
+              f'<path d="M10 14 H54 A4 4 0 0 1 58 18 V42 A4 4 0 0 1 54 46 H28 L16 56 V46 H10 A4 4 0 0 1 6 42 V18 A4 4 0 0 1 10 14 Z"/>'
+              f'<path d="M18 26 H46 M18 34 H38" stroke-linecap="round"/></svg>')
+    return (f'<div class="sc" style="animation:scIn .45s var(--spring) {t:.2f}s both">'
+            f'<div style="position:absolute;left:0;top:40px;width:840px;display:flex;flex-direction:column;align-items:center;text-align:center">'
+            f'<div style="width:190px;height:190px;border-radius:50%;background:var(--acc);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 18px rgba(91,75,255,.18);{A("popIn", t + .1, .55, "var(--spring)")}">{bubble}</div>'
+            f'<div style="font:700 52px/1 var(--serif);margin-top:50px;{A("fadeUp", t + .3, .5, "var(--spring)")}">Commente</div>'
+            f'<div style="margin-top:22px;padding:22px 46px;border-radius:22px;background:#fff;color:var(--ink);font:800 110px/1 var(--serif);letter-spacing:.02em;{A("popIn", t + .55, .55, "var(--spring)")}">VIDÉO</div>'
+            f'<div style="font:600 40px/1.2 var(--serif);color:var(--acc2);margin-top:34px;max-width:720px;{A("fadeUp", t + .85, .5, "var(--spring)")}">pour recevoir la vidéo en entier</div>'
+            f'</div></div>')
+
 def build(short, o, dur):
     body, js = "", []
     sc = short['scenes']
@@ -327,8 +341,11 @@ def build(short, o, dur):
         a, b = o(s['t0']), o(s['t1'])
         h, j = scene(s, o)
         if j: js.append(j)
-        enter = f"animation:scIn .4s var(--in) {a:.2f}s both" + ("" if i == len(sc) - 1 else f", scOut .35s var(--in) {b - .35:.2f}s forwards")
+        cta_t = dur - CTA_DUR
+        end = b if i < len(sc) - 1 else cta_t
+        enter = f"animation:scIn .4s var(--in) {a:.2f}s both, scOut .35s var(--in) {min(b, cta_t) - .35:.2f}s forwards"
         body += f'<div class="sc" style="{enter}">{h}</div>'
+    body += cta(dur - CTA_DUR)
     css = CSS.replace("ASSETS", ASSETS)
     top = (f'<div style="position:absolute;left:40px;top:-4px;width:840px;display:flex;align-items:center;gap:12px;opacity:0"></div>')
     return (f'<!doctype html><html><head><meta charset="utf-8"><style>{css}</style></head><body><div class="bg"></div><div class="grid"></div>'
