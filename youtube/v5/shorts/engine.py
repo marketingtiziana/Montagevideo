@@ -7,7 +7,8 @@ import json, os, sys, subprocess, numpy as np, cv2, wave
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 from manifest import SHORTS
-import panel
+import devices
+TOP_H, PAN_H = 760, 1160
 FPS = 25
 MEZZ = os.environ.get('V5_MEZZ')                     # rush extrait (t=0 <=> 1:00:10)
 VOICE = os.path.join(ROOT, 'build', 'media', 'voice_proc.wav')
@@ -15,7 +16,7 @@ BUILD = os.path.join(HERE, 'build'); OUT = os.path.join(HERE, 'output')
 GRADE = ("curves=master='0/0.015 0.2/0.19 0.5/0.505 0.8/0.81 0.93/0.905 1/0.94',"
          "colorbalance=rs=-0.01:bs=0.01:rh=-0.012:bh=0.008,eq=saturation=1.03:contrast=1.02")
 # cadrages verticaux (recadrage du 16:9 vers 1080x960, visage centré) : (largeur, x, y)
-VFRAMES = {'V': (1215, 288, 0), 'VC': (1040, 380, 18)}
+VFRAMES = {'V': (1535, 113, 0), 'VC': (1290, 235, 24)}
 
 def segments(a, b):
     """Plans gardés dans [a, b] (mêmes coupes d'hésitations et de silences que le montage YouTube)."""
@@ -64,18 +65,18 @@ def stage_presenter(sh, segs):
     parts = []
     for i, (s, e) in enumerate(segs):
         fr = 'V' if i % 2 == 0 else 'VC'
-        w, x, y = VFRAMES[fr]; h = round(w * 960 / 1080)
+        w, x, y = VFRAMES[fr]; h = round(w * TOP_H / 1080)
         out = os.path.join(d, f'p{i:02d}.mp4'); parts.append(out)
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{s/FPS:.4f}', '-i', MEZZ, '-frames:v', str(e - s), '-an',
-                        '-vf', f'crop={w}:{h}:{x}:{y},scale=1080:960:flags=lanczos,{GRADE},format=yuv420p',
+                        '-vf', f'crop={w}:{h}:{x}:{y},scale=1080:760:flags=lanczos,{GRADE},format=yuv420p',
                         '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '14', '-r', str(FPS), out], check=True)
     lst = os.path.join(d, 'list.txt'); open(lst, 'w').write(''.join(f"file '{p}'\n" for p in parts))
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', os.path.join(d, 'top.mp4')], check=True)
 
 def stage_panel(sh, o, total):
     d = os.path.join(BUILD, sh['id'], 'panel'); os.makedirs(d, exist_ok=True)
-    page = os.path.join(d, 'index.html'); open(page, 'w').write(panel.build_panel(sh, o, total / FPS))
-    env = dict(os.environ, VW='1080', VH='960')
+    page = os.path.join(d, 'index.html'); open(page, 'w').write(devices.build(sh, o, total / FPS))
+    env = dict(os.environ, VW='1080', VH='1160')
     subprocess.run(['node', os.path.join(ROOT, 'assets', 'render.js'), page, d, f'{total / FPS:.3f}', str(FPS)], check=True, env=env)
 
 def read_wav(p, sr=48000):
@@ -95,7 +96,7 @@ def stage_audio(sh, segs, o, total):
         seg = v[int(s / FPS * SR):int(e / FPS * SR)].copy(); seg[:fade] *= ramp; seg[-fade:] *= ramp[::-1]
         out[pos:pos + len(seg)] += seg; pos += len(seg)
     write_wav(os.path.join(d, 'voice.wav'), out[:n])
-    mus = M.music_v2(n) * 0.32
+    mus = M.music_calm(n) * 0.35
     mus[:SR // 2] *= np.linspace(0, 1, SR // 2); mus[-SR:] *= np.linspace(1, 0, SR)
     sfx = np.zeros(n + SR, np.float32)
     for i, s in enumerate(sh['scenes']):
@@ -133,7 +134,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: S,Inter SemiBold,50,&H00FFFFFF,&H00FFFFFF,&H102E080D,&H00000000,0,0,0,0,100,100,0.2,0,3,12,0,5,60,60,0,1
+Style: S,Inter SemiBold,52,&H00FFFFFF,&H00FFFFFF,&H50100820,&H96000000,0,0,0,0,100,100,0.2,0,1,3,1.8,2,60,60,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -142,8 +143,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         f.write(head)
         for c in cues:
             lines = SB.two_lines(c['text'], 30)
-            txt = r'\N'.join(hl.sub(lambda m: r'{\c&HFF9FA9&}' + m.group(0) + r'{\r}', l) for l in lines)
-            f.write(f"Dialogue: 0,{SB.ts_ass(c['s'])},{SB.ts_ass(c['e'])},S,,0,0,0,,{{\\pos(540,880)\\fad(80,80)}}{txt}\n")
+            txt = r'\N'.join(lines)   # même style que la vidéo YouTube : sans bandeau ni surlignage
+            f.write(f"Dialogue: 0,{SB.ts_ass(c['s'])},{SB.ts_ass(c['e'])},S,,0,0,0,,{{\\pos(540,736)\\fad(80,80)}}{txt}\n")
 
 def stage_compose(sh, segs, total, preview=False):
     d = os.path.join(BUILD, sh['id'])
@@ -157,19 +158,19 @@ def stage_compose(sh, segs, total, preview=False):
                             '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', outf], stdin=subprocess.PIPE)
     pdir = os.path.join(d, 'panel')
     for f in range(total):
-        buf = dec.stdout.read(1080 * 960 * 3)
-        if len(buf) < 1080 * 960 * 3: break
-        top = np.frombuffer(buf, np.uint8).reshape(960, 1080, 3)
+        buf = dec.stdout.read(1080 * TOP_H * 3)
+        if len(buf) < 1080 * TOP_H * 3: break
+        top = np.frombuffer(buf, np.uint8).reshape(TOP_H, 1080, 3)
         t = f / FPS
         k = max(i for i, st in enumerate(starts) if st <= t + 1e-6)
         seg_end = (starts[k + 1] if k + 1 < len(starts) else total / FPS)
         u = (t - starts[k]) / max(.5, seg_end - starts[k])
         z = 1.0 + 0.04 * (u if k % 2 == 0 else 1 - u)            # poussée lente, sens alterné
-        M = np.float32([[z, 0, 540 * (1 - z)], [0, z, 360 * (1 - z)]])
-        top = cv2.warpAffine(top, M, (1080, 960), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+        M = np.float32([[z, 0, 540 * (1 - z)], [0, z, 300 * (1 - z)]])
+        top = cv2.warpAffine(top, M, (1080, TOP_H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
         pan = cv2.imread(os.path.join(pdir, f'f{min(f, total - 1):04d}.png'), cv2.IMREAD_COLOR)
         frame = np.vstack([top, pan])
-        cv2.line(frame, (0, 960), (1080, 960), (255, 75, 91), 4)                       # filet d'accent entre les deux moitiés
+        cv2.line(frame, (0, TOP_H), (1080, TOP_H), (255, 75, 91), 4)                       # filet d'accent entre les deux moitiés
         cv2.rectangle(frame, (0, 0), (int(1080 * (f + 1) / total), 8), (255, 75, 91), -1)  # barre de progression
         enc.stdin.write(frame.tobytes())
     enc.stdin.close(); enc.wait(); dec.wait()
