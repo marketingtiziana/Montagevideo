@@ -18,3 +18,5 @@ __pycache__/
 # Miniatures : sources modifiables versionnées
 !output/thumbnail/editable_source/assets/
 !output/thumbnail/editable_source/fonts/
+!output/fynovates_thumbnail/editable_source/assets/
+!output/fynovates_thumbnail/editable_source/fonts/

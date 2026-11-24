@@ -1,0 +1,125 @@
+FYNOVATES — YOUTUBE THUMBNAIL "QUITTER LA FRANCE ?"
+Concept: LE DÉPART DE FRANCE — UNE DÉCISION À HAUTS ENJEUX
+1280 x 720 px · 16:9 · PNG
+=====================================================================
+
+DELIVERABLES (output/fynovates_thumbnail/)
+  concept_A.png                  A — The international departure
+  concept_B.png                  B — The immigration warning
+  concept_C.png                  C — The global financial exit
+  fynovates_thumbnail_final.png  Recommended version (B, refined)
+  design_notes.txt               this file
+  editable_source/               HTML/CSS sources, assets, scripts, 320x180 previews
+
+---------------------------------------------------------------------
+1. SELECTED COMPOSITION — WHY B
+---------------------------------------------------------------------
+The final is Concept B, refined: a soft key light on her face, a larger
+foreground passport, and slightly larger type on the tape.
+
+Why it wins:
+  1. Message in one second: the lit checkpoint sign with its downward arrow
+     sits directly above her head. "Border / control / departure" reads before
+     a single word does, and it creates a natural halo that separates her
+     dark hair from the background.
+  2. Tension without false claims: the ATTENTION tag, the navy/white
+     hatching, the chevrons and the "CONTRÔLE DES PASSEPORTS" tape create
+     urgency through geometry and light only. No legal statement, no figure.
+  3. Clear hierarchy: face → QUITTER LA FRANCE ? → ATTENTION → passport.
+     Each element has a role; at 320x180 the headline and the face hold.
+  4. Brand: strictly navy / near-black / white. The hatching and the square
+     tags echo the geometry of the FYNOVATES symbol.
+
+Why not the others:
+  A is the most "cinematic departure" (monumental terminal, departure board,
+    aircraft), but at small size the terminal reads as a generic dark
+    background: less tension, and the airport is less recognisable.
+  C has the best wealth/finance story (business district, route leaving the
+    passport), but the route and the skyline compete with the headline and the
+    airport is barely identifiable. It's more abstract and less immediate.
+
+---------------------------------------------------------------------
+2. THE THREE DIRECTIONS
+---------------------------------------------------------------------
+A — THE INTERNATIONAL DEPARTURE
+  Night terminal: steel roof structure, curtain wall, aircraft on the apron,
+  floodlights, departure board behind her. Open passport with visa stamps in
+  the lower-left foreground, boarding pass in soft focus behind it. Enormous
+  headline + "AVANT DE PARTIR…" tag.
+B — THE IMMIGRATION WARNING
+  Passport-control hall: glass booths in perspective, queue barriers, lit
+  signs with arrows, a diagonal light beam. ATTENTION tag, chevrons,
+  "CONTRÔLE DES PASSEPORTS" tape, passport + boarding pass.
+C — THE GLOBAL FINANCIAL EXIT
+  International business district seen through the terminal glass. A dotted
+  luminous route leaves the visa stamps and climbs toward the business
+  district. "AVANT DE PARTIR…" tag.
+
+---------------------------------------------------------------------
+3. ORIGINAL ASSET REFERENCES
+---------------------------------------------------------------------
+Supplied by FYNOVATES (editable_source/src_inputs/, untouched):
+  logo_symbol_variations.png     official symbol, 3 variations
+  logo_wordmark_navy.png         FYNOVATES wordmark, navy background
+  logo_wordmark_nearblack.png    FYNOVATES wordmark, near-black background
+  portrait_original.jpg          original photograph of the presenter
+
+Derived from the supplied files (editable_source/assets/), never redrawn:
+  logo_symbol_white.png          tight crop of the white square / navy F
+  logo_wordmark_white.png        original white letters, navy background made
+                                 transparent (luminance key)
+  portrait_cutout.png            BiRefNet-portrait mask + colour
+                                 decontamination of the edges; +6% contrast,
+                                 no smoothing, no change to her features,
+                                 locked aspect ratio
+
+AI-generated (vidIQ, GPT Image 2.6) for the environment and props only.
+Neither the logo nor the presenter was ever sent to or recreated by a
+generator (editable_source/assets/plates/):
+  plate_terminal.jpg             night airport terminal (Concept A)
+  plate_passport_control.jpg     passport-control hall (Concept B / final)
+  plate_skyline_terminal.jpg     business district through the terminal glass (C)
+  src_passport.jpg               generic passport: no emblem, no country,
+                                 no personal data; abstract stamps (dates only)
+  src_boarding_pass.jpg          generic boarding pass: no airline, no text
+  *_graded.jpg                   plates remapped to the FYNOVATES ramp
+                                 (grade_plates.py)
+  ../passport_cutout.png, ../boarding_pass_cutout.png   prop cutouts
+
+Typeface: Inter Display (OFL), weights 300–900, embedded in fonts/.
+
+---------------------------------------------------------------------
+4. QUALITY CONTROL
+---------------------------------------------------------------------
+  [x] Spelling: "QUITTER LA FRANCE ?" with a narrow no-break space before "?",
+      "AVANT DE PARTIR…", "ATTENTION", "CONTRÔLE DES PASSEPORTS" (circumflex
+      checked).
+  [x] Authentic logos, proportions locked, top-left, subordinate to the headline.
+  [x] Palette: plates gradient-mapped to #0F0A13 → #0D082E → white; tags and
+      tape in #0D082E / #FFFFFF. No red, yellow, orange, green or gold.
+  [x] Portrait: natural, undistorted, face never covered; shading and key
+      light applied as overlays masked to her silhouette (reversible in HTML).
+  [x] Documents: no official seal, no coat of arms, no real country, no
+      personal information, no claimed visa or approval.
+  [x] 1280 x 720 checked on all 4 PNGs (x2 supersampling, then Lanczos).
+  [x] 320 x 180 previews generated and reviewed (editable_source/previews/).
+  [x] Bottom-right corner (YouTube duration badge) carries no key information.
+  [!] Generated props: the stamps show only fictional dates; the boarding
+      pass shows lines instead of text. Check before publishing that this
+      suits your compliance policy.
+
+---------------------------------------------------------------------
+5. EDITING THE SOURCES
+---------------------------------------------------------------------
+  concept_A.html, concept_B.html, concept_C.html, concept_final.html
+    Each thumbnail = one 1280 x 720 HTML/CSS document organised in layers:
+    .plate (photo background + framing via background-size/-position),
+    .leftdark (readability gradients), .portrait / .subject-shade / .keylight
+    (presenter + cinematic lighting), .prop (passport, boarding pass),
+    .tag / .tape / .chev (graphics), .text (headline, auto-fit via
+    data-fit = width in px).
+  common.css / common.js  brand tokens, fonts, line fitting.
+  grade_plates.py         recomputes the brand grade of the plates.
+  prep_assets.py          regenerates the portrait cutout and the logos.
+  render.py + render.js   exports the PNGs and previews:
+                          python3 render.py A B C final  (Node + Playwright)

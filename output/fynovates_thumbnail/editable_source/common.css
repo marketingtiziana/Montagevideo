@@ -1,0 +1,44 @@
+/* FYNOVATES — thumbnail system (1280x720). Brand tokens only. */
+@font-face { font-family: "FYN"; font-weight: 300; src: url(fonts/InterDisplay-Light.otf); }
+@font-face { font-family: "FYN"; font-weight: 400; src: url(fonts/InterDisplay-Regular.otf); }
+@font-face { font-family: "FYN"; font-weight: 500; src: url(fonts/InterDisplay-Medium.otf); }
+@font-face { font-family: "FYN"; font-weight: 600; src: url(fonts/InterDisplay-SemiBold.otf); }
+@font-face { font-family: "FYN"; font-weight: 700; src: url(fonts/InterDisplay-Bold.otf); }
+@font-face { font-family: "FYN"; font-weight: 800; src: url(fonts/InterDisplay-ExtraBold.otf); }
+@font-face { font-family: "FYN"; font-weight: 900; src: url(fonts/InterDisplay-Black.otf); }
+
+:root {
+  --navy: #0D082E;        /* primary */
+  --ink: #0F0A13;         /* secondary near-black */
+  --white: #FFFFFF;
+  --navy-light: #1C1554;  /* tonal variation of primary navy, lighting only */
+  --navy-deep: #080520;   /* tonal variation of primary navy, shadows only */
+  --mute: rgba(255,255,255,.62);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1280px; height: 720px; overflow: hidden; background: var(--navy); }
+.frame { position: relative; width: 1280px; height: 720px; overflow: hidden;
+  font-family: "FYN", "Inter Display", Inter, sans-serif; color: var(--white);
+  -webkit-font-smoothing: antialiased; font-kerning: normal; font-feature-settings: "kern", "ss01" 0; }
+.layer { position: absolute; inset: 0; }
+.portrait { position: absolute; display: block; }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
+.logo { position: absolute; display: flex; align-items: center; }
+.logo img { display: block; }
+.eyebrow { font-weight: 600; letter-spacing: .32em; text-transform: uppercase; font-size: 15px; color: var(--mute); }
+.h { font-weight: 900; line-height: .9; letter-spacing: -.02em; white-space: nowrap; display: inline-block; }
+
+/* ---------- v2 cinematic components ---------- */
+.plate { position: absolute; inset: 0; background-repeat: no-repeat; }
+.grade { position: absolute; inset: 0; pointer-events: none; }
+/* pushes the generated plates' generic blue toward FYNOVATES navy-violet */
+.brandtone { position: absolute; inset: 0; background: #2A1F7A; mix-blend-mode: color; opacity: .32; }
+.navywash { position: absolute; inset: 0; background: #0D082E; mix-blend-mode: multiply; opacity: .30; }
+.prop { position: absolute; display: block; transform-origin: center; }
+/* cinematic shading on the subject, masked to her silhouette */
+.subject-shade { position: absolute; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; pointer-events: none; }
+.tag { display: inline-flex; align-items: center; gap: 12px; background: #fff; color: #0D082E;
+  font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.hatch { background: repeating-linear-gradient(-45deg, #fff 0 6px, transparent 6px 12px); }
+.headline-shadow { text-shadow: 0 6px 40px rgba(5,3,20,.55); }

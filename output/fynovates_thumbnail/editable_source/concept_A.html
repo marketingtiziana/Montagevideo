@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>FYNOVATES — Concept A · Le départ international</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+/* CONCEPT A — THE INTERNATIONAL DEPARTURE
+   Monumental night terminal, departure board glowing behind her head, passport + boarding pass
+   in the foreground, enormous white headline on the left. */
+.plate { background-image: url(assets/plates/plate_terminal_graded.jpg); background-size: 1430px 804px; background-position: -150px -30px; filter: brightness(1.35) contrast(1.12); }
+.leftdark { position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(8,5,32,.82) 0%, rgba(8,5,32,.55) 34%, rgba(8,5,32,.05) 56%, rgba(8,5,32,0) 70%),
+  linear-gradient(0deg, rgba(8,5,32,.85) 0%, rgba(8,5,32,0) 35%),
+  linear-gradient(180deg, rgba(8,5,32,.35) 0%, rgba(8,5,32,0) 22%); }
+.backlight { position: absolute; inset: 0; background: radial-gradient(380px 380px at 975px 230px, rgba(255,255,255,.16), rgba(255,255,255,0) 70%); mix-blend-mode: screen; }
+.portrait, .subject-shade { height: 992px; width: 744px; left: 596px; top: 22px; }
+.portrait { filter: drop-shadow(0 0 1px rgba(255,255,255,.35)) drop-shadow(-30px 20px 50px rgba(2,1,10,.8)); }
+.subject-shade { -webkit-mask-image: url(assets/portrait_cutout.png);
+  background: linear-gradient(90deg, rgba(8,5,32,.38) 0%, rgba(8,5,32,0) 45%), linear-gradient(180deg, rgba(8,5,32,0) 45%, rgba(8,5,32,.55) 72%); }
+.pass { width: 400px; left: 290px; top: 566px; transform: rotate(-17deg); filter: blur(1.6px) brightness(.5) saturate(.8) drop-shadow(0 20px 30px rgba(0,0,0,.6)); }
+.passport { width: 560px; left: -40px; top: 480px; transform: rotate(-9deg); filter: brightness(.74) contrast(1.12) saturate(.85) drop-shadow(0 30px 40px rgba(0,0,0,.75)); }
+.ppshade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8,5,32,.6) 0%, rgba(8,5,32,0) 16%), radial-gradient(520px 300px at 120px 720px, rgba(8,5,32,.55), rgba(8,5,32,0) 70%); }
+.logo { left: 60px; top: 42px; gap: 14px; }
+.logo .sym { height: 40px; } .logo .wm { height: 15px; }
+.text { position: absolute; left: 60px; top: 108px; }
+.l1, .l2 { letter-spacing: -.03em; }
+.tag { margin-top: 22px; font-size: 21px; padding: 9px 16px 9px 12px; }
+.tag i { display: block; width: 26px; height: 18px; }
+</style></head>
+<body><div class="frame">
+  <div class="plate"></div>
+  <div class="backlight"></div>
+  <div class="leftdark"></div>
+  <img class="portrait" src="assets/portrait_cutout.png" alt="">
+  <div class="subject-shade"></div>
+  <img class="prop pass" src="assets/boarding_pass_cutout.png" alt="">
+  <img class="prop passport" src="assets/passport_cutout.png" alt="">
+  <div class="ppshade"></div>
+  <div class="logo"><img class="sym" src="assets/logo_symbol_white.png" alt=""><img class="wm" src="assets/logo_wordmark_white.png" alt="FYNOVATES"></div>
+  <div class="text headline-shadow">
+    <div><span class="h l1" data-fit="600">QUITTER</span></div>
+    <div><span class="h l2" data-fit="600">LA FRANCE&#8239;?</span></div>
+    <div class="tag"><i class="hatch" style="background: repeating-linear-gradient(-45deg,#0D082E 0 4px,transparent 4px 8px)"></i>AVANT DE PARTIR…</div>
+  </div>
+  <div class="grain"></div>
+</div></body></html>
