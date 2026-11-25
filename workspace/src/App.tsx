@@ -12,6 +12,7 @@ import Journeys from './views/Journeys'
 import LongForms from './views/LongForms'
 import Matrix from './views/Matrix'
 import Overview from './views/Overview'
+import RhythmView from './views/Rhythm'
 import Templates from './views/Templates'
 
 const MindMap = lazy(() => import('./views/MindMap'))
@@ -49,6 +50,7 @@ export default function App() {
                 <Route path="/brand/:id" element={<Brand />} />
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/journeys" element={<Journeys />} />
+                <Route path="/rhythm" element={<RhythmView />} />
                 <Route path="/channel/:id" element={<Channel />} />
                 <Route path="/da/:id" element={<Charter />} />
                 <Route path="/templates" element={<Templates />} />

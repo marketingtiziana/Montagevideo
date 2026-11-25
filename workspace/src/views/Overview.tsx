@@ -7,6 +7,7 @@ import { BRANDS, PLATFORMS } from '../lib/constants'
 import { useBrands, useChannels } from '../lib/hooks'
 import { charters } from '../lib/seed/da'
 import { longforms } from '../lib/seed/longform'
+import { rhythms } from '../lib/seed/rhythm'
 
 const ENTRIES = [
   { to: '/brand/FN', title: 'Les deux marques', text: 'Positionnement, valeurs, ton et expressions signatures.' },
@@ -82,6 +83,22 @@ export default function Overview() {
               </div>
             </Link>
           ))}
+        </div>
+      </Section>
+
+      <Section title="Rythme de publication" aside={<Link to="/rhythm" className="text-[12px] text-ink-3 hover:text-ink">Semaine type →</Link>}>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {rhythms
+            .filter((r) => r.perWeek[1] > 0)
+            .map((r) => (
+              <Link key={r.id} to="/rhythm" className="rounded-xl border border-line bg-surface p-3 hover:border-line-strong">
+                <div className="flex items-center gap-1.5 text-[11.5px] text-ink-3">
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: PLATFORMS[r.platform].color }} />
+                  {r.label}
+                </div>
+                <div className="mt-1 text-[16px] font-semibold">{r.frequency}</div>
+              </Link>
+            ))}
         </div>
       </Section>
 

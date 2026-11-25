@@ -10,6 +10,7 @@ import type { PlatformId } from '../lib/types'
 import { SectionList } from './Brand'
 import { CtaBadge } from '../components/CtaBits'
 import { ctaByPlatform } from '../lib/seed/cta'
+import { rhythms } from '../lib/seed/rhythm'
 
 export default function Channel() {
   const { id } = useParams<{ id: PlatformId }>()
@@ -24,6 +25,16 @@ export default function Channel() {
   return (
     <Page wide>
       <PageHeader eyebrow={`${p.network} · ${BRANDS[p.brand].label}`} title={ch.name} description={ch.role} />
+      <div className="-mt-2 mb-8 flex flex-wrap gap-2">
+        {rhythms
+          .filter((r) => r.platform === id)
+          .map((r) => (
+            <Link key={r.id} to="/rhythm" className="rounded-lg border border-line bg-surface px-3 py-2 hover:border-line-strong">
+              <div className="text-[11px] text-ink-3">{r.label}</div>
+              <div className="text-[14px] font-semibold">{r.frequency}</div>
+            </Link>
+          ))}
+      </div>
       {id === 'ig-tz' && (
         <Section title="Feed 3 × 3">
           <div className="grid gap-6 md:grid-cols-[minmax(0,360px)_1fr]">
