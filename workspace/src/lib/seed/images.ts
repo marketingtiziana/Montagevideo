@@ -134,12 +134,33 @@ const rows: I[] = [
   ['IMG-035', 'IMG_6087.jpg', 1206, 1295, 'ref-corporate', null, null,
     'Capture de profil Instagram d’un compte tiers (bio courte, une Story à la une).',
     ['compte tiers', 'profil', 'bio'], [THIRD_PARTY, 'Doublon dans le Drive (« IMG_6087 2.jpg ») : importé une seule fois.']],
+  ['IMG-036', 'banniere-youtube-proposition-1', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube — proposition 1 : fond bleu nuit à fines rayures verticales, bande centrale entre deux filets, monogramme F + wordmark FYNOVATES, baseline « FISCALITÉ. | STRUCTURE. | FINANCE. | INTERNATIONAL. ».',
+    ['bannière', 'youtube', 'proposition'], ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).']],
+  ['IMG-037', 'banniere-youtube-proposition-2', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube — proposition 2 : fond quasi-noir, wordmark FYNOVATES ivoire entre deux doubles filets, baseline sérif « L’expertise au service de votre entreprise. ».',
+    ['bannière', 'youtube', 'proposition'],
+    ['Aucun monogramme, globe ni carte : seule proposition conforme aux interdits du brief.', 'Wordmark ivoire et baseline différente de « Conseil fiscal & structuration internationale » : à valider.']],
+  ['IMG-038', 'banniere-youtube-proposition-3', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube — proposition 3 : gratte-ciel en contre-plongée teintés bleu nuit, monogramme F + wordmark, filet court, « L’EXPERTISE AU SERVICE DE L’INTERNATIONAL ».',
+    ['bannière', 'youtube', 'proposition', 'architecture'], ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).']],
+  ['IMG-039', 'banniere-youtube-proposition-4', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube — proposition 4 : globe terrestre lumineux avec villes et coordonnées (Londres, Zurich, Lisbonne, Dubaï, Lagos), « FYNOVATES / INTELLIGENCE ÉCONOMIQUE », « DÉCRYPTER. ANALYSER. COMPRENDRE. ».',
+    ['bannière', 'youtube', 'proposition', 'globe'],
+    ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).', 'Globe lumineux et carte du monde : interdits par le brief (« aucun globe lumineux », « aucune carte du monde décorative », « aucune esthétique startup technologique »).', 'Villes nommées : suggèrent une présence géographique non vérifiée.']],
+  ['IMG-040', 'banniere-youtube-proposition-5', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube — proposition 5 : carte du monde en points, arcs entre villes (Toronto, Londres, Tokyo, Hong Kong, Singapour, Sydney, Mexico, Miami, São Paulo, Johannesbourg), monogramme F + wordmark, « COMPRENDRE LES ENJEUX DU BUSINESS INTERNATIONAL. ».',
+    ['bannière', 'youtube', 'proposition', 'carte'],
+    ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).', 'Carte du monde décorative : interdite par le brief.', 'Villes nommées : suggèrent une présence géographique non vérifiée.']],
 ]
+
+/** Visuels décrits mais pas encore fournis en fichier : affichés comme « visuel à importer ». */
+const NOT_YET_SUPPLIED = new Set(['IMG-036', 'IMG-037', 'IMG-038', 'IMG-039', 'IMG-040'])
 
 export const images: ImageAsset[] = rows.map(
   ([id, originalName, width, height, type, brand, platform, description, tags, warnings = [], validation]) => ({
     id,
-    src: `${import.meta.env.BASE_URL}library/${id}.jpg`,
+    src: NOT_YET_SUPPLIED.has(id) ? '' : `${import.meta.env.BASE_URL}library/${id}.jpg`,
     hasBlob: false,
     originalName,
     description,

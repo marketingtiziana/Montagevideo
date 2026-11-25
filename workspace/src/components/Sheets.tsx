@@ -359,9 +359,13 @@ export function ImageSheet() {
               <a href={img.src} target="_blank" rel="noreferrer" className="block">
                 <Thumb img={img} fit="contain" className="max-h-[76vh] w-full" />
               </a>
-              <a href={img.src} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-[12px] text-ink-3 hover:text-ink">
-                <ExternalLink size={12} /> Ouvrir en taille réelle
-              </a>
+              {img.src ? (
+                <a href={img.src} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-[12px] text-ink-3 hover:text-ink">
+                  <ExternalLink size={12} /> Ouvrir en taille réelle
+                </a>
+              ) : (
+                <div className="mt-2 text-[12px] text-ink-3">Fichier non fourni : visuel décrit, à importer.</div>
+              )}
             </div>
             <div className="space-y-5 p-5">
               {img.warnings.map((w, i) => (

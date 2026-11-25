@@ -11,6 +11,11 @@ import { SectionList } from './Brand'
 import { CtaBadge } from '../components/CtaBits'
 import { ctaByPlatform } from '../lib/seed/cta'
 import { rhythms } from '../lib/seed/rhythm'
+import { platformDesign } from '../lib/seed/design'
+import { getImage } from '../lib/hooks'
+import { useDetail } from '../lib/detail'
+import { Thumb } from '../components/images/Thumb'
+import { AlertTriangle } from 'lucide-react'
 
 export default function Channel() {
   const { id } = useParams<{ id: PlatformId }>()
@@ -35,6 +40,7 @@ export default function Channel() {
             </Link>
           ))}
       </div>
+      <AccountDesign id={id} />
       {id === 'ig-tz' && (
         <Section title="Feed 3 × 3">
           <div className="grid gap-6 md:grid-cols-[minmax(0,360px)_1fr]">
@@ -94,5 +100,53 @@ export default function Channel() {
         </Section>
       )}
     </Page>
+  )
+}
+
+function AccountDesign({ id }: { id: PlatformId }) {
+  const blocks = platformDesign[id]
+  const { open } = useDetail()
+  if (!blocks.length)
+    return (
+      <Section title="Design du compte">
+        <div className="rounded-xl border border-dashed border-line-strong px-4 py-5 text-[12.5px] text-ink-3">Aucun visuel de design fourni pour ce compte.</div>
+      </Section>
+    )
+  return (
+    <Section title="Design du compte">
+      <div className="grid gap-4 lg:grid-cols-2">
+        {blocks.map((b) => (
+          <div key={b.title} className={`card overflow-hidden ${b.wide ? 'lg:col-span-2' : ''}`}>
+            <div className="grid gap-2 bg-surface-2 p-3" style={b.imageIds.length > 1 ? { gridTemplateColumns: `repeat(${Math.min(b.imageIds.length, 3)}, minmax(0, 1fr))` } : undefined}>
+              {b.imageIds.map((iid) => (
+                <button key={iid} type="button" onClick={() => open('i', iid)} className="block overflow-hidden rounded-md" aria-label={`Agrandir ${iid}`}>
+                  <Thumb img={getImage(iid)} fit={b.crop ? 'cover' : 'contain'} label="VISUEL À IMPORTER" className={b.crop ?? `w-full ${b.wide ? 'max-h-[420px]' : 'max-h-[320px]'} ${getImage(iid)?.src ? '' : 'aspect-video'}`} />
+                </button>
+              ))}
+            </div>
+            <div className="p-4">
+              <div className="flex items-baseline justify-between gap-2">
+                <h3 className="text-[14px] font-semibold">{b.title}</h3>
+                <span className="font-mono text-[10.5px] text-ink-3">{b.imageIds.join(' · ')}</span>
+              </div>
+              <ul className="mt-2 space-y-1">
+                {b.specs.map((x) => (
+                  <li key={x} className="flex gap-2 text-[12.5px] leading-relaxed">
+                    <span className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-ink-3" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+              {b.warning && (
+                <div className="mt-3 flex gap-1.5 text-[12px]">
+                  <AlertTriangle size={13} className="mt-0.5 shrink-0 text-[var(--v-expert)]" />
+                  {b.warning}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
   )
 }
