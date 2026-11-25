@@ -19,6 +19,10 @@ import { ContextPack, PrintDoc, Register } from './views/brand/BrandExtras'
 import BrandHome from './views/brand/BrandHome'
 
 const MindMap = lazy(() => import('./views/MindMap'))
+const MindmapStudio = lazy(() => import('./views/mindmap/Studio'))
+const MindmapEditor = lazy(() => import('./views/mindmap/Editor'))
+const MindmapPresent = lazy(() => import('./views/mindmap/Present'))
+const MindmapPrint = lazy(() => import('./views/mindmap/PrintMap'))
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
   state = { error: null as Error | null }
@@ -46,6 +50,8 @@ export default function App() {
       <HashRouter>
         <Routes>
           <Route path="/brand-strategy/:doc/print" element={<PrintDoc />} />
+          <Route path="/mindmaps/:id/present" element={<Suspense fallback={null}><MindmapPresent /></Suspense>} />
+          <Route path="/mindmaps/:id/print" element={<Suspense fallback={null}><MindmapPrint /></Suspense>} />
           <Route
             path="*"
             element={
@@ -66,6 +72,8 @@ export default function App() {
                 <Route path="/longform" element={<LongForms />} />
                 <Route path="/ideas" element={<Ideas />} />
                 <Route path="/matrix" element={<Matrix />} />
+                <Route path="/mindmaps" element={<MindmapStudio />} />
+                <Route path="/mindmaps/:id/edit" element={<MindmapEditor />} />
                 <Route path="/brand-strategy" element={<BrandHome />} />
                 <Route path="/brand-strategy/register" element={<Register />} />
                 <Route path="/brand-strategy/context" element={<ContextPack />} />

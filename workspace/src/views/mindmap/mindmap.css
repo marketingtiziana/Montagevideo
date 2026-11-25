@@ -1,0 +1,425 @@
+/* Mindmap Studio — presentation stage. Official palette only:
+   navy #0D082E, near-black #0F0A13, white #FFFFFF (with white opacities). */
+
+.mm-root {
+  position: fixed;
+  inset: 0;
+  background: #0f0a13;
+  color: #fff;
+  font-family: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+.mm-stage {
+  background: #0f0a13;
+  color: #fff;
+  font-family: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  text-align: left;
+  overflow: hidden;
+}
+.mm-stage h1,
+.mm-stage h2,
+.mm-stage h3 {
+  color: inherit;
+  font-family: inherit;
+}
+:where(.mm-stage) button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.mm-fit {
+  overflow: hidden;
+}
+
+/* links */
+.mm-link {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 2;
+}
+
+/* centre */
+.mm-centre {
+  position: absolute;
+  background: #0d082e;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  outline: 1px solid rgba(255, 255, 255, 0.1);
+  outline-offset: 10px;
+  padding: 34px 40px;
+  cursor: pointer;
+}
+.mm-logo {
+  display: block;
+  height: auto;
+  pointer-events: none;
+}
+.mm-centre-rule {
+  display: block;
+  width: 64px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+  margin: 26px auto 22px;
+}
+.mm-centre-title {
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+.mm-centre-sub {
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+/* branches (overview) */
+.mm-branch {
+  position: absolute;
+  background: #0d082e;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 30px 34px;
+  cursor: pointer;
+  transition: opacity 0.25s ease, border-color 0.2s ease;
+}
+.mm-branch:active {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.mm-dim {
+  opacity: 0.35;
+}
+.mm-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.mm-num-dark {
+  color: rgba(13, 8, 46, 0.6);
+}
+.mm-rule {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.mm-rule-dark {
+  background: rgba(13, 8, 46, 0.18);
+}
+.mm-branch-title {
+  margin-top: 14px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.16;
+}
+.mm-phrase {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.66);
+  line-height: 1.32;
+}
+.mm-nodes {
+  margin-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.mm-node {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.3em 0;
+  line-height: 1.28;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* focus */
+.mm-rail {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  text-align: left;
+  min-height: 84px;
+  padding: 18px 26px;
+  background: #0d082e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.mm-rail-on {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.mm-focus {
+  position: absolute;
+  background: #fff;
+  color: #0d082e;
+  padding: 56px 64px;
+}
+.mm-focus-title {
+  margin-top: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.08;
+}
+.mm-focus-phrase {
+  margin-top: 14px;
+  color: rgba(13, 8, 46, 0.68);
+  line-height: 1.3;
+}
+.mm-grid {
+  margin-top: 40px;
+  display: grid;
+  gap: 18px;
+}
+.mm-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  padding: 24px 28px;
+  background: #0d082e;
+  color: #fff !important;
+  min-height: 120px;
+}
+.mm-card-title {
+  font-weight: 600;
+  line-height: 1.2;
+}
+.mm-card-detail {
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.35;
+}
+.mm-transition {
+  margin-top: auto;
+  padding-top: 28px;
+  color: rgba(13, 8, 46, 0.62);
+}
+
+/* detail */
+.mm-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 10, 19, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+.mm-detail {
+  width: 1240px;
+  max-height: 1240px;
+  overflow-y: auto;
+  background: #0d082e;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 64px 72px;
+}
+.mm-eyebrow {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.mm-eyebrow-dark {
+  color: rgba(13, 8, 46, 0.55);
+}
+.mm-claim {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* status tags — monochrome on purpose (no colour coding) */
+.mm-status {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 0.25em 0.7em;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+}
+.mm-status-research {
+  border-style: dashed;
+  color: rgba(255, 255, 255, 0.85);
+}
+.mm-status-pending {
+  color: #fff;
+}
+.mm-status-ok {
+  background: #fff;
+  color: #0d082e;
+  border-color: #fff;
+}
+
+/* presenter */
+.mm-keyidea {
+  background: #0d082e;
+  border-left: 3px solid #fff;
+  padding: 30px 36px;
+}
+.mm-cell {
+  background: #0d082e;
+  padding: 22px 24px;
+}
+.mm-panel {
+  background: #0d082e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 26px 28px;
+}
+.mm-panel-light {
+  background: #fff;
+  color: #0d082e;
+}
+.mm-private {
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.mm-mini {
+  background: rgba(13, 8, 46, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.mm-mini-centre {
+  fill: #0d082e;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 3;
+}
+.mm-mini-box {
+  position: absolute;
+  background: #0d082e;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.mm-mini-on {
+  background: #fff;
+  color: #0d082e !important;
+  border-color: #fff;
+}
+
+/* controls — large touch targets (≥ 88 units = 44 pt on a 1024-wide iPad) */
+.mm-bar {
+  z-index: 30;
+}
+.mm-btn,
+.mm-seg button {
+  min-height: 88px;
+  min-width: 88px;
+  padding: 0 30px;
+  font-size: 24px;
+  font-weight: 550;
+  letter-spacing: 0.02em;
+  background: rgba(13, 8, 46, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.mm-btn.on {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.mm-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.mm-btn-lg {
+  min-width: 220px;
+}
+.mm-seg {
+  display: flex;
+}
+.mm-seg button + button {
+  border-left: none;
+}
+.mm-seg button.on {
+  background: #fff;
+  color: #0d082e;
+  border-color: #fff;
+}
+.mm-pos {
+  min-width: 260px;
+  text-align: center;
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+.mm-hotcorner {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 140px;
+  height: 140px;
+  background: transparent;
+  z-index: 40;
+}
+
+/* subtle, fast, optional */
+@keyframes mm-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.mm-anim {
+  animation: mm-in 0.24s ease-out both;
+}
+.mm-noanim .mm-anim,
+.mm-noanim * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-mm-layer] {
+  will-change: auto;
+}
+
+/* print / PDF */
+.mm-print {
+  background: #0f0a13;
+  color: #fff;
+  font-family: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  padding: 24px;
+}
+.mm-print-page {
+  aspect-ratio: 4 / 3;
+  width: min(100%, 1200px);
+  margin: 0 auto 24px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+@media print {
+  .mm-print {
+    padding: 0;
+  }
+  .mm-print-page {
+    width: 2048px;
+    height: 1536px;
+    margin: 0;
+    break-after: page;
+    page-break-after: always;
+  }
+  .mm-print-page:last-child {
+    break-after: auto;
+  }
+  .mm-print .mm-stage {
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+  .mm-anim {
+    animation: none !important;
+  }
+}

@@ -16,6 +16,14 @@ export const NAV: NavGroup[] = [
     ],
   },
   {
+    label: 'Mindmap Studio',
+    items: [
+      { path: '/mindmaps', label: 'Cartes mentales iPad' },
+      { path: '/mindmaps/quitter-la-france/edit', label: 'Carte 01 — éditeur' },
+      { path: '/mindmaps/residence-fiscale/edit', label: 'Carte 02 — éditeur' },
+    ],
+  },
+  {
     label: 'Brand Strategy',
     items: [
       { path: '/brand-strategy', label: 'Vue d’ensemble' },

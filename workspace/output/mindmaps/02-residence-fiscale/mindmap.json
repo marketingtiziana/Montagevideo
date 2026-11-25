@@ -1,0 +1,490 @@
+{
+  "id": "residence-fiscale",
+  "slug": "02-residence-fiscale",
+  "number": "02",
+  "title": "Résidence fiscale : comment déterminer sa situation avant de partir ?",
+  "subtitle": "Comprendre les critères et les conséquences d’une mobilité internationale.",
+  "objective": "Expliquer la logique de la résidence fiscale et les questions à se poser, sans appliquer une règle générale à une situation particulière.",
+  "linkedLongForms": [
+    "LF-03"
+  ],
+  "disclaimer": "Contenu pédagogique. Les branches sont des propositions éditoriales, pas des conclusions juridiques ou fiscales. Les critères diffèrent selon les pays.",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "branches": [
+    {
+      "id": "m2-b1",
+      "num": "01",
+      "title": "Qu’est-ce que la résidence fiscale ?",
+      "phrase": "Une notion propre au droit fiscal.",
+      "nodes": [
+        {
+          "id": "m2-b1-n1",
+          "title": "Définition",
+          "detail": "Le lien qui rattache une personne à un État pour l’impôt, selon les règles de cet État."
+        },
+        {
+          "id": "m2-b1-n2",
+          "title": "Différence avec nationalité",
+          "detail": "Être Français et être résident fiscal français sont deux choses différentes."
+        },
+        {
+          "id": "m2-b1-n3",
+          "title": "Différence avec adresse",
+          "detail": "Une adresse est un indice parmi d’autres."
+        },
+        {
+          "id": "m2-b1-n4",
+          "title": "Notion de situation personnelle",
+          "detail": "Le foyer, la famille et le lieu de vie font partie de l’analyse."
+        },
+        {
+          "id": "m2-b1-n5",
+          "title": "Importance des règles nationales",
+          "detail": "Chaque État définit ses propres critères."
+        },
+        {
+          "id": "m2-b1-n6",
+          "title": "Importance des conventions internationales",
+          "detail": "Elles peuvent départager deux États qui revendiquent la même personne."
+        }
+      ],
+      "notes": {
+        "mainIdea": "La résidence fiscale est une notion juridique définie par chaque État, distincte de la nationalité et de l’adresse.",
+        "points": [
+          "Chaque État a sa propre définition.",
+          "La nationalité n’est pas un critère du droit interne français (à valider).",
+          "L’adresse est un indice, pas une preuve.",
+          "Les conventions fiscales peuvent intervenir."
+        ],
+        "explanation": "On ne « choisit » pas sa résidence fiscale par une déclaration : elle découle de critères appliqués à une situation.",
+        "example": "Cas anonymisé : une personne de nationalité française vivant et travaillant à l’étranger depuis plusieurs années.",
+        "nuance": "Tous les pays n’appliquent pas les mêmes critères : aucune règle universelle.",
+        "misconceptions": [
+          "« Je suis Français, donc résident fiscal français. »",
+          "« J’ai une adresse à l’étranger, donc je n’y suis plus. »"
+        ],
+        "questions": [
+          "Qu’est-ce qui me rattache à chaque pays ?"
+        ],
+        "transition": "Voyons quels critères sont examinés.",
+        "conclusion": "La résidence fiscale est une qualification, pas une préférence."
+      },
+      "privateNotes": "Bien marquer la différence nationalité / résidence dès l’ouverture.",
+      "claimIds": [
+        "C-NAT",
+        "C-ADMIN",
+        "C-CONV"
+      ]
+    },
+    {
+      "id": "m2-b2",
+      "num": "02",
+      "title": "Les critères à examiner",
+      "phrase": "Ce que regardent les règles applicables.",
+      "nodes": [
+        {
+          "id": "m2-b2-n1",
+          "title": "Foyer et lieu de séjour principal",
+          "detail": "Où vit la famille, où la personne séjourne principalement."
+        },
+        {
+          "id": "m2-b2-n2",
+          "title": "Activité professionnelle",
+          "detail": "Où l’activité principale est exercée."
+        },
+        {
+          "id": "m2-b2-n3",
+          "title": "Centre des intérêts économiques",
+          "detail": "Où se trouvent l’essentiel des investissements et des revenus."
+        },
+        {
+          "id": "m2-b2-n4",
+          "title": "Autres critères prévus par les règles applicables",
+          "detail": "D’autres pays peuvent retenir des critères différents."
+        },
+        {
+          "id": "m2-b2-n5",
+          "title": "Situation familiale",
+          "detail": "Un élément souvent déterminant dans l’analyse."
+        },
+        {
+          "id": "m2-b2-n6",
+          "title": "Répartition des activités et des intérêts",
+          "detail": "Une situation partagée entre plusieurs pays demande une analyse fine."
+        }
+      ],
+      "notes": {
+        "mainIdea": "Plusieurs critères sont examinés ; en droit français, ils sont prévus par la loi (référence à valider).",
+        "points": [
+          "Foyer et lieu de séjour principal.",
+          "Activité professionnelle.",
+          "Centre des intérêts économiques.",
+          "Le pays de destination peut retenir d’autres critères."
+        ],
+        "explanation": "Les critères s’apprécient sur des faits : documents, organisation de la vie, sources de revenus.",
+        "example": "Cas anonymisé : une activité exercée dans deux pays avec une famille installée dans l’un d’eux.",
+        "nuance": "L’articulation entre critères (alternatifs ou cumulatifs) dépend des règles de chaque pays : à vérifier.",
+        "misconceptions": [
+          "« Il faut remplir tous les critères pour être résident. »"
+        ],
+        "questions": [
+          "Quel critère s’applique à ma situation ?"
+        ],
+        "transition": "Que se passe-t-il quand deux pays revendiquent la même personne ?",
+        "conclusion": "Chaque critère se démontre par des faits."
+      },
+      "privateNotes": "Ne citer aucun nombre de jours ; aucun seuil.",
+      "claimIds": [
+        "C-4B",
+        "C-HOST"
+      ]
+    },
+    {
+      "id": "m2-b3",
+      "num": "03",
+      "title": "Les situations internationales",
+      "phrase": "Quand deux pays revendiquent la même personne.",
+      "nodes": [
+        {
+          "id": "m2-b3-n1",
+          "title": "Deux pays qui considèrent une personne comme résidente",
+          "detail": "Chaque État applique ses propres règles : une double résidence est possible."
+        },
+        {
+          "id": "m2-b3-n2",
+          "title": "Conflit de résidence",
+          "detail": "Il faut alors déterminer quel État l’emporte."
+        },
+        {
+          "id": "m2-b3-n3",
+          "title": "Application éventuelle d’une convention fiscale",
+          "detail": "Si une convention existe entre les deux États."
+        },
+        {
+          "id": "m2-b3-n4",
+          "title": "Critères conventionnels",
+          "detail": "Les conventions prévoient généralement des critères de départage, à lire dans chaque texte."
+        },
+        {
+          "id": "m2-b3-n5",
+          "title": "Analyse des circonstances concrètes",
+          "detail": "Les critères s’appliquent à des faits précis."
+        },
+        {
+          "id": "m2-b3-n6",
+          "title": "Documentation nécessaire",
+          "detail": "Pouvoir justifier sa situation dans chaque pays."
+        }
+      ],
+      "notes": {
+        "mainIdea": "Une double résidence est possible ; une convention fiscale, si elle existe, peut la résoudre.",
+        "points": [
+          "Deux États peuvent revendiquer la même personne.",
+          "La convention applicable doit être identifiée et lue.",
+          "Les critères conventionnels s’appliquent aux faits.",
+          "La documentation est essentielle."
+        ],
+        "explanation": "Le modèle OCDE sert de référence à de nombreuses conventions, mais chaque convention a son propre texte.",
+        "example": "Cas anonymisé : une personne partageant son temps et ses intérêts entre deux pays.",
+        "nuance": "Toutes les paires de pays ne sont pas liées par une convention : à vérifier.",
+        "misconceptions": [
+          "« Une convention règle tout automatiquement. »"
+        ],
+        "questions": [
+          "Existe-t-il une convention entre ces deux pays ?",
+          "Quels documents puis-je produire ?"
+        ],
+        "transition": "Une fois la résidence déterminée, quelles sont les conséquences pratiques ?",
+        "conclusion": "En situation internationale, tout part de la convention applicable et des faits."
+      },
+      "privateNotes": "Montrer la structure d’une convention à l’écran, sans citer de pays en exemple tant que non validé.",
+      "claimIds": [
+        "C-CONV",
+        "C-CONV-EXIST"
+      ]
+    },
+    {
+      "id": "m2-b4",
+      "num": "04",
+      "title": "Les conséquences pratiques",
+      "phrase": "Ce que la résidence change concrètement.",
+      "nodes": [
+        {
+          "id": "m2-b4-n1",
+          "title": "Déclarations fiscales",
+          "detail": "Où et comment déclarer : à vérifier selon la situation."
+        },
+        {
+          "id": "m2-b4-n2",
+          "title": "Revenus de source française",
+          "detail": "Certains peuvent rester imposables en France."
+        },
+        {
+          "id": "m2-b4-n3",
+          "title": "Revenus étrangers",
+          "detail": "Leur traitement dépend de la résidence et des règles applicables."
+        },
+        {
+          "id": "m2-b4-n4",
+          "title": "Actifs immobiliers",
+          "detail": "Les biens conservés ont leurs propres règles."
+        },
+        {
+          "id": "m2-b4-n5",
+          "title": "Activité entrepreneuriale",
+          "detail": "Société, clients, lieu de direction : points d’attention."
+        },
+        {
+          "id": "m2-b4-n6",
+          "title": "Obligations dans plusieurs juridictions",
+          "detail": "Des obligations peuvent exister dans plusieurs pays à la fois."
+        },
+        {
+          "id": "m2-b4-n7",
+          "title": "Coordination des obligations",
+          "detail": "Organiser les déclarations pour éviter les incohérences."
+        }
+      ],
+      "notes": {
+        "mainIdea": "La résidence fiscale détermine où et comment chaque revenu et chaque actif est traité.",
+        "points": [
+          "Les obligations déclaratives suivent la situation.",
+          "Les revenus de source française peuvent rester imposables en France.",
+          "Plusieurs juridictions peuvent être concernées.",
+          "La coordination évite les incohérences."
+        ],
+        "explanation": "Une même personne peut avoir des obligations dans plusieurs pays, selon la nature de ses revenus et actifs.",
+        "example": "Cas anonymisé : un entrepreneur résident à l’étranger qui conserve un bien locatif en France.",
+        "nuance": "Aucun taux ni échéance n’est donné : ils dépendent des textes en vigueur.",
+        "misconceptions": [
+          "« Une seule déclaration suffit. »"
+        ],
+        "questions": [
+          "Quelles obligations dans chaque pays ?"
+        ],
+        "transition": "Reste à éviter les raisonnements trompeurs.",
+        "conclusion": "Résidence déterminée, obligations coordonnées."
+      },
+      "privateNotes": "Point de vigilance : ne pas promettre d’économie d’impôt.",
+      "claimIds": [
+        "C-4A",
+        "C-DECL",
+        "C-HOST"
+      ]
+    },
+    {
+      "id": "m2-b5",
+      "num": "05",
+      "title": "Les erreurs de raisonnement",
+      "phrase": "Les raccourcis à éviter.",
+      "nodes": [
+        {
+          "id": "m2-b5-n1",
+          "title": "Confondre résidence physique et résidence fiscale",
+          "detail": "Vivre quelque part n’épuise pas l’analyse."
+        },
+        {
+          "id": "m2-b5-n2",
+          "title": "Penser que la nationalité détermine seule la résidence",
+          "detail": "Elle n’est pas un critère du droit interne français (à valider)."
+        },
+        {
+          "id": "m2-b5-n3",
+          "title": "Supposer qu’une adresse étrangère suffit",
+          "detail": "Un indice, jamais une preuve suffisante."
+        },
+        {
+          "id": "m2-b5-n4",
+          "title": "Négliger la situation familiale",
+          "detail": "Souvent au cœur de l’analyse."
+        },
+        {
+          "id": "m2-b5-n5",
+          "title": "Ignorer les conventions fiscales",
+          "detail": "Elles peuvent changer la conclusion."
+        },
+        {
+          "id": "m2-b5-n6",
+          "title": "Appliquer une règle générale à une situation particulière",
+          "detail": "Chaque cas demande une analyse propre."
+        }
+      ],
+      "notes": {
+        "mainIdea": "La plupart des erreurs viennent d’une règle trop simple appliquée à une situation complexe.",
+        "points": [
+          "Résidence physique ≠ résidence fiscale.",
+          "Nationalité ≠ résidence fiscale.",
+          "Une adresse ne suffit pas.",
+          "Les conventions peuvent changer la conclusion."
+        ],
+        "explanation": "Chaque raccourci isole un élément et ignore les autres critères.",
+        "example": "Cas anonymisé : une personne qui pensait ne plus être résidente parce qu’elle avait déménagé.",
+        "nuance": "Ces erreurs ont des conséquences variables selon les cas.",
+        "misconceptions": [
+          "« Ce qui vaut pour un pays vaut pour tous. »"
+        ],
+        "questions": [
+          "Mon raisonnement repose-t-il sur un seul élément ?"
+        ],
+        "transition": "Pour finir : les questions à se poser avant de partir.",
+        "conclusion": "Pas de règle universelle : une analyse par situation."
+      },
+      "privateNotes": "Format debunk possible pour les Shorts dérivés.",
+      "claimIds": [
+        "C-NAT",
+        "C-ADMIN",
+        "C-CONV"
+      ]
+    },
+    {
+      "id": "m2-b6",
+      "num": "06",
+      "title": "Les questions à se poser avant de partir",
+      "phrase": "Une grille de réflexion personnelle.",
+      "nodes": [
+        {
+          "id": "m2-b6-n1",
+          "title": "Où se situe mon foyer ?",
+          "detail": ""
+        },
+        {
+          "id": "m2-b6-n2",
+          "title": "Où travaille-je réellement ?",
+          "detail": ""
+        },
+        {
+          "id": "m2-b6-n3",
+          "title": "Où se trouvent mes intérêts économiques ?",
+          "detail": ""
+        },
+        {
+          "id": "m2-b6-n4",
+          "title": "Quelles règles nationales s’appliquent ?",
+          "detail": "En France et dans le pays de destination."
+        },
+        {
+          "id": "m2-b6-n5",
+          "title": "Existe-t-il une convention fiscale ?",
+          "detail": "À vérifier pour chaque paire de pays."
+        },
+        {
+          "id": "m2-b6-n6",
+          "title": "Quels documents doivent être réunis ?",
+          "detail": ""
+        },
+        {
+          "id": "m2-b6-n7",
+          "title": "Quelles conséquences dois-je anticiper ?",
+          "detail": ""
+        }
+      ],
+      "notes": {
+        "mainIdea": "Sept questions permettent de préparer l’analyse avec un professionnel compétent.",
+        "points": [
+          "Foyer, travail, intérêts économiques.",
+          "Règles nationales des deux pays.",
+          "Convention fiscale éventuelle.",
+          "Documents et conséquences à anticiper."
+        ],
+        "explanation": "Ces questions ne donnent pas la réponse : elles structurent l’analyse.",
+        "example": "Inviter le public à répondre aux sept questions pour sa propre situation.",
+        "nuance": "Une analyse individuelle reste indispensable.",
+        "misconceptions": [],
+        "questions": [
+          "Ai-je une réponse documentée à chaque question ?"
+        ],
+        "transition": "Conclusion : déterminer sa résidence fiscale avant de partir, pas après.",
+        "conclusion": "Se poser les bonnes questions avant de partir."
+      },
+      "privateNotes": "CTA doux : télécharger la grille ou prendre rendez-vous. Pas de promesse de résultat.",
+      "claimIds": [
+        "C-4B",
+        "C-CONV-EXIST",
+        "C-HOST"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "C-NAT",
+      "text": "Les critères du domicile fiscal prévus par le droit interne français ne reposent pas sur la nationalité. D’autres États peuvent appliquer des règles différentes : à vérifier pays par pays.",
+      "jurisdiction": "France ; autres États à vérifier",
+      "source": "Code général des impôts",
+      "reference": "CGI, art. 4 B",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-ADMIN",
+      "text": "La résidence administrative (adresse, inscription consulaire, titre de séjour) et la résidence fiscale sont des notions distinctes : l’une ne détermine pas automatiquement l’autre.",
+      "jurisdiction": "France",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-CONV",
+      "text": "Lorsque deux États considèrent une même personne comme résidente, la convention fiscale applicable entre ces États, si elle existe, peut prévoir des critères de départage. Le texte de chaque convention doit être lu : les critères et leur ordre peuvent différer.",
+      "jurisdiction": "International — convention bilatérale à identifier",
+      "source": "Modèle de Convention fiscale de l’OCDE et convention bilatérale applicable",
+      "reference": "Modèle OCDE, art. 4 ; convention applicable : À RENSEIGNER",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-4B",
+      "text": "En droit interne français, une personne est considérée comme fiscalement domiciliée en France si elle remplit l'un des critères prévus par la loi : foyer ou lieu de séjour principal, activité professionnelle principale, ou centre des intérêts économiques.",
+      "jurisdiction": "France",
+      "source": "Code général des impôts",
+      "reference": "CGI, art. 4 B",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-CONV-EXIST",
+      "text": "Existence, contenu et date d’effet d’une convention fiscale entre la France et le pays de destination envisagé.",
+      "jurisdiction": "France / pays de destination (à préciser)",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-4A",
+      "text": "Une personne qui n’est pas domiciliée fiscalement en France peut rester imposable en France sur certains revenus de source française.",
+      "jurisdiction": "France",
+      "source": "Code général des impôts",
+      "reference": "CGI, art. 4 A",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-DECL",
+      "text": "Obligations déclaratives en France l’année du départ et les années suivantes (déclarations, formulaires, échéances).",
+      "jurisdiction": "France",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-HOST",
+      "text": "Règles de résidence fiscale, obligations déclaratives et imposition applicables dans le pays de destination.",
+      "jurisdiction": "Pays de destination (à préciser)",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    }
+  ]
+}

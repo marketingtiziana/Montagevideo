@@ -75,3 +75,21 @@ Rôles : lecteur, éditeur, valideur. Le rôle est choisi localement dans le nav
 - **alignement** : toujours ajouté.
 
 Il compile ensuite un pack Markdown, à partir de l'état actuel des playbooks, avec les règles d'attribution. L'app ne contient pas d'outil de génération IA : ce pack est le point de branchement. On peut le copier ou le télécharger depuis **Brand Strategy → Contexte de marque**, et chaque fiche d'idée ou de long format y renvoie avec le bon contexte.
+
+## Mindmap Studio (présentations iPad)
+
+Deux cartes mentales de présentation pour les vidéos iPad + facecam : `#/mindmaps`.
+
+- **Données** : JSON structuré, source de vérité — `output/mindmaps/01-quitter-la-france/mindmap.json` et `output/mindmaps/02-residence-fiscale/mindmap.json` (branches, nœuds, notes de script, notes privées, registre des affirmations avec juridiction / date / source / référence / lien / statut).
+- **Présentation** `#/mindmaps/:id/present` : scène fixe 2048 × 1536 (4:3) mise à l’échelle sans déformation. Modes Vue d’ensemble, Focus, Présentateur ; toucher une branche / un nœud / le centre ; pincer pour zoomer, glisser pour se déplacer ; précédent / suivant ; plein écran ; « Masquer » cache les contrôles (coin supérieur droit pour les rappeler) ; animations désactivables.
+- **Éditeur** `#/mindmaps/:id/edit` : titres, branches et nœuds (ajout, suppression, réordonnancement), notes, sources, statuts, aperçu en direct, versions et restauration. Stockage local (IndexedDB). Seul le rôle « valideur » peut passer une affirmation en `VALIDATED`.
+- **Exports** : depuis le studio (PDF via impression, PNG, SVG, JSON, notes, sources) ou en ligne de commande :
+
+  ```bash
+  npm run build && npx vite preview --port 4173 &
+  npm run export:mindmaps
+  ```
+
+  Génère `overview.png`, `mindmap.pdf`, `mindmap.svg`, `speaker_notes.md`, `sources.md` dans chaque dossier. Les notes privées du présentateur ne figurent dans aucun export (elles restent seulement dans le JSON source).
+- **Logo** : `public/brand/fynovates-wordmark-white.png`, extrait tel quel de la bannière IMG-010 (pas de redessin). À remplacer par les fichiers officiels vectoriels dès qu’ils sont fournis.
+- **Règle fiscale** : aucun taux, seuil, délai ni montant. Les affirmations restent `PENDING VALIDATION` ou `RESEARCH REQUIRED` tant qu’un professionnel ne les a pas vérifiées ; les liens officiels sont « À RENSEIGNER ».
