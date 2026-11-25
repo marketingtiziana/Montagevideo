@@ -1,0 +1,218 @@
+{
+ "sequences": {
+  "A": {
+   "titre": "TVA et société étrangère",
+   "pilier": "Éducation",
+   "objectif": "Montrer qu’une société à l’étranger ne supprime pas la TVA et identifier les abonnés concernés.",
+   "files": [
+    "sequence-A-1-educ-question",
+    "sequence-A-2-sondage",
+    "sequence-A-3-educ-mecanisme",
+    "sequence-A-4-expert-portrait",
+    "sequence-A-5-conversion-cta"
+   ]
+  },
+  "B": {
+   "titre": "Compte bancaire et processeur de paiement",
+   "pilier": "Éducation",
+   "objectif": "Corriger une idée reçue et ouvrir la discussion sur l’organisation bancaire.",
+   "files": [
+    "sequence-B-1-educ-vraifaux",
+    "sequence-B-2-educ-comparaison",
+    "sequence-B-3-educ-reponse",
+    "sequence-B-4-educ-erreur",
+    "sequence-B-5-conversion-cta"
+   ]
+  },
+  "C": {
+   "titre": "Coulisses d’un dossier",
+   "pilier": "Coulisses",
+   "objectif": "Montrer la méthode et le niveau d’exigence du cabinet sur un dossier réel anonymisé.",
+   "files": [
+    "sequence-C-1-coulisses-bas",
+    "sequence-C-2-coulisses-cadre",
+    "sequence-C-3-educ-mecanisme",
+    "sequence-C-4-coulisses-bas",
+    "sequence-C-5-educ-reponse"
+   ]
+  },
+  "D": {
+   "titre": "Cas client immobilier",
+   "pilier": "Cas clients",
+   "objectif": "Illustrer l’importance de comptes et de justificatifs à jour avant un achat immobilier.",
+   "files": [
+    "sequence-D-1-cas-couverture",
+    "sequence-D-2-cas-etape",
+    "sequence-D-3-cas-etape",
+    "sequence-D-4-educ-reponse",
+    "sequence-D-5-cas-etape"
+   ]
+  },
+  "E": {
+   "titre": "Questions des entrepreneurs",
+   "pilier": "Interaction",
+   "objectif": "Récolter les problématiques de l’audience et y répondre par un expert.",
+   "files": [
+    "sequence-E-1-questions-appel",
+    "sequence-E-2-questions-recue",
+    "sequence-E-3-expert-video",
+    "sequence-E-4-educ-mecanisme",
+    "sequence-E-5-conversion-cta"
+   ]
+  },
+  "F": {
+   "titre": "Cas client TVA (modèle narratif complet)",
+   "pilier": "Cas clients",
+   "objectif": "Montrer les cinq étapes du modèle narratif sur une erreur de TVA fréquente.",
+   "files": [
+    "sequence-F-1-cas-couverture",
+    "sequence-F-2-cas-etape",
+    "sequence-F-3-cas-etape",
+    "sequence-F-4-cas-etape",
+    "sequence-F-5-cas-etape",
+    "sequence-F-6-cas-etape"
+   ]
+  }
+ },
+ "variantes": [
+  {
+   "name": "modele-01-educ-question",
+   "tpl": "educ",
+   "variant": "question"
+  },
+  {
+   "name": "modele-02-educ-reponse",
+   "tpl": "educ",
+   "variant": "reponse"
+  },
+  {
+   "name": "modele-03-educ-verdict",
+   "tpl": "educ",
+   "variant": "verdict"
+  },
+  {
+   "name": "modele-04-educ-erreur",
+   "tpl": "educ",
+   "variant": "erreur"
+  },
+  {
+   "name": "modele-05-educ-comparaison",
+   "tpl": "educ",
+   "variant": "comparaison"
+  },
+  {
+   "name": "modele-06-sondage",
+   "tpl": "sondage",
+   "variant": null
+  },
+  {
+   "name": "modele-07-sondage",
+   "tpl": "sondage",
+   "variant": null
+  },
+  {
+   "name": "modele-08-questions-appel",
+   "tpl": "questions",
+   "variant": "appel"
+  },
+  {
+   "name": "modele-09-expert-portrait",
+   "tpl": "expert",
+   "variant": "portrait"
+  },
+  {
+   "name": "modele-10-coulisses-bas",
+   "tpl": "coulisses",
+   "variant": "bas"
+  },
+  {
+   "name": "modele-11-coulisses-cadre",
+   "tpl": "coulisses",
+   "variant": "cadre"
+  },
+  {
+   "name": "modele-12-alerte",
+   "tpl": "alerte",
+   "variant": null
+  },
+  {
+   "name": "modele-13-alerte",
+   "tpl": "alerte",
+   "variant": null
+  },
+  {
+   "name": "modele-14-conversion-services",
+   "tpl": "conversion",
+   "variant": "services"
+  },
+  {
+   "name": "modele-15-conversion-etapes",
+   "tpl": "conversion",
+   "variant": "etapes"
+  },
+  {
+   "name": "modele-16-conversion-cta",
+   "tpl": "conversion",
+   "variant": "cta"
+  },
+  {
+   "name": "modele-17-republication",
+   "tpl": "republication",
+   "variant": null
+  },
+  {
+   "name": "modele-18-republication",
+   "tpl": "republication",
+   "variant": null
+  },
+  {
+   "name": "modele-19-republication",
+   "tpl": "republication",
+   "variant": null
+  },
+  {
+   "name": "modele-20-republication",
+   "tpl": "republication",
+   "variant": null
+  },
+  {
+   "name": "modele-21-republication",
+   "tpl": "republication",
+   "variant": null
+  }
+ ],
+ "unes": [
+  {
+   "name": "une-lecabinet",
+   "label": "Le cabinet"
+  },
+  {
+   "name": "une-fiscalite",
+   "label": "Fiscalité"
+  },
+  {
+   "name": "une-tva",
+   "label": "TVA"
+  },
+  {
+   "name": "une-international",
+   "label": "International"
+  },
+  {
+   "name": "une-banque",
+   "label": "Banque"
+  },
+  {
+   "name": "une-equipe",
+   "label": "Équipe"
+  },
+  {
+   "name": "une-methode",
+   "label": "Méthode"
+  },
+  {
+   "name": "une-contact",
+   "label": "Contact"
+  }
+ ]
+}
