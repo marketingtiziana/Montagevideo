@@ -68,17 +68,30 @@ function RelatedIdeas({ ids }: { ids: string[] }) {
   )
 }
 
-function Refs({ ids }: { ids: string[] }) {
+function Refs({ ids, label = 'Références visuelles' }: { ids: string[]; label?: string }) {
   const { open } = useDetail()
   if (!ids.length) return null
+  const imgs = ids.map(getImage).filter(Boolean) as NonNullable<ReturnType<typeof getImage>>[]
+  const groups = new Map<string, typeof imgs>()
+  for (const i of imgs) {
+    const k = i.platform ? PLATFORMS[i.platform].label : 'Toutes plateformes'
+    groups.set(k, [...(groups.get(k) ?? []), i])
+  }
   return (
-    <Block label="Références visuelles">
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-        {ids.map((id) => (
-          <button key={id} type="button" onClick={() => open('i', id)} className="overflow-hidden rounded-md border border-line bg-surface text-left hover:border-line-strong">
-            <Thumb img={getImage(id)} className="aspect-[4/3] w-full object-top" />
-            <div className="px-1.5 py-1 font-mono text-[10px] text-ink-3">{id}</div>
-          </button>
+    <Block label={label}>
+      <div className="space-y-3">
+        {[...groups.entries()].map(([g, list]) => (
+          <div key={g}>
+            {groups.size > 1 && <div className="mb-1.5 text-[11.5px] text-ink-3">{g}</div>}
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+              {list.map((img) => (
+                <button key={img.id} type="button" onClick={() => open('i', img.id)} className="overflow-hidden rounded-md border border-line bg-surface text-left hover:border-line-strong">
+                  <Thumb img={img} className="aspect-[4/3] w-full object-top" />
+                  <div className="px-1.5 py-1 font-mono text-[10px] text-ink-3">{img.id}</div>
+                </button>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </Block>
@@ -309,7 +322,7 @@ export function LongFormSheet() {
               </div>
             </Block>
             <BrandContext typeId={s.brand === 'TZ' ? 'db-yt-tz' : 'fn-script'} />
-            <Refs ids={l.support} />
+            <Refs ids={l.support} label="Visuels YouTube" />
             <ProblemsList ids={l.problemIds} />
             <RelatedIdeas ids={l.basedOn} />
             <Block label="Conseils de tournage">

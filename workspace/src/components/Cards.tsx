@@ -2,16 +2,16 @@ import clsx from 'clsx'
 import { AlertTriangle } from 'lucide-react'
 import { BRANDS, FORMATS, PILLARS } from '../lib/constants'
 import { useDetail } from '../lib/detail'
-import { getImage } from '../lib/hooks'
+import { pickImage } from '../lib/hooks'
 import { setups, type LongForm } from '../lib/seed/longform'
-import type { Content, ImageAsset } from '../lib/types'
+import type { Content, ImageAsset, PlatformId } from '../lib/types'
 import { Thumb } from './images/Thumb'
 import { SetupSchema } from './Previews'
 import { PlatformChip } from './ui'
 
-export function IdeaCard({ c, showImage = true }: { c: Content; showImage?: boolean }) {
+export function IdeaCard({ c, showImage = true, platform }: { c: Content; showImage?: boolean; platform?: PlatformId | null }) {
   const { open } = useDetail()
-  const img = getImage(c.imageIds[0])
+  const img = pickImage(c, platform)
   return (
     <button type="button" onClick={() => open('c', c.id)} className="card group flex flex-col overflow-hidden text-left transition-shadow hover:shadow-[var(--shadow-lg)]">
       {showImage && img && <Thumb img={img} className="aspect-[16/9] w-full border-b border-line object-top" />}

@@ -5,7 +5,7 @@ import { contents as rawContents } from './seed/contents'
 import { images } from './seed/images'
 import { problems } from './seed/problems'
 import { journeys, matrix, rules } from './seed/strategy'
-import type { Content, ImageAsset } from './types'
+import type { Content, ImageAsset, PlatformId } from './types'
 
 /** Make relatedIds symmetric and drop dangling references. */
 function normalize(list: Content[]): Content[] {
@@ -59,3 +59,13 @@ export function useImageUsage(list: Content[] | undefined) {
 }
 
 export const isToClassify = (img: ImageAsset) => img.type === 'a-classer' || (!img.brand && !img.platform)
+
+/**
+ * Visual to show for a content in a given platform context.
+ * Never returns a visual designed for another platform (e.g. an Instagram mockup on the YouTube page).
+ */
+export function pickImage(c: Pick<Content, 'imageIds' | 'platforms'>, platform?: PlatformId | null): ImageAsset | undefined {
+  const list = c.imageIds.map((id) => imageMap.get(id)).filter(Boolean) as ImageAsset[]
+  if (platform) return list.find((i) => i.platform === platform)
+  return list.find((i) => !i.platform || c.platforms.includes(i.platform))
+}

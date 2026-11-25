@@ -109,7 +109,7 @@ export const matrix: MatrixRow[] = [
       'tt-fn': cell('Différences entre les comptes', 'Motion design', 'FN-025'),
       'ig-fn': cell('Explication pédagogique', 'Story', 'FN-005'),
       'li-fn': cell('Comparaison professionnelle', 'Carrousel', 'FN-020'),
-      'ig-tz': cell('Réflexion personnelle', 'Reel ou Story', 'DB-002'),
+      'ig-tz': cell('Réflexion personnelle', 'Reel ou Story', 'DB-004'),
       'li-tz': cell('Vision de dirigeante', 'Publication', 'DB-002'),
     },
   },

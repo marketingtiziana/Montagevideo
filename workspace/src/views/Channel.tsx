@@ -77,10 +77,10 @@ export default function Channel() {
           </div>
         </Section>
       )}
-      <Section title={`Idées de posts (${ideas.length})`}>
+      <Section title={`${id === "yt-fn" ? "Idées de vidéos" : "Idées de posts"} (${ideas.length})`}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {ideas.map((c) => (
-            <IdeaCard key={c.id} c={c} />
+            <IdeaCard key={c.id} c={c} platform={id} />
           ))}
         </div>
       </Section>

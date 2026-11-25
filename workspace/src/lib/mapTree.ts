@@ -1,7 +1,7 @@
 import { BRANDS, FORMATS, PILLAR_IDS, PILLARS, PLATFORMS } from './constants'
 import { longforms, setups } from './seed/longform'
 import { ctas } from './seed/cta'
-import { isToClassify } from './hooks'
+import { isToClassify, pickImage } from './hooks'
 import type { Brand, Channel, Content, ImageAsset, Journey, MatrixRow, PlatformId, Problem, Rule, Validation } from './types'
 
 export type Ref = { t: 'c' | 'p' | 'i' | 'l'; id: string } | { t: 'route'; to: string }
@@ -40,7 +40,7 @@ const branch = (id: string, label: string, children: TreeNode[], extra: Partial<
   ...extra,
 })
 
-function contentNode(prefix: string, c: Content, children: TreeNode[] = []): TreeNode {
+function contentNode(prefix: string, c: Content, children: TreeNode[] = [], platform?: PlatformId): TreeNode {
   return {
     id: `${prefix}/c:${c.id}`,
     label: c.hook && c.hook !== 'À RENSEIGNER' && c.hook.length < 90 ? c.hook : c.subject,
@@ -50,7 +50,7 @@ function contentNode(prefix: string, c: Content, children: TreeNode[] = []): Tre
     meta: FORMATS[c.format],
     ref: { t: 'c', id: c.id },
     validation: c.validation,
-    imageId: c.imageIds[0],
+    imageId: pickImage(c, platform)?.id,
     children,
   }
 }
@@ -108,7 +108,7 @@ export function buildTree(d: MapData): TreeNode[] {
         branch(
           `${prefix}/contents`,
           'Contenus',
-          list.map((c) => contentNode(`${prefix}/contents`, c)),
+          list.map((c) => contentNode(`${prefix}/contents`, c, [], pid)),
           { color: PLATFORMS[pid].color },
         ),
       ],

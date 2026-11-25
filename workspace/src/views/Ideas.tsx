@@ -51,7 +51,7 @@ export default function Ideas() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {list.map((c) => (
-            <IdeaCard key={c.id} c={c} />
+            <IdeaCard key={c.id} c={c} platform={platform === 'all' ? null : platform} />
           ))}
         </div>
       )}
