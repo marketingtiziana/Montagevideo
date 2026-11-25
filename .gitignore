@@ -14,3 +14,11 @@ final_words.json
 kept_words.json
 transcript.txt
 __pycache__/
+
+# Miniatures : sources modifiables versionnées
+!output/thumbnail/editable_source/assets/
+!output/thumbnail/editable_source/fonts/
+!output/fynovates_thumbnail/editable_source/assets/
+!output/fynovates_thumbnail/editable_source/fonts/
+!output/private_departure/thumbnail_private_departure_source/assets/
+!output/private_departure/thumbnail_private_departure_source/fonts/

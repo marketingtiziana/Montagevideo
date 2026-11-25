@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>FYNOVATES — Concept C · La sortie financière globale</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+/* CONCEPT C — THE GLOBAL FINANCIAL EXIT
+   Financial-district skyline through the terminal glass, an airliner taking off,
+   a route drawn from the passport stamps to the aircraft. Mobility × taxation × wealth. */
+.plate { background-image: url(assets/plates/plate_skyline_terminal_graded.jpg); background-size: 1638px 922px; background-position: -300px -200px;
+  transform: scaleX(-1); filter: brightness(1.25) contrast(1.12); }
+.leftdark { position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(6,4,18,.78) 0%, rgba(6,4,18,.5) 34%, rgba(6,4,18,0) 58%),
+  linear-gradient(0deg, rgba(6,4,18,.92) 0%, rgba(6,4,18,0) 34%); }
+.portrait, .subject-shade { height: 992px; width: 744px; left: 600px; top: 24px; }
+.portrait { filter: drop-shadow(0 0 1px rgba(255,255,255,.4)) drop-shadow(-30px 20px 50px rgba(2,1,10,.85)); }
+.subject-shade { -webkit-mask-image: url(assets/portrait_cutout.png);
+  background: linear-gradient(90deg, rgba(6,4,18,.4) 0%, rgba(6,4,18,0) 42%), linear-gradient(180deg, rgba(6,4,18,0) 45%, rgba(6,4,18,.55) 72%); }
+.passport { width: 500px; left: 40px; top: 470px; transform: perspective(900px) rotateX(28deg) rotate(-6deg); filter: brightness(.78) contrast(1.12) saturate(.85) drop-shadow(0 24px 30px rgba(0,0,0,.8)); }
+.route { position: absolute; inset: 0; }
+.logo { left: 60px; top: 42px; gap: 14px; }
+.logo .sym { height: 40px; } .logo .wm { height: 15px; }
+.text { position: absolute; left: 60px; top: 178px; }
+.l1, .l2 { letter-spacing: -.03em; }
+.tag { margin-top: 22px; font-size: 20px; padding: 9px 16px 9px 12px; }
+.tag i { display: block; width: 26px; height: 18px; background: repeating-linear-gradient(-45deg,#0D082E 0 4px,transparent 4px 8px); }
+</style></head>
+<body><div class="frame">
+  <div class="plate"></div>
+  <div class="leftdark"></div>
+  <img class="prop passport" src="assets/passport_cutout.png" alt="">
+  <svg class="route" width="1280" height="720" fill="none">
+    <defs><filter id="g"><feGaussianBlur stdDeviation="3"/></filter></defs>
+    <path id="r" d="M380 560 C 560 480, 650 330, 690 -10" stroke="rgba(190,180,255,.7)" stroke-width="6" filter="url(#g)"/>
+    <path d="M380 560 C 560 480, 650 330, 690 -10" stroke="#fff" stroke-width="2.2" stroke-dasharray="2 8" stroke-linecap="round"/>
+    <circle cx="380" cy="560" r="6" fill="#fff"/><circle cx="380" cy="560" r="15" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+    
+  </svg>
+  <img class="portrait" src="assets/portrait_cutout.png" alt="">
+  <div class="subject-shade"></div>
+  <div class="logo"><img class="sym" src="assets/logo_symbol_white.png" alt=""><img class="wm" src="assets/logo_wordmark_white.png" alt="FYNOVATES"></div>
+  <div class="text headline-shadow">
+    <div><span class="h l1" data-fit="560">QUITTER</span></div>
+    <div><span class="h l2" data-fit="560">LA FRANCE&#8239;?</span></div>
+    <div class="tag"><i></i>AVANT DE PARTIR…</div>
+  </div>
+  <div class="grain"></div>
+</div></body></html>

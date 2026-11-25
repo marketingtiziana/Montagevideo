@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>FYNOVATES — Concept B · L'avertissement</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+/* CONCEPT B — THE IMMIGRATION WARNING
+   Passport-control hall, hard overhead light, the lit checkpoint sign above her head,
+   an ATTENTION tag, directional chevrons and a checkpoint tape. Tension by light and geometry only. */
+.plate { background-image: url(assets/plates/plate_passport_control_graded.jpg); background-size: 1366px 768px; background-position: -40px -20px; filter: brightness(1.2) contrast(1.18); }
+.leftdark { position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(6,4,18,.88) 0%, rgba(6,4,18,.62) 36%, rgba(6,4,18,.1) 56%, rgba(6,4,18,0) 66%),
+  linear-gradient(0deg, rgba(6,4,18,.9) 0%, rgba(6,4,18,0) 30%); }
+.beam { position: absolute; left: 820px; top: -60px; width: 300px; height: 900px; transform: rotate(14deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.10) 50%, rgba(255,255,255,0)); mix-blend-mode: screen; filter: blur(14px); }
+.portrait, .subject-shade { height: 1008px; width: 756px; left: 590px; top: 30px; }
+.portrait { filter: drop-shadow(0 0 1px rgba(255,255,255,.45)) drop-shadow(-30px 20px 50px rgba(2,1,10,.85)); }
+.subject-shade { -webkit-mask-image: url(assets/portrait_cutout.png);
+  background: linear-gradient(90deg, rgba(6,4,18,.45) 0%, rgba(6,4,18,0) 42%), linear-gradient(180deg, rgba(6,4,18,0) 42%, rgba(6,4,18,.6) 70%); }
+.passport { width: 470px; left: 300px; top: 478px; transform: rotate(10deg); filter: brightness(.72) contrast(1.15) saturate(.85) drop-shadow(0 26px 36px rgba(0,0,0,.8)); }
+.pass { width: 320px; left: 200px; top: 500px; transform: rotate(-24deg); filter: blur(1.2px) brightness(.45) drop-shadow(0 16px 24px rgba(0,0,0,.7)); }
+.tape { position: absolute; left: -60px; top: 636px; width: 470px; height: 46px; transform: rotate(-12deg);
+  background: #fff; color: #0D082E; display: flex; align-items: center; gap: 18px; padding-left: 64px;
+  font-weight: 800; font-size: 16px; letter-spacing: .26em; box-shadow: 0 18px 40px rgba(0,0,0,.6); white-space: nowrap; }
+.tape b { display: block; width: 60px; height: 100%; background: repeating-linear-gradient(-45deg, #0D082E 0 9px, #fff 9px 18px); }
+.logo { left: 60px; top: 42px; gap: 14px; }
+.logo .sym { height: 40px; } .logo .wm { height: 15px; }
+.text { position: absolute; left: 60px; top: 112px; }
+.tag { font-size: 20px; padding: 9px 16px 9px 0; margin-bottom: 18px; gap: 14px; }
+.tag b { display: block; width: 46px; height: 38px; margin: -9px 0; background: repeating-linear-gradient(-45deg, #0D082E 0 7px, #fff 7px 14px); }
+.l1, .l2 { letter-spacing: -.03em; }
+.chev { margin-top: 20px; display: flex; gap: 6px; }
+.chev svg { display: block; }
+</style></head>
+<body><div class="frame">
+  <div class="plate"></div>
+  <div class="beam"></div>
+  <div class="leftdark"></div>
+  <img class="portrait" src="assets/portrait_cutout.png" alt="">
+  <div class="subject-shade"></div>
+  <img class="prop pass" src="assets/boarding_pass_cutout.png" alt="">
+  <img class="prop passport" src="assets/passport_cutout.png" alt="">
+  <div class="tape"><b></b>CONTRÔLE DES PASSEPORTS</div>
+  <div class="logo"><img class="sym" src="assets/logo_symbol_white.png" alt=""><img class="wm" src="assets/logo_wordmark_white.png" alt="FYNOVATES"></div>
+  <div class="text headline-shadow">
+    <div class="tag"><b></b>ATTENTION</div>
+    <div><span class="h l1" data-fit="590">QUITTER</span></div>
+    <div><span class="h l2" data-fit="590">LA FRANCE&#8239;?</span></div>
+    <div class="chev">
+      <svg width="200" height="34" viewBox="0 0 200 34" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="miter">
+        <path d="M4 3 L20 17 L4 31" opacity=".35"/><path d="M34 3 L50 17 L34 31" opacity=".6"/><path d="M64 3 L80 17 L64 31"/>
+        <path d="M96 17 H196" stroke-width="2" opacity=".5"/></svg>
+    </div>
+  </div>
+  <div class="grain"></div>
+</div></body></html>

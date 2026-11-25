@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>FYNOVATES — Concept A</title>
+<link rel="stylesheet" href="common.css">
+<script src="assets/geo.js"></script><script src="common.js"></script>
+<style>
+/* CONCEPT A — INSTITUTIONAL PREMIUM
+   Calm navy field, private-bank restraint: justified two-weight headline, faint cartographic France. */
+.bg { background:
+  radial-gradient(520px 520px at 905px 300px, rgba(44,34,120,.85), rgba(13,8,46,0) 70%),
+  radial-gradient(900px 700px at 1100px 760px, rgba(28,21,84,.55), rgba(13,8,46,0) 70%),
+  linear-gradient(100deg, #080520 0%, #0D082E 45%, #0D082E 100%); }
+.grid { opacity: .07; }
+.france { position: absolute; left: 650px; top: 70px; width: 590px; height: 572px; opacity: .16; }
+.portrait { height: 992px; left: 560px; top: 14px;
+  filter: drop-shadow(0 0 .8px rgba(170,160,255,.22)) drop-shadow(-24px 18px 40px rgba(4,2,16,.65)); }
+.fade { background: linear-gradient(0deg, rgba(8,5,32,.92) 0%, rgba(8,5,32,0) 22%); }
+.logo { left: 64px; top: 54px; gap: 16px; }
+.logo .sym { height: 44px; }
+.logo .wm { height: 17px; }
+.text { position: absolute; left: 64px; top: 214px; }
+.eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+.eyebrow i { width: 40px; height: 2px; background: #fff; display: block; }
+.l1 { font-weight: 300; letter-spacing: .005em; }
+.l2 { font-weight: 900; margin-top: 6px; }
+.rule { width: 72px; height: 3px; background: #fff; margin: 34px 0 22px; }
+.sub { font-size: 25px; font-weight: 500; color: rgba(255,255,255,.82); letter-spacing: .01em; }
+</style></head>
+<body><div class="frame">
+  <div class="layer bg"></div>
+  <svg class="layer grid" width="1280" height="720"><g stroke="#fff" stroke-width="1" fill="none">
+    <path d="M0 180H1280M0 360H1280M0 540H1280"/><path d="M320 0V720M640 0V720M960 0V720"/></g></svg>
+  <svg class="france" data-geo="france" preserveAspectRatio="xMidYMid meet">
+    <path data-d="d" fill="rgba(255,255,255,.04)" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>
+  </svg>
+  <img class="portrait" src="assets/portrait_cutout.png" alt="">
+  <div class="layer fade"></div>
+
+  <div class="logo"><img class="sym" src="assets/logo_symbol_white.png" alt=""><img class="wm" src="assets/logo_wordmark_white.png" alt="FYNOVATES"></div>
+
+  <div class="text">
+    <div class="eyebrow"><i></i>Fiscalité internationale</div>
+    <div><span class="h l1" data-fit="590">QUITTER</span></div>
+    <div><span class="h l2" data-fit="590">LA FRANCE&#8239;?</span></div>
+    <div class="rule"></div>
+    <div class="sub">Résidence fiscale · Banque · Patrimoine</div>
+  </div>
+  <div class="grain"></div>
+</div></body></html>
