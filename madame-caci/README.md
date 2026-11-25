@@ -2,19 +2,17 @@
 
 Compte personnel, photographique et incarné, sans aucun élément de l'identité Fynovates.
 
-## Organisation (`output/`)
+## Organisation (`output/`) — six livrables séparés
 | Dossier | Contenu |
 |---|---|
-| `01-profil/` | Mockup 1 : profil complet (page entière et écran), bio « Fondatrice & directrice de @fynovates » |
-| `02-feed/` | 15 photographies 1080 × 1350 (aucun texte), carrousel photo de la publication 5, mockup 2 de la grille |
-| `03-reels/` | 12 miniatures 1080 × 1920 (image de la vidéo + sous-titre sobre), mockup de l'onglet Reels |
-| `04-stories/style-1…6/` | 18 Stories 1080 × 1920 aux codes natifs (sérif sur bandeaux blancs, sans-sérif, texte court, face caméra, lieu + réflexion, interactives). `apercu-telephone/` : la même Story dans la visionneuse. Interactives : version de production (emplacement libre) + aperçu avec sticker simulé |
-| `05-sequences/` | 4 séquences complètes (17 écrans), en fichiers seuls et dans la visionneuse |
-| `06-stories-a-la-une/` | 5 couvertures (À propos, Mon entreprise, International, Mes réflexions, Médias) et leur Story d'introduction |
-| `07-presentation/` | Présentation PDF (16 diapositives), diapositives PNG, planche globale |
-| `08-planches/` | Planches séparées Feed, Stories et Stories à la une (PNG + PDF) — `node madame-caci/src/planches.mjs` |
+| `A-profil/` | Profil Instagram (écran et page complète) avec la bio « Fondatrice & directrice de @fynovates » et les deux Stories à la une ; planche A (PNG + PDF) |
+| `B-feed/` | « FEED INSTAGRAM — MADAME CACI » : grille sur smartphone, planche (PNG + PDF), `photos/` = les 15 photos 1080 × 1350 et le carrousel photo |
+| `C-reels/` | Onglet Reels sur smartphone, 12 miniatures 1080 × 1920, planche C |
+| `D-stories/1…6/` | Stories individuelles 1080 × 1920, un dossier par famille. Interactives : fichier publiable (place libre) + `apercus-avec-sticker/`. `apercus-telephone/` : affichage secondaire. PDF : une Story par page |
+| `E-sequences/` | 4 séquences, un fichier publiable par écran (`ecran-1.png`…), aperçus secondaires, un PDF par séquence |
+| `F-stories-a-la-une/` | « À PROPOS DE MOI » et « MON CABINET » : couvertures (photo + variante typographique), affichage sous la bio, stories de chaque rubrique, planche F |
 
-`presentation/index.html` : page de présentation publiée en artefact.
+`presentation/index.html` : page de présentation (artefact), une section par livrable.
 
 ## Sources modifiables (`src/`)
 - `feed.mjs` : les 15 photos (cadrages, légendes) et les 12 Reels.
@@ -25,8 +23,8 @@ Compte personnel, photographique et incarné, sans aucun élément de l'identit�
 ```bash
 python3 madame-caci/photos/grade.py
 node madame-caci/src/build.mjs
-node madame-caci/src/presentation.mjs
+node madame-caci/src/planches.mjs
 ```
 
 ## À compléter
-Identifiant du compte, photos en réunion et avec les collaborateurs, photos d'événement, vraies photos de déplacement, captures des vidéos réelles (Reels et face caméra), nom de la chaîne YouTube. Les photos de lieux viennent des ressources du projet (Unsplash, voir `photos/CREDITS.md`). Les polices natives d'Instagram sont approchées (Liberation Serif et Liberation Sans) : les Stories finales se tapent dans l'application.
+Identifiant du compte, parcours de Tiziana (story « Mon parcours »), photos de l'équipe, photos en réunion et avec les collaborateurs, photos d'événement, vraies photos de déplacement, captures des vidéos réelles (Reels et face caméra), nom de la chaîne YouTube. Les photos de lieux viennent des ressources du projet (Unsplash, voir `photos/CREDITS.md`). Les polices natives d'Instagram sont approchées (Liberation Serif et Liberation Sans) : les Stories finales se tapent dans l'application.
