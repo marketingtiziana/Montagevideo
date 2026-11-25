@@ -34,13 +34,14 @@ export const charters: Record<BrandId, Charter> = {
     intro:
       'Corporate, minimaliste, institutionnelle, premium, sophistiquée et structurée. Un cabinet qui explique : beaucoup d’air, une hiérarchie typographique nette, le bleu nuit comme signature.',
     palette: [
-      { name: 'Bleu nuit', hex: '#0D092E', usage: 'Couleur signature : fonds de couverture, aplats de synthèse, Stories de conversion.', source: 'IMG-008, IMG-010' },
-      { name: 'Blanc', hex: '#FFFFFF', usage: 'Texte sur bleu nuit, fonds d’infographies et de carrousels.', source: 'IMG-001' },
-      { name: 'Gris clair', hex: '#F1F1F3', usage: 'Fond alterné des Stories pédagogiques, encadrés secondaires.', source: 'IMG-012' },
-      { name: 'Beige', hex: '#E7E4DD', usage: 'Fond de la variante B des couvertures (alternance avec le bleu nuit).', source: 'IMG-009' },
-      { name: 'Lavande', hex: '#A49CFF', usage: 'Accent ponctuel : un seul mot-clé par titre (ex. « vraiment »).', source: 'IMG-008' },
+      { name: 'Bleu nuit', hex: '#0D082E', usage: 'Couleur signature officielle : fonds de couverture, aplats de synthèse, Stories de conversion.', source: 'palette officielle' },
+      { name: 'Quasi-noir', hex: '#0F0A13', usage: 'Couleur officielle : textes forts, fonds sombres, vidéo.', source: 'palette officielle' },
+      { name: 'Blanc', hex: '#FFFFFF', usage: 'Couleur officielle : fonds d’infographies et de documents, texte sur bleu nuit.', source: 'palette officielle' },
+      { name: 'Gris clair', hex: '#F1F1F3', usage: 'Observé sur les maquettes (fond alterné des Stories) — À VALIDER.', source: 'IMG-012' },
+      { name: 'Beige', hex: '#E7E4DD', usage: 'Observé sur les maquettes (variante B des couvertures) — À VALIDER.', source: 'IMG-009' },
+      { name: 'Lavande', hex: '#A49CFF', usage: 'Accent observé sur un mot-clé — À VALIDER.', source: 'IMG-008' },
     ],
-    paletteNote: 'Valeurs relevées sur les maquettes fournies. À remplacer par les codes officiels de la charte s’ils existent.',
+    paletteNote: 'Bleu nuit, quasi-noir et blanc forment la palette officielle. Gris clair, beige et lavande ont été relevés sur les maquettes et restent à valider.',
     typography: [
       {
         role: 'Logo',

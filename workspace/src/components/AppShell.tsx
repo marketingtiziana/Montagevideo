@@ -5,6 +5,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { findNav, NAV } from '../lib/nav'
 import { CommandPalette } from './CommandPalette'
 import { IdeaSheet, ImageSheet, LongFormSheet, ProblemSheet } from './Sheets'
+import { useBrandReady } from './brand/BrandParts'
 import { Button, IconButton } from './ui'
 
 export function applyTheme(t: string) {
@@ -28,6 +29,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState(false)
   const [mobileNav, setMobileNav] = useState(false)
   const loc = useLocation()
+  useBrandReady()
 
   useEffect(() => setMobileNav(false), [loc.pathname])
   useEffect(() => {

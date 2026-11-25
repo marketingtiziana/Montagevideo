@@ -16,6 +16,18 @@ export const NAV: NavGroup[] = [
     ],
   },
   {
+    label: 'Brand Strategy',
+    items: [
+      { path: '/brand-strategy', label: 'Vue d’ensemble' },
+      { path: '/brand-strategy/fn', label: 'Fynovates — corporate' },
+      { path: '/brand-strategy/tz', label: 'Tiziana — personnelle' },
+      { path: '/brand-strategy/align', label: 'Alignement' },
+      { path: '/brand-strategy/assets', label: 'Guidelines des assets' },
+      { path: '/brand-strategy/register', label: 'Registre d’approbation' },
+      { path: '/brand-strategy/context', label: 'Contexte de marque (IA)' },
+    ],
+  },
+  {
     label: 'Stratégie',
     items: [
       { path: '/brand/FN', label: 'Fynovates' },

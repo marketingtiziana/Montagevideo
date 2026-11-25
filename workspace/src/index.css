@@ -262,3 +262,116 @@ textarea.input {
 .react-flow__background {
   background: var(--bg);
 }
+
+/* ---------------- Brand Strategy — editorial document ---------------- */
+.prose-brand {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 74ch;
+}
+.prose-brand p {
+  margin: 0 0 0.85em;
+}
+.prose-brand strong {
+  font-weight: 650;
+}
+.prose-brand h4 {
+  font-size: 13px;
+  font-weight: 650;
+  margin: 1.4em 0 0.5em;
+  letter-spacing: 0.01em;
+}
+.prose-brand ul,
+.prose-brand ol {
+  margin: 0 0 0.9em;
+  padding-left: 1.25em;
+}
+.prose-brand ul {
+  list-style: disc;
+}
+.prose-brand ol {
+  list-style: decimal;
+}
+.prose-brand li {
+  margin: 0.2em 0;
+}
+.prose-brand li::marker {
+  color: var(--ink-3);
+}
+.prose-brand table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6em 0 1.1em;
+  font-size: 13px;
+  line-height: 1.5;
+  display: block;
+  overflow-x: auto;
+}
+.prose-brand th,
+.prose-brand td {
+  border: 1px solid var(--line);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-brand th {
+  background: var(--surface-2);
+  font-weight: 600;
+  font-size: 12px;
+}
+.prose-brand blockquote {
+  border-left: 2px solid var(--line-strong);
+  padding: 2px 0 2px 14px;
+  margin: 0 0 1em;
+  color: var(--ink-2);
+}
+.prose-brand blockquote.to-validate {
+  border-left-color: var(--v-idea);
+  background: color-mix(in srgb, var(--v-idea) 7%, transparent);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  color: var(--ink);
+}
+.prose-brand blockquote.to-validate b {
+  color: var(--v-idea);
+  letter-spacing: 0.03em;
+}
+.prose-brand code {
+  font-size: 12.5px;
+  background: var(--surface-2);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.prose-brand hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 1.5em 0;
+}
+.prose-brand a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-section {
+    break-inside: auto;
+  }
+  .print-chapter {
+    break-before: page;
+  }
+  .prose-brand {
+    max-width: none;
+    font-size: 11pt;
+  }
+}

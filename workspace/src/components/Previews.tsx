@@ -4,7 +4,7 @@ import type { SetupId } from '../lib/seed/longform'
 import type { InfographicModel, Scene, Slide, StoryScreen } from '../lib/types'
 import { Thumb } from './images/Thumb'
 
-const NAVY = '#0D092E'
+const NAVY = '#0D082E'
 
 /* ---------------- Modèle A — infographie ---------------- */
 export function InfographicPreview({ m, className }: { m: InfographicModel; className?: string }) {
@@ -140,7 +140,7 @@ export function SetupSchema({ id, className }: { id: SetupId; className?: string
       {id === 'ipad-facecam' && (
         <>
           <div className="absolute inset-[8%_30%_8%_6%] rounded-md bg-white p-[4%]">
-            <div className="mb-2 h-[5px] w-1/2 rounded-full bg-[#0D092E]" />
+            <div className="mb-2 h-[5px] w-1/2 rounded-full bg-[#0D082E]" />
             <div className="grid grid-cols-2 gap-1.5">
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="h-5 rounded-sm border border-[#d9d9e3]" />
@@ -158,7 +158,7 @@ export function SetupSchema({ id, className }: { id: SetupId; className?: string
       {id === 'tv-facecam' && (
         <>
           <div className="absolute inset-x-0 bottom-0 h-[22%] bg-[#24242c]" />
-          <div className="absolute left-[8%] top-[14%] h-[50%] w-[48%] rounded-sm border-[3px] border-[#0b0b0f] bg-[#0D092E] p-[3%]">
+          <div className="absolute left-[8%] top-[14%] h-[50%] w-[48%] rounded-sm border-[3px] border-[#0b0b0f] bg-[#0D082E] p-[3%]">
             <div className="mb-1.5 h-[3px] w-1/3 rounded-full bg-white/40" />
             {lines(3, 'bg-white/70')}
           </div>
@@ -180,7 +180,7 @@ export function SetupSchema({ id, className }: { id: SetupId; className?: string
       )}
       {id === 'motion-vo' && (
         <>
-          <div className="absolute inset-0 p-[7%]" style={{ background: '#0D092E' }}>
+          <div className="absolute inset-0 p-[7%]" style={{ background: '#0D082E' }}>
             <div className="mb-[4%] text-[8px] tracking-[0.3em] text-white/50">F Y N O V A T E S</div>
             <div className="flex h-[55%] items-end gap-[3%]">
               {[70, 45, 25, 12, 30].map((h, i) => (
@@ -202,8 +202,8 @@ export function SetupSchema({ id, className }: { id: SetupId; className?: string
           {face('left-[5%] bottom-0 h-[86%] w-[32%] !rounded-none')}
           <div className="absolute right-[6%] top-[14%] w-[52%] space-y-[6%]">
             {['01', '02', '03'].map((n, i) => (
-              <div key={n} className="flex items-center gap-2 rounded-sm px-2 py-1.5" style={{ background: i === 1 ? '#0D092E' : '#fff' }}>
-                <span className={clsx('text-[9px] font-semibold', i === 1 ? 'text-white' : 'text-[#0D092E]')}>{n}</span>
+              <div key={n} className="flex items-center gap-2 rounded-sm px-2 py-1.5" style={{ background: i === 1 ? '#0D082E' : '#fff' }}>
+                <span className={clsx('text-[9px] font-semibold', i === 1 ? 'text-white' : 'text-[#0D082E]')}>{n}</span>
                 <div className={clsx('h-[3px] flex-1 rounded-full', i === 1 ? 'bg-white/70' : 'bg-[#cfcfe0]')} />
               </div>
             ))}

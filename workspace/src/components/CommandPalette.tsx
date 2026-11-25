@@ -4,6 +4,9 @@ import { FORMATS, IMAGE_TYPES, PILLARS } from '../lib/constants'
 import { useDetail } from '../lib/detail'
 import { useContents, useImages, useProblems } from '../lib/hooks'
 import { longforms } from '../lib/seed/longform'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { bdb } from '../lib/brand/store'
+import { DOCS } from '../lib/brand/docs'
 import { NAV } from '../lib/nav'
 
 const itemCls =
@@ -14,6 +17,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   const problems = useProblems()
   const images = useImages()
   const nav = useNavigate()
+  const brandSections = useLiveQuery(() => bdb.sections.toArray(), [], [])
   const { open: openDetail } = useDetail()
   if (!open) return null
 
@@ -42,6 +46,14 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
               <Command.Item key={it.path} value={`vue ${it.label} ${it.group}`} className={itemCls} onSelect={() => go(() => nav(it.path))}>
                 <span className="w-16 shrink-0 text-[11px] text-ink-3">{it.group}</span>
                 {it.label}
+              </Command.Item>
+            ))}
+          </Command.Group>
+          <Command.Group heading="Brand Strategy" className="[&_[cmdk-group-heading]]:eyebrow [&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:py-1.5">
+            {brandSections.map((b) => (
+              <Command.Item key={b.key} value={`brand ${DOCS[b.doc].short} ${b.sid} ${b.title} ${b.body.slice(0, 400)}`} className={itemCls} onSelect={() => go(() => nav(`/brand-strategy/${b.doc}#s-${b.sid}`))}>
+                <span className="w-16 shrink-0 font-mono text-[11px] text-ink-3">{b.doc.toUpperCase()} {b.sid}</span>
+                <span className="truncate">{b.title}</span>
               </Command.Item>
             ))}
           </Command.Group>

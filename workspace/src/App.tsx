@@ -14,6 +14,9 @@ import Matrix from './views/Matrix'
 import Overview from './views/Overview'
 import RhythmView from './views/Rhythm'
 import Templates from './views/Templates'
+import BrandDoc from './views/brand/BrandDoc'
+import { ContextPack, PrintDoc, Register } from './views/brand/BrandExtras'
+import BrandHome from './views/brand/BrandHome'
 
 const MindMap = lazy(() => import('./views/MindMap'))
 
@@ -41,6 +44,11 @@ export default function App() {
   return (
     <ToastProvider>
       <HashRouter>
+        <Routes>
+          <Route path="/brand-strategy/:doc/print" element={<PrintDoc />} />
+          <Route
+            path="*"
+            element={
         <AppShell>
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
@@ -58,11 +66,19 @@ export default function App() {
                 <Route path="/longform" element={<LongForms />} />
                 <Route path="/ideas" element={<Ideas />} />
                 <Route path="/matrix" element={<Matrix />} />
+                <Route path="/brand-strategy" element={<BrandHome />} />
+                <Route path="/brand-strategy/register" element={<Register />} />
+                <Route path="/brand-strategy/context" element={<ContextPack />} />
+                <Route path="/brand-strategy/assets" element={<BrandDoc docOverride="assets" />} />
+                <Route path="/brand-strategy/:doc" element={<BrandDoc />} />
                 <Route path="*" element={<Page><EmptyState title="Page introuvable" /></Page>} />
               </Routes>
             </Suspense>
           </ErrorBoundary>
         </AppShell>
+            }
+          />
+        </Routes>
       </HashRouter>
     </ToastProvider>
   )

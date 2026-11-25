@@ -10,6 +10,7 @@ import { Thumb } from './images/Thumb'
 import { IconButton, PillarChip, PlatformChip, Sheet, ValidationBadge } from './ui'
 import { CtaBadge } from './CtaBits'
 import { ctaById, ctaOf } from '../lib/seed/cta'
+import { CONTENT_TYPES, CONTEXT_LABEL, contentTypeFor } from '../lib/brand/context'
 
 function Head({ id, title, onClose, children }: { id: string; title: string; onClose: () => void; children?: React.ReactNode }) {
   return (
@@ -155,6 +156,7 @@ export function IdeaSheet() {
                 </dl>
               </Block>
             )}
+            <BrandContext typeId={contentTypeFor(c)} />
             <Refs ids={c.imageIds} />
             <ProblemsList ids={c.problemIds} />
             <RelatedIdeas ids={c.relatedIds} />
@@ -164,6 +166,22 @@ export function IdeaSheet() {
         </>
       )}
     </Sheet>
+  )
+}
+
+function BrandContext({ typeId }: { typeId: string }) {
+  const t = CONTENT_TYPES.find((x) => x.id === typeId)!
+  return (
+    <Block label="Contexte de marque">
+      <Link to={`/brand-strategy/context?type=${t.id}`} className="inline-flex flex-wrap items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2 text-[12.5px] hover:border-line-strong">
+        {t.contexts.map((c) => (
+          <span key={c} className="font-medium" style={{ color: c === 'corporate' ? 'var(--c-fn)' : 'var(--c-tz)' }}>
+            {CONTEXT_LABEL[c]}
+          </span>
+        ))}
+        <span className="text-ink-3">+ Alignement · {t.label} →</span>
+      </Link>
+    </Block>
   )
 }
 
@@ -290,6 +308,7 @@ export function LongFormSheet() {
                 </div>
               </div>
             </Block>
+            <BrandContext typeId={s.brand === 'TZ' ? 'db-yt-tz' : 'fn-script'} />
             <Refs ids={l.support} />
             <ProblemsList ids={l.problemIds} />
             <RelatedIdeas ids={l.basedOn} />

@@ -34,7 +34,7 @@ function SwatchCard({ name, hex, usage, source }: { name: string; hex: string; u
       <div className="p-3">
         <div className="text-[13px] font-semibold">{name}</div>
         <p className="mt-0.5 text-[12px] leading-relaxed text-ink-3">{usage}</p>
-        <div className="mt-1.5 text-[10.5px] text-ink-3">Relevé sur {source}</div>
+        <div className="mt-1.5 text-[10.5px] text-ink-3">{source === 'palette officielle' ? 'Palette officielle' : `Relevé sur ${source}`}</div>
       </div>
     </div>
   )
@@ -52,7 +52,7 @@ export default function Charter() {
       <PageHeader eyebrow="Direction artistique" title={isTZ ? 'Charte Tiziana / Madame Caci' : 'Charte Fynovates'} description={ch.intro} />
 
       <Section title={isTZ ? 'Tonalités' : 'Codes couleur'} aside={<span className="text-[11.5px] text-ink-3">Clique sur une couleur pour copier le code</span>}>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
           {ch.palette.map((s) => (
             <SwatchCard key={s.hex} {...s} />
           ))}
