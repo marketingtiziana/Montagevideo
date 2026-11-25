@@ -12,6 +12,7 @@ Compte personnel, photographique et incarné, sans aucun élément de l'identit�
 | `05-sequences/` | 4 séquences complètes (17 écrans), en fichiers seuls et dans la visionneuse |
 | `06-stories-a-la-une/` | 5 couvertures (À propos, Mon entreprise, International, Mes réflexions, Médias) et leur Story d'introduction |
 | `07-presentation/` | Présentation PDF (16 diapositives), diapositives PNG, planche globale |
+| `08-planches/` | Planches séparées Feed, Stories et Stories à la une (PNG + PDF) — `node madame-caci/src/planches.mjs` |
 
 `presentation/index.html` : page de présentation publiée en artefact.
 
