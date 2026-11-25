@@ -1,0 +1,89 @@
+// STORIES 1080 × 1920 au rendu de l'éditeur natif d'Instagram (pas de gabarit de designer).
+// Approximations des polices natives (propriétaires) : sérif « Classique » → Liberation Serif ; sans-sérif natif → Liberation Sans.
+// À la mise en ligne, les textes se tapent directement dans Instagram avec ces styles.
+import { page, photo, fix } from './core.mjs';
+const f = fix;
+const SERIF = "'Liberation Serif','Times New Roman',serif", SANS = "'Liberation Sans',Arial,sans-serif";
+const S = body => page(1080, 1920, body);
+
+// Style 1 : sérif noir sur bandeau blanc, un bloc par phrase
+const band = (t, top, { size = 50, align = 'center' } = {}) => `<div class="abs" style="left:70px;right:70px;top:${top}px;text-align:${align}"><span style="font:400 ${size}px/1.42 ${SERIF};color:#000;background:#fff;padding:4px 16px;-webkit-box-decoration-break:clone;box-decoration-break:clone">${f(t)}</span></div>`;
+// Style 2 : sans-sérif natif, blanc (ombre), sur fond sombre arrondi, ou noir sur photo claire
+const sans = (t, top, { size = 48, bold = true, mode = 'ombre', align = 'center' } = {}) => {
+  const st = mode === 'fond' ? 'background:rgba(0,0,0,.62);color:#fff;padding:6px 16px;border-radius:12px;' : mode === 'noir' ? 'color:#000;' : 'color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.55),0 0 2px rgba(0,0,0,.6);';
+  return `<div class="abs" style="left:80px;right:80px;top:${top}px;text-align:${align}"><span style="font:${bold ? 700 : 400} ${size}px/1.36 ${SANS};${st}-webkit-box-decoration-break:clone;box-decoration-break:clone">${f(t)}</span></div>`; };
+const subs = (t, top = 1300) => `<div class="abs" style="left:110px;right:110px;top:${top}px;text-align:center"><span style="font:700 46px/1.45 ${SANS};color:#fff;background:rgba(0,0,0,.55);padding:4px 14px;border-radius:10px;-webkit-box-decoration-break:clone;box-decoration-break:clone">${f(t)}</span></div>`;
+// Stickers natifs simulés (aperçu) ; la version de production garde l'emplacement libre
+const STK = {
+  question: (q, top) => `<div class="abs" style="left:180px;right:180px;top:${top}px;border-radius:30px;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:0 30px 34px"><div style="width:84px;height:84px;border-radius:50%;margin:-42px auto 14px;border:5px solid #fff;overflow:hidden;position:relative">${photo('portrait-studio', 84, 84, .52, .27, 2.6)}</div><div style="font:700 34px/1.3 ${SANS};color:#262626;text-align:center">${f(q)}</div><div style="margin-top:22px;background:#EFEFEF;border-radius:16px;padding:24px;text-align:center;font:400 30px ${SANS};color:#8e8e8e">Saisissez quelque chose…</div></div>`,
+  sondage: (d, top) => `<div class="abs" style="left:170px;right:170px;top:${top}px;background:#fff;border-radius:30px;padding:34px;box-shadow:0 8px 30px rgba(0,0,0,.25)"><div style="font:700 34px/1.3 ${SANS};color:#262626;text-align:center">${f(d[0])}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">${d.slice(1).map(o => `<div style="background:#F2F2F2;border-radius:18px;padding:26px 10px;text-align:center;font:700 32px ${SANS};color:#262626">${f(o)}</div>`).join('')}</div></div>`,
+  quiz: (d, top) => `<div class="abs" style="left:150px;right:150px;top:${top}px;background:#fff;border-radius:30px;padding:30px;box-shadow:0 8px 30px rgba(0,0,0,.25)"><div style="font:700 34px/1.3 ${SANS};color:#262626;text-align:center">${f(d[0])}</div>${d.slice(1).map((o, i) => `<div style="margin-top:16px;border:2px solid #E6E6E6;border-radius:40px;padding:16px 22px;font:500 30px ${SANS};color:#262626"><b style="display:inline-block;width:44px;height:44px;border-radius:50%;border:2px solid #ccc;text-align:center;line-height:40px;font-size:24px;margin-right:14px">${'ABC'[i]}</b>${f(o)}</div>`).join('')}</div>`,
+  lien: (d, top) => `<div class="abs" style="left:0;right:0;top:${top}px;text-align:center"><span style="display:inline-block;background:#fff;border-radius:18px;padding:22px 34px;font:700 34px ${SANS};color:#2D6CDF;box-shadow:0 8px 30px rgba(0,0,0,.2)">&#8599;&nbsp; ${f(d)}</span></div>`,
+};
+const zoneLibre = (top, h) => `<div class="abs" style="left:170px;right:170px;top:${top}px;height:${h}px;border:3px dashed rgba(255,255,255,.75);border-radius:30px;display:flex;align-items:center;justify-content:center;font:700 26px ${SANS};color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.12em;text-shadow:0 1px 6px rgba(0,0,0,.5)">Sticker natif</div>`;
+const fonce = (a = .25) => `<div class="abs" style="inset:0;background:rgba(0,0,0,${a})"></div>`;
+
+const EX = {
+  standards: ['MES STANDARDS NE SONT PAS NÉGOCIABLES.', 'Je crois à la rigueur, mais pas à la rigidité.', 'À l’ambition, mais pas aux raccourcis.', 'À la liberté, mais pas à l’improvisation.', 'À la croissance, mais pas au détriment de la qualité.'],
+  experience: ['AVEC LES ANNÉES, J’AI COMPRIS UNE CHOSE.', 'Une bonne décision ne se prend pas uniquement en regardant son avantage immédiat.', 'Il faut aussi regarder ses conséquences.', 'Et surtout, se demander si elle restera cohérente dans le temps.'],
+  vision: ['MA VISION DE L’ENTREPRENEURIAT.', 'Construire une entreprise qui fonctionne.', 'Comprendre ce que l’on crée.', 'S’entourer des bonnes compétences.', 'Ne pas sacrifier le long terme pour un avantage immédiat.'],
+};
+const bands = (lines, tops) => lines.map((l, i) => band(l, tops[i], { size: i ? 48 : 46 })).join('');
+const STORY = (id, style, nom, html, extra = {}) => ({ id, style, nom, html, ...extra });
+
+export const STORIES = [
+  STORY('s1-a-standards', 1, 'Standards', () => S(`${photo('portrait-studio', 1080, 1920, .52, .40, 1.0)}${bands(EX.standards, [300, 900, 1090, 1280, 1470])}`)),
+  STORY('s1-b-experience', 1, 'Expérience', () => S(`${photo('bureau-debout', 1080, 1920, .46, .42, 1.0)}${bands(EX.experience, [290, 960, 1210, 1380])}`)),
+  STORY('s1-c-vision', 1, 'Vision entrepreneuriale', () => S(`${photo('studio-podcast', 1080, 1920, .46, .42, 1.0)}${bands(EX.vision, [280, 920, 1090, 1260, 1430])}`)),
+  STORY('s2-a-dirigeante', 2, 'Dirigeante · fond sombre', () => S(`${photo('bureau-rire-documents', 1080, 1920, .45, .40, 1.0)}${sans('Il y a une chose que j’ai comprise en développant Fynovates.', 1000, { size: 50, mode: 'fond' })}${sans('Une entreprise ne grandit pas uniquement parce qu’elle a davantage de clients.', 1220, { size: 42, bold: false, mode: 'fond' })}${sans('Elle doit aussi développer une organisation capable de suivre cette croissance.', 1400, { size: 42, mode: 'fond' })}`)),
+  STORY('s2-b-international', 2, 'International · texte blanc', () => S(`${photo('jardin-voyage', 1080, 1920, .48, .50, 1.0)}${fonce(.18)}${sans('On parle beaucoup de liberté géographique.', 300, { size: 56 })}${sans('Mais pouvoir travailler depuis différents pays demande aussi de savoir organiser son activité correctement.', 1280, { size: 44, bold: false })}`)),
+  STORY('s2-c-architecture-noir', 2, 'Texte noir sur photo claire', () => S(`${photo('illustration-tours-jumelles', 1080, 1920, .5, .5, 1.0)}${sans('Ce qui dure se construit lentement.', 360, { size: 60, mode: 'noir' })}${sans('Dans une entreprise comme ailleurs, les fondations comptent plus que la façade.', 520, { size: 42, bold: false, mode: 'noir' })}`), { illustration: true }),
+  STORY('s3-a-decision', 3, 'Portrait', () => S(`${photo('portrait-studio', 1080, 1920, .52, .32, 1.25)}${sans('Une décision que je ne prends plus à la légère.', 1380, { size: 54 })}`)),
+  STORY('s3-b-experience', 3, 'Ville', () => S(`${photo('illustration-ville-londres', 1080, 1920, .5, .5, 1.0)}${band('Ce que l’expérience change dans notre manière de voir les choses.', 380, { size: 52 })}`), { illustration: true }),
+  STORY('s3-c-recul', 3, 'Paysage', () => S(`${photo('jardin-voyage', 1080, 1920, .86, .30, 1.9)}${sans('Prendre du recul fait aussi partie du travail.', 1300, { size: 56 })}`)),
+  STORY('s4-a-face-camera-bureau', 4, 'Face caméra · bureau', () => S(`${photo('bureau-debout', 1080, 1920, .44, .30, 1.12)}${subs('Une erreur que je rencontre régulièrement… on choisit le pays avant de comprendre son activité.')}`)),
+  STORY('s4-b-face-camera-studio', 4, 'Face caméra · studio', () => S(`${photo('studio-podcast', 1080, 1920, .46, .32, 1.25)}${subs('Avec les années, j’ai remarqué quelque chose : les plus sereins sont rarement les plus pressés.')}`)),
+  STORY('s5-a-new-york', 5, 'Ville', () => S(`${photo('illustration-new-york', 1080, 1920, .5, .5, 1.0)}${fonce(.15)}${sans('Chaque ville a sa manière d’entreprendre.', 330, { size: 54 })}${sans('La rigueur, elle, voyage avec nous.', 1400, { size: 50, bold: false })}`), { illustration: true }),
+  STORY('s5-b-bureaux', 5, 'Espace de travail', () => S(`${photo('illustration-bureaux', 1080, 1920, .5, .5, 1.0)}${band('Un bel espace de travail aide.', 1150, { size: 52 })}${band('Une organisation claire aide davantage.', 1270, { size: 52 })}`), { illustration: true }),
+  STORY('s6-a-question', 6, 'Boîte à questions', (ap = false) => S(`${photo('portrait-studio', 1080, 1920, .52, .38, 1.0)}${fonce(.2)}${sans('Pour les entrepreneurs qui me suivent :', 960, { size: 48 })}${ap ? STK.question('Quelle est la difficulté que vous rencontrez le plus souvent lorsque vous développez votre activité à l’international ?', 1130) : zoneLibre(1100, 460)}`), { sticker: true }),
+  STORY('s6-b-sondage', 6, 'Sondage', (ap = false) => S(`${photo('jardin-voyage', 1080, 1920, .12, .30, 1.9)}${fonce(.15)}${sans('As-tu déjà réfléchi à ton organisation financière personnelle ?', 420, { size: 52 })}${ap ? STK.sondage(['Ton organisation financière', 'Oui', 'Pas encore'], 1050) : zoneLibre(1050, 330)}`), { sticker: true }),
+  STORY('s6-c-quiz', 6, 'Quiz', (ap = false) => S(`${photo('illustration-bureaux', 1080, 1920, .5, .5, 1.0)}${sans('Est-ce que tu considères la construction de ton patrimoine dès aujourd’hui ?', 330, { size: 50, mode: 'fond' })}${ap ? STK.quiz(['Ton patrimoine', 'J’y pense déjà', 'Plus tard', 'Je ne sais pas par où commencer'], 900) : zoneLibre(900, 520)}`), { sticker: true, illustration: true }),
+  STORY('s6-d-youtube', 6, 'Lien YouTube', (ap = false) => S(`${photo('studio-podcast', 1080, 1920, .46, .40, 1.0)}${sans('Nouvelle vidéo en ligne.', 1060, { size: 56 })}${sans('Pourquoi choisir son pays avant d’analyser son activité est une erreur.', 1170, { size: 42, bold: false })}${ap ? STK.lien('YOUTUBE.COM/@[CHAÎNE]', 1420) : zoneLibre(1410, 130)}`), { sticker: true }),
+  STORY('s6-e-fynovates', 6, 'Lien vers Fynovates', (ap = false) => S(`${photo('bureau-debout', 1080, 1920, .45, .40, 1.0)}${sans('Pour une situation précise, l’équipe Fynovates peut l’analyser.', 1150, { size: 46, mode: 'fond' })}${ap ? STK.lien('FYNOVATES.COM', 1420) : zoneLibre(1410, 130)}`), { sticker: true }),
+];
+export const STYLES = { 1: 'Sérif et bandeaux blancs', 2: 'Sans-sérif natif', 3: 'Texte court sur photo', 4: 'Face caméra', 5: 'Photo de lieu et réflexion', 6: 'Interactive' };
+
+const scr = (nom, html, extra = {}) => [nom, { html, ...extra }];
+export const SEQUENCES = [
+  { id: 'a-avec-le-recul', titre: 'Avec le recul…', theme: 'Les enseignements de Tiziana', ecrans: [
+    scr('Accroche', () => S(`${photo('portrait-studio', 1080, 1920, .52, .34, 1.15)}${band('AVEC LE RECUL…', 1250, { size: 54 })}${band('il y a une chose que j’aurais aimé comprendre plus tôt.', 1380, { size: 48 })}`)),
+    scr('Observation', () => S(`${photo('bureau-rire-documents', 1080, 1920, .45, .40, 1.0)}${sans('Beaucoup d’entrepreneurs cherchent d’abord la structure idéale.', 1050, { size: 48, mode: 'fond' })}${sans('Très peu commencent par regarder comment leur activité fonctionne réellement.', 1300, { size: 42, bold: false, mode: 'fond' })}`)),
+    scr('Réflexion', () => S(`${photo('jardin-voyage', 1080, 1920, .9, .30, 1.9)}${sans('Une organisation solide ne se voit pas.', 360, { size: 54 })}${sans('Elle se ressent dans la sérénité avec laquelle on prend ses décisions.', 1300, { size: 46, bold: false })}`)),
+    scr('Conviction', () => S(`${photo('bureau-debout', 1080, 1920, .46, .42, 1.0)}${band('On structure ce que l’on comprend.', 1200, { size: 54 })}${band('Jamais l’inverse.', 1320, { size: 54 })}`))] },
+  { id: 'b-journal-de-dirigeante', titre: 'Journal de dirigeante', theme: 'Le développement de Fynovates', ecrans: [
+    scr('Moment de travail', () => S(`${photo('bureau-rire-documents', 1080, 1920, .45, .40, 1.0)}${sans('Mardi, 9 h 30', 300, { size: 44, align: 'left' })}${sans('Revue de notre organisation interne avec l’équipe.', 1350, { size: 46, mode: 'fond' })}`)),
+    scr('Priorité', () => S(`${photo('bureau-debout', 1080, 1920, .44, .32, 1.1)}${band('LA PRIORITÉ DU MOMENT', 1150, { size: 48 })}${band('Faire évoluer notre organisation sans perdre notre niveau d’exigence.', 1270, { size: 48 })}`)),
+    scr('Réflexion', () => S(`${photo('studio-podcast', 1080, 1920, .46, .38, 1.1)}${sans('Diriger, c’est souvent arbitrer entre ce qui est urgent et ce qui est important.', 1250, { size: 48 })}`)),
+    scr('Enseignement', () => S(`${photo('illustration-tours-verre', 1080, 1920, .55, .5, 1.0)}${band('Ce que j’en retiens :', 820, { size: 50 })}${band('une croissance se prépare avant d’arriver.', 940, { size: 50 })}`), { illustration: true })] },
+  { id: 'c-ma-vision-de-l-international', titre: 'Ma vision de l’international', theme: 'La structuration des entrepreneurs', ecrans: [
+    scr('Prise de position', () => S(`${photo('portrait-studio', 1080, 1920, .50, .38, 1.05)}${band('Je ne crois pas aux solutions universelles à l’international.', 1250, { size: 54 })}`)),
+    scr('Idée reçue', () => S(`${photo('illustration-ville-londres', 1080, 1920, .5, .5, 1.0)}${fonce(.3)}${sans('Une idée reçue :', 600, { size: 44, bold: false })}${sans('« Il suffit de créer une société à l’étranger pour payer moins d’impôts. »', 700, { size: 54 })}`), { illustration: true }),
+    scr('Raisonnement', () => S(`${photo('jardin-voyage', 1080, 1920, .48, .46, 1.15)}${sans('Ta résidence, le lieu de ton activité, tes clients, l’endroit où tu décides : tout se tient.', 300, { size: 46, mode: 'fond' })}${sans('Changer un seul élément ne suffit pas.', 1400, { size: 50, mode: 'fond' })}`)),
+    scr('Conviction', () => S(`${photo('bureau-debout', 1080, 1920, .46, .42, 1.0)}${band('Une structure se construit à partir de la réalité.', 1150, { size: 50 })}${band('Jamais à partir d’un taux.', 1340, { size: 50 })}`)),
+    scr('Redirection YouTube', (ap = false) => S(`${photo('studio-podcast', 1080, 1920, .46, .40, 1.0)}${sans('J’en parle en détail dans ma dernière vidéo.', 1150, { size: 50 })}${ap ? STK.lien('YOUTUBE.COM/@[CHAÎNE]', 1400) : zoneLibre(1390, 130)}`), { sticker: true })] },
+  { id: 'd-une-question-que-l-on-me-pose', titre: 'Une question que l’on me pose souvent', theme: 'Problématique entrepreneuriale', ecrans: [
+    scr('Question', () => S(`${photo('illustration-new-york', 1080, 1920, .5, .5, 1.0)}${fonce(.35)}${sans('Une question que l’on me pose souvent :', 640, { size: 44, bold: false })}${sans('« Dans quel pays dois-je créer ma société ? »', 760, { size: 60 })}`), { illustration: true }),
+    scr('Réponse', () => S(`${photo('portrait-studio', 1080, 1920, .52, .36, 1.1)}${band('Ma réponse : cela dépend de ta situation.', 1200, { size: 50 })}${band('La tienne, pas celle de quelqu’un d’autre.', 1390, { size: 50 })}`)),
+    scr('Mise en perspective', () => S(`${photo('bureau-rire-documents', 1080, 1920, .5, .42, 1.0)}${sans('Où vis-tu ? Où travailles-tu ? Où sont tes clients ? Qui prend les décisions ?', 1000, { size: 46, mode: 'fond' })}${sans('Ces réponses comptent plus que le pays lui-même.', 1330, { size: 46, mode: 'fond' })}`)),
+    scr('Redirection', (ap = false) => S(`${photo('bureau-debout', 1080, 1920, .45, .36, 1.05)}${sans('L’analyse complète est sur ma chaîne YouTube.', 1120, { size: 48 })}${ap ? STK.lien('YOUTUBE.COM/@[CHAÎNE]', 1330) : zoneLibre(1320, 130)}${sans('Pour une situation précise : @fynovates', 1500, { size: 36, bold: false })}`), { sticker: true })] },
+];
+
+export const HIGHLIGHTS = [
+  { id: 'a-propos', nom: 'À propos', ph: ['portrait-studio', .52, .27, 3.0], intro: () => S(`${photo('portrait-studio', 1080, 1920, .52, .36, 1.05)}${band('Tiziana Caci', 1150, { size: 58 })}${band('Fondatrice & directrice de Fynovates.', 1280, { size: 46 })}${band('Ici, je partage mon parcours, mes réflexions et mes déplacements.', 1400, { size: 46 })}`) },
+  { id: 'mon-entreprise', nom: 'Mon entreprise', ph: ['bureau-rire-documents', .80, .45, 3.2], intro: () => S(`${photo('bureau-rire-documents', 1080, 1920, .45, .40, 1.0)}${sans('Construire Fynovates.', 1150, { size: 56, mode: 'fond' })}${sans('Le rôle de dirigeante, l’équipe et les coulisses.', 1290, { size: 44, bold: false, mode: 'fond' })}`) },
+  { id: 'international', nom: 'International', ph: ['illustration-ville-londres', .55, .5, 2.2], intro: () => S(`${photo('jardin-voyage', 1080, 1920, .48, .50, 1.0)}${sans('Déplacements, lieux et observations.', 1350, { size: 52 })}`) },
+  { id: 'mes-reflexions', nom: 'Mes réflexions', ph: ['jardin-voyage', .86, .30, 3.2], intro: () => S(`${photo('bureau-debout', 1080, 1920, .46, .42, 1.0)}${band('Mes convictions, mes expériences,', 1200, { size: 50 })}${band('ce que j’apprends en chemin.', 1320, { size: 50 })}`) },
+  { id: 'medias', nom: 'Médias', ph: ['studio-podcast', .76, .395, 4.2], intro: () => S(`${photo('studio-podcast', 1080, 1920, .46, .40, 1.0)}${sans('Interviews, prises de parole et extraits YouTube.', 1300, { size: 50 })}`) },
+];
+export const hlPhoto = h => page(1080, 1080, photo(h.ph[0], 1080, 1080, h.ph[1], h.ph[2], h.ph[3]));
+export const HL_CONTENU = { 'a-propos': ['s1-a-standards', 's3-a-decision'], 'mon-entreprise': ['s2-a-dirigeante', 's1-b-experience'], international: ['s2-b-international', 's5-a-new-york'], 'mes-reflexions': ['s1-c-vision', 's3-c-recul'], medias: ['s4-b-face-camera-studio', 's6-d-youtube'] };
