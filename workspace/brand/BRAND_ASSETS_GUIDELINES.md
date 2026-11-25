@@ -53,6 +53,7 @@ Statut : CONFIRMÉ
 | IMG-004 à IMG-006 | Publications Instagram | Référence publication photo / couverture / carrousel |
 | IMG-007 à IMG-009 | Profil et couvertures TikTok (variantes A/B) | Référence couvertures vidéo |
 | IMG-012 à IMG-019 | Stories unitaires, séquences, Stories à la une | Référence Stories |
+| IMG-010, IMG-036 à IMG-041 | Propositions de bannière de chaîne YouTube | À arbitrer : seules IMG-010 (wordmark pur) et IMG-037 (fond noir, sérif ivoire) respectent les interdits du brief ; les autres portent un monogramme F, et IMG-039 / IMG-040 un globe ou une carte du monde. IMG-036 et IMG-037 restent à fournir. |
 
 Ces maquettes sont des **références de travail**, pas des assets à publier tels quels : les textes fiscaux qu'elles contiennent doivent être validés par un expert.
 

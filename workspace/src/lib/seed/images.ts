@@ -51,10 +51,10 @@ const rows: I[] = [
   ['IMG-009', 'fynovates-tiktok-couverture-02-B.png', 1080, 1920, 'ref-couverture', 'FN', 'tt-fn',
     'Couverture TikTok N° 02 — variante B (beige) : « Ouvrir un compte pro à l’étranger », rubrique BANQUE.',
     ['tiktok', 'couverture', 'variante B']],
-  ['IMG-010', 'fynovates-banniere-1-pure-wordmark-avec-signature.png', 2560, 1440, 'ref-corporate', 'FN', null,
-    'Bannière wordmark pur « FYNOVATES » + signature « Conseil fiscal & structuration internationale » sur bleu nuit.',
+  ['IMG-010', 'fynovates-banniere-1-pure-wordmark-avec-signature.png', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube « Pure wordmark » : wordmark « FYNOVATES » + signature « Conseil fiscal & structuration internationale » sur bleu nuit.',
     ['wordmark', 'bannière', 'identité'],
-    ['Format 2560 × 1440 (proportions de bannière YouTube) : plateforme de destination à confirmer.']],
+    ['Bannière YouTube « Pure wordmark » : conforme aux interdits du brief (wordmark seul, sans monogramme).']],
   ['IMG-011', 'thumbnail_private_departure.png', 1280, 720, 'ref-couverture', null, 'yt-fn',
     'Miniature 16:9 « QUITTER LA FRANCE ? — Avant de prendre votre décision » : portrait de femme dans un salon d’aéroport, passeport.',
     ['miniature', 'youtube', 'expatriation'],
@@ -141,21 +141,28 @@ const rows: I[] = [
     'Bannière YouTube — proposition 2 : fond quasi-noir, wordmark FYNOVATES ivoire entre deux doubles filets, baseline sérif « L’expertise au service de votre entreprise. ».',
     ['bannière', 'youtube', 'proposition'],
     ['Aucun monogramme, globe ni carte : seule proposition conforme aux interdits du brief.', 'Wordmark ivoire et baseline différente de « Conseil fiscal & structuration internationale » : à valider.']],
-  ['IMG-038', 'banniere-youtube-proposition-3', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
-    'Bannière YouTube — proposition 3 : gratte-ciel en contre-plongée teintés bleu nuit, monogramme F + wordmark, filet court, « L’EXPERTISE AU SERVICE DE L’INTERNATIONAL ».',
+  ['IMG-038', 'fynovates-banniere-A-corporate-prestige-avec-signature.png', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube « Corporate prestige » : gratte-ciel en contre-plongée teintés bleu nuit, monogramme F + wordmark, filet court, « L’EXPERTISE AU SERVICE DE L’INTERNATIONAL ».',
     ['bannière', 'youtube', 'proposition', 'architecture'], ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).']],
-  ['IMG-039', 'banniere-youtube-proposition-4', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
-    'Bannière YouTube — proposition 4 : globe terrestre lumineux avec villes et coordonnées (Londres, Zurich, Lisbonne, Dubaï, Lagos), « FYNOVATES / INTELLIGENCE ÉCONOMIQUE », « DÉCRYPTER. ANALYSER. COMPRENDRE. ».',
+  ['IMG-039', 'fynovates-banner-02-intelligence-economique-avec-signature.png', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube « Intelligence économique » : globe terrestre lumineux avec villes et coordonnées (Londres, Zurich, Lisbonne, Dubaï, Lagos), « FYNOVATES / INTELLIGENCE ÉCONOMIQUE », « DÉCRYPTER. ANALYSER. COMPRENDRE. ».',
     ['bannière', 'youtube', 'proposition', 'globe'],
     ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).', 'Globe lumineux et carte du monde : interdits par le brief (« aucun globe lumineux », « aucune carte du monde décorative », « aucune esthétique startup technologique »).', 'Villes nommées : suggèrent une présence géographique non vérifiée.']],
-  ['IMG-040', 'banniere-youtube-proposition-5', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
-    'Bannière YouTube — proposition 5 : carte du monde en points, arcs entre villes (Toronto, Londres, Tokyo, Hong Kong, Singapour, Sydney, Mexico, Miami, São Paulo, Johannesbourg), monogramme F + wordmark, « COMPRENDRE LES ENJEUX DU BUSINESS INTERNATIONAL. ».',
+  ['IMG-040', 'fynovates-banner-01-media-economique-international-avec-signature.png', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube « Média économique international » : carte du monde en points, arcs entre villes (Toronto, Londres, Tokyo, Hong Kong, Singapour, Sydney, Mexico, Miami, São Paulo, Johannesbourg), monogramme F + wordmark, « COMPRENDRE LES ENJEUX DU BUSINESS INTERNATIONAL. ».',
     ['bannière', 'youtube', 'proposition', 'carte'],
     ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).', 'Carte du monde décorative : interdite par le brief.', 'Villes nommées : suggèrent une présence géographique non vérifiée.']],
+  ['IMG-041', 'fynovates-banner-04-expertise-pedagogie-avec-signature.png', 2560, 1440, 'ref-corporate', 'FN', 'yt-fn',
+    'Bannière YouTube « Expertise pédagogie » : fond bleu nuit, schéma de structure de groupe à gauche (holding → opérations, PI · marques, trésorerie), schéma de flux transfrontaliers à droite (FR, LU, AE, SG, US), monogramme F + wordmark, « LE MONDE DES AFFAIRES INTERNATIONALES EXPLIQUÉ. ».',
+    ['bannière', 'youtube', 'proposition', 'schéma'],
+    ['Monogramme « F » : contraire à la règle du brief « aucun monogramme F, aucune icône F » — à arbitrer (logo officiel ou non ?).', 'Pays cités dans le schéma (FR, LU, AE, SG, US) : illustratifs, ne doivent pas suggérer une implantation.']],
+  ['IMG-042', 'IMG_6085.jpg', 1206, 2039, 'ref-feed', null, null,
+    'Capture de la grille Instagram d’un compte tiers (photographies lifestyle professionnel, événements, prise de parole).',
+    ['compte tiers', 'grille', 'feed photo'], [THIRD_PARTY, 'Rapprochement possible (proposition) : feed photographique de Tiziana. Destination à confirmer.']],
 ]
 
 /** Visuels décrits mais pas encore fournis en fichier : affichés comme « visuel à importer ». */
-const NOT_YET_SUPPLIED = new Set(['IMG-036', 'IMG-037', 'IMG-038', 'IMG-039', 'IMG-040'])
+const NOT_YET_SUPPLIED = new Set(['IMG-036', 'IMG-037'])
 
 export const images: ImageAsset[] = rows.map(
   ([id, originalName, width, height, type, brand, platform, description, tags, warnings = [], validation]) => ({

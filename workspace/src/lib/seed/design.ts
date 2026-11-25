@@ -72,17 +72,17 @@ export const platformDesign: Record<PlatformId, DesignBlock[]> = {
   ],
   'yt-fn': [
     {
-      title: 'Bannière de chaîne — 5 propositions',
-      imageIds: ['IMG-036', 'IMG-037', 'IMG-038', 'IMG-039', 'IMG-040'],
+      title: 'Bannière de chaîne — propositions',
+      imageIds: ['IMG-010', 'IMG-038', 'IMG-041', 'IMG-039', 'IMG-040', 'IMG-036', 'IMG-037'],
       wide: true,
       specs: [
         'Format 2560 × 1440 ; logo et texte dans la zone visible sur tous les écrans (centre, environ 1546 × 423)',
-        'Proposition 2 : seule conforme aux interdits du brief (pas de monogramme, pas de globe, pas de carte)',
-        'Propositions 1 et 3 : monogramme F à arbitrer',
-        'Propositions 4 et 5 : globe / carte du monde et villes nommées, contraires au brief',
-        'Baselines proposées : « Fiscalité. Structure. Finance. International. », « L’expertise au service de votre entreprise. », « L’expertise au service de l’international », « Décrypter. Analyser. Comprendre. », « Comprendre les enjeux du business international. »',
+        'Conformes aux interdits du brief : « Pure wordmark » (IMG-010) et la proposition fond noir / sérif ivoire (IMG-037)',
+        'Monogramme F à arbitrer : « Corporate prestige », « Expertise pédagogie », « Intelligence économique », « Média économique international », proposition à rayures',
+        'Globe et carte du monde, contraires au brief : « Intelligence économique » et « Média économique international »',
+        'Baselines : « Conseil fiscal & structuration internationale », « L’expertise au service de l’international », « Le monde des affaires internationales expliqué. », « Décrypter. Analyser. Comprendre. », « Comprendre les enjeux du business international. », « Fiscalité. Structure. Finance. International. », « L’expertise au service de votre entreprise. »',
       ],
-      warning: 'Fichiers non fournis : dépose les 5 bannières dans le dossier Drive IMAGES pour qu’elles s’affichent ici.',
+      warning: 'Deux propositions vues dans le chat ne sont pas encore dans le Drive : fond à rayures (IMG-036) et fond noir / sérif ivoire (IMG-037).',
     },
     {
       title: 'Miniature',
