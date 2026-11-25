@@ -1,64 +1,61 @@
-import { useLiveQuery } from 'dexie-react-hooks'
-import { useEffect, useMemo, useState } from 'react'
-import { db } from './db'
+import { useMemo } from 'react'
+import { brands, pillars } from './seed/brands'
+import { channels } from './seed/channels'
+import { contents as rawContents } from './seed/contents'
+import { images } from './seed/images'
+import { problems } from './seed/problems'
+import { journeys, matrix, rules } from './seed/strategy'
 import type { Content, ImageAsset } from './types'
 
-export const useContents = () => useLiveQuery(() => db.contents.toArray(), [], undefined)
-export const useProblems = () => useLiveQuery(() => db.problems.toArray(), [], undefined)
-export const useImages = () => useLiveQuery(() => db.images.toArray(), [], undefined)
-export const useChannels = () => useLiveQuery(() => db.channels.toArray(), [], undefined)
-export const useBrands = () => useLiveQuery(() => db.brands.toArray(), [], undefined)
-export const usePillars = () => useLiveQuery(() => db.pillars.toArray(), [], undefined)
-export const useJourneys = () => useLiveQuery(() => db.journeys.toArray(), [], undefined)
-export const useMatrix = () => useLiveQuery(() => db.matrix.orderBy('order').toArray(), [], undefined)
-export const useRules = () => useLiveQuery(() => db.rules.toArray(), [], undefined)
+/** Make relatedIds symmetric and drop dangling references. */
+function normalize(list: Content[]): Content[] {
+  const ids = new Set(list.map((c) => c.id))
+  const map = new Map(list.map((c) => [c.id, new Set(c.relatedIds.filter((r) => ids.has(r) && r !== c.id))]))
+  for (const [id, rel] of map) for (const r of rel) map.get(r)!.add(id)
+  return list.map((c) => ({ ...c, relatedIds: [...map.get(c.id)!].sort() }))
+}
 
-export const useContent = (id: string | null) =>
-  useLiveQuery(() => (id ? db.contents.get(id) : undefined), [id])
-export const useProblem = (id: string | null) =>
-  useLiveQuery(() => (id ? db.problems.get(id) : undefined), [id])
-export const useImage = (id: string | null) => useLiveQuery(() => (id ? db.images.get(id) : undefined), [id])
+const contents = normalize(rawContents)
 
-/** Resolves an image to a displayable URL (public file or stored blob). */
+/* Static reference data — the workspace is a read-only guide. */
+export const DATA = { contents, problems, images, channels, brands, pillars, journeys, matrix, rules }
+
+export const useContents = () => contents
+export const useProblems = () => problems
+export const useImages = () => images
+export const useChannels = () => channels
+export const useBrands = () => brands
+export const usePillars = () => pillars
+export const useJourneys = () => journeys
+export const useMatrix = () => matrix
+export const useRules = () => rules
+
+const byId = <T extends { id: string }>(list: T[]) => new Map(list.map((x) => [x.id, x]))
+const contentMap = byId(contents)
+const problemMap = byId(problems)
+const imageMap = byId(images)
+
+export const useContent = (id: string | null) => (id ? contentMap.get(id) : undefined)
+export const useProblem = (id: string | null) => (id ? problemMap.get(id) : undefined)
+export const useImage = (id: string | null) => (id ? imageMap.get(id) : undefined)
+export const getImage = (id: string | null | undefined) => (id ? imageMap.get(id) : undefined)
+export const getContent = (id: string | null | undefined) => (id ? contentMap.get(id) : undefined)
+export const getProblem = (id: string | null | undefined) => (id ? problemMap.get(id) : undefined)
+
 export function useImageUrl(img: ImageAsset | undefined | null): string | null {
-  const [url, setUrl] = useState<string | null>(img?.src || null)
-  useEffect(() => {
-    if (!img) return setUrl(null)
-    if (!img.hasBlob) return setUrl(img.src)
-    let revoke: string | null = null
-    let alive = true
-    db.files.get(img.id).then((f) => {
-      if (!alive || !f) return
-      revoke = URL.createObjectURL(f.blob)
-      setUrl(revoke)
-    })
-    return () => {
-      alive = false
-      if (revoke) URL.revokeObjectURL(revoke)
-    }
-  }, [img?.id, img?.hasBlob, img?.src])
-  return url
+  return img?.src || null
 }
 
 export function useById<T extends { id: string }>(list: T[] | undefined) {
   return useMemo(() => new Map((list ?? []).map((x) => [x.id, x])), [list])
 }
 
-/** Inverse relations, computed from the single source of truth. */
-export function useImageUsage(contents: Content[] | undefined) {
+export function useImageUsage(list: Content[] | undefined) {
   return useMemo(() => {
     const m = new Map<string, string[]>()
-    for (const c of contents ?? []) for (const i of c.imageIds) m.set(i, [...(m.get(i) ?? []), c.id])
+    for (const c of list ?? []) for (const i of c.imageIds) m.set(i, [...(m.get(i) ?? []), c.id])
     return m
-  }, [contents])
-}
-
-export function useProblemUsage(contents: Content[] | undefined) {
-  return useMemo(() => {
-    const m = new Map<string, string[]>()
-    for (const c of contents ?? []) for (const p of c.problemIds) m.set(p, [...(m.get(p) ?? []), c.id])
-    return m
-  }, [contents])
+  }, [list])
 }
 
 export const isToClassify = (img: ImageAsset) => img.type === 'a-classer' || (!img.brand && !img.platform)

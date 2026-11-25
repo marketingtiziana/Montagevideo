@@ -8,18 +8,24 @@ export interface NavGroup {
 }
 
 export const NAV: NavGroup[] = [
-  { label: 'Overview', items: [{ path: '/', label: 'Strategic Overview' }] },
   {
-    label: 'Strategy',
+    label: 'Accueil',
     items: [
-      { path: '/map', label: 'Master Mind Map' },
-      { path: '/brands', label: 'Brand Architecture' },
-      { path: '/pillars', label: 'Editorial Pillars' },
-      { path: '/insights', label: 'Prospect Insights' },
+      { path: '/', label: 'Vue d’ensemble' },
+      { path: '/map', label: 'Carte stratégique' },
     ],
   },
   {
-    label: 'Channels',
+    label: 'Stratégie',
+    items: [
+      { path: '/brand/FN', label: 'Fynovates' },
+      { path: '/brand/TZ', label: 'Tiziana / Madame Caci' },
+      { path: '/insights', label: 'Problématiques prospects' },
+      { path: '/journeys', label: 'Parcours de conversion' },
+    ],
+  },
+  {
+    label: 'Plateformes',
     items: [
       { path: '/channel/yt-fn', label: 'YouTube Fynovates' },
       { path: '/channel/ig-fn', label: 'Instagram Fynovates' },
@@ -30,30 +36,25 @@ export const NAV: NavGroup[] = [
     ],
   },
   {
-    label: 'Creative Studio',
+    label: 'Direction artistique',
     items: [
-      { path: '/art-direction', label: 'Art Direction' },
-      { path: '/library', label: 'Creative Library' },
-      { path: '/references', label: 'Visual References' },
-      { path: '/infographics', label: 'Infographics' },
-      { path: '/carousels', label: 'Carousels' },
-      { path: '/storyboards', label: 'Storyboards' },
+      { path: '/da/FN', label: 'Charte Fynovates' },
+      { path: '/da/TZ', label: 'Charte Tiziana' },
+      { path: '/templates', label: 'Templates' },
+      { path: '/gallery', label: 'Galerie visuelle' },
     ],
   },
   {
-    label: 'Operations',
+    label: 'Idées de contenus',
     items: [
-      { path: '/database', label: 'Content Database' },
-      { path: '/board', label: 'Production Board' },
-      { path: '/stories', label: 'Story Sequences' },
-      { path: '/matrix', label: 'Repurposing Matrix' },
-      { path: '/journeys', label: 'Conversion Journeys' },
+      { path: '/longform', label: 'Long formats YouTube' },
+      { path: '/ideas', label: 'Idées par plateforme' },
+      { path: '/matrix', label: 'Déclinaisons' },
     ],
   },
 ]
 
 export function findNav(pathname: string): { group: NavGroup; item: NavItem } | null {
-  for (const group of NAV)
-    for (const item of group.items) if (item.path === pathname) return { group, item }
+  for (const group of NAV) for (const item of group.items) if (item.path === pathname) return { group, item }
   return null
 }

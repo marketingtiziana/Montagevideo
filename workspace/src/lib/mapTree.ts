@@ -1,8 +1,9 @@
-import { BRANDS, FORMATS, PILLAR_IDS, PILLARS, PLATFORMS, STAGES } from './constants'
+import { BRANDS, FORMATS, PILLAR_IDS, PILLARS, PLATFORMS } from './constants'
+import { longforms, setups } from './seed/longform'
 import { isToClassify } from './hooks'
 import type { Brand, Channel, Content, ImageAsset, Journey, MatrixRow, PlatformId, Problem, Rule, Validation } from './types'
 
-export type Ref = { t: 'c' | 'p' | 'i'; id: string } | { t: 'route'; to: string }
+export type Ref = { t: 'c' | 'p' | 'i' | 'l'; id: string } | { t: 'route'; to: string }
 
 export interface TreeNode {
   id: string
@@ -149,7 +150,7 @@ export function buildTree(d: MapData): TreeNode[] {
           color: BRANDS[b].color,
         })
       }),
-      { t: 'route', to: '/brands' },
+      { t: 'route', to: '/brand/FN' },
     ),
     T(
       '03',
@@ -159,7 +160,7 @@ export function buildTree(d: MapData): TreeNode[] {
         branch('T03/TZ', 'Tiziana — références', d.images.filter((i) => i.brand === 'TZ').map((i) => imgNode('T03/TZ', i)), { color: BRANDS.TZ.color }),
         branch('T03/todo', 'Visuels à classer', toClassify.map((i) => imgNode('T03/todo', i))),
       ],
-      { t: 'route', to: '/art-direction' },
+      { t: 'route', to: '/da/FN' },
     ),
     T(
       '04',
@@ -197,7 +198,7 @@ export function buildTree(d: MapData): TreeNode[] {
         branch('T11/FN', 'Séquences Fynovates', stories.filter((c) => c.brands.includes('FN')).map((c) => contentNode('T11/FN', c)), { color: BRANDS.FN.color }),
         branch('T11/TZ', 'Stories Tiziana', stories.filter((c) => c.brands.includes('TZ')).map((c) => contentNode('T11/TZ', c)), { color: BRANDS.TZ.color }),
       ],
-      { t: 'route', to: '/stories' },
+      { t: 'route', to: '/channel/ig-fn' },
     ),
     T(
       '12',
@@ -206,11 +207,11 @@ export function buildTree(d: MapData): TreeNode[] {
         branch('T12/info', 'Infographies', visuals.filter((c) => c.format === 'infographie' || c.format === 'tableau-comparatif').map((c) => contentNode('T12/info', c))),
         branch('T12/car', 'Carrousels', visuals.filter((c) => c.format !== 'infographie' && c.format !== 'tableau-comparatif').map((c) => contentNode('T12/car', c))),
       ],
-      { t: 'route', to: '/infographics' },
+      { t: 'route', to: '/templates' },
     ),
     T(
       '13',
-      'Content Repurposing',
+      'Déclinaisons multi-plateformes',
       d.matrix.map((r) =>
         branch(
           `T13/${r.id}`,
@@ -242,15 +243,27 @@ export function buildTree(d: MapData): TreeNode[] {
     ),
     T(
       '15',
-      'Production et validation',
-      STAGES.map((s) =>
+      'Long formats YouTube',
+      setups.map((st) =>
         branch(
-          `T15/${s.id}`,
-          s.label,
-          d.contents.filter((c) => c.status === s.id).map((c) => contentNode(`T15/${s.id}`, c)),
+          `T15/${st.id}`,
+          st.name,
+          longforms
+            .filter((l) => l.setup === st.id)
+            .map((l) => ({
+              id: `T15/${st.id}/${l.id}`,
+              label: l.title,
+              kind: 'entity' as const,
+              num: l.id,
+              color: BRANDS[st.brand].color,
+              meta: st.duration,
+              ref: { t: 'l' as const, id: l.id },
+              children: [],
+            })),
+          { color: BRANDS[st.brand].color },
         ),
       ),
-      { t: 'route', to: '/board' },
+      { t: 'route', to: '/longform' },
     ),
   ]
 }

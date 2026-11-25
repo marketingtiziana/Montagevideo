@@ -1,20 +1,31 @@
 import clsx from 'clsx'
-import { ChevronRight, Menu, Plus, Search, Settings2, X } from 'lucide-react'
+import { ChevronRight, Menu, Moon, Search, X } from 'lucide-react'
 import { useEffect, useState, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { findNav, NAV } from '../lib/nav'
 import { CommandPalette } from './CommandPalette'
-import { ContentDetail } from './content/ContentDetail'
-import { ImageDetail } from './images/ImageDetail'
-import { ProblemDetail } from './problems/ProblemDetail'
-import { QuickCreate } from './QuickCreate'
-import { SettingsDialog } from './SettingsDialog'
+import { IdeaSheet, ImageSheet, LongFormSheet, ProblemSheet } from './Sheets'
 import { Button, IconButton } from './ui'
+
+export function applyTheme(t: string) {
+  if (t === 'system') document.documentElement.removeAttribute('data-theme')
+  else document.documentElement.setAttribute('data-theme', t)
+}
+function toggleTheme() {
+  const dark =
+    document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const next = dark ? 'light' : 'dark'
+  applyTheme(next)
+  try {
+    localStorage.setItem('theme', next)
+  } catch {
+    /* storage unavailable */
+  }
+}
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState(false)
-  const [create, setCreate] = useState(false)
-  const [settings, setSettings] = useState(false)
   const [mobileNav, setMobileNav] = useState(false)
   const loc = useLocation()
 
@@ -25,8 +36,6 @@ export function AppShell({ children }: { children: ReactNode }) {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
         setSearch((s) => !s)
-      } else if (!typing && e.key === 'c' && !e.metaKey && !e.ctrlKey && !e.altKey) {
-        setCreate(true)
       } else if (!typing && e.key === '/') {
         e.preventDefault()
         setSearch(true)
@@ -37,7 +46,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   }, [])
 
   const here = findNav(loc.pathname)
-  const isCanvas = loc.pathname === '/map' || loc.pathname === '/journeys'
+  const isCanvas = loc.pathname === '/map'
 
   return (
     <div className="flex h-full">
@@ -51,7 +60,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="flex h-14 items-center justify-between gap-2 border-b border-line px-4">
           <div className="min-w-0">
             <div className="text-[11px] font-semibold tracking-[0.28em] text-ink">FYNOVATES</div>
-            <div className="truncate text-[10.5px] text-ink-3">Marketing &amp; Creative Intelligence</div>
+            <div className="truncate text-[10.5px] text-ink-3">Guide stratégique &amp; créatif</div>
           </div>
           <IconButton label="Fermer le menu" className="lg:hidden" onClick={() => setMobileNav(false)}>
             <X size={15} />
@@ -91,8 +100,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
         <div className="border-t border-line p-3">
-          <Button variant="ghost" size="sm" className="w-full justify-start" icon={<Settings2 size={14} />} onClick={() => setSettings(true)}>
-            Données &amp; sauvegarde
+          <Button variant="ghost" size="sm" className="w-full justify-start" icon={<Moon size={14} />} onClick={toggleTheme}>
+            Clair / sombre
           </Button>
         </div>
       </aside>
@@ -105,7 +114,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Menu size={16} />
           </IconButton>
           <nav aria-label="Fil d’Ariane" className="flex min-w-0 items-center gap-1.5 text-[12.5px] text-ink-3">
-            <span className="hidden sm:inline">Workspace</span>
+            <span className="hidden sm:inline">Guide</span>
             {here && (
               <>
                 <ChevronRight size={12} className="hidden sm:inline" />
@@ -116,10 +125,8 @@ export function AppShell({ children }: { children: ReactNode }) {
             )}
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            <Button variant="ghost" size="sm" icon={<Search size={14} />} onClick={() => setSearch(true)} className="sm:hidden" aria-label="Rechercher" />
-            <Button variant="primary" size="sm" icon={<Plus size={14} />} onClick={() => setCreate(true)}>
-              Créer
-              <kbd className="ml-1 hidden rounded border border-white/25 px-1 text-[10px] opacity-70 sm:inline">C</kbd>
+            <Button variant="ghost" size="sm" icon={<Search size={14} />} onClick={() => setSearch(true)} aria-label="Rechercher">
+              <span className="hidden sm:inline">Rechercher</span>
             </Button>
           </div>
         </header>
@@ -127,11 +134,10 @@ export function AppShell({ children }: { children: ReactNode }) {
       </div>
 
       <CommandPalette open={search} onClose={() => setSearch(false)} />
-      <QuickCreate open={create} onClose={() => setCreate(false)} />
-      <SettingsDialog open={settings} onClose={() => setSettings(false)} />
-      <ContentDetail />
-      <ProblemDetail />
-      <ImageDetail />
+      <IdeaSheet />
+      <ProblemSheet />
+      <LongFormSheet />
+      <ImageSheet />
     </div>
   )
 }

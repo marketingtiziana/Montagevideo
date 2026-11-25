@@ -1,97 +1,74 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Page } from '../components/AppShell'
-import { ContentTable } from '../components/content/ContentTable'
-import { ImageCard } from '../components/images/ImageCard'
-import { Placeholder, Thumb } from '../components/images/Thumb'
-import { StrategySections } from '../components/StrategySections'
-import { EmptyState, Loading, PageHeader, Section, TextArea } from '../components/ui'
+import { IdeaCard, ImageTile, LongFormCard } from '../components/Cards'
+import { Placeholder } from '../components/images/Thumb'
+import { EmptyState, PageHeader, Section } from '../components/ui'
 import { BRANDS, PLATFORMS } from '../lib/constants'
-import { db } from '../lib/db'
-import { useDetail } from '../lib/detail'
-import { useChannels, useContents, useImageUsage, useImages } from '../lib/hooks'
+import { useChannels, useContents, useImages } from '../lib/hooks'
+import { longforms } from '../lib/seed/longform'
 import type { PlatformId } from '../lib/types'
+import { SectionList } from './Brand'
 
 export default function Channel() {
   const { id } = useParams<{ id: PlatformId }>()
-  const channels = useChannels()
+  const ch = useChannels().find((c) => c.id === id)
   const contents = useContents()
   const images = useImages()
-  const usage = useImageUsage(contents)
-  if (!channels || !contents || !images) return <Loading />
-  const ch = channels.find((c) => c.id === id)
-  if (!ch || !id) return <Page><EmptyState title="Canal introuvable" /></Page>
-  const list = contents.filter((c) => c.platforms.includes(id))
-  const refs = images.filter((i) => i.platform === id)
+  if (!ch || !id) return <Page><EmptyState title="Plateforme introuvable" /></Page>
   const p = PLATFORMS[id]
+  const ideas = contents.filter((c) => c.platforms.includes(id))
+  const refs = images.filter((i) => i.platform === id)
 
   return (
     <Page wide>
-      <PageHeader
-        eyebrow={`${p.network} · ${BRANDS[p.brand].label}`}
-        title={ch.name}
-        description={
-          <TextArea
-            className="!border-transparent !bg-transparent !px-0 text-[14px] leading-relaxed hover:!border-line focus:!px-2"
-            rows={1}
-            value={ch.role}
-            onCommit={(v) => db.channels.update(ch.id, { role: v })}
-          />
-        }
-      />
-      {id === 'ig-tz' && <TizianaFeed />}
-      <Section title="Stratégie de la plateforme">
-        <StrategySections columns={3} sections={ch.sections} onChange={(s) => db.channels.update(ch.id, { sections: s })} />
+      <PageHeader eyebrow={`${p.network} · ${BRANDS[p.brand].label}`} title={ch.name} description={ch.role} />
+      {id === 'ig-tz' && (
+        <Section title="Feed 3 × 3">
+          <div className="grid gap-6 md:grid-cols-[minmax(0,360px)_1fr]">
+            <div className="grid grid-cols-3 gap-[3px] overflow-hidden rounded-lg border border-line bg-line">
+              {Array.from({ length: 9 }).map((_, i) => (
+                <Placeholder key={i} label="PHOTO RÉELLE" className="aspect-[4/5]" />
+              ))}
+            </div>
+            <div className="space-y-2 text-[13px] leading-relaxed text-ink-2">
+              <p>Le feed de Tiziana ne contient que des photographies réelles : aucun texte incrusté, aucun montage, aucun logo Fynovates, aucune infographie.</p>
+              <p className="text-ink-3">Les photos individuelles n’ont pas été fournies : la proposition de feed complète est visible sur la planche IMG-002.</p>
+            </div>
+          </div>
+        </Section>
+      )}
+      <Section title="Stratégie">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {ch.sections.map((s) => (
+            <SectionList key={s.id} s={s} />
+          ))}
+        </div>
       </Section>
-      <Section title={`Contenus (${list.length})`}>
-        <ContentTable contents={list} showViews={false} defaultCreate={{ kind: p.brand, platforms: [id] }} />
-      </Section>
-      <Section title={`Références visuelles (${refs.length})`}>
-        {refs.length === 0 ? (
-          <EmptyState title="Aucune référence classée sur cette plateforme" description="Importe des images depuis Creative Library et associe-les à cette plateforme." />
-        ) : (
-          <div className="columns-2 gap-4 md:columns-3 xl:columns-4">
-            {refs.map((i) => (
-              <ImageCard key={i.id} img={i} usage={usage.get(i.id)?.length} natural />
+      {id === 'yt-fn' && (
+        <Section title="Idées de long formats" aside={<Link to="/longform" className="text-[12px] text-ink-3 hover:text-ink">Toutes les idées →</Link>}>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {longforms.slice(0, 6).map((l) => (
+              <LongFormCard key={l.id} l={l} />
             ))}
           </div>
-        )}
+        </Section>
+      )}
+      <Section title={`Idées de posts (${ideas.length})`}>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {ideas.map((c) => (
+            <IdeaCard key={c.id} c={c} />
+          ))}
+        </div>
       </Section>
+      {refs.length > 0 && (
+        <Section title="Références visuelles">
+          <div className="columns-2 gap-4 md:columns-3 xl:columns-5">
+            {refs.map((i) => (
+              <ImageTile key={i.id} img={i} natural />
+            ))}
+          </div>
+        </Section>
+      )}
     </Page>
-  )
-}
-
-/** Modèle E — Feed Tiziana : grille 3×3 alimentée uniquement par des photos réelles importées. */
-export function TizianaFeed() {
-  const images = useImages()
-  const { open } = useDetail()
-  const photos = (images ?? []).filter((i) => i.type === 'photo-tiziana' && i.validation === 'PHOTO RÉELLE TIZIANA')
-  const cells = Array.from({ length: 9 }, (_, i) => photos[i] ?? null)
-  return (
-    <Section title="Modèle E — Feed Tiziana (3 × 3)" aside={<span className="text-[11.5px] text-ink-3">{photos.length} photo(s) réelle(s) importée(s)</span>}>
-      <div className="grid gap-6 md:grid-cols-[minmax(0,420px)_1fr]">
-        <div className="grid grid-cols-3 gap-[3px] overflow-hidden rounded-lg border border-line bg-line">
-          {cells.map((img, i) =>
-            img ? (
-              <button key={img.id} type="button" onClick={() => open('i', img.id)} className="aspect-[4/5] bg-surface">
-                <Thumb img={img} className="h-full w-full" />
-              </button>
-            ) : (
-              <Placeholder key={i} label="PHOTO RÉELLE À IMPORTER" className="aspect-[4/5]" />
-            ),
-          )}
-        </div>
-        <div className="space-y-2 text-[12.5px] leading-relaxed text-ink-2">
-          <p>
-            Cette grille n’affiche que des images importées avec le type <b>Photo réelle Tiziana</b> et le statut <b>PHOTO RÉELLE TIZIANA</b>.
-            Aucun visuel n’est généré ni substitué.
-          </p>
-          <p>
-            La planche IMG-002 montre une proposition de feed de 15 photographies, mais les fichiers individuels n’ont pas été fournis : importe-les
-            depuis Creative Library puis classe-les pour remplir la grille.
-          </p>
-          <p className="text-ink-3">Feed : photographies uniquement — aucun texte incrusté, aucun montage, aucun logo Fynovates, carrousels exclusivement photographiques.</p>
-        </div>
-      </div>
-    </Section>
   )
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { FORMATS, IMAGE_TYPES, PILLARS } from '../lib/constants'
 import { useDetail } from '../lib/detail'
 import { useContents, useImages, useProblems } from '../lib/hooks'
+import { longforms } from '../lib/seed/longform'
 import { NAV } from '../lib/nav'
 
 const itemCls =
@@ -31,7 +32,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       >
         <Command.Input
           autoFocus
-          placeholder="Rechercher un contenu, une problématique, une image, une vue…"
+          placeholder="Rechercher une idée, un long format, une problématique, un visuel…"
           className="h-12 w-full border-b border-line bg-transparent px-4 text-[14px] outline-none placeholder:text-ink-3"
         />
         <Command.List className="max-h-[56vh] overflow-y-auto p-2 scroll-thin">
@@ -44,7 +45,15 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
               </Command.Item>
             ))}
           </Command.Group>
-          <Command.Group heading="Contenus" className="[&_[cmdk-group-heading]]:eyebrow [&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:py-1.5">
+          <Command.Group heading="Long formats YouTube" className="[&_[cmdk-group-heading]]:eyebrow [&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:py-1.5">
+            {longforms.map((l) => (
+              <Command.Item key={l.id} value={`${l.id} ${l.title} ${l.hook}`} className={itemCls} onSelect={() => go(() => openDetail('l', l.id))}>
+                <span className="w-16 shrink-0 font-mono text-[11px] text-ink-3">{l.id}</span>
+                <span className="truncate">{l.title}</span>
+              </Command.Item>
+            ))}
+          </Command.Group>
+          <Command.Group heading="Idées de posts" className="[&_[cmdk-group-heading]]:eyebrow [&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:py-1.5">
             {(contents ?? []).map((c) => (
               <Command.Item
                 key={c.id}

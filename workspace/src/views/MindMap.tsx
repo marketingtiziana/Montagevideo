@@ -14,20 +14,34 @@ import {
   type NodeProps,
 } from '@xyflow/react'
 import clsx from 'clsx'
-import { useLiveQuery } from 'dexie-react-hooks'
 import { ChevronsDownUp, ExternalLink, Focus, Maximize, Minus, Plus, RotateCcw, Search, Spline, X } from 'lucide-react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Thumb } from '../components/images/Thumb'
 import { Button, IconButton, Loading, ValidationBadge } from '../components/ui'
 import { BRANDS, VALIDATION_TONE } from '../lib/constants'
-import { db } from '../lib/db'
 import { useDetail } from '../lib/detail'
 import { useBrands, useById, useChannels, useContents, useImages, useJourneys, useMatrix, useProblems, useRules } from '../lib/hooks'
 import { buildTree, journeyFor, territoryForPlatform, type TreeNode } from '../lib/mapTree'
 import type { ImageAsset } from '../lib/types'
 
 /* ------------------------------------------------------------------ layout */
+
+function readLS<T>(key: string, fallback: T): T {
+  try {
+    const v = localStorage.getItem(key)
+    return v ? (JSON.parse(v) as T) : fallback
+  } catch {
+    return fallback
+  }
+}
+function writeLS(key: string, value: unknown) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+  } catch {
+    /* storage unavailable: state stays in memory */
+  }
+}
 
 const W: Record<TreeNode['kind'], number> = { territory: 300, branch: 260, leaf: 270, entity: 290, image: 210 }
 const GAP_X = 64
@@ -254,13 +268,17 @@ function MindMap() {
   const journeys = useJourneys()
   const matrix = useMatrix()
   const rules = useRules()
-  const saved = useLiveQuery(() => db.layout.toArray(), [], undefined)
-  const savedOpen = useLiveQuery(() => db.meta.get('mapOpen'), [], null)
+  const [saved, setSaved] = useState<{ id: string; x: number; y: number }[]>(() => readLS('mapLayout', []))
+  const persistLayout = useCallback((next: { id: string; x: number; y: number }[]) => {
+    setSaved(next)
+    writeLS('mapLayout', next)
+  }, [])
   const imgById = useById(images)
   const rf = useReactFlow()
   const nav = useNavigate()
   const { open: openDetail } = useDetail()
   const wrap = useRef<HTMLDivElement>(null)
+  const lastClick = useRef<{ id: string; t: number } | null>(null)
 
   const [openSet, setOpenSet] = useState<Set<string> | null>(null)
   const [focus, setFocus] = useState<string | null>(null)
@@ -268,16 +286,15 @@ function MindMap() {
   const [q, setQ] = useState('')
 
   useEffect(() => {
-    if (openSet || savedOpen === null) return
-    setOpenSet(new Set((savedOpen?.value as string[] | undefined) ?? DEFAULT_OPEN))
-  }, [savedOpen, openSet])
+    if (!openSet) setOpenSet(new Set(readLS<string[]>('mapOpen', DEFAULT_OPEN)))
+  }, [openSet])
 
   const persistOpen = useCallback((s: Set<string>) => {
     setOpenSet(s)
-    db.meta.put({ key: 'mapOpen', value: [...s] })
+    writeLS('mapOpen', [...s])
   }, [])
 
-  const ready = contents && problems && images && channels && brands && journeys && matrix && rules && saved && openSet
+  const ready = !!openSet
   const tree = useMemo(
     () => (ready ? buildTree({ contents, problems, images, channels, brands, journeys, matrix, rules }) : []),
     [ready, contents, problems, images, channels, brands, journeys, matrix, rules],
@@ -430,12 +447,13 @@ function MindMap() {
       const st = dragStart.current
       dragStart.current = null
       if (!st) return
+      const rest = saved.filter((x) => x.id !== (n.data.n.kind === 'territory' ? `off:${n.id}` : n.id))
       if (n.data.n.kind === 'territory') {
-        const prev = (await db.layout.get(`off:${n.id}`)) ?? { x: 0, y: 0 }
-        await db.layout.put({ id: `off:${n.id}`, x: prev.x + n.position.x - st.x, y: prev.y + n.position.y - st.y })
-      } else await db.layout.put({ id: n.id, x: n.position.x, y: n.position.y })
+        const prev = saved.find((x) => x.id === `off:${n.id}`) ?? { x: 0, y: 0 }
+        persistLayout([...rest, { id: `off:${n.id}`, x: prev.x + n.position.x - st.x, y: prev.y + n.position.y - st.y }])
+      } else persistLayout([...rest, { id: n.id, x: n.position.x, y: n.position.y }])
     },
-    [],
+    [saved, persistLayout],
   )
 
   const fit = () => rf.fitView({ padding: 0.08, duration: 450 })
@@ -487,13 +505,21 @@ function MindMap() {
         onNodeDragStart={onNodeDragStart}
         onNodeDrag={onNodeDrag}
         onNodeDragStop={onNodeDragStop}
-        onNodeClick={(_, n) => setFocus(n.id === focus ? null : n.id)}
-        onNodeDoubleClick={(_, n) => {
-          const r = (n.data as NodeData).n.ref
-          if (!r) return toggle(n.id)
-          if (r.t === 'route') nav(r.to)
-          else openDetail(r.t, r.id)
+        onNodeClick={(_, n) => {
+          const now = Date.now()
+          const last = lastClick.current
+          lastClick.current = { id: n.id, t: now }
+          if (last && last.id === n.id && now - last.t < 400) {
+            lastClick.current = null
+            const r = (n.data as NodeData).n.ref
+            if (!r) return toggle(n.id)
+            if (r.t === 'route') nav(r.to)
+            else openDetail(r.t, r.id)
+            return
+          }
+          setFocus(n.id)
         }}
+        zoomOnDoubleClick={false}
         onPaneClick={() => setFocus(null)}
         nodesConnectable={false}
         minZoom={0.05}
@@ -556,7 +582,7 @@ function MindMap() {
           <IconButton
             label="Réinitialiser la disposition"
             onClick={async () => {
-              await db.layout.clear()
+              persistLayout([])
               persistOpen(new Set(DEFAULT_OPEN))
               setTimeout(fit, 80)
             }}

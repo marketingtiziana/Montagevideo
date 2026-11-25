@@ -1,6 +1,6 @@
-# Fynovates — Marketing & Creative Intelligence Workspace
+# Fynovates × Tiziana — Guide stratégique & créatif
 
-Espace de travail visuel qui centralise la stratégie marketing, éditoriale, commerciale et artistique de **Fynovates** (cabinet) et de **Tiziana / Madame Caci** (personal branding).
+Site de référence, en lecture seule, pour produire les contenus de **Fynovates** (cabinet) et de **Tiziana / Madame Caci** (personal branding). Il ne fait pas de suivi : pas de statuts de production, pas de données, pas d'édition.
 
 ## Lancer
 
@@ -8,45 +8,36 @@ Espace de travail visuel qui centralise la stratégie marketing, éditoriale, co
 cd workspace
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # build statique dans dist/ (hébergeable partout, routage par hash)
+npm run build      # site statique dans dist/ (déployé par Vercel via vercel.json à la racine)
 ```
 
-## Ce que contient l'application
+## Contenu
 
-| Zone | Vues |
+| Rubrique | Pages |
 |---|---|
-| Overview | Strategic Overview — prise en main en 6 étapes, points d'attention |
-| Strategy | Master Mind Map (15 territoires, canvas React Flow), Brand Architecture, Editorial Pillars, Prospect Insights |
-| Channels | YouTube / Instagram / TikTok / LinkedIn Fynovates, Instagram / LinkedIn Tiziana |
-| Creative Studio | Art Direction, Creative Library (import), Visual References, Infographics (modèle A), Carousels (B), Storyboards (C) |
-| Operations | Content Database (TanStack Table), Production Board (Kanban), Story Sequences (D), Repurposing Matrix, Conversion Journeys |
+| Accueil | Vue d'ensemble, carte stratégique (mind map à 15 territoires) |
+| Stratégie | Fynovates, Tiziana, problématiques prospects (piliers A–F), parcours de conversion |
+| Plateformes | YouTube / Instagram / TikTok / LinkedIn Fynovates, Instagram / LinkedIn Tiziana : rôle, règles, idées, références |
+| Direction artistique | Chartes (codes couleur, typographies, codes graphiques, à faire / interdit, exemples), templates, galerie visuelle |
+| Idées de contenus | Long formats YouTube (dispositifs iPad + facecam, télévision + facecam, débunkage, motion + voix off, expert + motion), idées par plateforme, déclinaisons |
 
-Fiches détaillées en panneau latéral, adressables par URL : `?c=FN-001`, `?p=PB-A01`, `?i=IMG-001` (option `&t=creative`).
-Raccourcis : `⌘K` ou `/` pour la recherche globale, `C` pour créer.
+## Où modifier le contenu
 
-## Modèle de données
+Tout le contenu est dans `src/lib/seed/` :
 
-Source unique (`src/lib/types.ts`), relations stockées une seule fois et inverses calculées :
+- `brands.ts`, `channels.ts` : stratégie des marques et des plateformes
+- `da.ts` : chartes (couleurs, typographies, règles)
+- `longform.ts` : dispositifs de tournage et idées de long formats
+- `contents.ts` : idées de posts (FN-xxx, TZ-xxx, DB-xxx)
+- `problems.ts` : problématiques prospects
+- `images.ts` : références visuelles (`public/library/IMG-xxx.jpg`)
+- `strategy.ts` : parcours de conversion, règles, déclinaisons
 
-- `Content` (FN-xxx, TZ-xxx, DB-xxx) → `problemIds`, `imageIds`, `relatedIds` (symétrique, synchronisé)
-- `Problem` (PB-A01…PB-F03) → pilier A–F, `imageIds`
-- `ImageAsset` (IMG-xxx) → marque, plateforme, type, statut, avertissements
-- `Channel`, `Brand` → sections stratégiques éditables (items avec statut)
-- `MatrixRow` → cellules par plateforme (angle, format, contenu relié)
-- `Journey` → étapes et liens du flowchart
+Chaque élément porte sa source et un statut (validé, proposition, à valider par un expert). Les manques sont affichés « À RENSEIGNER ».
 
-Statuts de fidélité : VALIDÉ · STRATÉGIE PROPOSÉE · IDÉE À VALIDER · VALIDATION EXPERT REQUISE · RÉFÉRENCE VISUELLE · PHOTO RÉELLE TIZIANA. Chaque élément porte aussi sa **source** (brief, planche IMG-001, audit, proposition…).
+## Notes
 
-## Persistance
-
-Local-first : IndexedDB via Dexie (`src/lib/db.ts`). Tout est enregistré automatiquement (contenus, images importées en blob, positions et dépliage de la mind map) et survit au rechargement. Les données d'origine sont semées au premier lancement (`src/lib/seed/`).
-« Données & sauvegarde » (en bas de la barre latérale) : export / import JSON complet (images incluses) et réinitialisation.
-
-**Évolution** : pour un usage multi-utilisateur, remplacer `db.ts` par un adaptateur Supabase/Postgres aux mêmes formes de tables (une table par entité, tableaux d'IDs en colonnes `text[]` ou tables de jointure) et stocker les images dans un bucket. Les vues lisent via `src/lib/hooks.ts` et écrivent via `src/lib/actions.ts` : ce sont les deux seuls points à adapter.
-
-## Ressources intégrées
-
-- 35 images du Drive (`public/library/IMG-001.jpg` … `IMG-035.jpg`, le doublon `IMG_6087 2.jpg` est importé une fois).
-- Les captures de comptes tiers (IMG-020 à IMG-035) sont dans « Visuels à classer » : destination non inventée.
-- Aucune image n'est classée « Photo réelle Tiziana » : la grille Feed (modèle E) reste vide tant que les photos ne sont pas importées et validées.
-- Le document stratégique n'était pas dans les ressources : le contenu provient du brief, des planches et maquettes, et de l'audit des appels (anonymisé). Les manques sont signalés « À RENSEIGNER ».
+- Les codes couleur Fynovates ont été relevés sur les maquettes fournies. Les tonalités Tiziana sont indicatives (relevées sur des photographies).
+- Le nom exact de la police Fynovates n'est pas dans les ressources : À CONFIRMER.
+- Aucune image n'est présentée comme une photo réelle de Tiziana. Les captures de comptes tiers sont des inspirations uniquement.
+- Le document stratégique n'était pas dans les ressources : le contenu vient du brief, des planches et maquettes, et de l'audit des appels clients (anonymisé).
