@@ -14,7 +14,7 @@ const ENTRIES = [
   { to: '/templates', title: 'Templates', text: 'Infographie, carrousel, Stories, couvertures, formats vidéo.' },
   { to: '/longform', title: 'Idées de long formats', text: 'Sujets YouTube prêts à tourner : iPad + facecam, télévision, motion…' },
   { to: '/ideas', title: 'Idées par plateforme', text: 'Posts, Reels, Stories, carrousels pour chaque compte.' },
-  { to: '/insights', title: 'Problématiques prospects', text: 'Les sujets qui préoccupent les prospects, par pilier.' },
+  { to: '/journeys', title: 'Parcours & CTA', text: 'Quel CTA utiliser, sur quelle plateforme, pour quel contenu.' },
 ]
 
 export default function Overview() {

@@ -21,7 +21,7 @@ export const NAV: NavGroup[] = [
       { path: '/brand/FN', label: 'Fynovates' },
       { path: '/brand/TZ', label: 'Tiziana / Madame Caci' },
       { path: '/insights', label: 'Problématiques prospects' },
-      { path: '/journeys', label: 'Parcours de conversion' },
+      { path: '/journeys', label: 'Parcours & CTA' },
     ],
   },
   {

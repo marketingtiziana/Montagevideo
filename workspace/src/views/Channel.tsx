@@ -8,6 +8,8 @@ import { useChannels, useContents, useImages } from '../lib/hooks'
 import { longforms } from '../lib/seed/longform'
 import type { PlatformId } from '../lib/types'
 import { SectionList } from './Brand'
+import { CtaBadge } from '../components/CtaBits'
+import { ctaByPlatform } from '../lib/seed/cta'
 
 export default function Channel() {
   const { id } = useParams<{ id: PlatformId }>()
@@ -41,6 +43,17 @@ export default function Channel() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {ch.sections.map((s) => (
             <SectionList key={s.id} s={s} />
+          ))}
+        </div>
+      </Section>
+      <Section title="Stratégie CTA" aside={<Link to="/journeys" className="text-[12px] text-ink-3 hover:text-ink">Parcours & CTA →</Link>}>
+        <div className="divide-y divide-line rounded-xl border border-line bg-surface">
+          {ctaByPlatform[id].map((r) => (
+            <div key={r.content} className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2.5">
+              <span className="min-w-[220px] flex-1 text-[13px]">{r.content}</span>
+              {r.note && <span className="text-[12px] text-ink-3">{r.note}</span>}
+              <CtaBadge id={r.cta} />
+            </div>
           ))}
         </div>
       </Section>

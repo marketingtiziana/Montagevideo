@@ -8,6 +8,8 @@ import type { Content } from '../lib/types'
 import { InfographicPreview, ScenesList, SetupSchema, SlidesStrip, StoryStrip } from './Previews'
 import { Thumb } from './images/Thumb'
 import { IconButton, PillarChip, PlatformChip, Sheet, ValidationBadge } from './ui'
+import { CtaBadge } from './CtaBits'
+import { ctaById, ctaOf } from '../lib/seed/cta'
 
 function Head({ id, title, onClose, children }: { id: string; title: string; onClose: () => void; children?: React.ReactNode }) {
   return (
@@ -135,7 +137,12 @@ export function IdeaSheet() {
                 <ScenesList scenes={c.scenes} />
               </Block>
             )}
-            {c.cta && <Block label="CTA">{c.cta}</Block>}
+            <Block label="CTA">
+              <div className="flex flex-wrap items-center gap-2">
+                <CtaBadge id={ctaOf(c)} />
+                <span>{c.cta || (ctaOf(c) === 'soft' ? 'Pas de CTA commercial' : ctaById[ctaOf(c)].wordings[0])}</span>
+              </div>
+            </Block>
             {CREATIVE_FIELDS.some((f) => c.creative[f.key]) && (
               <Block label={c.creativeIsProposal ? 'Direction artistique (proposition)' : 'Direction artistique'}>
                 <dl className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
@@ -269,7 +276,20 @@ export function LongFormSheet() {
                 ))}
               </ul>
             </Block>
-            <Block label="CTA">{l.cta}</Block>
+            <Block label="Stratégie CTA">
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="w-[150px] shrink-0 text-[12.5px] text-ink-3">Déclinaisons courtes</span>
+                  <CtaBadge id="video" />
+                  <span className="text-[12.5px]">« Commente et on t’envoie la vidéo YouTube complète » — Simon envoie ce long format</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="w-[150px] shrink-0 text-[12.5px] text-ink-3">Le long format</span>
+                  <CtaBadge id="bio" />
+                  <span className="text-[12.5px]">Mention en fin de vidéo + lien en description vers le site ou la prise de rendez-vous</span>
+                </div>
+              </div>
+            </Block>
             <Refs ids={l.support} />
             <ProblemsList ids={l.problemIds} />
             <RelatedIdeas ids={l.basedOn} />

@@ -1,5 +1,6 @@
 import { BRANDS, FORMATS, PILLAR_IDS, PILLARS, PLATFORMS } from './constants'
 import { longforms, setups } from './seed/longform'
+import { ctas } from './seed/cta'
 import { isToClassify } from './hooks'
 import type { Brand, Channel, Content, ImageAsset, Journey, MatrixRow, PlatformId, Problem, Rule, Validation } from './types'
 
@@ -230,15 +231,25 @@ export function buildTree(d: MapData): TreeNode[] {
     ),
     T(
       '14',
-      'Conversion et parcours prospects',
-      d.journeys.map((j) =>
-        branch(
-          `T14/${j.id}`,
-          j.name,
-          j.steps.map((s) => leaf(`T14/${j.id}/${s.id}`, `${s.label} — ${s.detail}`)),
-          { validation: j.validation },
+      'Conversion, parcours et CTA',
+      [
+        ...d.journeys.map((j) =>
+          branch(
+            `T14/${j.id}`,
+            j.name,
+            [
+              ...j.steps.map((s) => leaf(`T14/${j.id}/${s.id}`, `${s.label} — ${s.detail}`)),
+              ...ctas.filter((c) => c.journey === j.id).map((c) => leaf(`T14/${j.id}/cta-${c.id}`, `CTA : « ${c.wordings[0]} »`, { meta: c.name, validation: c.validation })),
+            ],
+            { validation: j.validation },
+          ),
         ),
-      ),
+        branch(
+          'T14/cta-soft',
+          'Sans CTA commercial',
+          [ctas.find((c) => c.id === 'soft')!].map((c) => leaf('T14/cta-soft/x', c.how, { meta: c.where.join(' · '), validation: c.validation })),
+        ),
+      ],
       { t: 'route', to: '/journeys' },
     ),
     T(
