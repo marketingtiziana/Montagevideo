@@ -20,3 +20,5 @@ __pycache__/
 !output/thumbnail/editable_source/fonts/
 !output/fynovates_thumbnail/editable_source/assets/
 !output/fynovates_thumbnail/editable_source/fonts/
+!output/private_departure/thumbnail_private_departure_source/assets/
+!output/private_departure/thumbnail_private_departure_source/fonts/
