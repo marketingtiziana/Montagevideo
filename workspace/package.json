@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "export:mindmaps": "node scripts/export-mindmaps.cjs"
+    "export:mindmaps": "node scripts/export-mindmaps.cjs",
+    "export:plaquettes": "node scripts/export-plaquettes.cjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

@@ -42,6 +42,19 @@ export default function Channel() {
             </Link>
           ))}
       </div>
+      {(id === 'yt-fn' || id === 'li-fn') && (
+        <Link
+          to={id === 'yt-fn' ? '/plaquettes/youtube-fynovates' : '/plaquettes/linkedin-fynovates'}
+          className="mb-8 flex items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-3 hover:border-line-strong"
+          data-plaquette-link
+        >
+          <span>
+            <span className="block text-[14px] font-semibold">{id === 'yt-fn' ? 'Chaîne YouTube Fynovates' : 'Identité LinkedIn Fynovates'}</span>
+            <span className="text-[12.5px] text-ink-3">La maquette complète de la {id === 'yt-fn' ? 'chaîne' : 'page'} : identité, sections, visuels, textes.</span>
+          </span>
+          <span className="text-[13px]">Ouvrir →</span>
+        </Link>
+      )}
       <AccountDesign id={id} />
       {id === 'ig-tz' && (
         <Section title="Feed 3 × 3">

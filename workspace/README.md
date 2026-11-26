@@ -93,3 +93,19 @@ Deux cartes mentales de présentation pour les vidéos iPad + facecam : `#/mindm
   Génère `overview.png`, `mindmap.pdf`, `mindmap.svg`, `speaker_notes.md`, `sources.md` dans chaque dossier. Les notes privées du présentateur ne figurent dans aucun export (elles restent seulement dans le JSON source).
 - **Logo** : `public/brand/fynovates-wordmark-white.png`, extrait tel quel de la bannière IMG-010 (pas de redessin). À remplacer par les fichiers officiels vectoriels dès qu’ils sont fournis.
 - **Règle fiscale** : aucun taux, seuil, délai ni montant. Les affirmations restent `PENDING VALIDATION` ou `RESEARCH REQUIRED` tant qu’un professionnel ne les a pas vérifiées ; les liens officiels sont « À RENSEIGNER ».
+
+## Plaquettes LinkedIn et YouTube Fynovates
+
+Deux maquettes de référence, dans le menu **Plateformes** :
+
+- **Identité LinkedIn Fynovates** (`#/plaquettes/linkedin-fynovates`) : page entreprise simulée (ordinateur, tablette, mobile), les sections expliquées, les textes modifiables, les visuels (bannière 1128 × 191, logo 400 × 400, 4 visuels de posts 1080 × 1080) et la liste des points à valider.
+- **Chaîne YouTube Fynovates** (`#/plaquettes/youtube-fynovates`) : page d’accueil simulée (bannière, vidéo de présentation, 5 rubriques, Shorts), 17 miniatures et 6 couvertures de Shorts, les deux formats éditoriaux, le rythme, la structure d’une vidéo longue, les appels à l’action et l’écran de fin.
+
+Les textes se modifient dans l’onglet **Textes** (stockés dans le navigateur, export Markdown). Les contenus d’origine sont dans `src/lib/seed/linkedinFn.ts` et `src/lib/seed/youtubeFn.ts`. Les visuels sont des composants React rendus aux dimensions natives (`src/views/plaquette/`) ; leurs PNG sont générés dans `public/plaquettes/` :
+
+```bash
+npm run build && npx vite preview --port 4173 &
+npm run export:plaquettes
+```
+
+Aucune connexion à LinkedIn ni à YouTube, aucune publication. Les photos de Tiziana utilisées sur les miniatures viennent du shooting studio du Drive (`public/plaquettes/photos/`).

@@ -23,6 +23,9 @@ const MindmapStudio = lazy(() => import('./views/mindmap/Studio'))
 const MindmapEditor = lazy(() => import('./views/mindmap/Editor'))
 const MindmapPresent = lazy(() => import('./views/mindmap/Present'))
 const MindmapPrint = lazy(() => import('./views/mindmap/PrintMap'))
+const LinkedinFn = lazy(() => import('./views/plaquette/LinkedinFn'))
+const YoutubeFn = lazy(() => import('./views/plaquette/YoutubeFn'))
+const PlaquetteAssets = lazy(() => import('./views/plaquette/Assets'))
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
   state = { error: null as Error | null }
@@ -51,6 +54,7 @@ export default function App() {
         <Routes>
           <Route path="/brand-strategy/:doc/print" element={<PrintDoc />} />
           <Route path="/mindmaps/:id/present" element={<Suspense fallback={null}><MindmapPresent /></Suspense>} />
+          <Route path="/plaquettes/assets" element={<Suspense fallback={null}><PlaquetteAssets /></Suspense>} />
           <Route path="/mindmaps/:id/print" element={<Suspense fallback={null}><MindmapPrint /></Suspense>} />
           <Route
             path="*"
@@ -73,6 +77,8 @@ export default function App() {
                 <Route path="/ideas" element={<Ideas />} />
                 <Route path="/matrix" element={<Matrix />} />
                 <Route path="/mindmaps" element={<MindmapStudio />} />
+                <Route path="/plaquettes/linkedin-fynovates" element={<LinkedinFn />} />
+                <Route path="/plaquettes/youtube-fynovates" element={<YoutubeFn />} />
                 <Route path="/mindmaps/:id/edit" element={<MindmapEditor />} />
                 <Route path="/brand-strategy" element={<BrandHome />} />
                 <Route path="/brand-strategy/register" element={<Register />} />

@@ -48,6 +48,8 @@ export const NAV: NavGroup[] = [
   {
     label: 'Plateformes',
     items: [
+      { path: '/plaquettes/youtube-fynovates', label: 'Chaîne YouTube Fynovates' },
+      { path: '/plaquettes/linkedin-fynovates', label: 'Identité LinkedIn Fynovates' },
       { path: '/channel/yt-fn', label: 'YouTube Fynovates' },
       { path: '/channel/ig-fn', label: 'Instagram Fynovates' },
       { path: '/channel/tt-fn', label: 'TikTok Fynovates' },
