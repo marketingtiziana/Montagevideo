@@ -204,6 +204,15 @@ const rows: I[] = [
   ['IMG-057', 'reel-ref-podcast-micro.jpg', 1128, 2000, 'ref-reel', 'TZ', 'ig-tz',
     'Capture de Reel d’un compte tiers : face caméra au micro, titre-question sur bandeau blanc, sous-titre entre parenthèses, sous-titres dynamiques.',
     ['compte tiers', 'reel', 'micro', 'face caméra', 'bandeau blanc'], [THIRD_PARTY, SUGGEST_TZ_STORY, 'Capture envoyée dans le chat : fichier à déposer dans le Drive pour l’afficher.']],
+  ['IMG-058', 'ig-ref-profil-pov.jpg', 990, 2000, 'ref-reel', 'TZ', 'ig-tz',
+    'Capture du profil Instagram d’un entrepreneur tiers : bio avec légitimité et promesse, lien, Stories à la une par prénom (retours clients), grille de Reels « POV » face caméra.',
+    ['compte tiers', 'profil', 'bio', 'reels', 'pov'], [THIRD_PARTY]],
+  ['IMG-059', 'ig-ref-reels-pov-bureau.jpg', 1010, 2000, 'ref-reel', 'TZ', 'ig-tz',
+    'Capture de la grille de Reels d’un compte tiers : série « POV » tournée au bureau (diplômes au mur), titre sur bandeau blanc, sous-titres, épisodes numérotés.',
+    ['compte tiers', 'reels', 'pov', 'série', 'bandeau blanc'], [THIRD_PARTY, SUGGEST_TZ_STORY]],
+  ['IMG-060', 'ig-ref-grille-pov.jpg', 1206, 1957, 'ref-reel', 'TZ', 'ig-tz',
+    'Capture de la grille d’un compte tiers : Reels face caméra alternant décors (hôtel, rue, bureau) avec un même code de titre.',
+    ['compte tiers', 'grille', 'reels', 'pov'], [THIRD_PARTY]],
 ]
 
 /** Visuels décrits mais pas encore fournis en fichier : affichés comme « visuel à importer ». */

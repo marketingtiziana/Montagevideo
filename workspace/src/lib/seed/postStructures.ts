@@ -112,6 +112,18 @@ export const inspirations: InspirationAccount[] = [
     title: 'Comptes d’inspiration & structures de contenus',
     label: 'Entrepreneurs et cabinets sur Instagram (comptes tiers)',
     why: 'Stories à la première personne qui mêlent vie réelle (déplacements, événements, terrain) et prise de parole : la logique visée pour les Stories quotidiennes de Tiziana.',
+    profileImageId: 'IMG-058',
+    profile: [
+      'Bio en deux lignes : la légitimité, puis ce que le compte apporte',
+      'Un lien unique vers la prise de contact',
+      'Stories à la une nommées par prénom : chacune regroupe le retour d’un client',
+      'Onglet Reels mis en avant : une série reconnaissable au premier coup d’œil',
+    ],
+    profileAdaptation: [
+      'Bio de Tiziana : « Fondatrice & directrice de @fynovates » et sa vision, sans titre ni diplôme non confirmé',
+      'Stories à la une : seules « À PROPOS DE MOI » et « MON CABINET » sont validées ; aucune rubrique de témoignages tant qu’aucun retour réel et consenti n’existe',
+      'Lien unique vers la prise de rendez-vous Fynovates',
+    ],
     structures: [
       {
         id: 'manifeste',
@@ -199,6 +211,26 @@ export const inspirations: InspirationAccount[] = [
         ],
         warning: 'Aucun témoignage fourni à ce jour : ne jamais en créer ni en reformuler un. Format à activer seulement avec un retour réel et consenti.',
         validation: 'IDÉE À VALIDER',
+      },
+      {
+        id: 'reel-pov',
+        name: 'Série de Reels « POV » face caméra',
+        when: 'Réagir à une question fréquente, une actualité, une idée reçue',
+        imageIds: ['IMG-059', 'IMG-060'],
+        steps: [
+          'Titre « POV : … » sur bandeau blanc en haut de l’écran, toujours au même endroit',
+          'Face caméra, cadrage serré, réponse dès la première phrase',
+          'Sous-titres en bas, phrase par phrase',
+          'Décor récurrent qui situe la personne (bureau, déplacement)',
+          'Épisodes numérotés (« partie 1, 2, 3 ») quand le sujet est long',
+        ],
+        adaptation: [
+          'Titres d’entrepreneurs : « POV : on te dit qu’une société à l’étranger suffit », « POV : tu pars vivre à l’étranger le mois prochain »',
+          'Titre en sérif sur bandeau blanc, comme les Stories de Tiziana',
+          'Décors réels : son bureau, ses déplacements — jamais de document client à l’écran',
+        ],
+        warning: 'Aucune référence à un diplôme, un titre ou des résultats non confirmés.',
+        validation: 'STRATÉGIE PROPOSÉE',
       },
       {
         id: 'reel-micro',
