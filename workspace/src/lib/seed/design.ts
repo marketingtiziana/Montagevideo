@@ -100,5 +100,29 @@ export const platformDesign: Record<PlatformId, DesignBlock[]> = {
       warning: 'La planche affiche cinq Stories à la une : seules « À PROPOS DE MOI » et « MON CABINET » sont validées.',
     },
   ],
-  'li-tz': [],
+  'li-tz': [
+    {
+      title: 'Bannière de profil (proposition)',
+      imageIds: ['IMG-048'],
+      wide: true,
+      specs: [
+        '1584 × 396 (ratio 4:1) ; version @2x fournie dans le kit linkedin-tiziana/',
+        'Logo officiel FYNOVATES (SVG) en blanc, baseline « Conseil fiscal & structuration internationale », sur bleu nuit #0D082E',
+        'Tout le contenu dans la moitié droite : la photo recouvre le coin inférieur gauche sur ordinateur et sur mobile',
+        'La bannière porte la marque, la photo porte la personne',
+      ],
+      warning: 'Baseline « comptable » non confirmée : formule actuelle de la marque conservée. Police de la baseline à confirmer.',
+    },
+    {
+      title: 'Photo de profil (proposition)',
+      imageIds: ['IMG-049'],
+      specs: ['Portrait studio, cadrage tête et épaules, regard direct', 'Veste bleu marine en écho au bleu nuit Fynovates', 'Recadrage seul : aucun filtre, aucune retouche du visage'],
+      warning: 'Choix et droit d’usage à confirmer par Tiziana.',
+    },
+    {
+      title: 'Titre du profil (validé)',
+      imageIds: [],
+      specs: ['Fondatrice & Directrice de Fynovates | Entrepreneuriat international | Structuration et stratégie d’entreprise', 'Section Infos : texte validé, voir linkedin-tiziana/documentation/profile-copy.md'],
+    },
+  ],
 }

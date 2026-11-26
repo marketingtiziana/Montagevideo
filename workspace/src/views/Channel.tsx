@@ -16,6 +16,8 @@ import { getImage } from '../lib/hooks'
 import { useDetail } from '../lib/detail'
 import { Thumb } from '../components/images/Thumb'
 import { AlertTriangle } from 'lucide-react'
+import { ValidationBadge } from '../components/ui'
+import { inspirationFor } from '../lib/seed/postStructures'
 
 export default function Channel() {
   const { id } = useParams<{ id: PlatformId }>()
@@ -63,6 +65,7 @@ export default function Channel() {
           ))}
         </div>
       </Section>
+      <Inspiration id={id} />
       <Section title="Stratégie CTA" aside={<Link to="/journeys" className="text-[12px] text-ink-3 hover:text-ink">Parcours & CTA →</Link>}>
         <div className="divide-y divide-line rounded-xl border border-line bg-surface">
           {ctaByPlatform[id].map((r) => (
@@ -103,6 +106,77 @@ export default function Channel() {
   )
 }
 
+function Inspiration({ id }: { id: PlatformId }) {
+  const insp = inspirationFor(id)
+  const { open } = useDetail()
+  if (!insp) return null
+  const shot = (iid: string, cls = 'max-h-[300px]') => (
+    <button key={iid} type="button" onClick={() => open('i', iid)} className="block overflow-hidden rounded-md border border-line bg-surface-2" aria-label={`Agrandir ${iid}`}>
+      <Thumb img={getImage(iid)} fit="contain" className={`w-full ${cls}`} />
+    </button>
+  )
+  return (
+    <Section title="Compte d’inspiration & structures de posts">
+      <div className="mb-4 flex gap-1.5 rounded-lg border border-line bg-surface px-3 py-2 text-[12px] text-ink-2">
+        <AlertTriangle size={13} className="mt-0.5 shrink-0 text-[var(--v-expert)]" />
+        Captures d’un compte tiers : inspiration interne uniquement. On reprend les structures, jamais les textes, les chiffres ni les visuels.
+      </div>
+      <div className="card mb-4 grid gap-4 p-4 md:grid-cols-[220px_1fr]">
+        {shot(insp.profileImageId, 'max-h-[340px]')}
+        <div>
+          <div className="eyebrow">{insp.label}</div>
+          <p className="mt-1.5 text-[13px] leading-relaxed text-ink-2">{insp.why}</p>
+          <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <div>
+              <h3 className="text-[13px] font-semibold">Anatomie du profil</h3>
+              <ul className="mt-1.5 space-y-1">{insp.profile.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">— {x}</li>)}</ul>
+            </div>
+            <div>
+              <h3 className="text-[13px] font-semibold">Pour Tiziana</h3>
+              <ul className="mt-1.5 space-y-1">{insp.profileAdaptation.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">— {x}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="grid gap-4 lg:grid-cols-2">
+        {insp.structures.map((st, n) => (
+          <article key={st.id} className="card grid gap-4 p-4 sm:grid-cols-[160px_1fr]" data-structure={st.id}>
+            <div className="space-y-2">{st.imageIds.map((iid) => shot(iid, 'max-h-[260px]'))}</div>
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="text-[14px] font-semibold">
+                  <span className="tabular mr-1.5 text-ink-3">{String(n + 1).padStart(2, '0')}</span>
+                  {st.name}
+                </h3>
+                <ValidationBadge value={st.validation} />
+              </div>
+              <p className="mt-1 text-[12px] text-ink-3">Quand : {st.when}</p>
+              <ol className="mt-2.5 space-y-1">
+                {st.steps.map((x, i) => (
+                  <li key={x} className="flex gap-2 text-[12.5px] leading-relaxed">
+                    <span className="tabular w-4 shrink-0 text-ink-3">{i + 1}.</span>
+                    {x}
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-3 rounded-md bg-surface-2 p-2.5">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-3">Adaptation Tiziana</div>
+                <ul className="mt-1 space-y-1">{st.adaptation.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">{x}</li>)}</ul>
+              </div>
+              {st.warning && (
+                <div className="mt-2.5 flex gap-1.5 text-[12px]">
+                  <AlertTriangle size={13} className="mt-0.5 shrink-0 text-[var(--v-expert)]" />
+                  {st.warning}
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </Section>
+  )
+}
+
 function AccountDesign({ id }: { id: PlatformId }) {
   const blocks = platformDesign[id]
   const { open } = useDetail()
@@ -117,13 +191,13 @@ function AccountDesign({ id }: { id: PlatformId }) {
       <div className="grid gap-4 lg:grid-cols-2">
         {blocks.map((b) => (
           <div key={b.title} className={`card overflow-hidden ${b.wide ? 'lg:col-span-2' : ''}`}>
-            <div className="grid gap-2 bg-surface-2 p-3" style={b.imageIds.length > 1 ? { gridTemplateColumns: `repeat(${Math.min(b.imageIds.length, 3)}, minmax(0, 1fr))` } : undefined}>
+            {b.imageIds.length > 0 && <div className="grid gap-2 bg-surface-2 p-3" style={b.imageIds.length > 1 ? { gridTemplateColumns: `repeat(${Math.min(b.imageIds.length, 3)}, minmax(0, 1fr))` } : undefined}>
               {b.imageIds.map((iid) => (
                 <button key={iid} type="button" onClick={() => open('i', iid)} className="block overflow-hidden rounded-md" aria-label={`Agrandir ${iid}`}>
                   <Thumb img={getImage(iid)} fit={b.crop ? 'cover' : 'contain'} label="VISUEL À IMPORTER" className={b.crop ?? `w-full ${b.wide ? 'max-h-[420px]' : 'max-h-[320px]'} ${getImage(iid)?.src ? '' : 'aspect-video'}`} />
                 </button>
               ))}
-            </div>
+            </div>}
             <div className="p-4">
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="text-[14px] font-semibold">{b.title}</h3>
