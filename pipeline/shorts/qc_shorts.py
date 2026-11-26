@@ -29,6 +29,9 @@ for s in CFG['shorts']:
     conf = float(np.average([w[3] or 0 for w in words], weights=[w[2] - w[1] for w in words]))
     # 2. coupes : niveau aux points de coupe internes
     cut_lv = [db(t) for iv in ivs for t in (iv['src0'], iv['src1'])]
+    # une coupe est correcte si elle tombe entre deux mots (horodatage) ou dans un creux < -35 dB
+    def in_word(t): return any(x['t0'] + 0.03 < t < x['t1'] - 0.03 for x in W)
+    bad_cuts = [round(t, 2) for iv in ivs for t in (iv['src0'], iv['src1']) if in_word(t) and db(t) > -35]
     # 3. silences restants dans le Short (timeline finale)
     offs, acc = [], 0
     for iv in ivs: offs.append(acc); acc += iv['nfr'] / FPS
@@ -53,7 +56,7 @@ for s in CFG['shorts']:
     cs = R['cartes']; lines_ok = all(c['txt'].count('\\N') <= 1 for c in cs)
     checks = {
         'uniquement_tiziana': not host_in, 'phrases_a_verifier': len({p['t0'] for p in verif}),
-        'coupes_max_dB': round(float(max(cut_lv)), 1), 'coupes_ok': bool(max(cut_lv) < -30),
+        'coupes_max_dB': round(float(max(cut_lv)), 1), 'coupes_dans_un_mot': bad_cuts, 'coupes_ok': not bad_cuts,
         'plus_longue_pause_s': round(max(gaps) if gaps else 0, 2), 'pauses_ok': bool(not gaps or max(gaps) <= 0.85),
         'ecart_av_images': round(abs(nv / FPS - da) * FPS, 2), 'synchro_ok': bool(abs(nv / FPS - da) * FPS < 1.5),
         'format': wh, 'format_ok': wh == '1080,1920', 'visage_dans_cadre': round(face_ok, 3), 'cadrage_ok': face_ok > 0.97,

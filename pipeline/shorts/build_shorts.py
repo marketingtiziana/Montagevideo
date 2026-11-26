@@ -89,13 +89,48 @@ def plan_short(s):
     ivs = []
     for k, (r, why) in enumerate(runs):
         first, last = r[0], r[-1]
-        prev_end = max([x['t1'] for _, x in removed if x['t1'] <= first['t0'] + 0.05] + [first['t0'] - 0.35])
-        nxt = [x['t0'] for _, x in removed if x['t0'] >= last['t1'] - 0.05] + [last['t1'] + 0.45]
-        lo = max(prev_end + 0.02, first['t0'] - (0.22 if k else 0.15)); s0 = valley(lo, first['t0'] + 0.01, first['t0'] - 0.06)
-        hi = min(min(nxt) - 0.02, last['t1'] + (0.30 if k == len(runs) - 1 else 0.22)); s1 = valley(last['t1'] + 0.04, hi, last['t1'] + 0.15)
-        nfr = max(2, int(round((s1 - s0) * FPS)))
+        gi0, gi1 = W.index(next(x for x in W if x['t0'] == first['t0'] and x['w'] == first['w'])), \
+                   W.index(next(x for x in W if x['t0'] == last['t0'] and x['w'] == last['w']))
+        before = [x['t1'] for x in W[max(0, gi0 - 3):gi0] if x['w'].strip() not in ('?', '!', '.', ',')]
+        after = [x['t0'] for x in W[gi1 + 1:gi1 + 4] if x['w'].strip() not in ('?', '!', '.', ',')]
+        prev_end = max([x['t1'] for _, x in removed if x['t1'] <= first['t0'] + 0.05] + before[-1:] + [first['t0'] - 0.35])
+        nxt = [x['t0'] for _, x in removed if x['t0'] >= last['t1'] - 0.05] + after[:1] + [last['t1'] + 0.45]
+        lo = max(prev_end + 0.02, first['t0'] - (0.22 if k else 0.15)); hi0 = first['t0'] + 0.01
+        s0 = valley(lo, hi0, first['t0'] - 0.06) if lo < hi0 else max(prev_end + 0.01, first['t0'] - 0.01)
+        cap = min(nxt) - 0.02                                    # jamais au-delà du début d'un mot retiré
+        hi = min(cap, last['t1'] + (0.30 if k == len(runs) - 1 else 0.22)); lo1 = min(last['t1'] + 0.04, cap)
+        s1 = valley(lo1, hi, last['t1'] + 0.15) if lo1 < hi else min(cap, last['t1'] + 0.02)
+        nfr = max(2, int(np.floor((s1 - s0) * FPS)))                # arrondi vers le bas : la coupe reste avant s1
         ivs.append({'src0': round(s0, 4), 'nfr': nfr, 'src1': round(s0 + nfr / FPS, 4), 'raison_coupe_apres': why})
+    if s.get('debut_source'):                       # début imposé (vérifié à l'écoute / reconnaissance vocale)
+        iv = ivs[0]; iv['src0'] = s['debut_source']; iv['nfr'] = max(2, int(np.floor((iv['src1'] - iv['src0']) * FPS)))
+        iv['src1'] = round(iv['src0'] + iv['nfr'] / FPS, 4)
     return {'words': kept, 'removed': removed, 'ivs': ivs}
+
+_ASR = {}
+PROMPT = ("Podcast. Tiziana, fondatrice de FYNOVATES, cabinet fiscal et d'expatriation : Dubaï, Bali, Espagne, Thaïlande, "
+          "digital nomade, TVA, B2B, B2C, établissement stable, 182 jours, burn-out, entrepreneuriat.")
+def heard_tokens(wav, ref_words):
+    """mots + horodatages réellement entendus dans le son du Short (faster-whisper, contexte = texte d'origine)"""
+    if 'm' not in _ASR:
+        from faster_whisper import WhisperModel
+        _ASR['m'] = WhisperModel('models/fw-large-v3-turbo', device='cpu', compute_type='int8')
+    import librosa
+    y, _ = librosa.load(wav, sr=16000, mono=True)
+    ref = ' '.join(w['w'] for w in ref_words)[:600]
+    sg, _ = _ASR['m'].transcribe(y, language='fr', word_timestamps=True, condition_on_previous_text=False,
+                                 initial_prompt=PROMPT + ' ' + ref[:200], vad_filter=False)
+    ws = [{'w': x.word.strip(), 't0': x.start, 't1': x.end} for z in sg for x in z.words if x.word.strip()]
+    return tokens(ws, lambda tt: tt)
+_w16 = wave.open('work/audio16.wav'); Y16 = np.frombuffer(_w16.readframes(_w16.getnframes()), np.int16).astype(np.float32) / 32768
+def first_heard(t):
+    if 'm' not in _ASR:
+        from faster_whisper import WhisperModel
+        _ASR['m'] = WhisperModel('models/fw-large-v3-turbo', device='cpu', compute_type='int8')
+    seg = Y16[int(t * 16000):int((t + 3.0) * 16000)].copy(); f = int(0.008 * 16000); seg[:f] *= np.linspace(0, 1, f)
+    sg, _ = _ASR['m'].transcribe(seg, language='fr', condition_on_previous_text=False, word_timestamps=True)
+    ws = [x.word for z in sg for x in z.words]
+    return nz(ws[0]) if ws else ''
 
 # ------------------------------------------------------------------ recadrage 9:16 sur Tiziana
 def crop_for(ivs):
@@ -181,9 +216,10 @@ def render(s, P):
     run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', f'{t}/list.txt', '-c', 'copy', f'{t}/video.mp4'])
     # audio original + fondus 8 ms
     fade = int(0.008 * SR); seg = []
-    for iv in P['ivs']:
+    for k_, iv in enumerate(P['ivs']):
         i0 = int(round(iv['src0'] * SR)); n = int(round(iv['nfr'] / FPS * SR)); p = A[i0:i0 + n].copy()
-        r = np.linspace(0, 1, fade)[:, None]; p[:fade] *= r; p[-fade:] *= r[::-1]; seg.append(p)
+        fi = int(0.030 * SR) if k_ == 0 else fade
+        p[:fi] *= np.linspace(0, 1, fi)[:, None]; r = np.linspace(0, 1, fade)[:, None]; p[-fade:] *= r[::-1]; seg.append(p)
     au = np.concatenate(seg); ww = wave.open(f'{t}/raw.wav', 'wb'); ww.setnchannels(2); ww.setsampwidth(2); ww.setframerate(SR)
     ww.writeframes((np.clip(au, -1, 1) * 32767).astype(np.int16).tobytes()); ww.close()
     o = subprocess.run(['ffmpeg', '-nostats', '-i', f'{t}/raw.wav', '-af', 'loudnorm=I=-14:TP=-1:LRA=11:print_format=json', '-f', 'null', '-'],
@@ -191,7 +227,8 @@ def render(s, P):
     m = json.loads(o[o.rfind('{'):o.rfind('}') + 1])
     ln = (f"loudnorm=I=-14:TP=-1:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
           f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
-    run(['ffmpeg', '-v', 'error', '-y', '-i', f'{t}/raw.wav', '-af', ln + ',aresample=48000', '-c:a', 'pcm_s16le', f'{t}/audio.wav'])
+    # limiteur doux de sécurité (crêtes après encodage AAC), transparent sur la voix
+    run(['ffmpeg', '-v', 'error', '-y', '-i', f'{t}/raw.wav', '-af', ln + ',alimiter=limit=0.84:attack=2:release=50:level=false,aresample=48000', '-c:a', 'pcm_s16le', f'{t}/audio.wav'])
     # sous-titres (timeline du Short)
     offs, acc = [], 0
     for iv in P['ivs']: offs.append(acc); acc += iv['nfr'] / FPS
@@ -199,7 +236,7 @@ def render(s, P):
         for iv, of in zip(P['ivs'], offs):
             if iv['src0'] - 0.3 <= tt <= iv['src1'] + 0.3: return max(0.0, of + tt - iv['src0'])
         return None
-    toks = [tk for tk in tokens(P['words'], tmap) if tk['t0'] is not None]
+    toks = heard_tokens(f'{t}/raw.wav', P['words'])
     cs = cards(toks, acc); write_subs(cs, f'{t}/subs.ass', f'{d}/subtitles.srt')
     run(['ffmpeg', '-v', 'error', '-y', '-i', f'{t}/video.mp4', '-i', f'{t}/audio.wav', '-vf', f'subtitles={t}/subs.ass:fontsdir=fonts',
          '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p',
