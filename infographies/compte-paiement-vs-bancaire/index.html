@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Compte de paiement vs compte bancaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1535; --card:#1A2250; --card-2:#151C44; --indigo:#4F6BFF;
+    --white:#FFFFFF; --muted:#A9B4D6;
+    --line:rgba(79,107,255,.28); --line-strong:rgba(79,107,255,.85);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1350px;background:var(--navy)}
+  body{font-family:'Inter',sans-serif;color:var(--white);-webkit-font-smoothing:antialiased;overflow:hidden}
+  .canvas{position:relative;width:1080px;height:1350px;padding:64px 64px 64px;display:flex;flex-direction:column;
+    background:
+      radial-gradient(700px 420px at 85% 0%, rgba(79,107,255,.18), transparent 70%),
+      radial-gradient(600px 400px at 0% 100%, rgba(79,107,255,.10), transparent 70%),
+      var(--navy);}
+  svg{display:block;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* Header */
+  .header{display:flex;justify-content:space-between;align-items:center;height:48px}
+  .logo{font-weight:900;font-size:28px;letter-spacing:.32em;color:var(--white)}
+  .tag{font-weight:600;font-size:22px;letter-spacing:.08em;color:var(--white);
+    border:1px solid var(--line);background:rgba(79,107,255,.12);border-radius:999px;padding:10px 22px}
+
+  /* Title */
+  .title{margin-top:40px}
+  h1{font-weight:900;font-size:66px;line-height:1.06;letter-spacing:-.025em}
+  h1 .accent{color:var(--indigo);display:block}
+  .subtitle{margin-top:20px;font-weight:500;font-size:26px;color:var(--muted)}
+
+  /* Comparison grid */
+  .compare{margin-top:36px;display:grid;
+    grid-template-columns:340px 1fr 340px;column-gap:16px;
+    grid-template-rows:auto repeat(4, 92px);position:relative}
+  .card-bg{grid-row:1 / 6;border-radius:24px;background:var(--card);border:1px solid var(--line)}
+  .card-bg.left{grid-column:1}
+  .card-bg.right{grid-column:3;border:1.5px solid var(--line-strong);
+    background:linear-gradient(180deg, rgba(79,107,255,.16), rgba(79,107,255,.04) 40%), var(--card);
+    box-shadow:0 0 0 6px rgba(79,107,255,.07)}
+  .head{grid-row:1;padding:26px 24px 22px;position:relative;z-index:1;border-bottom:1px solid var(--line)}
+  .head.left{grid-column:1}
+  .head.right{grid-column:3}
+  .head h3{font-weight:800;font-size:28px;letter-spacing:-.015em;white-space:nowrap}
+  .head.right h3{color:var(--white)}
+  .head p{margin-top:8px;font-size:22px;line-height:1.3;color:var(--muted);font-weight:500;letter-spacing:-.01em}
+  .vs{grid-column:2;grid-row:1;align-self:center;justify-self:center;width:76px;height:76px;border-radius:50%;
+    background:var(--navy);border:1.5px solid var(--indigo);display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:24px;letter-spacing:.04em;color:var(--white);
+    box-shadow:0 0 0 8px rgba(79,107,255,.10)}
+  .cell{position:relative;z-index:1;display:flex;align-items:center;padding:0 24px;
+    font-size:22px;line-height:1.3;font-weight:500;color:var(--white)}
+  .cell.l{grid-column:1}
+  .cell.r{grid-column:3}
+  .row-sep{border-top:1px solid rgba(79,107,255,.16)}
+  .crit{grid-column:2;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;text-align:left;padding-left:16px}
+  .crit .ico{flex:0 0 40px;width:40px;height:40px;border-radius:12px;background:rgba(79,107,255,.14);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center}
+  .crit .ico svg{width:22px;height:22px;stroke:var(--indigo)}
+  .crit span{font-weight:600;font-size:22px;line-height:1.15;color:var(--white)}
+  .r2{grid-row:2}.r3{grid-row:3}.r4{grid-row:4}.r5{grid-row:5}
+
+  /* Impacts */
+  .impacts{margin-top:32px;border-radius:24px;border:1px solid var(--line);background:var(--card-2);padding:24px 28px 26px}
+  .impacts h4{font-weight:700;font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo)}
+  .impacts ol{list-style:none;margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .impacts li{display:flex;align-items:flex-start;gap:14px}
+  .num{flex:0 0 40px;height:40px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:22px;color:var(--white)}
+  .impacts li span{font-weight:500;font-size:22px;line-height:1.3}
+
+  /* Synthesis */
+  .synth{margin-top:32px;text-align:center;font-weight:600;font-size:30px;line-height:1.3;letter-spacing:-.01em}
+
+  /* Footer */
+  .footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;
+    padding-top:24px;border-top:1px solid var(--line)}
+  .cta{display:flex;align-items:center;gap:18px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--indigo);color:var(--white);
+    font-weight:700;font-size:22px;padding:14px 26px;border-radius:999px}
+  .btn svg{width:20px;height:20px;stroke:var(--white)}
+  .link{font-weight:600;font-size:22px;color:var(--white)}
+  .site{font-weight:500;font-size:22px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="header">
+    <div class="logo">FYNOVATES</div>
+    <div class="tag">BANQUE &amp; ENCAISSEMENTS</div>
+  </div>
+
+  <div class="title">
+    <h1>Un compte de paiement<span class="accent">n’est pas un compte bancaire.</span></h1>
+    <p class="subtitle">Deux statuts, deux niveaux de protection, deux usages.</p>
+  </div>
+
+  <div class="compare">
+    <div class="card-bg left"></div>
+    <div class="card-bg right"></div>
+
+    <div class="head left">
+      <h3>Compte de paiement</h3>
+      <p>Établissement de paiement <span style="white-space:nowrap">ou de monnaie électronique</span></p>
+    </div>
+    <div class="vs">VS</div>
+    <div class="head right">
+      <h3>Compte bancaire</h3>
+      <p>Établissement de crédit</p>
+    </div>
+
+    <!-- Rôle -->
+    <div class="cell l r2">Exécuter des paiements</div>
+    <div class="crit r2"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg></div><span>Rôle</span></div>
+    <div class="cell r r2">Recevoir des dépôts et prêter</div>
+
+    <!-- Protection -->
+    <div class="cell l r3 row-sep">Fonds cantonnés, hors garantie des dépôts</div>
+    <div class="crit r3"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg></div><span>Protection des fonds</span></div>
+    <div class="cell r r3 row-sep">Garantie des dépôts jusqu’à 100&nbsp;000&nbsp;€ (UE)</div>
+
+    <!-- Crédit -->
+    <div class="cell l r4 row-sep">Pas de financement de vos projets</div>
+    <div class="crit r4"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M10 21V10"/><path d="M14 21V10"/><path d="M19 21V10"/><path d="M2.5 10 12 4l9.5 6z"/></svg></div><span>Crédit</span></div>
+    <div class="cell r r4 row-sep">Crédit professionnel et immobilier</div>
+
+    <!-- Relation -->
+    <div class="cell l r5 row-sep">Support en ligne</div>
+    <div class="crit r5"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></div><span>Relation</span></div>
+    <div class="cell r r5 row-sep">Interlocuteur et historique bancaire</div>
+  </div>
+
+  <div class="impacts">
+    <h4>Ce que cela change</h4>
+    <ol>
+      <li><div class="num">1</div><span>Une protection des fonds différente</span></li>
+      <li><div class="num">2</div><span>Aucun historique pour un futur crédit</span></li>
+      <li><div class="num">3</div><span>Un compte unique, un point de fragilité</span></li>
+    </ol>
+  </div>
+
+  <p class="synth">Un bon outil d’encaissement n’est pas une organisation bancaire.</p>
+
+  <div class="footer">
+    <div class="cta">
+      <div class="btn">Audit offert<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>
+      <div class="link">lynkk.it/audit_offert</div>
+    </div>
+    <div class="site">fynovates.com</div>
+  </div>
+
+</div>
+</body>
+</html>
