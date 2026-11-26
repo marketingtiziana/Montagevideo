@@ -1,98 +1,74 @@
 1
-00:00:00,000 --> 00:00:01,635
-Alors, Dubaï, c'est
-vrai que c'est un peu
+00:00:00,000 --> 00:00:12,530
+Je veux dire, t'as 9
+% d'impôts à partir
 
 2
-00:00:01,635 --> 00:00:04,895
-la grande destination.
-
-3
-00:00:04,895 --> 00:00:06,275
-Ça commence à bouger
-dernièrement,
-
-4
-00:00:06,275 --> 00:00:07,135
-mais c'est une grande
-destination
-
-5
-00:00:07,135 --> 00:00:09,946
-parce que fiscalement
-parlant, on est quand
-
-6
-00:00:09,946 --> 00:00:10,606
-même assez light.
-
-7
-00:00:10,606 --> 00:00:12,566
-Je veux dire, tu as
-9 % d'impôts à partir
-
-8
-00:00:12,566 --> 00:00:14,606
+00:00:12,530 --> 00:00:14,650
 d'un certain
 chiffre d'affaires.
 
-9
-00:00:14,606 --> 00:00:16,186
+3
+00:00:14,650 --> 00:00:16,150
 Mais alors, si tu
 prends des salariés,
 
-10
-00:00:16,186 --> 00:00:17,346
+4
+00:00:16,150 --> 00:00:17,310
 si tu prends
-des dividendes, si tu prends
+des dividendes, tu prends
 
-11
-00:00:17,346 --> 00:00:19,006
+5
+00:00:17,310 --> 00:00:18,890
 un salaire,
 c'est zéro.
 
-12
-00:00:19,006 --> 00:00:20,886
+6
+00:00:18,890 --> 00:00:20,490
 Donc, évidemment,
 ça change la donne.
 
-13
-00:00:20,886 --> 00:00:22,566
+7
+00:00:20,490 --> 00:00:22,550
 Après, le coût de la
 vie est un peu plus
 
-14
-00:00:22,566 --> 00:00:23,826
+8
+00:00:22,550 --> 00:00:23,790
 élevé. C'est vrai que c'est
 une place tournante
 
-15
-00:00:23,826 --> 00:00:25,706
+9
+00:00:23,790 --> 00:00:25,410
 au niveau business,
 c'est intéressant.
 
-16
-00:00:25,706 --> 00:00:27,846
-Donc oui c'est super
-intéressant mais c'est
+10
+00:00:25,410 --> 00:00:26,090
+Donc,
 
-17
-00:00:27,846 --> 00:00:29,346
-pas fait pour tout
-le monde maintenant
+11
+00:00:26,090 --> 00:00:27,810
+oui, c'est super
+intéressant, mais c'est
 
-18
-00:00:29,346 --> 00:00:31,126
-en y vivant réellement
-parce que avoir
+12
+00:00:27,810 --> 00:00:29,050
+pas fait pour
+tout le monde.
 
-19
-00:00:31,126 --> 00:00:32,506
-une société à Dubaï
-et vivre en France
+13
+00:00:29,050 --> 00:00:30,450
+Maintenant,
+en vivant réellement
 
-20
-00:00:32,506 --> 00:00:34,067
-ça c'est
+14
+00:00:30,450 --> 00:00:32,030
+parce que avant tout
+est à dubaï et vivre
+
+15
+00:00:32,030 --> 00:00:33,901
+en france ça c'est
 de l'évasion fiscale
 

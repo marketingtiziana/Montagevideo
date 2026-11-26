@@ -1,152 +1,135 @@
 1
-00:00:00,000 --> 00:00:01,505
-Après, pour moi,
-j'essaie toujours d'avoir
-
-2
-00:00:01,505 --> 00:00:03,725
-un avis qui est
-très honnête parce
-
-3
-00:00:03,725 --> 00:00:06,065
-que ce n'est pas juste
-encaisser et faire
-
-4
-00:00:06,065 --> 00:00:07,425
-de l'argent ou reprendre
-des clients.
-
-5
-00:00:07,425 --> 00:00:08,625
-Il faut quand même
-que je sois honnête
-
-6
-00:00:08,625 --> 00:00:10,085
-dans le sens que ça
+00:00:06,570 --> 00:00:10,090
+Dans le sens que ça
 m'est déjà arrivé
 
-7
-00:00:10,085 --> 00:00:11,205
-à dire à des personnes,
+2
+00:00:10,090 --> 00:00:11,210
+à dire des personnes,
 en fait, tu n'es
 
-8
-00:00:11,205 --> 00:00:12,425
+3
+00:00:11,210 --> 00:00:12,390
 pas prêt
 à t'expatrier.
 
-9
-00:00:12,425 --> 00:00:14,245
+4
+00:00:12,390 --> 00:00:13,870
 Tu en rêves ou tu
-voudrais, je veux dire,
+voudrais, mais je veux
 
-10
-00:00:14,245 --> 00:00:16,025
-ta situation fait
-que ce n'est pas possible.
+5
+00:00:13,870 --> 00:00:15,290
+dire, ta situation
+fait que ce n'est
 
-11
-00:00:16,025 --> 00:00:18,405
+6
+00:00:15,290 --> 00:00:15,990
+pas possible.
+
+7
+00:00:15,990 --> 00:00:18,230
 Autant dans l'activité,
-ta situation personnelle,
+ta situation personnelle
 
-12
-00:00:18,405 --> 00:00:20,285
+8
+00:00:18,230 --> 00:00:20,270
 ou tu es peut-être mariée
 et madame, évidemment,
 
-13
-00:00:20,285 --> 00:00:21,405
+9
+00:00:20,270 --> 00:00:21,490
 elle a un salaire qu'elle
-ne veut pas quitter,
+ne veut pas quitter.
 
-14
-00:00:21,405 --> 00:00:22,125
-donc à un moment
+10
+00:00:21,490 --> 00:00:22,130
+Donc, à un moment
 donné, il faut avoir
 
-15
-00:00:22,125 --> 00:00:23,485
+11
+00:00:22,130 --> 00:00:23,450
 les pieds sur terre.
 
-16
-00:00:23,485 --> 00:00:24,865
+12
+00:00:23,450 --> 00:00:24,870
 Mais c'est vrai
 qu'effectivement, quand
 
-17
-00:00:24,865 --> 00:00:27,265
-quelqu'un on voit
+13
+00:00:24,870 --> 00:00:26,870
+quelqu'un, on voit
 que tout est aligné
 
-18
-00:00:27,265 --> 00:00:29,345
+14
+00:00:26,870 --> 00:00:29,330
 et que c'est cohérent,
 alors on le conseille
 
-19
-00:00:29,345 --> 00:00:31,330
-pour qu'il gagne
+15
+00:00:29,330 --> 00:00:31,550
+pour qu'il gagnent
 du temps dans les choix.
 
+16
+00:00:31,550 --> 00:00:33,510
+Attention entre ce qu'on
+pense, où on veut
+
+17
+00:00:33,510 --> 00:00:34,290
+aller vivre et je
+vous le dis parce
+
+18
+00:00:34,290 --> 00:00:35,270
+que j'ai vécu
+personnellement, ça fait
+
+19
+00:00:35,270 --> 00:00:36,090
+deux ans que je fais
+le tour du monde
+
 20
-00:00:31,330 --> 00:00:33,250
-Mais, attention,
-entre ce qu'on pense,
+00:00:36,090 --> 00:00:37,790
+je me suis quand même
+reposée en Espagne
 
 21
-00:00:33,250 --> 00:00:34,270
-où on veut aller vivre,
-et je vous le dis,
-
-22
-00:00:34,270 --> 00:00:35,190
-parce que j'ai vécu
-personnellement, ça
-
-23
-00:00:35,190 --> 00:00:36,350
-fait deux ans que je fais
-le tour du monde,
-
-24
-00:00:36,350 --> 00:00:38,070
-je me suis quand même
-reposée en Espagne.
-
-25
-00:00:38,070 --> 00:00:38,410
+00:00:37,790 --> 00:00:38,370
 Pourquoi ?
 
-26
-00:00:38,410 --> 00:00:40,652
+22
+00:00:38,370 --> 00:00:40,470
 Parce que vivre dans le
-pays, tu vois réellement
+pays tu vois réellement,
 
-27
-00:00:40,652 --> 00:00:41,732
-tu ne te rends pas compte,
-parce que c'est
+23
+00:00:40,470 --> 00:00:41,670
+elle ne te rend
+pas compte parce que c'est
 
-28
-00:00:41,732 --> 00:00:42,572
+24
+00:00:41,670 --> 00:00:42,470
 dans ton habitude.
 
-29
-00:00:42,572 --> 00:00:43,852
-Mais quand tu le
-découvres, tu te dis,
+25
+00:00:42,470 --> 00:00:44,210
+Mais quand tu le découvres,
+tu dis tiens,
 
-30
-00:00:43,852 --> 00:00:45,492
-tiens, ça, ça me manque,
-ça, c'est important,
+26
+00:00:44,210 --> 00:00:45,490
+ça ça me manque, ça
+c'est important, ça
 
-31
-00:00:45,492 --> 00:00:47,748
-ça, c'est primordial
-pour moi, l'expérience.
+27
+00:00:45,490 --> 00:00:46,770
+c'est primordial
+pour moi.
+
+28
+00:00:46,770 --> 00:00:47,614
+L'expérience.
 

@@ -1,83 +1,54 @@
 1
-00:00:00,045 --> 00:00:01,445
-Parce que zéro impôt,
-c'est pas que ça.
+00:00:00,000 --> 00:00:09,570
+Chaque année.
 
 2
-00:00:01,445 --> 00:00:02,585
-Zéro, oui,
-mais attends.
-
-3
-00:00:02,585 --> 00:00:04,005
-À Dubaï, je veux dire,
-la responsabilité
-
-4
-00:00:04,005 --> 00:00:05,845
-d'entreprise, il y a
-quand même des frais
-
-5
-00:00:05,845 --> 00:00:07,025
-à générer.
-
-6
-00:00:07,025 --> 00:00:08,205
-C'est une licence
-à Dubaï.
-
-7
-00:00:08,205 --> 00:00:09,525
-Tu la payes
-chaque année.
-
-8
-00:00:09,525 --> 00:00:10,845
+00:00:09,570 --> 00:00:10,850
 Donc, c'est comme
 si tu payais 80 %
 
-9
-00:00:10,845 --> 00:00:12,625
+3
+00:00:10,850 --> 00:00:12,650
 de ta constitution
 chaque année.
 
-10
-00:00:12,625 --> 00:00:14,065
+4
+00:00:12,650 --> 00:00:14,050
 Plus le bilan,
 plus la compta.
 
-11
-00:00:14,065 --> 00:00:15,345
+5
+00:00:14,050 --> 00:00:15,350
 Enfin, je veux dire,
 ça se durcit un petit
 
-12
-00:00:15,345 --> 00:00:17,185
-peu malgré que c'est
-plus souple donc oui
+6
+00:00:15,350 --> 00:00:16,790
+peu, malgré que c'est
+plus souple.
 
-13
-00:00:17,185 --> 00:00:19,445
-c'est intéressant
-mais il faut
+7
+00:00:16,790 --> 00:00:18,750
+Donc, oui, c'est
+intéressant, mais il faut
 
-14
-00:00:19,445 --> 00:00:20,885
+8
+00:00:18,750 --> 00:00:20,510
 être réaliste
-et objectif et comme j'ai
+et objectif.
 
-15
-00:00:20,885 --> 00:00:22,425
-un regard extérieur
-comme c'est pas
+9
+00:00:20,510 --> 00:00:22,130
+Et comme j'ai un regard
+extérieur, comme
 
-16
-00:00:22,425 --> 00:00:23,465
-ma situation
-personnelle je suis pas
+10
+00:00:22,130 --> 00:00:23,350
+c'est pas ma situation
+personnelle,
 
-17
-00:00:23,465 --> 00:00:24,215
-dans l'émotionnel
+11
+00:00:23,350 --> 00:00:24,100
+je suis pas dans
+l'émotionnel.
 
