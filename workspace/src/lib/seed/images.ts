@@ -180,10 +180,34 @@ const rows: I[] = [
   ['IMG-049', 'portrait-final.jpg', 800, 800, 'photo-tiziana', 'TZ', 'li-tz',
     'Photo de profil LinkedIn de Tiziana (proposition) : shooting studio, veste bleu marine, regard direct. Recadrage seul, sans retouche.',
     ['linkedin', 'photo de profil', 'photographie réelle'], ['Photo réelle issue du dossier « PHOTOS Tiziana » du Drive : choix et droit d’usage à confirmer par Tiziana.'], 'STRATÉGIE PROPOSÉE'],
+  ['IMG-050', 'story-ref-manifeste.jpg', 1206, 1782, 'ref-story', 'TZ', 'ig-tz',
+    'Capture de Story d’un compte tiers : selfie en situation (vue sur une ville), titre sérif sur bandeau blanc et manifeste en quatre lignes parallèles.',
+    ['compte tiers', 'story', 'manifeste', 'bandeaux blancs', 'sérif'], [THIRD_PARTY, SUGGEST_TZ_STORY]],
+  ['IMG-051', 'story-ref-coulisses-evenement.jpg', 1067, 2000, 'ref-story', 'TZ', 'ig-tz',
+    'Capture de Story d’un compte tiers : coulisses avant un événement professionnel, photo du lieu, une phrase et sticker de localisation.',
+    ['compte tiers', 'story', 'coulisses', 'événement'], [THIRD_PARTY]],
+  ['IMG-052', 'story-ref-sequence-texte-1.jpg', 1129, 2000, 'ref-story', 'TZ', 'ig-tz',
+    'Capture de Story d’un compte tiers (cabinet) : séquence pédagogique, texte long en blanc gras sur photo assombrie, mots-clés en couleur d’accent, liste à flèches.',
+    ['compte tiers', 'story', 'séquence', 'texte long', 'expatriation'], [THIRD_PARTY, 'Discours de cabinet (« nous ») et promesses de résultat : ne pas reprendre tels quels.']],
+  ['IMG-053', 'story-ref-sequence-texte-2.jpg', 1134, 2000, 'ref-story', 'TZ', 'ig-tz',
+    'Capture de Story d’un compte tiers (cabinet) : écran « méthode » de la même séquence, liste à puces sur photo de skyline au coucher du soleil.',
+    ['compte tiers', 'story', 'séquence', 'méthode'], [THIRD_PARTY]],
+  ['IMG-054', 'story-ref-face-camera.jpg', 1151, 2000, 'ref-story', 'TZ', 'ig-tz',
+    'Capture de Story vidéo d’un compte tiers : face caméra spontané en marchant, sous-titre sur bandeau blanc.',
+    ['compte tiers', 'story', 'face caméra', 'sous-titre'], [THIRD_PARTY, SUGGEST_TZ_STORY]],
+  ['IMG-055', 'feed-ref-lifestyle-pro.jpg', 1183, 2000, 'ref-feed', 'TZ', 'ig-tz',
+    'Capture de la grille Instagram d’un compte tiers : photographies lifestyle professionnel (événements, prise de parole au micro, réunions, déplacements, sport, lieux).',
+    ['compte tiers', 'grille', 'feed photo', 'lifestyle'], [THIRD_PARTY, 'Capture envoyée dans le chat : fichier à déposer dans le Drive pour l’afficher.']],
+  ['IMG-056', 'story-ref-vocal-client.jpg', 1136, 2000, 'ref-story', 'TZ', 'ig-tz',
+    'Capture de Story d’un compte tiers : message vocal d’un client sur fond sombre, phrase de contexte et sticker lien.',
+    ['compte tiers', 'story', 'témoignage', 'vocal', 'sticker lien'], [THIRD_PARTY, 'Capture envoyée dans le chat : fichier à déposer dans le Drive pour l’afficher.']],
+  ['IMG-057', 'reel-ref-podcast-micro.jpg', 1128, 2000, 'ref-reel', 'TZ', 'ig-tz',
+    'Capture de Reel d’un compte tiers : face caméra au micro, titre-question sur bandeau blanc, sous-titre entre parenthèses, sous-titres dynamiques.',
+    ['compte tiers', 'reel', 'micro', 'face caméra', 'bandeau blanc'], [THIRD_PARTY, SUGGEST_TZ_STORY, 'Capture envoyée dans le chat : fichier à déposer dans le Drive pour l’afficher.']],
 ]
 
 /** Visuels décrits mais pas encore fournis en fichier : affichés comme « visuel à importer ». */
-const NOT_YET_SUPPLIED = new Set(['IMG-036', 'IMG-037'])
+const NOT_YET_SUPPLIED = new Set(['IMG-036', 'IMG-037', 'IMG-055', 'IMG-056', 'IMG-057'])
 
 export const images: ImageAsset[] = rows.map(
   ([id, originalName, width, height, type, brand, platform, description, tags, warnings = [], validation]) => ({

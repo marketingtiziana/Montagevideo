@@ -18,9 +18,10 @@ export interface InspirationAccount {
   platform: PlatformId
   label: string
   why: string
-  profileImageId: string
-  profile: string[]
-  profileAdaptation: string[]
+  profileImageId?: string
+  profile?: string[]
+  profileAdaptation?: string[]
+  title?: string
   structures: PostStructure[]
 }
 
@@ -103,6 +104,120 @@ export const inspirations: InspirationAccount[] = [
           'Proposition : « Je m’appelle Tiziana Caci. Je dirige Fynovates, un cabinet qui accompagne les entrepreneurs dans leurs projets de développement et d’organisation à l’international. Chaque jour, je partage ici mon regard sur les décisions qui façonnent le parcours d’un entrepreneur. ➡️ Suivez-moi pour ne rien manquer. »',
         ],
         validation: 'IDÉE À VALIDER',
+      },
+    ],
+  },
+  {
+    platform: 'ig-tz',
+    title: 'Comptes d’inspiration & structures de contenus',
+    label: 'Entrepreneurs et cabinets sur Instagram (comptes tiers)',
+    why: 'Stories à la première personne qui mêlent vie réelle (déplacements, événements, terrain) et prise de parole : la logique visée pour les Stories quotidiennes de Tiziana.',
+    structures: [
+      {
+        id: 'manifeste',
+        name: 'Manifeste sur photo réelle',
+        when: 'Affirmer une conviction, une valeur, une façon de travailler',
+        imageIds: ['IMG-050'],
+        steps: [
+          'Photo réelle en situation (déplacement, lieu de travail, ville)',
+          'Titre court en sérif sur bandeau blanc',
+          '3 à 4 lignes parallèles : « Je crois à …, mais pas à … »',
+          'Aucun appel à l’action',
+        ],
+        adaptation: [
+          'Convictions de Tiziana sur l’entrepreneuriat et la décision (ex. analyse avant la structure, rigueur, vision globale)',
+          'Reprend le code déjà prévu pour ses Stories : texte sérif noir sur bandeaux blancs sur photographie',
+        ],
+        validation: 'STRATÉGIE PROPOSÉE',
+      },
+      {
+        id: 'coulisses',
+        name: 'Coulisses d’un déplacement ou d’un événement',
+        when: 'Avant ou pendant un rendez-vous, un salon, un voyage professionnel',
+        imageIds: ['IMG-051'],
+        steps: ['Photo du lieu, sans mise en scène', 'Une phrase de contexte', 'Sticker de localisation', 'Éventuellement une deuxième Story le lendemain (l’événement lui-même)'],
+        adaptation: ['Uniquement des déplacements et événements réels', 'Ne jamais montrer un client, un document ou un écran confidentiel'],
+        validation: 'STRATÉGIE PROPOSÉE',
+      },
+      {
+        id: 'sequence-texte',
+        name: 'Séquence pédagogique en texte sur photo',
+        when: 'Expliquer un sujet en 6 à 10 écrans (résidence fiscale, erreurs d’expatriation, méthode)',
+        imageIds: ['IMG-052', 'IMG-053'],
+        steps: [
+          'Écran d’ouverture : le problème que vivent les entrepreneurs',
+          'Écrans de développement : texte court en blanc sur photo assombrie, un mot-clé mis en valeur par écran',
+          'Listes à puces ou à flèches pour les points clés',
+          'Écran « méthode » : comment on aborde le sujet',
+          'Dernier écran : sticker question ou invitation à écrire',
+        ],
+        adaptation: [
+          'Voix de Tiziana à la première personne (« ce que je constate »), pas le discours du cabinet (« nous intervenons »)',
+          'Mise en valeur en gras ou sur bandeau blanc : pas de couleur d’accent hors palette',
+          'Aucune promesse de résultat (« expatriations sécurisées », « montages qui passent »)',
+        ],
+        warning: 'Toute règle fiscale citée est validée par un expert avant publication.',
+        validation: 'STRATÉGIE PROPOSÉE',
+      },
+      {
+        id: 'face-camera',
+        name: 'Face caméra spontané',
+        when: 'Partager une réflexion du moment, en marchant ou en déplacement',
+        imageIds: ['IMG-054'],
+        steps: ['Vidéo selfie, cadrage serré, son direct', 'Une idée, 15 à 30 secondes', 'Phrase clé en sous-titre sur bandeau blanc'],
+        adaptation: ['Ton naturel, tutoiement ou vouvoiement selon l’arbitrage de la charte', 'Sous-titres obligatoires (Stories souvent vues sans le son)'],
+        validation: 'STRATÉGIE PROPOSÉE',
+      },
+      {
+        id: 'feed-lifestyle',
+        name: 'Feed photographique lifestyle professionnel',
+        when: 'Publications du feed',
+        imageIds: ['IMG-055', 'IMG-042'],
+        steps: [
+          'Uniquement des photographies réelles, sans texte incrusté',
+          'Alternance : prise de parole et événements, réunions, déplacements, moments de vie, lieux',
+          'Photos prises par un tiers plutôt que des selfies, lumière naturelle',
+          'Étalonnage cohérent d’une photo à l’autre',
+        ],
+        adaptation: [
+          'Confirme la règle du feed de Tiziana : photographies réelles uniquement, pas de logo ni d’infographie',
+          'Base disponible : shootings du dossier « PHOTOS Tiziana » du Drive',
+        ],
+        warning: 'Photos d’agence (type Getty) ou d’un tiers : droits à vérifier avant publication.',
+        validation: 'STRATÉGIE PROPOSÉE',
+      },
+      {
+        id: 'vocal-client',
+        name: 'Retour client en message vocal',
+        when: 'Un client envoie spontanément un retour',
+        imageIds: ['IMG-056'],
+        steps: ['Fond sombre uni', 'Une phrase de contexte (« Petit retour d’un client ce matin »)', 'Le message vocal en lecture', 'Sticker lien vers la prise de contact'],
+        adaptation: [
+          'Uniquement un retour réel, avec l’accord écrit du client',
+          'Anonymisé : aucun nom, aucune information sur sa situation',
+          'Lien vers la page de contact ou le rendez-vous Fynovates',
+        ],
+        warning: 'Aucun témoignage fourni à ce jour : ne jamais en créer ni en reformuler un. Format à activer seulement avec un retour réel et consenti.',
+        validation: 'IDÉE À VALIDER',
+      },
+      {
+        id: 'reel-micro',
+        name: 'Reel face caméra au micro',
+        when: 'Une idée forte en 30 à 60 secondes',
+        imageIds: ['IMG-057'],
+        steps: [
+          'Face caméra au micro, plan fixe',
+          'Titre-question sur bandeau blanc, sous-titre court entre parenthèses',
+          'Sous-titres dynamiques en capitales',
+          'Une seule idée, réponse dans les premières secondes',
+        ],
+        adaptation: [
+          'Questions d’entrepreneurs : « Pourquoi ta société étrangère ne fait pas de toi un non-résident », etc.',
+          'Décor sobre (bureau, bibliothèque), tenue professionnelle',
+          'Titre en sérif sur bandeau blanc pour rester dans les codes de Tiziana',
+        ],
+        warning: 'Tout contenu fiscal validé par un expert avant publication.',
+        validation: 'STRATÉGIE PROPOSÉE',
       },
     ],
   },

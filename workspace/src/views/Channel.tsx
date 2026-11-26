@@ -116,12 +116,18 @@ function Inspiration({ id }: { id: PlatformId }) {
     </button>
   )
   return (
-    <Section title="Compte d’inspiration & structures de posts">
+    <Section title={insp.title ?? "Compte d’inspiration & structures de posts"}>
       <div className="mb-4 flex gap-1.5 rounded-lg border border-line bg-surface px-3 py-2 text-[12px] text-ink-2">
         <AlertTriangle size={13} className="mt-0.5 shrink-0 text-[var(--v-expert)]" />
-        Captures d’un compte tiers : inspiration interne uniquement. On reprend les structures, jamais les textes, les chiffres ni les visuels.
+        Captures de comptes tiers : inspiration interne uniquement. On reprend les structures, jamais les textes, les chiffres ni les visuels.
       </div>
-      <div className="card mb-4 grid gap-4 p-4 md:grid-cols-[220px_1fr]">
+      {!insp.profileImageId && (
+        <p className="mb-4 text-[13px] leading-relaxed text-ink-2">
+          <span className="eyebrow mr-2">{insp.label}</span>
+          {insp.why}
+        </p>
+      )}
+      {insp.profileImageId && <div className="card mb-4 grid gap-4 p-4 md:grid-cols-[220px_1fr]">
         {shot(insp.profileImageId, 'max-h-[340px]')}
         <div>
           <div className="eyebrow">{insp.label}</div>
@@ -129,15 +135,15 @@ function Inspiration({ id }: { id: PlatformId }) {
           <div className="mt-3 grid gap-4 md:grid-cols-2">
             <div>
               <h3 className="text-[13px] font-semibold">Anatomie du profil</h3>
-              <ul className="mt-1.5 space-y-1">{insp.profile.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">— {x}</li>)}</ul>
+              <ul className="mt-1.5 space-y-1">{insp.profile?.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">— {x}</li>)}</ul>
             </div>
             <div>
               <h3 className="text-[13px] font-semibold">Pour Tiziana</h3>
-              <ul className="mt-1.5 space-y-1">{insp.profileAdaptation.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">— {x}</li>)}</ul>
+              <ul className="mt-1.5 space-y-1">{insp.profileAdaptation?.map((x) => <li key={x} className="text-[12.5px] leading-relaxed">— {x}</li>)}</ul>
             </div>
           </div>
         </div>
-      </div>
+      </div>}
       <div className="grid gap-4 lg:grid-cols-2">
         {insp.structures.map((st, n) => (
           <article key={st.id} className="card grid gap-4 p-4 sm:grid-cols-[160px_1fr]" data-structure={st.id}>
