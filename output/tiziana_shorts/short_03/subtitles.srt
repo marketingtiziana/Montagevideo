@@ -51,7 +51,7 @@ des employés, une structure,
 11
 00:00:16,130 --> 00:00:18,030
 vraiment une présence,
-je dirais, physique.
+gérée physique.
 
 12
 00:00:18,030 --> 00:00:19,250
@@ -69,50 +69,49 @@ en France, il y a quand
 même quelque chose
 
 15
-00:00:22,550 --> 00:00:23,890
-à faire, tu vois.
+00:00:22,550 --> 00:00:23,910
+à faire. Tu vois ?
 
 16
-00:00:23,890 --> 00:00:25,970
+00:00:23,910 --> 00:00:25,970
 Mais par contre,
 si tu as juste le service
 
 17
-00:00:25,970 --> 00:00:27,490
+00:00:25,970 --> 00:00:27,550
 qui est vendu comme
 à des particuliers,
 
 18
-00:00:27,490 --> 00:00:29,450
+00:00:27,550 --> 00:00:29,450
 à des Français, mais
 que toute la structure
 
 19
-00:00:29,450 --> 00:00:31,410
-est gérée, depuis
-l'extérieur.
+00:00:29,450 --> 00:00:31,670
+est gérée depuis
+l'extérieur, alors c'est
 
 20
-00:00:31,410 --> 00:00:32,810
-Alors, c'est juste
-une question de TVA,
+00:00:31,670 --> 00:00:32,950
+juste une question
+de TVA, si c'est
 
 21
-00:00:32,810 --> 00:00:34,030
-si c'est
+00:00:32,950 --> 00:00:34,050
 du B2C ou B2B.
 
 22
-00:00:34,030 --> 00:00:35,550
-Je te fais général
+00:00:34,050 --> 00:00:35,550
+Je te fais général,
 après, il faut voir
 
 23
-00:00:35,550 --> 00:00:36,330
+00:00:35,550 --> 00:00:36,310
 en détail.
 
 24
-00:00:36,330 --> 00:00:38,272
+00:00:36,310 --> 00:00:38,272
 Mais les gens confondent
 tout à ce niveau-là.
 

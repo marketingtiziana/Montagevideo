@@ -1,58 +1,63 @@
 1
-00:00:01,270 --> 00:00:03,390
-Tiziana, attends,
-burn-out, tu quittes
+00:00:00,000 --> 00:00:01,330
+C'est ce que ma
+mère me disait.
 
 2
-00:00:03,390 --> 00:00:04,890
+00:00:01,330 --> 00:00:03,470
+Tiziana, attends,
+burn-out, tu quittes…
+
+3
+00:00:03,470 --> 00:00:04,890
 parce que j'étais
 directrice générale d'un
 
-3
+4
 00:00:04,890 --> 00:00:06,550
-autre cabinet, je me
+autre cabinet, et je me
 dis, tiens, non,
 
-4
+5
 00:00:06,550 --> 00:00:07,850
 je vais lancer mon cabinet,
 je vais m'expatrier
 
-5
-00:00:07,850 --> 00:00:09,090
+6
+00:00:07,850 --> 00:00:09,130
 avec mon burn-out.
 
-6
-00:00:09,090 --> 00:00:11,150
-Aucun problème,
-tout est mental.
-
 7
+00:00:09,130 --> 00:00:10,170
+Aucun problème,
+c'est-à-dire que tout est
+
+8
+00:00:10,170 --> 00:00:11,150
+mental.
+
+9
 00:00:11,150 --> 00:00:12,630
 Ça a été peut-être
 mon soin, mais peut-être
 
-8
-00:00:12,630 --> 00:00:14,430
-que d'autres, ça
-ne va pas l'être.
-
-9
-00:00:14,430 --> 00:00:16,250
-C'est quand t'es
-au bout du gouffre
-
 10
-00:00:16,250 --> 00:00:17,970
-que tu arrives,
-que t'as pas le cheveu
+00:00:12,630 --> 00:00:14,230
+que d'autres, ça
+va pas l'être.
 
 11
-00:00:17,970 --> 00:00:20,210
-foin. Et je ne regrette
-pas, franchement
+00:00:14,230 --> 00:00:16,387
+C'est... quand t'es
+au bout du gouffre
 
 12
-00:00:20,210 --> 00:00:20,960
+00:00:16,387 --> 00:00:17,590
+t'as pas le choix
+de faire avancer et j'en
+
+13
+00:00:17,590 --> 00:00:20,787
+regrette pas, franchement
 pas du tout.
 

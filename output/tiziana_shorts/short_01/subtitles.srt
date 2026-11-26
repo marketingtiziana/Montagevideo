@@ -1,187 +1,176 @@
 1
-00:00:00,000 --> 00:00:02,290
-Donc, le cabinet
-fiscal d'expatriation
+00:00:00,070 --> 00:00:03,170
+Le cabinet fiscal
+d'expatriation est sur
 
 2
-00:00:02,290 --> 00:00:04,510
-est sur une clientèle
-qui est assez jeune
+00:00:03,170 --> 00:00:05,090
+une clientèle qui est
+assez jeune et dynamique.
 
 3
-00:00:04,510 --> 00:00:05,090
-et dynamique.
-
-4
 00:00:05,090 --> 00:00:06,670
 Et c'est vrai qu'ils
 ont tous les métiers
 
-5
-00:00:06,670 --> 00:00:08,990
+4
+00:00:06,670 --> 00:00:08,790
 digitaux, en fait,
 tout croisés.
 
-6
-00:00:08,990 --> 00:00:11,170
+5
+00:00:08,790 --> 00:00:11,150
 Et donc, ils n'ont
 pas de limite géographique.
 
+6
+00:00:11,150 --> 00:00:12,150
+Donc, ils voyagent
+beaucoup, on appelle
+
 7
-00:00:11,170 --> 00:00:11,910
-Donc, ils
-voyagent beaucoup.
+00:00:12,150 --> 00:00:13,150
+ça un digital nomade.
 
 8
-00:00:11,910 --> 00:00:13,150
-On appelle ça
-un digital nomade.
+00:00:13,150 --> 00:00:14,810
+Et c'est vrai que c'est
+assez compliqué,
 
 9
-00:00:13,150 --> 00:00:14,670
-Et c'est vrai que c'est
-assez compliqué
-
-10
-00:00:14,670 --> 00:00:16,290
-parce que, comme ils
+00:00:14,810 --> 00:00:16,310
+parce que comme ils
 sont jeunes en général,
 
-11
-00:00:16,290 --> 00:00:17,450
-ils voyagent
-énormément.
+10
+00:00:16,310 --> 00:00:18,050
+ils voyagent énormément,
+donc d'où le terme
 
-12
-00:00:17,450 --> 00:00:19,070
-Donc, d'où le terme
+11
+00:00:18,050 --> 00:00:18,910
 digital nomade.
 
-13
-00:00:19,070 --> 00:00:20,250
+12
+00:00:18,910 --> 00:00:20,210
 Mais il leur manque
-une structure.
+une structure,
+
+13
+00:00:20,210 --> 00:00:21,430
+parce que si chaque
+fois, ils doivent faire
 
 14
-00:00:20,250 --> 00:00:21,270
-Parce que si, chaque
-fois, ils doivent
+00:00:21,430 --> 00:00:23,370
+une structure dans
+le pays où ils vont,
 
 15
-00:00:21,270 --> 00:00:23,090
-faire une structure
-dans le pays où ils
+00:00:23,370 --> 00:00:24,390
+en sachant qu'ils
+ne restent pas spécialement
 
 16
-00:00:23,090 --> 00:00:23,890
-vont, en sachant
-qu'ils ne restent
+00:00:24,390 --> 00:00:26,550
+sur du long terme,
+je veux dire, fiscalement
 
 17
-00:00:23,890 --> 00:00:25,470
-pas spécialement
-sur du long terme,
-
-18
-00:00:25,470 --> 00:00:27,770
-je veux dire, fiscalement
+00:00:26,550 --> 00:00:28,350
 et administrativement,
-
-19
-00:00:27,770 --> 00:00:28,550
 c'est assez lourd.
 
-20
-00:00:28,550 --> 00:00:29,650
+18
+00:00:28,350 --> 00:00:29,650
 Donc, ce qu'on fait,
 c'est qu'on met
 
-21
-00:00:29,650 --> 00:00:31,230
+19
+00:00:29,650 --> 00:00:31,350
 en place quelque
 chose d'assez central,
 
-22
-00:00:31,230 --> 00:00:32,610
-parce que moi j'appelle
-ça un triomphe,
+20
+00:00:31,350 --> 00:00:32,450
+parce que moi, j'appelle
+ça un triangle,
 
-23
-00:00:32,610 --> 00:00:34,410
+21
+00:00:32,450 --> 00:00:34,410
 il y a l'endroit
 où il y a la société,
 
-24
-00:00:34,410 --> 00:00:36,070
+22
+00:00:34,410 --> 00:00:36,050
 il y a l'endroit
-où est la clientèle,
+où est la clientèle.
+
+23
+00:00:36,050 --> 00:00:36,830
+Il ne faut pas que ça
+impacte, que
+
+24
+00:00:36,830 --> 00:00:38,410
+ce soit au niveau
+bancaire, au niveau image.
 
 25
-00:00:36,070 --> 00:00:36,830
-il ne faut pas que
-c'est un impact,
+00:00:38,410 --> 00:00:40,070
+Et l'endroit où il
+réside, qui est assez
 
 26
-00:00:36,830 --> 00:00:37,710
-que ce soit au niveau
-bancaire, au niveau
+00:00:40,070 --> 00:00:41,310
+volatile,
 
 27
-00:00:37,710 --> 00:00:39,830
-image, et l'endroit
-où il réside, qui est
-
-28
-00:00:39,830 --> 00:00:41,270
-assez volatil.
-
-29
-00:00:41,270 --> 00:00:42,470
-Et donc c'est vrai
+00:00:41,310 --> 00:00:42,470
+et donc, c'est vrai
 qu'on fait autant
 
-30
+28
 00:00:42,470 --> 00:00:45,190
 la mise en place
 fiscale, au niveau
 
-31
-00:00:45,190 --> 00:00:46,610
+29
+00:00:45,190 --> 00:00:46,550
 de la structure,
 de la gestion comptable,
 
+30
+00:00:46,550 --> 00:00:49,350
+etc, évidemment, dans le
+conseil de l'expatriation.
+
+31
+00:00:49,350 --> 00:00:50,950
+Et donc, effectivement,
+on a des partenaires.
+
 32
-00:00:46,610 --> 00:00:49,350
-etc. Évidemment dans le
-conseil de l'expatriation,
+00:00:50,950 --> 00:00:52,170
+Et donc, on regarde
+un peu ce qui leur
 
 33
-00:00:49,350 --> 00:00:50,970
-et donc effectivement
-on a des partenaires,
+00:00:52,170 --> 00:00:52,910
+correspond réellement.
 
 34
-00:00:50,970 --> 00:00:52,490
-et donc on regarde un peu
-ce qui leur correspond
+00:00:52,910 --> 00:00:54,630
+Parce que bon, en soi,
+ils ont des effets
 
 35
-00:00:52,490 --> 00:00:54,090
-réellement, parce
-que bon, en soi, ils
+00:00:54,630 --> 00:00:56,970
+de mode, de juridiction,
+de territoire,
 
 36
-00:00:54,090 --> 00:00:56,130
-ont des effets de mode,
-de juridiction,
-
-37
-00:00:56,130 --> 00:00:57,650
-de territoire,
-mais après il faut...
-
-38
-00:00:57,650 --> 00:00:58,659
-Allez, chacun est
-unique, c'est tué.
+00:00:56,970 --> 00:00:58,659
+mais après, chacun
+est unique si tu veux.
 

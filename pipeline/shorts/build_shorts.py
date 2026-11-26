@@ -122,8 +122,16 @@ def aligned_tokens(wav, ref_words, tmap):
     got = [None] * len(orig)
     for blk in sm.get_matching_blocks():
         for k in range(blk.size): got[blk.a + k] = heard[blk.b + k]
+    PUN = ',.?!…'
     for i, h in enumerate(got):
-        if h: orig[i]['t0'], orig[i]['t1'] = h['t0'], h['t1']
+        if h:
+            orig[i]['t0'], orig[i]['t1'] = h['t0'], h['t1']
+            # ponctuation : on reprend celle entendue quand le texte d'origine n'en a pas
+            if orig[i]['w'][-1:] not in PUN and h['w'][-1:] in PUN:
+                orig[i]['w'] += (' ' if h['w'][-1] in '?!' else '') + h['w'][-1]
+            if i + 1 < len(orig) and h['w'][-1:] in '.?!' and orig[i + 1]['w'][:1].islower() and orig[i]['w'][-1:] in '.?!':
+                orig[i + 1]['w'] = orig[i + 1]['w'][:1].upper() + orig[i + 1]['w'][1:]
+    if orig and orig[-1]['w'][-1:] not in '.?!…': orig[-1]['w'] = orig[-1]['w'].rstrip(',') + '.'
     # interpolation des mots non alignés entre les voisins alignés (bornée par l'ordre)
     idx = [i for i, h in enumerate(got) if h]
     for i in range(len(orig)):

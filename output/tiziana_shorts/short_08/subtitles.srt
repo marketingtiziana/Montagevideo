@@ -1,142 +1,171 @@
 1
-00:00:03,210 --> 00:00:04,720
-Le Maroc.
+00:00:00,000 --> 00:00:00,650
+Maintenant, tu as
+beaucoup de gens qui
 
 2
-00:00:07,190 --> 00:00:08,590
-Non. Je te dis
-la réponse, c'est pas moi
+00:00:00,650 --> 00:00:02,230
+sont incertains parce
+qu'eux-mêmes ne savent
 
 3
-00:00:08,590 --> 00:00:09,650
-qui l'est, c'est
-toi en soi.
+00:00:02,230 --> 00:00:02,930
+pas ce qu'ils veulent.
 
 4
-00:00:09,650 --> 00:00:12,970
+00:00:02,930 --> 00:00:04,650
+Moi, quand je fais
+un audit, ce n'est
+
+5
+00:00:04,650 --> 00:00:06,570
+pas que je te dis,
+tiens, Johanna, hop,
+
+6
+00:00:06,570 --> 00:00:07,250
+toi, c'est le Maroc.
+
+7
+00:00:07,250 --> 00:00:08,450
+Non, je te dis
+la réponse, ce n'est
+
+8
+00:00:08,450 --> 00:00:09,610
+pas moi qui l'ai,
+c'est toi en soi.
+
+9
+00:00:09,610 --> 00:00:12,950
 On essaie de débloquer
 les réels éléments
 
-5
-00:00:12,970 --> 00:00:15,090
+10
+00:00:12,950 --> 00:00:15,110
 de réflexion que tu as
 besoin de toi-même
 
-6
-00:00:15,090 --> 00:00:17,790
+11
+00:00:15,110 --> 00:00:17,790
 pour avoir le résultat
 que tu penses avoir
 
-7
+12
 00:00:17,790 --> 00:00:19,730
 et pas ce que
 tu rêves avoir.
 
-8
-00:00:19,730 --> 00:00:20,550
+13
+00:00:19,730 --> 00:00:20,250
 Tu comprends ?
 
-9
-00:00:20,550 --> 00:00:22,390
+14
+00:00:20,250 --> 00:00:22,330
 C'est te faire
 réfléchir.
 
-10
-00:00:22,390 --> 00:00:23,590
+15
+00:00:22,330 --> 00:00:23,650
 Donc, ça ne se fait
 pas en un rendez-vous,
 
-11
-00:00:23,590 --> 00:00:24,450
+16
+00:00:23,650 --> 00:00:24,450
 c'est te faire réfléchir
 quand quelqu'un
 
-12
-00:00:24,450 --> 00:00:25,750
+17
+00:00:24,450 --> 00:00:25,450
 est vraiment incertain,
 je veux dire.
 
-13
-00:00:25,750 --> 00:00:26,730
+18
+00:00:25,450 --> 00:00:26,730
 C'est vraiment te
 faire réfléchir
 
-14
+19
 00:00:26,730 --> 00:00:28,150
 pour dire, tiens,
 qu'est-ce qui te correspond
 
-15
-00:00:28,150 --> 00:00:29,570
+20
+00:00:28,150 --> 00:00:29,590
 réellement en sachant
 qu'il va sûrement
 
-16
-00:00:29,570 --> 00:00:30,430
-avoir des résultats.
-
-17
-00:00:30,430 --> 00:00:31,890
-Étapes qui vont sécher
-le nez dans le temps
-
-18
-00:00:31,890 --> 00:00:33,850
-par l'expérience
-de vie dans le terrain
-
-19
-00:00:33,850 --> 00:00:35,970
-sur le territoire
-mais oui ça prend
-
-20
-00:00:35,970 --> 00:00:37,430
-du temps parce que
-les gens croient qu'on
-
 21
-00:00:37,430 --> 00:00:38,650
-arrive avec un diagnostic
-c'est un plus
+00:00:29,590 --> 00:00:31,530
+avoir des étapes qui
+vont sécher le nez
 
 22
-00:00:38,650 --> 00:00:39,730
-un égal deux et hop
-je te le donne
+00:00:31,530 --> 00:00:33,370
+dans le temps
+par l'expérience de vivre
 
 23
-00:00:39,730 --> 00:00:41,950
-pas du tout pas du
-tout parce que même
+00:00:33,370 --> 00:00:35,250
+dans le terrain, enfin
+sur le territoire.
 
 24
-00:00:41,950 --> 00:00:43,890
-eux ils sont incertains
-c'est normal c'est
+00:00:35,250 --> 00:00:36,510
+Mais oui, ça prend
+du temps parce que
 
 25
-00:00:43,890 --> 00:00:45,170
-tu sais quand tu quittes
-ton pays la première
+00:00:36,510 --> 00:00:37,550
+les gens, ils
+croient qu'on arrive
 
 26
-00:00:45,170 --> 00:00:46,250
-fois tu as l'impression
-que le monde
+00:00:37,550 --> 00:00:38,990
+avec un diagnostic,
+c'est 1 plus 1 égale
 
 27
-00:00:46,250 --> 00:00:47,970
-il est grand tout
-est possible ouais
+00:00:38,990 --> 00:00:39,890
+2 et hop,
+je te le donne.
 
 28
-00:00:47,970 --> 00:00:49,810
-mais tu peux déjà
-éliminer pas mal de choses
+00:00:39,890 --> 00:00:41,990
+Pas du tout, pas du
+tout parce que même
 
 29
-00:00:49,810 --> 00:00:51,318
-donc on essaie
-de structurer un peu
+00:00:41,990 --> 00:00:43,730
+eux, ils sont
+incertains, c'est normal.
+
+30
+00:00:43,730 --> 00:00:45,130
+Tu sais, quand tu quittes
+ton pays la première
+
+31
+00:00:45,130 --> 00:00:46,250
+fois, tu as l'impression
+que le monde,
+
+32
+00:00:46,250 --> 00:00:47,850
+il est grand,
+que tout est possible.
+
+33
+00:00:47,850 --> 00:00:49,530
+Oui, mais tu peux
+déjà éliminer pas mal
+
+34
+00:00:49,530 --> 00:00:49,910
+de choses.
+
+35
+00:00:49,910 --> 00:00:51,318
+Donc, on essaie
+de structurer un peu.
 
