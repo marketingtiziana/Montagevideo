@@ -14,6 +14,7 @@ import numpy as np
 
 ap = argparse.ArgumentParser(); ap.add_argument('--only', type=int, nargs='*'); ap.add_argument('--jobs', type=int, default=3)
 ap.add_argument('--plan', action='store_true', help='calcule seulement les découpes (sans rendu)')
+ap.add_argument('--subs-only', action='store_true', help='refait seulement sous-titres + mixage final (image et son réutilisés)')
 a = ap.parse_args()
 FPS_N, FPS_D = 30000, 1001; FPS = FPS_N / FPS_D
 SW, SH, OW, OH = 3840, 2160, 1080, 1920
@@ -110,6 +111,29 @@ def plan_short(s):
 _ASR = {}
 PROMPT = ("Podcast. Tiziana, fondatrice de FYNOVATES, cabinet fiscal et d'expatriation : Dubaï, Bali, Espagne, Thaïlande, "
           "digital nomade, TVA, B2B, B2C, établissement stable, 182 jours, burn-out, entrepreneuriat.")
+def aligned_tokens(wav, ref_words, tmap):
+    """texte = transcription d'origine (contexte complet, meilleure qualité) ; horodatages = mots réellement
+    entendus dans le son du Short, alignés mot à mot (difflib) ; mots non retrouvés : interpolés entre voisins"""
+    import difflib
+    orig = [tk for tk in tokens(ref_words, tmap) if tk['t0'] is not None]
+    heard = heard_tokens(wav, None)
+    a = [nz(x['w']) for x in orig]; b = [nz(x['w']) for x in heard]
+    sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+    got = [None] * len(orig)
+    for blk in sm.get_matching_blocks():
+        for k in range(blk.size): got[blk.a + k] = heard[blk.b + k]
+    for i, h in enumerate(got):
+        if h: orig[i]['t0'], orig[i]['t1'] = h['t0'], h['t1']
+    # interpolation des mots non alignés entre les voisins alignés (bornée par l'ordre)
+    idx = [i for i, h in enumerate(got) if h]
+    for i in range(len(orig)):
+        if got[i]: continue
+        lo = max([j for j in idx if j < i], default=None); hi = min([j for j in idx if j > i], default=None)
+        if lo is not None and hi is not None:
+            n = hi - lo; t0, t1 = orig[lo]['t1'], orig[hi]['t0']
+            orig[i]['t0'] = t0 + (t1 - t0) * (i - lo) / n; orig[i]['t1'] = t0 + (t1 - t0) * (i - lo + 1) / n
+    print(f"  alignement : {len(idx)}/{len(orig)} mots retrouvés dans le son")
+    return orig
 def heard_tokens(wav, ref_words):
     """mots + horodatages réellement entendus dans le son du Short (faster-whisper, contexte = texte d'origine)"""
     if 'm' not in _ASR:
@@ -117,9 +141,8 @@ def heard_tokens(wav, ref_words):
         _ASR['m'] = WhisperModel('models/fw-large-v3-turbo', device='cpu', compute_type='int8')
     import librosa
     y, _ = librosa.load(wav, sr=16000, mono=True)
-    ref = ' '.join(w['w'] for w in ref_words)[:600]
     sg, _ = _ASR['m'].transcribe(y, language='fr', word_timestamps=True, condition_on_previous_text=False,
-                                 initial_prompt=PROMPT + ' ' + ref[:200], vad_filter=False)
+                                 initial_prompt=PROMPT, vad_filter=False)
     ws = [{'w': x.word.strip(), 't0': x.start, 't1': x.end} for z in sg for x in z.words if x.word.strip()]
     return tokens(ws, lambda tt: tt)
 _w16 = wave.open('work/audio16.wav'); Y16 = np.frombuffer(_w16.readframes(_w16.getnframes()), np.int16).astype(np.float32) / 32768
@@ -205,15 +228,17 @@ def render(s, P):
     sid = f"short_{s['id']:02d}"; d = f'{OUT}/{sid}'; os.makedirs(d, exist_ok=True); t = f'{TMP}/{sid}'; os.makedirs(t, exist_ok=True)
     x, y, wc, hc, info = crop_for(P['ivs'])
     parts = []
-    for k, iv in enumerate(P['ivs']):
+    reuse = a.subs_only and all(os.path.exists(f'{t}/{f}') for f in ('video.mp4', 'raw.wav', 'audio.wav'))
+    for k, iv in enumerate([] if reuse else P['ivs']):
         o = f'{t}/p{k:02d}.mp4'
         run(['ffmpeg', '-v', 'error', '-y', '-ss', f"{iv['src0']:.4f}", '-i', 'source.mp4', '-an', '-vf',
              f'fps={FPS_N}/{FPS_D},crop={wc}:{hc}:{x}:{y},scale={OW}:{OH}:flags=lanczos,format=yuv420p',
              '-frames:v', str(iv['nfr']), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '12', o])
         assert nb_frames(o) == iv['nfr'], (sid, k)
         parts.append(o)
-    open(f'{t}/list.txt', 'w').write(''.join(f"file '{os.path.basename(p)}'\n" for p in parts))
-    run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', f'{t}/list.txt', '-c', 'copy', f'{t}/video.mp4'])
+    if not reuse:
+        open(f'{t}/list.txt', 'w').write(''.join(f"file '{os.path.basename(p)}'\n" for p in parts))
+        run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', f'{t}/list.txt', '-c', 'copy', f'{t}/video.mp4'])
     # audio original + fondus 8 ms
     fade = int(0.008 * SR); seg = []
     for k_, iv in enumerate(P['ivs']):
@@ -228,7 +253,7 @@ def render(s, P):
     ln = (f"loudnorm=I=-14:TP=-1:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
           f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
     # limiteur doux de sécurité (crêtes après encodage AAC), transparent sur la voix
-    run(['ffmpeg', '-v', 'error', '-y', '-i', f'{t}/raw.wav', '-af', ln + ',alimiter=limit=0.84:attack=2:release=50:level=false,aresample=48000', '-c:a', 'pcm_s16le', f'{t}/audio.wav'])
+    run(['ffmpeg', '-v', 'error', '-y', '-i', f'{t}/raw.wav', '-af', ln + ',alimiter=limit=0.79:attack=1:release=50:level=false,aresample=48000', '-c:a', 'pcm_s16le', f'{t}/audio.wav'])
     # sous-titres (timeline du Short)
     offs, acc = [], 0
     for iv in P['ivs']: offs.append(acc); acc += iv['nfr'] / FPS
@@ -236,7 +261,7 @@ def render(s, P):
         for iv, of in zip(P['ivs'], offs):
             if iv['src0'] - 0.3 <= tt <= iv['src1'] + 0.3: return max(0.0, of + tt - iv['src0'])
         return None
-    toks = heard_tokens(f'{t}/raw.wav', P['words'])
+    toks = aligned_tokens(f'{t}/raw.wav', P['words'], tmap)
     cs = cards(toks, acc); write_subs(cs, f'{t}/subs.ass', f'{d}/subtitles.srt')
     run(['ffmpeg', '-v', 'error', '-y', '-i', f'{t}/video.mp4', '-i', f'{t}/audio.wav', '-vf', f'subtitles={t}/subs.ass:fontsdir=fonts',
          '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p',
@@ -252,9 +277,10 @@ if __name__ == '__main__':
         print(f"#{s['id']:02d} {dur:5.1f}s (brut {raw:5.1f}s, {len(P['ivs'])} morceaux, retirés : "
               f"{sum(1 for r, _ in P['removed'] if r == 'hôte')} mots hôte, {sum(1 for r, _ in P['removed'] if r != 'hôte')} éditoriaux) {s['titre']}")
         for r, w in P['removed']: print(f"      - {r}: {w['w']} ({w['t0']:.2f})")
-    json.dump({str(k): {'ivs': v['ivs'], 'removed': [[r, w['w'], w['t0']] for r, w in v['removed']],
-                        'words': [[w['w'], w['t0'], w['t1'], w.get('conf2'), w.get('verif')] for w in v['words']]} for k, v in plans.items()},
-              open(f'{TMP}/plans.json', 'w'), ensure_ascii=False, indent=0)
+    _old = json.load(open(f'{TMP}/plans.json')) if os.path.exists(f'{TMP}/plans.json') else {}
+    _old.update({str(k): {'ivs': v['ivs'], 'removed': [[r, w['w'], w['t0']] for r, w in v['removed']],
+                        'words': [[w['w'], w['t0'], w['t1'], w.get('conf2'), w.get('verif')] for w in v['words']]} for k, v in plans.items()})
+    json.dump(_old, open(f'{TMP}/plans.json', 'w'), ensure_ascii=False, indent=0)
     if a.plan: raise SystemExit
     with cf.ThreadPoolExecutor(a.jobs) as ex:
         res = list(ex.map(lambda s: render(s, plans[s['id']]), shorts))

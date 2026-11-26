@@ -17,6 +17,20 @@ fmt = lambda t: f"{int(t // 3600):02d}:{int(t % 3600 // 60):02d}:{t % 60:06.3f}"
 probe = lambda p, *k: subprocess.check_output(['ffprobe', '-v', 'error', *k, p]).decode().strip()
 clean = lambda s: re.sub(r"\s+([,.])", r"\1", re.sub(r" ([' -])", r"\1", s)).replace(" '", "'").replace(' ?', ' ?')
 
+import unicodedata
+nz = lambda x: re.sub(r"[^a-z0-9]", '', unicodedata.normalize('NFD', x.lower()).encode('ascii', 'ignore').decode())
+_M = {}
+def last_word_heard(sid, end=None):
+    if 'm' not in _M:
+        from faster_whisper import WhisperModel
+        _M['m'] = WhisperModel('models/fw-large-v3-turbo', device='cpu', compute_type='int8')
+    import librosa
+    y, _ = librosa.load(f'work/shorts/{sid}/raw.wav', sr=16000, mono=True)
+    e = len(y) if end is None else int(end * 16000)
+    sg, _ = _M['m'].transcribe(y[max(0, e - int(3.0 * 16000)):e], language='fr', condition_on_previous_text=False, word_timestamps=True)
+    ws = [x.word for z in sg for x in z.words]
+    return nz(ws[-1]) if ws else ''
+asr_ok = []
 rows, rep, qc = [], [], {}
 for s in CFG['shorts']:
     k = str(s['id']); sid = f"short_{s['id']:02d}"; mp4 = f'{OUT}/{sid}/{sid}.mp4'
@@ -32,6 +46,16 @@ for s in CFG['shorts']:
     # une coupe est correcte si elle tombe entre deux mots (horodatage) ou dans un creux < -35 dB
     def in_word(t): return any(x['t0'] + 0.03 < t < x['t1'] - 0.03 for x in W)
     bad_cuts = [round(t, 2) for iv in ivs for t in (iv['src0'], iv['src1']) if in_word(t) and db(t) > -35]
+    # coupe de fin de morceau signalée : on réécoute la fin du morceau dans le son du Short
+    still = []
+    for t in bad_cuts:
+        k_ = next((j for j, iv in enumerate(ivs) if abs(iv['src1'] - t) < 0.02), None)
+        if k_ is not None:
+            end_short = sum(iv['nfr'] for iv in ivs[:k_ + 1]) / FPS
+            lastw = [w for w in words if w[1] < ivs[k_]['src1'] and w[0].strip() not in '?.,!']
+            if lastw and last_word_heard(sid, end_short) == nz(lastw[-1][0]): asr_ok.append((s['id'], t)); continue
+        still.append(t)
+    bad_cuts = still
     # 3. silences restants dans le Short (timeline finale)
     offs, acc = [], 0
     for iv in ivs: offs.append(acc); acc += iv['nfr'] / FPS
@@ -179,4 +203,5 @@ cols = 7; rows_n = (len(tiles) + cols - 1) // cols
 sheet = Image.new('RGB', (cols * 324, rows_n * 576), (20, 20, 20))
 for i, im in enumerate(tiles): sheet.paste(im, ((i % cols) * 324, (i // cols) * 576))
 sheet.save(f'{OUT}/contact_sheet.png')
+print('fins vérifiées par reconnaissance vocale :', asr_ok)
 print(json.dumps({k: v['statut'] for k, v in qc.items()}, ensure_ascii=False, indent=1))

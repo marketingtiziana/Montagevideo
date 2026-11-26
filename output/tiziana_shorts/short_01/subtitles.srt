@@ -97,12 +97,12 @@ Donc, ce qu'on fait,
 c'est qu'on met
 
 21
-00:00:29,650 --> 00:00:31,350
+00:00:29,650 --> 00:00:31,230
 en place quelque
 chose d'assez central,
 
 22
-00:00:31,350 --> 00:00:32,610
+00:00:31,230 --> 00:00:32,610
 parce que moi j'appelle
 ça un triomphe,
 
@@ -112,12 +112,12 @@ il y a l'endroit
 où il y a la société,
 
 24
-00:00:34,410 --> 00:00:36,090
+00:00:34,410 --> 00:00:36,070
 il y a l'endroit
 où est la clientèle,
 
 25
-00:00:36,090 --> 00:00:36,830
+00:00:36,070 --> 00:00:36,830
 il ne faut pas que
 c'est un impact,
 
@@ -133,7 +133,7 @@ où il réside, qui est
 
 28
 00:00:39,830 --> 00:00:41,270
-assez volatile.
+assez volatil.
 
 29
 00:00:41,270 --> 00:00:42,470
@@ -141,12 +141,12 @@ Et donc c'est vrai
 qu'on fait autant
 
 30
-00:00:42,470 --> 00:00:45,210
+00:00:42,470 --> 00:00:45,190
 la mise en place
 fiscale, au niveau
 
 31
-00:00:45,210 --> 00:00:46,610
+00:00:45,190 --> 00:00:46,610
 de la structure,
 de la gestion comptable,
 
@@ -181,6 +181,7 @@ de territoire,
 mais après il faut...
 
 38
-00:00:57,650 --> 00:00:58,400
-Allez, chacun a une...
+00:00:57,650 --> 00:00:58,659
+Allez, chacun est
+unique, c'est tué.
 
