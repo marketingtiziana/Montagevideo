@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Encaisser n'est pas être bancarisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F1535;
+    --navy-2: #161E47;
+    --indigo: #4F6BFF;
+    --white: #FFFFFF;
+    --muted: #9AA6CC;
+    --line: rgba(154, 166, 204, 0.22);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1350px; background: var(--navy); }
+  body {
+    font-family: "Inter", sans-serif;
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+  .canvas {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    padding: 80px 80px 76px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 600px at 100% 0%, rgba(79, 107, 255, 0.16), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(79, 107, 255, 0.08), transparent 60%),
+      var(--navy);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 14px;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--indigo);
+    box-shadow: 0 0 0 6px rgba(79, 107, 255, 0.18);
+  }
+  h1 {
+    margin-top: 0;
+    font-size: 88px;
+    line-height: 1.02;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+  }
+  h1 .accent { color: var(--indigo); }
+  .subtitle {
+    margin-top: 22px;
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .cards {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .card {
+    border-radius: 24px;
+    padding: 32px 34px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(154, 166, 204, 0.28);
+  }
+  .card.bank {
+    background: linear-gradient(180deg, rgba(79, 107, 255, 0.14), rgba(79, 107, 255, 0.04));
+    border: 2px solid var(--indigo);
+    box-shadow: 0 24px 60px -24px rgba(79, 107, 255, 0.55);
+  }
+  .card h2 {
+    font-size: 40px;
+    line-height: 1.08;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    padding-bottom: 22px;
+    min-height: 108px;
+  }
+  .row {
+    padding: 18px 0 20px;
+    border-top: 1px solid var(--line);
+  }
+  .label {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .card.bank .label { color: #8FA2FF; }
+  .value {
+    margin-top: 6px;
+    font-size: 30px;
+    line-height: 1.28;
+    font-weight: 500;
+  }
+  .banner {
+    margin-top: 32px;
+    border-radius: 24px;
+    background: var(--indigo);
+    padding: 34px 40px;
+    font-size: 34px;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .banner strong { font-weight: 700; color: var(--white); }
+  .footer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .footer .name { font-size: 30px; font-weight: 600; }
+  .footer .brand { font-size: 28px; font-weight: 500; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <h1>Encaisser n’est pas être <span class="accent">bancarisé</span></h1>
+    <p class="subtitle">Deux comptes, deux fonctions différentes</p>
+
+    <div class="cards">
+      <div class="card pay">
+        <h2>Compte de paiement</h2>
+        <div class="row"><div class="label">Rôle</div><div class="value">Recevoir et envoyer des paiements</div></div>
+        <div class="row"><div class="label">Fonds</div><div class="value">Cantonnés, hors garantie des dépôts</div></div>
+        <div class="row"><div class="label">Crédit</div><div class="value">Non</div></div>
+      </div>
+      <div class="card bank">
+        <h2>Compte bancaire</h2>
+        <div class="row"><div class="label">Rôle</div><div class="value">Relation bancaire complète</div></div>
+        <div class="row"><div class="label">Fonds</div><div class="value">Couverts par la garantie des dépôts</div></div>
+        <div class="row"><div class="label">Crédit</div><div class="value">Possible, selon le dossier</div></div>
+      </div>
+    </div>
+
+    <div class="banner">La question n’est pas comment j’encaisse.<br><strong>C’est ce que cet argent me permettra de&nbsp;faire dans&nbsp;3&nbsp;ans.</strong></div>
+
+    <div class="footer">
+      <span class="name">Tiziana Caci</span>
+      <span class="brand">Fynovates</span>
+    </div>
+  </div>
+</body>
+</html>
