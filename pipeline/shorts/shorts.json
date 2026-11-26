@@ -1,0 +1,179 @@
+{
+ "_doc": "Chaque Short = une idée. 'garder' = morceaux [phrase de début, phrase de fin] (inclus), 'apres' = temps source approximatif pour lever les ambiguïtés. Les relances de l'hôte à l'intérieur sont retirées automatiquement (pipeline/shorts/speakers.py).",
+ "shorts": [
+  {
+   "id": 1,
+   "titre": "Le triangle de l'expatriation",
+   "apres": 195,
+   "garder": [
+    [
+     "le cabinet fiscal d'expatriation est sur",
+     "chacun est unique si tu veux"
+    ]
+   ],
+   "debut_source": 196.13
+  },
+  {
+   "id": 2,
+   "titre": "Dubaï : 0 % d'impôt, vraiment pour tout le monde ?",
+   "apres": 262,
+   "garder": [
+    [
+     "Alors, Dubaï, c'est vrai",
+     "de l'évasion fiscale"
+    ]
+   ]
+  },
+  {
+   "id": 3,
+   "titre": "Résident à Dubaï, clients français : où payer ses impôts ?",
+   "apres": 325,
+   "garder": [
+    [
+     "Alors, il y a plusieurs critères",
+     "confondent tout à ce niveau-là"
+    ]
+   ]
+  },
+  {
+   "id": 4,
+   "titre": "Tu n'es pas prêt à t'expatrier (et c'est normal)",
+   "apres": 390,
+   "garder": [
+    [
+     "Après, pour moi, j'essaie toujours",
+     "primordial pour moi, l'expérience"
+    ]
+   ]
+  },
+  {
+   "id": 5,
+   "titre": "Tester un pays : au-delà des 3 mois",
+   "apres": 450,
+   "garder": [
+    [
+     "Honnêtement, quand tu vois vraiment",
+     "à part quand ils le vivent"
+    ]
+   ]
+  },
+  {
+   "id": 6,
+   "titre": "Choisir un pays : la fiscalité ne suffit pas",
+   "apres": 510,
+   "garder": [
+    [
+     "ce qu'il faut savoir c'est que",
+     "le bonheur, ça n'a pas de prix"
+    ]
+   ]
+  },
+  {
+   "id": 7,
+   "titre": "Zéro impôt à Dubaï ? Les coûts cachés",
+   "apres": 554,
+   "garder": [
+    [
+     "Parce que zéro impôt",
+     "je suis pas dans l'émotionnel"
+    ]
+   ]
+  },
+  {
+   "id": 8,
+   "titre": "L'audit : la réponse, c'est toi",
+   "apres": 620,
+   "garder": [
+    [
+     "Maintenant, tu as beaucoup de gens qui sont incertains",
+     "on essaie de structurer un peu"
+    ]
+   ]
+  },
+  {
+   "id": 9,
+   "titre": "À partir de quand s'expatrier ?",
+   "apres": 744,
+   "garder": [
+    [
+     "au niveau professionnel déjà",
+     "est-ce qu'elle est déplaçable"
+    ],
+    [
+     "au niveau pratique business",
+     "c'est toi dans ta tête"
+    ]
+   ]
+  },
+  {
+   "id": 10,
+   "titre": "Bali, la destination n°1",
+   "apres": 788,
+   "garder": [
+    [
+     "Alors, pour l'instant, c'est Bali",
+     "un manquement européen"
+    ]
+   ]
+  },
+  {
+   "id": 11,
+   "titre": "Femme entrepreneuse et burn-out",
+   "apres": 843,
+   "garder": [
+    [
+     "C'est vrai qu'on commence toujours un peu tout seul",
+     "pas facile d'être une femme entrepreneuse"
+    ]
+   ]
+  },
+  {
+   "id": 12,
+   "titre": "La charge mentale des femmes",
+   "apres": 909,
+   "garder": [
+    [
+     "Je pense que chacun, que ce soit l'homme",
+     "le surmenage t'explose"
+    ]
+   ]
+  },
+  {
+   "id": 13,
+   "titre": "Tout quitter après un burn-out",
+   "apres": 964,
+   "garder": [
+    [
+     "C'est ce que ma mère me disait",
+     "franchement pas du tout"
+    ]
+   ]
+  },
+  {
+   "id": 14,
+   "titre": "Transmettre, sa nouvelle mission de vie",
+   "apres": 1016,
+   "garder": [
+    [
+     "c'est vrai que j'ai un projet",
+     "aider beaucoup plus de gens"
+    ],
+    [
+     "c'est ma nouvelle mission de vie",
+     "c'est ma nouvelle mission de vie"
+    ]
+   ]
+  }
+ ],
+ "corrections_sous_titres": {
+  "conseil de l'exploitation": "conseil de l'expatriation",
+  "sinon, l'exploitation,": "sinon, l'expatriation,",
+  "l'air n'est pas plus verte": "l'herbe n'est pas plus verte",
+  "ça se dourcit": "ça se durcit",
+  "antécédés": "antécédents",
+  "m'expatrer": "m'expatrier",
+  "il ne faut pas que ses impacts": "il ne faut pas que ça impacte",
+  "c'est plus ça peut-être": "c'est plus ça, peut-être",
+  "tu es née dans le guidon": "tu as le nez dans le guidon"
+ }
+}

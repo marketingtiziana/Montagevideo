@@ -1,0 +1,54 @@
+{
+ "rushs": {
+  "cam_large": "source.mp4",
+  "cam_hote": "source.mp4",
+  "cam_invite": "source.mp4"
+ },
+ "audio_hote": "intégré",
+ "audio_invite": "intégré",
+ "sponsor_rush": "aucun",
+ "nom_podcast": "",
+ "hote": "Joana",
+ "invite": "Tiziana",
+ "invite_fonction": "Fondatrice · FYNOVATES, cabinet fiscal & expatriation",
+ "invite_linkedin": "",
+ "invite_instagram": "@madamecaci",
+ "couleur_primaire": "#1E5BFF",
+ "couleur_accent": "#FFCC00",
+ "couleur_texte": "#FFFFFF",
+ "fps_sortie": "30000/1001",
+ "sync_ref": "cam_large",
+ "cote_hote": "droite",
+ "etalonnage": "eq=contrast=1.06:saturation=0.98:gamma=1.02,colorbalance=rs=0.03:bs=-0.03:rm=0.02:bm=-0.02:rh=0.01:bh=-0.01,curves=all='0/0.035 0.25/0.235 0.5/0.5 0.75/0.765 1/0.965',huesaturation=colors=g+y:saturation=-0.12:strength=0.6",
+ "teaser": [
+  "P2",
+  "P3",
+  "P1",
+  "P9"
+ ],
+ "teaser_plages": {
+  "P9": {
+   "t0": 780.68
+  }
+ },
+ "logo": false,
+ "watermark": false,
+ "invite_youtube": "@Tiziana_Caci",
+ "jingle": false,
+ "end_slate": false,
+ "cta_disponible_sur": false,
+ "cta_commentaire": false,
+ "bips": [
+  "couillon",
+  "fric"
+ ],
+ "musique_teaser_style": "calme",
+ "musique_teaser_lufs": -24,
+ "ducking_ratio": 2.5,
+ "musique_teaser_gain_db": 0,
+ "lower_third_sur_invite": true,
+ "ouverture": {
+  "cam_debut": "H",
+  "large_au_mot": "bienvenue"
+ }
+}
