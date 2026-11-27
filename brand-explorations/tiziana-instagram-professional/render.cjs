@@ -9,7 +9,7 @@ const fs = require('node:fs')
   const errs = []
   p.on('pageerror', (e) => errs.push(e.message))
   p.on('requestfailed', (r) => errs.push('failed ' + r.url()))
-  await p.goto('file://' + path.join(__dirname, 'index.html'))
+  await p.goto('file://' + path.join(__dirname, process.argv[2] || 'index.html'))
   await p.waitForSelector('body[data-ready]')
   await p.evaluate(() => document.body.classList.add('exporting'))
   await p.evaluate(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))))

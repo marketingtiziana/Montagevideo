@@ -35,3 +35,11 @@ Ouvrir `index.html` dans un navigateur pour voir toutes les planches. Pour tout 
 
 ## Sources modifiables
 `src/content.js` (textes), `src/design.js` (gabarits), `src/app.js` (planches), `src/lib.js` (textures), `src/styles.css`.
+
+## V2 — inspirée du feed de référence (dossier `v2/`)
+Ouvrir `index-v2.html` ; export : `node render.cjs index-v2.html`.
+- Photos tonales : chaque photo reçoit un calque « couleur » beige (#C09F7E), la teinte est unifiée et la lumière d'origine conservée.
+- Titres en linéale condensée XXL (Bebas Neue), questions en Oswald italique, touches manuscrites (Allura). Toutes sous licence OFL, polices dans `src/typefaces`.
+- Accroches qui interpellent (idée reçue entre guillemets), séries récurrentes (« Le brief international », « Coulisses du cabinet »), pastilles, soulignés, images d'ambiance.
+- On ne reprend pas le côté lifestyle ou mise en scène de la référence.
+- Livrables : `v2/00-analyse-reference.jpg`, `01-simulation-profil.jpg`, `02-grille-12.jpg`, `03-les-12-visuels.jpg`, `v2/publications/`, 3 carrousels (`v2/carrousel-*.jpg` + `v2/carrousels/`), Reels (`v2/reels-couvertures.jpg` + `v2/reels/`), `v2/charte-v2.jpg`.
