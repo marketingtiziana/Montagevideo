@@ -1,0 +1,103 @@
+/* Tiziana — 6 beige art directions. */
+;(function () {
+  const full = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;'
+  let uid = 0
+  const paper = (opacity = 0.18) => {
+    const f = `pp${++uid}`
+    return `<svg style="${full}mix-blend-mode:multiply" preserveAspectRatio="none"><filter id="${f}"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" seed="5" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.38  0 0 0 0 0.3  0 0 0 0.55 0"/></filter><rect width="100%" height="100%" filter="url(#${f})" opacity="${opacity}"/></svg>`
+  }
+
+  window.TZ_DIRECTIONS = [
+    {
+      key: 'editorial',
+      num: 'A',
+      name: 'Éditorial clair',
+      short: 'Beige minimaliste et éditorial',
+      idea: 'La page d’un magazine de fond : beaucoup d’air, une grande capitale sérif, des filets fins. Tiziana parle peu, chaque mot pèse.',
+      c: { bg: '#EFEBE3', bg2: '#FAF8F4', ink: '#1E1B18', muted: '#6E665C', line: '#C9C0B2', accent: '#1E1B18' },
+      fonts: { display: 'Cormorant Garamond', dWeight: 500, text: 'Inter', caps: 'Inter' },
+      fontNote: 'Cormorant Garamond (titres), Inter (texte, petites capitales)',
+      texture: 'Aucune : aplats beige clair et blanc cassé',
+      elements: 'Filets fins, numérotation romaine, grandes marges, photo en pleine page ou en colonne',
+      pros: ['Le plus intemporel', 'Laisse toute la place à la parole et à la photo', 'Très bonne lisibilité'],
+      risks: ['Peut paraître froid ou trop retenu', 'Dépend fortement de la qualité des photos'],
+      bgLayer: (c) => `<div style="${full}background:${c.bg}"></div>`,
+    },
+    {
+      key: 'sand',
+      num: 'B',
+      name: 'Sable naturel',
+      short: 'Beige sable et naturel',
+      idea: 'La lumière d’une fin d’après-midi, des matières naturelles : une présence chaleureuse, posée, sans décor.',
+      c: { bg: '#E4D6C1', bg2: '#F3ECE1', ink: '#3A3026', muted: '#7A6A57', line: '#C7B394', accent: '#9C7E5A' },
+      fonts: { display: 'Fraunces', dWeight: 420, text: 'Inter', caps: 'Inter' },
+      fontNote: 'Fraunces (titres, graisse légère), Inter (texte)',
+      texture: 'Grain papier chaud très léger (multiplication, 15 %)',
+      elements: 'Aplats sable, cadres photo à marge large, petites capitales espacées',
+      pros: ['Le plus chaleureux et accessible', 'Matière perceptible : se distingue des aplats numériques', 'Accord naturel avec les photos en lumière chaude'],
+      risks: ['Peut glisser vers le lifestyle si les photos sont trop « vacances »', 'Contraste texte modéré : surveiller la lisibilité'],
+      bgLayer: (c) => `<div style="${full}background:${c.bg}"></div>` + paper(0.16),
+    },
+    {
+      key: 'brown',
+      num: 'C',
+      name: 'Beige et brun profond',
+      short: 'Beige et brun chocolat',
+      idea: 'Le beige domine, le brun tranche : une identité structurée, affirmée, qui évoque le cuir, le bois, les bureaux de direction.',
+      c: { bg: '#E9DFD0', bg2: '#F4EEE5', ink: '#3B2A20', muted: '#7A5C45', line: '#CDBBA4', accent: '#3B2A20' },
+      fonts: { display: 'DM Serif Display', dWeight: 400, text: 'Manrope', caps: 'Manrope' },
+      fontNote: 'DM Serif Display (titres), Manrope (texte et capitales)',
+      texture: 'Aplats ; bandeaux brun chocolat',
+      elements: 'Bandeaux et blocs brun, titres larges, capitales espacées en brun clair',
+      pros: ['Le plus affirmé et reconnaissable', 'Le brun donne de l’autorité sans le noir', 'Très bonne tenue en miniature YouTube'],
+      risks: ['Brun + beige peut vieillir vite s’il est surutilisé', 'À doser : le brun en accent, pas en fond'],
+      bgLayer: (c) => `<div style="${full}background:${c.bg}"></div>`,
+    },
+    {
+      key: 'noir',
+      num: 'D',
+      name: 'Beige et noir',
+      short: 'Fond beige, typographie noire',
+      idea: 'Le contraste d’un quotidien économique : une typographie noire, grande, frontale. La prise de position avant tout.',
+      c: { bg: '#E7E1D6', bg2: '#F2EEE7', ink: '#111111', muted: '#55504A', line: '#111111', accent: '#111111' },
+      fonts: { display: 'Playfair Display', dWeight: 700, text: 'Manrope', caps: 'Manrope' },
+      fontNote: 'Playfair Display gras (titres), Manrope (texte)',
+      texture: 'Aucune ; filets noirs épais et fins',
+      elements: 'Titres très grands, filets noirs, colonnes de journal, guillemets typographiques',
+      pros: ['Le plus éditorial et le plus « tribune »', 'Lisibilité maximale', 'Idéal pour les citations et prises de position'],
+      risks: ['Peut sembler austère', 'Le noir rapproche du code presse générique'],
+      bgLayer: (c) => `<div style="${full}background:${c.bg}"></div>`,
+    },
+    {
+      key: 'champagne',
+      num: 'E',
+      name: 'Crème et champagne',
+      short: 'Beige crème et champagne',
+      idea: 'Un raffinement silencieux : crème, un filet champagne, une signature. Le détail qui se remarque à la deuxième lecture.',
+      c: { bg: '#F2EADB', bg2: '#FBF7EF', ink: '#2B2620', muted: '#776D5F', line: '#D9C7A0', accent: '#B89B62' },
+      fonts: { display: 'Cormorant Garamond', dWeight: 400, text: 'Inter', caps: 'Inter', italic: true },
+      fontNote: 'Cormorant Garamond italique (accents), Inter (texte)',
+      texture: 'Aplats crème ; filets champagne de 1 à 2 px',
+      elements: 'Double filet champagne, italiques ponctuelles, monogramme typographique « T·C » à valider',
+      pros: ['Le plus raffiné', 'Le champagne apporte la nuance sans dorure', 'S’accorde avec le bleu nuit de Fynovates'],
+      risks: ['Frontière fine avec le registre luxe / mariage', 'Le champagne doit rester un filet, jamais un aplat'],
+      bgLayer: (c) => `<div style="${full}background:${c.bg}"></div>`,
+    },
+    {
+      key: 'archi',
+      num: 'F',
+      name: 'Beige architectural',
+      short: 'Beige contemporain et architectural',
+      idea: 'Des blocs beige de trois valeurs, superposés, asymétriques : une dirigeante qui construit, qui organise, qui décide.',
+      c: { bg: '#E6DCCB', bg2: '#F5F0E7', ink: '#1F1B17', muted: '#6C6153', line: '#B9A88F', accent: '#CDBDA5', bridge: '#0D082E' },
+      fonts: { display: 'Manrope', dWeight: 760, text: 'Manrope', caps: 'Manrope', serif: 'Instrument Serif' },
+      fontNote: 'Manrope gras (titres), Instrument Serif italique (accents), Manrope (texte)',
+      texture: 'Blocs superposés en trois valeurs de beige',
+      elements: 'Blocs asymétriques, une ligne bleu nuit comme pont vers Fynovates',
+      pros: ['Le plus contemporain', 'Fait le lien le plus naturel avec la structure de Fynovates', 'Décline facilement en gabarits'],
+      risks: ['Moins « incarné » que les directions éditoriales', 'Blocs à garder simples pour ne pas surcharger'],
+      bgLayer: (c) =>
+        `<div style="${full}background:${c.bg};overflow:hidden"><div style="position:absolute;right:0;top:0;width:36%;height:64%;background:${c.accent}"></div><div style="position:absolute;right:16%;bottom:0;width:30%;height:46%;background:${c.bg2}"></div></div>`,
+    },
+  ]
+})()

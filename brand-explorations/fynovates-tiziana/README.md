@@ -35,13 +35,13 @@ node render-boards.cjs
 - Logo : wordmark officiel FYNOVATES (SVG du dossier Drive « LOGOS »), jamais redessiné.
 - Photos : shooting studio réel de Tiziana (dossier Drive « PHOTOS Tiziana »), sans retouche.
 - Textes : expressions signatures et méthode issues des playbooks (`workspace/brand/`). Aucun chiffre ni promesse.
-- Polices : Inter, Manrope, Fraunces, Cormorant Garamond, Playfair Display, DM Serif Display, Instrument Serif — licence libre SIL OFL (`assets/fonts/`).
+- Polices : Inter, Manrope, Fraunces, Cormorant Garamond, Playfair Display, DM Serif Display, Instrument Serif — licence libre SIL OFL (`lib/fonts/`).
 
 ## Fichiers
 
-- `index.html`, `assets/styles.css` — galerie
-- `assets/textures.js` — les 8 textures (CSS / SVG génératif)
-- `assets/directions.js` — les 6 directions beige
-- `assets/applications.js` — gabarits des supports
-- `assets/app.js` — composition des planches
+- `index.html`, `lib/styles.css` — galerie
+- `lib/textures.js` — les 8 textures (CSS / SVG génératif)
+- `lib/directions.js` — les 6 directions beige
+- `lib/applications.js` — gabarits des supports
+- `lib/app.js` — composition des planches
 - `render-boards.cjs` — export PNG
