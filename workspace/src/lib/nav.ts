@@ -1,0 +1,83 @@
+export interface NavItem {
+  path: string
+  label: string
+}
+export interface NavGroup {
+  label: string
+  items: NavItem[]
+}
+
+export const NAV: NavGroup[] = [
+  {
+    label: 'Accueil',
+    items: [
+      { path: '/', label: 'Vue d’ensemble' },
+      { path: '/map', label: 'Carte stratégique' },
+    ],
+  },
+  {
+    label: 'Mindmap Studio',
+    items: [
+      { path: '/mindmaps', label: 'Cartes mentales iPad' },
+      { path: '/mindmaps/quitter-la-france/edit', label: 'Carte 01 — éditeur' },
+      { path: '/mindmaps/residence-fiscale/edit', label: 'Carte 02 — éditeur' },
+    ],
+  },
+  {
+    label: 'Brand Strategy',
+    items: [
+      { path: '/brand-strategy', label: 'Vue d’ensemble' },
+      { path: '/brand-strategy/fn', label: 'Fynovates — corporate' },
+      { path: '/brand-strategy/tz', label: 'Tiziana — personnelle' },
+      { path: '/brand-strategy/align', label: 'Alignement' },
+      { path: '/brand-strategy/assets', label: 'Guidelines des assets' },
+      { path: '/brand-strategy/register', label: 'Registre d’approbation' },
+      { path: '/brand-strategy/context', label: 'Contexte de marque (IA)' },
+    ],
+  },
+  {
+    label: 'Stratégie',
+    items: [
+      { path: '/brand/FN', label: 'Fynovates' },
+      { path: '/brand/TZ', label: 'Tiziana / Madame Caci' },
+      { path: '/insights', label: 'Problématiques prospects' },
+      { path: '/journeys', label: 'Parcours & CTA' },
+      { path: '/rhythm', label: 'Rythme de publication' },
+    ],
+  },
+  {
+    label: 'Plateformes',
+    items: [
+      { path: '/plaquettes/youtube-fynovates', label: 'Chaîne YouTube Fynovates' },
+      { path: '/plaquettes/linkedin-fynovates', label: 'Identité LinkedIn Fynovates' },
+      { path: '/channel/yt-fn', label: 'YouTube Fynovates' },
+      { path: '/channel/ig-fn', label: 'Instagram Fynovates' },
+      { path: '/channel/tt-fn', label: 'TikTok Fynovates' },
+      { path: '/channel/li-fn', label: 'LinkedIn Fynovates' },
+      { path: '/channel/ig-tz', label: 'Instagram Tiziana' },
+      { path: '/channel/li-tz', label: 'LinkedIn Tiziana' },
+    ],
+  },
+  {
+    label: 'Direction artistique',
+    items: [
+      { path: '/da/FN', label: 'Charte Fynovates' },
+      { path: '/da/TZ', label: 'Charte Tiziana' },
+      { path: '/templates', label: 'Templates' },
+      { path: '/gallery', label: 'Galerie visuelle' },
+    ],
+  },
+  {
+    label: 'Idées de contenus',
+    items: [
+      { path: '/longform', label: 'Long formats YouTube' },
+      { path: '/ideas', label: 'Idées par plateforme' },
+      { path: '/matrix', label: 'Déclinaisons' },
+    ],
+  },
+]
+
+export function findNav(pathname: string): { group: NavGroup; item: NavItem } | null {
+  for (const group of NAV) for (const item of group.items) if (item.path === pathname) return { group, item }
+  return null
+}

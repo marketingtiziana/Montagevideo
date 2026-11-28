@@ -1,0 +1,38 @@
+[
+ {
+  "key": "modele-veste-noire-1",
+  "file": "photographies/references/modele-veste-noire-1.jpg",
+  "query": "woman black blazer portrait",
+  "title": "Portrait bearded man wearing blazer",
+  "creator": null,
+  "source": "rawpixel",
+  "page": "https://www.rawpixel.com/image/8795038/portrait-bearded-man-wearing-blazer-and-study-seated-woman",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "openverse_id": "53419dff-4de5-4eae-9137-793c823394c0"
+ },
+ {
+  "key": "verre-depoli-1",
+  "file": "photographies/references/verre-depoli-1.jpg",
+  "query": "frosted glass office",
+  "title": "A WordPress pennant hangs in a modern office setting, its bold logo on display against the geometric patterns of frosted glass partitions, reflecting a creative and tech-savvy environment.",
+  "creator": "Mohammad Shoeb Ansari",
+  "source": "wordpress",
+  "page": "https://wordpress.org/photos/photo/51465c5f34/",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "openverse_id": "8f074eba-bc09-4ac1-a653-a5345f561362"
+ },
+ {
+  "key": "verre-depoli-2",
+  "file": "photographies/references/verre-depoli-2.jpg",
+  "query": "frosted glass office",
+  "title": "A vintage-style hourglass made of brass with a glass center filled with white sand is placed on a smooth white table. In the background, there are blurred lines of a frosted glass wall, suggesting an office setting.",
+  "creator": "kavita1990",
+  "source": "wordpress",
+  "page": "https://wordpress.org/photos/photo/19168a8378/",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "openverse_id": "6a81d410-95be-4505-87d3-1c0a7427145d"
+ }
+]

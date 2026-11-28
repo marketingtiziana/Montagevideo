@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tiziana — 10 identités</title>
+<style>
+:root{--bg:#F5F4F1;--ink:#151515;--mid:#77746d}
+*{box-sizing:border-box;margin:0;padding:0}body{font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{padding:48px 24px 16px;max-width:1400px;margin:0 auto}h1{font-size:44px;letter-spacing:-.03em}header p{color:var(--mid);max-width:760px;margin-top:8px}
+nav{position:sticky;top:0;background:rgba(245,244,241,.95);backdrop-filter:blur(6px);border-bottom:1px solid #ddd;padding:10px 24px;display:flex;flex-wrap:wrap;gap:8px;z-index:2}
+nav button{border:1px solid #ccc;background:#fff;border-radius:20px;padding:6px 14px;font:600 13px system-ui;cursor:pointer}nav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{max-width:1400px;margin:0 auto;padding:24px}section{margin-bottom:40px}h2{font-size:28px;margin:8px 0 14px}h3{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin:22px 0 10px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row img{border-radius:6px;max-width:100%}.feed{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.feed img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:4px}
+a{color:inherit}
+</style></head><body>
+<header><h1>The Executive Identity Book</h1><p>Sept directions artistiques et trois hybrides pour la marque personnelle de Tiziana Caci. Galerie locale autonome — aucune connexion à la plateforme. <a href="pdf/Tiziana-Caci-Executive-Identity-Book.pdf">Ouvrir le PDF</a> · <a href="document-source/book.html">Version de présentation</a></p></header>
+<nav id="nav"></nav><main id="main"></main>
+<script>
+const DIRS=[['A','direction-A-monochrome','The Monochrome Executive'],['B','direction-B-modern-authority','The Modern Authority'],['C','direction-C-editorial','The Editorial Woman'],['D','direction-D-architectural','The Architectural Leader'],['E','direction-E-modern-power','The Modern Power'],['F','direction-F-burgundy','The Burgundy Signature'],['G','direction-G-aubergine','The Aubergine Executive'],['H1','hybrid-concepts/H1-monochrome-aubergine','Monochrome & Aubergine'],['H2','hybrid-concepts/H2-architectural-grenat','Architecture & Grenat'],['H3','hybrid-concepts/H3-authority-noir-blanc','Authority & Noir et blanc']]
+const nav=document.getElementById('nav'),main=document.getElementById('main')
+const show=(i)=>{const [id,f,n]=DIRS[i];[...nav.children].forEach((b,k)=>b.classList.toggle('on',k===i));const p=(x)=>`${f}/${x}`
+main.innerHTML=`<section><h2>${id} · ${n}</h2>
+<h3>Instagram</h3><div class="row"><img src="${p('instagram/profil-instagram.png')}" style="width:300px"><div class="feed" style="flex:1;min-width:300px">${Array.from({length:12},(_,k)=>`<img src="${p('instagram/post-'+String(k+1).padStart(2,'0')+'.jpg')}">`).join('')}</div></div>
+<h3>Carrousel</h3><div class="row">${[p('instagram/post-05.jpg'),...[2,3,4,5].map(k=>p('instagram/carrousel-'+k+'.jpg'))].map(s=>`<img src="${s}" style="width:180px">`).join('')}</div>
+<h3>LinkedIn</h3><div class="row"><img src="${p('linkedin/page-linkedin.jpg')}" style="width:620px"></div>
+<h3>YouTube</h3><div class="row"><img src="${p('youtube/chaine-youtube.jpg')}" style="width:760px">${[1,2,3].map(k=>`<img src="${p('youtube/miniature-'+k+'.jpg')}" style="width:300px">`).join('')}</div>
+<h3>Décors (simulations)</h3><div class="row">${['decor-1-face','decor-1-trois-quarts','decor-2-face','decor-2-trois-quarts'].map(k=>`<img src="${p('decor/'+k+'.jpg')}" style="width:330px">`).join('')}</div>
+<h3>Apparence, objets, signe</h3><div class="row">${[1,2,3].map(k=>`<img src="${p('apparence/silhouette-'+k+'.jpg')}" style="width:180px">`).join('')}${[1,2,3].map(k=>`<img src="${p('objets/objet-'+k+'.jpg')}" style="width:180px">`).join('')}<img src="${p('signe/presentation.jpg')}" style="width:420px"></div></section>`}
+DIRS.forEach(([id,,n],i)=>{const b=document.createElement('button');b.textContent=`${id} · ${n}`;b.onclick=()=>show(i);nav.appendChild(b)});show(0)
+</script></body></html>

@@ -1,0 +1,509 @@
+{
+  "id": "quitter-la-france",
+  "slug": "01-quitter-la-france",
+  "number": "01",
+  "title": "Comment quitter la France ?",
+  "subtitle": "Les éléments à comprendre avant de préparer un départ à l’international.",
+  "objective": "Donner une vue d’ensemble des questions à se poser avant un départ, sans conclure à la place d’une analyse individuelle.",
+  "linkedLongForms": [
+    "LF-08"
+  ],
+  "disclaimer": "Contenu pédagogique. Les branches sont des propositions éditoriales, pas des conclusions juridiques ou fiscales. Chaque situation demande une analyse individuelle.",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "branches": [
+    {
+      "id": "m1-b1",
+      "num": "01",
+      "title": "Comprendre le projet de départ",
+      "phrase": "Avant les règles, clarifier le projet lui-même.",
+      "nodes": [
+        {
+          "id": "m1-b1-n1",
+          "title": "Pourquoi envisager un départ ?",
+          "detail": "Motivations personnelles, professionnelles, familiales : elles orientent toute la suite de l’analyse."
+        },
+        {
+          "id": "m1-b1-n2",
+          "title": "Départ personnel ou professionnel ?",
+          "detail": "Un départ lié à un contrat, à une création d’activité ou à un choix de vie ne soulève pas les mêmes questions."
+        },
+        {
+          "id": "m1-b1-n3",
+          "title": "Pays de destination",
+          "detail": "Chaque pays applique ses propres règles : aucune conclusion générale n’est possible sans le connaître."
+        },
+        {
+          "id": "m1-b1-n4",
+          "title": "Calendrier envisagé",
+          "detail": "La date de départ et l’organisation dans le temps comptent pour les obligations à anticiper."
+        },
+        {
+          "id": "m1-b1-n5",
+          "title": "Situation familiale",
+          "detail": "Qui part, qui reste : un élément central de l’analyse."
+        },
+        {
+          "id": "m1-b1-n6",
+          "title": "Activité professionnelle",
+          "detail": "Où l’activité sera réellement exercée, et sous quelle forme."
+        },
+        {
+          "id": "m1-b1-n7",
+          "title": "Patrimoine existant",
+          "detail": "Biens immobiliers, placements, participations : ce qui reste en France doit être recensé."
+        }
+      ],
+      "notes": {
+        "mainIdea": "Un départ se prépare à partir d’un projet clair, pas à partir d’une destination choisie à l’avance.",
+        "points": [
+          "Distinguer le pourquoi (motivations) du comment (règles).",
+          "Le pays de destination change les questions à se poser.",
+          "La famille, l’activité et le patrimoine sont les trois piliers de la situation.",
+          "Le calendrier est un élément du projet, pas un détail."
+        ],
+        "explanation": "Les règles fiscales s’appliquent à une situation concrète. Sans description précise du projet, toute réponse reste théorique.",
+        "example": "Cas anonymisé : deux personnes partent vers le même pays, l’une avec sa famille, l’autre seule. Leurs analyses ne seront pas identiques.",
+        "nuance": "Aucun élément ne suffit seul : c’est l’ensemble de la situation qui est examiné.",
+        "misconceptions": [
+          "« Il suffit de choisir un pays. »",
+          "« Ma situation est la même que celle d’un ami parti au même endroit. »"
+        ],
+        "questions": [
+          "Pourquoi est-ce que je veux partir ?",
+          "Qui part avec moi ?",
+          "Où exercerai-je réellement mon activité ?"
+        ],
+        "transition": "Une fois le projet posé, la première question technique est celle de la résidence fiscale.",
+        "conclusion": "Un projet clair est le point de départ de toute analyse sérieuse."
+      },
+      "privateNotes": "Ouvrir avec une question au public. Ne citer aucun pays comme « meilleur choix ».",
+      "claimIds": []
+    },
+    {
+      "id": "m1-b2",
+      "num": "02",
+      "title": "Analyser la résidence fiscale",
+      "phrase": "La notion centrale de tout départ.",
+      "nodes": [
+        {
+          "id": "m1-b2-n1",
+          "title": "Différence entre résidence administrative et fiscale",
+          "detail": "Une adresse ou un titre de séjour ne détermine pas automatiquement la résidence fiscale."
+        },
+        {
+          "id": "m1-b2-n2",
+          "title": "Critères de résidence fiscale",
+          "detail": "Le droit français prévoit plusieurs critères ; d’autres pays appliquent leurs propres règles."
+        },
+        {
+          "id": "m1-b2-n3",
+          "title": "Situation personnelle",
+          "detail": "Le foyer et le lieu de séjour principal font partie des éléments examinés."
+        },
+        {
+          "id": "m1-b2-n4",
+          "title": "Activité professionnelle",
+          "detail": "Le lieu où l’activité est réellement exercée est un élément d’analyse."
+        },
+        {
+          "id": "m1-b2-n5",
+          "title": "Intérêts économiques",
+          "detail": "Où se situent les investissements, les revenus et le centre des affaires."
+        },
+        {
+          "id": "m1-b2-n6",
+          "title": "Situation internationale",
+          "detail": "Deux pays peuvent considérer la même personne comme résidente."
+        },
+        {
+          "id": "m1-b2-n7",
+          "title": "Conventions fiscales applicables",
+          "detail": "Lorsqu’elles existent, elles peuvent prévoir des règles de départage."
+        }
+      ],
+      "notes": {
+        "mainIdea": "La résidence fiscale dépend de critères examinés sur la situation réelle, pas d’une déclaration d’intention.",
+        "points": [
+          "Résidence administrative et résidence fiscale sont deux notions distinctes.",
+          "Le droit français prévoit plusieurs critères (référence à valider).",
+          "Le pays de destination applique ses propres critères.",
+          "Une convention fiscale peut intervenir en cas de double résidence."
+        ],
+        "explanation": "L’analyse porte sur des faits : où vit la famille, où l’activité est exercée, où se trouvent les intérêts économiques.",
+        "example": "Cas anonymisé : une personne installée à l’étranger dont la famille et l’essentiel des revenus restent en France.",
+        "nuance": "Les critères et leur articulation doivent être vérifiés dans les textes applicables, pays par pays.",
+        "misconceptions": [
+          "« Je n’habite plus en France, donc je ne suis plus résident fiscal. »",
+          "« Mon inscription consulaire règle la question. »"
+        ],
+        "questions": [
+          "Où se trouve mon foyer ?",
+          "Où mon activité est-elle réellement exercée ?",
+          "Une convention existe-t-elle avec le pays visé ?"
+        ],
+        "transition": "Déterminer sa résidence permet ensuite d’anticiper les conséquences fiscales du départ.",
+        "conclusion": "La résidence fiscale se démontre par des faits et se vérifie dans les textes."
+      },
+      "privateNotes": "Renvoyer vers la carte 02 pour le détail. Ne donner aucun nombre de jours.",
+      "claimIds": [
+        "C-ADMIN",
+        "C-4B",
+        "C-CONV",
+        "C-HOST"
+      ]
+    },
+    {
+      "id": "m1-b3",
+      "num": "03",
+      "title": "Anticiper les conséquences fiscales",
+      "phrase": "Ce qui change, et ce qui reste en France.",
+      "nodes": [
+        {
+          "id": "m1-b3-n1",
+          "title": "Situation avant le départ",
+          "detail": "Faire l’état des lieux fiscal de la situation actuelle."
+        },
+        {
+          "id": "m1-b3-n2",
+          "title": "Revenus français et étrangers",
+          "detail": "Certains revenus de source française peuvent rester imposables en France."
+        },
+        {
+          "id": "m1-b3-n3",
+          "title": "Patrimoine immobilier",
+          "detail": "Les biens conservés en France ont leurs propres conséquences à examiner."
+        },
+        {
+          "id": "m1-b3-n4",
+          "title": "Participations et actifs professionnels",
+          "detail": "Parts de société, actifs professionnels : un point d’attention particulier."
+        },
+        {
+          "id": "m1-b3-n5",
+          "title": "Obligations déclaratives",
+          "detail": "Des obligations peuvent subsister l’année du départ et après."
+        },
+        {
+          "id": "m1-b3-n6",
+          "title": "Éventuelle exit tax selon les conditions applicables",
+          "detail": "Un dispositif existe ; ses conditions doivent être vérifiées au cas par cas."
+        },
+        {
+          "id": "m1-b3-n7",
+          "title": "Conséquences fiscales dans le pays de destination",
+          "detail": "Les règles du pays d’accueil s’ajoutent à celles de la France."
+        }
+      ],
+      "notes": {
+        "mainIdea": "Partir ne fait pas disparaître toutes les obligations : il faut identifier ce qui change et ce qui demeure.",
+        "points": [
+          "Faire l’état des lieux avant toute décision.",
+          "Distinguer revenus de source française et revenus étrangers.",
+          "Les participations peuvent relever d’un dispositif spécifique, sous conditions à vérifier.",
+          "Le pays d’accueil a ses propres règles."
+        ],
+        "explanation": "Les conséquences dépendent de la nature des revenus, du patrimoine et du pays de destination.",
+        "example": "Cas anonymisé : un dirigeant qui part en conservant ses parts de société et un bien locatif en France.",
+        "nuance": "Aucun taux, seuil ou délai n’est donné ici : ils doivent être vérifiés dans les textes en vigueur.",
+        "misconceptions": [
+          "« Une fois parti, je ne dois plus rien à la France. »",
+          "« L’exit tax concerne tout le monde. »"
+        ],
+        "questions": [
+          "Quels revenus resteront de source française ?",
+          "Quels actifs je conserve en France ?",
+          "Suis-je concerné par un dispositif spécifique ?"
+        ],
+        "transition": "Ces conséquences identifiées, il faut organiser concrètement le changement de situation.",
+        "conclusion": "Anticiper, c’est savoir ce qui change avant de partir, pas après."
+      },
+      "privateNotes": "Ne jamais citer de seuil ni de durée pour l’exit tax tant que la source n’est pas validée.",
+      "claimIds": [
+        "C-4A",
+        "C-EXIT",
+        "C-DECL",
+        "C-HOST"
+      ]
+    },
+    {
+      "id": "m1-b4",
+      "num": "04",
+      "title": "Préparer le changement de situation",
+      "phrase": "L’organisation concrète du départ.",
+      "nodes": [
+        {
+          "id": "m1-b4-n1",
+          "title": "Documents à réunir",
+          "detail": "Justificatifs de la situation personnelle, professionnelle et patrimoniale."
+        },
+        {
+          "id": "m1-b4-n2",
+          "title": "Calendrier",
+          "detail": "Ordonner les démarches dans le temps."
+        },
+        {
+          "id": "m1-b4-n3",
+          "title": "Démarches administratives",
+          "detail": "Les formalités à accomplir en France et dans le pays d’accueil : à identifier."
+        },
+        {
+          "id": "m1-b4-n4",
+          "title": "Organisation professionnelle",
+          "detail": "Contrat, société, clients : comment l’activité sera organisée."
+        },
+        {
+          "id": "m1-b4-n5",
+          "title": "Situation bancaire",
+          "detail": "Comptes en France et à l’étranger, et leurs obligations éventuelles."
+        },
+        {
+          "id": "m1-b4-n6",
+          "title": "Situation familiale",
+          "detail": "Scolarité, logement, conjoint : l’organisation de la famille."
+        },
+        {
+          "id": "m1-b4-n7",
+          "title": "Coordination entre professionnels compétents",
+          "detail": "Fiscal, juridique, social : faire travailler les bons interlocuteurs ensemble."
+        }
+      ],
+      "notes": {
+        "mainIdea": "Un départ réussi est un départ organisé et documenté.",
+        "points": [
+          "Réunir les documents avant d’en avoir besoin.",
+          "Construire un calendrier réaliste.",
+          "Penser à la fois à la France et au pays d’accueil.",
+          "Coordonner les professionnels plutôt que les consulter séparément."
+        ],
+        "explanation": "La documentation permet de justifier la situation réelle si elle est examinée plus tard.",
+        "example": "Cas anonymisé : une famille qui prépare son départ sur plusieurs mois avec un calendrier partagé.",
+        "nuance": "La liste exacte des démarches dépend du pays de destination et de la situation : à établir au cas par cas.",
+        "misconceptions": [
+          "« Les papiers se feront une fois sur place. »"
+        ],
+        "questions": [
+          "Quels documents prouvent ma situation ?",
+          "Qui coordonne les différents professionnels ?"
+        ],
+        "transition": "Même bien organisé, un départ peut être fragilisé par des erreurs fréquentes.",
+        "conclusion": "Organiser et documenter, c’est sécuriser le changement de situation."
+      },
+      "privateNotes": "Montrer un exemple de calendrier vierge à l’écran, sans dates réglementaires.",
+      "claimIds": [
+        "C-DECL",
+        "C-HOST"
+      ]
+    },
+    {
+      "id": "m1-b5",
+      "num": "05",
+      "title": "Éviter les erreurs de préparation",
+      "phrase": "Les raisonnements qui fragilisent un départ.",
+      "nodes": [
+        {
+          "id": "m1-b5-n1",
+          "title": "Croire qu’une simple adresse étrangère suffit",
+          "detail": "L’adresse est un indice, pas un critère suffisant."
+        },
+        {
+          "id": "m1-b5-n2",
+          "title": "Négliger les critères de résidence fiscale",
+          "detail": "Ils s’apprécient sur la situation réelle."
+        },
+        {
+          "id": "m1-b5-n3",
+          "title": "Ignorer les obligations restant en France",
+          "detail": "Revenus de source française, déclarations : tout ne s’arrête pas au départ."
+        },
+        {
+          "id": "m1-b5-n4",
+          "title": "Partir sans examiner son patrimoine",
+          "detail": "Les actifs conservés ont des conséquences à anticiper."
+        },
+        {
+          "id": "m1-b5-n5",
+          "title": "Sous-estimer la réglementation du pays d’accueil",
+          "detail": "Le pays de destination a ses propres règles et obligations."
+        },
+        {
+          "id": "m1-b5-n6",
+          "title": "Prendre une décision sans analyse globale",
+          "detail": "Une décision partielle peut créer des difficultés ailleurs."
+        }
+      ],
+      "notes": {
+        "mainIdea": "La plupart des difficultés viennent d’un raisonnement trop simple, pas d’une règle inconnue.",
+        "points": [
+          "Une adresse ne fait pas une résidence fiscale.",
+          "Le départ ne supprime pas toutes les obligations françaises.",
+          "Le pays d’accueil compte autant que la France.",
+          "Seule une analyse globale permet de décider."
+        ],
+        "explanation": "Chaque erreur isole un élément de la situation et oublie les autres.",
+        "example": "Cas anonymisé : une personne qui ouvre une adresse à l’étranger mais conserve sa famille et son activité en France.",
+        "nuance": "Ces erreurs sont des points d’attention, pas des sanctions automatiques : leurs conséquences dépendent de chaque cas.",
+        "misconceptions": [
+          "« Tout le monde fait comme ça. »"
+        ],
+        "questions": [
+          "Quelle partie de ma situation ai-je oubliée ?"
+        ],
+        "transition": "Pour décider, il reste à faire la synthèse.",
+        "conclusion": "Éviter ces erreurs, c’est regarder la situation dans son ensemble."
+      },
+      "privateNotes": "Ton pédagogique, jamais moralisateur.",
+      "claimIds": [
+        "C-ADMIN",
+        "C-4A",
+        "C-HOST"
+      ]
+    },
+    {
+      "id": "m1-b6",
+      "num": "06",
+      "title": "Synthèse et décision",
+      "phrase": "Passer de l’intuition à une décision éclairée.",
+      "nodes": [
+        {
+          "id": "m1-b6-n1",
+          "title": "Faire le point sur sa situation",
+          "detail": "Rassembler les éléments personnels, professionnels et patrimoniaux."
+        },
+        {
+          "id": "m1-b6-n2",
+          "title": "Vérifier les règles applicables",
+          "detail": "En France et dans le pays de destination, à la date du départ."
+        },
+        {
+          "id": "m1-b6-n3",
+          "title": "Identifier les conséquences",
+          "detail": "Ce qui change, ce qui demeure."
+        },
+        {
+          "id": "m1-b6-n4",
+          "title": "Comparer les scénarios",
+          "detail": "Plusieurs options peuvent être étudiées avant de choisir."
+        },
+        {
+          "id": "m1-b6-n5",
+          "title": "Préparer le calendrier",
+          "detail": "Ordonner les étapes."
+        },
+        {
+          "id": "m1-b6-n6",
+          "title": "Consulter les professionnels compétents",
+          "detail": "Une analyse individuelle reste indispensable."
+        }
+      ],
+      "notes": {
+        "mainIdea": "Une décision de départ se prend après une analyse complète, avec des professionnels compétents.",
+        "points": [
+          "Faire le point, vérifier, identifier, comparer.",
+          "Les règles applicables doivent être vérifiées à la date du projet.",
+          "Comparer plusieurs scénarios plutôt qu’un seul.",
+          "Se faire accompagner pour l’analyse individuelle."
+        ],
+        "explanation": "La carte résume une méthode, pas une réponse : chaque situation est différente.",
+        "example": "Cas anonymisé : comparaison de deux calendriers de départ pour une même famille.",
+        "nuance": "Cette présentation ne remplace pas un conseil personnalisé.",
+        "misconceptions": [
+          "« Une vidéo suffit pour décider. »"
+        ],
+        "questions": [
+          "Ai-je tous les éléments pour décider ?",
+          "Qui peut analyser ma situation ?"
+        ],
+        "transition": "Conclusion : un départ se prépare, il ne s’improvise pas.",
+        "conclusion": "Comprendre, vérifier, puis décider."
+      },
+      "privateNotes": "CTA doux en fin de vidéo : prendre rendez-vous pour une analyse. Pas de promesse de résultat.",
+      "claimIds": [
+        "C-CONV-EXIST",
+        "C-HOST"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "C-ADMIN",
+      "text": "La résidence administrative (adresse, inscription consulaire, titre de séjour) et la résidence fiscale sont des notions distinctes : l’une ne détermine pas automatiquement l’autre.",
+      "jurisdiction": "France",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-4B",
+      "text": "En droit interne français, une personne est considérée comme fiscalement domiciliée en France si elle remplit l'un des critères prévus par la loi : foyer ou lieu de séjour principal, activité professionnelle principale, ou centre des intérêts économiques.",
+      "jurisdiction": "France",
+      "source": "Code général des impôts",
+      "reference": "CGI, art. 4 B",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-CONV",
+      "text": "Lorsque deux États considèrent une même personne comme résidente, la convention fiscale applicable entre ces États, si elle existe, peut prévoir des critères de départage. Le texte de chaque convention doit être lu : les critères et leur ordre peuvent différer.",
+      "jurisdiction": "International — convention bilatérale à identifier",
+      "source": "Modèle de Convention fiscale de l’OCDE et convention bilatérale applicable",
+      "reference": "Modèle OCDE, art. 4 ; convention applicable : À RENSEIGNER",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-CONV-EXIST",
+      "text": "Existence, contenu et date d’effet d’une convention fiscale entre la France et le pays de destination envisagé.",
+      "jurisdiction": "France / pays de destination (à préciser)",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-4A",
+      "text": "Une personne qui n’est pas domiciliée fiscalement en France peut rester imposable en France sur certains revenus de source française.",
+      "jurisdiction": "France",
+      "source": "Code général des impôts",
+      "reference": "CGI, art. 4 A",
+      "status": "PENDING VALIDATION",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-EXIT",
+      "text": "Le transfert du domicile fiscal hors de France peut entraîner l’application d’un dispositif d’imposition de certaines plus-values latentes (« exit tax »). Les conditions d’application, seuils, durées et modalités de sursis ne sont pas reproduites ici et doivent être vérifiées.",
+      "jurisdiction": "France",
+      "source": "Code général des impôts",
+      "reference": "CGI, art. 167 bis — conditions à vérifier",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-DECL",
+      "text": "Obligations déclaratives en France l’année du départ et les années suivantes (déclarations, formulaires, échéances).",
+      "jurisdiction": "France",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    },
+    {
+      "id": "C-HOST",
+      "text": "Règles de résidence fiscale, obligations déclaratives et imposition applicables dans le pays de destination.",
+      "jurisdiction": "Pays de destination (à préciser)",
+      "source": "À RENSEIGNER",
+      "reference": "À RENSEIGNER",
+      "status": "RESEARCH REQUIRED",
+      "date": "À vérifier à la date de publication",
+      "url": ""
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+@import 'tailwindcss';
+@import '@xyflow/react/dist/style.css';
+
+/* ------------------------------------------------------------
+   Design tokens — Premium editorial workspace
+   Colour is reserved for classification (brand, platform,
+   pillar, status). Everything else is ink on paper.
+   ------------------------------------------------------------ */
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #f0efeb;
+  --surface-3: #e9e7e2;
+  --line: #e4e2dc;
+  --line-strong: #d2cfc7;
+  --ink: #17171a;
+  --ink-2: #47474d;
+  --ink-3: #85858c;
+  --focus: #1f2a44;
+  --shadow: 0 1px 2px rgb(23 23 26 / 0.04), 0 2px 8px rgb(23 23 26 / 0.04);
+  --shadow-lg: 0 4px 12px rgb(23 23 26 / 0.06), 0 24px 48px rgb(23 23 26 / 0.08);
+
+  --c-fn: #26325c;
+  --c-tz: #9a5a3a;
+  --c-yt: #a83c34;
+  --c-ig: #9c4672;
+  --c-tt: #2c2c31;
+  --c-li: #2f5c95;
+
+  --c-pa: #36598a;
+  --c-pb: #2b7566;
+  --c-pc: #8a6a2c;
+  --c-pd: #6a5287;
+  --c-pe: #536b3a;
+  --c-pf: #8b4f4b;
+
+  --v-ok: #2e6a4d;
+  --v-proposal: #3a5a8a;
+  --v-idea: #8a6a1c;
+  --v-expert: #a13d2b;
+  --v-ref: #5a5a66;
+  --v-photo: #9a5a3a;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #121214;
+    --surface: #1a1a1d;
+    --surface-2: #222226;
+    --surface-3: #2a2a2f;
+    --line: #2c2c31;
+    --line-strong: #3a3a40;
+    --ink: #ededee;
+    --ink-2: #b8b8be;
+    --ink-3: #7c7c84;
+    --focus: #c9d3ea;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 24px 48px rgb(0 0 0 / 0.45);
+    --c-fn: #8ea0d8;
+    --c-tz: #d99a76;
+    --c-yt: #e07a70;
+    --c-ig: #d888b2;
+    --c-tt: #c8c8cf;
+    --c-li: #7fa7dc;
+    --c-pa: #86a6d4;
+    --c-pb: #6fbfab;
+    --c-pc: #d0b06f;
+    --c-pd: #ab95cc;
+    --c-pe: #9cb67d;
+    --c-pf: #cf918c;
+    --v-ok: #74c19b;
+    --v-proposal: #8eaee0;
+    --v-idea: #d6b45c;
+    --v-expert: #e8826d;
+    --v-ref: #a9a9b4;
+    --v-photo: #d99a76;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #121214;
+  --surface: #1a1a1d;
+  --surface-2: #222226;
+  --surface-3: #2a2a2f;
+  --line: #2c2c31;
+  --line-strong: #3a3a40;
+  --ink: #ededee;
+  --ink-2: #b8b8be;
+  --ink-3: #7c7c84;
+  --focus: #c9d3ea;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 24px 48px rgb(0 0 0 / 0.45);
+  --c-fn: #8ea0d8;
+  --c-tz: #d99a76;
+  --c-yt: #e07a70;
+  --c-ig: #d888b2;
+  --c-tt: #c8c8cf;
+  --c-li: #7fa7dc;
+  --c-pa: #86a6d4;
+  --c-pb: #6fbfab;
+  --c-pc: #d0b06f;
+  --c-pd: #ab95cc;
+  --c-pe: #9cb67d;
+  --c-pf: #cf918c;
+  --v-ok: #74c19b;
+  --v-proposal: #8eaee0;
+  --v-idea: #d6b45c;
+  --v-expert: #e8826d;
+  --v-ref: #a9a9b4;
+  --v-photo: #d99a76;
+  color-scheme: dark;
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-focus: var(--focus);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  line-height: 1.5;
+}
+::selection {
+  background: color-mix(in srgb, var(--focus) 18%, transparent);
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+@layer components {
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 550;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 6px 9px;
+  color: var(--ink);
+  transition: border-color 0.12s;
+}
+.input:hover {
+  border-color: var(--line-strong);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 12%, transparent);
+}
+.input::placeholder {
+  color: var(--ink-3);
+}
+textarea.input {
+  resize: vertical;
+  min-height: 64px;
+  line-height: 1.55;
+}
+}
+.fade-in {
+  animation: fade 0.16s ease-out;
+}
+.slide-in {
+  animation: slide 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes slide {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .slide-in {
+    animation: none;
+  }
+}
+
+/* React Flow overrides */
+.react-flow__attribution {
+  display: none;
+}
+.react-flow__minimap {
+  background: var(--surface) !important;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.react-flow__controls {
+  box-shadow: var(--shadow) !important;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.react-flow__controls-button {
+  background: var(--surface) !important;
+  border-bottom: 1px solid var(--line) !important;
+  fill: var(--ink-2) !important;
+}
+.react-flow__controls-button svg {
+  fill: var(--ink-2) !important;
+}
+.react-flow__handle {
+  opacity: 0;
+  width: 6px;
+  height: 6px;
+  min-width: 0;
+  min-height: 0;
+  border: none;
+}
+.react-flow__edge-path {
+  stroke: var(--line-strong);
+}
+.react-flow__background {
+  background: var(--bg);
+}
+
+/* ---------------- Brand Strategy — editorial document ---------------- */
+.prose-brand {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 74ch;
+}
+.prose-brand p {
+  margin: 0 0 0.85em;
+}
+.prose-brand strong {
+  font-weight: 650;
+}
+.prose-brand h4 {
+  font-size: 13px;
+  font-weight: 650;
+  margin: 1.4em 0 0.5em;
+  letter-spacing: 0.01em;
+}
+.prose-brand ul,
+.prose-brand ol {
+  margin: 0 0 0.9em;
+  padding-left: 1.25em;
+}
+.prose-brand ul {
+  list-style: disc;
+}
+.prose-brand ol {
+  list-style: decimal;
+}
+.prose-brand li {
+  margin: 0.2em 0;
+}
+.prose-brand li::marker {
+  color: var(--ink-3);
+}
+.prose-brand table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6em 0 1.1em;
+  font-size: 13px;
+  line-height: 1.5;
+  display: block;
+  overflow-x: auto;
+}
+.prose-brand th,
+.prose-brand td {
+  border: 1px solid var(--line);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-brand th {
+  background: var(--surface-2);
+  font-weight: 600;
+  font-size: 12px;
+}
+.prose-brand blockquote {
+  border-left: 2px solid var(--line-strong);
+  padding: 2px 0 2px 14px;
+  margin: 0 0 1em;
+  color: var(--ink-2);
+}
+.prose-brand blockquote.to-validate {
+  border-left-color: var(--v-idea);
+  background: color-mix(in srgb, var(--v-idea) 7%, transparent);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  color: var(--ink);
+}
+.prose-brand blockquote.to-validate b {
+  color: var(--v-idea);
+  letter-spacing: 0.03em;
+}
+.prose-brand code {
+  font-size: 12.5px;
+  background: var(--surface-2);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.prose-brand hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 1.5em 0;
+}
+.prose-brand a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-section {
+    break-inside: auto;
+  }
+  .print-chapter {
+    break-before: page;
+  }
+  .prose-brand {
+    max-width: none;
+    font-size: 11pt;
+  }
+}

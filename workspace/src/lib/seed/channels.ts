@@ -1,0 +1,238 @@
+import type { Channel } from '../types'
+import { section } from './helpers'
+
+export const channels: Channel[] = [
+  {
+    id: 'yt-fn',
+    brand: 'FN',
+    network: 'YouTube',
+    name: 'YouTube Fynovates',
+    role: 'Bibliothèque de référence : contenus longs qui approfondissent chaque problématique et alimentent shorts, Reels et Stories.',
+    sections: [
+      section('Univers Tiziana', [
+        'Décryptages de 15 à 20 minutes',
+        'Support iPad et télévision',
+        'Débunkage',
+        'Analyse spontanée',
+        'Présentation structurée',
+        'Pas de script intégral',
+      ]),
+      section('Univers Fynovates', [
+        'Motion design',
+        'Voix off',
+        'Explications pédagogiques',
+        'Experts',
+        'Méthodes',
+        'Sujets techniques',
+      ]),
+      section('Rythme de production', [
+        'Validation du sujet et du support le mardi',
+        'Tournage dans la semaine',
+        'Montage du long format et des shorts',
+        'Validation commune avant de passer à la vidéo suivante',
+        'Objectif minimum : un long format par semaine',
+        'Objectif futur : deux à trois long formats lorsque le rythme sera maîtrisé',
+        'Deepwork hebdomadaire',
+      ]),
+    ],
+  },
+  {
+    id: 'ig-fn',
+    brand: 'FN',
+    network: 'Instagram',
+    name: 'Instagram Fynovates',
+    role: 'Compte pédagogique et corporate du cabinet : expliquer, rassurer, montrer la méthode et convertir via les Stories.',
+    sections: [
+      section('Contenus', [
+        'Publications pédagogiques',
+        'Motion design',
+        'Experts',
+        'Cas clients anonymisés',
+        'Méthodes',
+        'Équipe',
+        'Corporate',
+        'Stories pédagogiques',
+        'Stories de conversion',
+      ]),
+      section(
+        'Stories à la une (maquette IMG-019)',
+        [
+          ['BANQUE', 'RÉFÉRENCE VISUELLE'],
+          ['CONTACT', 'RÉFÉRENCE VISUELLE'],
+          ['ÉQUIPE', 'RÉFÉRENCE VISUELLE'],
+          ['FISCALITÉ', 'RÉFÉRENCE VISUELLE'],
+          ['INTERNATIONAL', 'RÉFÉRENCE VISUELLE'],
+          ['LE CABINET', 'RÉFÉRENCE VISUELLE'],
+          ['MÉTHODE', 'RÉFÉRENCE VISUELLE'],
+          ['TVA', 'RÉFÉRENCE VISUELLE'],
+        ],
+      ),
+      section(
+        'Points de vigilance relevés',
+        [
+          [
+            'La maquette de profil IMG-003 montre une rubrique « Avis » : aucun témoignage client n’a été fourni — ne pas publier sans avis réels.',
+            'IDÉE À VALIDER',
+          ],
+          [
+            'Les maquettes Stories utilisent des [Prénom] d’experts : identités à renseigner, ne pas inventer.',
+            'IDÉE À VALIDER',
+          ],
+        ],
+        'rules',
+      ),
+    ],
+  },
+  {
+    id: 'tt-fn',
+    brand: 'FN',
+    network: 'TikTok',
+    name: 'TikTok Fynovates',
+    role: 'Acquisition par la pédagogie courte : erreurs fréquentes, débunkage et explications techniques en motion design.',
+    sections: [
+      section('Contenus', [
+        'Motion design',
+        'Voix off',
+        'Experts',
+        'Explications techniques',
+        'Débunkage',
+        'Erreurs fréquentes',
+        'Cas clients',
+        'Shorts YouTube',
+      ]),
+      section(
+        'Système de couvertures (IMG-007 à IMG-009)',
+        [
+          ['Couverture numérotée « N° 01 », rubrique en capitales (FISCALITÉ, BANQUE…)', 'RÉFÉRENCE VISUELLE'],
+          ['Deux fonds alternés : bleu nuit / beige clair', 'RÉFÉRENCE VISUELLE'],
+          ['Mot-clé mis en valeur par couleur ou surlignage', 'RÉFÉRENCE VISUELLE'],
+        ],
+      ),
+    ],
+  },
+  {
+    id: 'li-fn',
+    brand: 'FN',
+    network: 'LinkedIn',
+    name: 'LinkedIn Fynovates',
+    role: 'Autorité professionnelle : analyses, comparatifs et documents de référence pour entrepreneurs et prescripteurs.',
+    sections: [
+      section(
+        'Six piliers',
+        [
+          'Analyses fiscales et réglementaires',
+          'Banque et financement',
+          'Structuration internationale',
+          'Cas clients',
+          'Méthode et équipe',
+          'Écosystème et prescripteurs',
+        ],
+        'pillars',
+      ),
+      section('Formats', [
+        'Infographies',
+        'Carrousels PDF',
+        'Tableaux comparatifs',
+        'Études de cas',
+        'Actualités',
+        'Présentations d’experts',
+        'Méthodologie',
+        'Partenariats',
+      ]),
+      section(
+        'Références intégrées',
+        [
+          ['10 infographies de référence — IMG-001 (FN-010 à FN-019)', 'RÉFÉRENCE VISUELLE'],
+          ['Carrousel 8 pages « Compte de paiement ou compte bancaire ? » — FN-020', 'RÉFÉRENCE VISUELLE'],
+        ],
+      ),
+    ],
+  },
+  {
+    id: 'ig-tz',
+    brand: 'TZ',
+    network: 'Instagram',
+    name: 'Instagram Tiziana',
+    role: 'Présence éditoriale de la dirigeante : photographie, prise de parole face caméra et Stories natives.',
+    sections: [
+      section('Bio', ['« Fondatrice & directrice de @fynovates »'], 'rules'),
+      section(
+        'Feed — règles non négociables',
+        [
+          'Photographies uniquement',
+          'Aucun texte incrusté',
+          'Aucun montage graphique',
+          'Aucun logo Fynovates',
+          'Pas d’infographies',
+          'Pas de citations sur fond graphique',
+          'Carrousels exclusivement photographiques',
+        ],
+        'rules',
+      ),
+      section('Catégories photographiques', [
+        'Portraits',
+        'Photos professionnelles',
+        'Déplacements',
+        'Architecture',
+        'Environnements de travail',
+        'Lifestyle professionnel',
+        'Événements',
+        'Ambiances',
+      ]),
+      section('Reels', ['Face caméra', 'Reportages', 'Extraits YouTube', 'Storytelling', 'Conversations']),
+      section('Stories', [
+        'Typographies natives Instagram',
+        'Texte sérif noir sur bandeaux blancs',
+        'Texte sans-sérif noir ou blanc sur photographie',
+        'Photos personnelles',
+        'Photos de lieux',
+        'Face caméra',
+        'Stories interactives',
+      ]),
+      section('Stories à la une — uniquement', ['À PROPOS DE MOI', 'MON CABINET'], 'rules'),
+      section(
+        'Écarts relevés sur la planche IMG-002',
+        [
+          [
+            'La planche propose 5 Stories à la une (À propos, Mon entreprise, International, Mes réflexions, Médias) : seules « À PROPOS DE MOI » et « MON CABINET » sont validées.',
+            'IDÉE À VALIDER',
+          ],
+          [
+            'Identifiant du compte affiché « [identifiant] » : à renseigner.',
+            'IDÉE À VALIDER',
+          ],
+        ],
+        'rules',
+      ),
+    ],
+  },
+  {
+    id: 'li-tz',
+    brand: 'TZ',
+    network: 'LinkedIn',
+    name: 'LinkedIn Tiziana',
+    role: 'Vision de dirigeante : convictions, observations de terrain et construction de Fynovates, à la première personne.',
+    sections: [
+      section(
+        'Six piliers',
+        [
+          'Observations sur les entrepreneurs',
+          'Convictions fiscales',
+          'Construction de Fynovates',
+          'Leadership',
+          'Entrepreneuriat international',
+          'Expérience et coulisses',
+        ],
+        'pillars',
+      ),
+      section('Séries', [
+        'Le point de vue de Tiziana',
+        'Ce que les entrepreneurs ne comprennent pas',
+        'Construire Fynovates',
+        'Ce que je constate sur le terrain',
+        'Ma vision de l’entrepreneuriat international',
+      ]),
+      section('Formats', ['Posts à la première personne', 'Vidéos', 'Documents PDF', 'Photographies', 'Analyses']),
+    ],
+  },
+]

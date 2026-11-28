@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Fynovates — Direction artistique bleue et textures</title>
+<style>
+@font-face{font-family:'Inter';src:url(../fynovates-tiziana/lib/typefaces/inter-latin-wght-normal.woff2);font-weight:100 900}
+@page{size:297mm 210mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#777}
+body{font-family:Inter;color:#0D082E;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:297mm;height:210mm;position:relative;overflow:hidden;background:#fff;page-break-after:always;break-after:page;padding:16mm 18mm}
+@media screen{.page{margin:10mm auto;box-shadow:0 10px 30px rgba(0,0,0,.3)}}
+.navy{background:#0D082E;color:#fff}.grey{background:#F2F2F5}
+.kick{font:600 8pt/1 Inter;letter-spacing:.22em;text-transform:uppercase;color:#6B6890}.navy .kick{color:rgba(255,255,255,.6)}
+h1{font:800 40pt/1 Inter;letter-spacing:-.025em;text-transform:uppercase;margin-top:5mm}
+h2{font:800 26pt/1.02 Inter;letter-spacing:-.02em;margin-top:3mm}
+.bar{width:16mm;height:.8mm;background:#0D082E;margin-top:6mm}.navy .bar{background:#fff}
+p{font-size:9.5pt;line-height:1.55}
+.lead{font-size:11pt;line-height:1.55;max-width:160mm;margin-top:6mm;color:#4A4766}.navy .lead{color:rgba(255,255,255,.72)}
+.tex .foot span{color:#8E8CA8}.foot{position:absolute;left:18mm;right:18mm;bottom:9mm;display:flex;justify-content:space-between;align-items:center;font:600 7pt/1 Inter;letter-spacing:.18em;text-transform:uppercase;color:#8E8CA8}
+.navy .foot{color:rgba(255,255,255,.45)}
+img{display:block}
+.cap{font-size:7.5pt;line-height:1.35;margin-top:1.8mm;color:#6B6890}.navy .cap{color:rgba(255,255,255,.55)}
+.row{display:flex;gap:5mm;align-items:flex-start}
+.blk{border-top:.3mm solid #D9D8E3;padding:2.6mm 0}.blk .l{font:700 7pt Inter;letter-spacing:.18em;text-transform:uppercase;color:#6B6890;margin-bottom:1.2mm}
+.blk p,.blk li{font-size:8.8pt;line-height:1.45}
+ul{list-style:none}li{padding:.5mm 0}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:5mm}.sw i{display:block;height:34mm;border-radius:1.5mm;box-shadow:inset 0 0 0 .25mm rgba(13,8,46,.12)}.sw b{display:block;font-size:9.5pt;margin-top:2.5mm}.sw code{font-size:8pt;color:#6B6890}.sw span{display:block;font-size:8pt;color:#4A4766;margin-top:1mm;line-height:1.35}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:5mm}
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:6mm 12mm;margin-top:8mm}.qa h3{font:700 10.5pt Inter;margin-bottom:2mm}.qa li{font-size:9pt;line-height:1.5;padding:1mm 0;border-bottom:.2mm solid #E6E5EE}
+</style></head><body>
+<div id="doc"></div>
+<script src="../fynovates-tiziana/lib/textures.js"></script>
+<script>
+const T = window.FN_TEXTURES
+const LOGO_W = '../fynovates-tiziana/lib/img/fynovates-logo-white.svg', LOGO_N = '../fynovates-tiziana/lib/img/fynovates-logo-navy.svg'
+const A = (n) => 'visuels/fynovates/' + n + '.jpg'
+let pg = 0
+const page = (cls, inner, foot = true) => `<section class="page ${cls}">${inner}${foot ? `<div class="foot"><img src="${cls.includes('navy') || cls.includes('tex') ? LOGO_W : LOGO_N}" style="height:2.4mm"><span>Direction artistique · ${String(++pg).padStart(2, '0')}</span></div>` : (++pg, '')}</section>`
+const H = []
+
+/* 1 cover */
+H.push(page('navy', `<img src="${A('01-grain-texture')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;left:22mm;top:24mm;right:22mm;bottom:22mm;display:flex;flex-direction:column"><img src="${LOGO_W}" style="width:90mm">
+<div style="margin-top:auto" class="kick">Proposition · document de travail</div><h1 style="font-size:52pt;margin-top:4mm">Direction artistique<br>Le bleu Fynovates</h1><div class="bar"></div>
+<p class="lead" style="margin-top:5mm">Le bleu nuit institutionnel, ses règles d’usage et huit propositions de textures pour lui donner une matière, déclinées sur les supports du cabinet.</p></div>`, false))
+
+/* 2 intention */
+H.push(page('', `<div class="kick">01 · Intention</div><h1>Un seul bleu,<br>une matière</h1><div class="bar"></div>
+<p class="lead">Fynovates s’exprime avec une couleur : le bleu nuit #0D082E. L’objectif n’est pas d’ajouter des couleurs, mais de donner à ce bleu une matière reconnaissable, constante d’un support à l’autre.</p>
+<div class="row" style="margin-top:10mm;gap:10mm">${[['Une couleur', 'Le bleu nuit domine. Le blanc porte le texte. Aucune couleur d’accent.'], ['Une texture', 'Une seule texture retenue, à la même intensité partout : bannières, miniatures, présentations.'], ['Une typographie', 'Sans-sérif uniquement, graisses fortes pour les titres, capitales espacées pour les rubriques.'], ['Un logo intact', 'Le wordmark officiel FYNOVATES, jamais redessiné, en blanc sur bleu ou en bleu sur blanc.']].map(([t, d]) => `<div class="blk" style="flex:1"><div class="l">${t}</div><p>${d}</p></div>`).join('')}</div>
+<p class="cap" style="margin-top:8mm">Baseline validée : « Le cabinet de conseil des entrepreneurs en ligne et internationaux. » · Domaines : Fiscalité | Banque | Expatriation | Structuration internationale.</p>`))
+
+/* 3 palette + logo */
+const pal = [['Bleu nuit', '#0D082E', 'Couleur institutionnelle, fonds'], ['Bleu encre', '#07051C', 'Ombres, volumes, bas de dégradé'], ['Bleu tonal', '#1C1763', 'Lumière des dégradés'], ['Halo', '#7A70FF', 'Lumière diffuse, 10 % maximum'], ['Blanc', '#FFFFFF', 'Titres, logo, filets'], ['Blanc 72 %', 'rgba(255,255,255,.72)', 'Textes secondaires'], ['Blanc 40 %', 'rgba(255,255,255,.4)', 'Rubriques, numéros'], ['Blanc 18 %', 'rgba(255,255,255,.18)', 'Filets de séparation']]
+H.push(page('grey', `<div class="kick">02 · Couleurs et logo</div><h1>La palette</h1><div class="bar"></div>
+<div class="sw" style="margin-top:8mm">${pal.map(([n, h, u]) => `<div><i style="background:${h.startsWith('rgba') ? `linear-gradient(${h},${h}),#0D082E` : h}"></i><b>${n}</b><code>${h}</code><span>${u}</span></div>`).join('')}</div>
+<div class="row" style="position:absolute;left:18mm;right:18mm;bottom:20mm;gap:6mm"><div style="flex:1;height:26mm;background:#0D082E;display:flex;align-items:center;justify-content:center"><img src="${LOGO_W}" style="width:70mm"></div><div style="flex:1;height:26mm;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 .25mm #D9D8E3"><img src="${LOGO_N}" style="width:70mm"></div></div>`))
+
+/* 4 typography */
+H.push(page('navy', `<img src="${A('02-tonal-texture')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><div style="position:relative"><div class="kick">03 · Typographie</div><h1>Inter, une seule famille</h1><div class="bar"></div>
+<div style="margin-top:9mm"><div class="blk" style="border-color:rgba(255,255,255,.18)"><div class="l" style="color:rgba(255,255,255,.5)">Titres · Inter 800 · capitales · interlettrage −2 %</div><div style="font:800 40pt/1 Inter;letter-spacing:-.02em;text-transform:uppercase">Résidence fiscale</div></div>
+<div class="blk" style="border-color:rgba(255,255,255,.18)"><div class="l" style="color:rgba(255,255,255,.5)">Sous-titres · Inter 600</div><div style="font:600 20pt/1.2 Inter">Trois questions avant de facturer à l’international</div></div>
+<div class="blk" style="border-color:rgba(255,255,255,.18)"><div class="l" style="color:rgba(255,255,255,.5)">Rubriques · Inter 600 · capitales espacées 20 %</div><div style="font:600 11pt Inter;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72)">Fiscalité &nbsp;|&nbsp; Banque &nbsp;|&nbsp; Expatriation &nbsp;|&nbsp; Structuration internationale</div></div>
+<div class="blk" style="border-color:rgba(255,255,255,.18)"><div class="l" style="color:rgba(255,255,255,.5)">Texte · Inter 400</div><p style="font-size:11pt;color:rgba(255,255,255,.8);max-width:170mm">Comprendre, vérifier, faire relire, recommander : la méthode Fynovates.</p></div></div>
+<p class="cap">Inter est sous licence SIL Open Font License.</p></div>`))
+
+/* 5 overview */
+H.push(page('', `<div class="kick">04 · Propositions</div><h1>Huit textures</h1><div class="bar"></div>
+<div class="grid4" style="margin-top:8mm">${T.map((t) => `<div><div style="height:38mm;border-radius:1mm;overflow:hidden"><img src="${A(t.num + '-' + t.key + '-texture')}" style="width:250%;margin:-10mm 0 0 -20mm"></div><div class="cap"><b style="color:#0D082E">${t.num} · ${t.name}</b><br>${t.idea}</div></div>`).join('')}</div>`))
+
+/* 6-13 one page per texture */
+const zoom = (src, d, css = '') => `<div style="width:${d}mm;height:${d}mm;border-radius:50%;overflow:hidden;box-shadow:0 0 0 .6mm #fff,0 3mm 8mm rgba(0,0,0,.35);${css}"><img src="${src}" style="width:100%;height:100%"></div>`
+T.forEach((t) => H.push(page('tex', `<div style="position:absolute;left:0;top:0;width:140mm;height:210mm;overflow:hidden;background:#0D082E"><img src="${A(t.num + '-' + t.key + '-texture')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;left:18mm;top:18mm;right:16mm;color:#fff"><div class="kick" style="color:rgba(255,255,255,.6)">Texture ${t.num} / 08</div><h1 style="font-size:34pt">${t.name}</h1><div class="bar" style="background:#fff"></div><p style="margin-top:5mm;font-size:11pt;line-height:1.5;color:rgba(255,255,255,.78)">${t.idea}</p></div>
+<div style="position:absolute;left:18mm;bottom:22mm;right:16mm;font:600 7pt Inter;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55)">Texture appliquée sur toute la page, à l’intensité recommandée</div></div>
+<div style="position:absolute;left:152mm;top:16mm;right:16mm">
+<div class="blk" style="border-top:0;padding-top:0"><div class="l">Palette</div><p>${t.palette.map(([n, h]) => `${n} <span style="color:#6B6890">${h}</span>`).join(' · ')}</p></div>
+<div class="blk"><div class="l">Texture</div><p>${t.texture}</p></div>
+<div class="row" style="gap:5mm"><div class="blk" style="flex:1"><div class="l">Avantages</div><ul>${t.pros.map((x) => `<li>+ ${x}</li>`).join('')}</ul></div><div class="blk" style="flex:1"><div class="l">Vigilance</div><ul>${t.risks.map((x) => `<li>– ${x}</li>`).join('')}</ul></div></div>
+<img src="${A(t.num + '-' + t.key + '-cover')}" style="width:129mm;margin-top:3mm;border-radius:.8mm"><div class="cap">Couverture de présentation</div>
+<div class="row" style="gap:3mm;margin-top:2mm"><div><img src="${A(t.num + '-' + t.key + '-yt')}" style="height:30mm;border-radius:.8mm"><div class="cap">Miniature YouTube</div></div><div><img src="${A(t.num + '-' + t.key + '-ig')}" style="height:30mm;border-radius:.8mm"><div class="cap">Instagram</div></div></div></div>`)))
+
+/* 14 recommendation */
+H.push(page('grey', `<div class="kick">05 · Lecture</div><h1>Comment choisir</h1><div class="bar"></div>
+<div class="qa"><div><h3>Les plus sûres</h3><ul><li><b>01 Grain papier</b> — invisible comme effet, visible comme qualité. Peut devenir la base de tous les supports.</li><li><b>02 Dégradé tonal</b> et <b>07 Profondeur lumineuse</b> — les plus « premium » à l’écran, à associer au grain pour éviter les bandes.</li></ul></div>
+<div><h3>Les plus porteuses de sens</h3><ul><li><b>05 Topographie</b> — l’international sans cliché.</li><li><b>08 Architectural</b> — la structuration, littéralement. À réserver aux supports d’autorité : couvertures, bannières.</li></ul></div>
+<div><h3>Les plus risquées</h3><ul><li><b>03 Pierre polie</b> — registre décoratif si les veines s’intensifient.</li><li><b>04 Micro-trame</b> et <b>06 Textile</b> — effet de moiré en petit format.</li></ul></div>
+<div><h3>Règles de coexistence avec Tiziana</h3><ul><li>Le bleu peut entrer chez Tiziana (filet, signature) ; le beige n’entre jamais chez Fynovates.</li><li>« Nous » chez Fynovates, « je » chez Tiziana.</li><li>Sans-sérif seule pour Fynovates.</li></ul></div></div>
+<div class="blk" style="margin-top:8mm"><div class="l">Prochaines étapes</div><p>Présélection de 2 textures par l’équipe · tests sur publications réelles · choix d’une texture unique · gabarits définitifs · puis seulement intégration dans la plateforme.</p></div>`))
+
+/* 15 back */
+H.push(page('navy', `<img src="${A('05-topo-texture')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center"><img src="${LOGO_W}" style="width:110mm"><p class="lead" style="text-align:center;margin-top:8mm">Le cabinet de conseil des entrepreneurs en ligne et internationaux.</p><p class="cap" style="margin-top:3mm;letter-spacing:.2em;text-transform:uppercase">Fiscalité | Banque | Expatriation | Structuration internationale</p></div>`, false))
+
+document.getElementById('doc').innerHTML = H.join('')
+document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {})))).then(() => document.body.dataset.ready = 1)
+</script></body></html>

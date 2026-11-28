@@ -1,0 +1,20 @@
+{
+ "name": "The Red Mark — Tiziana Caci",
+ "repartition": {
+  "craie+sable": "55%",
+  "espresso": "30%",
+  "grenat": "10%",
+  "bronze": "5%"
+ },
+ "colors": {
+  "beige-craie": "#E7DED2",
+  "sable": "#C7B39B",
+  "espresso": "#302820",
+  "grenat-profond": "#702B40",
+  "bronze": "#9B8267",
+  "craie-clair": "#F2ECE4",
+  "espresso-profond": "#1F1914",
+  "grenat-clair": "#8E3E56",
+  "ivoire": "#F7F3EE"
+ }
+}
