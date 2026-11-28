@@ -1,5 +1,6 @@
 /* THE EXECUTIVE IDENTITY BOOK — 7 directions + 3 hybrids, A3 landscape. */
 ;(function () {
+  window.SHOTS = window.SHOTS || [['Face caméra', 'studio-marine'], ['Trois-quarts', 'studio-marine-reflexion'], ['En pied', 'studio-en-pied'], ['Rendez-vous d’affaires', 'dejeuner-affaires'], ['Au travail', 'bibliotheque-ordinateur'], ['Devant un écran', 'fenetre-ronde-ordinateur'], ['International', 'voyage-valise-fenetre'], ['Mains et objets', 'env:carnet-1']]
   const D = window.DIRS, MAIN = D.filter((d) => !d.hybrid), HYB = D.filter((d) => d.hybrid), CR = window.CRITERIA
   const fr = (t) => t.replace(/ ([?:!;»])/g, ' $1').replace(/« /g, '« ')
   const pages = [], toc = []
